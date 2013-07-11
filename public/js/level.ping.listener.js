@@ -1,22 +1,28 @@
+var $ = $ || require('jquery');
+
 LevelPingListener = function() {
 
-	return {								
+	return _this = {
 		
 		try: function() {
-			self = this;
-			var endpoint = "/ping?server=" + $('#server').val();
-			$.get(endpoint)
-			.done(function(data, textStatus, jqXHR) {
-				if (data == LevelPingListener.expectedAnswer) {
-					$('#status').text('success!');
-				}
-				else {
-					$('#status').text('fail :(: should return ' + LevelPingListener.expectedAnswer);
-				}
-			})
-			.fail(function(error) {
-				$('#status').text('fail :(: server not responding(404)');
-			});
+			$.get("/ping?server=" + $('#server').val()).done(_this.success).fail(_this.error);
+		},
+		
+		success: function(data, textStatus, jqXHR) {
+			if (data == LevelPingListener.expectedAnswer) {
+				_this.display('success!');
+			}
+			else {
+				_this.display('fail :(: should return ' + LevelPingListener.expectedAnswer);
+			}
+		},
+		
+		error: function(err) {
+			_this.display('fail :(: server not responding(404)');
+		},
+		
+		display: function(message) {
+			$('#status').text(message);
 		}
 	};
 };
