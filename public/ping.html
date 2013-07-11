@@ -3,12 +3,22 @@
 <head>
 	<title>YOSE</title>
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<script src="js/lib/jquery-1.9.0.min.js"></script>	
+	<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<script src="lib/jquery/jquery-1.9.0.min.js"></script>
+	<script src="lib/bootstrap/js/bootstrap.min.js"></script>	
+	
 	<script src="js/level.ping.listener.js"></script>
 </head>
 <body>
-	<input id="server" />
-	<button id="try" onclick="new LevelPingListener().try()" ></button>
+	<h1>The Ping challenge</h1>
+	<p>
+		You should provide an url that should accept a GET on the 
+		provided url and respond the following json
+		<br/>
+		{ "alive" : true }
+	</p>
+	<label>Enter the url of your server</label><input id="server" />
+	<button class="btn btn-primary" id="try" onclick="new LevelPingListener().try()" >Try</button>
 	<label id="status"></label>
 </body>
 </html>
