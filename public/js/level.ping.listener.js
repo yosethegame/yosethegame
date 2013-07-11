@@ -1,17 +1,17 @@
 LevelPingListener = function() {
-	expectedAnswer = JSON.stringify({ alive: true });
-	
-	return {						
 
+	return {								
+		
 		try: function() {
+			self = this;
 			var endpoint = "/ping?server=" + $('#server').val();
 			$.get(endpoint)
 			.done(function(data, textStatus, jqXHR) {
-				if (data == expectedAnswer) {
+				if (data == LevelPingListener.expectedAnswer) {
 					$('#status').text('success!');
 				}
 				else {
-					$('#status').text('fail :(: should return ' + expectedAnswer);
+					$('#status').text('fail :(: should return ' + LevelPingListener.expectedAnswer);
 				}
 			})
 			.fail(function(error) {
@@ -19,4 +19,9 @@ LevelPingListener = function() {
 			});
 		}
 	};
-}
+};
+
+LevelPingListener.expectedAnswer = JSON.stringify({ alive: true });
+
+var module = module || {};
+module.exports = LevelPingListener;

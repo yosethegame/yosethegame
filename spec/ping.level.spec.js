@@ -2,6 +2,7 @@ var Browser = require("zombie");
 var serving = require('../public/js/serving');
 var Server = require('../public/js/server');
 var request = require('request');
+var LevelPingListener = require('../public/js/level.ping.listener.js');
 
 describe("Ping level", function() {
 
@@ -76,7 +77,7 @@ describe("Ping level", function() {
 						   .pressButton("#try");
 				}).
 				then(function() {
-					expect(browser.text("#status")).toEqual("fail :(: should return " + JSON.stringify({ alive: true }));
+					expect(browser.text("#status")).toEqual("fail :(: should return " + LevelPingListener.expectedAnswer);
 					done();
 				}).
 				fail(function(error) {
