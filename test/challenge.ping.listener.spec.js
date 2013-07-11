@@ -1,4 +1,4 @@
-var LevelPingListener = require('../public/js/level.ping.listener.js');
+var LevelPingListener = require('../public/js/challenge.ping.listener.js');
 var $ = require('jquery');
 
 describe("LevelPingListener", function() {
