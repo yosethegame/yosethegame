@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>YOSE</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<script src="js/lib/jquery-1.9.0.min.js"></script>
+	
+	<script type="text/javascript">
+	LevelPingListener = function() {
+		expectedAnswer = JSON.stringify({ alive: true });
+		
+		return {						
+
+			try: function() {
+				var endpoint = "/ping?server=" + $('#server').val();
+				$.get(endpoint)
+				.done(function(data, textStatus, jqXHR) {
+					if (data == expectedAnswer) {
+						$('#status').text('success!');
+					}
+					else {
+						$('#status').text('fail :(: should return ' + expectedAnswer);
+					}
+				})
+				.fail(function(error) {
+					$('#status').text('fail :(: server not responding(404)');
+				});
+			}
+		};
+	}
+	</script>
+</head>
+<body>
+	<input id="server" />
+	<button id="try" onclick="new LevelPingListener().try()" ></button>
+	<label id="status"></label>
+</body>
+</html>
