@@ -10,15 +10,30 @@
 	<script src="js/level.ping.listener.js"></script>
 </head>
 <body>
-	<h1>The Ping challenge</h1>
-	<p>
-		You should provide an url that should accept a GET on the 
-		provided url and respond the following json
-		<br/>
-		{ "alive" : true }
-	</p>
-	<label>Enter the url of your server</label><input id="server" />
-	<button class="btn btn-primary" id="try" onclick="new LevelPingListener().try()" >Try</button>
-	<label id="status"></label>
+	<div class="indent">
+		<legend>
+			<h1>The Ping challenge</h1>
+		</legend>
+		
+		<p class="lead">
+			You're expected to provide an url that should accept a 
+			GET request and respond the following					
+		</p>
+		
+		<pre>{ "alive" : true }</pre>
+
+		<br/><br/>
+		<legend>
+			<h2>Take it!</h2>
+		</legend>
+		<form>
+			<label>Enter the url of your server</label>
+			<div class="input-append">
+				<input type="text" class="input-xlarge" id="server" placeholder="http://your-server"/>
+				<button type="button" class="btn btn-primary" id="try" onclick="new LevelPingListener().try()" >Try</button>
+			</div>
+			<label id="status"></label>
+		</form>
+	</div>
 </body>
 </html>
