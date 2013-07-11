@@ -2,7 +2,8 @@
   "name": "node-example",
   "version": "0.0.1",
   "dependencies": {
-    "url": "~0.7.9"
+    "url": "~0.7.9",
+    "request": "~2.22.0"
   },
   "devDependencies": {
     "zombie": "~2.0.0-alpha19",
