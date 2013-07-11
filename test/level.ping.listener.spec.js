@@ -3,13 +3,23 @@ var $ = require('jquery');
 
 describe("LevelPingListener", function() {
 
+	var listener = new LevelPingListener();
+	
 	it("publish expected value from remote server", function() {
 		expect(LevelPingListener.expectedAnswer).toEqual(JSON.stringify({ alive: true }));
 	});
 	
-	describe("status message update", function() {
+	it("send a get request to the chosen server", function() {
+		$('<input id="server" />').appendTo('body');
+		$('#server').val('any');
+		spyOn($, 'get').andCallThrough();
+		listener.try();
 		
-		var listener = new LevelPingListener();
+		expect($.get).toHaveBeenCalledWith('/ping?server=any');
+	});
+	
+	describe("status message update", function() {
+				
 		var message;
 		
 		beforeEach(function() {
