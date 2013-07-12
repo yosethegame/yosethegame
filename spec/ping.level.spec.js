@@ -2,11 +2,12 @@ var Browser = require("zombie");
 var serving = require('../public/js/serving');
 var Server = require('../public/js/server');
 var request = require('request');
-var LevelPingListener = require('../public/js/challenge.ping.listener.js');
+var LevelPingListener = require('../public/challenge.ping/challenge.ping.listener.js');
 
 describe("Ping level", function() {
 
 	var server = new Server(serving('public'));
+	var pingChallengePage = "http://localhost:5000/challenge.ping/ping.html";
 	
 	beforeEach(function() {
 		server.start();
@@ -35,7 +36,7 @@ describe("Ping level", function() {
 
 		it("you pass the level", function(done) {
 			var browser = new Browser();
-			browser.visit("http://localhost:5000/ping.html").
+			browser.visit(pingChallengePage).
 				then(function () {
 					return browser.fill("#server", "http://localhost:6000")
 						   .pressButton("#try");
@@ -71,7 +72,7 @@ describe("Ping level", function() {
 
 		it("you fail the level and get the expected answer", function(done) {
 			var browser = new Browser();
-			browser.visit("http://localhost:5000/ping.html").
+			browser.visit(pingChallengePage).
 				then(function () {
 					return browser.fill("#server", "http://localhost:6000")
 						   .pressButton("#try");
@@ -92,7 +93,7 @@ describe("Ping level", function() {
 		
 		it("you fail the level and are notified that your server is not responding", function(done) {
 			var browser = new Browser();
-			browser.visit("http://localhost:5000/ping.html").
+			browser.visit(pingChallengePage).
 				then(function () {
 					return browser.fill("#server", "http://localhost:6000")
 						   .pressButton("#try");

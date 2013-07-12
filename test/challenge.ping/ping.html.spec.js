@@ -5,7 +5,7 @@ describe("ping.html", function() {
 	var page;
 
 	beforeEach(function() {	
-		page = cheerio.load(require('fs').readFileSync('./public/ping.html').toString());
+		page = cheerio.load(require('fs').readFileSync('./public/challenge.ping/ping.html').toString());
 	});
 	
 	describe("page's title", function() {	

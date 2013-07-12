@@ -1,6 +1,6 @@
 var request = require('request');
-var serving = require('../public/js/serving');
-var Server = require('../public/js/server');
+var serving = require('../../public/js/serving');
+var Server = require('../../public/js/server');
 
 describe("Serving ping level", function() {
 
