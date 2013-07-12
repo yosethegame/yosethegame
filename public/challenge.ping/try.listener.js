@@ -9,16 +9,12 @@ LevelPingListener = function() {
 		},
 		
 		success: function(data, textStatus, jqXHR) {
-			if (data == LevelPingListener.expectedAnswer) {
-				_this.display('success!');
-			}
-			else {
-				_this.display('fail :(: should return ' + LevelPingListener.expectedAnswer);
-			}
+			_this.display('success!');
 		},
 		
 		error: function(err) {
-			_this.display('fail :(: server not responding(404)');
+			var clue = (err.responseText == '') ? 'server not responding' : err.responseText;
+			_this.display(err.status + ': ' + clue);
 		},
 		
 		display: function(message) {

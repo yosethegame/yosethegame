@@ -1,7 +1,7 @@
 var LevelPingListener = require('../../public/challenge.ping/try.listener.js');
 var $ = require('jquery');
 
-describe("LevelPingListener", function() {
+describe("TryListener: ", function() {
 
 	var listener = new LevelPingListener();
 	
@@ -18,7 +18,7 @@ describe("LevelPingListener", function() {
 		expect($.get).toHaveBeenCalledWith('/ping?server=any');
 	});
 	
-	describe("status message update", function() {
+	describe("status message update: ", function() {
 				
 		var message;
 		
@@ -26,28 +26,29 @@ describe("LevelPingListener", function() {
 			$('<label id="status" />').appendTo('body');
 			message = $('#status');
 		});
+		
+		describe("when success", function() {
 
-		describe("when done", function() {
-
-			it("success when receiving the expected value", function() {			
-				listener.success(LevelPingListener.expectedAnswer);
+			it("displays a success message", function() {			
+				listener.success();
 
 				expect(message.text()).toEqual('success!');
 			});
 
-			it("error when receiving an unexpected value", function() {			
-				listener.success('any');
-
-				expect(message.text()).toEqual('fail :(: should return ' + LevelPingListener.expectedAnswer);
-			});
 		});
 
 		describe("when error", function() {
 
-			it("notify that server is not responding", function() {			
-				listener.error();
+			it("notify that server is not responding when 404", function() {			
+				listener.error({ status: 404, responseText: '' });
 
-				expect(message.text()).toEqual('fail :(: server not responding(404)');
+				expect(message.text()).toEqual('404: server not responding');
+			});
+			
+			it("display error message when 501", function() {			
+				listener.error({ status: 501, responseText: 'any' });
+
+				expect(message.text()).toEqual('501: any');
 			});
 		});
 	});

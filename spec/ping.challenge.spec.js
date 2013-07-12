@@ -24,6 +24,7 @@ describe("Ping challenge", function() {
 		beforeEach(function() {
 			remote = require('http').createServer(
 				function (request, response) {
+					response.writeHead(200, {'Content-Type': 'application/json'});
 					response.write(JSON.stringify({ alive: true }));
 					response.end();
 				})
@@ -78,7 +79,7 @@ describe("Ping challenge", function() {
 						   .pressButton("#try");
 				}).
 				then(function() {
-					expect(browser.text("#status")).toEqual("fail :(: should return " + LevelPingListener.expectedAnswer);
+					expect(browser.text("#status")).toContain('501');
 					done();
 				}).
 				fail(function(error) {
@@ -99,7 +100,7 @@ describe("Ping challenge", function() {
 						   .pressButton("#try");
 				}).
 				then(function() {
-					expect(browser.text("#status")).toEqual("fail :(: server not responding(404)");
+					expect(browser.text("#status")).toEqual('404: server not responding');
 					done();
 				}).
 				fail(function(error) {
