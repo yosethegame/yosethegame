@@ -17,6 +17,6 @@
     "npm": "1.1.x"
   },
   "scripts": {
-    "test": "jasmine-node test --verbose ; jasmine-node spec --verbose"
+    "test": "jasmine-node test ; jasmine-node spec"
   }
 }
