@@ -2,7 +2,7 @@ var Browser = require("zombie");
 var serving = require('../public/js/serving');
 var Server = require('../public/js/server');
 var request = require('request');
-var LevelPingListener = require('../public/challenge.ping/challenge.ping.listener.js');
+var LevelPingListener = require('../public/challenge.ping/try.listener.js');
 
 describe("Ping level", function() {
 
