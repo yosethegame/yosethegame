@@ -1,10 +1,10 @@
 var request = require('request');
-var serving = require('../../public/js/serving');
 var Server = require('../../public/js/server');
+var pong = require('../../public/challenge.ping/pong.js');
 
 describe("Serving ping challenge", function() {
 
-	var server = new Server(serving('public'));
+	var server = new Server(pong);
 
 	beforeEach(function() {
 		server.start();
