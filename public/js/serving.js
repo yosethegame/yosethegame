@@ -8,7 +8,7 @@ String.prototype.startsWith = function (prefix) {
 serving = function(folder) {
 	
 	return function (request, response) {
-		if (request.url.startsWith('/ping')) {
+		if (request.url.startsWith('/ping?server=')) {
 			pong(request, response);
 		}
 		else {
