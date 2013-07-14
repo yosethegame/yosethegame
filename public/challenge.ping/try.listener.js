@@ -14,16 +14,22 @@ LevelPingListener = function() {
 			$('#error').text('');
 			$('#expected').text('');
 			$('#got').text('');
+			$('#success_section').addClass('hidden');
+			$('#error_section').addClass('hidden');
 		},
 		
 		success: function(data, textStatus, jqXHR) {
 			_this.clear();
 			$('#success').text('success!');
+			$('#success_section').removeClass('hidden');
+			$('#error_section').addClass('hidden');
 		},
 		
 		error: function(err) {
 			_this.clear();
 			$('#error').text('error ' + err.status );
+			$('#error_section').removeClass('hidden');
+			$('#success_section').addClass('hidden');
 			
 			if (err.responseText != null) {
 				var gotIndex = err.responseText.indexOf(',"got":');

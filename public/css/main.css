@@ -16,3 +16,16 @@ body {
 	padding-left: 20px;
 	padding-right: 20px;
 }
+
+.success {
+	color: green;
+}
+
+.error {
+	color: red;
+}
+
+.hidden {
+	display: none;
+}
+

@@ -23,6 +23,9 @@ describe("TryListener: ", function() {
 		var message;
 		
 		beforeEach(function() {
+			$('<label id="success_section" class="hidden"></label>').appendTo('body');
+			$('<label id="error_section" class="hidden"></label>').appendTo('body');
+			
 			$('<label id="success">previous</label>').appendTo('body');
 
 			$('<label id="error">previous</label>').appendTo('body');
@@ -35,6 +38,14 @@ describe("TryListener: ", function() {
 			beforeEach(function() {
 				listener.success();				
 			});
+			
+			it("displays the success section", function() {
+				expect($('#success_section').hasClass('hidden')).toBe(false);
+			});
+			
+			it("hides the error section", function() {
+				expect($('#error_section').hasClass('hidden')).toBe(true);
+			})
 
 			it("displays a success message", function() {			
 				expect($('#success').text()).toEqual('success!');
@@ -53,6 +64,14 @@ describe("TryListener: ", function() {
 			beforeEach(function() {
 				listener.error({ status: 404 });
 			});
+
+			it("displays the error section", function() {
+				expect($('#error_section').hasClass('hidden')).toBe(false);
+			});
+			
+			it("hides the success section", function() {
+				expect($('#success_section').hasClass('hidden')).toBe(true);
+			})
 
 			it("displays the error message", function() {			
 				expect($('#error').text()).toEqual('error 404');

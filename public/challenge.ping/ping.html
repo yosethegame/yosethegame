@@ -5,9 +5,7 @@
 	<link href="/css/main.css" rel="stylesheet" type="text/css">
 	<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
-	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>	
-	
-	<script src="try.listener.js"></script>
+	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>		
 </head>
 <body>
 	<div class="indent">
@@ -33,13 +31,26 @@
 				<input type="text" class="input-xlarge" id="server" placeholder="http://your-server"/>
 				<button type="button" class="btn btn-primary" id="try" onclick="new LevelPingListener().try()" >Try</button>
 			</div>
-			<div id="success"></div>
-			<div>
-				<div id="error"></div>
-				<div id="expected"></div>
-				<div id="got"></div>
+
+			<div id="success_section" class="success hidden">
+				<label id="success">success!</label>
 			</div>
+			<div id="error_section" class="error hidden">
+				<label id="error">501</label>
+				<dl class="dl-horizontal">
+					<dt>Expected</dt>
+					<dd id="expected">{ some: thing }</dd>
+				</dl>
+				<dl class="dl-horizontal">
+					<dt>Got: </dt>
+					<dd id="got">{ other: one }</dd>
+				</dl>
+			</div>
+
 		</section>
 	</div>
+	
+	<script src="try.listener.js"></script>
+	
 </body>
 </html>
