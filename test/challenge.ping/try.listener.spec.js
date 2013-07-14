@@ -23,32 +23,87 @@ describe("TryListener: ", function() {
 		var message;
 		
 		beforeEach(function() {
-			$('<label id="status" />').appendTo('body');
-			message = $('#status');
+			$('<label id="success">previous</label>').appendTo('body');
+
+			$('<label id="error">previous</label>').appendTo('body');
+			$('<label id="expected">previous</label>').appendTo('body');
+			$('<label id="got">previous</label>').appendTo('body');
 		});
 		
-		describe("when success", function() {
+		describe("when success, ", function() {
+
+			beforeEach(function() {
+				listener.success();				
+			});
 
 			it("displays a success message", function() {			
-				listener.success();
-
-				expect(message.text()).toEqual('success!');
+				expect($('#success').text()).toEqual('success!');
+			});
+			
+			it("clears all error-related placeholders", function() {
+				expect($('#error').text()).toEqual('');
+				expect($('#expected').text()).toEqual('');
+				expect($('#got').text()).toEqual('');				
 			});
 
 		});
 
-		describe("when error", function() {
+		describe("when 404, ", function() {
 
-			it("notify that server is not responding when 404", function() {			
-				listener.error({ status: 404, responseText: '' });
+			beforeEach(function() {
+				listener.error({ status: 404 });
+			});
 
-				expect(message.text()).toEqual('404: server not responding');
+			it("displays the error message", function() {			
+				expect($('#error').text()).toEqual('error 404');
+			});
+
+			it("clears the other placeholders", function() {
+				expect($('#success').text()).toEqual('');
+				
+				expect($('#expected').text()).toEqual('');
+				expect($('#got').text()).toEqual('');				
+			});
+		});
+		
+		describe("when 501, ", function() {
+			
+			beforeEach(function() {
+				listener.error({ 
+					status: 501, 
+					responseText: JSON.stringify({
+						expected: {
+								'content-type': 'application/json',
+								body: { alive: true }
+							},
+							got: {
+								'content-type': 'unexpected content-type',
+								body: 'unexpected content'
+							}
+						})
+				});
 			});
 			
-			it("display error message when 501", function() {			
-				listener.error({ status: 501, responseText: 'any' });
-
-				expect(message.text()).toEqual('501: any');
+			it("clears success placeholder", function() {
+				expect($('#success').text()).toEqual('');
+			});
+			
+			it("displays error message", function() {			
+				expect($('#error').text()).toEqual('error 501');
+			});
+			
+			it("displays the expected value", function() {
+				expect($('#expected').text()).toEqual(JSON.stringify({
+					'content-type': 'application/json',
+					body: { alive: true }
+				}));
+			});
+			
+			it("displays the actual value", function() {
+				expect($('#got').text()).toEqual(JSON.stringify({
+					'content-type': 'unexpected content-type',
+					body: 'unexpected content'
+				}));
 			});
 		});
 	});

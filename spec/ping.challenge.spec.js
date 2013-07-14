@@ -43,7 +43,7 @@ describe("Ping challenge", function() {
 						   .pressButton("#try");
 				}).
 				then(function() {
-					expect(browser.text("#status")).toEqual("success!");
+					expect(browser.text("#success")).toEqual("success!");
 					done();
 				}).
 				fail(function(error) {
@@ -71,7 +71,7 @@ describe("Ping challenge", function() {
 			remote.close();
 		});
 
-		it("you fail the level and get the expected answer", function(done) {
+		it("you fail the level and are notified that your server does not implement the feature", function(done) {
 			var browser = new Browser();
 			browser.visit(pingChallengePage).
 				then(function () {
@@ -79,7 +79,7 @@ describe("Ping challenge", function() {
 						   .pressButton("#try");
 				}).
 				then(function() {
-					expect(browser.text("#status")).toContain('501');
+					expect(browser.text("#error")).toContain('501');
 					done();
 				}).
 				fail(function(error) {
@@ -100,7 +100,7 @@ describe("Ping challenge", function() {
 						   .pressButton("#try");
 				}).
 				then(function() {
-					expect(browser.text("#status")).toEqual('404: server not responding');
+					expect(browser.text("#error")).toContain('404');
 					done();
 				}).
 				fail(function(error) {

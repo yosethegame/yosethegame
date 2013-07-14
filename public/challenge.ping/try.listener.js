@@ -5,21 +5,36 @@ LevelPingListener = function() {
 	return _this = {
 		
 		try: function() {
+			_this.clear();
 			$.get("/ping?server=" + $('#server').val()).done(_this.success).fail(_this.error);
 		},
 		
+		clear: function() {
+			$('#success').text('');
+			$('#error').text('');
+			$('#expected').text('');
+			$('#got').text('');
+		},
+		
 		success: function(data, textStatus, jqXHR) {
-			_this.display('success!');
+			_this.clear();
+			$('#success').text('success!');
 		},
 		
 		error: function(err) {
-			var clue = (err.responseText == '') ? 'server not responding' : err.responseText;
-			_this.display(err.status + ': ' + clue);
+			_this.clear();
+			$('#error').text('error ' + err.status );
+			
+			if (err.responseText != null) {
+				var gotIndex = err.responseText.indexOf(',"got":');
+				var expected = err.responseText.substring('{"expected":}'.length-1, gotIndex);
+				var actual = err.responseText.substring(gotIndex + ',"got":'.length);
+
+				$('#expected').text(expected);
+				$('#got').text(actual.substring(0, actual.length-1));
+			}
 		},
 		
-		display: function(message) {
-			$('#status').text(message);
-		}
 	};
 };
 
