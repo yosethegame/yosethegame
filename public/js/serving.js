@@ -11,6 +11,21 @@ serving = function(folder) {
 		if (request.url.startsWith('/ping?server=')) {
 			pong(request, response);
 		}
+		else if (request.url.startsWith('/players/ericminio')) {
+			var mongodb = require('mongodb');
+			var MONGOHQ_URL="mongodb://yose:yose@dharma.mongohq.com:10038/yose";
+			mongodb.Db.connect(MONGOHQ_URL, function(error, client) {
+				var collection = new mongodb.Collection(client, 'players');
+				var documents = collection.find({ login: 'ericminio' });
+				documents.toArray(function(error, docs) {
+					me = docs[0];
+			        client.close();
+			
+					response.write('<img src="' + me.avatar + '" >');
+					response.end();
+		      	});
+			});
+		}
 		else {
 			servecontent(folder, request, response);
 		}
