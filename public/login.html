@@ -15,10 +15,16 @@
 			</legend>
 			<fieldset>
 				<input id="login" placeholder="login">
-				<button id="enter" class="btn btn-primary">Enter</button>
+				<button id="enter" class="btn btn-primary" onclick="login()">Enter</button>
 			</fieldset>
 		</div>
 	</div>
 	
+	<script>
+		function login() {
+			var login = $('#login').val();
+			window.location = '/players/' + login;
+		}
+	</script>
 </body>
 </html>
