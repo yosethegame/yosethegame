@@ -11,4 +11,8 @@ Dashboard.prototype.html = function() {
 	return fs.readFileSync('./public/dashboard.html').toString();
 }
 
+Dashboard.prototype.useRepository = function(repository) {
+	
+}
+
 module.exports = new Dashboard();

@@ -8,11 +8,15 @@ describe('Dashboard', function() {
 		page = cheerio.load(dashboard.html());
 	});
 	
-	describe("page's title", function() {	
+	describe('The elements of the page', function() {
 
-		it("is 'Dashboard'", function() {			
+		it('The title', function() {			
 			expect(page('title').text()).toBe('Dashboard');
 		});		
+
+		it('The placeholder of the avatar', function() {
+			expect(page('#player img').length).toNotBe(0);
+		});
 	});
 	
 	describe('when player is unknown', function() {
@@ -22,4 +26,22 @@ describe('Dashboard', function() {
 		});
 	});
 	
+	describe('when player is known', function() {
+	
+		aMemoryRepoWithPlayers = function(players) {
+			
+		}
+	
+		beforeEach(function() {
+			dashboard.useRepository(aMemoryRepoWithPlayers([
+				{
+					avatar: 'this-avatar'
+				}
+				]));
+		})
+	
+		it('displays its avatar', function() {
+			expect(page('#player img').attr('src')).toBe('this-avatar');
+		});
+	});
 });
