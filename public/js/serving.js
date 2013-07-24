@@ -1,5 +1,6 @@
 var servecontent = require('./serve-content.js');
 var pong         = require('../challenge.ping/pong.js');
+var dashboard	 = require('./dashboard.js');
 
 String.prototype.startsWith = function (prefix) {
 	return this.indexOf(prefix) == 0;
@@ -12,19 +13,7 @@ serving = function(folder) {
 			pong(request, response);
 		}
 		else if (request.url.startsWith('/players/ericminio')) {
-			var mongodb = require('mongodb');
-			var MONGOHQ_URL="mongodb://yose:yose@dharma.mongohq.com:10038/yose";
-			mongodb.Db.connect(MONGOHQ_URL, function(error, client) {
-				var collection = new mongodb.Collection(client, 'players');
-				var documents = collection.find({ login: 'ericminio' });
-				documents.toArray(function(error, docs) {
-					me = docs[0];
-			        client.close();
-			
-					response.write('<img src="' + me.avatar + '" >');
-					response.end();
-		      	});
-			});
+			dashboard.display(request, response);
 		}
 		else {
 			servecontent(folder, request, response);

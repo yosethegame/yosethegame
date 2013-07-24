@@ -4,7 +4,7 @@ var Server = require('../public/js/server');
 var request = require('request');
 var LevelPingListener = require('../public/challenge.ping/try.listener.js');
 
-describe("Ping challenge", function() {
+xdescribe("Ping challenge", function() {
 
 	var server = new Server(serving('public'));
 	var pingChallengePage = "http://localhost:5000/challenge.ping/ping.html";
