@@ -1,8 +1,14 @@
+var fs = require('fs');
+
 Dashboard = function() {}
 
 Dashboard.prototype.display = function(request, response) {
-	response.write('<html><body><label id="info">Unknown player</label></body></html>');
+	response.write(this.html());
 	response.end();
+}
+
+Dashboard.prototype.html = function() {
+	return fs.readFileSync('./public/dashboard.html').toString();
 }
 
 module.exports = new Dashboard();
