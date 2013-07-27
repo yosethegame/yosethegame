@@ -6,7 +6,7 @@ Dashboard = function(login) {
 }
 
 Dashboard.prototype.useRepository = function(repository) {
-	this.repository = repository;
+	this.player = repository.find({ login: this.login });
 }
 
 Dashboard.prototype.display = function(request, response) {
@@ -14,31 +14,18 @@ Dashboard.prototype.display = function(request, response) {
 	response.end();
 }
 
+String.prototype.hide = function(selector) {
+	var page = cheerio.load(this);
+	var before = page(selector);
+	var after = page(selector).addClass('hidden').removeClass('visible');
+	return page('html').toString().replace(before, after);
+}
+
 Dashboard.prototype.html = function() {
 	var html = fs.readFileSync('./public/dashboard.html').toString();
-	if (this.repository != undefined) {
-		var player = this.repository.find({ login: this.login });
-		if (player != undefined) {
-			html = html.replace('avatar-of-player', player.avatar);
-			
-			var page = cheerio.load(html);
-			var before = page('#info');
-			var after = page('#info').addClass('hidden').removeClass('visible');
-			html = page('html').toString().replace(before, after);
-			
-		}
-		else {
-			var page = cheerio.load(html);
-			var before = page('#player');
-			var after = page('#player').addClass('hidden').removeClass('visible');
-			html = page('html').toString().replace(before, after);
-		}
-	}
-	else {
-		var page = cheerio.load(html);
-		var before = page('#player');
-		var after = page('#player').addClass('hidden').removeClass('visible');
-		html = page('html').toString().replace(before, after);
+	if (this.player != undefined) {
+		html = html.replace('avatar-of-player', this.player.avatar);
+		html = html.hide('#info');			
 	}
 	return html;
 }

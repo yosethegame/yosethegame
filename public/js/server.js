@@ -2,6 +2,10 @@ function Server(serving) {
 	this.serving = serving;
 };
 
+Server.prototype.useRepository = function(repository) {
+	
+};
+
 Server.prototype.start = function() {
 	this.server = require('http').createServer(this.serving).listen(process.env.PORT || 5000);		
 };

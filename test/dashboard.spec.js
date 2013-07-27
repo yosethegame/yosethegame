@@ -16,17 +16,24 @@ describe('Dashboard >', function() {
 			page = cheerio.load(dashboard.html());
 		});
 
-		it('can remember a given repository', function() {
-			var repo = {};
-			dashboard.useRepository(repo);
-			
-			expect(dashboard.repository).toEqual(repo);
-		});
-		
 		it('remembers the requested login', function() {
 			expect(dashboard.login).toEqual('ericminio');
 		})
 
+		it('extract the player from the given repository', function() {
+			var player = {};
+			var repo = { find : function() { return player; } };
+			dashboard.useRepository(repo);
+			
+			expect(dashboard.player).toEqual(player);
+		});
+		
+		it('declares the player undefined when not found in the repository', function() {
+			dashboard.useRepository({ find : function() { return undefined } });
+			
+			expect(dashboard.player).toBe(undefined);
+		})
+		
 		describe('The elements of the page:', function() {
 
 			it('The title', function() {			

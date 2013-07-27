@@ -31,8 +31,38 @@ describe("Player dashboard", function() {
 					done();
 				});
 		});
+	});
+	
+	describe("When player does exist", function() {
+
+		beforeEach(function() {
+			server.useRepository( {
+				find: function() {
+					return { avatar: 'http://this-avatar' };
+				}
+			});
+		});
+
+		it("displays its avatar", function(done) {
+			var browser = new Browser();
+			browser.visit("http://localhost:5000/players/ericminio").
+				then(function() {
+					expect(browser.query('#player img').src).toEqual('http://this-avatar');
+				}).
+				then(function() {
+					expect(browser.query('#player').className).toContain('visible');
+					done();
+				}).				
+				then(function() {
+					expect(browser.query('#info').className).toContain('hidden');
+					done();
+				}).				
+				fail(function(error) {
+					expect(error.toString()).toBeNull();
+					done();
+				});
+		});
 
 		
 	});
-	
 });
