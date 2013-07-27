@@ -1,7 +1,7 @@
 var mongodb = require('mongodb');
 var url = require('url');
 
-describe("MongoHq access", function() {
+xdescribe("MongoHq access", function() {
 
 	var MONGOHQ_URL="mongodb://yose:yose@dharma.mongohq.com:10038/yose";
 	var log = console.log;

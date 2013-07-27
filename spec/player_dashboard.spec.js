@@ -21,8 +21,11 @@ describe("Player dashboard", function() {
 			browser.visit("http://localhost:5000/players/ericminio").
 				then(function() {
 					expect(browser.text('#info')).toEqual("Unknown player");
-					done();
 				}).
+				then(function() {
+					expect(browser.query('#player').className).toContain("hidden");
+					done();
+				}).				
 				fail(function(error) {
 					expect(error.toString()).toBeNull();
 					done();

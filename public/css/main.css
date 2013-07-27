@@ -29,6 +29,10 @@
 	display: none;
 }
 
+.visible {
+	display: block;
+}
+
 .centered-form {
 	margin: 50px 0px 0px 200px;
 	padding:20px 20px 20px 20px;
