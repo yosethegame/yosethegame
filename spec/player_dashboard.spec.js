@@ -39,7 +39,7 @@ describe("Player dashboard", function() {
 			server.useRepository(
 				{
 					find: function() {
-						return { avatar: 'http://this-avatar/' };
+						return { avatar: 'http://this-avatar' };
 					}
 				}
 			)
@@ -64,7 +64,53 @@ describe("Player dashboard", function() {
 					done();
 				});
 		});
+	});
+	
+	describe("When player is not alone in the database, ", function() {
 
+		var repository = {
+			players: [
+				{
+					login: 'ericminio',
+					avatar: 'http://ericminio-avatar'
+				},
+				{
+					login: 'annessou',
+					avatar: 'http://annessou-avatar'
+				}
+			],
+			
+			find: function(login) {
+				for(i=0; i<this.players.length; i++) {
+					if (this.players[i].login == login) {
+						return this.players[i];
+					}
+				}
+			}
+		};
+
+		beforeEach(function() {
+			server.useRepository(repository);
+		});
+		
+		it('btw uses a in-memory database', function() {
+			expect(repository.find('annessou').login).toBe('annessou');
+			expect(repository.find('not-here')).toBe(undefined);
+		});
+
+		it("finds it accurately", function(done) {
+			var browser = new Browser();
+			browser.visit("http://localhost:5000/players/annessou").
+				then(function() {
+					expect(browser.query('#player img').src).toEqual('http://annessou-avatar/');
+					done();
+				}).
+				fail(function(error) {
+					expect(error.toString()).toBeNull();
+					done();
+				});
+		});
+		
 		
 	});
 });

@@ -22,8 +22,8 @@ describe('Router', function() {
 			expect(router.endPointOf({ url: '/players/any' })).toBe(dashboard);
 		});
 		
-		xit('maps static content request', function() {
-			expect(router.endPointOf({ url: '/anything-else' })).toBe(servecontent('public'));
+		it('maps static content request', function() {
+			expect(router.endPointOf({ url: '/anything-else' }).toString()).toEqual(servecontent('public').toString());
 		});
 		
 	});
