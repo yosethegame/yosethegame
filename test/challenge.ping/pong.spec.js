@@ -4,7 +4,7 @@ var pong = require('../../public/challenge.ping/pong.js');
 
 describe("Serving ping challenge:", function() {
 
-	var server = new Server(pong);
+	var server = new Server({ gate: pong });
 
 	beforeEach(function() {
 		server.start();

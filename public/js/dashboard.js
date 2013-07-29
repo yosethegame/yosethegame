@@ -1,19 +1,6 @@
 var fs 		= require('fs');
 var cheerio = require('cheerio');
 
-Dashboard = function(login) {
-	this.login = login;
-}
-
-Dashboard.prototype.useRepository = function(repository) {
-	this.player = repository.find({ login: this.login });
-}
-
-Dashboard.prototype.display = function(request, response) {
-	response.write(this.html());
-	response.end();
-}
-
 String.prototype.hide = function(selector) {
 	var page = cheerio.load(this);
 	var before = page(selector);
@@ -21,13 +8,23 @@ String.prototype.hide = function(selector) {
 	return page('html').toString().replace(before, after);
 }
 
-Dashboard.prototype.html = function() {
-	var html = fs.readFileSync('./public/dashboard.html').toString();
-	if (this.player != undefined) {
-		html = html.replace('avatar-of-player', this.player.avatar);
-		html = html.hide('#info');			
-	}
-	return html;
+String.prototype.show = function(selector) {
+	var page = cheerio.load(this);
+	var before = page(selector);
+	var after = page(selector).addClass('visible').removeClass('hidden');
+	return page('html').toString().replace(before, after);
 }
 
-module.exports = Dashboard;
+dashboard = function(request, response, repository) {
+	var html = fs.readFileSync('./public/dashboard.html').toString();
+
+	var player = repository == undefined ? undefined : repository.find();
+	if (player != undefined) {
+		html = html.replace('avatar-of-player', player.avatar);
+		html = html.hide('#info').show('#player');		
+	}
+	response.write(html);
+	response.end();
+}
+
+module.exports = dashboard;

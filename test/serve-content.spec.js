@@ -1,15 +1,15 @@
 var request = require('request');
 var fs = require('fs');
-var serving = require('../public/js/serving');
+var servecontent = require('../public/js/serve-content.js');
 
-describe("Serving callback", function() {
+describe("Serve Content callback", function() {
 
 	var server;
 	var folder = 'test/data';
 	
 	beforeEach(function() {	
 		if (!fs.existsSync(folder)) fs.mkdirSync(folder);			
-		server = require('http').createServer(serving(folder)).listen(5000, 'localhost');		
+		server = require('http').createServer(servecontent(folder)).listen(5000, 'localhost');		
 	});
 	afterEach(function() {
 		server.close();

@@ -1,13 +1,13 @@
-function Server(serving) {
-	this.serving = serving;
+function Server(router) {
+	this.router = router;
 };
 
 Server.prototype.useRepository = function(repository) {
-	
+	this.router.useRepository(repository);
 };
 
 Server.prototype.start = function() {
-	this.server = require('http').createServer(this.serving).listen(process.env.PORT || 5000);		
+	this.server = require('http').createServer(this.router.gate).listen(process.env.PORT || 5000);		
 };
 
 Server.prototype.stop = function() {

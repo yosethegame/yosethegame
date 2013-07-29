@@ -1,10 +1,10 @@
 var Browser = require("zombie");
-var serving = require('../public/js/serving');
+var Router = require('../public/js/router');
 var Server = require('../public/js/server');
 
 describe("Player dashboard", function() {
 
-	var server = new Server(serving('public'));
+	var server = new Server(new Router());
 	
 	beforeEach(function() {
 		server.start();
@@ -36,18 +36,20 @@ describe("Player dashboard", function() {
 	describe("When player does exist", function() {
 
 		beforeEach(function() {
-			server.useRepository( {
-				find: function() {
-					return { avatar: 'http://this-avatar' };
+			server.useRepository(
+				{
+					find: function() {
+						return { avatar: 'http://this-avatar/' };
+					}
 				}
-			});
+			)
 		});
 
 		it("displays its avatar", function(done) {
 			var browser = new Browser();
 			browser.visit("http://localhost:5000/players/ericminio").
 				then(function() {
-					expect(browser.query('#player img').src).toEqual('http://this-avatar');
+					expect(browser.query('#player img').src).toEqual('http://this-avatar/');
 				}).
 				then(function() {
 					expect(browser.query('#player').className).toContain('visible');

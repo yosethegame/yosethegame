@@ -1,12 +1,12 @@
 var Browser = require("zombie");
-var serving = require('../public/js/serving');
+var Router = require('../public/js/router');
 var Server = require('../public/js/server');
 var request = require('request');
 var LevelPingListener = require('../public/challenge.ping/try.listener.js');
 
-xdescribe("Ping challenge", function() {
+describe("Ping challenge", function() {
 
-	var server = new Server(serving('public'));
+	var server = new Server(new Router());
 	var pingChallengePage = "http://localhost:5000/challenge.ping/ping.html";
 	
 	beforeEach(function() {

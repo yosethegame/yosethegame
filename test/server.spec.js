@@ -3,7 +3,9 @@ var Server = require('../public/js/server');
 
 describe("Server", function() {
 
-	var server = new Server(function (request, response) { response.end(); });
+	var server = new Server({
+		gate: function (request, response) { response.end(); }
+	});
 	
 	beforeEach(function() {	
 		server.start();

@@ -1,10 +1,10 @@
 var Browser = require("zombie");
-var serving = require('../public/js/serving');
+var Router = require('../public/js/router');
 var Server = require('../public/js/server');
 
-xdescribe("Login", function() {
+describe("Login", function() {
 
-	var server = new Server(serving('public'));
+	var server = new Server(new Router());
 	
 	beforeEach(function() {
 		server.start();

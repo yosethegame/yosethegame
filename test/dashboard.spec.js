@@ -1,46 +1,27 @@
 var cheerio 	 = require('cheerio');
-var Dashboard	 = require('../public/js/dashboard.js');
+var dashboard	 = require('../public/js/dashboard.js');
 
 describe('Dashboard >', function() {
 	
 	var page;
-	var dashboard;
 	
 	beforeEach(function() {	
-		dashboard = new Dashboard('ericminio');
+		var response = {
+			write: function(content) { this.html = content; },
+			end: function() {}
+		}
+		dashboard({}, response);
+		page = cheerio.load(response.html);
 	});
 
-	describe('Core >', function() {
-	
-		beforeEach(function() {	
-			page = cheerio.load(dashboard.html());
-		});
 
-		it('remembers the requested login', function() {
-			expect(dashboard.login).toEqual('ericminio');
-		})
+	describe('The elements of the page:', function() {
 
-		it('extract the player from the given repository', function() {
-			var player = {};
-			var repo = { find : function() { return player; } };
-			dashboard.useRepository(repo);
+		it('The title', function() {			
+			expect(page('title').text()).toBe('Dashboard');
+		});		
 			
-			expect(dashboard.player).toEqual(player);
-		});
-		
-		it('declares the player undefined when not found in the repository', function() {
-			dashboard.useRepository({ find : function() { return undefined } });
-			
-			expect(dashboard.player).toBe(undefined);
-		})
-		
-		describe('The elements of the page:', function() {
-
-			it('The title', function() {			
-				expect(page('title').text()).toBe('Dashboard');
-			});		
-			
-			describe('The placeholder of the information messages', function() {
+		describe('The placeholder of the information messages', function() {
 				
 				it('exists', function() {
 					expect(page('#info').length).toNotBe(0);
@@ -81,50 +62,9 @@ describe('Dashboard >', function() {
 					expect(page('#player').attr('class')).toContain('hidden');
 				});
 			});		
-		});
+
 	});
 	
-	describe('when the player is known:', function() {
 	
-		var repository = {
-			find: function() { return { login: 'ericminio', avatar: 'this-avatar' }; }
-		};
-		
-		beforeEach(function() {	
-			dashboard.useRepository(repository);
-			page = cheerio.load(dashboard.html());
-		});
-
-		it('displays its avatar', function() {
-			expect(page('#player img').attr('src')).toBe('this-avatar');
-		});
-
-		it('hides the info section', function() {
-			expect(page('#info').attr('class')).toContain('hidden');
-			expect(page('#info').attr('class')).toNotContain('visible');
-		});
-	});
-	
-	describe('when the requested player is unknown:', function() {
-		
-		var repository = {
-			find: function() { return undefined; }
-		};
-		
-		beforeEach(function() {	
-			dashboard.useRepository(repository);
-			page = cheerio.load(dashboard.html());
-		});
-
-		it('displays unknow player mention', function() {
-			expect(page('#info').text()).toEqual('Unknown player');
-		});
-		
-		it('hides the player section', function() {
-			expect(page('#player').attr('class')).toContain('hidden');
-			expect(page('#player').attr('class')).toNotContain('visible');
-		});
-		
-	});
 	
 });
