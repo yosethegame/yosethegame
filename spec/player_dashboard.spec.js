@@ -1,6 +1,7 @@
 var Browser = require("zombie");
 var Router = require('../public/js/router');
 var Server = require('../public/js/server');
+var InMemoryDatabase = require('../public/js/inMemoryDatabase');
 
 describe("Player dashboard", function() {
 
@@ -68,8 +69,7 @@ describe("Player dashboard", function() {
 	
 	describe("When player is not alone in the database, ", function() {
 
-		var repository = {
-			players: [
+		var repository = new InMemoryDatabase().withPlayers([
 				{
 					login: 'ericminio',
 					avatar: 'http://ericminio-avatar'
@@ -78,16 +78,7 @@ describe("Player dashboard", function() {
 					login: 'annessou',
 					avatar: 'http://annessou-avatar'
 				}
-			],
-			
-			find: function(login) {
-				for(i=0; i<this.players.length; i++) {
-					if (this.players[i].login == login) {
-						return this.players[i];
-					}
-				}
-			}
-		};
+			]);
 
 		beforeEach(function() {
 			server.useRepository(repository);
