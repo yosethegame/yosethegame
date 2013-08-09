@@ -102,19 +102,6 @@ describe("Player dashboard:", function() {
 				});
 		});
 		
-		it('shows the get-ready challenge', function(done) {
-			var browser = new Browser();
-			browser.visit("http://localhost:5000/players/ericminio").
-				then(function() {
-					expect(browser.text('#player #next-challenge')).toEqual('Get ready');
-					done();
-				}).
-				fail(function(error) {
-					expect(error.toString()).toBeNull();
-					done();
-				});
-		});
 	});
-	
 	
 });

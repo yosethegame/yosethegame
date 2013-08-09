@@ -11,18 +11,21 @@ dashboard = function(request, response, database) {
 		html = html.replace('avatar-of-player', player.avatar);
 		html = html.hide('#info').show('#player');		
 		
-		var challenge = database.challenges[0];
-		if (player.portfolio != undefined) {
-			var index = 0;
-			while(player.portfolio[index] && player.portfolio[index].title == database.challenges[index].title) { index ++ }
-			challenge = database.challenges[index];
-		}
-		html = html.replace('Next challenge title', challenge.title);
+		if (database.challenges != undefined)
+		{
+			var challenge = database.challenges[0];
+			if (player.portfolio != undefined) {
+				var index = 0;
+				while(player.portfolio[index] && player.portfolio[index].title == database.challenges[index].title) { index ++ }
+				challenge = database.challenges[index];
+			}
+			html = html.replace('Next challenge title', challenge.title);
 
-		if (challenge.file != undefined) {
-			var page = cheerio.load(fs.readFileSync(challenge.file).toString());
-			html = html.replace('Next challenge content', page('#challenge-content').html());
-		}
+			if (challenge.file != undefined) {
+				var page = cheerio.load(fs.readFileSync(challenge.file).toString());
+				html = html.replace('Next challenge content', page('#challenge-content').html());
+			}			
+		}		
 	}
 	response.write(html);
 	response.end();

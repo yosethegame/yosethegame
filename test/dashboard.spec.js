@@ -104,7 +104,7 @@ describe('Dashboard >', function() {
 		
 	});
 	
-	describe('Challenge display', function() {
+	describe('Challenge content display:', function() {
 	
 		var database;
 		var fs = require('fs');
