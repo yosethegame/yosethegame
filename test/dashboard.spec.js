@@ -110,14 +110,14 @@ describe('Dashboard >', function() {
 		var fs = require('fs');
 		
 		beforeEach(function() {	
-			var content = '<html><body>anything before<div id="challenge-content">content</div>anything after</body></html>';
+			var content = '<html><body>anything before<div id="challenge-content">content<label>with html</label></div>anything after</body></html>';
 			fs.writeFileSync('test/data/challenge-file.html', content);			
 			
 			database = new InMemoryDatabase();
 			database.challenges = [
 				{ 
 					title: 'First challenge',
-					content: 'test/data/challenge-file.html' 
+					file: 'test/data/challenge-file.html' 
 				}
 			];
 			database.players = [
@@ -129,7 +129,7 @@ describe('Dashboard >', function() {
 			dashboard({ url: '/players/ericminio' }, response, database);
 			page = cheerio.load(response.html);
 
-			expect(page('#next-challenge-content').text()).toEqual('content');			
+			expect(page('#next-challenge-content').html()).toEqual('content<label>with html</label>');			
 		});
 	});
 	

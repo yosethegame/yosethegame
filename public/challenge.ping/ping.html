@@ -7,15 +7,15 @@
 	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
 	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>		
 </head>
-<body>
+<body id="challenge-content">
 	<div class="indent">
 		<legend>
-			<h1>The Ping challenge</h1>
+			<h2>The Ping challenge</h2>
 		</legend>
 		
 		<p class="lead">
 			You're expected to provide an url that should accept a 
-			GET request and respond the following					
+			GET request and respond the following JSON					
 		</p>
 		
 		<pre>{ "alive" : true }</pre>
@@ -49,8 +49,6 @@
 
 		</section>
 	</div>
-	
-	<script src="try.listener.js"></script>
-	
+	<script src="/challenge.ping/try.listener.js"></script>	
 </body>
 </html>
