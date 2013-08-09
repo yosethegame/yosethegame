@@ -3,7 +3,7 @@ var Router = require('../public/js/router');
 var Server = require('../public/js/server');
 var InMemoryDatabase = require('../public/js/inMemoryDatabase');
 
-describe("Player dashboard", function() {
+describe("Player dashboard:", function() {
 
 	var server = new Server(new Router());
 	
@@ -25,39 +25,6 @@ describe("Player dashboard", function() {
 				}).
 				then(function() {
 					expect(browser.query('#player').className).toContain("hidden");
-					done();
-				}).				
-				fail(function(error) {
-					expect(error.toString()).toBeNull();
-					done();
-				});
-		});
-	});
-	
-	describe("When player does exist", function() {
-
-		beforeEach(function() {
-			server.useRepository(
-				{
-					find: function() {
-						return { avatar: 'http://this-avatar' };
-					}
-				}
-			)
-		});
-
-		it("displays its avatar", function(done) {
-			var browser = new Browser();
-			browser.visit("http://localhost:5000/players/ericminio").
-				then(function() {
-					expect(browser.query('#player img').src).toEqual('http://this-avatar/');
-				}).
-				then(function() {
-					expect(browser.query('#player').className).toContain('visible');
-					done();
-				}).				
-				then(function() {
-					expect(browser.query('#info').className).toContain('hidden');
 					done();
 				}).				
 				fail(function(error) {
@@ -100,8 +67,54 @@ describe("Player dashboard", function() {
 					expect(error.toString()).toBeNull();
 					done();
 				});
+		});				
+	});
+	
+	describe("When player exists, ", function() {
+
+		beforeEach(function() {
+			server.useRepository(
+				{
+					find: function() {
+						return { avatar: 'http://this-avatar' };
+					}
+				}
+			)
+		});
+
+		it("displays its avatar", function(done) {
+			var browser = new Browser();
+			browser.visit("http://localhost:5000/players/ericminio").
+				then(function() {
+					expect(browser.query('#player img').src).toEqual('http://this-avatar/');
+				}).
+				then(function() {
+					expect(browser.query('#player').className).toContain('visible');
+					done();
+				}).				
+				then(function() {
+					expect(browser.query('#info').className).toContain('hidden');
+					done();
+				}).				
+				fail(function(error) {
+					expect(error.toString()).toBeNull();
+					done();
+				});
 		});
 		
-		
+		it('shows the get-ready challenge', function(done) {
+			var browser = new Browser();
+			browser.visit("http://localhost:5000/players/ericminio").
+				then(function() {
+					expect(browser.text('#player #next-challenge')).toEqual('Get ready');
+					done();
+				}).
+				fail(function(error) {
+					expect(error.toString()).toBeNull();
+					done();
+				});
+		});
 	});
+	
+	
 });

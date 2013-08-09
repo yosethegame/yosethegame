@@ -1,21 +1,22 @@
-var cheerio 	 = require('cheerio');
-var dashboard	 = require('../public/js/dashboard.js');
+var cheerio 	 	 = require('cheerio');
+var dashboard	 	 = require('../public/js/dashboard.js');
+var InMemoryDatabase = require('../public/js/inMemoryDatabase');
 
 describe('Dashboard >', function() {
 	
 	var page;
+	var response = {
+		write: function(content) { this.html = content; },
+		end: function() {}
+	}
 	
-	beforeEach(function() {	
-		var response = {
-			write: function(content) { this.html = content; },
-			end: function() {}
-		}
-		dashboard({}, response);
-		page = cheerio.load(response.html);
-	});
-
-
 	describe('The elements of the page:', function() {
+
+		beforeEach(function() {	
+			dashboard({}, response);
+			page = cheerio.load(response.html);
+		});
+
 
 		it('The title', function() {			
 			expect(page('title').text()).toBe('Dashboard');
@@ -48,7 +49,7 @@ describe('Dashboard >', function() {
 				});
 				
 				it('appears in a circle', function() {
-					expect(page('#player img').attr('class')).toEqual('img-circle');
+					expect(page('#player img').attr('class')).toContain('img-circle');
 				});
 			});	
 			
@@ -65,6 +66,71 @@ describe('Dashboard >', function() {
 
 	});
 	
+	describe('Challenge invitation', function() {
+		
+		var database;
+		
+		beforeEach(function() {	
+			database = new InMemoryDatabase();
+			database.challenges = [
+				{ title: 'First challenge' },
+				{ title: 'Second challenge' }
+			];
+			database.players = [
+				{ login: 'ericminio' },
+				{ 
+					login: 'annessou', 
+					portfolio: [
+						{ title: 'First challenge' }
+					]
+				}
+			];
+		});
+
+
+		it('displays the first challenge to a new player', function() {
+			dashboard({ url: '/players/ericminio' }, response, database);
+			page = cheerio.load(response.html);
+
+			expect(page('#next-challenge-title').text()).toEqual('First challenge');
+		});
+		
+		it('displays the next undone challenge to a player with a portfolio', function() {
+			dashboard({ url: '/players/annessou' }, response, database);
+			page = cheerio.load(response.html);
+
+			expect(page('#next-challenge-title').text()).toEqual('Second challenge');
+		});
+		
+	});
 	
+	describe('Challenge display', function() {
+	
+		var database;
+		var fs = require('fs');
+		
+		beforeEach(function() {	
+			var content = '<html><body>anything before<div id="challenge-content">content</div>anything after</body></html>';
+			fs.writeFileSync('test/data/challenge-file.html', content);			
+			
+			database = new InMemoryDatabase();
+			database.challenges = [
+				{ 
+					title: 'First challenge',
+					content: 'test/data/challenge-file.html' 
+				}
+			];
+			database.players = [
+				{ login: 'ericminio' }
+			];
+		});
+
+		it('displays the next challenge content', function() {
+			dashboard({ url: '/players/ericminio' }, response, database);
+			page = cheerio.load(response.html);
+
+			expect(page('#next-challenge-content').text()).toEqual('content');			
+		});
+	});
 	
 });
