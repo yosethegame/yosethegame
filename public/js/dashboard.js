@@ -26,6 +26,8 @@ dashboard = function(request, response, database) {
 					var page = cheerio.load(fs.readFileSync(challenge.file).toString());
 					html = html.replace('Next challenge content', page('#challenge-content').html());
 				}			
+			} else {
+				html = html.hide('#next-challenge').show('#when-no-more-challenges');
 			}
 		}		
 	}

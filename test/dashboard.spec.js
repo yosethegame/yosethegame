@@ -158,4 +158,34 @@ describe('Dashboard >', function() {
 		});
 	});
 	
+	describe('Achievements display:', function() {
+	
+		var database;
+		
+		beforeEach(function() {	
+			database = new InMemoryDatabase();
+			database.challenges = [
+				{ title: 'First challenge' },
+				{ title: 'Second challenge' }
+			];
+			database.players = [
+				{ 
+					login: 'ericminio', 
+					portfolio: [
+						{ title: 'First challenge' },
+						{ title: 'Second challenge' }
+					]
+				}
+			];
+		});
+		
+		it('displays the first challenge of the portfolio', function() {
+			dashboard({ url: '/players/ericminio' }, response, database);
+			page = cheerio.load(response.html);
+
+			expect(page('#achievements_1').text()).toEqual('First challenge');			
+		});
+		
+	});
+	
 });
