@@ -19,12 +19,14 @@ dashboard = function(request, response, database) {
 				while(player.portfolio[index] && player.portfolio[index].title == database.challenges[index].title) { index ++ }
 				challenge = database.challenges[index];
 			}
-			html = html.replace('Next challenge title', challenge.title);
+			if (challenge != undefined) {
+				html = html.replace('Next challenge title', challenge.title);
 
-			if (challenge.file != undefined) {
-				var page = cheerio.load(fs.readFileSync(challenge.file).toString());
-				html = html.replace('Next challenge content', page('#challenge-content').html());
-			}			
+				if (challenge.file != undefined) {
+					var page = cheerio.load(fs.readFileSync(challenge.file).toString());
+					html = html.replace('Next challenge content', page('#challenge-content').html());
+				}			
+			}
 		}		
 	}
 	response.write(html);

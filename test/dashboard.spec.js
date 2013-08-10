@@ -83,6 +83,13 @@ describe('Dashboard >', function() {
 					portfolio: [
 						{ title: 'First challenge' }
 					]
+				},
+				{
+					login: 'bilou',
+					portfolio: [
+						{ title: 'First challenge' },
+						{ title: 'Second challenge' }
+					]
 				}
 			];
 		});
@@ -100,6 +107,24 @@ describe('Dashboard >', function() {
 			page = cheerio.load(response.html);
 
 			expect(page('#next-challenge-title').text()).toEqual('Second challenge');
+		});
+		
+		describe('when no more challenge is available', function() {
+		
+			it('displays the coming-soon section', function() {
+				dashboard({ url: '/players/bilou' }, response, database);
+				page = cheerio.load(response.html);
+
+				expect(page('#when-no-more-challenges').attr('class')).toContain('visible');
+			});
+			
+			it('hides the next-challenge section', function() {
+				dashboard({ url: '/players/bilou' }, response, database);
+				page = cheerio.load(response.html);
+
+				expect(page('#next-challenge').attr('class')).toContain('hidden');
+			});
+			
 		});
 		
 	});
