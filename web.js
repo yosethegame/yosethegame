@@ -14,6 +14,10 @@ repository.players= [
 		{
 			login: 'annessou',
 			avatar: 'https://lh6.googleusercontent.com/-sJ1pMYYvlAQ/AAAAAAAAAAI/AAAAAAAAACM/ZqVyRKEq2iQ/s90-c-k-no/photo.jpg'
+		},
+		{
+			login: 'frederic.leroulley',
+			avatar: 'https://lh4.googleusercontent.com/-5jvSrCDevlw/AAAAAAAAAAI/AAAAAAAAAAA/AX_8CvrZjh4/s46-c-k-no/photo.jpg',
 		}
 	];
 	
@@ -22,6 +26,7 @@ repository.challenges = [
 		title: 'Get ready',
 		file: 'public/challenge.ping/ping.html'
 	}
+	
 ];
 
 

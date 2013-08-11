@@ -14,10 +14,18 @@ dashboard = function(request, response, database) {
 		if (database.challenges != undefined)
 		{
 			var challenge = database.challenges[0];
-			if (player.portfolio != undefined) {
-				var index = 0;
-				while(player.portfolio[index] && player.portfolio[index].title == database.challenges[index].title) { index ++ }
-				challenge = database.challenges[index];
+			if (player.portfolio != undefined && player.portfolio.length > 0) {
+				html = html.show('#achievements');
+				var achievement_template = cheerio.load(html)('#achievements ol').html();
+				var achievements = '';
+				for(var i=0; i<player.portfolio.length; i++) {
+					achievements += achievement_template
+						.replace('id="achievement_n"></', 'id="achievement_n">'+ player.portfolio[i].title + '</')
+						.replace('achievement_n', 'achievement_' + (i+1));
+				}
+				html = html.replace(achievement_template, achievements);
+
+				challenge = database.challenges[player.portfolio.length];
 			}
 			if (challenge != undefined) {
 				html = html.replace('Next challenge title', challenge.title);

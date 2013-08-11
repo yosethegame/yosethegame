@@ -57,13 +57,41 @@ describe('Dashboard >', function() {
 				
 				it('exists', function() {
 					expect(page('#player').length).toNotBe(0);
-				});
-				
+				});				
 				it('is hidden by default (no repository)', function() {
 					expect(page('#player').attr('class')).toContain('hidden');
 				});
-			});		
+			});	
+			
+			describe('The placeholder of the achievements', function() {
+				it('exists', function() {
+					expect(page('#achievements').length).toNotBe(0);
+				});
+				it('is hidden by default', function() {
+					expect(page('#achievements').attr('class')).toContain('hidden');
+				});
+				it('contains the template for each achievement', function() {
+					expect(page('#achievements #achievement_n').length).toNotBe(0);
+				});
+			});
+			
+			describe('The placeholder of the next-challenge', function() {
+				it('exists', function() {
+					expect(page('#next-challenge').length).toNotBe(0);
+				});
+				it('is visible by default', function() {
+					expect(page('#next-challenge').attr('class')).toContain('visible');
+				});
+			});
 
+			describe('The placeholder of the when-no-more-challenges message', function() {
+				it('exists', function() {
+					expect(page('#when-no-more-challenges').length).toNotBe(0);
+				});
+				it('is hidden by default', function() {
+					expect(page('#when-no-more-challenges').attr('class')).toContain('hidden');
+				});
+			});
 	});
 	
 	describe('Challenge invitation', function() {
@@ -179,11 +207,38 @@ describe('Dashboard >', function() {
 			];
 		});
 		
-		it('displays the first challenge of the portfolio', function() {
+		it('displays the achievements section when the player has a non-empty portfolio', function() {
+			dashboard({ url: '/players/ericminio' }, response, database);
+			page = cheerio.load(response.html);
+			
+			expect(page('#achievements').attr('class')).toContain('visible');
+		});
+		
+		it('displays the first achievement of the portfolio', function() {
 			dashboard({ url: '/players/ericminio' }, response, database);
 			page = cheerio.load(response.html);
 
-			expect(page('#achievements_1').text()).toEqual('First challenge');			
+			expect(page('#achievement_1').text()).toEqual('First challenge');			
+		});
+		
+		it('displays the second achievement of the portfolio', function() {
+			dashboard({ url: '/players/ericminio' }, response, database);
+			page = cheerio.load(response.html);
+
+			expect(page('#achievement_2').text()).toEqual('Second challenge');			
+		});
+
+		it('support an empty portfolio', function() {
+			database.players = [
+				{ 
+					login: 'ericminio', 
+					portfolio: []
+				}
+			];
+			dashboard({ url: '/players/ericminio' }, response, database);
+			page = cheerio.load(response.html);
+			
+			expect(page('#achievements').attr('class')).toContain('hidden');
 		});
 		
 	});
