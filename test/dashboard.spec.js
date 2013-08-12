@@ -24,78 +24,78 @@ describe('Dashboard >', function() {
 			
 		describe('The placeholder of the information messages', function() {
 				
-				it('exists', function() {
-					expect(page('#info').length).toNotBe(0);
-				});
-
-				it('appears as an error', function() {
-					expect(page('#info').attr('class')).toContain('text-error');
-				});
-
-				it('is visible by default', function() {
-					expect(page('#info').attr('class')).toContain('visible');
-				});
+			it('exists', function() {
+				expect(page('#info').length).toNotBe(0);
 			});
 
-			describe('The placeholder of the avatar', function() {
-				
-				it('exists', function() {
-					expect(page('#player img').length).toNotBe(0);
-				});
+			it('appears as an error', function() {
+				expect(page('#info').attr('class')).toContain('text-error');
+			});
 
-				it('is bounded in a square', function() {
-					expect(page('#player img').attr('width')).toEqual('60');
-					expect(page('#player img').attr('height')).toEqual('60');
-				});
+			it('is visible by default', function() {
+				expect(page('#info').attr('class')).toContain('visible');
+			});
+		});
+
+		describe('The placeholder of the avatar', function() {
 				
-				it('appears in a circle', function() {
-					expect(page('#player img').attr('class')).toContain('img-circle');
-				});
-			});	
+			it('exists', function() {
+				expect(page('#player img').length).toNotBe(0);
+			});
+
+			it('is bounded in a square', function() {
+				expect(page('#player img').attr('width')).toEqual('60');
+				expect(page('#player img').attr('height')).toEqual('60');
+			});
+				
+			it('appears in a circle', function() {
+				expect(page('#player img').attr('class')).toContain('img-circle');
+			});
+		});	
 			
-			describe('The placeholder of the player', function() {
+		describe('The placeholder of the player', function() {
 				
-				it('exists', function() {
-					expect(page('#player').length).toNotBe(0);
-				});				
-				it('is hidden by default (no repository)', function() {
-					expect(page('#player').attr('class')).toContain('hidden');
-				});
+			it('exists', function() {
+				expect(page('#player').length).toNotBe(0);
+			});				
+			it('is hidden by default (no repository)', function() {
+				expect(page('#player').attr('class')).toContain('hidden');
+			});
 				
-				it('contains an hidden placeholder that will store the login of the player', function() {
-					expect(page('#player #login').attr('class')).toContain('hidden');
-				});
-			});	
-			
-			describe('The placeholder of the achievements', function() {
-				it('exists', function() {
-					expect(page('#achievements').length).toNotBe(0);
-				});
-				it('is hidden by default', function() {
-					expect(page('#achievements').attr('class')).toContain('hidden');
-				});
-				it('contains the template for each achievement', function() {
-					expect(page('#achievements #achievement_n').length).toNotBe(0);
-				});
+			it('contains an hidden placeholder that will store the login of the player', function() {
+				expect(page('#player #login').attr('class')).toContain('hidden');
 			});
+		});	
 			
-			describe('The placeholder of the next-challenge', function() {
-				it('exists', function() {
-					expect(page('#next-challenge').length).toNotBe(0);
-				});
-				it('is visible by default', function() {
-					expect(page('#next-challenge').attr('class')).toContain('visible');
-				});
+		describe('The placeholder of the achievements', function() {
+			it('exists', function() {
+				expect(page('#achievements').length).toNotBe(0);
 			});
+			it('is hidden by default', function() {
+				expect(page('#achievements').attr('class')).toContain('hidden');
+			});
+			it('contains the template for each achievement', function() {
+				expect(page('#achievements #achievement_n').length).toNotBe(0);
+			});
+		});
+			
+		describe('The placeholder of the next-challenge', function() {
+			it('exists', function() {
+				expect(page('#next-challenge').length).toNotBe(0);
+			});
+			it('is visible by default', function() {
+				expect(page('#next-challenge').attr('class')).toContain('visible');
+			});
+		});
 
-			describe('The placeholder of the when-no-more-challenges message', function() {
-				it('exists', function() {
-					expect(page('#when-no-more-challenges').length).toNotBe(0);
-				});
-				it('is hidden by default', function() {
-					expect(page('#when-no-more-challenges').attr('class')).toContain('hidden');
-				});
+		describe('The placeholder of the when-no-more-challenges message', function() {
+			it('exists', function() {
+				expect(page('#when-no-more-challenges').length).toNotBe(0);
 			});
+			it('is hidden by default', function() {
+				expect(page('#when-no-more-challenges').attr('class')).toContain('hidden');
+			});
+		});
 	});
 	
 	describe('Login availaility', function() {
