@@ -15,4 +15,7 @@ InMemoryDatabase.prototype.find = function(login) {
 	}
 };
 
+InMemoryDatabase.prototype.savePlayer = function (player) {
+};
+
 module.exports = InMemoryDatabase;

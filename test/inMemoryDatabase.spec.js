@@ -27,4 +27,13 @@ describe('InMemoryDatabase', function() {
 		expect(database.players[0]).toEqual(me);
 	});
 	
+	it('updating a player needs no implementation thx to in-memory db', function() {
+		var me = { login: 'me' };
+		var database = new InMemoryDatabase().withPlayers([me]);
+		me.name = 'eric';
+		database.savePlayer(me);
+		
+		expect(database.find('me').name).toEqual('eric');
+	});
+	
 });
