@@ -61,6 +61,10 @@ describe('Dashboard >', function() {
 				it('is hidden by default (no repository)', function() {
 					expect(page('#player').attr('class')).toContain('hidden');
 				});
+				
+				it('contains an hidden placeholder that will store the login of the player', function() {
+					expect(page('#player #login').attr('class')).toContain('hidden');
+				});
 			});	
 			
 			describe('The placeholder of the achievements', function() {
@@ -92,6 +96,24 @@ describe('Dashboard >', function() {
 					expect(page('#when-no-more-challenges').attr('class')).toContain('hidden');
 				});
 			});
+	});
+	
+	describe('Login availaility', function() {
+	
+		var database;
+		
+		beforeEach(function() {	
+			database = new InMemoryDatabase().withPlayers([
+				{ login: 'ericminio' }
+			]);
+		});
+		
+		it('makes login available in the page to be used eventually', function() {
+			dashboard({ url: '/players/ericminio' }, response, database);
+			page = cheerio.load(response.html);
+
+			expect(page('#login').text()).toEqual('ericminio');
+		});
 	});
 	
 	describe('Challenge invitation', function() {
@@ -242,5 +264,7 @@ describe('Dashboard >', function() {
 		});
 		
 	});
+	
+	
 	
 });

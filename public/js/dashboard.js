@@ -8,8 +8,9 @@ dashboard = function(request, response, database) {
 
 	var player = database == undefined ? undefined : database.find(request.url.lastSegment());
 	if (player != undefined) {
-		html = html.replace('avatar-of-player', player.avatar);
-		html = html.hide('#info').show('#player');		
+		html = html.hide('#info').show('#player')
+				   .replace('avatar-of-player', player.avatar)
+				   .replace('login-of-player', player.login);
 		
 		if (database.challenges != undefined)
 		{
