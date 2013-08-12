@@ -1,5 +1,5 @@
 var fs = require('fs');
-var FileDatabase = require('../public/js/FileDatabase');
+var FileDatabase = require('../public/js/fileDatabase');
 
 describe('File Database', function() {
 
