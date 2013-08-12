@@ -58,4 +58,19 @@ describe('File Database', function() {
 		});
 		
 	});
+	
+	describe('Updating player', function() {
+		
+		beforeEach(function() {
+			fs.unlinkSync(folder + '/player.asm')
+			database.createPlayer(annessou);
+		})
+	
+		it('can modify a player', function() {
+			annessou.field = 'anything';
+			database.savePlayer(annessou);
+			
+			expect(database.find('asm').field).toEqual('anything');
+		});		
+	});
 });

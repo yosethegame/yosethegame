@@ -1,24 +1,38 @@
 var fs = require('fs');
-var $ = $ || require('jquery');
+var $  = $ || require('jquery');
 
 function FileDatabase(folder) {
 	this.folder = folder;
 };
 
 FileDatabase.prototype.find = function(login) {
-	var file = this.folder + '/player.' + login;
-	if (!fs.existsSync(file)) return undefined;
-	
-	var content = fs.readFileSync(file);
-	var player = $.parseJSON(content.toString());
-	return player;
+	return this.playerFileExists(login) ?  this.buildPlayerFromFile(login) : undefined;
+};
+
+FileDatabase.prototype.playerFile = function(login) {
+	return this.folder + '/player.' + login;
+};
+
+FileDatabase.prototype.playerFileExists = function(login) {
+	return fs.existsSync(this.playerFile(login));
+}
+
+FileDatabase.prototype.buildPlayerFromFile = function(login) {
+	return $.parseJSON(this.readPlayerFile(login));
+}
+
+FileDatabase.prototype.readPlayerFile = function(login) {
+	return fs.readFileSync(this.playerFile(login)).toString();
 };
 
 FileDatabase.prototype.createPlayer = function(player) {
-	var file = this.folder + '/player.' + player.login;
-	if (!fs.existsSync(file)) {
-		fs.writeFileSync(file, JSON.stringify(player));		
+	if (!this.playerFileExists(player.login)) {
+		this.savePlayer(player);
 	}
+};
+
+FileDatabase.prototype.savePlayer = function(player) {
+	fs.writeFileSync(this.playerFile(player.login), JSON.stringify(player));
 };
 
 module.exports = FileDatabase;
