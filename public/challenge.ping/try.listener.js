@@ -23,6 +23,14 @@ LevelPingListener = function() {
 			$('#success').text('success!');
 			$('#success_section').removeClass('hidden');
 			$('#error_section').addClass('hidden');
+			
+			if ($('#player.visible #login').length > 0) {
+				$.post('/success', { 
+					challenge: 'public/challenge.ping/ping.html',
+					login: $('#login').text(),
+					server: $('#server').val()
+				});
+			}
 		},
 		
 		error: function(err) {

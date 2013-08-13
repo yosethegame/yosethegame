@@ -18,6 +18,47 @@ describe("TryListener: ", function() {
 		expect($.get).toHaveBeenCalledWith('/ping?server=any');
 	});
 	
+	describe('When success and a player is logged,', function() {
+	
+		var post;
+	
+		beforeEach(function() {
+			$('body').append('<div id="player" class="visible"><label id="login">eric</label></div>');
+
+			$('body').append('<input id="server"/>');
+			$('#server').val('any');
+			spyOn($, 'ajax');
+			listener.success();			
+			
+			post = $.ajax.mostRecentCall.args[0];
+		});
+		
+		afterEach(function() {
+			$('#login').remove();
+			$('#server').remove();
+		});
+	
+		it('notifies the success', function() {
+			expect(post.url).toBe('/success');
+		});
+		
+		it('sends the challenge file name to identify the challenge', function() {
+			var name = 'public/challenge.ping/ping.html';
+			if (!require('fs').existsSync(name)) { this.fail(Error('challenge file has moved')); }
+			
+			expect(post.data.challenge).toBe(name);
+		});
+		
+		it('sends the login of the player', function() {
+			expect(post.data.login).toBe('eric');
+		});
+		
+		it('sends the server given by the player', function() {
+			expect(post.data.server).toBe('any');
+		});
+		
+	});
+	
 	describe("status message update: ", function() {
 				
 		var message;
