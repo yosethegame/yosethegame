@@ -1,8 +1,6 @@
 var Browser = require("zombie");
 var Router = require('../public/js/router');
 var Server = require('../public/js/server');
-var request = require('request');
-var LevelPingListener = require('../public/challenge.ping/try.listener.js');
 
 describe("Ping challenge", function() {
 
@@ -50,7 +48,7 @@ describe("Ping challenge", function() {
 					expect(error.toString()).toBeNull();
 					done();
 				});
-		});
+		});		
 		
 	});
 	
