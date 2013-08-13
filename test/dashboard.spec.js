@@ -40,16 +40,16 @@ describe('Dashboard >', function() {
 		describe('The placeholder of the avatar', function() {
 				
 			it('exists', function() {
-				expect(page('#player img').length).toNotBe(0);
+				expect(page('#player img#avatar').length).toNotBe(0);
 			});
 
 			it('is bounded in a square', function() {
-				expect(page('#player img').attr('width')).toEqual('60');
-				expect(page('#player img').attr('height')).toEqual('60');
+				expect(page('#avatar').attr('width')).toEqual('60');
+				expect(page('#avatar').attr('height')).toEqual('60');
 			});
 				
 			it('appears in a circle', function() {
-				expect(page('#player img').attr('class')).toContain('img-circle');
+				expect(page('#avatar').attr('class')).toContain('img-circle');
 			});
 		});	
 			
@@ -98,6 +98,49 @@ describe('Dashboard >', function() {
 		});
 	});
 	
+	describe('info/player toggle', function() {
+	
+		var database;
+		
+		beforeEach(function() {	
+			database = new InMemoryDatabase().withPlayers([
+				{ login: 'ericminio' }
+			]);
+			dashboard({ url: 'players/ericminio' }, response, database);
+			page = cheerio.load(response.html);
+		});
+
+		it('hides the info section when player exists in the database', function() {
+			expect(page('#info').attr('class')).toContain('hidden');
+		});
+		
+		it('shows the player section when the player exists in the database', function() {
+			expect(page('#player').attr('class')).toContain('visible');
+		})
+		
+	});
+	
+	describe('Avatar', function() {
+		
+		var database;
+		
+		beforeEach(function() {	
+			database = new InMemoryDatabase().withPlayers([
+				{ 
+					login: 'ericminio',
+					avatar: 'http://annessou-avatar'
+				}
+			]);
+			dashboard({ url: 'players/ericminio' }, response, database);
+			page = cheerio.load(response.html);
+		});
+		
+		it('is displayed when player has an avatar', function() {
+			expect(page('#avatar').attr('src')).toEqual('http://annessou-avatar');
+		});
+		
+	});
+	
 	describe('Login availaility', function() {
 	
 		var database;
@@ -143,7 +186,6 @@ describe('Dashboard >', function() {
 				}
 			];
 		});
-
 
 		it('displays the first challenge to a new player', function() {
 			dashboard({ url: '/players/ericminio' }, response, database);
