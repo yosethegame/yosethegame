@@ -9,6 +9,7 @@ describe('Router', function() {
 		var pong   		 = require('../public/challenge.ping/pong.js');
 		var dashboard	 = require('../public/js/dashboard.js');
 		var servecontent = require('../public/js/serve-content.js');
+		var success		 = require('../public/js/success.js');
 
 		it('has routes', function() {
 			expect(router.routes.length).toBeGreaterThan(1);
@@ -20,6 +21,10 @@ describe('Router', function() {
 		
 		it('maps dashboard request', function() {
 			expect(router.endPointOf({ url: '/players/any' })).toBe(dashboard);
+		});
+		
+		it('maps success request', function() {
+			expect(router.endPointOf({ url: '/success' })).toBe(success);
 		});
 		
 		it('maps static content request', function() {

@@ -1,6 +1,7 @@
 var servecontent = require('./serve-content.js');
 var pong         = require('../challenge.ping/pong.js');
 var dashboard	 = require('./dashboard.js');
+var success		 = require('./success.js');
 
 String.prototype.startsWith = function (prefix) {
 	return this.indexOf(prefix) == 0;
@@ -18,6 +19,10 @@ Router = function() {
 			{
 				prefix: '/players/',
 				target: dashboard
+			},
+			{
+				prefix: '/success',
+				target: success
 			},
 			{
 				prefix: '',
