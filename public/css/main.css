@@ -48,3 +48,13 @@
 #achievements {
 	color: green;
 }
+
+#sidebar {
+	width:60px;
+	position:fixed;
+	padding-left:10px;
+}
+
+#content {
+	margin-left: 80px;
+}
