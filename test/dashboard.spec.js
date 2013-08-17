@@ -96,6 +96,15 @@ describe('Dashboard >', function() {
 				expect(page('#when-no-more-challenges').attr('class')).toContain('hidden');
 			});
 		});
+		
+		describe('The placeholder for the invitation to continue', function() {
+			it('exists', function() {
+				expect(page('#continue').length).toNotBe(0);
+			});
+			it('is hidden by default', function() {
+				expect(page('#continue').attr('class')).toContain('hidden');
+			});
+		});
 	});
 	
 	describe('info/player toggle', function() {
