@@ -273,8 +273,14 @@ describe('Dashboard >', function() {
 				{ 
 					login: 'ericminio', 
 					portfolio: [
-						{ title: 'First challenge' },
-						{ title: 'Second challenge' }
+						{ 
+							title: 'First challenge',
+							server: 'here'
+						},
+						{ 
+							title: 'Second challenge',
+							server: 'there'
+						}
 					]
 				}
 			];
@@ -291,14 +297,14 @@ describe('Dashboard >', function() {
 			dashboard({ url: '/players/ericminio' }, response, database);
 			page = cheerio.load(response.html);
 
-			expect(page('#achievement_1').text()).toEqual('First challenge');			
+			expect(page('#achievement_1').text()).toEqual('First challenge (here)');			
 		});
 		
 		it('displays the second achievement of the portfolio', function() {
 			dashboard({ url: '/players/ericminio' }, response, database);
 			page = cheerio.load(response.html);
 
-			expect(page('#achievement_2').text()).toEqual('Second challenge');			
+			expect(page('#achievement_2').text()).toContain('Second challenge');			
 		});
 
 		it('support an empty portfolio', function() {

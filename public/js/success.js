@@ -18,7 +18,12 @@ success = function(request, response, database) {
 	    request.on('end', function () {
 			var form = qs.parse(body);
 			var player = database.find(form.login);
-			player.portfolio = [ { title: findChallengeTitle(form.challenge, database) } ];
+			player.portfolio = [ 
+				{ 
+					title: findChallengeTitle(form.challenge, database),
+					server: form.server 
+				} 
+			];
 			database.savePlayer(player);
 			response.end();
 	    });

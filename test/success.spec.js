@@ -62,12 +62,14 @@ describe('Success listener', function() {
 				url: 'http://localhost:5000/success',
 				form: {
 					login: 'annessou',
-					challenge: 'path/to/challenge/file'
+					challenge: 'path/to/challenge/file',
+					server: 'the/server/of/annessou'
 				}
 			}, 
 			function(error, response, body) {
 				expect(spy.login).toEqual('annessou');
 				expect(spy.player.portfolio[0].title).toEqual('a tough challenge');
+				expect(spy.player.portfolio[0].server).toEqual('the/server/of/annessou');
 				expect(spy.savedPlayer).toEqual(spy.player);
 				done();
 			});

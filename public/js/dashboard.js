@@ -20,8 +20,9 @@ dashboard = function(request, response, database) {
 				var achievement_template = cheerio.load(html)('#achievements ol').html();
 				var achievements = '';
 				for(var i=0; i<player.portfolio.length; i++) {
+					var achievement = player.portfolio[i].title + ' (' + player.portfolio[i].server + ')';
 					achievements += achievement_template
-						.replace('id="achievement_n"></', 'id="achievement_n">'+ player.portfolio[i].title + '</')
+						.replace('id="achievement_n"></', 'id="achievement_n">'+ achievement + '</')
 						.replace('achievement_n', 'achievement_' + (i+1));
 				}
 				html = html.replace(achievement_template, achievements);
