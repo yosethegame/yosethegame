@@ -18,6 +18,30 @@ describe("TryListener: ", function() {
 		expect($.get).toHaveBeenCalledWith('/ping?server=any');
 	});
 	
+	describe('Animation', function() {
+		var post;
+	
+		beforeEach(function() {
+			$('body').append('<img id="avatar" />');
+
+			$('body').append('<input id="server"/>');
+			$('#server').val('any');
+			spyOn($, 'get').andCallThrough();
+		});
+		
+		it('starts when a try is attempted', function() {
+			listener.try();
+			expect($('#avatar').attr('class')).toContain('rotate');
+		});
+		
+		it('stops when success', function() {
+			$('#avatar').addClass('rotate');
+			listener.success();
+			expect($('#avatar').attr('class')).toNotContain('rotate');
+		});
+		
+	});
+	
 	describe('When success and a player is logged,', function() {
 	
 		var post;

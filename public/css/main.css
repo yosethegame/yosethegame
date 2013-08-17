@@ -1,3 +1,14 @@
+@-webkit-keyframes horizontal-loop
+{
+	from {-webkit-transform:scaleX(1.0);}
+	to {-webkit-transform:scaleX(-1.0);}
+}
+
+
+.rotate {
+	-webkit-animation:horizontal-loop 1s linear infinite alternate; 
+}
+
 .fond {
 	background-color: #B0DBAB;
 }
