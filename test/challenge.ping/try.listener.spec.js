@@ -24,6 +24,7 @@ describe("TryListener: ", function() {
 	
 		beforeEach(function() {
 			$('body').append('<div id="player" class="visible"><label id="login">eric</label></div>');
+			$('body').append('<div id="continue" class="hidden"></div>');
 
 			$('body').append('<input id="server"/>');
 			$('#server').val('any');
@@ -36,6 +37,8 @@ describe("TryListener: ", function() {
 		afterEach(function() {
 			$('#login').remove();
 			$('#server').remove();
+			$('#player').remove();
+			$('#continue').remove();
 		});
 	
 		it('notifies the success', function() {
@@ -55,6 +58,33 @@ describe("TryListener: ", function() {
 		
 		it('sends the server given by the player', function() {
 			expect(post.data.server).toBe('any');
+		});
+		
+		it('displays the invitation to continue', function() {
+			expect($('#continue').attr('class')).toContain('visible');
+		});
+		
+	});
+	
+	describe('When success and nobody seems to be logged', function() {
+
+		var post;
+	
+		beforeEach(function() {
+			$('body').append('<div id="continue" class="hidden"></div>');
+			$('body').append('<input id="server"/>');
+			$('#server').val('any');
+			spyOn($, 'ajax');
+			listener.success();			
+		});
+		
+		afterEach(function() {
+			$('#server').remove();
+			$('#continue').remove();
+		});
+
+		it('the invitation to continue remains hidden', function() {
+			expect($('#continue').attr('class')).toContain('hidden');
 		});
 		
 	});

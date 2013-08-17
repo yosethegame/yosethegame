@@ -30,7 +30,9 @@ LevelPingListener = function() {
 					login: $('#login').text(),
 					server: $('#server').val()
 				});
-			}
+				$('#continue').removeClass('hidden');
+				$('#continue').addClass('visible');
+			}			
 		},
 		
 		error: function(err) {
