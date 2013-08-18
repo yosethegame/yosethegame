@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<title>Power of two - YOSE</title>
+	<link href="/css/main.css" rel="stylesheet" type="text/css">
+	<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
+	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>		
+</head>
+<body id="challenge-content">
+	<legend>
+		<h2>Power of two</h2>
+	</legend>
+		
+	<p>
+		In mathematics, a 
+		<a href="http://en.wikipedia.org/wiki/Power_of_two">power of two</a>
+		means a number of the form 2*exp(n) where n is an integer, 
+		i.e. the result of exponentiation with as base the number 2 and as exponent the integer n.
+	</p>
+	<p class="lead">
+		You're expected to provide an url that should accept a 
+		GET request with a power of 2 as parameter and should respond 
+		a JSON containing the decomposition of this number
+	</p>
+	
+	<p>For example, receiving</p>
+
+	<pre>http://your/url?number=16</pre>
+
+	<p>You should respond</p>
+		
+	<pre>{
+    "number" : 16,
+    "decomposition" : [ 2, 2, 2, 2 ]
+}
+	</pre>
+
+
+	
+	<legend>
+		<h2>Take it!</h2>
+	</legend>
+		
+	<section>
+		<p>
+			Your server will be called with a random power of two.
+		</p>	
+
+		<label>Enter the url of your server</label>
+		<div class="form-inline">
+			<input type="text" class="input-xlarge" id="server" placeholder="http://your-server"/>
+			<button type="button" class="btn btn-primary" id="try" onclick="new PowerOfTwoListener().try()" >Try</button>
+		</div>
+
+		<div id="success_section" class="success hidden">
+			<label id="success">success!</label>
+		</div>
+		<div id="error_section" class="error hidden">
+			<label id="error">501</label>
+			<dl class="dl-horizontal">
+				<dt>Expected</dt>
+				<dd id="expected">{ some: thing }</dd>
+			</dl>
+			<dl class="dl-horizontal">
+				<dt>Got: </dt>
+				<dd id="got">{ other: one }</dd>
+			</dl>
+		</div>
+
+	</section>
+	<script src="/challenge.primeFactors/power.of.two.listener.js"></script>	
+</body>
+</html>

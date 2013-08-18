@@ -26,7 +26,7 @@ describe("Serving ping challenge:", function() {
 	
 	describe("When the remote server is up, ", function() {
 		
-		xdescribe("and responds the expected answser,", function() {
+		describe("and responds the expected answser,", function() {
 			var remote;
 
 			beforeEach(function() {
