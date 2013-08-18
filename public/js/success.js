@@ -9,6 +9,7 @@ findChallengeTitle = function(challengeFile, database) {
 };
 
 success = function(request, response, database) {
+	console.log('\nreceiving success request from host ' + request.headers.host);
 	
 	if (request.method != 'POST') {
 		response.writeHead(405);
