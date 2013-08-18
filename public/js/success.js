@@ -10,26 +10,32 @@ findChallengeTitle = function(challengeFile, database) {
 
 success = function(request, response, database) {
 	
-	if (request.method == 'POST') {
+	if (request.method != 'POST') {
+		response.writeHead(405);
+		response.end();
+	} else {
 		var body = '';
 	    request.on('data', function (data) {
 	        body += data;
 	    });
 	    request.on('end', function () {
 			var form = qs.parse(body);
+			
 			var player = database.find(form.login);
-			player.portfolio = [ 
+			
+			if (player.portfolio == undefined) {
+				player.portfolio = [];
+			}
+			
+			player.portfolio.push( 
 				{ 
 					title: findChallengeTitle(form.challenge, database),
 					server: form.server 
 				} 
-			];
+			);
 			database.savePlayer(player);
 			response.end();
 	    });
-	} else {
-		response.writeHead(405);
-		response.end();
 	}
 };
 

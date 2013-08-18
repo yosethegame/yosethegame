@@ -2,33 +2,32 @@ var request = require('request');
 var Server = require('../public/js/server');
 var Router = require('../public/js/router');
 var success = require('../public/js/success.js');
+var InMemoryDatabase = require('../public/js/inMemoryDatabase');
 
 describe('Success listener', function() {
 	
 	var server;
-	var spy = { 
-		login: '',
-		find: function(login) {
-			this.login = login;
-			this.player = {
-				portfolio: []
-			};
-			return this.player;
-		},
-		savePlayer: function(player) {
-			this.savedPlayer = player;
-		},
-		challenges: [
+	var database;
+	
+	beforeEach(function() {
+		database = new InMemoryDatabase();
+		database.challenges = [
 			{
 				title: 'a tough challenge',
 				file: 'path/to/challenge/file'
 			}
-		]
-	};
-	
-	beforeEach(function() {
+		];
+		database.players = [
+			{ login: 'ericminio' },
+			{ 
+				login: 'annessou', 
+				portfolio: [
+					{ title: 'First challenge' }
+				]
+			}
+		];
 		server = require('http').createServer(function(request, response) {
-			success(request, response, spy);
+			success(request, response, database);
 		}).listen(5000, 'localhost');					
 	});
 	
@@ -43,19 +42,26 @@ describe('Success listener', function() {
 		});
 	});
 	
-	it('accepts a POST', function(done) {
+	it('saves the success of a new player', function(done) {
 		request.post(
 			{
 				headers: {'content-type' : 'application/x-www-form-urlencoded'},
-				url: 'http://localhost:5000/success'
+				url: 'http://localhost:5000/success',
+				form: {
+					login: 'ericminio',
+					challenge: 'path/to/challenge/file',
+					server: 'the/server/of/ricou'
+				}
 			}, 
 			function(error, response, body) {
-				expect(response.statusCode).toEqual(200);
+				var player = database.find('ericminio');
+				expect(player.portfolio[0].title).toEqual('a tough challenge');
+				expect(player.portfolio[0].server).toEqual('the/server/of/ricou');
 				done();
 			});
-	});
+	});	
 	
-	it('Saves the success of a new player', function(done) {
+	it('saves the success of any player', function(done) {
 		request.post(
 			{
 				headers: {'content-type' : 'application/x-www-form-urlencoded'},
@@ -67,12 +73,12 @@ describe('Success listener', function() {
 				}
 			}, 
 			function(error, response, body) {
-				expect(spy.login).toEqual('annessou');
-				expect(spy.player.portfolio[0].title).toEqual('a tough challenge');
-				expect(spy.player.portfolio[0].server).toEqual('the/server/of/annessou');
-				expect(spy.savedPlayer).toEqual(spy.player);
+				var player = database.find('annessou');
+				expect(player.portfolio.length).toEqual(2);
+				expect(player.portfolio[1].title).toEqual('a tough challenge');
+				expect(player.portfolio[1].server).toEqual('the/server/of/annessou');
 				done();
 			});
-	});		
+	});
 
 });
