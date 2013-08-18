@@ -21,6 +21,12 @@ success = function(request, response, database) {
 	    request.on('end', function () {
 			var form = qs.parse(body);
 			
+			if (form.login == undefined || form.challenge == undefined || form.server == undefined) {
+				response.writeHead(400);
+				response.end();
+				return;
+			}
+			
 			var player = database.find(form.login);
 			
 			if (player.portfolio == undefined) {

@@ -80,5 +80,64 @@ describe('Success listener', function() {
 				done();
 			});
 	});
+	
+	it('declares the request to be a bad request when the form misses the login', function(done) {
+		request.post(
+			{
+				headers: {'content-type' : 'application/x-www-form-urlencoded'},
+				url: 'http://localhost:5000/success',
+				form: {
+					challenge: 'path/to/challenge/file',
+					server: 'the/server/of/annessou'
+				}
+			}, 
+			function(error, response, body) {
+				expect(response.statusCode).toEqual(400);
+				done();
+			});
+	});
+	
+	it('declares the request to be a bad request when the form misses the challenge file', function(done) {
+		request.post(
+			{
+				headers: {'content-type' : 'application/x-www-form-urlencoded'},
+				url: 'http://localhost:5000/success',
+				form: {
+					login: 'annessou',
+					server: 'the/server/of/annessou'
+				}
+			}, 
+			function(error, response, body) {
+				expect(response.statusCode).toEqual(400);
+				done();
+			});
+	});
 
+	it('declares the request to be a bad request when the form misses the server used by the player', function(done) {
+		request.post(
+			{
+				headers: {'content-type' : 'application/x-www-form-urlencoded'},
+				url: 'http://localhost:5000/success',
+				form: {
+					login: 'annessou',
+					challenge: 'path/to/challenge/file'
+				}
+			}, 
+			function(error, response, body) {
+				expect(response.statusCode).toEqual(400);
+				done();
+			});
+	});
+
+	it('declares the request to be a bad request when the form is missing', function(done) {
+		request.post(
+			{
+				headers: {'content-type' : 'application/x-www-form-urlencoded'},
+				url: 'http://localhost:5000/success'
+			}, 
+			function(error, response, body) {
+				expect(response.statusCode).toEqual(400);
+				done();
+			});
+	});
 });
