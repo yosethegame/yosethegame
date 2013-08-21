@@ -25,6 +25,10 @@ Router = function() {
 				target: success
 			},
 			{
+				prefix: '/tryPowerOfTwo',
+				target: require('../challenge.primeFactors/power.of.two.js')
+			},
+			{
 				prefix: '',
 				target: servecontent('public')
 			}

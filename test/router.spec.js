@@ -10,6 +10,7 @@ describe('Router', function() {
 		var dashboard	 = require('../public/js/dashboard.js');
 		var servecontent = require('../public/js/serve-content.js');
 		var success		 = require('../public/js/success.js');
+		var powerOfTwo	 = require('../public/challenge.primeFactors/power.of.two.js');
 
 		it('has routes', function() {
 			expect(router.routes.length).toBeGreaterThan(1);
@@ -25,6 +26,10 @@ describe('Router', function() {
 		
 		it('maps success request', function() {
 			expect(router.endPointOf({ url: '/success' })).toBe(success);
+		});
+		
+		it('maps power-of-two challenge request', function() {
+			expect(router.endPointOf({ url: '/tryPowerOfTwo' })).toBe(powerOfTwo);
 		});
 		
 		it('maps static content request', function() {
