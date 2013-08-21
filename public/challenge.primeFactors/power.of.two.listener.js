@@ -1,21 +1,27 @@
 var $ = $ || require('jquery');
 
+var thisPowerOfTwoListener;
+
 PowerOfTwoListener = function() {
+	thisPowerOfTwoListener = this;
 };
 
 PowerOfTwoListener.prototype.try = function() {
 	$.get("/tryPowerOfTwo?server=" + $('#server').val()).success(this.success);
 };
 
-PowerOfTwoListener.prototype.success = function() {
+PowerOfTwoListener.prototype.clear = function() {
 	$('#success_section').removeClass('hidden');
-	$('#success_section').addClass('visible');
 	$('#error_section').addClass('hidden');
 	$('#error').text('');
 	$('#expected').text('');
 	$('#got').text('');
-	
-	$('#success').text('success!');
+};
+
+PowerOfTwoListener.prototype.success = function(data) {
+	thisPowerOfTwoListener.clear();
+	$('#success_section').addClass('visible');
+	$('#success').text('success!' + ' ' + data);
 };
 
 var module = module || {};

@@ -8,8 +8,6 @@ describe("Power of two challenge", function() {
 	var powerOfTwoChallengePage = "http://localhost:5000/challenge.primeFactors/power.of.two.html";
 	
 	beforeEach(function() {
-		var powerOfTwo = require('../public/challenge.primeFactors/power.of.two.js');
-		powerOfTwo.setNumberToSendAsNumberToDecompose(4);
 		server.start();
 	});
 
@@ -26,6 +24,8 @@ describe("Power of two challenge", function() {
 			});
 
 		beforeEach(function() {
+			var powerOfTwo = require('../public/challenge.primeFactors/power.of.two.js');
+			powerOfTwo.numberToAskDecompositionFor = function() { return 4; };
 			remote = require('http').createServer(
 				function (request, response) {
 					response.writeHead(200, {'Content-Type': 'application/json'});
@@ -62,7 +62,26 @@ describe("Power of two challenge", function() {
 		
 	});
 	
-	
+	describe("when the remote server is down", function() {
+		
+		it("you fail the level and are notified that your server is not responding", function(done) {
+			var browser = new Browser();
+			browser.visit(powerOfTwoChallengePage).
+				then(function () {
+					return browser.fill("#server", "http://localhost:6000")
+						   .pressButton("#try");
+				}).
+				then(function() {
+					expect(browser.text("#error")).toContain('404');
+					done();
+				}).
+				fail(function(error) {
+					expect(error.toString()).toBeNull();
+					done();
+				});
+		});
+		
+	});
 });
 		
 		

@@ -38,8 +38,10 @@ describe("PowerOfTwoListener: ", function() {
 		
 		describe("when success, ", function() {
 
+			var answer = JSON.stringify({ number: 4, decomposition: [2, 2]});
+			
 			beforeEach(function() {
-				powerOfTwolistener.success();				
+				powerOfTwolistener.success(answer);				
 			});
 			
 			it("displays the success section", function() {
@@ -52,7 +54,11 @@ describe("PowerOfTwoListener: ", function() {
 			})
 
 			it("displays a success message", function() {			
-				expect($('#success').text()).toEqual('success!');
+				expect($('#success').text()).toContain('success!');
+			});
+			
+			it("displays what the response of the player", function() {			
+				expect($('#success').text()).toContain(answer);
 			});
 			
 			it("clears all error-related placeholders", function() {
