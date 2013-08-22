@@ -39,6 +39,16 @@ describe('Serving Power-of-two challenge', function() {
 		expect(first).not.toEqual(second);
 	});
 	
+	describe("When no remote server answers, ", function() {
+
+		it("returns not found", function(done) {
+			request("http://localhost:5000/tryPowerOfTwo?server=http://localhost:6000", function(error, response, body) {
+				expect(response.statusCode).toEqual(404);
+				done();
+			})
+		});
+	});
+	
 	describe('Request sent', function() {
 		var sentRequest;
 		

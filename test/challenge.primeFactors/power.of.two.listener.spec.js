@@ -51,6 +51,7 @@ describe("PowerOfTwoListener: ", function() {
 			
 			it("hides the error section", function() {
 				expect($('#error_section').hasClass('hidden')).toBe(true);
+				expect($('#error_section').hasClass('visible')).toBe(false);
 			})
 
 			it("displays a success message", function() {			
@@ -67,6 +68,34 @@ describe("PowerOfTwoListener: ", function() {
 				expect($('#got').text()).toEqual('');				
 			});
 
+		});
+		
+		describe("when 404, ", function() {
+
+			beforeEach(function() {
+				powerOfTwolistener.error({ status: 404 });
+			});
+
+			it("displays the error section", function() {
+				expect($('#error_section').hasClass('hidden')).toBe(false);
+				expect($('#error_section').hasClass('visible')).toBe(true);
+			});
+			
+			it("hides the success section", function() {
+				expect($('#success_section').hasClass('hidden')).toBe(true);
+				expect($('#success_section').hasClass('visible')).toBe(false);
+			});
+
+			it("displays the error message", function() {			
+				expect($('#error').text()).toEqual('error 404');
+			});
+
+			it("clears the other placeholders", function() {
+				expect($('#success').text()).toEqual('');
+				
+				expect($('#expected').text()).toEqual('');
+				expect($('#got').text()).toEqual('');				
+			});
 		});
 
 	});

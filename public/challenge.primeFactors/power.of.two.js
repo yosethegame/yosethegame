@@ -10,6 +10,7 @@ powerOfTwo = function(incoming, response) {
 	
 	request(params.query.server + '?number=' + powerOfTwo.numberToAskDecompositionFor(), function(error, remoteResponse, content) {
 		if (error != null) {
+			response.writeHead(404);
 			response.end();
 			return;
 		}
