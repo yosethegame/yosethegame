@@ -102,6 +102,23 @@ describe("Power of two challenge", function() {
 					expect(browser.text("#error")).toContain('501');
 					done();
 				}).
+				then(function() {
+					expect(browser.text("#expected")).toContain(JSON.stringify({
+						'content-type': 'application/json',
+						body: { 
+							number: 4,
+							decomposition : [2, 2] 
+						}
+					}));
+					done();
+				}).
+				then(function() {
+					expect(browser.text("#got")).toContain(JSON.stringify({
+						'content-type' : 'application/json',
+						body : incorrectAnswer
+					}));
+					done();
+				}).
 				fail(function(error) {
 					expect(error.toString()).toBeNull();
 					done();

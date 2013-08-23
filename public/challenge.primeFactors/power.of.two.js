@@ -1,4 +1,5 @@
-var request = require('request');
+var request 		= require('request');
+var primeFactorsOf 	= require('./prime.factors.js');
 
 var numberToAskDecompositionFor = function() {
 	var index = Math.floor(Math.random()*10);
@@ -14,7 +15,27 @@ powerOfTwo = function(incoming, response) {
 			response.end();
 			return;
 		}
-		response.write(content);
+		var expectedAnswer = {
+			number: powerOfTwo.numberToAskDecompositionFor(),
+			decomposition: primeFactorsOf(powerOfTwo.numberToAskDecompositionFor())
+		};
+		if (remoteResponse.headers['content-type'] != 'application/json' || content != JSON.stringify(expectedAnswer)) {
+			var remoteResponseHeader = remoteResponse.headers['content-type'] ==undefined ? 
+					'text/plain':  remoteResponse.headers['content-type'];
+			response.writeHead(501);
+			response.write(JSON.stringify({
+				expected: {
+					'content-type' : 'application/json',
+					body : expectedAnswer
+				},
+				got: {
+					'content-type' : remoteResponseHeader,
+					body : content
+				}
+			}));
+		} else {
+			response.write(content);
+		}
 		response.end();
 	});
 	

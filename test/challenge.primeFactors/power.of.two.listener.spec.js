@@ -97,6 +97,46 @@ describe("PowerOfTwoListener: ", function() {
 				expect($('#got').text()).toEqual('');				
 			});
 		});
+		
+		
+		describe("when 501, ", function() {
+
+			beforeEach(function() {
+				powerOfTwolistener.error({ 
+					status: 501,
+					responseText: JSON.stringify({
+						expected: 111,
+						got: 222
+					})
+				});
+			});
+
+			it("displays the error section", function() {
+				expect($('#error_section').hasClass('hidden')).toBe(false);
+				expect($('#error_section').hasClass('visible')).toBe(true);
+			});
+			
+			it("hides the success section", function() {
+				expect($('#success_section').hasClass('hidden')).toBe(true);
+				expect($('#success_section').hasClass('visible')).toBe(false);
+			});
+
+			it("displays the error message", function() {			
+				expect($('#error').text()).toContain('501');
+			});
+
+			it("clears the success placeholders", function() {
+				expect($('#success').text()).toEqual('');
+			});
+			
+			it('displays the expected value', function() {
+				expect($('#expected').text()).toEqual('111');
+			});
+
+			it('displays the got value', function() {
+				expect($('#got').text()).toEqual('222');
+			});
+		});
 
 	});
 	
