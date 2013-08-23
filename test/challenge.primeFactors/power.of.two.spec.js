@@ -39,6 +39,14 @@ describe('Serving Power-of-two challenge', function() {
 		expect(first).not.toEqual(second);
 	});
 	
+	it('can build the expected answer', function() {
+		powerOfTwo.numberToAskDecompositionFor = function() { return 8; };
+		expect(powerOfTwo.expectedAnswer()).toEqual({
+			number : 8,
+			decomposition : [2, 2, 2]
+		});
+	});
+	
 	describe("When no remote server answers, ", function() {
 
 		it("returns not found", function(done) {

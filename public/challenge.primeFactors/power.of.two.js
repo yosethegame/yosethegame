@@ -6,6 +6,14 @@ var numberToAskDecompositionFor = function() {
 	return [2, 4, 8, 16, 64, 128, 256, 512, 1024, 2048][index];
 };
 
+var expectedAnswer = function() {
+	var number = powerOfTwo.numberToAskDecompositionFor();
+	return {
+		number : number,
+		decomposition: primeFactorsOf(number)
+	}
+}
+
 powerOfTwo = function(incoming, response) {
 	var params = require('url').parse(incoming.url, true);
 	
@@ -15,10 +23,7 @@ powerOfTwo = function(incoming, response) {
 			response.end();
 			return;
 		}
-		var expectedAnswer = {
-			number: powerOfTwo.numberToAskDecompositionFor(),
-			decomposition: primeFactorsOf(powerOfTwo.numberToAskDecompositionFor())
-		};
+		var expectedAnswer = powerOfTwo.expectedAnswer();
 		if (remoteResponse.headers['content-type'] != 'application/json' || content != JSON.stringify(expectedAnswer)) {
 			var remoteResponseHeader = remoteResponse.headers['content-type'] ==undefined ? 
 					'text/plain':  remoteResponse.headers['content-type'];
@@ -47,3 +52,4 @@ setNumberToSendAsNumberToDecompose = function(number) {
 
 module.exports = powerOfTwo;
 module.exports.numberToAskDecompositionFor = numberToAskDecompositionFor;
+module.exports.expectedAnswer = expectedAnswer;
