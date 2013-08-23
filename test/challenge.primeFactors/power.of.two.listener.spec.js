@@ -140,4 +140,34 @@ describe("PowerOfTwoListener: ", function() {
 
 	});
 	
+	describe('Animation', function() {
+		var post;
+	
+		beforeEach(function() {
+			$('body').append('<img id="avatar" />');
+
+			$('body').append('<input id="server"/>');
+			$('#server').val('any');
+			spyOn($, 'get').andCallThrough();
+		});
+		
+		it('starts when a try is attempted', function() {
+			powerOfTwolistener.try();
+			expect($('#avatar').attr('class')).toContain('rotate');
+		});
+		
+		it('stops when success', function() {
+			$('#avatar').addClass('rotate');
+			powerOfTwolistener.success();
+			expect($('#avatar').attr('class')).toNotContain('rotate');
+		});
+		
+		it('stops when error', function() {
+			$('#avatar').addClass('rotate');
+			powerOfTwolistener.error({});
+			expect($('#avatar').attr('class')).toNotContain('rotate');
+		});
+		
+	});
+	
 });

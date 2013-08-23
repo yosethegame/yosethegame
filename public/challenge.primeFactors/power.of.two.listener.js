@@ -7,6 +7,8 @@ PowerOfTwoListener = function() {
 };
 
 PowerOfTwoListener.prototype.try = function() {
+	thisPowerOfTwoListener.clear();
+	$('#avatar').addClass('rotate');
 	$.get("/tryPowerOfTwo?server=" + $('#server').val()).success(this.success).error(this.error);
 };
 
@@ -28,6 +30,7 @@ PowerOfTwoListener.prototype.hide = function(selector) {
 };
 
 PowerOfTwoListener.prototype.success = function(data) {
+	$('#avatar').removeClass('rotate');
 	thisPowerOfTwoListener.clear();
 	thisPowerOfTwoListener.show('#success_section');
 	thisPowerOfTwoListener.hide('#error_section');
@@ -35,6 +38,7 @@ PowerOfTwoListener.prototype.success = function(data) {
 };
 
 PowerOfTwoListener.prototype.error = function(err) {
+	$('#avatar').removeClass('rotate');
 	thisPowerOfTwoListener.clear();
 	thisPowerOfTwoListener.hide('#success_section');
 	thisPowerOfTwoListener.show('#error_section');
