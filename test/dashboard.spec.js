@@ -52,6 +52,12 @@ describe('Dashboard >', function() {
 				expect(page('#avatar').attr('class')).toContain('img-circle');
 			});
 		});	
+		
+		describe('The placeholder of the level progress', function() {
+			it('exists', function() {
+				expect(page('#player #progress').length).toNotBe(0);
+			});
+		});
 			
 		describe('The placeholder of the player', function() {
 				
