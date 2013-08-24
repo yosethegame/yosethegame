@@ -172,4 +172,76 @@ describe("PowerOfTwoListener: ", function() {
 		
 	});
 	
+	describe('When success and nobody seems to be logged', function() {
+
+		var post;	
+		var answer = JSON.stringify({ number: 4, decomposition: [2, 2]});
+		
+		beforeEach(function() {
+			$('body').append('<div id="continue" class="hidden"></div>');
+			$('body').append('<input id="server"/>');
+			$('#server').val('any');
+			spyOn($, 'ajax');
+			powerOfTwolistener.success(answer);				
+		});
+		
+		afterEach(function() {
+			$('#server').remove();
+			$('#continue').remove();
+		});
+
+		it('the invitation to continue remains hidden', function() {
+			expect($('#continue').attr('class')).toContain('hidden');
+		});
+		
+	});
+	
+	describe('When success and a player is logged,', function() {
+	
+		var post;
+		var answer = JSON.stringify({ number: 4, decomposition: [2, 2]});
+	
+		beforeEach(function() {
+			$('body').append('<div id="player" class="visible"><label id="login">eric</label></div>');
+			$('body').append('<div id="continue" class="hidden"></div>');
+
+			$('body').append('<input id="server"/>');
+			$('#server').val('any');
+			spyOn($, 'ajax');
+			powerOfTwolistener.success(answer);				
+			
+			post = $.ajax.mostRecentCall.args[0];
+		});
+		
+		afterEach(function() {
+			$('#login').remove();
+			$('#server').remove();
+			$('#player').remove();
+			$('#continue').remove();
+		});
+	
+		it('notifies the success', function() {
+			expect(post.url).toBe('/success');
+		});
+		
+		it('sends the challenge file name to identify the challenge', function() {
+			var name = 'public/challenge.primeFactors/power.of.two.html';
+			if (!require('fs').existsSync(name)) { this.fail(Error('challenge file has moved')); }
+			
+			expect(post.data.challenge).toBe(name);
+		});
+		
+		it('sends the login of the player', function() {
+			expect(post.data.login).toBe('eric');
+		});
+		
+		it('sends the server given by the player', function() {
+			expect(post.data.server).toBe('any');
+		});
+		
+		it('displays the invitation to continue', function() {
+			expect($('#continue').attr('class')).toContain('visible');
+		});
+		
+	});	
 });

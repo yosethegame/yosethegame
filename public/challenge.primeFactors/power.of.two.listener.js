@@ -37,6 +37,16 @@ PowerOfTwoListener.prototype.success = function(data) {
 	thisPowerOfTwoListener.hide('#error_section');
 	$('#success').text('success!');
 	$('#received').text(data);
+	
+	if ($('#player.visible #login').length > 0) {
+		$.post('/success', { 
+			challenge: 'public/challenge.primeFactors/power.of.two.html',
+			login: $('#login').text(),
+			server: $('#server').val()
+		});
+		$('#continue').removeClass('hidden');
+		$('#continue').addClass('visible');
+	}
 };
 
 PowerOfTwoListener.prototype.error = function(err) {
