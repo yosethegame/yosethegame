@@ -21,6 +21,7 @@ describe("PowerOfTwoListener: ", function() {
 			$('<label id="error_section" class="hidden"></label>').appendTo('body');
 			
 			$('<label id="success">previous</label>').appendTo('body');
+			$('<label id="received">previous</label>').appendTo('body');
 
 			$('<label id="error">previous</label>').appendTo('body');
 			$('<label id="expected">previous</label>').appendTo('body');
@@ -29,6 +30,7 @@ describe("PowerOfTwoListener: ", function() {
 		
 		afterEach(function() {
 			$('#success_section').remove();
+			$('#received').remove();
 			$('#error_section').remove();
 			$('#success').remove();
 			$('#error').remove();
@@ -58,8 +60,8 @@ describe("PowerOfTwoListener: ", function() {
 				expect($('#success').text()).toContain('success!');
 			});
 			
-			it("displays what the response of the player", function() {			
-				expect($('#success').text()).toContain(answer);
+			it("displays the response of the player", function() {			
+				expect($('#received').text()).toContain(answer);
 			});
 			
 			it("clears all error-related placeholders", function() {

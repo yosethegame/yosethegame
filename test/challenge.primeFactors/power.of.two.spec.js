@@ -14,13 +14,20 @@ Array.prototype.hasItem = function(item) {
 describe('Serving Power-of-two challenge', function() {
 
 	var server = new Server({ gate: powerOfTwo });
-
+	var backup;
+	
 	beforeEach(function() {
+		backup = {
+			numberToAskDecompositionFor: powerOfTwo.numberToAskDecompositionFor,
+			expectedAnswer: powerOfTwo.expectedAnswer
+		}
 		server.start();
 	});
 
 	afterEach(function() {
 		server.stop();
+		powerOfTwo.numberToAskDecompositionFor = backup.numberToAskDecompositionFor
+		powerOfTwo.expectedAnswer = backup.expectedAnswer
 	});
 	
 	it('chooses a power-of-two number', function() {
@@ -82,7 +89,12 @@ describe('Serving Power-of-two challenge', function() {
 		});
 		
 		it('asks for the decomposition of a number', function(done) {
-			powerOfTwo.numberToAskDecompositionFor = function() { return 8; };
+			powerOfTwo.expectedAnswer = function() {
+				return {
+					number : 8,
+					decomposition: [2, 2, 2]
+				};
+			}
 			request("http://localhost:5000/tryPowerOfTwo?server=http://localhost:6000/any/path", function(error, response, body) {
 				expect(sentRequest).toEqual('/any/path?number=8');
 				done();
@@ -92,17 +104,17 @@ describe('Serving Power-of-two challenge', function() {
 	
 	describe("When the remote server is up and responds the expected answser,", function() {
 		var remote;
-		var correctAnswer = JSON.stringify({ 
+		var expectedAnswer = { 
 				number: 8,
 				decomposition: [2, 2, 2]
-			});
+			};
 
 		beforeEach(function() {
-		powerOfTwo.numberToAskDecompositionFor = function() { return 8; };
-		remote = require('http').createServer(
+			powerOfTwo.expectedAnswer = function() { return expectedAnswer; }
+			remote = require('http').createServer(
 				function (request, response) {
 					response.writeHead(200, {"Content-Type": "application/json"});
-					response.write(correctAnswer);
+					response.write(JSON.stringify(expectedAnswer));
 					response.end();
 				})
 			.listen(6000);
@@ -121,7 +133,7 @@ describe('Serving Power-of-two challenge', function() {
 			
 		it("returns the remote answer", function(done) {
 			request("http://localhost:5000/tryPowerOfTwo?server=http://localhost:6000", function(error, response, body) {
-				expect(body).toEqual(correctAnswer);
+				expect(body).toEqual(JSON.stringify(expectedAnswer));
 				done();
 			});
 		});
@@ -130,9 +142,13 @@ describe('Serving Power-of-two challenge', function() {
 	
 	describe("When the remote server is up and does not respond the expected answser,", function() {
 		var remote;
+		var expectedAnswer = { 
+				number: 8,
+				decomposition: [2, 2, 2]
+			};
 
 		beforeEach(function() {
-			powerOfTwo.numberToAskDecompositionFor = function() { return 8; };
+			powerOfTwo.expectedAnswer = function() { return expectedAnswer; }
 			remote = require('http').createServer(
 				function (request, response) {
 					response.writeHead(200, {"Content-Type": "application/json"});
@@ -178,7 +194,6 @@ describe('Serving Power-of-two challenge', function() {
 		var remote;
 
 		beforeEach(function() {
-			powerOfTwo.numberToAskDecompositionFor = function() { return 8; };
 			remote = require('http').createServer(
 				function (request, response) {
 					response.write(JSON.stringify({ 

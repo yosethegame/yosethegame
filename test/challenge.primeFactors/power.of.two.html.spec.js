@@ -18,8 +18,9 @@ describe("power.of.two.html", function() {
 			expect(page('button#try').length).toBe(1);
 		});		
 
-		it("success placeholder is available", function() {			
+		it("success placeholders are available", function() {			
 			expect(page('#success').length).toBe(1);
+			expect(page('#received').length).toBe(1);
 		});		
 		
 		it("error placeholders are available", function() {			

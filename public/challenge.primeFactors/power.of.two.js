@@ -17,13 +17,13 @@ var expectedAnswer = function() {
 powerOfTwo = function(incoming, response) {
 	var params = require('url').parse(incoming.url, true);
 	
-	request(params.query.server + '?number=' + powerOfTwo.numberToAskDecompositionFor(), function(error, remoteResponse, content) {
+	var expectedAnswer = powerOfTwo.expectedAnswer();
+	request(params.query.server + '?number=' + expectedAnswer.number, function(error, remoteResponse, content) {
 		if (error != null) {
 			response.writeHead(404);
 			response.end();
 			return;
 		}
-		var expectedAnswer = powerOfTwo.expectedAnswer();
 		if (remoteResponse.headers['content-type'] != 'application/json' || content != JSON.stringify(expectedAnswer)) {
 			var remoteResponseHeader = remoteResponse.headers['content-type'] ==undefined ? 
 					'text/plain':  remoteResponse.headers['content-type'];

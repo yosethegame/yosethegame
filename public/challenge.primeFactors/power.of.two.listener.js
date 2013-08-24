@@ -14,6 +14,7 @@ PowerOfTwoListener.prototype.try = function() {
 
 PowerOfTwoListener.prototype.clear = function() {
 	$('#success').text('');
+	$('#received').text('');
 	$('#error').text('');
 	$('#expected').text('');
 	$('#got').text('');
@@ -34,7 +35,8 @@ PowerOfTwoListener.prototype.success = function(data) {
 	thisPowerOfTwoListener.clear();
 	thisPowerOfTwoListener.show('#success_section');
 	thisPowerOfTwoListener.hide('#error_section');
-	$('#success').text('success!' + ' ' + data);
+	$('#success').text('success!');
+	$('#received').text(data);
 };
 
 PowerOfTwoListener.prototype.error = function(err) {
