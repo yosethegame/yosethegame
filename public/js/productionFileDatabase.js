@@ -5,6 +5,10 @@ function ProductionFileDatabase() {
 		{
 			title: 'Get ready',
 			file: 'public/challenge.ping/ping.html'
+		},
+		{
+			title: 'Power of two challenge',
+			file: 'public/challenge.primeFactors/power.of.two.html'
 		}
 	];
 };

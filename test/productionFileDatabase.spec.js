@@ -30,5 +30,26 @@ describe('Production FileDatabase', function() {
 		it('checks that the file exists', function() {
 			expect(fs.existsSync(challenge.file)).toBe(true);
 		});
-	})
+	});
+	
+	describe('Second challenge', function() {
+		var challenge;
+		
+		beforeEach(function() {
+			challenge = new ProductionFileDatabase().challenges[1];
+		});
+		
+		it('has an invitating name', function() {
+			expect(challenge.title).toEqual('Power of two challenge');
+		});
+		
+		it('is the power.of.two challenge', function() {
+			expect(challenge.file).toEqual('public/challenge.primeFactors/power.of.two.html');
+		});
+		
+		it('checks that the file exists', function() {
+			expect(fs.existsSync(challenge.file)).toBe(true);
+		});
+	});
+	
 });
