@@ -1,11 +1,10 @@
 var qs = require('querystring');
+require('./array-extensions');
 
 findChallengeTitle = function(challengeFile, database) {
-	for(var i=0; i<database.challenges.length; i++) {
-		if (database.challenges[i].file == challengeFile) {
-			return database.challenges[i].title;
-		}
-	}
+	return database.challenges.select(function(item) {
+		return item.file == challengeFile;
+	}).title;
 };
 
 logSuccess = function(form, database, response) {
