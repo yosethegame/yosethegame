@@ -1,8 +1,8 @@
 var qs = require('querystring');
-require('./array-extensions');
+var array = require('./array.utils');
 
 findChallengeTitle = function(challengeFile, database) {
-	return database.challenges.select(function(item) {
+	return array.first(database.challenges, function(item) {
 		return item.file == challengeFile;
 	}).title;
 };
