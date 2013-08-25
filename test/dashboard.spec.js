@@ -339,20 +339,7 @@ describe('Dashboard >', function() {
 			];
 		});
 		
-		it('displays 0% when the player has an empty portfolio', function() {
-			database.players = [
-				{ 
-					login: 'ericminio', 
-					portfolio: []
-				}
-			];
-			dashboard({ url: '/players/ericminio' }, response, database);
-			page = cheerio.load(response.html);
-			
-			expect(page('#progress').text()).toEqual('0%');
-		});
-		
-		xit('displays 0% when the player has no portfolio', function() {
+		it('displays 0% when the player has no portfolio', function() {
 			database.players = [
 				{ 
 					login: 'ericminio'
@@ -364,7 +351,7 @@ describe('Dashboard >', function() {
 			expect(page('#progress').text()).toEqual('0%');
 		});
 		
-		xit('displays 50% when the player has done half of the available challenges', function() {
+		it('displays 50% when the player has done half of the available challenges', function() {
 			database.players = [
 				{ 
 					login: 'ericminio', 
@@ -382,7 +369,7 @@ describe('Dashboard >', function() {
 			expect(page('#progress').text()).toEqual('50%');
 		});
 		
-		xit('displays 100% when the player has done all the available challenges', function() {
+		it('displays 100% when the player has done all the available challenges', function() {
 			database.players = [
 				{ 
 					login: 'ericminio', 
@@ -401,8 +388,9 @@ describe('Dashboard >', function() {
 			dashboard({ url: '/players/ericminio' }, response, database);
 			page = cheerio.load(response.html);
 			
-			expect(page('#progress').text()).toEqual('50%');
+			expect(page('#progress').text()).toEqual('100%');
 		});
+
 	});
 	
 });

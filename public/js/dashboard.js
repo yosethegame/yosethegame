@@ -2,6 +2,7 @@ var fs 		= require('fs');
 var cheerio = require('cheerio');
 
 require('./string-extensions');
+var progressOf = require('./progress');
 
 dashboard = function(request, response, database) {
 	var html = fs.readFileSync('./public/dashboard.html').toString();
@@ -28,7 +29,10 @@ dashboard = function(request, response, database) {
 				html = html.replace(achievement_template, achievements);
 
 				challenge = database.challenges[player.portfolio.length];
+				
 			}
+			html = html.replace('id="progress">100%</', 'id="progress">' + progressOf(player, database) + '%</');
+			
 			if (challenge != undefined) {
 				html = html.replace('Next challenge title', challenge.title);
 
