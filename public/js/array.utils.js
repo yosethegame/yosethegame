@@ -13,5 +13,9 @@ module.exports = {
 	
 	hasOneItemIn: function(collection, callback) {
 		return this.first(collection, callback) == undefined ? false : true;
+	},
+	
+	firstItemIn: function(collection, matcher) {
+		return this.first(collection, matcher);
 	}
 };

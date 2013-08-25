@@ -1,6 +1,7 @@
 require('../public/js/string-extensions');
 var $ = require('jquery');
 var array = require('../public/js/array.utils');
+var extract = require('../public/js/array.utils');
 
 describe('School', function() {
 
@@ -88,5 +89,23 @@ describe('School', function() {
 			
 			expect(found).toBe(false);
 		});
+	});
+	
+	describe('array()', function() {
+		
+		var withPrice = function(price) {
+			return function(item) {
+				return item.price == price;
+			}
+		};
+		
+		it('can select one item from a collection', function() {
+			mouse = { price: 10 };
+			keyboard = { price: 100 };
+			var ten = extract.firstItemIn([mouse, keyboard], withPrice(10));
+			
+			expect(ten).toEqual(mouse);
+		});
+		
 	});
 });

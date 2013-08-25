@@ -1,16 +1,11 @@
 var array = require('./array.utils');
 var thisPlayer = require('./player.utils');
-
-withTitle = function(title) {
-	return function(item) {
-		return item.title == title;
-	};
-}
+var withAttribute = require('./array.matchers');
 
 doneChallengeCount = function(player, database) {
 	var count = 0;
 	array.forEach(database.challenges, function(challenge) {
-		count += array.hasOneItemIn(player.portfolio, withTitle(challenge.title)) ? 1 : 0;
+		count += array.hasOneItemIn(player.portfolio, withAttribute.titleEqualsTo(challenge.title)) ? 1 : 0;
 	});
 	return count;
 }
