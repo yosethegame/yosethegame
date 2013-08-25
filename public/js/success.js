@@ -8,6 +8,29 @@ findChallengeTitle = function(challengeFile, database) {
 	}
 };
 
+logSuccess = function(form, database, response) {
+	if (form.login == undefined || form.challenge == undefined || form.server == undefined) {
+		response.writeHead(400);
+		response.end();
+		return;
+	}
+		
+	var player = database.find(form.login);
+		
+	if (player.portfolio == undefined) {
+		player.portfolio = [];
+	}
+		
+	player.portfolio.push( 
+		{ 
+			title: findChallengeTitle(form.challenge, database),
+			server: form.server 
+		} 
+	);
+	database.savePlayer(player);
+	response.end();
+}
+
 success = function(request, response, database) {
 	var host = request.headers.host;
 	if (host != 'localhost:5000' && host != 'yose.herokuapp.com') {
@@ -29,28 +52,8 @@ success = function(request, response, database) {
     });
 
     request.on('end', function () {
-		var form = qs.parse(body);
-			
-		if (form.login == undefined || form.challenge == undefined || form.server == undefined) {
-			response.writeHead(400);
-			response.end();
-			return;
-		}
-			
-		var player = database.find(form.login);
-			
-		if (player.portfolio == undefined) {
-			player.portfolio = [];
-		}
-			
-		player.portfolio.push( 
-			{ 
-				title: findChallengeTitle(form.challenge, database),
-				server: form.server 
-			} 
-		);
-		database.savePlayer(player);
-		response.end();
+		var form = qs.parse(body);			
+		logSuccess(form, database, response);
     });
 	
 };
