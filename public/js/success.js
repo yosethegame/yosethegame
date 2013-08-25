@@ -1,5 +1,6 @@
 var qs = require('querystring');
 var array = require('./array.utils');
+var thisPlayer = require('./player.utils');
 
 findChallengeTitle = function(challengeFile, database) {
 	return array.first(database.challenges, function(item) {
@@ -16,7 +17,7 @@ logSuccess = function(form, database, response) {
 		
 	var player = database.find(form.login);
 		
-	if (player.portfolio == undefined) {
+	if (thisPlayer.isANew(player)) {
 		player.portfolio = [];
 	}
 		

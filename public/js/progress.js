@@ -1,4 +1,5 @@
 var array = require('./array.utils');
+var thisPlayer = require('./player.utils');
 
 withTitle = function(title) {
 	return function(item) {
@@ -14,12 +15,8 @@ doneChallengeCount = function(player, database) {
 	return count;
 }
 
-thisIsANew = function(player) {
-	return player.portfolio == undefined || player.portfolio.length == 0;
-}
-
 progressOf = function(player, database) {
-	if (thisIsANew(player)) return 0;
+	if (thisPlayer.isANew(player)) return 0;
 
 	var count = doneChallengeCount(player, database);
 	return Math.round(100 * count / database.challenges.length, 0);
