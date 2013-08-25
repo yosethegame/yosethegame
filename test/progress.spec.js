@@ -1,5 +1,5 @@
 var progress = require('../public/js/progress');
-var InMemoryDatabase = require('../public/js/inMemoryDatabase');
+var InMemoryDatabase = require('./inMemoryDatabase');
 
 describe('Progress percentage', function() {
 

@@ -1,6 +1,6 @@
 var cheerio 	 	 = require('cheerio');
 var dashboard	 	 = require('../public/js/dashboard.js');
-var InMemoryDatabase = require('../public/js/inMemoryDatabase');
+var InMemoryDatabase = require('./inMemoryDatabase');
 
 describe('Dashboard >', function() {
 	

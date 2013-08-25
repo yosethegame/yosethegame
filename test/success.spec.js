@@ -2,7 +2,7 @@ var request = require('request');
 var Server = require('../public/js/server');
 var Router = require('../public/js/router');
 var success = require('../public/js/success.js');
-var InMemoryDatabase = require('../public/js/inMemoryDatabase');
+var InMemoryDatabase = require('./inMemoryDatabase');
 
 describe('Success listener', function() {
 	

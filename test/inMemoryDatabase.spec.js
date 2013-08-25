@@ -1,4 +1,4 @@
-var InMemoryDatabase = require('../public/js/inMemoryDatabase');
+var InMemoryDatabase = require('./inMemoryDatabase');
 
 describe('InMemoryDatabase', function() {
 
