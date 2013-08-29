@@ -9,15 +9,28 @@ describe("TryListener: ", function() {
 		expect(LevelPingListener.expectedAnswer).toEqual(JSON.stringify({ alive: true }));
 	});
 	
-	it("send a get request to the chosen server", function() {
-		$('<input id="server" />').appendTo('body');
-		$('#server').val('any');
-		spyOn($, 'get').andCallThrough();
-		listener.try();
-		
-		expect($.get).toHaveBeenCalledWith('/ping?server=any');
-	});
+	describe('Request sent:', function() {
 	
+		beforeEach(function() {
+			$('body').append('<div id="player" class="visible"><label id="login">eric</label></div>');
+			$('body').append('<input id="server"/>');			
+		});
+		
+		afterEach(function() {
+			$('#login').remove();
+			$('#server').remove();
+			$('#player').remove();
+		});
+		
+		it("send a get request to the chosen server", function() {
+			$('#server').val('any');
+			spyOn($, 'get').andCallThrough();
+			listener.try();
+
+			expect($.get).toHaveBeenCalledWith('/ping?login=eric&server=any');
+		});
+	});
+		
 	describe('Animation', function() {
 		var post;
 	
@@ -27,6 +40,11 @@ describe("TryListener: ", function() {
 			$('body').append('<input id="server"/>');
 			$('#server').val('any');
 			spyOn($, 'get').andCallThrough();
+		});
+		
+		afterEach(function() {
+			$('#server').remove();
+			$('#avatar').remove();			
 		});
 		
 		it('starts when a try is attempted', function() {

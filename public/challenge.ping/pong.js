@@ -1,6 +1,6 @@
 var request = require('request');
 
-pong = function(incoming, response) {
+pong = function(incoming, response, database) {
 	var params = require('url').parse(incoming.url, true);
 	
 	request(params.query.server, function(error, remoteResponse, content) {

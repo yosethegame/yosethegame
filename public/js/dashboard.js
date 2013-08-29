@@ -1,5 +1,6 @@
-var fs 		= require('fs');
-var cheerio = require('cheerio');
+var fs 		  = require('fs');
+var cheerio   = require('cheerio');
+var thePlayer = require('./player.utils');
 
 require('./string-extensions');
 var progressOf = require('./progress');
@@ -16,7 +17,7 @@ dashboard = function(request, response, database) {
 		if (database.challenges != undefined)
 		{
 			var challenge = database.challenges[0];
-			if (player.portfolio != undefined && player.portfolio.length > 0) {
+			if (!thePlayer.isANew(player)) {
 				html = html.show('#achievements');
 				var achievement_template = cheerio.load(html)('#achievements ol').html();
 				var achievements = '';
