@@ -7,7 +7,7 @@ LevelPingListener = function() {
 		try: function() {
 			_this.clear();
 			$('#avatar').addClass('rotate');
-			$.get("/ping?server=" + $('#server').val()).done(_this.success).fail(_this.error);
+			$.get('/ping?login=' + $('#login').text() + '&server=' + $('#server').val()).done(_this.success).fail(_this.error);
 		},
 		
 		clear: function() {

@@ -1,6 +1,7 @@
 var request = require('request');
 var Server = require('../../public/js/server');
 var pong = require('../../public/challenge.ping/pong.js');
+var InMemoryDatabase = require('../inMemoryDatabase');
 
 describe("Serving ping challenge:", function() {
 
@@ -47,7 +48,19 @@ describe("Serving ping challenge:", function() {
 				request("http://localhost:5000/ping?server=http://localhost:6000", function(error, response, body) {
 					expect(response.statusCode).toEqual(200);
 					done();
-				})
+				});
+			});
+			
+			it('saves the server of the player', function(done) {
+				var database = new InMemoryDatabase().withPlayers([
+					{ login: 'annessou' }
+				]);
+				server.useRepository(database);
+				request("http://localhost:5000/ping?login=annessou&server=http://localhost:6000", function(error, response, body) {
+					var player = database.find('annessou');
+					expect(player.server).toEqual('http://localhost:6000');
+					done();
+				});
 			});
 		});
 		

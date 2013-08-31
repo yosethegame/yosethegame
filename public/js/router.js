@@ -13,7 +13,7 @@ Router = function() {
 		
 		routes: [
 			{
-				prefix: '/ping?server=',
+				prefix: '/ping',
 				target: pong
 			},
 			{
