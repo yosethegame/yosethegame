@@ -160,7 +160,7 @@ describe("Prime factors decomposition level", function() {
 					done();
 				}).
 				then(function() {
-					expect(browser.text("#result_1 .got")).toEqual(JSON.stringify({ 'content-type': 'text/plain', body: "bad answer with incorrect header" }));
+					expect(browser.text("#result_1 .got")).toEqual(JSON.stringify({ body: "bad answer with incorrect header" }));
 					done();
 				}).
 				fail(function(error) {
