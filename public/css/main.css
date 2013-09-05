@@ -83,3 +83,8 @@
 	margin-right: 10px;
 }
 
+.header {
+	background-color: #eeeeee;
+	border:1px solid green;
+	border-radius:5px;
+}

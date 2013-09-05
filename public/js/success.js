@@ -1,9 +1,9 @@
-var qs = require('querystring');
-var extract = require('./array.utils');
-var thePlayer = require('./player.utils');
-var withAttribute = require('./array.matchers');
-var error = require('./http.errors.utils');
-var theHost = require('./host.utils');
+var qs 				= require('querystring');
+var extract 		= require('./utils/array.utils');
+var thePlayer 		= require('./utils/player.utils');
+var withAttribute 	= require('./utils/array.matchers');
+var error 			= require('./utils/http.errors.utils');
+var theHost 		= require('./utils/host.utils');
 
 theFormIsUnIncomplete = function(form) {
 	return form.login == undefined || form.challenge == undefined || form.server == undefined;

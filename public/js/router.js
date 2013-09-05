@@ -1,5 +1,4 @@
 var servecontent = require('./serve-content.js');
-var pong         = require('../challenge.ping/pong.js');
 var dashboard	 = require('./dashboard.js');
 var success		 = require('./success.js');
 
@@ -13,20 +12,12 @@ Router = function() {
 		
 		routes: [
 			{
-				prefix: '/ping',
-				target: pong
-			},
-			{
 				prefix: '/players/',
 				target: dashboard
 			},
 			{
-				prefix: '/success',
-				target: success
-			},
-			{
-				prefix: '/tryPowerOfTwo',
-				target: require('../challenge.primeFactors/power.of.two.js')
+				prefix: '/try-all-up-to',
+				target: require('./try-all-up-to')
 			},
 			{
 				prefix: '',

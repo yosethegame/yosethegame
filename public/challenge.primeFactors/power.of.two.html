@@ -46,29 +46,9 @@
 		<label>Enter the url of your server</label>
 		<div class="form-inline">
 			<input type="text" class="input-xlarge" id="server" placeholder="http://your-server"/>
-			<button type="button" class="btn btn-primary" id="try" onclick="new PowerOfTwoListener().try()" >Try</button>
-		</div>
-
-		<div id="success_section" class="success hidden">
-			<label id="success">success!</label>
-			<dl class="dl-horizontal">
-				<dt>Received</dt>
-				<dd id="received">{ answer }</dd>
-			</dl>
-		</div>
-		<div id="error_section" class="error hidden">
-			<label id="error">501</label>
-			<dl class="dl-horizontal">
-				<dt>Expected</dt>
-				<dd id="expected">{ some: thing }</dd>
-			</dl>
-			<dl class="dl-horizontal">
-				<dt>Got: </dt>
-				<dd id="got">{ other: one }</dd>
-			</dl>
+			<button type="button" class="btn btn-primary" id="try" onclick="new TryListener().try('public/challenge.primeFactors/power.of.two.html')" >Try</button>
 		</div>
 
 	</section>
-	<script src="/challenge.primeFactors/power.of.two.listener.js"></script>	
 </body>
 </html>

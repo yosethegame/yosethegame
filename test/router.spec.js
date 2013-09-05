@@ -6,35 +6,25 @@ describe('Router', function() {
 	
 	describe('Prod configuration:', function() {
 	
-		var pong   		 = require('../public/challenge.ping/pong.js');
-		var dashboard	 = require('../public/js/dashboard.js');
-		var servecontent = require('../public/js/serve-content.js');
-		var success		 = require('../public/js/success.js');
-		var powerOfTwo	 = require('../public/challenge.primeFactors/power.of.two.js');
+		var dashboard	 = require('../public/js/dashboard');
+		var servecontent = require('../public/js/serve-content');
+		var tryAll		 = require('../public/js/try-all-up-to');
 
 		it('has routes', function() {
 			expect(router.routes.length).toBeGreaterThan(1);
 		});
 
-		it('maps ping challenge request', function() {
-			expect(router.endPointOf({ url: '/ping?server=any' })).toBe(pong);
-		});
-		
 		it('maps dashboard request', function() {
 			expect(router.endPointOf({ url: '/players/any' })).toBe(dashboard);
-		});
-		
-		it('maps success request', function() {
-			expect(router.endPointOf({ url: '/success' })).toBe(success);
-		});
-		
-		it('maps power-of-two challenge request', function() {
-			expect(router.endPointOf({ url: '/tryPowerOfTwo' })).toBe(powerOfTwo);
 		});
 		
 		it('maps static content request', function() {
 			expect(router.endPointOf({ url: '/anything-else' }).toString()).toEqual(servecontent('public').toString());
 		});
+		
+		it('maps try-all-up-to request', function() {
+			expect(router.endPointOf({ url: '/try-all-up-to' })).toBe(tryAll);
+		})
 		
 	});
 	

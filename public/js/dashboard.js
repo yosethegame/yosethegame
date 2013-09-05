@@ -1,8 +1,8 @@
 var fs 		  = require('fs');
 var cheerio   = require('cheerio');
-var thePlayer = require('./player.utils');
+var thePlayer = require('./utils/player.utils');
 
-require('./string-extensions');
+require('./utils/string-extensions');
 var progressOf = require('./progress');
 
 dashboard = function(request, response, database) {

@@ -1,4 +1,9 @@
 module.exports = {
+	notFound: function(response) {
+		response.writeHead(404);
+		response.end();
+	},
+
 	badRequest: function(response) {
 		response.writeHead(400);
 		response.end();

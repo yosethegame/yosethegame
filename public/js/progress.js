@@ -1,6 +1,6 @@
-var array = require('./array.utils');
-var thisPlayer = require('./player.utils');
-var withAttribute = require('./array.matchers');
+var array = require('./utils/array.utils');
+var thisPlayer = require('./utils/player.utils');
+var withAttribute = require('./utils/array.matchers');
 
 doneChallengeCount = function(player, database) {
 	var count = 0;
