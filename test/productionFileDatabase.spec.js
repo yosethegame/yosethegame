@@ -1,8 +1,9 @@
 var ProductionFileDatabase = require('../public/js/productionFileDatabase');
 var FileDatabase = require('../public/js/fileDatabase');
 var fs = require('fs');
+var array = require('../public/js/utils/array.utils');
 
-describe('Production FileDatabase', function() {
+describe('Production FileDatabase:', function() {
 	
 	it('inherits from fileDatabase targeting player folder', function() {
 		expect(ProductionFileDatabase.prototype).toEqual(new FileDatabase('players'));
@@ -51,5 +52,35 @@ describe('Production FileDatabase', function() {
 			expect(fs.existsSync(challenge.file)).toBe(true);
 		});
 	});
+    
+    describe('Requesters:', function() {
+	
+        it('All requesters can be required from public/js and provide an url() api', function() {
+    		var challenges = new ProductionFileDatabase().challenges;
+       	
+	       	array.forEach(challenges, function(challenge) {
+        		var Requester = require('../public/js/' + challenge.requester);
+                var requester = new Requester();
+                if (requester.url == undefined) {
+                	throw 'Requester ' + challenge.requester + ' of challenge "' + challenge.title + '" should have an url() method';
+                }
+    	    });
+	    });
+    });
+    
+    describe('Checkers:', function() {
+    
+	    it('All checkers can be required from public/js and provide a validate api', function() {
+    		var challenges = new ProductionFileDatabase().challenges;
+       	
+	       	array.forEach(challenges, function(challenge) {
+        		var checker = require('../public/js/' + challenge.checker);
+                if (checker.validate == undefined) {
+                	throw 'Checker ' + challenge.checker + ' of challenge "' + challenge.title + '" should have a validate() method';
+                }
+    	    });
+        });
+    });
+    
 	
 });
