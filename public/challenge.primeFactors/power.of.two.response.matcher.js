@@ -1,5 +1,6 @@
 var primeFactorsOf = require('./prime.factors');
 var $ = require('jquery');
+var abstractMatcher = require('../js/abstract.response.matcher');
 
 module.exports = {
 	expectedContentType: 'application/json',
@@ -29,24 +30,7 @@ module.exports = {
 	},
 	
 	validate: function(request, remoteResponse, content) {
-		if (remoteResponse == undefined) {
-			return {
-				code: 404,
-				expected: this.expectedAnswer(request),
-			};
-		}
-		try {
-			var parsedContent = $.parseJSON(content);
-		}
-		catch(e) {
-			var parsedContent = content;
-		}
-		var status = {
-			code: this.hasExpectedContentType(remoteResponse) && this.hasExpectedContent(request, content) ? 200 : 501,
-			expected : this.expectedAnswer(request),
-			got: { 'content-type': remoteResponse.headers['content-type'], body: parsedContent }
-		};
-		return status;
+		return abstractMatcher(request, remoteResponse, content, this);
 	}
 };
 
