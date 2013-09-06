@@ -1,8 +1,8 @@
-var Router = require('./public/js/router');
+var router = require('./public/js/router');
 var Server = require('./public/js/server');
 var ProductionFileDatabase = require('./public/js/productionFileDatabase');
 
-var server = new Server(new Router());
+var server = new Server(router);
 
 var database = new ProductionFileDatabase();
 
@@ -16,6 +16,6 @@ database.createPlayer({
 	avatar: 'https://si0.twimg.com/profile_images/2225960371/PabloL_normal.jpg'
 });
 
-server.useRepository(database);
+server.useDatabase(database);
 
 server.start();

@@ -1,12 +1,12 @@
 var Browser = require("zombie");
-var Router = require('../public/js/router');
+var router = require('../public/js/router');
 var Server = require('../public/js/server');
 var FileDatabase = require('../public/js/fileDatabase');
 var fs = require('fs');
 
 describe("Prime factors decomposition level", function() {
 
-	var server = new Server(new Router());
+	var server = new Server(router);
 	
 	beforeEach(function() {
 		database = new FileDatabase('spec/data');
@@ -31,7 +31,7 @@ describe("Prime factors decomposition level", function() {
 				checker: '../challenge.primeFactors/power.of.two.response.matcher.js'
 			}
 			];
-		server.useRepository(database);
+		server.useDatabase(database);
 		server.start();
 	});
 

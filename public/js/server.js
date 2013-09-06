@@ -2,12 +2,16 @@ function Server(router) {
 	this.router = router;
 };
 
-Server.prototype.useRepository = function(repository) {
-	this.router.useRepository(repository);
+Server.prototype.useDatabase = function(database) {
+	this.database = database;
 };
 
 Server.prototype.start = function() {
-	this.server = require('http').createServer(this.router.gate).listen(process.env.PORT || 5000);		
+	var router = this.router;
+    var database = this.database;
+	this.server = require('http').createServer(function(request, response) {
+    	router.endPointOf(request)(request, response, database);
+    }).listen(process.env.PORT || 5000);
 };
 
 Server.prototype.stop = function() {

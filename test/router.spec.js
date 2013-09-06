@@ -1,10 +1,8 @@
-var Router = require('../public/js/router.js');
+var router = require('../public/js/router.js');
 
 describe('Router', function() {
 
-	var router = new Router();
-	
-	describe('Prod configuration:', function() {
+    describe('Prod configuration:', function() {
 	
 		var dashboard	 = require('../public/js/dashboard');
 		var servecontent = require('../public/js/serve-content');
@@ -28,12 +26,14 @@ describe('Router', function() {
 		
 	});
 	
-	describe('Node.js compatibility:', function() {
+	describe('Compatibility with http module of node.js:', function() {
 		
 		var server;
 		
 		beforeEach(function() {
-			server = require('http').createServer(router.gate).listen(5000, 'localhost');					
+			server = require('http').createServer(function(request, response){
+            	router.endPointOf(request)(request, response);
+            }).listen(5000, 'localhost');
 		});
 		
 		afterEach(function() {
@@ -44,7 +44,7 @@ describe('Router', function() {
 			var called = false;
 			router.routes = [ 
 				{ 
-					prefix: '/a-specific-request', 
+					prefix: '', 
 					target: function(request, response) { 
 						called = true; 
 						response.end();
@@ -52,7 +52,7 @@ describe('Router', function() {
 				} 
 			];
 
-			require('request')("http://localhost:5000/a-specific-request", function(error, response, body) {
+			require('request')("http://localhost:5000", function(error, response, body) {
 				expect(called).toBe(true);
 				done();
 			});

@@ -6,41 +6,29 @@ String.prototype.startsWith = function (prefix) {
 	return this.indexOf(prefix) == 0;
 }
 
-Router = function() {
+module.exports = {
 	
-	return _thisRouter = {
-		
-		routes: [
-			{
-				prefix: '/players/',
-				target: dashboard
-			},
-			{
-				prefix: '/try-all-up-to',
-				target: require('./try-all-up-to')
-			},
-			{
-				prefix: '',
-				target: servecontent('public')
-			}
-		],
-		
-		gate: function(request, response) {
-			_thisRouter.endPointOf(request)(request, response, _thisRouter.repository);
-		},
-
-		endPointOf: function(request) {
-			for (i=0; i<_thisRouter.routes.length; i++) {
-				if (request.url.startsWith(_thisRouter.routes[i].prefix)) {
-					return _thisRouter.routes[i].target;
-				}
-			}
-		},
-		
-		useRepository: function(repository) {
-			_thisRouter.repository = repository;
-		}
-	};
+    routes: [
+         {
+         	prefix: '/players/',
+         	target: dashboard
+         },
+         {
+         	prefix: '/try-all-up-to',
+         	target: require('./try-all-up-to')
+         },
+         {
+         	prefix: '',
+         	target: servecontent('public')
+         }
+	],
+    
+	endPointOf: function(request) {
+    	for (i=0; i<this.routes.length; i++) {
+        	if (request.url.startsWith(this.routes[i].prefix)) {
+            	return this.routes[i].target;
+	        }
+	    }
+	}
 };
 
-module.exports = Router;
