@@ -36,6 +36,7 @@ describe("Serve Content callback", function() {
 	});
 	
 	it("returns 404 when file does not exist", function(done) {
+        fs.writeFileSync(folder + '/a-missing-file', 'anything');
 		fs.unlink(folder + '/a-missing-file');
 		
 		request("http://localhost:5000/a-missing-file", function(error, response, body) {
