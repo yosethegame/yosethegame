@@ -27,6 +27,7 @@ tryChallenge = function(challenge, params, database, response) {
 		var requester = new Requester(params.query.server);
 	}	
 	var requestSent = requester.url();
+	if (requestSent == undefined) requestSent = '';
 
 	request(requestSent, function(error, remoteResponse, content) {
 		var checker = require(challenge.checker);

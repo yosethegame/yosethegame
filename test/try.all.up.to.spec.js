@@ -83,6 +83,20 @@ describe("Trying to pass challenges", function() {
 				done();
 			});			
 		});
+		it('support when no server is provided', function(done) {
+			request("http://localhost:5000/try-all-up-to", function(error, response, body) {
+				expect(body).toEqual(JSON.stringify([
+						{
+							challenge: 'thisTitle',
+							code: 404,
+							expected: 'a correct value',
+							got: 'undefined'
+						}
+					]					
+				));
+				done();
+			});			
+		});
 	});
 	
 	describe('When player passes the first challenge', function() {
