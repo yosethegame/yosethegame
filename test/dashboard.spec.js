@@ -156,7 +156,7 @@ describe('Dashboard >', function() {
 		
 	});
 	
-	describe('Login availaility', function() {
+	describe('Login hidden field avalaility', function() {
 	
 		var database;
 		
@@ -280,12 +280,10 @@ describe('Dashboard >', function() {
 					login: 'ericminio', 
 					portfolio: [
 						{ 
-							title: 'First challenge',
-							server: 'here'
+							title: 'First challenge'
 						},
 						{ 
-							title: 'Second challenge',
-							server: 'there'
+							title: 'Second challenge'
 						}
 					]
 				}
@@ -303,7 +301,7 @@ describe('Dashboard >', function() {
 			dashboard({ url: '/players/ericminio' }, response, database);
 			page = cheerio.load(response.html);
 
-			expect(page('#achievement_1').text()).toEqual('First challenge (here)');			
+			expect(page('#achievement_1').text()).toEqual('First challenge');			
 		});
 		
 		it('displays the second achievement of the portfolio', function() {
