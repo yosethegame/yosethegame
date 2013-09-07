@@ -6,10 +6,20 @@ var httperror 		= require('./utils/http.errors.utils');
 var logSuccess 		= require('./log.success');
 var logPlayerServer = require('./log.player.server');
 
-tryAllChallengesUntilGivenChallenge = function(incoming, response, database) {
-	var params = url.parse(incoming.url, true);
+var responseCount;
+var output;
+
+maybeClose = function(response, result) {
+	responseCount --;
+	output.push(result);
+	if (responseCount == 0) {
+		response.write(JSON.stringify(output))
+		response.end();
+	}
+};
+
+tryChallenge = function(challenge, params, database, response) {
 	var player = database.find(params.query.login);
-	var challenge = extract.firstItemIn(database.challenges, withAttribute.fileEqualsTo(params.query.challenge));
 	var Requester = require(challenge.requester);
 	if (player != undefined && player.server != undefined) {
 		var requester = new Requester(player.server);
@@ -17,7 +27,7 @@ tryAllChallengesUntilGivenChallenge = function(incoming, response, database) {
 		var requester = new Requester(params.query.server);
 	}	
 	var requestSent = requester.url();
-	
+
 	request(requestSent, function(error, remoteResponse, content) {
 		var checker = require(challenge.checker);
 		var status = checker.validate(requestSent, remoteResponse, content);
@@ -31,14 +41,33 @@ tryAllChallengesUntilGivenChallenge = function(incoming, response, database) {
 			}
 			logSuccess({login: params.query.login, challenge: challenge}, database);
 		}
-		response.write(JSON.stringify([{
+		maybeClose(response, {
 			challenge: challenge.title,
 			code: status.code,
 			expected: status.expected,
 			got: status.got
-		}]));
-		response.end();
-	});
+		});
+	});		
+};
+
+tryAllChallengesUntilGivenChallenge = function(incoming, response, database) {
+	output = [];
+	var params = url.parse(incoming.url, true);
+	
+	var player = database.find(params.query.login);
+	if (player == undefined || player.portfolio == undefined || player.portfolio.length == 0) {
+		var challengeCount = 1;
+	} else {
+		var challengeCount = player.portfolio.length + 1;
+	}
+	
+	responseCount = challengeCount;
+	for(var i=0; i< challengeCount; i++) {
+		var challenge = database.challenges[i];
+		
+		tryChallenge(challenge, params, database, response);		
+	}	
 };
 
 module.exports = tryAllChallengesUntilGivenChallenge;
+

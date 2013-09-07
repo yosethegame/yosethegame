@@ -23,6 +23,15 @@ describe("Trying to pass challenges", function() {
 						title: 'thisTitle'
 					}
 				]
+			},
+			{
+				login: 'clairette',
+				server: 'http://localhost:6000',
+				portfolio: [
+					{
+						title: 'thisTitle'
+					}
+				]
 			}
 		];
 		database.challenges = [
@@ -33,7 +42,7 @@ describe("Trying to pass challenges", function() {
 				requester: '../../test/support/empty.request',
 			},
 			{
-				title: 'second title',
+				title: 'secondTitle',
 				file: 'secondFile',
 				checker: '../../test/support/response.always.valid',
 				requester: '../../test/support/empty.request',
@@ -173,6 +182,41 @@ describe("Trying to pass challenges", function() {
 			request("http://localhost:5000/try-all-up-to?login=bilou&challenge=secondFile", function(error, response, body) {
 				var result = $.parseJSON(body);
 				expect(result[0].code).toEqual(200);
+				done();
+			});			
+		});
+	});
+	
+	describe("Trying the second challenge means trying both the first and the second", function() {
+		var remote;
+		beforeEach(function() {
+			remote = require('http').createServer(
+				function (request, response) {
+					response.end();
+				})
+			.listen(6000);
+		});
+		afterEach(function() {
+			remote.close();
+		});
+	
+		it('returns detailed content for success', function(done) {
+			request("http://localhost:5000/try-all-up-to?login=clairette&challenge=secondFile", function(error, response, body) {
+				expect(body).toEqual(JSON.stringify([
+						{
+							challenge: 'thisTitle',
+							code: 200,
+							expected: 'a correct value',
+							got: 'a correct value'
+						},
+						{
+							challenge: 'secondTitle',
+							code: 200,
+							expected: 'a correct value',
+							got: 'a correct value'
+						}
+					]					
+				));
 				done();
 			});			
 		});
