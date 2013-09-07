@@ -19,6 +19,7 @@ dashboard = function(request, response, database) {
 			var challenge = database.challenges[0];
 			if (!thePlayer.isANew(player)) {
 				html = html.show('#achievements');
+				html = html.replace('id="server">server</', 'id="server">' + player.server + '</');
 				var achievement_template = cheerio.load(html)('#achievements ol').html();
 				var achievements = '';
 				for(var i=0; i<player.portfolio.length; i++) {
