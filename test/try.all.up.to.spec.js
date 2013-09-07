@@ -2,6 +2,7 @@ var request = require('request');
 var Server = require('../public/js/server');
 var tryAll = require('../public/js/try-all-up-to');
 var InMemoryDatabase = require('./inMemoryDatabase');
+var $ = require('jquery');
 
 describe("Trying to pass challenges", function() {
 
@@ -144,5 +145,37 @@ describe("Trying to pass challenges", function() {
 			});			
 		});
 	});		
+	
+	describe("Player's server use", function() {
+		var remote;
+		beforeEach(function() {
+			remote = require('http').createServer(
+				function (request, response) {
+					response.end();
+				})
+			.listen(6000);
+			var player = database.find('bilou');
+			player.server = 'http://localhost:6000';
+		});
+		afterEach(function() {
+			remote.close();
+		});
+	
+		it('uses the already known server of the player even if provided', function(done) {
+			request("http://localhost:5000/try-all-up-to?login=bilou&challenge=secondFile&server=any", function(error, response, body) {
+				var result = $.parseJSON(body);
+				expect(result[0].code).toEqual(200);
+				done();
+			});			
+		});
+		
+		it('supports when no server is provided', function(done) {
+			request("http://localhost:5000/try-all-up-to?login=bilou&challenge=secondFile", function(error, response, body) {
+				var result = $.parseJSON(body);
+				expect(result[0].code).toEqual(200);
+				done();
+			});			
+		});
+	});
 });
 

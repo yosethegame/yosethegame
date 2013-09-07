@@ -8,9 +8,14 @@ var logPlayerServer = require('./log.player.server');
 
 tryAllChallengesUntilGivenChallenge = function(incoming, response, database) {
 	var params = url.parse(incoming.url, true);
+	var player = database.find(params.query.login);
 	var challenge = extract.firstItemIn(database.challenges, withAttribute.fileEqualsTo(params.query.challenge));
-	var Requester = require(challenge.requester);	
-	var requester = new Requester(params.query.server);
+	var Requester = require(challenge.requester);
+	if (player != undefined && player.server != undefined) {
+		var requester = new Requester(player.server);
+	} else {
+		var requester = new Requester(params.query.server);
+	}	
 	var requestSent = requester.url();
 	
 	request(requestSent, function(error, remoteResponse, content) {
@@ -21,7 +26,6 @@ tryAllChallengesUntilGivenChallenge = function(incoming, response, database) {
 			status.got = 'undefined'
 		}
 		if (status.code == 200) {
-			var player = database.find(params.query.login);
 			if (player.server == undefined) {
 				logPlayerServer({login: params.query.login, server: params.query.server}, database);
 			}
