@@ -64,13 +64,13 @@ describe("Trying to pass challenges", function() {
 		});
 
 		it("returns normally", function(done) {
-			request("http://localhost:5000/try-all-up-to?challenge=thisFile&server=http://localhost:6000", function(error, response, body) {
+			request("http://localhost:5000/try-all-up-to?server=http://localhost:6000", function(error, response, body) {
 				expect(response.statusCode).toEqual(200);
 				done();
 			});
 		});
 		it('returns detailed error for 404', function(done) {
-			request("http://localhost:5000/try-all-up-to?challenge=thisFile&server=http://localhost:6000", function(error, response, body) {
+			request("http://localhost:5000/try-all-up-to?server=http://localhost:6000", function(error, response, body) {
 				expect(body).toEqual(JSON.stringify([
 						{
 							challenge: 'thisTitle',
@@ -98,7 +98,7 @@ describe("Trying to pass challenges", function() {
 			remote.close();
 		});
 		it('saves the server used by the player', function(done) {
-			request("http://localhost:5000/try-all-up-to?login=annessou&challenge=thisFile&server=http://localhost:6000", function(error, response, body) {
+			request("http://localhost:5000/try-all-up-to?login=annessou&server=http://localhost:6000", function(error, response, body) {
 				var player = database.find('annessou');
 				expect(player.server).toEqual('http://localhost:6000');
 				done();
@@ -106,20 +106,20 @@ describe("Trying to pass challenges", function() {
 		});
 		it('makes the challenge to be in the portfolio of the player', function(done) {
 			database.challenges[0].title = 'Get ready for fun :)';
-			request("http://localhost:5000/try-all-up-to?login=annessou&challenge=thisFile&server=http://localhost:6000", function(error, response, body) {
+			request("http://localhost:5000/try-all-up-to?login=annessou&server=http://localhost:6000", function(error, response, body) {
 				var player = database.find('annessou');
 				expect(player.portfolio[0].title).toEqual('Get ready for fun :)')
 				done();
 			});			
 		});
 		it('returns ok status', function(done) {
-			request("http://localhost:5000/try-all-up-to?login=annessou&challenge=thisFile&server=http://localhost:6000", function(error, response, body) {
+			request("http://localhost:5000/try-all-up-to?login=annessou&server=http://localhost:6000", function(error, response, body) {
 				expect(response.statusCode).toEqual(200);
 				done();
 			});			
 		});
 		it('returns detailed content for success', function(done) {
-			request("http://localhost:5000/try-all-up-to?login=annessou&challenge=thisFile&server=http://localhost:6000", function(error, response, body) {
+			request("http://localhost:5000/try-all-up-to?login=annessou&server=http://localhost:6000", function(error, response, body) {
 				expect(body).toEqual(JSON.stringify([
 						{
 							challenge: 'thisTitle',
@@ -147,7 +147,7 @@ describe("Trying to pass challenges", function() {
 			remote.close();
 		});
 		it('does not update the server of the player', function(done) {
-			request("http://localhost:5000/try-all-up-to?login=bilou&challenge=secondFile&server=http://localhost:6000", function(error, response, body) {
+			request("http://localhost:5000/try-all-up-to?login=bilou&server=http://localhost:6000", function(error, response, body) {
 				var player = database.find('bilou');
 				expect(player.server).toEqual('guiguilove');
 				done();
@@ -171,7 +171,7 @@ describe("Trying to pass challenges", function() {
 		});
 	
 		it('uses the already known server of the player even if provided', function(done) {
-			request("http://localhost:5000/try-all-up-to?login=bilou&challenge=secondFile&server=any", function(error, response, body) {
+			request("http://localhost:5000/try-all-up-to?login=bilou&server=any", function(error, response, body) {
 				var result = $.parseJSON(body);
 				expect(result[0].code).toEqual(200);
 				done();
@@ -179,7 +179,7 @@ describe("Trying to pass challenges", function() {
 		});
 		
 		it('supports when no server is provided', function(done) {
-			request("http://localhost:5000/try-all-up-to?login=bilou&challenge=secondFile", function(error, response, body) {
+			request("http://localhost:5000/try-all-up-to?login=bilou", function(error, response, body) {
 				var result = $.parseJSON(body);
 				expect(result[0].code).toEqual(200);
 				done();
@@ -201,7 +201,7 @@ describe("Trying to pass challenges", function() {
 		});
 	
 		it('returns detailed content for success', function(done) {
-			request("http://localhost:5000/try-all-up-to?login=clairette&challenge=secondFile", function(error, response, body) {
+			request("http://localhost:5000/try-all-up-to?login=clairette", function(error, response, body) {
 				expect(body).toEqual(JSON.stringify([
 						{
 							challenge: 'thisTitle',
