@@ -20,6 +20,15 @@ describe("Prime factors decomposition level", function() {
 		database.players = [
 			{
 				login: 'annessou',
+			},
+			{
+				login: 'bilou',
+				server: 'http://localhost:6000',
+				portfolio: [
+					{
+						title: 'Get ready for fun :)'
+					}
+				]
 			}
 		];
 		database.challenges = [
@@ -104,6 +113,53 @@ describe("Prime factors decomposition level", function() {
 				}).
 				then(function() {
 					expect(browser.text("#result_1 .got")).toEqual('"an incorrect value"');
+					done();
+				}).
+				fail(function(error) {
+					expect(error.toString()).toBeNull();
+					done();
+				});
+		});
+	});
+	
+	describe("When player passes the second challenge", function() {
+		
+		it('displays the detail of the success of the first challenge', function(done) {
+			var browser = new Browser();
+			browser.visit('http://localhost:5000/players/bilou').
+				then(function () {
+					return browser.pressButton("#try");
+				}).
+				then(function() {
+					expect(browser.text("#result_1 .challenge")).toEqual('Get ready for fun :)');
+					done();
+				}).
+				then(function() {
+					expect(browser.text("#result_1 .status")).toEqual('200');
+					done();
+				}).
+				then(function() {
+					expect(browser.text("#result_1 .expected")).toEqual('"a correct expected value"');
+					done();
+				}).
+				then(function() {
+					expect(browser.text("#result_1 .got")).toEqual('"a correct actual value"');
+					done();
+				}).
+				fail(function(error) {
+					expect(error.toString()).toBeNull();
+					done();
+				});
+		});
+
+		it('displays the detail of the success of the second challenge too', function(done) {
+			var browser = new Browser();
+			browser.visit('http://localhost:5000/players/bilou').
+				then(function () {
+					return browser.pressButton("#try");
+				}).
+				then(function() {
+					expect(browser.text("#result_2 .challenge")).toEqual('Power of two');
 					done();
 				}).
 				fail(function(error) {
