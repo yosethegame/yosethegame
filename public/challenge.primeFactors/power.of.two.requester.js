@@ -1,12 +1,12 @@
 var Chooser = require('./power.of.two.chooser');
 
-function Requester(options) {
-	this.options = options;
+function Requester(server) {
+	this.server = server;
 	this.numberChooser = new Chooser();
 };
 
 Requester.prototype.url = function() {
-	return this.options.query.server + '?number=' + this.numberChooser.getNumber();
+	return this.server + '?number=' + this.numberChooser.getNumber();
 }
 
 var module = module || {};

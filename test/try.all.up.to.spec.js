@@ -13,12 +13,27 @@ describe("Trying to pass challenges", function() {
 		database.players = [
 			{
 				login: 'annessou'
+			},
+			{
+				login: 'bilou',
+				server: 'guiguilove',
+				portfolio: [
+					{
+						title: 'thisTitle'
+					}
+				]
 			}
 		];
 		database.challenges = [
 			{
 				title: 'thisTitle',
 				file: 'thisFile',
+				checker: '../../test/support/response.always.valid',
+				requester: '../../test/support/empty.request',
+			},
+			{
+				title: 'second title',
+				file: 'secondFile',
 				checker: '../../test/support/response.always.valid',
 				requester: '../../test/support/empty.request',
 			}
@@ -108,6 +123,26 @@ describe("Trying to pass challenges", function() {
 			});			
 		});
 	});
-		
+	
+	describe('When player passes the second challenge', function() {
+		var remote;
+		beforeEach(function() {
+			remote = require('http').createServer(
+				function (request, response) {
+					response.end();
+				})
+			.listen(6000);
+		});
+		afterEach(function() {
+			remote.close();
+		});
+		it('does not update the server of the player', function(done) {
+			request("http://localhost:5000/try-all-up-to?login=bilou&challenge=secondFile&server=http://localhost:6000", function(error, response, body) {
+				var player = database.find('bilou');
+				expect(player.server).toEqual('guiguilove');
+				done();
+			});			
+		});
+	});		
 });
 

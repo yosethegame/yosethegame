@@ -6,9 +6,7 @@ describe('Power of two Requester', function() {
 	var requester;
 
 	beforeEach(function() {
-		requester = new Requester({
-			 query : { server: 'this-url' }
-		});
+		requester = new Requester('this-url');
 	});
 	
 	it('has a number chooser', function() {

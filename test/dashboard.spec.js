@@ -418,7 +418,7 @@ describe('Dashboard >', function() {
 			dashboard({ url: '/players/ericminio' }, response, database);
 			page = cheerio.load(response.html);
 			
-			expect(page('#achievements #server').text()).toEqual('here');
+			expect(page('#achievements #server-of-player').text()).toEqual('here');
 		});
 		
 	});

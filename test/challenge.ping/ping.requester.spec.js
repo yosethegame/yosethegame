@@ -5,9 +5,7 @@ describe('Ping challenge requester', function() {
 	var requester;
 	
 	beforeEach(function() {
-		requester = new Requester({
-			 query : { server: 'this-url' }
-		});
+		requester = new Requester('this-url');
 	});
 	
 	describe('target url', function() {

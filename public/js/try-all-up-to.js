@@ -10,7 +10,7 @@ tryAllChallengesUntilGivenChallenge = function(incoming, response, database) {
 	var params = url.parse(incoming.url, true);
 	var challenge = extract.firstItemIn(database.challenges, withAttribute.fileEqualsTo(params.query.challenge));
 	var Requester = require(challenge.requester);	
-	var requester = new Requester(params);
+	var requester = new Requester(params.query.server);
 	var requestSent = requester.url();
 	
 	request(requestSent, function(error, remoteResponse, content) {
@@ -21,7 +21,10 @@ tryAllChallengesUntilGivenChallenge = function(incoming, response, database) {
 			status.got = 'undefined'
 		}
 		if (status.code == 200) {
-			logPlayerServer({login: params.query.login, server: params.query.server}, database);
+			var player = database.find(params.query.login);
+			if (player.server == undefined) {
+				logPlayerServer({login: params.query.login, server: params.query.server}, database);
+			}
 			logSuccess({login: params.query.login, challenge: challenge}, database);
 		}
 		response.write(JSON.stringify([{

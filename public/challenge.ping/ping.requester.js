@@ -1,9 +1,9 @@
-function Requester(options) {
-	this.options = options;
+function Requester(server) {
+	this.server = server;
 };
 
 Requester.prototype.url = function() {
-	return this.options.query.server;
+	return this.server;
 };
 
 var module = module || {};

@@ -1,9 +1,9 @@
-function EmptyRequest(options) {
-	this.options = options;
+function EmptyRequest(server) {
+	this.server = server;
 };
 
 EmptyRequest.prototype.url = function() {
-	return this.options.query.server;
+	return this.server;
 };
 
 var module = module || {};
