@@ -1,9 +1,9 @@
 module.exports = {
 	validate: function() {
 		return {
-			code: 200,
+			code: 501,
 			expected: 'a correct expected value',
-			got: 'a correct actual value'
+			got: 'an incorrect value'
 		};
 	}
 };

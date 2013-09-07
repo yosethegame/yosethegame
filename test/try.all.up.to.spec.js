@@ -75,7 +75,7 @@ describe("Trying to pass challenges", function() {
 						{
 							challenge: 'thisTitle',
 							code: 404,
-							expected: 'a correct value',
+							expected: 'a correct expected value',
 							got: 'undefined'
 						}
 					]					
@@ -89,7 +89,7 @@ describe("Trying to pass challenges", function() {
 						{
 							challenge: 'thisTitle',
 							code: 404,
-							expected: 'a correct value',
+							expected: 'a correct expected value',
 							got: 'undefined'
 						}
 					]					
@@ -138,8 +138,8 @@ describe("Trying to pass challenges", function() {
 						{
 							challenge: 'thisTitle',
 							code: 200,
-							expected: 'a correct value',
-							got: 'a correct value'
+							expected: 'a correct expected value',
+							got: 'a correct actual value'
 						}
 					]					
 				));
@@ -220,14 +220,14 @@ describe("Trying to pass challenges", function() {
 						{
 							challenge: 'thisTitle',
 							code: 200,
-							expected: 'a correct value',
-							got: 'a correct value'
+							expected: 'a correct expected value',
+							got: 'a correct actual value'
 						},
 						{
 							challenge: 'secondTitle',
 							code: 200,
-							expected: 'a correct value',
-							got: 'a correct value'
+							expected: 'a correct expected value',
+							got: 'a correct actual value'
 						}
 					]					
 				));
