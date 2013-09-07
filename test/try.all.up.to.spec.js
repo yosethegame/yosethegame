@@ -234,6 +234,14 @@ describe("Trying to pass challenges", function() {
 				done();
 			});			
 		});
+		it('only adds the second challenge in the portfolio and not two times the first', function(done) {
+			request("http://localhost:5000/try-all-up-to?login=clairette", function(error, response, body) {
+				var player = database.find('clairette');
+				expect(player.portfolio.length).toEqual(2);
+				expect(player.portfolio[1].title).toEqual('secondTitle');
+				done();
+			});			
+		});
 	});
 });
 

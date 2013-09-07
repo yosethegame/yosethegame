@@ -3,6 +3,7 @@ var url 			= require('url');
 var withAttribute 	= require('./utils/array.matchers');
 var extract 		= require('./utils/array.utils');
 var httperror 		= require('./utils/http.errors.utils');
+var thisPlayer 		= require('./utils/player.utils');
 var logSuccess 		= require('./log.success');
 var logPlayerServer = require('./log.player.server');
 
@@ -40,7 +41,9 @@ tryChallenge = function(challenge, params, database, response) {
 			if (player.server == undefined) {
 				logPlayerServer({login: params.query.login, server: params.query.server}, database);
 			}
-			logSuccess({login: params.query.login, challenge: challenge}, database);
+			if (! thisPlayer.hasTheGivenChallengeInPortfolio(challenge.title, player)) {
+				logSuccess({login: params.query.login, challenge: challenge}, database);
+			}
 		}
 		maybeClose(response, {
 			challenge: challenge.title,
