@@ -32,6 +32,9 @@ TryListener.prototype.displayResults = function(data) {
 
 		if (result.code != 200) {
 			canContinue = false;
+			$('#result_' + (i+1)).addClass('danger').removeClass('success');
+		} else {
+			$('#result_' + (i+1)).addClass('success').removeClass('danger');
 		}
 	}
 
@@ -43,7 +46,7 @@ TryListener.prototype.displayResults = function(data) {
 		$('#try').prop('disabled', false);
 	}
 	
-	$('#scroll-anchor')[0].scrollIntoView( true );
+	if ($('#scroll-anchor')[0].scrollIntoView != undefined) $('#scroll-anchor')[0].scrollIntoView(true);
 };
 
 var startAnimation = function() {

@@ -1,15 +1,14 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
 		<title>Dashboard</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="/css/main.css" rel="stylesheet" type="text/css">
 		<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
-		<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
-		<script src="/lib/bootstrap/js/bootstrap.min.js"></script>		
-		<script src="/js/try.listener.js"></script>	
 	</head>
 <body class="fond">
 	
-	<label class="text-error visible" id="info">Unknown player</label>
+	<label class="text-danger visible" id="info">Unknown player</label>
 	
 	<div id="player" class="hidden">
 		<label id="login" class="hidden">login-of-player</label>
@@ -37,10 +36,12 @@
 			</section>
 			
 			<section id="result">
-				<table id="results" class="hidden">
-					<tr class="header">
-						<td>Challenge</td><td>Result</td><td>Expected</td><td>Got</td>
-					</tr>
+				<br>
+				<div class="table-responsive">
+				<table id="results" class="hidden table">
+					<thead><tr>
+						<th>Challenge</th><th>Result</th><th>Expected</th><th>Got</th>
+					</tr></thead>
 					<tr id="result_1" class="result">
 						<td class="challenge">Challenge</td>
 						<td class="status">Result</td>
@@ -48,14 +49,19 @@
 						<td class="got">Got</td>
 					</tr>
 				</table>
+				</div>
 			</section>
 			
 			<section id="when-no-more-challenges" class="hidden">
-				New challenges coming soon... Follow <a href="http://twitter.com/ericminio">@EricMinio</a>
+				<p>
+					New challenges coming soon... Follow <a href="http://twitter.com/ericminio">@EricMinio</a>
+				</p>
 			</section>
 				
 			<section id="continue" class="hidden">
-				<a href="">continue to the next challenge</a>
+				<p>
+					<a href="">continue to the next challenge</a>
+				</p>
 			</section>
 				
 			<section id="scroll-anchor"></section>
@@ -64,5 +70,8 @@
 		
 	</div>
 	
+	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
+	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>		
+	<script src="/js/try.listener.js"></script>	
 </body>
 </html>

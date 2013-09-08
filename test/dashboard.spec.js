@@ -33,7 +33,7 @@ describe('Dashboard >', function() {
 			});
 
 			it('appears as an error', function() {
-				expect(page('#info').attr('class')).toContain('text-error');
+				expect(page('#info').attr('class')).toContain('text-danger');
 			});
 
 			it('is visible by default', function() {

@@ -5,6 +5,14 @@ describe("TryListener: ", function() {
 
 	var listener = new TryListener();
 	
+	beforeEach(function() {
+		$('body').append('<section id="scroll-anchor"></section>');
+	});
+	
+	afterEach(function() {
+		$('#scroll-anchor').remove();
+	});
+	
 	describe('Request sent:', function() {
 	
 		beforeEach(function() {
@@ -186,6 +194,37 @@ describe("TryListener: ", function() {
 				});
 			});
 
+			describe('Highligthing', function() {
+
+				beforeEach(function() {
+					listener.displayResults(JSON.stringify([
+						{
+							challenge: 'one',
+							code: 404,
+							expected: { question: 'any', answer: 42 },
+							got: { flag: true }
+						},
+						{
+							challenge: 'two',
+							code: 200,
+							expected: { question: 'any', answer: 42 },
+							got: { flag: true }
+						}
+					]));					
+				});
+				
+				it('hightligth lines in errors', function() {
+					expect($('#result_1').attr('class')).toContain('danger');
+					expect($('#result_1').attr('class')).toNotContain('success');
+				});
+				
+				it('hightligth lines in success', function() {
+					expect($('#result_2').attr('class')).toContain('success');
+					expect($('#result_2').attr('class')).toNotContain('danger');
+				});
+				
+			});
+
 		});
 
 		describe('Invitation to continue', function() {
@@ -307,7 +346,7 @@ describe("TryListener: ", function() {
 				expect($('#try').prop('disabled')).toEqual(false);
 			});
 		});
-
+		
 	});	
 	
 });
