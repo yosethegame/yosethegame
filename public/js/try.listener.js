@@ -42,6 +42,8 @@ TryListener.prototype.displayResults = function(data) {
 		$('#continue').removeClass('visible').addClass('hidden');
 		$('#try').prop('disabled', false);
 	}
+	
+	$('#scroll-anchor')[0].scrollIntoView( true );
 };
 
 var startAnimation = function() {
