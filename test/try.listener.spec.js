@@ -264,6 +264,49 @@ describe("TryListener: ", function() {
 				expect($('#continue').attr('class')).toNotContain('visible');
 			});
 		});
+		
+		describe('Try button', function() {
+		
+			beforeEach(function() {
+				$('body').append('<button type="button" id="try">Try</button>');
+			});
+
+			afterEach(function() {
+				$('#try').remove();
+			});
+		
+			it('is disabled after success', function() {
+				listener.displayResults(JSON.stringify([
+					{
+						challenge: 'this-challenge',
+						code: 200,
+						expected: { question: 'any', answer: 42 },
+						got: { flag: true }
+					}
+				]));
+				expect($('#try').prop('disabled')).toEqual(true);
+			});
+			
+			it('is enabled after failure', function() {
+				listener.displayResults(JSON.stringify([
+					{
+						challenge: 'this-challenge',
+						code: 200,
+						expected: { question: 'any', answer: 42 },
+						got: { flag: true }
+					}
+				]));
+				listener.displayResults(JSON.stringify([
+					{
+						challenge: 'this-challenge',
+						code: 404,
+						expected: { question: 'any', answer: 42 },
+						got: { flag: true }
+					}
+				]));
+				expect($('#try').prop('disabled')).toEqual(false);
+			});
+		});
 
 	});	
 	

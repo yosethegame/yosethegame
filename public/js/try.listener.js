@@ -37,8 +37,10 @@ TryListener.prototype.displayResults = function(data) {
 
 	if (canContinue) {
 		$('#continue').removeClass('hidden').addClass('visible');
+		$('#try').prop('disabled', true);
 	} else {
 		$('#continue').removeClass('visible').addClass('hidden');
+		$('#try').prop('disabled', false);
 	}
 };
 
