@@ -116,6 +116,53 @@ describe("TryListener: ", function() {
 	
 	});
 	
+	describe('Two results display', function() {
+	
+		beforeEach(function() {
+			$('body').append(
+				'<div id="results">' +
+					'<div id="result_1">' +
+						'<label class="challenge">challenge</label>' +
+						'<label class="status">status</label>' +
+						'<label class="expected">expected</label>' +
+						'<label class="got">got</label>' +
+					'</div>' +
+				'</div>'
+				);
+			listener.displayResults(JSON.stringify([
+				{
+					challenge: 'one',
+					code: 1,
+					expected: { one: 1 },
+					got: { oneone: 11 }
+				},
+				{
+					challenge: 'second',
+					code: 2,
+					expected: { two: 2 },
+					got: { twotwo: 2 }
+				}
+			]));	
+		});
+		
+		afterEach(function() {
+			$('#results').remove();
+		});
+		
+		describe('The challenge column', function() {
+			
+			it('displays the first result', function() {
+				expect($('#result_1 .challenge').text()).toEqual('one');
+			});
+
+			it('displays the second result', function() {
+				expect($('#result_2 .challenge').text()).toEqual('second');
+			});
+
+		});
+		
+	});
+
 	describe('Invitation to continue', function() {
 		
 		beforeEach(function() {
