@@ -57,7 +57,7 @@ describe("TryListener: ", function() {
 		beforeEach(function() {
 			$('body').append(
 				'<div id="results">' +
-					'<div id="result_n">' +
+					'<div id="result_1" class="result">' +
 						'<label class="challenge">challenge</label>' +
 						'<label class="status">status</label>' +
 						'<label class="expected">expected</label>' +
@@ -155,7 +155,13 @@ describe("TryListener: ", function() {
 				beforeEach(function() {
 					listener.displayResults(JSON.stringify([
 						{
-							challenge: 'first',
+							challenge: 'one',
+							code: 200,
+							expected: { question: 'any', answer: 42 },
+							got: { flag: true }
+						},
+						{
+							challenge: 'one',
 							code: 200,
 							expected: { question: 'any', answer: 42 },
 							got: { flag: true }
@@ -171,8 +177,12 @@ describe("TryListener: ", function() {
 					]));	
 				});
 
-				it('displays the second result in the single line', function() {
+				it('displays the second result', function() {
 					expect($('#result_1 .challenge').text()).toEqual('second');
+				});
+
+				it('updates the table to only display one line', function() {
+					expect($('.result').length).toEqual(1);
 				});
 			});
 
@@ -181,7 +191,7 @@ describe("TryListener: ", function() {
 		describe('Invitation to continue', function() {
 
 			beforeEach(function() {
-				$('body').append('<label id="continue" class=hidden>continue</label>');
+				$('body').append('<label id="continue" class="hidden">continue</label>');
 			});
 
 			afterEach(function() {
@@ -218,12 +228,33 @@ describe("TryListener: ", function() {
 				listener.displayResults(JSON.stringify([
 					{
 						challenge: 'one',
-						code: 200,
+						code: 404,
 						expected: { question: 'any', answer: 42 },
 						got: { flag: true }
 					},
 					{
 						challenge: 'two',
+						code: 200,
+						expected: { question: 'any', answer: 42 },
+						got: { flag: true }
+					}
+				]));
+				expect($('#continue').attr('class')).toContain('hidden');
+				expect($('#continue').attr('class')).toNotContain('visible');
+			});
+			
+			it('hides back when a second try is failing', function() {
+				listener.displayResults(JSON.stringify([
+					{
+						challenge: 'this-challenge',
+						code: 200,
+						expected: { question: 'any', answer: 42 },
+						got: { flag: true }
+					}
+				]));
+				listener.displayResults(JSON.stringify([
+					{
+						challenge: 'this-challenge',
 						code: 404,
 						expected: { question: 'any', answer: 42 },
 						got: { flag: true }

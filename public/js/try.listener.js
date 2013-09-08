@@ -16,11 +16,12 @@ TryListener.prototype.displayResults = function(data) {
 	var results = $.parseJSON(data);
 	if (results.length == 0) return;
 	
-	var result_n_html = $('#result_n')[0].outerHTML;
-	$('#result_n').remove();
+	var result_n_html = $('#result_1')[0].outerHTML;
+	$('.result').remove();
 
+	var canContinue = true;
 	for (var i=0; i<results.length; i++) {
-		var result_i_html = result_n_html.replace('result_n', 'result_' + (i+1));
+		var result_i_html = result_n_html.replace('result_1', 'result_' + (i+1));
 		$('#results').append(result_i_html);
 
 		var result = results[i];
@@ -29,7 +30,6 @@ TryListener.prototype.displayResults = function(data) {
 		$('#result_' + (i+1) + ' .expected').text(JSON.stringify(result.expected));
 		$('#result_' + (i+1) + ' .got').text(JSON.stringify(result.got));
 
-		var canContinue = true;
 		if (result.code != 200) {
 			canContinue = false;
 		}
