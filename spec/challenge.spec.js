@@ -1,7 +1,7 @@
 var Browser = require("zombie");
 var router = require('../public/js/router');
 var Server = require('../public/js/server');
-var InMemoryDatabase = require('../test/InMemoryDatabase');
+var InMemoryDatabase = require('../test/support/InMemoryDatabase');
 var fs = require('fs');
 
 describe("Prime factors decomposition level", function() {

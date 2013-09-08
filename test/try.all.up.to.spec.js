@@ -1,7 +1,7 @@
 var request = require('request');
 var Server = require('../public/js/server');
 var tryAll = require('../public/js/try-all-up-to');
-var InMemoryDatabase = require('./inMemoryDatabase');
+var InMemoryDatabase = require('./support/inMemoryDatabase');
 var $ = require('jquery');
 
 describe("Trying to pass challenges", function() {
