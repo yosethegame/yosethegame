@@ -3,26 +3,36 @@ var $ = $ || require('jquery');
 function TryListener() {	
 };
 
-TryListener.prototype.try = function(challenge) {
-	this.startAnimation();
-	this.hideResults();
-	$.get('/try-all-up-to?challenge=' + challenge + '&login=' + $('#login').text() + '&server=' + $('#server').val())
+TryListener.prototype.try = function() {
+	startAnimation();
+	hideResults();
+	$.get('/try-all-up-to?login=' + $('#login').text() + '&server=' + $('#server').val())
 		.success(this.displayResults);
 };
 
 TryListener.prototype.displayResults = function(data) {
-	TryListener.prototype.stopAnimation();
-	TryListener.prototype.showResults();
+	stopAnimation();
+	showResults();
 	var results = $.parseJSON(data);
+	if (results.length == 0) return;
 	
-	var result = results[0];
-	$('#result_1 .challenge').text(result.challenge);
-	$('#result_1 .status').text(result.code);
-	$('#result_1 .expected').text(JSON.stringify(result.expected));
-	$('#result_1 .got').text(JSON.stringify(result.got));
-	var canContinue = true;
-	if (result.code != 200) {
-		canContinue = false;
+	var result_n_html = $('#result_n')[0].outerHTML;
+	$('#result_n').remove();
+
+	for (var i=0; i<results.length; i++) {
+		var result_i_html = result_n_html.replace('result_n', 'result_' + (i+1));
+		$('#results').append(result_i_html);
+
+		var result = results[i];
+		$('#result_' + (i+1) + ' .challenge').text(result.challenge);
+		$('#result_' + (i+1) + ' .status').text(result.code);
+		$('#result_' + (i+1) + ' .expected').text(JSON.stringify(result.expected));
+		$('#result_' + (i+1) + ' .got').text(JSON.stringify(result.got));
+
+		var canContinue = true;
+		if (result.code != 200) {
+			canContinue = false;
+		}
 	}
 
 	if (canContinue) {
@@ -30,16 +40,16 @@ TryListener.prototype.displayResults = function(data) {
 	}
 };
 
-TryListener.prototype.startAnimation = function() {
+var startAnimation = function() {
 	$('#avatar').addClass('rotate');	
 };
-TryListener.prototype.stopAnimation = function() {
+var stopAnimation = function() {
 	$('#avatar').removeClass('rotate');	
 };
-TryListener.prototype.hideResults = function() {
+var hideResults = function() {
 	$('#results').removeClass('visible').addClass('hidden');	
 };
-TryListener.prototype.showResults = function() {
+var showResults = function() {
 	$('#results').removeClass('hidden').addClass('visible');	
 };
 

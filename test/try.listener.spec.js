@@ -20,9 +20,9 @@ describe("TryListener: ", function() {
 		it("send a get request to the chosen server", function() {
 			$('#server').val('any');
 			spyOn($, 'get').andCallThrough();
-			listener.try('thisChallenge');
+			listener.try();
 
-			expect($.get).toHaveBeenCalledWith('/try-all-up-to?challenge=thisChallenge&login=eric&server=any');
+			expect($.get).toHaveBeenCalledWith('/try-all-up-to?login=eric&server=any');
 		});
 	});
 	
@@ -46,158 +46,194 @@ describe("TryListener: ", function() {
 		
 		it('stops when success', function() {
 			$('#avatar').addClass('rotate');
-			listener.displayResults('[{}]');
+			listener.displayResults('[]');
 			expect($('#avatar').attr('class')).toNotContain('rotate');
 		});
 		
 	});
 	
-	describe('Show / hide results', function() {
+	describe('Results display', function() {
 		
-		beforeEach(function() {
-			$('body').append('<div id="results" class="visible"/>');
-		});
-
-		afterEach(function() {
-			$('#results').remove();			
-		});
-
-		it('hides the results when a try is triggered', function() {
-			listener.try();
-			expect($('#results').attr('class')).toContain('hidden');
-			expect($('#results').attr('class')).toNotContain('visible');
-		});
-		
-		it('shows the results when success', function() {
-			$('#results').removeClass('visible').addClass('hidden');
-			listener.displayResults('[{}]');
-			expect($('#results').attr('class')).toNotContain('hidden');
-			expect($('#results').attr('class')).toContain('visible');
-		})
-	});
-		
-	describe('One result display', function() {
-	
-		beforeEach(function() {
-			$('body').append(
-				'<div id="result_1">' +
-					'<label class="challenge">challenge</label>' +
-					'<label class="status">status</label>' +
-					'<label class="expected">expected</label>' +
-					'<label class="got">got</label>' +
-				'</div>'
-				);
-			listener.displayResults(JSON.stringify([
-				{
-					challenge: 'this-challenge',
-					code: 200,
-					expected: { question: 'any', answer: 42 },
-					got: { flag: true }
-				}
-			]));	
-		});
-		
-		afterEach(function() {
-			$('#result_1').remove();
-		});
-		
-		it('displays the first result : the challenge name', function() {
-			expect($('#result_1 .challenge').text()).toEqual('this-challenge');
-		});
-		it('displays the first result : the status', function() {
-			expect($('#result_1 .status').text()).toEqual('200');
-		});
-		it('displays the first result : the expected', function() {
-			expect($('#result_1 .expected').text()).toEqual(JSON.stringify({ question: 'any', answer: 42 }));
-		});
-		it('displays the first result : the actual', function() {
-			expect($('#result_1 .got').text()).toEqual(JSON.stringify({ flag: true }));
-		});
-	
-	});
-	
-	describe('Two results display', function() {
-	
 		beforeEach(function() {
 			$('body').append(
 				'<div id="results">' +
-					'<div id="result_1">' +
+					'<div id="result_n">' +
 						'<label class="challenge">challenge</label>' +
 						'<label class="status">status</label>' +
 						'<label class="expected">expected</label>' +
 						'<label class="got">got</label>' +
 					'</div>' +
 				'</div>'
-				);
-			listener.displayResults(JSON.stringify([
-				{
-					challenge: 'one',
-					code: 1,
-					expected: { one: 1 },
-					got: { oneone: 11 }
-				},
-				{
-					challenge: 'second',
-					code: 2,
-					expected: { two: 2 },
-					got: { twotwo: 2 }
-				}
-			]));	
+			);
 		});
 		
 		afterEach(function() {
 			$('#results').remove();
 		});
 		
-		describe('The challenge column', function() {
+		describe('Show / hide results', function() {
+
+			afterEach(function() {
+				$('#results').remove();			
+			});
+
+			it('hides the results when a try is triggered', function() {
+				listener.try();
+				expect($('#results').attr('class')).toContain('hidden');
+				expect($('#results').attr('class')).toNotContain('visible');
+			});
+
+			it('shows the results when success', function() {
+				$('#results').removeClass('visible').addClass('hidden');
+				listener.displayResults('[{}]');
+				expect($('#results').attr('class')).toNotContain('hidden');
+				expect($('#results').attr('class')).toContain('visible');
+			})
+		});
+
+		describe('One result display', function() {
+
+			beforeEach(function() {
+				listener.displayResults(JSON.stringify([
+					{
+						challenge: 'this-challenge',
+						code: 200,
+						expected: { question: 'any', answer: 42 },
+						got: { flag: true }
+					}
+				]));	
+			});
+
+			it('displays the first result : the challenge name', function() {
+				expect($('#result_1 .challenge').text()).toEqual('this-challenge');
+			});
+			it('displays the first result : the status', function() {
+				expect($('#result_1 .status').text()).toEqual('200');
+			});
+			it('displays the first result : the expected', function() {
+				expect($('#result_1 .expected').text()).toEqual(JSON.stringify({ question: 'any', answer: 42 }));
+			});
+			it('displays the first result : the actual', function() {
+				expect($('#result_1 .got').text()).toEqual(JSON.stringify({ flag: true }));
+			});
+
+		});
+
+		describe('Two results display', function() {
+
+			beforeEach(function() {
+				listener.displayResults(JSON.stringify([
+					{
+						challenge: 'one',
+						code: 1,
+						expected: { one: 1 },
+						got: { oneone: 11 }
+					},
+					{
+						challenge: 'second',
+						code: 2,
+						expected: { two: 2 },
+						got: { twotwo: 2 }
+					}
+				]));	
+			});
+
+			describe('The challenges column', function() {
+
+				it('displays the first result', function() {
+					expect($('#result_1 .challenge').text()).toEqual('one');
+				});
+
+				it('displays the second result', function() {
+					expect($('#result_2 .challenge').text()).toEqual('second');
+				});
+
+			});
 			
-			it('displays the first result', function() {
-				expect($('#result_1 .challenge').text()).toEqual('one');
+			describe('Multiple calls', function() {
+				
+				beforeEach(function() {
+					listener.displayResults(JSON.stringify([
+						{
+							challenge: 'first',
+							code: 200,
+							expected: { question: 'any', answer: 42 },
+							got: { flag: true }
+						}
+					]));	
+					listener.displayResults(JSON.stringify([
+						{
+							challenge: 'second',
+							code: 200,
+							expected: { question: 'any', answer: 42 },
+							got: { flag: true }
+						}
+					]));	
+				});
+
+				it('displays the second result in the single line', function() {
+					expect($('#result_1 .challenge').text()).toEqual('second');
+				});
 			});
 
-			it('displays the second result', function() {
-				expect($('#result_2 .challenge').text()).toEqual('second');
+		});
+
+		describe('Invitation to continue', function() {
+
+			beforeEach(function() {
+				$('body').append('<label id="continue" class=hidden>continue</label>');
 			});
 
-		});
-		
-	});
+			afterEach(function() {
+				$('#continue').remove();
+			});
 
-	describe('Invitation to continue', function() {
-		
-		beforeEach(function() {
-			$('body').append('<label id="continue" class=hidden>continue</label>');
+			it('becomes visible when success (code == 200)', function() {
+				listener.displayResults(JSON.stringify([
+					{
+						challenge: 'this-challenge',
+						code: 200,
+						expected: { question: 'any', answer: 42 },
+						got: { flag: true }
+					}
+				]));
+				expect($('#continue').attr('class')).toNotContain('hidden');
+				expect($('#continue').attr('class')).toContain('visible');
+			});
+
+			it('remains hidden otherwise (code != 200)', function() {
+				listener.displayResults(JSON.stringify([
+					{
+						challenge: 'this-challenge',
+						code: 404,
+						expected: { question: 'any', answer: 42 },
+						got: { flag: true }
+					}
+				]));
+				expect($('#continue').attr('class')).toContain('hidden');
+				expect($('#continue').attr('class')).toNotContain('visible');
+			});
+
+			it('remains hidden if one result is not passing', function() {
+				listener.displayResults(JSON.stringify([
+					{
+						challenge: 'one',
+						code: 200,
+						expected: { question: 'any', answer: 42 },
+						got: { flag: true }
+					},
+					{
+						challenge: 'two',
+						code: 404,
+						expected: { question: 'any', answer: 42 },
+						got: { flag: true }
+					}
+				]));
+				expect($('#continue').attr('class')).toContain('hidden');
+				expect($('#continue').attr('class')).toNotContain('visible');
+			});
 		});
-		
-		afterEach(function() {
-			$('#continue').remove();
-		});
-		
-		it('becomes visible when success', function() {
-			listener.displayResults(JSON.stringify([
-				{
-					challenge: 'this-challenge',
-					code: 200,
-					expected: { question: 'any', answer: 42 },
-					got: { flag: true }
-				}
-			]));
-			expect($('#continue').attr('class')).toNotContain('hidden');
-			expect($('#continue').attr('class')).toContain('visible');
-		});
-		
-		it('remains hidden otherwise', function() {
-			listener.displayResults(JSON.stringify([
-				{
-					challenge: 'this-challenge',
-					code: 404,
-					expected: { question: 'any', answer: 42 },
-					got: { flag: true }
-				}
-			]));
-			expect($('#continue').attr('class')).toContain('hidden');
-			expect($('#continue').attr('class')).toNotContain('visible');
-		})
-	});
+
+	});	
 	
 });
