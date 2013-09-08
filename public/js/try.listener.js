@@ -37,6 +37,8 @@ TryListener.prototype.displayResults = function(data) {
 
 	if (canContinue) {
 		$('#continue').removeClass('hidden').addClass('visible');
+	} else {
+		$('#continue').removeClass('visible').addClass('hidden');
 	}
 };
 
