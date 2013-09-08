@@ -41,7 +41,12 @@
 }
 
 #achievements {
-	color:green;
+	padding-left:20px;
+	display: inline-block;
+}
+#achievements li {
+	padding:0px;
+	float:left;
 }
 
 #server-of-player {

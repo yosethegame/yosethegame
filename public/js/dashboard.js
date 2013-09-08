@@ -20,7 +20,11 @@ dashboard = function(request, response, database) {
 			var achievement_template = cheerio.load(html)('#achievements').html();
 			var achievements = '';
 			for(var index=0; index<database.challenges.length; index++) {
-				achievements += achievement_template.replace('id="achievement_n"></', 'id="achievement_' + (index+1) + '"><img width="23" height="23" src="/img/star-undone.png"></');
+				if (!thePlayer.isANew(player) && index < (player.portfolio.length)) {
+					achievements += achievement_template.replace('id="achievement_n"></', 'id="achievement_' + (index+1) + '"><img class="img-responsive" width="23" height="23" src="/img/star-done.png"></');
+				} else {
+					achievements += achievement_template.replace('id="achievement_n"></', 'id="achievement_' + (index+1) + '"><img class="img-responsive" width="23" height="23" src="/img/star-undone.png"></');
+				}
 			}
 			html = html.replace(achievement_template, achievements);
 			

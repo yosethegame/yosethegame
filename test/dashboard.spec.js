@@ -283,6 +283,17 @@ describe('Dashboard >', function() {
 							title: 'First challenge'
 						}
 					]
+				},
+				{
+					login: 'bilou',
+					portfolio: [
+						{
+							title: 'First challenge'
+						},
+						{
+							title: 'Second challenge'
+						}
+					]
 				}
 			];
 		});
@@ -304,16 +315,39 @@ describe('Dashboard >', function() {
 			});
 		});	
 		
-		describe('When the player has done the first challenge', function() {
+		describe('When the player has done the first challenge,', function() {
 		
 			it('displays a done star for the first challenge', function() {
-				dashboard({ url: '/players/ericminio' }, response, database);
+				dashboard({ url: '/players/annessou' }, response, database);
 				page = cheerio.load(response.html);
 
 				expect(page('#achievement_1').html()).toContain('star-done');
 			});
 			
-		});		
+			it('displays an undone star for the second challenge', function() {
+				dashboard({ url: '/players/annessou' }, response, database);
+				page = cheerio.load(response.html);
+
+				expect(page('#achievement_2').html()).toContain('star-undone');
+			});
+		});	
+		
+		describe('When the player has done both challenges,', function() {
+			
+			it('displays a done star for the first challenge', function() {
+				dashboard({ url: '/players/bilou' }, response, database);
+				page = cheerio.load(response.html);
+
+				expect(page('#achievement_1').html()).toContain('star-done');
+			});
+			
+			it('displays an undone star for the second challenge', function() {
+				dashboard({ url: '/players/bilou' }, response, database);
+				page = cheerio.load(response.html);
+
+				expect(page('#achievement_2').html()).toContain('star-done');
+			});
+		});
 		
 	});
 	
