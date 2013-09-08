@@ -82,6 +82,15 @@ describe('Dashboard >', function() {
 			});
 		});
 			
+		describe('The placeholder of the start-over invitation', function() {
+			it('exists', function() {
+				expect(page('#start-over').length).toNotBe(0);
+			});
+			it('is hidden by default', function() {
+				expect(page('#start-over').attr('class')).toContain('hidden');
+			});
+		});
+
 		describe('The placeholder of the next-challenge', function() {
 			it('exists', function() {
 				expect(page('#next-challenge').length).toNotBe(0);
@@ -384,4 +393,33 @@ describe('Dashboard >', function() {
 		
 	});
 	
+	describe('Start-over invitation', function() {
+	
+		var database;
+		
+		beforeEach(function() {	
+			database = new InMemoryDatabase();
+			database.challenges = [
+				{ title: 'First challenge' },
+				{ title: 'Second challenge' }
+			];
+			database.players = [
+				{ 
+					login: 'annessou', 
+					portfolio: [
+						{ title: 'First challenge' }
+					]
+				}
+			];
+		});
+
+		it('becomes accessible once the player has a challenge in his portfolio', function() {
+			dashboard({ url: '/players/annessou' }, response, database);
+			page = cheerio.load(response.html);
+
+			expect(page('#start-over').attr('class')).toContain('visible');			
+		});
+		
+	});
+		
 });
