@@ -341,7 +341,7 @@ describe('Dashboard >', function() {
 				expect(page('#achievement_1').html()).toContain('star-done');
 			});
 			
-			it('displays an undone star for the second challenge', function() {
+			it('displays a done star for the second challenge', function() {
 				dashboard({ url: '/players/bilou' }, response, database);
 				page = cheerio.load(response.html);
 
