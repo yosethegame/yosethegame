@@ -57,12 +57,6 @@ describe('Dashboard >', function() {
 			});
 		});	
 		
-		describe('The placeholder of the level progress', function() {
-			it('exists', function() {
-				expect(page('#player #progress').length).toNotBe(0);
-			});
-		});
-			
 		describe('The placeholder of the player', function() {
 				
 			it('exists', function() {
@@ -78,12 +72,11 @@ describe('Dashboard >', function() {
 		});	
 			
 		describe('The placeholder of the achievements', function() {
+
 			it('exists', function() {
 				expect(page('#achievements').length).toNotBe(0);
 			});
-			it('is hidden by default', function() {
-				expect(page('#achievements').attr('class')).toContain('hidden');
-			});
+
 			it('contains the template for each achievement', function() {
 				expect(page('#achievements #achievement_n').length).toNotBe(0);
 			});
@@ -282,117 +275,46 @@ describe('Dashboard >', function() {
 			database.players = [
 				{ 
 					login: 'ericminio', 
+				},
+				{
+					login: 'annessou',
 					portfolio: [
-						{ 
+						{
 							title: 'First challenge'
-						},
-						{ 
-							title: 'Second challenge'
 						}
 					]
 				}
 			];
 		});
 		
-		it('displays the achievements section when the player has a non-empty portfolio', function() {
-			dashboard({ url: '/players/ericminio' }, response, database);
-			page = cheerio.load(response.html);
+		describe('When the player has an empty portfolio,', function() {
 			
-			expect(page('#achievements').attr('class')).toContain('visible');
-		});
-		
-		it('displays the first achievement of the portfolio', function() {
-			dashboard({ url: '/players/ericminio' }, response, database);
-			page = cheerio.load(response.html);
+			it('displays an undone star for the first challenge', function() {
+				dashboard({ url: '/players/ericminio' }, response, database);
+				page = cheerio.load(response.html);
 
-			expect(page('#achievement_1').text()).toEqual('First challenge');			
-		});
-		
-		it('displays the second achievement of the portfolio', function() {
-			dashboard({ url: '/players/ericminio' }, response, database);
-			page = cheerio.load(response.html);
+				expect(page('#achievement_1').html()).toContain('star-undone');
+			});
+			
+			it('displays an undone star for the second challenge', function() {
+				dashboard({ url: '/players/ericminio' }, response, database);
+				page = cheerio.load(response.html);
 
-			expect(page('#achievement_2').text()).toContain('Second challenge');			
-		});
+				expect(page('#achievement_2').html()).toContain('star-undone');
+			});
+		});	
+		
+		describe('When the player has done the first challenge', function() {
+		
+			it('displays a done star for the first challenge', function() {
+				dashboard({ url: '/players/ericminio' }, response, database);
+				page = cheerio.load(response.html);
 
-		it('support an empty portfolio', function() {
-			database.players = [
-				{ 
-					login: 'ericminio', 
-					portfolio: []
-				}
-			];
-			dashboard({ url: '/players/ericminio' }, response, database);
-			page = cheerio.load(response.html);
+				expect(page('#achievement_1').html()).toContain('star-done');
+			});
 			
-			expect(page('#achievements').attr('class')).toContain('hidden');
-		});
+		});		
 		
-	});
-	
-	describe('Progress placeholder', function() {
-		var database;
-		
-		beforeEach(function() {	
-			database = new InMemoryDatabase();
-			database.challenges = [
-				{ title: 'First challenge' },
-				{ title: 'Second challenge' }
-			];
-		});
-		
-		it('displays 0% when the player has no portfolio', function() {
-			database.players = [
-				{ 
-					login: 'ericminio'
-				}
-			];
-			dashboard({ url: '/players/ericminio' }, response, database);
-			page = cheerio.load(response.html);
-			
-			expect(page('#progress').text()).toEqual('0%');
-		});
-		
-		it('displays 50% when the player has done half of the available challenges', function() {
-			database.players = [
-				{ 
-					login: 'ericminio', 
-					portfolio: [
-						{ 
-							title: 'First challenge',
-							server: 'here'
-						}
-					]
-				}
-			];
-			dashboard({ url: '/players/ericminio' }, response, database);
-			page = cheerio.load(response.html);
-			
-			expect(page('#progress').text()).toEqual('50%');
-		});
-		
-		it('displays 100% when the player has done all the available challenges', function() {
-			database.players = [
-				{ 
-					login: 'ericminio', 
-					portfolio: [
-						{ 
-							title: 'First challenge',
-							server: 'here'
-						},
-						{ 
-							title: 'Second challenge',
-							server: 'there'
-						}
-					]
-				}
-			];
-			dashboard({ url: '/players/ericminio' }, response, database);
-			page = cheerio.load(response.html);
-			
-			expect(page('#progress').text()).toEqual('100%');
-		});
-
 	});
 	
 	describe("Player's server", function() {
@@ -418,11 +340,12 @@ describe('Dashboard >', function() {
 			];
 		});
 		
-		it('is displayed in the achievements section', function() {
+		it('is displayed when the player has one', function() {
 			dashboard({ url: '/players/ericminio' }, response, database);
 			page = cheerio.load(response.html);
 			
-			expect(page('#achievements #server-of-player').text()).toEqual('here');
+			expect(page('#server-of-player').attr('class')).toContain('visible');
+			expect(page('#server-of-player').text()).toEqual('here');
 		});
 		
 	});

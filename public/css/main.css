@@ -4,15 +4,51 @@
 	to {-webkit-transform:scaleX(-1.0);}
 }
 
-
 .rotate {
 	-webkit-animation:horizontal-loop 1s linear infinite alternate; 
 }
 
 .fond {
-	background-color: #DAF5D7;
-	margin-top:5px;
 	margin-left:5px;
+	margin-top:5px;
+	margin-right:5px;
+}
+
+#sidebar {
+	width:100%;
+	padding:5px;
+	height:70px;
+
+	background-color: #DAF5D7;
+	border-radius:5px;
+}
+
+#avatar {
+	float:left;
+}
+
+#sidebar-info {
+	margin-left:75px;
+}
+
+#progress {
+	padding-left:0px;
+}
+
+#level {
+	float:left;
+	margin:0;
+}
+
+#achievements {
+	color:green;
+}
+
+#server-of-player {
+}
+
+#content {
+	padding-left:80px;
 }
 
 .title {
@@ -56,36 +92,6 @@
 
 #next-challenge-title {
 	color: red;
-}
-
-#achievements {
-	color: green;
-	border:1px solid green;
-	border-radius:5px;
-	padding-left:5px;
-}
-
-#sidebar {
-	background-image:url('');
-	width:70px;
-	position:fixed;
-	padding-left:5px;
-	padding-right:5px;
-	padding-top:5px;
-	height:98%;
-	border:1px solid green;
-	border-radius:5px;
-	
-	text-align:center;
-}
-
-#avatar {
-	
-}
-
-#content {
-	margin-left: 80px;
-	margin-right: 10px;
 }
 
 .header {

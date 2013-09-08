@@ -16,24 +16,21 @@ dashboard = function(request, response, database) {
 		
 		if (database.challenges != undefined)
 		{
+			html = html.show('#achievements');				
+			var achievement_template = cheerio.load(html)('#achievements').html();
+			var achievements = '';
+			for(var index=0; index<database.challenges.length; index++) {
+				achievements += achievement_template.replace('id="achievement_n"></', 'id="achievement_' + (index+1) + '"><img width="23" height="23" src="/img/star-undone.png"></');
+			}
+			html = html.replace(achievement_template, achievements);
+			
 			var challenge = database.challenges[0];
 			if (!thePlayer.isANew(player)) {
-				html = html.show('#achievements');
-				html = html.replace('id="server-of-player">server</', 'id="server-of-player">' + player.server + '</');
-				var achievement_template = cheerio.load(html)('#achievements ol').html();
-				var achievements = '';
-				for(var i=0; i<player.portfolio.length; i++) {
-					var achievement = player.portfolio[i].title;
-					achievements += achievement_template
-						.replace('id="achievement_n"></', 'id="achievement_n">'+ achievement + '</')
-						.replace('achievement_n', 'achievement_' + (i+1));
-				}
-				html = html.replace(achievement_template, achievements);
-
+				html = html.show('#server-of-player');
+				html = html.replace('id="server-of-player">server</', 'id="server-of-player">' + player.server + '</');				
 				challenge = database.challenges[player.portfolio.length];
 				
 			}
-			html = html.replace('id="progress">100%</', 'id="progress">' + progressOf(player, database) + '%</');
 			
 			if (challenge != undefined) {
 				html = html.replace('Next challenge title', challenge.title);
