@@ -1,6 +1,9 @@
 var Browser = require("zombie");
 var router = require('../public/js/router');
 var Server = require('../public/js/server');
+
+console.log('Show me the current dir my dear travis:' + __dirname);
+
 var InMemoryDatabase = require('../test/support/InMemoryDatabase');
 var fs = require('fs');
 
