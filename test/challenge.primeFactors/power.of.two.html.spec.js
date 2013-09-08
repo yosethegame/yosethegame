@@ -10,9 +10,6 @@ describe("power.of.two.html", function() {
 	
 	describe("page's element", function() {
 		
-		it("try server button is available", function() {			
-			expect(page('button#try').length).toBe(1);
-		});		
 
 	});
 	

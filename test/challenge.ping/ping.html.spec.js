@@ -14,10 +14,6 @@ describe("ping.html", function() {
 			expect(page('input#server').length).toBe(1);
 		});		
 
-		it("try server button is available", function() {			
-			expect(page('button#try').length).toBe(1);
-		});		
-
 	});
 		
 });

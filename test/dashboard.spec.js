@@ -22,6 +22,10 @@ describe('Dashboard >', function() {
 			expect(page('title').text()).toBe('Dashboard');
 		});		
 			
+		it("try server button is available", function() {			
+			expect(page('button#try').length).toBe(1);
+		});		
+
 		describe('The placeholder of the information messages', function() {
 				
 			it('exists', function() {
