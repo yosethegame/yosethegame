@@ -17,7 +17,7 @@ dashboard = function(request, response, database) {
 		if (database.challenges != undefined)
 		{
 			html = html.show('#achievements');				
-			var achievement_template = cheerio.load(html)('#achievements').html();
+			var achievement_template = cheerio.load(html).html('#achievement_n');
 			var achievements = '';
 			for(var index=0; index<database.challenges.length; index++) {
 				var star = '<img class="img-responsive" width="23" height="23" src="/img/star-undone.png">';
