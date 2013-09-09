@@ -40,5 +40,9 @@ describe('Start over:', function() {
 		it('resists basic attacks', function() {
 			startover({ url: '/start-over' }, { end: function() {} }, database);
 		});
+
+		it('resists to request made for unknown player', function() {
+			startover({ url: '/start-over?login=any' }, { end: function() {} }, database);
+		});
 	});
 });
