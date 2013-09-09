@@ -34,4 +34,11 @@ describe('Start over:', function() {
 			expect(database.find('bilou').server).toBe(undefined);
 		});
 	});
+	
+	describe('Strength', function() {
+	
+		it('resists basic attacks', function() {
+			startover({ url: '/start-over' }, { end: function() {} }, database);
+		});
+	});
 });
