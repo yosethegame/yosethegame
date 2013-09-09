@@ -32,6 +32,7 @@ dashboard = function(request, response, database) {
 			if (!thePlayer.isANew(player)) {
 				html = html.show('#server-of-player');
 				html = html.replace('id="server-of-player">server</', 'id="server-of-player">' + player.server + '</');				
+				html = html.show('#start-over');
 				challenge = database.challenges[player.portfolio.length];				
 			}
 			
