@@ -67,7 +67,7 @@ describe("Start over", function() {
 		});
 	});
 	
-	describe('When one starts over', function() {
+	describe('When one starts over,', function() {
 		
 		it('he sees the first challenge', function(done) {
 			var browser = new Browser();
