@@ -1,11 +1,5 @@
-var $ = $ || require('jquery');
+startover = function(request, response, database) {
+	response.end();
+}
 
-function Start() {	
-};
-
-Start.prototype.over = function() {
-	$.get('/start-over?login=' + $('#login').text());
-};
-
-var module = module || {};
-module.exports = Start;
+module.exports = startover;

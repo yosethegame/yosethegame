@@ -1,25 +1,37 @@
-var $ = require('jquery');
-var Start = require('../public/js/start.over');
+var startover = require('../public/js/start.over');
+var InMemoryDatabase = require('./support/inMemoryDatabase');
 
-describe("Start-Over: ", function() {
+describe('Start over:', function() {
 
-	var start = new Start();
-	
-	beforeEach(function() {
-		$('body').append('<label id="login">eric</label>');
+	var database;
+
+	beforeEach(function() {		
+		database = new InMemoryDatabase();
 	});
 	
-	afterEach(function() {
-		$('#login').remove();
-	});
-	
-	describe('Request sent:', function() {
-	
-		it("send a get request to the chosen server", function() {
-			spyOn($, 'get').andCallThrough();
-			start.over();
+	describe('When the player has a portfolio,', function() {
+		
+		beforeEach(function() {		
+			database.players = [
+				{
+					login: 'bilou',
+					server: 'guiguilove',
+					portfolio: [
+						{
+							title: 'thisTitle'
+						}
+					]
+				}
+			];
+			startover({ url: '/start-over?login=bilou' }, { end: function() {} }, database);
+		});
 
-			expect($.get).toHaveBeenCalledWith('/start-over?login=eric');
+		it('empties the portfolio', function() {
+			expect(database.find('bilou').portfolio.length).toEqual(0);
+		});
+
+		it('empties the server', function() {
+			expect(database.find('bilou').server).toBe(undefined);
 		});
 	});
 });
