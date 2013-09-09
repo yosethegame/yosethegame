@@ -4,16 +4,12 @@ describe('Router', function() {
 
     describe('Prod configuration:', function() {
 	
-		var dashboard	 = require('../public/js/dashboard');
-		var servecontent = require('../public/js/serve-content');
-		var tryAll		 = require('../public/js/try-all-up-to');
-
 		it('has routes', function() {
 			expect(router.routes.length).toBeGreaterThan(1);
 		});
 
 		it('maps dashboard request', function() {
-			expect(router.endPointOf({ url: '/players/any' })).toBe(dashboard);
+			expect(router.endPointOf({ url: '/players/any' })).toBe(require('../public/js/dashboard'));
 		});
 		
 		it('maps static content request', function() {
@@ -21,9 +17,12 @@ describe('Router', function() {
 		});
 		
 		it('maps try-all-up-to request', function() {
-			expect(router.endPointOf({ url: '/try-all-up-to' })).toBe(tryAll);
-		})
+			expect(router.endPointOf({ url: '/try-all-up-to' })).toBe(require('../public/js/try-all-up-to'));
+		});
 		
+		it('maps start-over request', function() {
+			expect(router.endPointOf({ url: '/start-over' })).toBe(require('../public/js/start-over'));
+		});
 	});
 	
 	describe('Compatibility with http module of node.js:', function() {
