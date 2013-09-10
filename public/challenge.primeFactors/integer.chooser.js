@@ -1,7 +1,7 @@
 function Chooser() {
 	
 	this.getNumber = function() {
-		return 2;
+		return Math.floor(Math.random()*10000) + 2;
 	};
 	
 };
