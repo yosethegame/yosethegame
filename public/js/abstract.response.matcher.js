@@ -1,10 +1,27 @@
 var $ = require('jquery');
 
+var expectedContentType = 'application/json';
+
+expectedAnswer = function(url, matcher) {
+	return { 
+		'content-type': expectedContentType, 
+		body: matcher.expectedContent(url) 
+	};
+};
+
+hasExpectedContentType = function(response) {
+	return response.headers['content-type'] == expectedContentType;
+};
+
+hasExpectedContent = function(request, content, matcher) {
+	return content == JSON.stringify(matcher.expectedContent(request));
+};
+
 abstractMatcher = function(request, remoteResponse, content, matcher) {
     if (remoteResponse == undefined) {
         return {
             code: 404,
-            expected: matcher.expectedAnswer(request),
+            expected: expectedAnswer(request, matcher),
         };
     }
     try {
@@ -14,8 +31,8 @@ abstractMatcher = function(request, remoteResponse, content, matcher) {
         var parsedContent = content;
     }
     var status = {
-        code: matcher.hasExpectedContentType(remoteResponse) && matcher.hasExpectedContent(request, content) ? 200 : 501,
-        expected : matcher.expectedAnswer(request),
+        code: hasExpectedContentType(remoteResponse) && hasExpectedContent(request, content, matcher) ? 200 : 501,
+        expected : expectedAnswer(request, matcher),
         got: { 'content-type': remoteResponse.headers['content-type'], body: parsedContent }
     };
     return status;
