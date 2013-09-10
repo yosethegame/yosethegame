@@ -9,26 +9,25 @@
 </head>
 <body id="challenge-content">
 	<p>
-		In mathematics, a 
-		<a href="http://en.wikipedia.org/wiki/Power_of_two">power of two</a>
-		means a number of the form 2*exp(n) where n is an integer, 
-		i.e. the result of exponentiation with as base the number 2 and as exponent the integer n.
+		Now that your server can decompose power of two numbers, you might
+		feel a little nervous about all the hackers around that will eventually
+		try to crash down your wonderful code.
 	</p>
 	<p class="lead">
 		You're expected to provide an url that should accept a 
-		GET request with a power of 2 as parameter and should respond 
-		a JSON containing the decomposition of this number
+		GET request with a string as parameter and should respond 
+		a JSON containing the 'not a number' error message.
 	</p>
 	
 	<p>For example, receiving</p>
 
-	<pre>http://your/url?number=16</pre>
+	<pre>http://your/url?number=hello</pre>
 
 	<p>You should respond</p>
 		
 	<pre>{
-    "number" : 16,
-    "decomposition" : [ 2, 2, 2, 2 ]
+    "number" : "hello",
+    "error" : "not a number"
 }
 	</pre>
 	
@@ -38,10 +37,10 @@
 		
 	<section>
 		<p>
-			Your server will be called with a random power of two.
+			Your server will be called with a string.
 		</p>	
 		<p>
-			AND the previous challenge should still pass :)
+			AND the previous challenges should still pass :)
 		</p>
 
 	</section>

@@ -1,63 +1,47 @@
-var ProductionFileDatabase = require('../public/js/productionDatabase');
+var ProductionDatabase = require('../public/js/productionDatabase');
 var FileDatabase = require('../public/js/fileDatabase');
 var fs = require('fs');
 var array = require('../public/js/utils/array.utils');
 
-describe('Production FileDatabase:', function() {
+describe('Production Database:', function() {
 	
 	it('inherits from fileDatabase targeting player folder', function() {
-		expect(ProductionFileDatabase.prototype).toEqual(new FileDatabase('players'));
+		expect(ProductionDatabase.prototype).toEqual(new FileDatabase('players'));
 	});
 	
 	it('does not override target folder', function() {
-		expect(new ProductionFileDatabase().folder).toEqual('players');
+		expect(new ProductionDatabase().folder).toEqual('players');
 	});
 	
-	describe('First challenge', function() {
-		var challenge;
-		
-		beforeEach(function() {
-			challenge = new ProductionFileDatabase().challenges[0];
-		});
-		
-		it('has an invitating name', function() {
-			expect(challenge.title).toEqual('Get ready');
-		});
-		
-		it('is the ping challenge', function() {
-			expect(challenge.file).toEqual('public/challenge.ping/ping.html');
-		});
-		
-		it('checks that the file exists', function() {
-			expect(fs.existsSync(challenge.file)).toBe(true);
-		});
-	});
+	var challenges;
 	
-	describe('Second challenge', function() {
-		var challenge;
-		
-		beforeEach(function() {
-			challenge = new ProductionFileDatabase().challenges[1];
-		});
-		
-		it('has an invitating name', function() {
-			expect(challenge.title).toEqual('Power of two challenge');
-		});
-		
-		it('is the power.of.two challenge', function() {
-			expect(challenge.file).toEqual('public/challenge.primeFactors/power.of.two.html');
-		});
-		
-		it('checks that the file exists', function() {
-			expect(fs.existsSync(challenge.file)).toBe(true);
-		});
+	beforeEach(function() {
+		challenges = new ProductionDatabase().challenges;
 	});
+
+    describe('Titles:', function() {
+	
+        it('All challenges must have a title', function() {
+	       	array.forEach(challenges, function(challenge) {
+				expect(challenge.title).toBeDefined();
+    	    });
+	    });
+    });
+    
+    describe('Files:', function() {
+	
+        it('All challenges must have a file', function() {
+	       	array.forEach(challenges, function(challenge) {
+				if (!fs.existsSync(challenge.file)) {
+					throw 'File "' + challenge.file + '" of challenge "' + challenge.title + '" not found';
+				}
+    	    });
+	    });
+    });
     
     describe('Requesters:', function() {
 	
         it('All requesters can be required from public/js and provide an url() api', function() {
-    		var challenges = new ProductionFileDatabase().challenges;
-       	
 	       	array.forEach(challenges, function(challenge) {
         		var Requester = require('../public/js/' + challenge.requester);
                 var requester = new Requester();
@@ -71,8 +55,6 @@ describe('Production FileDatabase:', function() {
     describe('Checkers:', function() {
     
 	    it('All checkers can be required from public/js and provide a validate api', function() {
-    		var challenges = new ProductionFileDatabase().challenges;
-       	
 	       	array.forEach(challenges, function(challenge) {
         		var checker = require('../public/js/' + challenge.checker);
                 if (checker.validate == undefined) {

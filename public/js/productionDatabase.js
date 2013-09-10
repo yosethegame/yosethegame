@@ -13,6 +13,12 @@ function ProductionDatabase() {
 			file: 'public/challenge.primeFactors/power.of.two.html',
 			requester: '../challenge.primeFactors/power.of.two.requester.js',
 			checker: '../challenge.primeFactors/power.of.two.response.matcher.js'
+		},
+		{
+			title: 'Guard challenge',
+			file: 'public/challenge.primeFactors/guard.html',
+			requester: '../challenge.primeFactors/guard.requester.js',
+			checker: '../challenge.primeFactors/guard.response.matcher.js',
 		}
 	];
 };
