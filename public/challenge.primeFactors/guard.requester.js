@@ -6,6 +6,7 @@ function Requester(server) {
 };
 
 Requester.prototype.url = function() {
+	return this.server + '?number=' + this.stringChooser.getString();
 }
 
 var module = module || {};
