@@ -1,10 +1,10 @@
 var router = require('./public/js/router');
 var Server = require('./public/js/server');
-var ProductionFileDatabase = require('./public/js/productionFileDatabase');
+var ProductionFileDatabase = require('./public/js/productionDatabase');
 
 var server = new Server(router);
 
-var database = new ProductionFileDatabase();
+var database = new ProductionDatabase();
 
 database.createPlayer({
 	login: 'ericminio',

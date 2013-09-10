@@ -1,6 +1,6 @@
 var FileDatabase = require('./fileDatabase');
 
-function ProductionFileDatabase() {
+function ProductionDatabase() {
 	this.challenges = [
 		{
 			title: 'Get ready',
@@ -17,6 +17,6 @@ function ProductionFileDatabase() {
 	];
 };
 
-ProductionFileDatabase.prototype = new FileDatabase('players');
+ProductionDatabase.prototype = new FileDatabase('players');
 
-module.exports = ProductionFileDatabase;
+module.exports = ProductionDatabase;
