@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Decomposition</title>
+	<link href="/css/main.css" rel="stylesheet" type="text/css">
+	<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
+	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>		
+</head>
+<body id="challenge-content">
+	<p>
+		Nice ! I guess you can't wait to show that you can do more.
+		Here it is: the decomposition challenge, to explore the decomposition
+		of any number in its <a href="prime factors. http://en.wikipedia.org/wiki/Prime_factor">prime factors</a>.
+	</p>
+	<p class="lead">
+		You're expected to provide an url that should accept a 
+		GET request with a positive integer parameter and should respond 
+		a JSON containing the prime factors decomposition of this number
+	</p>
+	
+	<p>For example, receiving</p>
+
+	<pre>http://your/url?number=300</pre>
+
+	<p>You should respond</p>
+		
+	<pre>{
+    "number" : 300,
+    "decomposition" : [ 2, 2, 3, 5, 5 ]
+}
+	</pre>
+	
+	<legend>
+		<h2>Take it!</h2>
+	</legend>
+		
+	<section>
+		<p>
+			Your server will be called with a random power of two.
+		</p>	
+		<p>
+			AND the previous challenge should still pass :)
+		</p>
+
+	</section>
+</body>
+</html>
