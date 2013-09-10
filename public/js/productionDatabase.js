@@ -19,6 +19,9 @@ function ProductionDatabase() {
 			file: 'public/challenge.primeFactors/guard.html',
 			requester: '../challenge.primeFactors/guard.requester.js',
 			checker: '../challenge.primeFactors/guard.response.matcher.js',
+		},
+		{
+			title: 'Decomposition challenge'
 		}
 	];
 };
