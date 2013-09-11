@@ -1,6 +1,5 @@
-var primeFactorsOf = require('./prime.factors');
-var $ = require('jquery');
 var abstractMatcher = require('../js/abstract.response.matcher');
+var primeFactorsOf = require('./prime.factors');
 
 module.exports = {
 
