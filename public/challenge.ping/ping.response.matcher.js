@@ -7,8 +7,8 @@ module.exports = {
 		return { alive: true };
 	},
 	
-	validate: function(request, remoteResponse, content) {
-		return abstractMatcher(request, remoteResponse, content, this);
+	validate: function(request, remoteResponse, content, callback) {
+		return abstractMatcher(request, remoteResponse, content, this, callback);
 	}
 	
 };

@@ -17,25 +17,32 @@ hasExpectedContent = function(request, content, matcher) {
 	return content == JSON.stringify(matcher.expectedContent(request));
 };
 
-abstractMatcher = function(request, remoteResponse, content, matcher) {
-    if (remoteResponse == undefined) {
-        return {
+computeStatus = function(request, remoteResponse, content, matcher) {
+	if (remoteResponse == undefined) {
+        var status = {
             code: 404,
             expected: expectedAnswer(request, matcher),
         };
     }
-    try {
-        var parsedContent = $.parseJSON(content);
-    }
-    catch(e) {
-        var parsedContent = content;
-    }
-    var status = {
-        code: hasExpectedContentType(remoteResponse) && hasExpectedContent(request, content, matcher) ? 200 : 501,
-        expected : expectedAnswer(request, matcher),
-        got: { 'content-type': remoteResponse.headers['content-type'], body: parsedContent }
-    };
+	else {
+	    try {
+	        var parsedContent = $.parseJSON(content);
+	    }
+	    catch(e) {
+	        var parsedContent = content;
+	    }
+	    var status = {
+	        code: hasExpectedContentType(remoteResponse) && hasExpectedContent(request, content, matcher) ? 200 : 501,
+	        expected : expectedAnswer(request, matcher),
+	        got: { 'content-type': remoteResponse.headers['content-type'], body: parsedContent }
+	    };
+	}
     return status;
 };
 
+abstractMatcher = function(request, remoteResponse, content, matcher, callback) {
+    callback(computeStatus(request, remoteResponse, content, matcher));
+};
+
 module.exports = abstractMatcher;
+module.exports.computeStatus = computeStatus;

@@ -32,24 +32,25 @@ tryChallenge = function(challenge, params, database, response) {
 
 	request(requestSent, function(error, remoteResponse, content) {
 		var checker = require(challenge.checker);
-		var status = checker.validate(requestSent, remoteResponse, content);
-		if (error != null) {
-			status.code = 404,
-			status.got = 'undefined'
-		}
-		if (status.code == 200) {
-			if (player.server == undefined) {
-				logPlayerServer({login: params.query.login, server: params.query.server}, database);
+		checker.validate(requestSent, remoteResponse, content, function(status) {
+			if (error != null) {
+				status.code = 404,
+				status.got = 'undefined'
 			}
-			if (! thisPlayer.hasTheGivenChallengeInPortfolio(challenge.title, player)) {
-				logSuccess({login: params.query.login, challenge: challenge}, database);
+			if (status.code == 200) {
+				if (player.server == undefined) {
+					logPlayerServer({login: params.query.login, server: params.query.server}, database);
+				}
+				if (! thisPlayer.hasTheGivenChallengeInPortfolio(challenge.title, player)) {
+					logSuccess({login: params.query.login, challenge: challenge}, database);
+				}
 			}
-		}
-		maybeClose(response, {
-			challenge: challenge.title,
-			code: status.code,
-			expected: status.expected,
-			got: status.got
+			maybeClose(response, {
+				challenge: challenge.title,
+				code: status.code,
+				expected: status.expected,
+				got: status.got
+			});
 		});
 	});		
 };

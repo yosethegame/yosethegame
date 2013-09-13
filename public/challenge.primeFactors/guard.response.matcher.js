@@ -11,8 +11,8 @@ module.exports = {
 		}
 	},
 		
-	validate: function(request, remoteResponse, content) {		
-		return abstractMatcher(request, remoteResponse, content, this);
+	validate: function(request, remoteResponse, content, callback) {		
+		return abstractMatcher(request, remoteResponse, content, this, callback);
 	}
 };
 
