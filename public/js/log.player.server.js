@@ -1,6 +1,5 @@
-log = function(options, database) {
-	var player = database.find(options.login);
-	player.server = options.server;
+log = function(player, server, database) {
+	player.server = server;
 	database.savePlayer(player);
 };
 

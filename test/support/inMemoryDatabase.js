@@ -7,12 +7,14 @@ InMemoryDatabase.prototype.withPlayers = function(players) {
 	return this;
 };
 
-InMemoryDatabase.prototype.find = function(login) {
+InMemoryDatabase.prototype.find = function(login, callback) {
+	var player;
 	for(i=0; i<this.players.length; i++) {
 		if (this.players[i].login == login) {
-			return this.players[i];
+			player = this.players[i];
 		}
 	}
+	callback(player);
 };
 
 InMemoryDatabase.prototype.savePlayer = function (player) {

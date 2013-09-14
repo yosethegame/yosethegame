@@ -28,12 +28,18 @@ describe('File Database', function() {
 			fs.writeFileSync(folder + '/player.asm', JSON.stringify(annessou));
 		});
 
-		it('can find a player that exists', function() {
-			expect(database.find('asm').name).toEqual('annessou');
+		it('can find a player that exists', function(done) {
+			database.find('asm', function(player) {
+				expect(player.name).toEqual('annessou');
+				done();
+			});
 		});
 		
-		it('returns undefined when not found', function() {
-			expect(database.find('not-here')).toBe(undefined);
+		it('returns undefined when not found', function(done) {
+			database.find('not-here', function(player) {
+				expect(player).toEqual(undefined);
+				done();
+			});
 		});
 	});
 	
@@ -43,18 +49,24 @@ describe('File Database', function() {
 			fs.unlinkSync(folder + '/player.asm')
 		})
 	
-		it('can create a new player', function() {
+		it('can create a new player', function(done) {
 			database.createPlayer(annessou);
 			
-			expect(database.find('asm').name).toEqual('annessou');
+			database.find('asm', function(player) {
+				expect(player.name).toEqual('annessou');
+				done();
+			});
 		});
 		
-		it('preserves an already existing player', function() {
+		it('preserves an already existing player', function(done) {
 			database.createPlayer(annessou);
 			annessou.name = 'new name';
 			database.createPlayer(annessou);
 
-			expect(database.find('asm').name).toEqual('annessou');
+			database.find('asm', function(player) {
+				expect(player.name).toEqual('annessou');
+				done();
+			});
 		});
 		
 	});
@@ -66,11 +78,14 @@ describe('File Database', function() {
 			database.createPlayer(annessou);
 		})
 	
-		it('can modify a player', function() {
+		it('can modify a player', function(done) {
 			annessou.field = 'anything';
 			database.savePlayer(annessou);
 			
-			expect(database.find('asm').field).toEqual('anything');
+			database.find('asm', function(player) {
+				expect(player.field).toEqual('anything');
+				done();
+			});
 		});		
 	});
 });

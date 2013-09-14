@@ -19,8 +19,7 @@ maybeClose = function(response, result) {
 	}
 };
 
-tryChallenge = function(challenge, params, database, response) {
-	var player = database.find(params.query.login);
+tryChallenge = function(player, challenge, params, database, response) {
 	var Requester = require(challenge.requester);
 	if (player != undefined && player.server != undefined) {
 		var requester = new Requester(player.server);
@@ -39,10 +38,10 @@ tryChallenge = function(challenge, params, database, response) {
 			}
 			if (status.code == 200) {
 				if (player.server == undefined) {
-					logPlayerServer({login: params.query.login, server: params.query.server}, database);
+					logPlayerServer(player, params.query.server, database);
 				}
 				if (! thisPlayer.hasTheGivenChallengeInPortfolio(challenge.title, player)) {
-					logSuccess({login: params.query.login, challenge: challenge}, database);
+					logSuccess(player, challenge, database);
 				}
 			}
 			maybeClose(response, {
@@ -59,19 +58,20 @@ tryAllChallengesUntilGivenChallenge = function(incoming, response, database) {
 	output = [];
 	var params = url.parse(incoming.url, true);
 	
-	var player = database.find(params.query.login);
-	if (player == undefined || thisPlayer.isANew(player)) {
-		var challengeCount = 1;
-	} else {
-		var challengeCount = player.portfolio.length + 1;
-	}
-	
-	responseCount = challengeCount;
-	for(var i=0; i< challengeCount; i++) {
-		var challenge = database.challenges[i];
-		
-		tryChallenge(challenge, params, database, response);		
-	}	
+	database.find(params.query.login, function(player) {
+		if (player == undefined || thisPlayer.isANew(player)) {
+			var challengeCount = 1;
+		} else {
+			var challengeCount = player.portfolio.length + 1;
+		}
+
+		responseCount = challengeCount;
+		for(var i=0; i< challengeCount; i++) {
+			var challenge = database.challenges[i];
+
+			tryChallenge(player, challenge, params, database, response);		
+		}	
+	});
 };
 
 module.exports = tryAllChallengesUntilGivenChallenge;
