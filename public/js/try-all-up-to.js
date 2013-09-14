@@ -60,7 +60,7 @@ tryAllChallengesUntilGivenChallenge = function(incoming, response, database) {
 	var params = url.parse(incoming.url, true);
 	
 	var player = database.find(params.query.login);
-	if (player == undefined || player.portfolio == undefined || player.portfolio.length == 0) {
+	if (player == undefined || thisPlayer.isANew(player)) {
 		var challengeCount = 1;
 	} else {
 		var challengeCount = player.portfolio.length + 1;

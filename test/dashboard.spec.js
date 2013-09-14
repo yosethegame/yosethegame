@@ -118,7 +118,7 @@ describe('Dashboard >', function() {
 		});
 	});
 	
-	describe('info/player toggle', function() {
+	describe('info/player toggle,', function() {
 	
 		var database;
 		
@@ -126,18 +126,41 @@ describe('Dashboard >', function() {
 			database = new InMemoryDatabase().withPlayers([
 				{ login: 'ericminio' }
 			]);
-			dashboard({ url: 'players/ericminio' }, response, database);
-			page = cheerio.load(response.html);
+		});
+		
+		describe('when the player is known', function() {
+
+			beforeEach(function() {
+				dashboard({ url: 'players/ericminio' }, response, database);
+				page = cheerio.load(response.html);
+			});
+			
+			it('hides the info section', function() {
+				expect(page('#info').attr('class')).toContain('hidden');
+			});
+
+			it('shows the player section', function() {
+				expect(page('#player').attr('class')).toContain('visible');
+			});
+
+		});
+		
+		describe('when the player is unknown', function() {
+			
+			beforeEach(function() {
+				dashboard({ url: 'players/annessou' }, response, database);
+				page = cheerio.load(response.html);
+			});
+			
+			it('keeps the info section visible', function() {
+				expect(page('#info').attr('class')).toContain('visible');
+			});
+
+			it('keeps the player section hidden', function() {
+				expect(page('#player').attr('class')).toContain('hidden');
+			});
 		});
 
-		it('hides the info section when player exists in the database', function() {
-			expect(page('#info').attr('class')).toContain('hidden');
-		});
-		
-		it('shows the player section when the player exists in the database', function() {
-			expect(page('#player').attr('class')).toContain('visible');
-		})
-		
 	});
 	
 	describe('Avatar', function() {
