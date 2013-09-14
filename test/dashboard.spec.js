@@ -17,7 +17,6 @@ describe('Dashboard >', function() {
 			page = cheerio.load(response.html);
 		});
 
-
 		it('The title', function() {			
 			expect(page('title').text()).toBe('Dashboard');
 		});		
@@ -149,7 +148,7 @@ describe('Dashboard >', function() {
 			database = new InMemoryDatabase().withPlayers([
 				{ 
 					login: 'ericminio',
-					avatar: 'http://annessou-avatar'
+					avatar: 'http://ericminio-avatar'
 				}
 			]);
 			dashboard({ url: 'players/ericminio' }, response, database);
@@ -157,7 +156,7 @@ describe('Dashboard >', function() {
 		});
 		
 		it('is displayed when player has an avatar', function() {
-			expect(page('#avatar').attr('src')).toEqual('http://annessou-avatar');
+			expect(page('#avatar').attr('src')).toEqual('http://ericminio-avatar');
 		});
 		
 	});
@@ -224,17 +223,16 @@ describe('Dashboard >', function() {
 		
 		describe('when no more challenge is available', function() {
 		
-			it('displays the coming-soon section', function() {
+			beforeEach(function() {
 				dashboard({ url: '/players/bilou' }, response, database);
 				page = cheerio.load(response.html);
-
+			});
+		
+			it('displays the coming-soon section', function() {
 				expect(page('#when-no-more-challenges').attr('class')).toContain('visible');
 			});
 			
 			it('hides the next-challenge section', function() {
-				dashboard({ url: '/players/bilou' }, response, database);
-				page = cheerio.load(response.html);
-
 				expect(page('#next-challenge').attr('class')).toContain('hidden');
 			});
 			
@@ -309,51 +307,48 @@ describe('Dashboard >', function() {
 		
 		describe('When the player has an empty portfolio,', function() {
 			
-			it('displays an undone star for the first challenge', function() {
+			beforeEach(function() {
 				dashboard({ url: '/players/ericminio' }, response, database);
 				page = cheerio.load(response.html);
-
+			});
+			
+			it('displays an undone star for the first challenge', function() {
 				expect(page('#achievement_1').html()).toContain('star-undone');
 			});
 			
 			it('displays an undone star for the second challenge', function() {
-				dashboard({ url: '/players/ericminio' }, response, database);
-				page = cheerio.load(response.html);
-
 				expect(page('#achievement_2').html()).toContain('star-undone');
 			});
 		});	
 		
 		describe('When the player has done the first challenge,', function() {
-		
-			it('displays a done star for the first challenge', function() {
+
+			beforeEach(function() {
 				dashboard({ url: '/players/annessou' }, response, database);
 				page = cheerio.load(response.html);
-
+			});
+		
+			it('displays a done star for the first challenge', function() {
 				expect(page('#achievement_1').html()).toContain('star-done');
 			});
 			
 			it('displays an undone star for the second challenge', function() {
-				dashboard({ url: '/players/annessou' }, response, database);
-				page = cheerio.load(response.html);
-
 				expect(page('#achievement_2').html()).toContain('star-undone');
 			});
 		});	
 		
 		describe('When the player has done both challenges,', function() {
 			
-			it('displays a done star for the first challenge', function() {
+			beforeEach(function() {
 				dashboard({ url: '/players/bilou' }, response, database);
-				page = cheerio.load(response.html);
-
+				page = cheerio.load(response.html);				
+			});
+			
+			it('displays a done star for the first challenge', function() {
 				expect(page('#achievement_1').html()).toContain('star-done');
 			});
 			
 			it('displays a done star for the second challenge', function() {
-				dashboard({ url: '/players/bilou' }, response, database);
-				page = cheerio.load(response.html);
-
 				expect(page('#achievement_2').html()).toContain('star-done');
 			});
 		});
