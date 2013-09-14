@@ -20,6 +20,6 @@
     "npm": "1.1.x"
   },
   "scripts": {
-    "test": "jasmine-node test"
+    "test": "jasmine-node test ; jasmine-node deployment"
   }
 }
