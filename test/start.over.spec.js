@@ -1,26 +1,22 @@
 var startover = require('../public/js/start.over');
-var InMemoryDatabase = require('./support/inMemoryDatabase');
+var Example = require('./support/database.with.levels');
 
 describe('Start over:', function() {
 
 	var database;
 
 	beforeEach(function() {		
-		database = new InMemoryDatabase();
+		database = new Example();
 	});
 	
-	describe('When the player has a portfolio,', function() {
+	describe('When the player has a done the first challenge of the first level,', function() {
 		
 		beforeEach(function() {		
 			database.players = [
 				{
 					login: 'bilou',
 					server: 'guiguilove',
-					portfolio: [
-						{
-							title: 'thisTitle'
-						}
-					]
+					portfolio: [ { title: 'challenge 1.1' } ]
 				}
 			];
 			startover({ url: '/start-over?login=bilou' }, { end: function() {} }, database);
@@ -33,6 +29,29 @@ describe('Start over:', function() {
 		it('empties the server', function() {
 			expect(database.find('bilou').server).toBe(undefined);
 		});
+	});
+	
+	describe('When the player has a done the first challenge of the second level,', function() {
+		
+		beforeEach(function() {		
+			database.players = [
+				{
+					login: 'bilou',
+					server: 'guiguilove',
+					portfolio: [ { title: 'challenge 1.1' }, { title: 'challenge 1.2' }, { title: 'challenge 2.1' } ]
+				}
+			];
+			startover({ url: '/start-over?login=bilou' }, { end: function() {} }, database);
+		});
+
+		it('does not modify the server', function() {
+			expect(database.find('bilou').server).toBe('guiguilove');
+		});
+
+		it('removes only the first challenge of second level from portfolio', function() {
+			expect(database.find('bilou').portfolio.length).toEqual(2);
+		});
+
 	});
 	
 	describe('Strength', function() {

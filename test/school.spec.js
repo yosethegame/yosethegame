@@ -28,6 +28,26 @@ describe('School', function() {
 			var player = $.parseJSON('{ "table" : [1, 2] }');
 			expect(player.table.select).toBe(undefined);	
 		});
+		
+		it('can remove the last item from an array', function() {
+			var table = [1, 2, 3];
+			table.pop();
+			
+			expect(table).toEqual([1, 2]);
+		});
+		
+		it('can remove a given item from an array', function() {
+			var table = [1, 2, 3, 4, 5, 6];
+			table.splice(3, 2);
+			
+			expect(table).toEqual([1, 2, 3, 6]);			
+		});
+		
+		it('can identify the index of an element', function() {
+			var table = [1, 2, 3, 4, 5, 6];
+
+			expect(table.indexOf(3)).toEqual(2);
+		});
 	});
 	
 	describe('array.foreach', function() {
