@@ -4,7 +4,6 @@ var thePlayer 	= require('./utils/player.utils');
 var insert		= require('./utils/level.utils');
 
 require('./utils/string-extensions');
-var progressOf = require('./progress');
 
 togglePlayerSection = function(html, player) {
 	return html.hide('#info').show('#player')

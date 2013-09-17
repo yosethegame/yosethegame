@@ -2,6 +2,7 @@ var request 		= require('request');
 var url 			= require('url');
 var withAttribute 	= require('./utils/array.matchers');
 var extract 		= require('./utils/array.utils');
+var array 			= require('./utils/array.utils');
 var httperror 		= require('./utils/http.errors.utils');
 var thisPlayer 		= require('./utils/player.utils');
 var logSuccess 		= require('./log.success');
@@ -57,21 +58,23 @@ tryChallenge = function(challenge, params, database, response) {
 
 tryAllChallengesUntilGivenChallenge = function(incoming, response, database) {
 	output = [];
-	var params = url.parse(incoming.url, true);
-	
+	var params = url.parse(incoming.url, true);	
 	var player = database.find(params.query.login);
-	if (player == undefined || thisPlayer.isANew(player)) {
-		var challengeCount = 1;
-	} else {
-		var challengeCount = player.portfolio.length + 1;
-	}
+	var level = thisPlayer.currentLevel(player, database);
+	var challengesToTry = [];
 	
-	responseCount = challengeCount;
-	for(var i=0; i< challengeCount; i++) {
-		var challenge = database.challenges[i];
-		
+	array.forEach(level.challenges, function(challenge) {
+		if (thisPlayer.hasTheGivenChallengeInPortfolio(challenge.title, player)) {
+			challengesToTry.push(challenge);
+		}
+	});
+	challengesToTry.push(array.firstItemIn(level.challenges, function(challenge) {
+		return !thisPlayer.hasTheGivenChallengeInPortfolio(challenge.title, player);
+	}));
+	responseCount = challengesToTry.length;
+	array.forEach(challengesToTry, function(challenge) {
 		tryChallenge(challenge, params, database, response);		
-	}	
+	});	
 };
 
 module.exports = tryAllChallengesUntilGivenChallenge;
