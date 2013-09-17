@@ -49,7 +49,7 @@ dashboard = function(request, response, database) {
 	if (player != undefined) {
 		html = togglePlayerSection(html, player);
 		var level = thePlayer.currentLevel(player, database);
-		html = insert.levelIn(html, player, database);
+		html = insert.levelIn(html, level);
 		html = showAchievements(html, player, level);
 		if (!thePlayer.isANew(player)) {
 			html = showPlayersServer(html, player);
