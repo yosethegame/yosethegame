@@ -54,10 +54,9 @@ dashboard = function(request, response, database) {
 		if (!thePlayer.isANew(player)) {
 			html = showPlayersServer(html, player);
 		}
-		var challenge = thePlayer.nextChallenge(player, database);
+		var challenge = thePlayer.nextChallengeInLevel(player, level);
 		if (challenge != undefined) {
 			html = html.replace('Next challenge title', challenge.title);
-
 			if (challenge.file != undefined) {
 				var page = cheerio.load(fs.readFileSync(challenge.file).toString());
 				html = html.replace('Next challenge content', page('#challenge-content').html());

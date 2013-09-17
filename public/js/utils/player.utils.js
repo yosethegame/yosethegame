@@ -25,11 +25,14 @@ module.exports = {
 	},
 	
 	nextChallenge: function(player, database) {
-		var level = this.currentLevel(player, database);
+		return this.nextChallengeInLevel(player, this.currentLevel(player, database));
+	},
+
+	nextChallengeInLevel: function(player, level) {
 		var self = this;
 		var found = array.firstItemIn(level.challenges, function(challenge) {
 			return !self.hasTheGivenChallengeInPortfolio(challenge.title, player);
 		});
 		return found;
-	}
+	},
 }
