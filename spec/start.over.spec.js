@@ -21,27 +21,30 @@ describe("Start over", function() {
 			{
 				login: 'bilou',
 				server: 'http://localhost:6000',
-				portfolio: [
+				portfolio: [ { title: 'Ping' }
+				]
+			}
+		];
+		database.levels = [
+			{
+				number: 1,
+				name: 'level 1',
+				challenges: [
 					{
-						title: 'Get ready for fun :)'
+						title: 'Ping',
+						file: 'public/challenge.ping/ping.html',
+						requester: '../../test/support/empty.request',
+						checker: '../../test/support/response.always.valid',
+					},
+					{
+						title: 'Power of two',
+						file: 'public/challenge.primeFactors/power.of.two.html',
+						requester: '../../test/support/empty.request',
+						checker: '../../test/support/response.always.valid',
 					}
 				]
 			}
 		];
-		database.challenges = [
-			{
-				title: 'Ping',
-				file: 'public/challenge.ping/ping.html',
-				requester: '../../test/support/empty.request',
-				checker: '../../test/support/response.always.valid',
-			},
-			{
-				title: 'Power of two',
-				file: 'public/challenge.primeFactors/power.of.two.html',
-				requester: '../../test/support/empty.request',
-				checker: '../../test/support/response.always.valid',
-			}
-			];
 		server.useDatabase(database);
 		server.start();
 	});

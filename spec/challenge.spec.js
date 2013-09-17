@@ -24,27 +24,29 @@ describe("Prime factors decomposition level", function() {
 			{
 				login: 'bilou',
 				server: 'http://localhost:6000',
-				portfolio: [
+				portfolio: [ { title: 'Get ready for fun :)' } ]
+			}
+		];
+		database.levels = [
+			{
+				number: 1,
+				name: 'level 1',
+				challenges: [
 					{
-						title: 'Get ready for fun :)'
+						title: 'Get ready for fun :)',
+						file: 'public/challenge.ping/ping.html',
+						requester: '../../test/support/empty.request',
+						checker: '../../test/support/response.always.valid',
+					},
+					{
+						title: 'Power of two',
+						file: 'public/challenge.primeFactors/power.of.two.html',
+						requester: '../../test/support/empty.request',
+						checker: '../../test/support/response.always.valid',
 					}
 				]
 			}
 		];
-		database.challenges = [
-			{
-				title: 'Get ready for fun :)',
-				file: 'public/challenge.ping/ping.html',
-				requester: '../../test/support/empty.request',
-				checker: '../../test/support/response.always.valid',
-			},
-			{
-				title: 'Power of two',
-				file: 'public/challenge.primeFactors/power.of.two.html',
-				requester: '../../test/support/empty.request',
-				checker: '../../test/support/response.always.valid',
-			}
-			];
 		server.useDatabase(database);
 		server.start();
 	});
@@ -89,7 +91,7 @@ describe("Prime factors decomposition level", function() {
 	describe("When player fails the first challenge", function() {
 		
 		beforeEach(function() {
-			database.challenges[0].checker = '../../test/support/response.always.501';
+			database.levels[0].challenges[0].checker = '../../test/support/response.always.501';
 		});
 
 		it('displays the detail of the error', function(done) {
