@@ -2,6 +2,7 @@ var fs 		  	= require('fs');
 var cheerio   	= require('cheerio');
 var thePlayer 	= require('./utils/player.utils');
 var insert		= require('./utils/level.utils');
+var array		= require('./utils/array.utils');
 
 require('./utils/string-extensions');
 
@@ -13,13 +14,15 @@ togglePlayerSection = function(html, player) {
 
 buildAchivementList = function(template, player, level) {
 	var achievements = '';
-	for(var index=0; index<level.challenges.length; index++) {
+	var index = 0;
+	array.forEach(level.challenges, function(challenge) {
 		var star = '<img class="img-responsive" width="23" height="23" src="/img/star-undone.png">';
-		if (!thePlayer.isANew(player) && index < (player.portfolio.length)) {
+		if (thePlayer.hasTheGivenChallengeInPortfolio(challenge.title, player)) {
 			star = star.replace('undone', 'done');
 		}
 		achievements += template.replace('id="achievement_n"></', 'id="achievement_' + (index+1) + '">' + star + '</');
-	}
+		index ++;
+	});
 	return achievements;
 };
 

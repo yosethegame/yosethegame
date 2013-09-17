@@ -365,19 +365,19 @@ describe('Dashboard >', function() {
 			});
 		});	
 		
-		describe('When the player has done both challenges,', function() {
+		describe('When the player has finished the first level,', function() {
 			
 			beforeEach(function() {
 				dashboard({ url: '/players/bilou' }, response, database);
 				page = cheerio.load(response.html);				
 			});
 			
-			it('displays a done star for the first challenge', function() {
-				expect(page('#achievement_1').html()).toContain('star-done');
+			it('displays a undone star for the first challenge of second level', function() {
+				expect(page('#achievement_1').html()).toContain('star-undone');
 			});
 			
-			it('displays a done star for the second challenge', function() {
-				expect(page('#achievement_2').html()).toContain('star-done');
+			it('displays a undone star for the second challenge of the second level', function() {
+				expect(page('#achievement_2').html()).toContain('star-undone');
 			});
 		});
 		
