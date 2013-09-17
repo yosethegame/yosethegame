@@ -1,11 +1,13 @@
 var thePlayer = require('./utils/player.utils');
 
-logSuccess = function(player, challenge, database) {
+logSuccess = function(options, database) {
+	var player = database.find(options.login);		
 	if (thePlayer.isANew(player)) {
 		player.portfolio = [];
 	}		
 	player.portfolio.push( { 
-			title: challenge.title,
+			title: options.challenge.title,
+			server: options.server 
 		} 
 	);
 	database.savePlayer(player);

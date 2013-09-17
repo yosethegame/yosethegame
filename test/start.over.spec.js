@@ -26,18 +26,12 @@ describe('Start over:', function() {
 			startover({ url: '/start-over?login=bilou' }, { end: function() {} }, database);
 		});
 
-		it('empties the portfolio', function(done) {
-			database.find('bilou', function(player) {
-				expect(player.portfolio.length).toEqual(0);
-				done();
-			});
+		it('empties the portfolio', function() {
+			expect(database.find('bilou').portfolio.length).toEqual(0);
 		});
 
-		it('empties the server', function(done) {
-			database.find('bilou', function(player) {
-				expect(player.server).toBe(undefined);
-				done();
-			});
+		it('empties the server', function() {
+			expect(database.find('bilou').server).toBe(undefined);
 		});
 	});
 	

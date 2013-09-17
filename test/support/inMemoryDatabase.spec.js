@@ -12,15 +12,12 @@ describe('InMemoryDatabase', function() {
 		expect(database.players.length).toEqual(0);
 	});
 	
-	it('offers a way to find a player by login', function(done) {
+	it('offers a way to find a player by login', function() {
 		database.players = [
 			{ login: 'one', name: 'ricou' },
 			{ login: 'two', name: 'annessou' }
 		];
-		database.find('two', function(player) {
-			expect(player.name).toEqual('annessou');
-			done();
-		});
+		expect(database.find('two').name).toEqual('annessou');
 	});
 	
 	it('offers a friendly way to populate players', function() {
@@ -30,16 +27,13 @@ describe('InMemoryDatabase', function() {
 		expect(database.players[0]).toEqual(me);
 	});
 	
-	it('updating a player needs no implementation thx to in-memory db', function(done) {
+	it('updating a player needs no implementation thx to in-memory db', function() {
 		var me = { login: 'me' };
 		var database = new InMemoryDatabase().withPlayers([me]);
 		me.name = 'eric';
 		database.savePlayer(me);
 		
-		database.find('me', function(player) {
-			expect(player.name).toEqual('eric');
-			done();
-		});
+		expect(database.find('me').name).toEqual('eric');
 	});
 	
 });

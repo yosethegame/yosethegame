@@ -52,34 +52,33 @@ dashboard = function(request, response, database) {
 		response.end();
 		return;
 	}
-	database.find(request.url.lastSegment(), function(player) {
-		if (player != undefined) {
-			html = togglePlayerSection(html, player);
+	var player = database.find(request.url.lastSegment());
+	if (player != undefined) {
+		html = togglePlayerSection(html, player);
+		
+		if (database.challenges != undefined)
+		{
+			html = showAchievements(html, player, database);
+			
+			if (!thePlayer.isANew(player)) {
+				html = showPlayersServer(html, player);
+			}
+			
+			var challenge = nextChallenge(player, database);
+			if (challenge != undefined) {
+				html = html.replace('Next challenge title', challenge.title);
 
-			if (database.challenges != undefined)
-			{
-				html = showAchievements(html, player, database);
-
-				if (!thePlayer.isANew(player)) {
-					html = showPlayersServer(html, player);
-				}
-
-				var challenge = nextChallenge(player, database);
-				if (challenge != undefined) {
-					html = html.replace('Next challenge title', challenge.title);
-
-					if (challenge.file != undefined) {
-						var page = cheerio.load(fs.readFileSync(challenge.file).toString());
-						html = html.replace('Next challenge content', page('#challenge-content').html());
-					}			
-				} else {
-					html = html.hide('#next-challenge').show('#when-no-more-challenges');
-				}
-			}		
-		}
-		response.write(html);
-		response.end();
-	});
+				if (challenge.file != undefined) {
+					var page = cheerio.load(fs.readFileSync(challenge.file).toString());
+					html = html.replace('Next challenge content', page('#challenge-content').html());
+				}			
+			} else {
+				html = html.hide('#next-challenge').show('#when-no-more-challenges');
+			}
+		}		
+	}
+	response.write(html);
+	response.end();
 }
 
 module.exports = dashboard;

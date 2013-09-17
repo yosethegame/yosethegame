@@ -4,7 +4,7 @@ var tryAll = require('../public/js/try-all-up-to');
 var InMemoryDatabase = require('./support/inMemoryDatabase');
 var $ = require('jquery');
 
-describe("Trying to pass challenges:", function() {
+describe("Trying to pass challenges", function() {
 
 	var server;
 	var database;
@@ -113,19 +113,17 @@ describe("Trying to pass challenges:", function() {
 		});
 		it('saves the server used by the player', function(done) {
 			request("http://localhost:5000/try-all-up-to?login=annessou&server=http://localhost:6000", function(error, response, body) {
-				database.find('annessou', function(player) {
-					expect(player.server).toEqual('http://localhost:6000');
-					done();
-				});
+				var player = database.find('annessou');
+				expect(player.server).toEqual('http://localhost:6000');
+				done();
 			});			
 		});
 		it('makes the challenge to be in the portfolio of the player', function(done) {
 			database.challenges[0].title = 'Get ready for fun :)';
 			request("http://localhost:5000/try-all-up-to?login=annessou&server=http://localhost:6000", function(error, response, body) {
-				database.find('annessou', function(player) {
-					expect(player.portfolio[0].title).toEqual('Get ready for fun :)')
-					done();
-				});
+				var player = database.find('annessou');
+				expect(player.portfolio[0].title).toEqual('Get ready for fun :)')
+				done();
 			});			
 		});
 		it('returns ok status', function(done) {
@@ -164,26 +162,23 @@ describe("Trying to pass challenges:", function() {
 		});
 		it('does not update the server of the player', function(done) {
 			request("http://localhost:5000/try-all-up-to?login=bilou&server=http://localhost:6000", function(error, response, body) {
-				database.find('bilou', function(player) {
-					expect(player.server).toEqual('guiguilove');
-					done();
-				});
+				var player = database.find('bilou');
+				expect(player.server).toEqual('guiguilove');
+				done();
 			});			
 		});
 	});		
 	
-	describe("Player's server use:", function() {
+	describe("Player's server use", function() {
 		var remote;
-		beforeEach(function(done) {
+		beforeEach(function() {
 			remote = require('http').createServer(
 				function (request, response) {
 					response.end();
 				})
 			.listen(6000);
-			database.find('bilou', function(player) {
-				player.server = 'http://localhost:6000';
-				done();
-			});
+			var player = database.find('bilou');
+			player.server = 'http://localhost:6000';
 		});
 		afterEach(function() {
 			remote.close();
@@ -241,11 +236,10 @@ describe("Trying to pass challenges:", function() {
 		});
 		it('only adds the second challenge in the portfolio and not two times the first', function(done) {
 			request("http://localhost:5000/try-all-up-to?login=clairette", function(error, response, body) {
-				database.find('clairette', function(player) {
-					expect(player.portfolio.length).toEqual(2);
-					expect(player.portfolio[1].title).toEqual('secondTitle');
-					done();
-				});
+				var player = database.find('clairette');
+				expect(player.portfolio.length).toEqual(2);
+				expect(player.portfolio[1].title).toEqual('secondTitle');
+				done();
 			});			
 		});
 	});

@@ -5,8 +5,8 @@ function FileDatabase(folder) {
 	this.folder = folder;
 };
 
-FileDatabase.prototype.find = function(login, callback) {
-	return this.playerFileExists(login) ?  callback(this.buildPlayerFromFile(login)) : callback(undefined);
+FileDatabase.prototype.find = function(login) {
+	return this.playerFileExists(login) ?  this.buildPlayerFromFile(login) : undefined;
 };
 
 FileDatabase.prototype.playerFile = function(login) {
