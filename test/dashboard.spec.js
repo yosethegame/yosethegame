@@ -1,19 +1,24 @@
-var cheerio 	 	 = require('cheerio');
-var dashboard	 	 = require('../public/js/dashboard.js');
-var InMemoryDatabase = require('./support/inMemoryDatabase');
+var cheerio 	= require('cheerio');
+var dashboard	= require('../public/js/dashboard.js');
+var Example 	= require('./support/database.with.levels');
 
 describe('Dashboard >', function() {
 	
+	var database;
 	var page;
 	var response = {
 		write: function(content) { this.html = content; },
 		end: function() {}
 	}
 	
+	beforeEach(function() {	
+		database = new Example();
+	});
+
 	describe('The elements of the page:', function() {
 
 		beforeEach(function() {	
-			dashboard({}, response);
+			dashboard({}, response, database);
 			page = cheerio.load(response.html);
 		});
 
@@ -69,6 +74,17 @@ describe('Dashboard >', function() {
 				expect(page('#player #login').attr('class')).toContain('hidden');
 			});
 		});	
+		
+		describe('The placeholder of the level', function() {
+		
+			it('exists (number)', function() {
+				expect(page('#level-number').length).toNotBe(0);
+			});
+			it('exists (name)', function() {
+				expect(page('#level-name').length).toNotBe(0);
+			});
+			
+		});
 			
 		describe('The placeholder of the achievements', function() {
 
@@ -120,12 +136,10 @@ describe('Dashboard >', function() {
 	
 	describe('info/player toggle,', function() {
 	
-		var database;
-		
 		beforeEach(function() {	
-			database = new InMemoryDatabase().withPlayers([
+			database.players = [
 				{ login: 'ericminio' }
-			]);
+			];
 		});
 		
 		describe('when the player is known', function() {
@@ -165,15 +179,13 @@ describe('Dashboard >', function() {
 	
 	describe('Avatar', function() {
 		
-		var database;
-		
 		beforeEach(function() {	
-			database = new InMemoryDatabase().withPlayers([
+			database.players = [
 				{ 
 					login: 'ericminio',
 					avatar: 'http://ericminio-avatar'
 				}
-			]);
+			];
 			dashboard({ url: 'players/ericminio' }, response, database);
 			page = cheerio.load(response.html);
 		});
@@ -186,12 +198,10 @@ describe('Dashboard >', function() {
 	
 	describe('Login hidden field avalaility', function() {
 	
-		var database;
-		
 		beforeEach(function() {	
-			database = new InMemoryDatabase().withPlayers([
+			database.players = [
 				{ login: 'ericminio' }
-			]);
+			];
 		});
 		
 		it('makes login available in the page to be used eventually', function() {
@@ -204,27 +214,22 @@ describe('Dashboard >', function() {
 	
 	describe('Challenge invitation', function() {
 		
-		var database;
-		
 		beforeEach(function() {	
-			database = new InMemoryDatabase();
-			database.challenges = [
-				{ title: 'First challenge' },
-				{ title: 'Second challenge' }
-			];
 			database.players = [
 				{ login: 'ericminio' },
 				{ 
 					login: 'annessou', 
 					portfolio: [
-						{ title: 'First challenge' }
+						{ title: 'challenge 1.1' }
 					]
 				},
 				{
 					login: 'bilou',
 					portfolio: [
-						{ title: 'First challenge' },
-						{ title: 'Second challenge' }
+						{ title: 'challenge 1.1' },
+						{ title: 'challenge 1.2' },
+						{ title: 'challenge 2.1' },
+						{ title: 'challenge 2.2' },
 					]
 				}
 			];
@@ -234,14 +239,14 @@ describe('Dashboard >', function() {
 			dashboard({ url: '/players/ericminio' }, response, database);
 			page = cheerio.load(response.html);
 
-			expect(page('#next-challenge-title').text()).toEqual('First challenge');
+			expect(page('#next-challenge-title').text()).toEqual('challenge 1.1');
 		});
 		
 		it('displays the next undone challenge to a player with a portfolio', function() {
 			dashboard({ url: '/players/annessou' }, response, database);
 			page = cheerio.load(response.html);
 
-			expect(page('#next-challenge-title').text()).toEqual('Second challenge');
+			expect(page('#next-challenge-title').text()).toEqual('challenge 1.2');
 		});
 		
 		describe('when no more challenge is available', function() {
@@ -265,20 +270,13 @@ describe('Dashboard >', function() {
 	
 	describe('Challenge content display:', function() {
 	
-		var database;
 		var fs = require('fs');
 		
 		beforeEach(function() {	
 			var content = '<html><body>anything before<div id="challenge-content">content<label>with html</label></div>anything after</body></html>';
 			fs.writeFileSync('test/data/challenge-file.html', content);			
 			
-			database = new InMemoryDatabase();
-			database.challenges = [
-				{ 
-					title: 'First challenge',
-					file: 'test/data/challenge-file.html' 
-				}
-			];
+			database.levels[0].challenges[0].file = 'test/data/challenge-file.html';
 			database.players = [
 				{ login: 'ericminio' }
 			];
@@ -292,38 +290,45 @@ describe('Dashboard >', function() {
 		});
 	});
 	
+	describe('Level display:', function() {
+	
+		describe('When the player has an empty portfolio,', function() {
+		
+			beforeEach(function() {
+				database.players = [
+					{ 
+						login: 'ericminio', 
+					}
+				];				
+				dashboard({ url: '/players/ericminio' }, response, database);
+				page = cheerio.load(response.html);
+			});
+		
+			it('displays level 1', function() {
+				expect(page('#level-number').text()).toEqual('1');
+			});
+			
+			it('displays the name of level 1', function() {
+				expect(page('#level-name').text()).toEqual('level 1');
+			});
+		});
+		
+	});
+	
 	describe('Achievements display:', function() {
 	
-		var database;
-		
 		beforeEach(function() {	
-			database = new InMemoryDatabase();
-			database.challenges = [
-				{ title: 'First challenge' },
-				{ title: 'Second challenge' }
-			];
 			database.players = [
 				{ 
 					login: 'ericminio', 
 				},
 				{
 					login: 'annessou',
-					portfolio: [
-						{
-							title: 'First challenge'
-						}
-					]
+					portfolio: 	[ { title: 'challenge 1.1' } ]
 				},
 				{
 					login: 'bilou',
-					portfolio: [
-						{
-							title: 'First challenge'
-						},
-						{
-							title: 'Second challenge'
-						}
-					]
+					portfolio: [ { title: 'challenge 1.1' }, { title: 'challenge 1.2' } ]
 				}
 			];
 		});
@@ -380,23 +385,12 @@ describe('Dashboard >', function() {
 	
 	describe("Player's server", function() {
 	
-		var database;
-		
 		beforeEach(function() {	
-			database = new InMemoryDatabase();
-			database.challenges = [
-				{ title: 'First challenge' },
-				{ title: 'Second challenge' }
-			];
 			database.players = [
 				{ 
 					login: 'ericminio', 
 					server: 'here',
-					portfolio: [
-						{ 
-							title: 'First challenge'
-						}
-					]
+					portfolio: [ {  title: 'challenge 1.1' } ]
 				}
 			];
 		});
@@ -413,20 +407,11 @@ describe('Dashboard >', function() {
 	
 	describe('Start-over invitation', function() {
 	
-		var database;
-		
 		beforeEach(function() {	
-			database = new InMemoryDatabase();
-			database.challenges = [
-				{ title: 'First challenge' },
-				{ title: 'Second challenge' }
-			];
 			database.players = [
 				{ 
 					login: 'annessou', 
-					portfolio: [
-						{ title: 'First challenge' }
-					]
+					portfolio: [ {  title: 'challenge 1.1' } ]
 				}
 			];
 		});

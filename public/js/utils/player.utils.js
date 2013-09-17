@@ -9,5 +9,27 @@ module.exports = {
 	hasTheGivenChallengeInPortfolio: function(title, player) {
 		if (this.isANew(player)) return false;		
 		return array.hasOneItemIn(player.portfolio, withAttribute.titleEqualsTo(title));
+	},
+	
+	currentLevel: function(player, database) {
+		if (this.isANew(player)) return database.levels[0];
+
+		var self = this;
+		var found = array.firstItemIn(database.levels, function(level) {
+			return array.hasOneItemIn(level.challenges, function(challenge) {
+				return !self.hasTheGivenChallengeInPortfolio(challenge.title, player);
+			})
+		});
+		
+		return found == undefined ? database.levels[database.levels.length-1] : found;
+	},
+	
+	nextChallenge: function(player, database) {
+		var level = this.currentLevel(player, database);
+		var self = this;
+		var found = array.firstItemIn(level.challenges, function(challenge) {
+			return !self.hasTheGivenChallengeInPortfolio(challenge.title, player);
+		});
+		return found;
 	}
 }
