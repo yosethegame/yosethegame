@@ -1,4 +1,4 @@
-var matcher = require('../../public/challenge.ping/ping.response.matcher');
+var matcher = require('../../public/level.1/ping.response.matcher');
 
 describe('Ping response matcher:', function() {
 

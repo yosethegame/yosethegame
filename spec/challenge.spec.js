@@ -34,13 +34,13 @@ describe("Prime factors decomposition level", function() {
 				challenges: [
 					{
 						title: 'Get ready for fun :)',
-						file: 'public/challenge.ping/ping.html',
+						file: 'public/level.1/ping.html',
 						requester: '../../test/support/empty.request',
 						checker: '../../test/support/response.always.valid',
 					},
 					{
 						title: 'Power of two',
-						file: 'public/challenge.primeFactors/power.of.two.html',
+						file: 'public/level.2/power.of.two.html',
 						requester: '../../test/support/empty.request',
 						checker: '../../test/support/response.always.valid',
 					}

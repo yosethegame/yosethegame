@@ -1,4 +1,4 @@
-var matcher = require('../../public/challenge.primeFactors/guard.response.matcher');
+var matcher = require('../../public/level.2/guard.response.matcher');
 var $ = require('jquery');
 
 describe('Guard response matcher,', function() {

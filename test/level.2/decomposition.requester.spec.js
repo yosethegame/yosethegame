@@ -1,4 +1,4 @@
-var Requester = require('../../public/challenge.primeFactors/decomposition.requester');
+var Requester = require('../../public/level.2/decomposition.requester');
 var array = require('../../public/js/utils/array.utils');
 
 describe('Decomposition Requester', function() {

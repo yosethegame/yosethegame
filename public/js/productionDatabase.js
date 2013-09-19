@@ -8,9 +8,9 @@ function ProductionDatabase() {
 			challenges: [
 				{
 					title: 'The ping challenge',
-					file: 'public/challenge.ping/ping.html',
-					requester: '../challenge.ping/ping.requester.js',
-					checker: '../challenge.ping/ping.response.matcher.js'
+					file: 'public/level.1/ping.html',
+					requester: '../level.1/ping.requester.js',
+					checker: '../level.1/ping.response.matcher.js'
 				},
 			]
 		},
@@ -20,21 +20,21 @@ function ProductionDatabase() {
 			challenges: [
 				{
 					title: 'Power of two challenge',
-					file: 'public/challenge.primeFactors/power.of.two.html',
-					requester: '../challenge.primeFactors/power.of.two.requester.js',
-					checker: '../challenge.primeFactors/power.of.two.response.matcher.js'
+					file: 'public/level.2/power.of.two.html',
+					requester: '../level.2/power.of.two.requester.js',
+					checker: '../level.2/power.of.two.response.matcher.js'
 				},
 				{
 					title: 'Guard challenge',
-					file: 'public/challenge.primeFactors/guard.html',
-					requester: '../challenge.primeFactors/guard.requester.js',
-					checker: '../challenge.primeFactors/guard.response.matcher.js',
+					file: 'public/level.2/guard.html',
+					requester: '../level.2/guard.requester.js',
+					checker: '../level.2/guard.response.matcher.js',
 				},
 				{
 					title: 'Decomposition challenge',
-					file: 'public/challenge.primeFactors/decomposition.html',
-					requester: '../challenge.primeFactors/decomposition.requester.js',
-					checker: '../challenge.primeFactors/decomposition.response.matcher.js',
+					file: 'public/level.2/decomposition.html',
+					requester: '../level.2/decomposition.requester.js',
+					checker: '../level.2/decomposition.response.matcher.js',
 				}
 			]
 		},

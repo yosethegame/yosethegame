@@ -1,4 +1,4 @@
-var matcher = require('../../public/challenge.primeFactors/decomposition.response.matcher');
+var matcher = require('../../public/level.2/decomposition.response.matcher');
 
 describe('Decomposition response matcher,', function() {
 

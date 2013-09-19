@@ -1,4 +1,4 @@
-var Requester = require('../../public/challenge.primeFactors/power.of.two.requester');
+var Requester = require('../../public/level.2/power.of.two.requester');
 var array = require('../../public/js/utils/array.utils');
 
 describe('Power of two Requester', function() {

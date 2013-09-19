@@ -1,4 +1,4 @@
-var Requester = require('../../public/challenge.primeFactors/guard.requester');
+var Requester = require('../../public/level.2/guard.requester');
 
 describe('Power of two Requester', function() {
 

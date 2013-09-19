@@ -1,4 +1,4 @@
-var Chooser = require('../../public/challenge.primeFactors/integer.chooser');
+var Chooser = require('../../public/level.2/integer.chooser');
 
 describe('Power of two chooser', function() {
 
