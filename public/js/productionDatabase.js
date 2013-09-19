@@ -37,6 +37,18 @@ function ProductionDatabase() {
 					checker: '../challenge.primeFactors/decomposition.response.matcher.js',
 				}
 			]
+		},
+		{
+			number: 3,
+			name: 'First UI',
+			challenges: [
+				{
+					title: 'Form challenge',
+					file: 'public/level.3/ui.html',
+					requester: '../level.3/ui.requester.js',
+					checker: '../level.3/ui.response.matcher.js'
+				}
+			]
 		}
 	];
 };
