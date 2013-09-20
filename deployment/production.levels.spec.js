@@ -3,7 +3,7 @@ var FileDatabase = require('../public/js/fileDatabase');
 var fs = require('fs');
 var array = require('../public/js/utils/array.utils');
 
-describe('Production Database:', function() {
+describe('Production Levels:', function() {
 	
 	it('inherits from fileDatabase targeting player folder', function() {
 		expect(ProductionDatabase.prototype).toEqual(new FileDatabase('players'));
