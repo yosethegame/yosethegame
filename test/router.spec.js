@@ -23,6 +23,10 @@ describe('Router', function() {
 		it('maps start-over request', function() {
 			expect(router.endPointOf({ url: '/start-over' })).toBe(require('../public/js/start.over'));
 		});
+
+		it('maps restart-game request', function() {
+			expect(router.endPointOf({ url: '/restart-game' })).toBe(require('../public/js/restart.game'));
+		});
 	});
 	
 	describe('Compatibility with http module of node.js:', function() {
