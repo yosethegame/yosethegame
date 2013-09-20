@@ -19,6 +19,10 @@ module.exports = {
 			prefix: '/start-over',
 			target: require('./start.over')
 		},
+		{
+			prefix: '/restart-game',
+			target: require('./restart.game')
+		},
         {
         	prefix: '',
          	target: servecontent('public')
