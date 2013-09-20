@@ -67,7 +67,7 @@ describe("Start over all", function() {
 			var browser = new Browser();
 			browser.visit('http://localhost:5000/players/bilou').
 				then(function () {
-					return browser.clickLink("#start-over-all-link");
+					return browser.clickLink("#restart-game");
 				}).
 				then(function() {
 					expect(browser.text("#next-challenge-title")).toEqual('Ping');

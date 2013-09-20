@@ -132,6 +132,24 @@ describe('Dashboard >', function() {
 				expect(page('#continue').attr('class')).toContain('hidden');
 			});
 		});
+		
+		describe('The placeholder for the server of the player', function() {
+			it('exists', function() {
+				expect(page('#server-of-player').length).toNotBe(0);
+			});
+			it('is hidden by default', function() {
+				expect(page('#server-of-player').attr('class')).toContain('hidden');
+			});
+		});
+
+		describe('The placeholder for the restart game', function() {
+			it('exists', function() {
+				expect(page('#restart-game').length).toNotBe(0);
+			});
+			it('is hidden by default', function() {
+				expect(page('#restart-game').attr('class')).toContain('hidden');
+			});
+		});
 	});
 	
 	describe('info/player toggle,', function() {
@@ -403,6 +421,26 @@ describe('Dashboard >', function() {
 			expect(page('#server-of-player').text()).toEqual('here');
 		});
 		
+	});
+	
+	describe('Restart game mention', function() {
+		
+		beforeEach(function() {	
+			database.players = [
+				{ 
+					login: 'ericminio', 
+					portfolio: [ {  title: 'challenge 1.1' } ]
+				}
+			];
+		});
+		
+		it('is displayed when the player has one', function() {
+			dashboard({ url: '/players/ericminio' }, response, database);
+			page = cheerio.load(response.html);
+			
+			expect(page('#restart-game').attr('class')).toContain('visible');
+		});
+
 	});
 	
 	describe('Start-over invitation', function() {
