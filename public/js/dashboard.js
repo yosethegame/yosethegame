@@ -39,6 +39,10 @@ showPlayersServer = function(html, player) {
 	return html.show('#start-over');
 };
 
+showRestartGameMention = function(html) {
+	return html.show('#restart-game');
+}
+
 dashboard = function(request, response, database) {
 	var html = fs.readFileSync('./public/dashboard.html').toString();
 
@@ -55,6 +59,7 @@ dashboard = function(request, response, database) {
 		html = showAchievements(html, player, level);
 		if (!thePlayer.isANew(player)) {
 			html = showPlayersServer(html, player);
+			html = showRestartGameMention(html);
 		}
 		var challenge = thePlayer.nextChallengeInLevel(player, level);
 		if (challenge != undefined) {
