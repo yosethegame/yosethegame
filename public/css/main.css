@@ -54,6 +54,11 @@
 }
 
 #server-of-player {
+	float: left;
+	padding-right:10px;
+}
+
+#restart-game {
 }
 
 #content {
