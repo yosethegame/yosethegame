@@ -32,7 +32,7 @@ computeStatus = function(request, remoteResponse, content, matcher) {
 	        var parsedContent = content;
 	    }
 	    var status = {
-	        code: hasExpectedContentType(remoteResponse) && hasExpectedContent(request, content, matcher) ? 200 : 501,
+	        code: hasExpectedContentType(remoteResponse) && hasExpectedContent(request, JSON.stringify(parsedContent), matcher) ? 200 : 501,
 	        expected : expectedAnswer(request, matcher),
 	        got: { 'content-type': remoteResponse.headers['content-type'], body: parsedContent }
 	    };

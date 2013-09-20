@@ -42,6 +42,18 @@ describe('Power of two response matcher,', function() {
 		it('sets the actual value to the given value', function() {
 			expect(JSON.stringify(status.got)).toEqual(JSON.stringify(correctAnswer));
 		});
+		
+		describe('supports extra carriage return in response', function() {
+			beforeEach(function() {
+				remoteResponse.headers['content-type'] = 'application/json';
+				status = matcher.computeStatus('this-url?number=8',  remoteResponse,  JSON.stringify(correctContent) + '\n', matcher);
+			});
+			
+			it('sets code to 200', function() {
+				expect(status.code).toEqual(200);
+			});
+
+		});
 	});
 	
 	describe('When remote server returns bad header,', function() {
