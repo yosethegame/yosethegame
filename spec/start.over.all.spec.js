@@ -4,7 +4,7 @@ var Server = require('../public/js/server');
 var InMemoryDatabase = require('../test/support/InMemoryDatabase');
 var fs = require('fs');
 
-describe("Start over", function() {
+describe("Start over all", function() {
 
 	var server = new Server(router);
 	var remote;
@@ -35,7 +35,13 @@ describe("Start over", function() {
 						file: 'public/level.1/ping.html',
 						requester: '../../test/support/empty.request',
 						checker: '../../test/support/response.always.valid',
-					},
+					}
+				]
+			},
+			{
+				number: 2,
+				name: 'level 2',
+				challenges: [
 					{
 						title: 'Power of two',
 						file: 'public/level.2/power.of.two.html',
@@ -44,6 +50,7 @@ describe("Start over", function() {
 					}
 				]
 			}
+			
 		];
 		server.useDatabase(database);
 		server.start();
@@ -54,29 +61,13 @@ describe("Start over", function() {
 		server.stop();
 	});
 	
-	describe("When one has done the first challenge,", function() {
-		
-		it('he sees the second challenge', function(done) {
-			var browser = new Browser();
-			browser.visit('http://localhost:5000/players/bilou').
-				then(function() {
-					expect(browser.text("#next-challenge-title")).toEqual('Power of two');
-					done();
-				}).
-				fail(function(error) {
-					expect(error.toString()).toBeNull();
-					done();
-				});
-		});
-	});
-	
 	describe('When one starts over,', function() {
 		
 		it('he sees the first challenge', function(done) {
 			var browser = new Browser();
 			browser.visit('http://localhost:5000/players/bilou').
 				then(function () {
-					return browser.clickLink("#start-over-link");
+					return browser.clickLink("#start-over-all-link");
 				}).
 				then(function() {
 					expect(browser.text("#next-challenge-title")).toEqual('Ping');
