@@ -22,23 +22,29 @@ describe('Start over:', function() {
 			restartgame({ url: '/restart-game?login=bilou' }, { end: function() {} }, database);
 		});
 
-		it('empties the portfolio', function() {
-			expect(database.find('bilou').portfolio.length).toEqual(0);
+		it('empties the portfolio', function(done) {
+			database.find('bilou', function(player) {
+				expect(player.portfolio.length).toEqual(0);
+				done();
+			});
 		});
 
-		it('empties the server', function() {
-			expect(database.find('bilou').server).toBe(undefined);
+		it('empties the server', function(done) {
+			database.find('bilou', function(player) {
+				expect(player.server).toBe(undefined);
+				done();
+			});
 		});
 	});
 	
 	describe('Strength', function() {
 	
 		it('resists basic attacks', function() {
-			startover({ url: '/restart-game' }, { end: function() {} }, database);
+			restartgame({ url: '/restart-game' }, { end: function() {} }, database);
 		});
 
 		it('resists to request made for unknown player', function() {
-			startover({ url: '/restart-game?login=any' }, { end: function() {} }, database);
+			restartgame({ url: '/restart-game?login=any' }, { end: function() {} }, database);
 		});
 	});
 });
