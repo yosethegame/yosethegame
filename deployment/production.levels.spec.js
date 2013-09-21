@@ -1,17 +1,8 @@
 var ProductionDatabase = require('../public/js/productionDatabase');
-var FileDatabase = require('../public/js/fileDatabase');
 var fs = require('fs');
 var array = require('../public/js/utils/array.utils');
 
 describe('Production Levels:', function() {
-	
-	it('inherits from fileDatabase targeting player folder', function() {
-		expect(ProductionDatabase.prototype).toEqual(new FileDatabase('players'));
-	});
-	
-	it('does not override target folder', function() {
-		expect(new ProductionDatabase().folder).toEqual('players');
-	});
 	
 	var database;
 	

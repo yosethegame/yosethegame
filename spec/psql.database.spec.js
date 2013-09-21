@@ -77,7 +77,7 @@ describe('PostgreSql database', function() {
 	it('can modify a field', function(done) {
 		database.createPlayer(annessou, function() {
 			annessou.name = 'anne-sophie';
-			database.save(annessou, function() {
+			database.savePlayer(annessou, function() {
 				database.find('asm', function(player) {
 					expect(player.name).toEqual('anne-sophie');
 					done();
@@ -89,7 +89,7 @@ describe('PostgreSql database', function() {
 	it('can add a new field', function(done) {
 		database.createPlayer(annessou, function() {
 			annessou.field = 'any';
-			database.save(annessou, function() {
+			database.savePlayer(annessou, function() {
 				database.find('asm', function(player) {
 					expect(player.field).toEqual('any');
 					done();

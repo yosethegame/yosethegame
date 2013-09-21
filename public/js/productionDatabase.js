@@ -1,4 +1,4 @@
-var FileDatabase = require('./fileDatabase');
+var PSql = require('./psql.database');
 
 function ProductionDatabase() {
 	this.levels = [
@@ -53,6 +53,6 @@ function ProductionDatabase() {
 	];
 };
 
-ProductionDatabase.prototype = new FileDatabase('players');
+ProductionDatabase.prototype = new PSql(process.env.DATABASE_URL);
 
 module.exports = ProductionDatabase;

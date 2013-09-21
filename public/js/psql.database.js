@@ -37,7 +37,7 @@ PostgreSql.prototype.find = function(login, callback) {
 	});
 };
 
-PostgreSql.prototype.save = function(player, callback) {
+PostgreSql.prototype.savePlayer = function(player, callback) {
 	client = new pg.Client(this.url);
 	client.connect(function(err) {
 		var sql = "update players set json = '" + JSON.stringify(player) + "' where login = '" + player.login + "'";
