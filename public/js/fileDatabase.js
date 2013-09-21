@@ -5,8 +5,9 @@ function FileDatabase(folder) {
 	this.folder = folder;
 };
 
-FileDatabase.prototype.find = function(login) {
-	return this.playerFileExists(login) ?  this.buildPlayerFromFile(login) : undefined;
+FileDatabase.prototype.find = function(login, callback) {
+	var found = this.playerFileExists(login) ?  this.buildPlayerFromFile(login) : undefined;
+	callback(found);
 };
 
 FileDatabase.prototype.playerFile = function(login) {
@@ -25,14 +26,17 @@ FileDatabase.prototype.readPlayerFile = function(login) {
 	return fs.readFileSync(this.playerFile(login)).toString();
 };
 
-FileDatabase.prototype.createPlayer = function(player) {
+FileDatabase.prototype.createPlayer = function(player, callback) {
 	if (!this.playerFileExists(player.login)) {
-		this.savePlayer(player);
+		this.savePlayer(player, callback);
+	} else {
+		callback();
 	}
 };
 
-FileDatabase.prototype.savePlayer = function(player) {
+FileDatabase.prototype.savePlayer = function(player, callback) {
 	fs.writeFileSync(this.playerFile(player.login), JSON.stringify(player));
+	callback();
 };
 
 module.exports = FileDatabase;

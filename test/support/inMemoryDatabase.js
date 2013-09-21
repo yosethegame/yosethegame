@@ -1,3 +1,5 @@
+var array = require('../../public/js/utils/array.utils');
+
 function InMemoryDatabase() {
 	this.players = [];
 };
@@ -7,15 +9,14 @@ InMemoryDatabase.prototype.withPlayers = function(players) {
 	return this;
 };
 
-InMemoryDatabase.prototype.find = function(login) {
-	for(i=0; i<this.players.length; i++) {
-		if (this.players[i].login == login) {
-			return this.players[i];
-		}
-	}
+InMemoryDatabase.prototype.find = function(login, callback) {
+	callback(array.firstItemIn(this.players, function(player) {
+		return player.login == login;
+	}));
 };
 
-InMemoryDatabase.prototype.savePlayer = function (player) {
+InMemoryDatabase.prototype.savePlayer = function (player, callback) {
+	callback(player);
 };
 
 module.exports = InMemoryDatabase;
