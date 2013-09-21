@@ -51,29 +51,30 @@ dashboard = function(request, response, database) {
 		response.end();
 		return;
 	}
-	var player = database.find(request.url.lastSegment());
-	if (player != undefined) {
-		html = togglePlayerSection(html, player);
-		var level = thePlayer.currentLevel(player, database);
-		html = insert.levelIn(html, level);
-		html = showAchievements(html, player, level);
-		if (!thePlayer.isANew(player)) {
-			html = showPlayersServer(html, player);
-			html = showRestartGameMention(html);
+	database.find(request.url.lastSegment(), function(player) {
+		if (player != undefined) {
+			html = togglePlayerSection(html, player);
+			var level = thePlayer.currentLevel(player, database);
+			html = insert.levelIn(html, level);
+			html = showAchievements(html, player, level);
+			if (!thePlayer.isANew(player)) {
+				html = showPlayersServer(html, player);
+				html = showRestartGameMention(html);
+			}
+			var challenge = thePlayer.nextChallengeInLevel(player, level);
+			if (challenge != undefined) {
+				html = html.replace('Next challenge title', challenge.title);
+				if (challenge.file != undefined) {
+					var page = cheerio.load(fs.readFileSync(challenge.file).toString());
+					html = html.replace('Next challenge content', page('#challenge-content').html());
+				}			
+			} else {
+				html = html.hide('#next-challenge').show('#when-no-more-challenges');
+			}
 		}
-		var challenge = thePlayer.nextChallengeInLevel(player, level);
-		if (challenge != undefined) {
-			html = html.replace('Next challenge title', challenge.title);
-			if (challenge.file != undefined) {
-				var page = cheerio.load(fs.readFileSync(challenge.file).toString());
-				html = html.replace('Next challenge content', page('#challenge-content').html());
-			}			
-		} else {
-			html = html.hide('#next-challenge').show('#when-no-more-challenges');
-		}
-	}
-	response.write(html);
-	response.end();
+		response.write(html);
+		response.end();
+	});
 }
 
 module.exports = dashboard;
