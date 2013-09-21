@@ -26,6 +26,13 @@ describe('PostgreSql database', function() {
 		
 	});
 	
+	it('uses process.env.DATABASE_URL', function() {
+		expect(url).toEqual(process.env.DATABASE_URL);
+	});
+	
+	it('enjoys a env var', function() {
+		expect(url).toBeDefined();
+	});
 
 	it('can create a player', function(done) {
 		database.createPlayer(annessou, function() {
