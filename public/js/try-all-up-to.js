@@ -20,8 +20,7 @@ maybeClose = function(response, result) {
 	}
 };
 
-tryChallenge = function(challenge, params, database, response) {
-	var player = database.find(params.query.login);
+tryChallenge = function(challenge, params, player, database, response) {
 	var Requester = require(challenge.requester);
 	if (player != undefined && player.server != undefined) {
 		var requester = new Requester(player.server);
@@ -40,10 +39,10 @@ tryChallenge = function(challenge, params, database, response) {
 			}
 			if (status.code == 200) {
 				if (player.server == undefined) {
-					logPlayerServer({login: params.query.login, server: params.query.server}, database);
+					logPlayerServer(player, params.query.server, database);
 				}
 				if (! thisPlayer.hasTheGivenChallengeInPortfolio(challenge.title, player)) {
-					logSuccess({login: params.query.login, challenge: challenge}, database);
+					logSuccess(player, challenge, database);
 				}
 			}
 			maybeClose(response, {
@@ -59,22 +58,23 @@ tryChallenge = function(challenge, params, database, response) {
 tryAllChallengesUntilGivenChallenge = function(incoming, response, database) {
 	output = [];
 	var params = url.parse(incoming.url, true);	
-	var player = database.find(params.query.login);
-	var level = thisPlayer.currentLevel(player, database);
-	var challengesToTry = [];
-	
-	array.forEach(level.challenges, function(challenge) {
-		if (thisPlayer.hasTheGivenChallengeInPortfolio(challenge.title, player)) {
-			challengesToTry.push(challenge);
-		}
+	database.find(params.query.login, function(player) {
+		var level = thisPlayer.currentLevel(player, database);
+		var challengesToTry = [];
+
+		array.forEach(level.challenges, function(challenge) {
+			if (thisPlayer.hasTheGivenChallengeInPortfolio(challenge.title, player)) {
+				challengesToTry.push(challenge);
+			}
+		});
+		challengesToTry.push(array.firstItemIn(level.challenges, function(challenge) {
+			return !thisPlayer.hasTheGivenChallengeInPortfolio(challenge.title, player);
+		}));
+		responseCount = challengesToTry.length;
+		array.forEach(challengesToTry, function(challenge) {
+			tryChallenge(challenge, params, player, database, response);		
+		});	
 	});
-	challengesToTry.push(array.firstItemIn(level.challenges, function(challenge) {
-		return !thisPlayer.hasTheGivenChallengeInPortfolio(challenge.title, player);
-	}));
-	responseCount = challengesToTry.length;
-	array.forEach(challengesToTry, function(challenge) {
-		tryChallenge(challenge, params, database, response);		
-	});	
 };
 
 module.exports = tryAllChallengesUntilGivenChallenge;
