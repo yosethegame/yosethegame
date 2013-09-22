@@ -35,8 +35,7 @@ showAchievements = function(html, player, level) {
 
 showPlayersServer = function(html, player) {
 	html = html.show('#server-of-player');
-	html = html.replace('id="server-of-player">server</', 'id="server-of-player">' + player.server + '</');				
-	return html.show('#start-over');
+	return html.replace('id="server-of-player">server</', 'id="server-of-player">' + player.server + '</');				
 };
 
 showRestartGameMention = function(html) {
