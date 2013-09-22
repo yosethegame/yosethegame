@@ -32,7 +32,11 @@ PostgreSql.prototype.find = function(login, callback) {
 		var sql = "select json from players where login = '" + login + "'";
 		client.query(sql, function(err, result) {
 			client.end();
-			callback($.parseJSON(result.rows[0].json));
+			if (result && result.rows[0]) {
+				callback($.parseJSON(result.rows[0].json));
+			} else {
+				callback(undefined);
+			}
 		});
 	});
 };

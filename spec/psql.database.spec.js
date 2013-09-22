@@ -98,4 +98,11 @@ describe('PostgreSql database', function() {
 		});
 	});
 	
+	it('returns undefined when the player is unknown', function(done) {
+		database.find('any', function(player) {
+			expect(player).toEqual(undefined);
+			done();
+		});				
+	});
+	
 });
