@@ -11,7 +11,7 @@ describe('Guard response matcher,', function() {
 	});
 
 	it('knows the expected content from the sent request', function() {
-		expect(matcher.expectedContent('this-url?number=toto')).toEqual({
+		expect(matcher.expectedContent('this-url/primeFactors?number=toto')).toEqual({
 			number: 'toto',
 			error: 'not a number'
 		});

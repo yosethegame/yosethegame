@@ -16,7 +16,7 @@ describe('Power of two Requester', function() {
 	it('adds the number to the url', function() {
 		requester.numberChooser = { getNumber: function() { return 42; } };
 				
-		expect(requester.url()).toEqual('this-url?number=42');
+		expect(requester.url()).toEqual('this-url/primeFactors?number=42');
 	});
 		
 });

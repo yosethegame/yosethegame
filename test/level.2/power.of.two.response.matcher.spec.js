@@ -11,7 +11,7 @@ describe('Power of two response matcher,', function() {
 	});
 
 	it('knows the expected answer from the sent request', function() {
-		expect(matcher.expectedContent('this-url?number=8')).toEqual({
+		expect(matcher.expectedContent('this-url/primeFactors?number=8')).toEqual({
 			number: 8,
 			decomposition: [2, 2, 2]
 		});
@@ -28,7 +28,7 @@ describe('Power of two response matcher,', function() {
 		
 		beforeEach(function() {
 			remoteResponse.headers['content-type'] = 'application/json';
-			status = matcher.computeStatus('this-url?number=8',  remoteResponse,  JSON.stringify(correctContent), matcher);
+			status = matcher.computeStatus('this-url/primeFactors?number=8',  remoteResponse,  JSON.stringify(correctContent), matcher);
 		});
 
 		it('sets code to 200', function() {
@@ -60,7 +60,7 @@ describe('Power of two response matcher,', function() {
 
 		beforeEach(function() {
 			remoteResponse.headers['content-type'] = 'text/plain';
-			status = matcher.computeStatus('this-url?number=8', remoteResponse, JSON.stringify(correctContent), matcher);
+			status = matcher.computeStatus('this-url/primeFactors?number=8', remoteResponse, JSON.stringify(correctContent), matcher);
 		});
 
 		it('sets code to 501', function() {
@@ -79,7 +79,7 @@ describe('Power of two response matcher,', function() {
 	describe('When remote server returns no header,', function() {
 
 		beforeEach(function() {
-			status = matcher.computeStatus('this-url?number=8', remoteResponse, JSON.stringify(correctContent), matcher);
+			status = matcher.computeStatus('this-url/primeFactors?number=8', remoteResponse, JSON.stringify(correctContent), matcher);
 		});
 
 		it('sets code to 501', function() {
@@ -99,7 +99,7 @@ describe('Power of two response matcher,', function() {
 
 		beforeEach(function() {
 			remoteResponse.headers['content-type'] = 'application/json';
-			status = matcher.computeStatus('this-url?number=8', remoteResponse, 'anything', matcher);
+			status = matcher.computeStatus('this-url/primeFactors?number=8', remoteResponse, 'anything', matcher);
 		});
 
 		it('sets code to 501', function() {
@@ -119,7 +119,7 @@ describe('Power of two response matcher,', function() {
 
 		beforeEach(function() {
 			remoteResponse.headers['content-type'] = 'application/json';
-			status = matcher.computeStatus('this-url?number=8', remoteResponse, JSON.stringify({ number: 8, decomposition: [2, 2] } ), matcher);
+			status = matcher.computeStatus('this-url/primeFactors?number=8', remoteResponse, JSON.stringify({ number: 8, decomposition: [2, 2] } ), matcher);
 		});
 
 		it('sets code to 501', function() {

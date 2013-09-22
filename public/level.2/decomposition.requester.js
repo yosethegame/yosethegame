@@ -6,7 +6,7 @@ function Requester(server) {
 };
 
 Requester.prototype.url = function() {
-	return this.server + '?number=' + this.numberChooser.getNumber();
+	return this.server + '/primeFactors?number=' + this.numberChooser.getNumber();
 }
 
 var module = module || {};

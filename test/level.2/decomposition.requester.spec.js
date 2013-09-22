@@ -16,7 +16,7 @@ describe('Decomposition Requester', function() {
 	it('adds the number to the url', function() {
 		requester.numberChooser = { getNumber: function() { return 300; } };
 				
-		expect(requester.url()).toEqual('this-url?number=300');
+		expect(requester.url()).toEqual('this-url/primeFactors?number=300');
 	});
 		
 });

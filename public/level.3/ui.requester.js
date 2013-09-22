@@ -3,7 +3,7 @@ function Requester(server) {
 };
 
 Requester.prototype.url = function() {
-	return this.server + '/ui';
+	return this.server + '/primeFactors/ui';
 };
 
 var module = module || {};

@@ -9,7 +9,7 @@ describe('UI Requester', function() {
 	});
 	
 	it('adds /ui to the url', function() {
-		expect(requester.url()).toEqual('this-url/ui');
+		expect(requester.url()).toEqual('this-url/primeFactors/ui');
 	});
 		
 });
