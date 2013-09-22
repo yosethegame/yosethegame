@@ -70,7 +70,7 @@ describe("Prime factors decomposition level", function() {
 					done();
 				}).
 				then(function() {
-					expect(browser.text("#result_1 .status")).toEqual('200');
+					expect(browser.text("#result_1 .status")).toEqual('success');
 					done();
 				}).
 				then(function() {
@@ -106,7 +106,7 @@ describe("Prime factors decomposition level", function() {
 					done();
 				}).
 				then(function() {
-					expect(browser.text("#result_1 .status")).toEqual('501');
+					expect(browser.text("#result_1 .status")).toEqual('fail');
 					done();
 				}).
 				then(function() {
@@ -137,7 +137,7 @@ describe("Prime factors decomposition level", function() {
 					done();
 				}).
 				then(function() {
-					expect(browser.text("#result_1 .status")).toEqual('200');
+					expect(browser.text("#result_1 .status")).toEqual('success');
 					done();
 				}).
 				then(function() {

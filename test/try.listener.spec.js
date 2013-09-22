@@ -99,7 +99,7 @@ describe("TryListener: ", function() {
 			})
 		});
 
-		describe('One result display', function() {
+		describe('One result display:', function() {
 
 			beforeEach(function() {
 				listener.displayResults(JSON.stringify([
@@ -115,8 +115,19 @@ describe("TryListener: ", function() {
 			it('displays the first result : the challenge name', function() {
 				expect($('#result_1 .challenge').text()).toEqual('this-challenge');
 			});
-			it('displays the first result : the status', function() {
-				expect($('#result_1 .status').text()).toEqual('200');
+			it('displays the first result : "success" when receiving code == 200', function() {
+				expect($('#result_1 .status').text()).toEqual('success');
+			});
+			it('displays the first result : "fail" when receiving code != 200', function() {
+				listener.displayResults(JSON.stringify([
+					{
+						challenge: 'this-challenge',
+						code: 100,
+						expected: { question: 'any', answer: 42 },
+						got: { flag: true }
+					}
+				]));	
+				expect($('#result_1 .status').text()).toEqual('fail');
 			});
 			it('displays the first result : the expected', function() {
 				expect($('#result_1 .expected').text()).toEqual(JSON.stringify({ question: 'any', answer: 42 }));
@@ -127,7 +138,7 @@ describe("TryListener: ", function() {
 
 		});
 
-		describe('Two results display', function() {
+		describe('Two results display:', function() {
 
 			beforeEach(function() {
 				listener.displayResults(JSON.stringify([
@@ -158,7 +169,7 @@ describe("TryListener: ", function() {
 
 			});
 			
-			describe('Multiple calls', function() {
+			describe('Multiple calls only keeps the results from the last call', function() {
 				
 				beforeEach(function() {
 					listener.displayResults(JSON.stringify([
@@ -194,7 +205,7 @@ describe("TryListener: ", function() {
 				});
 			});
 
-			describe('Highligthing', function() {
+			describe('Highligthing failures', function() {
 
 				beforeEach(function() {
 					listener.displayResults(JSON.stringify([
@@ -227,7 +238,7 @@ describe("TryListener: ", function() {
 
 		});
 
-		describe('Invitation to continue', function() {
+		describe('Invitation to continue:', function() {
 
 			beforeEach(function() {
 				$('body').append('<label id="continue" class="hidden">continue</label>');
@@ -304,7 +315,7 @@ describe("TryListener: ", function() {
 			});
 		});
 		
-		describe('Try button', function() {
+		describe('Try button:', function() {
 		
 			beforeEach(function() {
 				$('body').append('<button type="button" id="try">Try</button>');
