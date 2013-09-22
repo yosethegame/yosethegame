@@ -3,7 +3,7 @@ var matcher = require('../../public/level.3/ui.response.matcher');
 describe('UI response matcher,', function() {
 
 	it('knows the expected form', function() {
-		expect(matcher.expected).toEqual('A form with elements #title #invitation input#number button#go #decomposition');
+		expect(matcher.expected).toEqual('A form with elements #title #invitation input#number button#go');
 	});
 
 	var status;

@@ -4,7 +4,7 @@ var expectedContentType = 'text/html';
 var expectedTitle = 'Prime factors';
 var expectedAnswer = { 'content-type': expectedContentType, body: 'Page with title==' + expectedTitle }
 
-var elements = [ '#title', '#invitation', 'input#number', 'button#go', '#decomposition' ];
+var elements = [ '#title', '#invitation', 'input#number', 'button#go' ];
 
 
 module.exports = {
