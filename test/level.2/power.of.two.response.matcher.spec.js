@@ -54,6 +54,18 @@ describe('Power of two response matcher,', function() {
 			});
 
 		});
+		
+		describe('supports extra header info:', function() {
+			beforeEach(function() {
+				remoteResponse.headers['content-type'] = 'application/json; charset=utf-8';
+				status = matcher.computeStatus('this-url?number=8',  remoteResponse,  JSON.stringify(correctContent), matcher);
+			});
+			
+			it('sets code to 200', function() {
+				expect(status.code).toEqual(200);
+			});
+
+		});
 	});
 	
 	describe('When remote server returns bad header,', function() {

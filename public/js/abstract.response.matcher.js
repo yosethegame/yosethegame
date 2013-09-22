@@ -10,7 +10,8 @@ expectedAnswer = function(url, matcher) {
 };
 
 hasExpectedContentType = function(response) {
-	return response.headers['content-type'] == expectedContentType;
+	return response.headers['content-type'] != undefined 
+		&& response.headers['content-type'].indexOf(expectedContentType) != -1;
 };
 
 hasExpectedContent = function(request, content, matcher) {
