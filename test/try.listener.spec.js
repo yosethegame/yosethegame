@@ -6,10 +6,21 @@ describe("TryListener: ", function() {
 	var listener = new TryListener();
 	
 	beforeEach(function() {
+		$('body').append(
+			'<div id="results">' +
+				'<div id="result_1" class="result">' +
+					'<label class="challenge">challenge</label>' +
+					'<label class="status">status</label>' +
+					'<label class="expected">expected</label>' +
+					'<label class="got">got</label>' +
+				'</div>' +
+			'</div>'
+		);
 		$('body').append('<section id="scroll-anchor"></section>');
 	});
 	
 	afterEach(function() {
+		$('#results').remove();
 		$('#scroll-anchor').remove();
 	});
 	
@@ -61,23 +72,6 @@ describe("TryListener: ", function() {
 	});
 	
 	describe('Results display', function() {
-		
-		beforeEach(function() {
-			$('body').append(
-				'<div id="results">' +
-					'<div id="result_1" class="result">' +
-						'<label class="challenge">challenge</label>' +
-						'<label class="status">status</label>' +
-						'<label class="expected">expected</label>' +
-						'<label class="got">got</label>' +
-					'</div>' +
-				'</div>'
-			);
-		});
-		
-		afterEach(function() {
-			$('#results').remove();
-		});
 		
 		describe('Show / hide results', function() {
 
@@ -360,4 +354,51 @@ describe("TryListener: ", function() {
 		
 	});	
 	
+	describe('Achievements update:', function() {
+
+		beforeEach(function() {
+			$('body').append('<span id="achievement_1"><img src="star-undone"></span>');
+		});
+		
+		afterEach(function() {
+			$('#achievement_1').remove();
+		});
+	
+		describe('When the player fails the challenge,', function() {
+			
+			beforeEach(function() {
+				listener.displayResults(JSON.stringify([
+					{
+						challenge: 'this-challenge',
+						code: 404,
+						expected: { question: 'any', answer: 42 },
+						got: { flag: true }
+					}
+				]));
+			});
+			
+			it('remains undone', function() {
+				expect($('#achievement_1 img').attr('src')).toContain('star-undone');
+			});
+		});
+		
+		describe('When the player passes the challenge,', function() {
+			
+			beforeEach(function() {
+				listener.displayResults(JSON.stringify([
+					{
+						challenge: 'this-challenge',
+						code: 200,
+						expected: { question: 'any', answer: 42 },
+						got: { flag: true }
+					}
+				]));
+			});
+			
+			it('switches to done', function() {
+				expect($('#achievement_1 img').attr('src')).toContain('star-done');
+			});
+		});
+		
+	});
 });
