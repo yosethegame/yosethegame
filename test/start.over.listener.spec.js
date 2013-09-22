@@ -13,13 +13,11 @@ describe("Start-Over listener: ", function() {
 		$('#login').remove();
 	});
 	
-	describe('Request sent:', function() {
-	
-		it("send a get request to the chosen server", function() {
-			spyOn($, 'get').andCallThrough();
-			start.over();
+	it("sends a get request to the chosen server", function() {
+		spyOn($, 'get').andCallThrough();
+		start.over();
 
-			expect($.get).toHaveBeenCalledWith('/start-over?login=eric');
-		});
+		expect($.get).toHaveBeenCalledWith('/start-over?login=eric');
 	});
+	
 });

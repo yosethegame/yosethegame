@@ -13,13 +13,11 @@ describe("Restart game listener: ", function() {
 		$('#login').remove();
 	});
 	
-	describe('Request sent:', function() {
-	
-		it("send a get request to the chosen server", function() {
-			spyOn($, 'get').andCallThrough();
-			restart.game();
+	it("sends a get request to the chosen server", function() {
+		spyOn($, 'get').andCallThrough();
+		restart.game();
 
-			expect($.get).toHaveBeenCalledWith('/restart-game?login=eric');
-		});
+		expect($.get).toHaveBeenCalledWith('/restart-game?login=eric');
 	});
+
 });
