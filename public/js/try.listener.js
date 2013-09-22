@@ -41,7 +41,10 @@ TryListener.prototype.displayResults = function(data) {
 	if (canContinue) {
 		$('#continue').removeClass('hidden').addClass('visible');
 		$('#try').prop('disabled', true);
-		$('#achievement_1 img').attr('src', '/img/star-done.png');
+
+		var index = 1;
+		while($('#achievement_' + index + ' img').attr('src') == '/img/star-done.png') { index++ }
+		$('#achievement_' + index + ' img').attr('src', '/img/star-done.png');
 	} else {
 		$('#continue').removeClass('visible').addClass('hidden');
 		$('#try').prop('disabled', false);

@@ -358,6 +358,7 @@ describe("TryListener: ", function() {
 
 		beforeEach(function() {
 			$('body').append('<span id="achievement_1"><img src="star-undone"></span>');
+			$('body').append('<span id="achievement_2"><img src="star-undone"></span>');
 		});
 		
 		afterEach(function() {
@@ -400,5 +401,23 @@ describe("TryListener: ", function() {
 			});
 		});
 		
+		describe('When the player passes the second challenge,', function() {
+			
+			beforeEach(function() {
+				$('#achievement_1 img').attr('src', '/img/star-done.png')
+				listener.displayResults(JSON.stringify([
+					{
+						challenge: 'this-challenge',
+						code: 200,
+						expected: { question: 'any', answer: 42 },
+						got: { flag: true }
+					}
+				]));
+			});
+			
+			it('switches to done the second achievement', function() {
+				expect($('#achievement_2 img').attr('src')).toContain('star-done');
+			});
+		});
 	});
 });
