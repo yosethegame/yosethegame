@@ -74,11 +74,11 @@ describe("Prime factors decomposition level", function() {
 					done();
 				}).
 				then(function() {
-					expect(browser.text("#result_1 .expected")).toEqual('"a correct expected value"');
+					expect(browser.text("#result_1 .expected")).toEqual('a correct expected value');
 					done();
 				}).
 				then(function() {
-					expect(browser.text("#result_1 .got")).toEqual('"a correct actual value"');
+					expect(browser.text("#result_1 .got")).toEqual('a correct actual value');
 					done();
 				}).
 				fail(function(error) {
@@ -110,11 +110,11 @@ describe("Prime factors decomposition level", function() {
 					done();
 				}).
 				then(function() {
-					expect(browser.text("#result_1 .expected")).toEqual('"a correct expected value"');
+					expect(browser.text("#result_1 .expected")).toEqual('a correct expected value');
 					done();
 				}).
 				then(function() {
-					expect(browser.text("#result_1 .got")).toEqual('"an incorrect value"');
+					expect(browser.text("#result_1 .got")).toEqual('an incorrect value');
 					done();
 				}).
 				fail(function(error) {
@@ -141,11 +141,11 @@ describe("Prime factors decomposition level", function() {
 					done();
 				}).
 				then(function() {
-					expect(browser.text("#result_1 .expected")).toEqual('"a correct expected value"');
+					expect(browser.text("#result_1 .expected")).toEqual('a correct expected value');
 					done();
 				}).
 				then(function() {
-					expect(browser.text("#result_1 .got")).toEqual('"a correct actual value"');
+					expect(browser.text("#result_1 .got")).toEqual('a correct actual value');
 					done();
 				}).
 				fail(function(error) {
