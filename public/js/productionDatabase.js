@@ -40,18 +40,18 @@ function ProductionDatabase() {
 		},
 		{
 			number: 3,
-			name: 'First UI',
+			name: 'GUI',
 			challenges: [
 				{
 					title: 'Form challenge',
-					file: 'public/level.3/ui.html',
-					requester: '../level.3/ui.requester.js',
-					checker: '../level.3/ui.response.matcher.js'
+					file: 'public/challenge.form/form.html',
+					requester: '../challenge.form/form.requester.js',
+					checker: '../challenge.form/form.response.matcher.js'
 				},
 				{
 					title: 'Input challenge',
 					file: 'public/level.3/input.html',
-					requester: '../level.3/ui.requester.js',
+					requester: '../challenge.form/form.requester.js',
 					checker: '../level.3/input.response.matcher.js'
 				}
 			]

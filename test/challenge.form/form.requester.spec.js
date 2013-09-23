@@ -1,4 +1,4 @@
-var Requester = require('../../public/level.3/ui.requester');
+var Requester = require('../../public/challenge.form/form.requester');
 
 describe('UI Requester', function() {
 
