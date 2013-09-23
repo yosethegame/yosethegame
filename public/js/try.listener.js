@@ -27,8 +27,8 @@ TryListener.prototype.displayResults = function(data) {
 		var result = results[i];
 		$('#result_' + (i+1) + ' .challenge').text(result.challenge);
 		$('#result_' + (i+1) + ' .status').text(result.code == 200 ? 'success': 'fail');
-		$('#result_' + (i+1) + ' .expected').text(JSON.stringify(result.expected));
-		$('#result_' + (i+1) + ' .got').text(JSON.stringify(result.got));
+		$('#result_' + (i+1) + ' .expected').text(typeof result.expected == 'string' ? result.expected: JSON.stringify(result.expected));
+		$('#result_' + (i+1) + ' .got').text(typeof result.got == 'string' ? result.got: JSON.stringify(result.got));
 
 		if (result.code != 200) {
 			canContinue = false;

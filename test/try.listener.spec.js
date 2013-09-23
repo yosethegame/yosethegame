@@ -123,11 +123,41 @@ describe("TryListener: ", function() {
 				]));	
 				expect($('#result_1 .status').text()).toEqual('fail');
 			});
-			it('displays the first result : the expected', function() {
-				expect($('#result_1 .expected').text()).toEqual(JSON.stringify({ question: 'any', answer: 42 }));
+			describe('The expected:', function() {
+				
+				it('displays an object as string', function() {
+					expect($('#result_1 .expected').text()).toEqual(JSON.stringify({ question: 'any', answer: 42 }));
+				});
+
+				it('displays a string as is', function() {
+					listener.displayResults(JSON.stringify([
+						{
+							challenge: 'this-challenge',
+							code: 200,
+							expected: 'any',
+							got: { flag: true }
+						}
+					]));	
+					expect($('#result_1 .expected').text()).toEqual('any');
+				});
 			});
-			it('displays the first result : the actual', function() {
-				expect($('#result_1 .got').text()).toEqual(JSON.stringify({ flag: true }));
+			describe('The actual', function() {
+				
+				it('displays an object as string', function() {
+					expect($('#result_1 .got').text()).toEqual(JSON.stringify({ flag: true }));
+				});
+				
+				it('displays a string as is', function() {
+					listener.displayResults(JSON.stringify([
+						{
+							challenge: 'this-challenge',
+							code: 200,
+							expected: { question: 'any', answer: 42 },
+							got: 'any'
+						}
+					]));	
+					expect($('#result_1 .got').text()).toEqual('any');
+				});
 			});
 
 		});
