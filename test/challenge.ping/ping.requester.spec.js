@@ -1,4 +1,4 @@
-var Requester = require('../../public/level.1/ping.requester');
+var Requester = require('../../public/challenge.ping/ping.requester');
 
 describe('Ping challenge requester', function() {
 	

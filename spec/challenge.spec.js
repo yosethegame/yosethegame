@@ -34,7 +34,7 @@ describe("Prime factors decomposition level", function() {
 				challenges: [
 					{
 						title: 'Get ready for fun :)',
-						file: 'public/level.1/ping.html',
+						file: 'public/challenge.ping/ping.html',
 						requester: '../../test/support/empty.request',
 						checker: '../../test/support/response.always.valid',
 					},

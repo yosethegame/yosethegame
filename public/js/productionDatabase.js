@@ -8,9 +8,9 @@ function ProductionDatabase() {
 			challenges: [
 				{
 					title: 'The ping challenge',
-					file: 'public/level.1/ping.html',
-					requester: '../level.1/ping.requester.js',
-					checker: '../level.1/ping.response.matcher.js'
+					file: 'public/challenge.ping/ping.html',
+					requester: '../challenge.ping/ping.requester.js',
+					checker: '../challenge.ping/ping.response.matcher.js'
 				},
 			]
 		},
