@@ -2,6 +2,7 @@
   "name": "node-example",
   "version": "0.0.1",
   "dependencies": {
+    "zombie": "2.0.0-alpha19",
     "url": "0.7.9",
     "request": "2.22.0",
     "cheerio": "0.12.0",
