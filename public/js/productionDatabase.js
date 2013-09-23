@@ -25,12 +25,6 @@ function ProductionDatabase() {
 					checker: '../challenge.power.of.two/power.of.two.response.matcher.js'
 				},
 				{
-					title: 'Guard challenge',
-					file: 'public/challenge.guard.string/guard.html',
-					requester: '../challenge.guard.string/guard.requester.js',
-					checker: '../challenge.guard.string/guard.response.matcher.js',
-				},
-				{
 					title: 'Decomposition challenge',
 					file: 'public/challenge.decomposition/decomposition.html',
 					requester: '../challenge.decomposition/decomposition.requester.js',
@@ -40,6 +34,18 @@ function ProductionDatabase() {
 		},
 		{
 			number: 3,
+			name: 'Guards',
+			challenges: [
+				{
+					title: 'String challenge',
+					file: 'public/challenge.guard.string/guard.html',
+					requester: '../challenge.guard.string/guard.requester.js',
+					checker: '../challenge.guard.string/guard.response.matcher.js',
+				}
+			]
+		},
+		{
+			number: 4,
 			name: 'GUI',
 			challenges: [
 				{
