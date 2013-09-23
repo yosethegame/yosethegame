@@ -26,9 +26,9 @@ function ProductionDatabase() {
 				},
 				{
 					title: 'Guard challenge',
-					file: 'public/level.2/guard.html',
-					requester: '../level.2/guard.requester.js',
-					checker: '../level.2/guard.response.matcher.js',
+					file: 'public/challenge.guard.string/guard.html',
+					requester: '../challenge.guard.string/guard.requester.js',
+					checker: '../challenge.guard.string/guard.response.matcher.js',
 				},
 				{
 					title: 'Decomposition challenge',
