@@ -1,6 +1,6 @@
 var Browser = require('zombie');
-var Chooser = require('../level.2/integer.chooser');
-var primeFactorsOf = require('../level.2/prime.factors');
+var Chooser = require('../levels.common/integer.chooser');
+var primeFactorsOf = require('../levels.common/prime.factors');
 
 module.exports = {
 

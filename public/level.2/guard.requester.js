@@ -1,4 +1,4 @@
-var StringChooser = require('./string.chooser');
+var StringChooser = require('../levels.common/string.chooser');
 
 function Requester(server) {
 	this.server = server;

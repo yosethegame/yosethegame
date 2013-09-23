@@ -1,4 +1,4 @@
-var matcher = require('../../public/level.2/power.of.two.response.matcher');
+var matcher = require('../../public/challenge.power.of.two/power.of.two.response.matcher');
 var $ = require('jquery');
 
 describe('Power of two response matcher,', function() {

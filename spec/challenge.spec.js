@@ -40,7 +40,7 @@ describe("Prime factors decomposition level", function() {
 					},
 					{
 						title: 'Power of two',
-						file: 'public/level.2/power.of.two.html',
+						file: 'public/challenge.power.of.two/power.of.two.html',
 						requester: '../../test/support/empty.request',
 						checker: '../../test/support/response.always.valid',
 					}

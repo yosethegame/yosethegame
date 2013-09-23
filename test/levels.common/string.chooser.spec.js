@@ -1,4 +1,4 @@
-var Chooser = require('../../public/level.2/string.chooser');
+var Chooser = require('../../public/levels.common/string.chooser');
 
 describe('String chooser', function() {
 

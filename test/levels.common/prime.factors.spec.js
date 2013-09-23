@@ -1,4 +1,4 @@
-var primeFactorsOf = require('../../public/level.2/prime.factors.js');
+var primeFactorsOf = require('../../public/levels.common/prime.factors.js');
 
 describe('Prime factors decomposition', function() {
 

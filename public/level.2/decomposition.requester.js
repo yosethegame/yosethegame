@@ -1,4 +1,4 @@
-var Chooser = require('./integer.chooser');
+var Chooser = require('../levels.common/integer.chooser');
 
 function Requester(server) {
 	this.server = server;

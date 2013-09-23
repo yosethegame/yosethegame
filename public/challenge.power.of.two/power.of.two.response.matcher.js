@@ -1,5 +1,5 @@
 var abstractMatcher = require('../js/abstract.response.matcher');
-var primeFactorsOf = require('./prime.factors');
+var primeFactorsOf = require('../levels.common/prime.factors');
 
 module.exports = {
 

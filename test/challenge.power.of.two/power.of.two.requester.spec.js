@@ -1,4 +1,4 @@
-var Requester = require('../../public/level.2/power.of.two.requester');
+var Requester = require('../../public/challenge.power.of.two/power.of.two.requester');
 var array = require('../../public/js/utils/array.utils');
 
 describe('Power of two Requester', function() {

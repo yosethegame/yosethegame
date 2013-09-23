@@ -20,9 +20,9 @@ function ProductionDatabase() {
 			challenges: [
 				{
 					title: 'Power of two challenge',
-					file: 'public/level.2/power.of.two.html',
-					requester: '../level.2/power.of.two.requester.js',
-					checker: '../level.2/power.of.two.response.matcher.js'
+					file: 'public/challenge.power.of.two/power.of.two.html',
+					requester: '../challenge.power.of.two/power.of.two.requester.js',
+					checker: '../challenge.power.of.two/power.of.two.response.matcher.js'
 				},
 				{
 					title: 'Guard challenge',

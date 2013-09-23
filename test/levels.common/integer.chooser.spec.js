@@ -1,4 +1,4 @@
-var Chooser = require('../../public/level.2/integer.chooser');
+var Chooser = require('../../public/levels.common/integer.chooser');
 
 describe('Power of two chooser', function() {
 
