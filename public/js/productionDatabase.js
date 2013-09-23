@@ -32,9 +32,9 @@ function ProductionDatabase() {
 				},
 				{
 					title: 'Decomposition challenge',
-					file: 'public/level.2/decomposition.html',
-					requester: '../level.2/decomposition.requester.js',
-					checker: '../level.2/decomposition.response.matcher.js',
+					file: 'public/challenge.decomposition/decomposition.html',
+					requester: '../challenge.decomposition/decomposition.requester.js',
+					checker: '../challenge.decomposition/decomposition.response.matcher.js',
 				}
 			]
 		},
