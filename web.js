@@ -6,12 +6,12 @@ var server = new Server(router);
 var database = new ProductionDatabase();
 server.useDatabase(database);
 
-var ovaillancourt = {
-	login: 'o_vaillancourt',
-	avatar: 'https://si0.twimg.com/profile_images/1846958904/image_bigger.jpg'
+var ericminio = {
+	login: 'ericminio',
+	avatar: 'https://si0.twimg.com/profile_images/848367249/moi_bigger.jpg'
 };
 
-database.createPlayer(ovaillancourt, function() {
+database.createPlayer(ericminio, function() {
 });
 
 server.start();
