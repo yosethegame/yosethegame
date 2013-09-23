@@ -47,6 +47,12 @@ function ProductionDatabase() {
 					file: 'public/level.3/ui.html',
 					requester: '../level.3/ui.requester.js',
 					checker: '../level.3/ui.response.matcher.js'
+				},
+				{
+					title: 'Input challenge',
+					file: 'public/level.3/input.html',
+					requester: '../level.3/ui.requester.js',
+					checker: '../level.3/input.response.matcher.js'
 				}
 			]
 		}

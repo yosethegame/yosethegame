@@ -1,6 +1,6 @@
 var matcher = require('../../public/level.3/ui.response.matcher');
 
-describe('UI response matcher,', function() {
+describe('Form response matcher,', function() {
 
 	it('knows the expected form', function() {
 		expect(matcher.expected).toEqual('A form with elements #title #invitation input#number button#go');
@@ -17,7 +17,6 @@ describe('UI response matcher,', function() {
 							'<label id="invitation">invitation</label>' +
 							'<input id="number">' +
 							'<button id="go">go</button>' +
-							'<label id="decomposition"></label>' +
 					  '</body></html>';			
 			status = matcher.computeStatus({ headers: {'content-type': contentType} }, content);
 		});
@@ -64,7 +63,6 @@ describe('UI response matcher,', function() {
 							'<label id="invitation">invitation</label>' +
 
 							'<button id="go">go</button>'
-							'<label id="decomposition"></label>' +
 					  '</body></html>';			
 			status = matcher.computeStatus({ headers: {'content-type': 'text/html' } }, content);
 		});
