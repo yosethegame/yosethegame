@@ -50,9 +50,9 @@ function ProductionDatabase() {
 				},
 				{
 					title: 'Input challenge',
-					file: 'public/level.3/input.html',
+					file: 'public/challenge.input/input.html',
 					requester: '../challenge.form/form.requester.js',
-					checker: '../level.3/input.response.matcher.js'
+					checker: '../challenge.input/input.response.matcher.js'
 				}
 			]
 		}

@@ -1,4 +1,4 @@
-var matcher = require('../../public/level.3/input.response.matcher');
+var matcher = require('../../public/challenge.input/input.response.matcher');
 
 describe('Input response matcher,', function() {
 	
