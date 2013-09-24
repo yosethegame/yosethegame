@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Power of two - YOSE</title>
+	<link href="/css/main.css" rel="stylesheet" type="text/css">
+	<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
+	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>		
+</head>
+<body id="challenge-content">
+	<p class="lead">
+		Update your server to make it accept a 
+		GET request with a positive integer parameter and make it respond
+		a JSON containing the 'too big number (>1e6)' error message
+		when the number is actually > 1e6
+	</p>
+	
+	<p>For example, receiving</p>
+
+	<pre>http://your/server/primeFactors?number=1000001</pre>
+
+	<p>You should respond</p>
+		
+	<pre>{
+    "number" : "hello",
+    "error" : "too big number (>1e6)"
+}
+	</pre>
+	
+	<legend>
+		<h2>Take it!</h2>
+	</legend>
+		
+	<section>
+		<p>
+			Your server will be called with a number > 1000000
+		</p>	
+
+	</section>
+</body>
+</html>
