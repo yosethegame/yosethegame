@@ -11,7 +11,7 @@ var logPlayerServer = require('./log.player.server');
 var responseCount;
 var output;
 
-maybeClose = function(response, result) {
+var maybeClose = function(response, result) {
 	responseCount --;
 	output.push(result);
 	if (responseCount == 0) {
@@ -20,7 +20,7 @@ maybeClose = function(response, result) {
 	}
 };
 
-tryChallenge = function(challenge, params, player, database, response) {
+var tryChallenge = function(challenge, params, player, database, response) {
 	var Requester = require(challenge.requester);
 	if (player != undefined && player.server != undefined) {
 		var requester = new Requester(player.server);
@@ -55,21 +55,28 @@ tryChallenge = function(challenge, params, player, database, response) {
 	});		
 };
 
-tryAllChallengesUntilGivenChallenge = function(incoming, response, database) {
-	output = [];
-	var params = url.parse(incoming.url, true);	
-	database.find(params.query.login, function(player) {
-		var level = thisPlayer.currentLevel(player, database);
-		var challengesToTry = [];
+var allChallengesToTry = function(player, database) {
+	var challengesToTry = [];
 
+	array.forEach(database.levels, function(level) {
 		array.forEach(level.challenges, function(challenge) {
 			if (thisPlayer.hasTheGivenChallengeInPortfolio(challenge.title, player)) {
 				challengesToTry.push(challenge);
 			}
 		});
-		challengesToTry.push(array.firstItemIn(level.challenges, function(challenge) {
-			return !thisPlayer.hasTheGivenChallengeInPortfolio(challenge.title, player);
-		}));
+	})
+	var level = thisPlayer.currentLevel(player, database);
+	challengesToTry.push(array.firstItemIn(level.challenges, function(challenge) {
+		return !thisPlayer.hasTheGivenChallengeInPortfolio(challenge.title, player);
+	}));
+	return challengesToTry;
+};
+
+var tryAllChallengesUntilGivenChallenge = function(incoming, response, database) {
+	output = [];
+	var params = url.parse(incoming.url, true);	
+	database.find(params.query.login, function(player) {
+		var challengesToTry = allChallengesToTry(player, database);
 		responseCount = challengesToTry.length;
 		array.forEach(challengesToTry, function(challenge) {
 			tryChallenge(challenge, params, player, database, response);		
@@ -78,4 +85,5 @@ tryAllChallengesUntilGivenChallenge = function(incoming, response, database) {
 };
 
 module.exports = tryAllChallengesUntilGivenChallenge;
+module.exports.allChallengesToTry = allChallengesToTry;
 

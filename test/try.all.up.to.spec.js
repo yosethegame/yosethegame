@@ -8,42 +8,73 @@ describe("Trying to pass challenges", function() {
 
 	var server;
 	var database;
+	var annessou;
+	var bilou;
+	var clairette;
+	var ericminio;
+
+	var challenge11;
+	var challenge12;
+	var challenge21;
+	var challenge22;
 
 	beforeEach(function() {
+		annessou = {
+			login: 'annessou'
+		};
+		bilou = {
+			login: 'bilou',
+			server: 'guiguilove',
+			portfolio: [ { title: 'thisTitle' } ]
+		};
+		clairette = {
+			login: 'clairette',
+			server: 'http://localhost:6000',
+			portfolio: [ { title: 'thisTitle' } ]
+		};
+		ericminio = {
+			login: 'ericminio',
+			server: 'http://localhost:6000',
+			portfolio: [ { title: 'thisTitle' }, { title: 'secondTitle' } ]
+		};
+		
+		challenge11 = {
+			title: 'thisTitle',
+			file: 'thisFile',
+			checker: '../../test/support/response.always.valid',
+			requester: '../../test/support/empty.request',
+		};
+		challenge12 = {
+			title: 'secondTitle',
+			file: 'secondFile',
+			checker: '../../test/support/response.always.valid',
+			requester: '../../test/support/empty.request',
+		};
+		challenge21 = {
+			title: 'challenge 2.1',
+			file: 'thisFile',
+			checker: '../../test/support/response.always.valid',
+			requester: '../../test/support/empty.request',
+		};
+		challenge22 = {
+			title: 'challenge 2.2',
+			file: 'secondFile',
+			checker: '../../test/support/response.always.valid',
+			requester: '../../test/support/empty.request',
+		};
+		
 		database = new InMemoryDatabase();
-		database.players = [
-			{
-				login: 'annessou'
-			},
-			{
-				login: 'bilou',
-				server: 'guiguilove',
-				portfolio: [ { title: 'thisTitle' } ]
-			},
-			{
-				login: 'clairette',
-				server: 'http://localhost:6000',
-				portfolio: [ { title: 'thisTitle' } ]
-			}
-		];
+		database.players = [ annessou, bilou, clairette, ericminio ];
 		database.levels = [
 			{
 				number: 1,
 				name: 'level 1',
-				challenges: [
-					{
-						title: 'thisTitle',
-						file: 'thisFile',
-						checker: '../../test/support/response.always.valid',
-						requester: '../../test/support/empty.request',
-					},
-					{
-						title: 'secondTitle',
-						file: 'secondFile',
-						checker: '../../test/support/response.always.valid',
-						requester: '../../test/support/empty.request',
-					}
-				]
+				challenges: [ challenge11, challenge12 ]
+			},
+			{
+				number: 2,
+				name: 'level 2',
+				challenges: [ challenge21, challenge22 ]
 			}
 		];
 		server = require('http').createServer(function(incoming, response) {
@@ -248,6 +279,69 @@ describe("Trying to pass challenges", function() {
 				});
 			});			
 		});
+	});
+	
+	describe('Challenges to try:', function() {
+	
+		var challenges;
+		
+		describe('When the player is a new player,', function() {
+
+			beforeEach(function() {
+				challenges = tryAll.allChallengesToTry(annessou, database);				
+			});
+			
+			it('has just one challenge to try', function() {
+				expect(challenges.length).toEqual(1);				
+			});
+			
+			it('is the first challenge', function() {
+				expect(challenges[0]).toEqual(challenge11);
+			});
+		});
+		
+		describe('When the player has already done the first challenge,', function() {
+			
+			beforeEach(function() {
+				challenges = tryAll.allChallengesToTry(bilou, database);				
+			});
+			
+			it('must try two challenges', function() {
+				expect(challenges.length).toEqual(2);				
+			});
+			
+			it('must try the first challenge', function() {
+				expect(challenges[0]).toEqual(challenge11);
+			});
+			
+			it('must try the second challenge', function() {
+				expect(challenges[1]).toEqual(challenge12);
+			});
+		});
+		
+		describe('When the player has reached the level 2', function() {
+			
+			beforeEach(function() {
+				challenges = tryAll.allChallengesToTry(ericminio, database);				
+			});
+			
+			it('has three challenges to try', function() {
+				expect(challenges.length).toEqual(3);				
+			});
+			
+			it('must try the first challenge', function() {
+				expect(challenges[0]).toEqual(challenge11);
+			});
+			
+			it('must try the second challenge', function() {
+				expect(challenges[1]).toEqual(challenge12);
+			});
+
+			it('must try the third challenge', function() {
+				expect(challenges[2]).toEqual(challenge21);
+			});
+		});
+
 	});
 });
 
