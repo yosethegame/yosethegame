@@ -141,6 +141,12 @@ describe('Dashboard >', function() {
 				expect(page('#restart-game').attr('class')).toContain('hidden');
 			});
 		});
+		
+		describe('The help link', function() {
+			it('targets google group', function() {
+				expect(page('a#help').attr('href')).toEqual('https://groups.google.com/forum/?hl=fr#!forum/yosethegame');
+			});			
+		});
 	});
 	
 	describe('info/player toggle,', function() {
