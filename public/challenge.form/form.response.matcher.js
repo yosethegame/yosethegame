@@ -22,7 +22,7 @@ module.exports = {
 	computeStatus: function(remoteResponse, content) {
 		if (remoteResponse == undefined 
 			|| remoteResponse.headers == undefined 
-			|| remoteResponse.headers['content-type'] != 'text/html') {
+			|| remoteResponse.headers['content-type'].indexOf('text/html') == -1) {
 			return {
 				code: 501,
 				expected: { 'content-type': 'text/html' },

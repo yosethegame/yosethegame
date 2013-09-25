@@ -33,6 +33,11 @@ describe('Form response matcher,', function() {
 			expect(status.got).toEqual(matcher.expected);
 		});
 		
+		it('support extra info in content-type like the charset', function() {
+			status = matcher.computeStatus({ headers: {'content-type': contentType + '; charset=utf-8'} }, content);
+			expect(status.code).toEqual(200);
+		});
+		
 	});	
 	
 	describe('When remote server responds with incorrect content-type', function() {
