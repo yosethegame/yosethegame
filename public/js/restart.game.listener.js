@@ -8,7 +8,7 @@ Restart.prototype.game = function() {
 };
 
 Restart.prototype.reload = function() {
-	window.location.reload();
+	window.location.reload(true);
 };
 
 var module = module || {};
