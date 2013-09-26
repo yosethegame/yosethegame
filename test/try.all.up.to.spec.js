@@ -35,7 +35,7 @@ describe("Trying to pass challenges", function() {
 		ericminio = {
 			login: 'ericminio',
 			server: 'http://localhost:6000',
-			portfolio: [ { title: 'thisTitle' }, { title: 'secondTitle' } ]
+			portfolio: [ { title: 'thisTitle' }, { title: 'secondTitle' }, { title: 'challenge 2.1' } ]
 		};
 		
 		challenge11 = {
@@ -319,14 +319,14 @@ describe("Trying to pass challenges", function() {
 			});
 		});
 		
-		describe('When the player has reached the level 2', function() {
+		describe('When the player has reached the level 2 and challenge 2.2', function() {
 			
 			beforeEach(function() {
 				challenges = tryAll.allChallengesToTry(ericminio, database);				
 			});
 			
-			it('has three challenges to try', function() {
-				expect(challenges.length).toEqual(3);				
+			it('has four challenges to try', function() {
+				expect(challenges.length).toEqual(4);				
 			});
 			
 			it('must try the first challenge', function() {
@@ -339,6 +339,10 @@ describe("Trying to pass challenges", function() {
 
 			it('must try the third challenge', function() {
 				expect(challenges[2]).toEqual(challenge21);
+			});
+
+			it('must try the fourth challenge', function() {
+				expect(challenges[3]).toEqual(challenge22);
 			});
 		});
 
