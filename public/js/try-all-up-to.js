@@ -7,15 +7,33 @@ var httperror 		= require('./utils/http.errors.utils');
 var thisPlayer 		= require('./utils/player.utils');
 var logSuccess 		= require('./log.success');
 var logPlayerServer = require('./log.player.server');
+var Sorter			= require('./utils/challenges.utils');
 
 var responseCount;
 var output;
 
-var maybeClose = function(response, result) {
+var sortOutput = function(results, database) {
+	var items = [];
+	array.forEach(results, function(result) {
+		items.push({
+			item: result,
+			database: database
+		});
+	});
+	var sorter = new Sorter();	
+	items.sort(sorter.sort);
+	var sorted = [];
+	array.forEach(items, function(item) {
+		sorted.push(item.item);
+	});
+	return sorted;
+};
+
+var maybeClose = function(response, result, database) {
 	responseCount --;
 	output.push(result);
 	if (responseCount == 0) {
-		response.write(JSON.stringify(output))
+		response.write(JSON.stringify(sortOutput(output, database)))
 		response.end();
 	}
 };
@@ -50,7 +68,7 @@ var tryChallenge = function(challenge, params, player, database, response) {
 				code: status.code,
 				expected: status.expected,
 				got: status.got
-			});
+			}, database);
 		});
 	});		
 };
@@ -86,4 +104,5 @@ var tryAllChallengesUntilGivenChallenge = function(incoming, response, database)
 
 module.exports = tryAllChallengesUntilGivenChallenge;
 module.exports.allChallengesToTry = allChallengesToTry;
+module.exports.sortOutput = sortOutput;
 

@@ -25,27 +25,27 @@ describe("Trying to pass challenges", function() {
 		bilou = {
 			login: 'bilou',
 			server: 'guiguilove',
-			portfolio: [ { title: 'thisTitle' } ]
+			portfolio: [ { title: 'challenge 1.1' } ]
 		};
 		clairette = {
 			login: 'clairette',
 			server: 'http://localhost:6000',
-			portfolio: [ { title: 'thisTitle' } ]
+			portfolio: [ { title: 'challenge 1.1' } ]
 		};
 		ericminio = {
 			login: 'ericminio',
 			server: 'http://localhost:6000',
-			portfolio: [ { title: 'thisTitle' }, { title: 'secondTitle' }, { title: 'challenge 2.1' } ]
+			portfolio: [ { title: 'challenge 1.1' }, { title: 'challenge 1.2' }, { title: 'challenge 2.1' } ]
 		};
 		
 		challenge11 = {
-			title: 'thisTitle',
+			title: 'challenge 1.1',
 			file: 'thisFile',
 			checker: '../../test/support/response.always.valid',
 			requester: '../../test/support/empty.request',
 		};
 		challenge12 = {
-			title: 'secondTitle',
+			title: 'challenge 1.2',
 			file: 'secondFile',
 			checker: '../../test/support/response.always.valid',
 			requester: '../../test/support/empty.request',
@@ -102,7 +102,7 @@ describe("Trying to pass challenges", function() {
 			request("http://localhost:5000/try-all-up-to?login=annessou&server=http://localhost:6000", function(error, response, body) {
 				expect(body).toEqual(JSON.stringify([
 						{
-							challenge: 'thisTitle',
+							challenge: 'challenge 1.1',
 							code: 404,
 							expected: 'a correct expected value',
 							got: 'undefined'
@@ -116,7 +116,7 @@ describe("Trying to pass challenges", function() {
 			request("http://localhost:5000/try-all-up-to?login=annessou", function(error, response, body) {
 				expect(body).toEqual(JSON.stringify([
 						{
-							challenge: 'thisTitle',
+							challenge: 'challenge 1.1',
 							code: 404,
 							expected: 'a correct expected value',
 							got: 'undefined'
@@ -167,7 +167,7 @@ describe("Trying to pass challenges", function() {
 			request("http://localhost:5000/try-all-up-to?login=annessou&server=http://localhost:6000", function(error, response, body) {
 				expect(body).toEqual(JSON.stringify([
 						{
-							challenge: 'thisTitle',
+							challenge: 'challenge 1.1',
 							code: 200,
 							expected: 'a correct expected value',
 							got: 'a correct actual value'
@@ -254,13 +254,13 @@ describe("Trying to pass challenges", function() {
 			request("http://localhost:5000/try-all-up-to?login=clairette", function(error, response, body) {
 				expect(body).toEqual(JSON.stringify([
 						{
-							challenge: 'thisTitle',
+							challenge: 'challenge 1.1',
 							code: 200,
 							expected: 'a correct expected value',
 							got: 'a correct actual value'
 						},
 						{
-							challenge: 'secondTitle',
+							challenge: 'challenge 1.2',
 							code: 200,
 							expected: 'a correct expected value',
 							got: 'a correct actual value'
@@ -274,7 +274,7 @@ describe("Trying to pass challenges", function() {
 			request("http://localhost:5000/try-all-up-to?login=clairette", function(error, response, body) {
 				database.find('clairette', function(player) {
 					expect(player.portfolio.length).toEqual(2);
-					expect(player.portfolio[1].title).toEqual('secondTitle');
+					expect(player.portfolio[1].title).toEqual('challenge 1.2');
 					done();
 				});
 			});			
@@ -347,5 +347,31 @@ describe("Trying to pass challenges", function() {
 		});
 
 	});
+	
+	describe('Sort output', function() {
+		
+		it('does nothing when two challenges are in correct order', function() {		
+			var output = [ { challenge: 'challenge 1.1' }, { challenge: 'challenge 1.2' } ];
+			var sorted = tryAll.sortOutput(output, database);
+			
+			expect(sorted[0].challenge).toEqual('challenge 1.1');
+		});
+		
+		it('invert two challenges in incorrect order', function() {
+			var output = [ { challenge: 'challenge 1.2' }, { challenge: 'challenge 1.1' } ];
+			var sorted = tryAll.sortOutput(output, database);
+			
+			expect(sorted[0].challenge).toEqual('challenge 1.1');
+		});
+		
+		it('orders correctly three challenged', function() {
+			var output = [ { challenge: 'challenge 2.2' }, { challenge: 'challenge 1.2' }, { challenge: 'challenge 1.1' } ];
+			var sorted = tryAll.sortOutput(output, database);
+			
+			expect(sorted[0].challenge).toEqual('challenge 1.1');
+			expect(sorted[1].challenge).toEqual('challenge 1.2');
+		});
+		
+	})
 });
 
