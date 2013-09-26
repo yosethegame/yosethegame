@@ -61,6 +61,18 @@ function ProductionDatabase() {
 					checker: '../challenge.guard.big.number/big.number.response.matcher.js',
 				}
 			]
+		},
+		{
+			number: 4,
+			name: 'Protection',
+			challenges: [
+				{
+					title: 'Resist big number',
+					file: 'public/challenge.resist.big.number/resist.big.number.html',
+					requester: '../challenge.form/form.requester.js',
+					checker: '../challenge.resist.big.number/resist.big.number.response.matcher.js',
+				}
+			]
 		}
 	];
 };

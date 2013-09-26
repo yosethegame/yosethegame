@@ -1,17 +1,17 @@
-var matcher = require('../../public/challenge.input/input.response.matcher');
+var matcher = require('../../public/challenge.resist.big.number/resist.big.number.response.matcher');
 
-describe('Input response matcher,', function() {
+describe('Resist big number matcher', function() {
 	
 	it('has a number chooser', function() {
-		expect(matcher.numberChooser.getNumber()).toBeGreaterThan(1);
+		expect(matcher.numberChooser.getNumber()).toBeGreaterThan(1e6);
 	});
 	
 	it('knows the expected answer', function() {
-		expect(matcher.expectedResult(42)).toEqual('42 = 2 x 3 x 7');		
+		expect(matcher.expectedResult(4200000)).toEqual('too big number (>1e6)');		
 	});
 	
 	var remote;
-
+	
 	var form = '<html><body>' +
 					'<label id="title">title</label>' +
 					'<label id="invitation">invitation</label>' +
@@ -23,13 +23,13 @@ describe('Input response matcher,', function() {
 		
 		beforeEach(function() {
 			matcher.numberChooser = { getNumber: function() { return 42; } }
-			var decomposition = '<html><body>' + 
-							'<label id="result">42 = 2 x 3 x 7</label>' +
+			var error = '<html><body>' + 
+							'<label id="result">too big number (>1e6)</label>' +
 			  			'</body></html>';			
 			remote = require('http').createServer(
 				function (request, response) {
 					if (request.url == '/go') {
-						response.write(decomposition);
+						response.write(error);
 					} else {
 						response.write(form);
 					}
@@ -51,14 +51,14 @@ describe('Input response matcher,', function() {
 		
 		it('sets expected', function(done) {
 			matcher.validate('http://localhost:6000/primeFactors/ui', {}, {}, function(status) {
-				expect(status.expected).toEqual("#result containing '42 = 2 x 3 x 7'");
+				expect(status.expected).toEqual("#result containing 'too big number (>1e6)'");
 				done();
 			});
 		});
 		
 		it('sets actual', function(done) {
 			matcher.validate('http://localhost:6000/primeFactors/ui', {}, {}, function(status) {
-				expect(status.got).toEqual("#result containing '42 = 2 x 3 x 7'");
+				expect(status.got).toEqual("#result containing 'too big number (>1e6)'");
 				done();
 			});
 		});
@@ -89,7 +89,7 @@ describe('Input response matcher,', function() {
 		
 		it('sets expected', function(done) {
 			matcher.validate('http://localhost:6000/primeFactors/ui', {}, {}, function(status) {
-				expect(status.expected).toEqual("#result containing '42 = 2 x 3 x 7'");
+				expect(status.expected).toEqual("#result containing 'too big number (>1e6)'");
 				done();
 			});
 		});
@@ -103,17 +103,16 @@ describe('Input response matcher,', function() {
 		
 	});
 	
-	describe('When server does not respond correct decomposition,', function () {
+	describe('When server does not respond the correct error message,', function () {
 		
 		beforeEach(function() {
-			matcher.numberChooser = { getNumber: function() { return 42; } }
-			var decomposition = '<html><body>' + 
-							'<label id="result">42 = 2 x 3 x 7 x 1000</label>' +
+			var content = '<html><body>' + 
+							'<label id="result">any</label>' +
 			  			'</body></html>';			
 			remote = require('http').createServer(
 				function (request, response) {
 					if (request.url == '/go') {
-						response.write(decomposition);
+						response.write(content);
 					} else {
 						response.write(form);
 					}
@@ -135,18 +134,17 @@ describe('Input response matcher,', function() {
 		
 		it('sets expected', function(done) {
 			matcher.validate('http://localhost:6000/primeFactors/ui', {}, {}, function(status) {
-				expect(status.expected).toEqual("#result containing '42 = 2 x 3 x 7'");
+				expect(status.expected).toEqual("#result containing 'too big number (>1e6)'");
 				done();
 			});
 		});
 		
 		it('sets actual', function(done) {
 			matcher.validate('http://localhost:6000/primeFactors/ui', {}, {}, function(status) {
-				expect(status.got).toEqual("#result containing '42 = 2 x 3 x 7 x 1000'");
+				expect(status.got).toEqual("#result containing 'any'");
 				done();
 			});
 		});
 		
 	});
-	
 });
