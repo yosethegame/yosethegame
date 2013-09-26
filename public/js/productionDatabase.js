@@ -71,6 +71,12 @@ function ProductionDatabase() {
 					file: 'public/challenge.resist.big.number/resist.big.number.html',
 					requester: '../challenge.form/form.requester.js',
 					checker: '../challenge.resist.big.number/resist.big.number.response.matcher.js',
+				},
+				{
+					title: 'Resist strings',
+					file: 'public/challenge.resist.strings/resist.strings.html',
+					requester: '../challenge.form/form.requester.js',
+					checker: '../challenge.resist.strings/resist.strings.response.matcher.js',
 				}
 			]
 		}
