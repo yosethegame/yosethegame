@@ -1,4 +1,4 @@
-var ProductionDatabase = require('../public/js/productionDatabase');
+var ProductionDatabase = require('../public/js/production.database');
 var fs = require('fs');
 var array = require('../public/js/utils/array.utils');
 

@@ -1,6 +1,6 @@
 var router = require('./public/js/router');
 var Server = require('./public/js/server');
-var ProductionDatabase = require('./public/js/productionDatabase');
+var ProductionDatabase = require('./public/js/production.database');
 
 var server = new Server(router);
 var database = new ProductionDatabase();
