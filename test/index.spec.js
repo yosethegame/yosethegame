@@ -48,6 +48,10 @@ describe("index.html", function() {
 				it('contains an empty placeholder for the avatar', function() {
 					expect(page('#players .player img').attr('src')).toEqual('');
 				});
+				
+				it('contains an empty placeholder for the level', function() {
+					expect(page('#players .player .level').text()).toEqual('Level');
+				});
 			});
 			
 		});

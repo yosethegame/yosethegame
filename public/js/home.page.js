@@ -7,7 +7,8 @@ var extractPlayerTemplateIn = function(page) {
 };
 
 var buildLine = function(template, player) {
-	return template.replace('<img src=""', '<img src="' + player.avatar + '"');
+	return template.replace('<img src=""', '<img src="' + player.avatar + '"')
+				   .replace('class="level">Level<', 'class="level">Level 1<');
 };
 
 var buildPlayerList = function(page, players) {
