@@ -43,6 +43,13 @@ describe("index.html", function() {
 				expect(page('#players .player').length).toEqual(1);
 			});
 			
+			describe('line template', function() {
+				
+				it('contains an empty placeholder for the avatar', function() {
+					expect(page('#players .player img').attr('src')).toEqual('');
+				});
+			});
+			
 		});
 	});
 		

@@ -52,4 +52,15 @@ PostgreSql.prototype.savePlayer = function(player, callback) {
 	});
 };
 
+PostgreSql.prototype.allPlayers = function(callback) {
+	client = new pg.Client(this.url);
+	client.connect(function(err) {
+		var sql = "select login, json from players";
+		client.query(sql, function(err, result) {
+			client.end();
+			callback(result.rows);
+		});
+	});
+};
+
 module.exports = PostgreSql;

@@ -15,6 +15,10 @@ InMemoryDatabase.prototype.find = function(login, callback) {
 	}));
 };
 
+InMemoryDatabase.prototype.allPlayers = function(callback) {
+	callback(this.players);
+};
+
 InMemoryDatabase.prototype.savePlayer = function (player, callback) {
 	callback(player);
 };

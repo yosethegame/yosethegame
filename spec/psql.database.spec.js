@@ -6,13 +6,14 @@ describe('PostgreSql database', function() {
 	var url = process.env.DATABASE_URL;
 	var database = new PSql(url);
 	var client;
-	
-	var annessou = { 
-		login: 'asm',
-		name: 'annessou'
-	};
+	var annessou;
 	
 	beforeEach(function(done) {
+		annessou = { 
+			login: 'asm',
+			name: 'annessou'
+		};
+
 		client = new pg.Client(url);
 		client.connect(function(err) {
 			client.query('drop table players', function(err, result) {
@@ -103,6 +104,28 @@ describe('PostgreSql database', function() {
 			expect(player).toEqual(undefined);
 			done();
 		});				
+	});
+	
+	describe('Retrieving all players', function() {
+		
+		it('is possible', function(done) {
+			database.createPlayer(annessou, function() {
+				database.allPlayers(function(players) {
+					expect(players.length).toEqual(1);
+					done();
+				});
+			});
+		});
+
+		it('returns full players', function(done) {
+			annessou.field = 'any';
+			database.createPlayer(annessou, function() {
+				database.allPlayers(function(players) {
+					expect(players[0].field).toEqual('any');
+					done();
+				});
+			});
+		});
 	});
 	
 });

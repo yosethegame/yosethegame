@@ -1,23 +1,32 @@
-var fs 		  	= require('fs');
-var cheerio   	= require('cheerio');
+var fs 		= require('fs');
+var cheerio = require('cheerio');
+var array	= require('./utils/array.utils');
 
 var extractPlayerTemplateIn = function(page) {
 	return page.html('#players .player');
 };
 
-var buildPlayerList = function(page, database) {
-	return page.html();
+var buildPlayerList = function(page, database, callback) {
+	var template = extractPlayerTemplateIn(page);
+	database.allPlayers(function(players) {
+		var list = '';
+		array.forEach(players, function(player) {
+			list += template.replace('<img src=""', '<img src="' + player.avatar + '"');
+		});
+		callback(list);
+	});
 };
 
-index = function(request, response, database) {
+var index = function(request, response, database) {
 	var html = fs.readFileSync('./public/index.html').toString();
 
 	var page = cheerio.load(html);
-	var list = this.buildPlayerList(page);
-	html = html.replace(this.extractPlayerTemplateIn(page), list);
+	buildPlayerList(page, database, function(list) {
+		html = html.replace(extractPlayerTemplateIn(page), list);
 
-	response.write(html);
-	response.end();
+		response.write(html);
+		response.end();		
+	});
 }
 
 module.exports = index;
