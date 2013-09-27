@@ -77,6 +77,12 @@ function ProductionDatabase() {
 					file: 'public/challenge.resist.strings/resist.strings.html',
 					requester: '../challenge.form/form.requester.js',
 					checker: '../challenge.resist.strings/resist.strings.response.matcher.js',
+				},
+				{
+					title: 'Resist negative number',
+					file: 'public/challenge.resist.negative/resist.negative.html',
+					requester: '../challenge.form/form.requester.js',
+					checker: '../challenge.resist.negative/resist.negative.response.matcher.js',
 				}
 			]
 		}
