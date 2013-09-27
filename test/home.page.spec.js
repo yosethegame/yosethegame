@@ -11,31 +11,41 @@ describe('Home page building', function() {
 		expect(home.extractPlayerTemplateIn(page)).toEqual('<li class="player"></li>');
 	});
 	
-	it('inserts two lines in player list when there are 2 players', function(done) {
-		var database = new InMemoryDatabase().withPlayers([
+	it('bulds two lines when there are 2 players', function() {
+		var players = [
 				{ login: 'me' },
 				{ login: 'you' }
-			]);
+			];
 		var html = '<ul id="players"><li class="player"></li></ul>';
-		var page = cheerio.load(html);
+		var page = cheerio.load(html);		
+		var list = home.buildPlayerList(page, players);
 		
-		home.buildPlayerList(page, database, function(list) {
-			expect(cheerio.load(list)('.player').length).toEqual(2);
-			done();
-		});
+		expect(cheerio.load(list)('.player').length).toEqual(2);
+	});
+	
+	it('replaces the template by the player list', function() {
+		var players = [
+				{ login: 'me' },
+				{ login: 'you' }
+			];
+		var html = '<ul id="players"><li class="player"></li></ul>';
+		var page = cheerio.load(html);		
+		var output = home.insertPlayerList(page, players);
+
+		expect(cheerio.load(output)('#players .player').length).toEqual(2);
 	});
 	
 	describe('player line', function() {
 	
-		var database = new InMemoryDatabase().withPlayers([ { login: 'me', avatar: 'me.png' }, ]);
-		var html = '<ul id="players"><li class="player"><img src=""></li></ul>';
-		var page = cheerio.load(html);
+		var template = '<li class="player"><img src=""></li>';
+		var line;
+		
+		beforeEach(function() {
+			line = home.buildLine(template, { avatar: 'me.png' } );
+		});
 	
-		it('displays the avatar', function(done) {
-			home.buildPlayerList(page, database, function(list) {
-				expect(cheerio.load(list)('.player img')[0].attribs.src).toEqual('me.png');
-				done();
-			});
+		it('contains the avatar', function() {
+			expect(cheerio.load(line)('img')[0].attribs.src).toEqual('me.png');
 		});
 		
 	});

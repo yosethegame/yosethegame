@@ -22,7 +22,7 @@ describe("index.html", function() {
 		});
 
 		it("has a placeholder for a welcome message", function() {
-			expect(page('#welcome').text()).toBe('coming soon :)');
+			expect(page('#welcome').length).toEqual(1);
 		});		
 
 		it("displays a 'fork me on github.com' banner", function() {

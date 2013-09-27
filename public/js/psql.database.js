@@ -1,5 +1,6 @@
-var pg = require('pg');
-var $ = require('jquery');
+var pg 		= require('pg');
+var $ 		= require('jquery');
+var array 	= require('./utils/array.utils');
 
 function PostgreSql(url) {
 	this.url = url;	
@@ -58,7 +59,11 @@ PostgreSql.prototype.allPlayers = function(callback) {
 		var sql = "select login, json from players";
 		client.query(sql, function(err, result) {
 			client.end();
-			callback(result.rows);
+			var players = [];
+			array.forEach(result.rows, function(row) {
+				players.push($.parseJSON(row.json))
+			});
+			callback(players);
 		});
 	});
 };

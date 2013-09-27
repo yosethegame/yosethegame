@@ -6,24 +6,32 @@ var extractPlayerTemplateIn = function(page) {
 	return page.html('#players .player');
 };
 
-var buildPlayerList = function(page, database, callback) {
+var buildLine = function(template, player) {
+	return template.replace('<img src=""', '<img src="' + player.avatar + '"');
+};
+
+var buildPlayerList = function(page, players) {
 	var template = extractPlayerTemplateIn(page);
-	database.allPlayers(function(players) {
-		var list = '';
-		array.forEach(players, function(player) {
-			list += template.replace('<img src=""', '<img src="' + player.avatar + '"');
-		});
-		callback(list);
+	var list = '';
+	array.forEach(players, function(player) {
+		list += buildLine(template, player);
 	});
+	return list;
+};
+
+var insertPlayerList = function(page, players) {
+	var list = buildPlayerList(page, players);
+	var template = extractPlayerTemplateIn(page);
+	var html = page.html();
+	return html.replace(template, list);
 };
 
 var index = function(request, response, database) {
 	var html = fs.readFileSync('./public/index.html').toString();
 
 	var page = cheerio.load(html);
-	buildPlayerList(page, database, function(list) {
-		html = html.replace(extractPlayerTemplateIn(page), list);
-
+	database.allPlayers(function(players) {
+		html = insertPlayerList(page, players);
 		response.write(html);
 		response.end();		
 	});
@@ -32,3 +40,5 @@ var index = function(request, response, database) {
 module.exports = index;
 module.exports.extractPlayerTemplateIn = extractPlayerTemplateIn;
 module.exports.buildPlayerList = buildPlayerList;
+module.exports.insertPlayerList = insertPlayerList;
+module.exports.buildLine = buildLine;
