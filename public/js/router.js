@@ -22,11 +22,7 @@ module.exports = {
 		{
 			prefix: '/restart-game',
 			target: require('./restart.game')
-		},
-        {
-        	prefix: '',
-         	target: servecontent('public')
-        }
+		}
 	],
     
 	endPointOf: function(request) {
@@ -35,6 +31,10 @@ module.exports = {
             	return this.routes[i].target;
 	        }
 	    }
+		if (request.url == '/') {
+			return require('./home.page');
+		}
+		return servecontent('public');
 	}
 };
 

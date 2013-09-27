@@ -27,6 +27,10 @@ describe('Router', function() {
 		it('maps restart-game request', function() {
 			expect(router.endPointOf({ url: '/restart-game' })).toBe(require('../public/js/restart.game'));
 		});
+
+		it('maps home page request', function() {
+			expect(router.endPointOf({ url: '/' })).toBe(require('../public/js/home.page'));
+		});
 	});
 	
 	describe('Compatibility with http module of node.js:', function() {
@@ -47,7 +51,7 @@ describe('Router', function() {
 			var called = false;
 			router.routes = [ 
 				{ 
-					prefix: '', 
+					prefix: '/gate', 
 					target: function(request, response) { 
 						called = true; 
 						response.end();
@@ -55,7 +59,7 @@ describe('Router', function() {
 				} 
 			];
 
-			require('request')("http://localhost:5000", function(error, response, body) {
+			require('request')("http://localhost:5000/gate", function(error, response, body) {
 				expect(called).toBe(true);
 				done();
 			});
