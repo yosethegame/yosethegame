@@ -147,6 +147,12 @@ describe('Dashboard >', function() {
 				expect(page('a#help').attr('href')).toEqual('https://groups.google.com/forum/?hl=fr#!forum/yosethegame');
 			});			
 		});
+		
+		describe('The placeholder for the score', function() {
+			it('exists', function() {
+				expect(page('#score').length).toEqual(1);
+			});
+		});
 	});
 	
 	describe('info/player toggle,', function() {
@@ -438,6 +444,27 @@ describe('Dashboard >', function() {
 			expect(page('#restart-game').attr('class')).toContain('visible');
 		});
 
+	});
+	
+	describe('Score', function() {
+	
+		beforeEach(function() {	
+			database.players = [
+				{ 
+					login: 'ericminio', 
+					score: 10,
+					portfolio: [ {  title: 'challenge 1.1' } ]
+				}
+			];
+		});
+
+		it('is displayed', function() {
+			dashboard({ url: '/players/ericminio' }, response, database);
+			page = cheerio.load(response.html);
+			
+			expect(page('#score').text()).toEqual('10');
+		});
+		
 	});
 	
 });

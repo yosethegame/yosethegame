@@ -35,4 +35,8 @@ module.exports = {
 		});
 		return found;
 	},
+	
+	scoreOf: function(player) {
+		return player.score ? player.score : 0;
+	}
 }

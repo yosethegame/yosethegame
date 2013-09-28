@@ -450,4 +450,34 @@ describe("TryListener: ", function() {
 			});
 		});
 	});
+	
+	describe('Score update', function() {
+	
+		beforeEach(function() {
+			$('body').append('<span id="score">10</span>');
+		});
+		
+		afterEach(function() {
+			$('#score').remove();
+		});
+	
+		describe('When the player passes the challenge,', function() {
+			
+			beforeEach(function() {
+				listener.displayResults(JSON.stringify([
+					{
+						challenge: 'this-challenge',
+						code: 200,
+						expected: { question: 'any', answer: 42 },
+						got: { flag: true }
+					}
+				]));
+			});
+			
+			it('increases the score by 10', function() {
+				expect($('#score').text()).toEqual('20');
+			});
+		});
+		
+	});
 });

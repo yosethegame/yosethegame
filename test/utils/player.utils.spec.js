@@ -111,4 +111,16 @@ describe('Player utils:', function() {
 			expect(thisPlayer.nextChallenge(player, database)).toBe(undefined);
 		});
 	});
+	
+	describe('Current score', function() {
+	
+		it('is zero when score is not defined', function() {
+			expect(thisPlayer.scoreOf({})).toEqual(0);
+		});
+		
+		it('is the score of the player if defined', function() {
+			expect(thisPlayer.scoreOf({ score: 420 })).toEqual(420);
+		});
+		
+	});
 });

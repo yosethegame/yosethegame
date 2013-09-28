@@ -9,7 +9,8 @@ require('./utils/string-extensions');
 togglePlayerSection = function(html, player) {
 	return html.hide('#info').show('#player')
 			   .replace('avatar-of-player', player.avatar)
-			   .replace('login-of-player', player.login);
+			   .replace('login-of-player', player.login)
+			   .replace('score-of-player', thePlayer.scoreOf(player));
 };
 
 buildAchivementList = function(template, player, level) {
