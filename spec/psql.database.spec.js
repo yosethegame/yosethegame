@@ -27,6 +27,12 @@ describe('PostgreSql database', function() {
 		
 	});
 	
+	afterEach(function(done) {
+		database.deletePlayer(annessou, function() {
+			done();
+		})
+	});
+
 	it('uses process.env.DATABASE_URL', function() {
 		expect(url).toEqual(process.env.DATABASE_URL);
 	});
@@ -124,6 +130,17 @@ describe('PostgreSql database', function() {
 					expect(players[0].field).toEqual('any');
 					done();
 				});
+			});
+		});
+	});
+	
+	it('can delete a player', function(done) {
+		database.createPlayer(annessou, function() {
+			database.deletePlayer(annessou, function() {
+				database.find('asm', function(player) {
+					expect(player).toEqual(undefined);
+					done();
+				});								
 			});
 		});
 	});

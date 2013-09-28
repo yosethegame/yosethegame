@@ -48,12 +48,19 @@ describe('Home page building', function() {
 							'<ul>' +
 								'<li><img src="star"></li>' +
 							'</ul>' +
+							'<span class="hall-of-fame-score">1234567</span>' +
 					   '</li>';
 		
 		it('contains the avatar', function() {
 			var line = home.buildLine(template, { avatar: 'me.png' }, database );
 
 			expect(cheerio.load(line)('.player img.avatar')[0].attribs.src).toEqual('me.png');
+		});
+		
+		it('contains the score', function() {
+			var line = home.buildLine(template, { avatar: 'me.png', score: 420 }, database );
+
+			expect(cheerio.load(line)('.player .hall-of-fame-score').text()).toEqual('000420');
 		});
 		
 		describe('Level', function() {

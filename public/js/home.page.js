@@ -2,6 +2,7 @@ var fs 			= require('fs');
 var cheerio 	= require('cheerio');
 var array		= require('./utils/array.utils');
 var thePlayer 	= require('./utils/player.utils');
+var renderScore	= require('./utils/render.score');
 
 var extractPlayerTemplateIn = function(page) {
 	return page.html('#players .player');
@@ -20,6 +21,7 @@ var buildLine = function(template, player, database) {
 	var line = template.replace('<img src=""', '<img src="' + player.avatar + '"')
 				   	   .replace('class="level">Level<', 'class="level">Level ' + level.number + ' : ' + level.name + '<')
 					   .replace('<li><img src="star"></li>', stars)
+					   .replace('1234567', renderScore(player.score))
 				;
 	return line;
 };

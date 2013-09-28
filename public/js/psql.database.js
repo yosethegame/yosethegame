@@ -68,4 +68,15 @@ PostgreSql.prototype.allPlayers = function(callback) {
 	});
 };
 
+PostgreSql.prototype.deletePlayer = function(player, callback) {
+	client = new pg.Client(this.url);
+	client.connect(function(err) {
+		var sql = "delete from players where login = '" + player.login + "'";
+		client.query(sql, function(err, result) {
+			client.end();
+			callback();
+		});
+	});
+};
+
 module.exports = PostgreSql;

@@ -27,8 +27,12 @@ describe("index.html", function() {
 
 		describe('player list', function() {
 			
-			it('has a title', function() {
+			it('has a title for the players column', function() {
 				expect(page('#players-title').length).toEqual(1);
+			});
+			
+			it('has a title for the score column', function() {
+				expect(page('#score-title').length).toEqual(1);
 			});
 			
 			it('exists', function() {
@@ -51,6 +55,10 @@ describe("index.html", function() {
 				
 				it('contains a placeholder for the achievements', function() {
 					expect(page('#players .player ul li img').attr('src')).toEqual('star');
+				});
+				
+				it('contains an empty placeholder for the score', function() {
+					expect(page('#players .player .hall-of-fame-score').text()).toEqual('1234567');
 				});
 			});
 			
