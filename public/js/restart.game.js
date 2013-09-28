@@ -7,6 +7,7 @@ restartgame = function(request, response, database) {
 		if (player != undefined) {
 			player.portfolio = [];
 			player.server = undefined;
+			player.score = 0;
 			database.savePlayer(player, function() {
 				response.end();
 			});

@@ -3,6 +3,7 @@ var cheerio   	= require('cheerio');
 var thePlayer 	= require('./utils/player.utils');
 var insert		= require('./utils/level.utils');
 var array		= require('./utils/array.utils');
+var renderScore	= require('./utils/render.score');
 
 require('./utils/string-extensions');
 
@@ -10,7 +11,7 @@ togglePlayerSection = function(html, player) {
 	return html.hide('#info').show('#player')
 			   .replace('avatar-of-player', player.avatar)
 			   .replace('login-of-player', player.login)
-			   .replace('score-of-player', thePlayer.scoreOf(player));
+			   .replace('score-of-player', renderScore(player.score));
 };
 
 buildAchivementList = function(template, player, level) {

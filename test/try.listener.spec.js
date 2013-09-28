@@ -475,7 +475,7 @@ describe("TryListener: ", function() {
 			});
 			
 			it('increases the score by 10', function() {
-				expect($('#score').text()).toEqual('20');
+				expect($('#score').text()).toEqual('000020');
 			});
 		});
 		

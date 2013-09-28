@@ -462,7 +462,7 @@ describe('Dashboard >', function() {
 			dashboard({ url: '/players/ericminio' }, response, database);
 			page = cheerio.load(response.html);
 			
-			expect(page('#score').text()).toEqual('10');
+			expect(page('#score').text()).toEqual('000010');
 		});
 		
 	});

@@ -1,4 +1,5 @@
-var $ = $ || require('jquery');
+var $ 			= $ || require('jquery');
+var renderScore = renderScore || require('./utils/render.score');
 
 function TryListener() {	
 };
@@ -47,7 +48,7 @@ TryListener.prototype.displayResults = function(data) {
 		$('#achievement_' + index + ' img').attr('src', '/img/star-done.png');
 		
 		var oldScore = parseInt($('#score').text());
-		$('#score').text(oldScore + 10);
+		$('#score').text(renderScore(oldScore + 10));
 	} else {
 		$('#continue').removeClass('visible').addClass('hidden');
 		$('#try').prop('disabled', false);

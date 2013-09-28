@@ -14,24 +14,40 @@
 		<label id="login" class="hidden">login-of-player</label>
 
 		<section id="sidebar">
-			<img id="avatar" class="img-circle" width="60" height="60" src="avatar-of-player">
-			<label id="score">score-of-player</label>
-			<section id="sidebar-info">
-				<p id="level" class="lead">
-					Level&nbsp;
-					<span id="level-number">42</span>
-					&nbsp;:&nbsp; 
-					<span id="level-name">Universe</span>
-				</p>
-				<ul id="achievements">
-					<li id="achievement_n"></li>
-				</ul>
-				<p>
-					<span class="hidden" id="server-of-player">server</span>
-					<a id="restart-game" class="hidden" onclick="new Restart().game()">restart game</a>
-					<a id="help" href="https://groups.google.com/forum/?hl=fr#!forum/yosethegame">help</help>
-				</p>
-			</section>
+			<table>
+				<tr valign="top">
+					<td>
+						<img id="avatar" class="img-circle" width="60" height="60" src="avatar-of-player">
+					</td>
+					<td nowrap>
+						<section id="sidebar-info">
+							<p id="level" class="lead">
+								Level&nbsp;
+								<span id="level-number">42</span>
+								&nbsp;:&nbsp; 
+								<span id="level-name">Universe</span>
+							</p>
+							<ul id="achievements">
+								<li id="achievement_n"></li>
+							</ul>
+							<p>
+								<span class="hidden" id="server-of-player">server</span>
+								<a id="restart-game" class="hidden" onclick="new Restart().game()">restart game</a>
+								<a id="help" href="https://groups.google.com/forum/?hl=fr#!forum/yosethegame">help</help>
+							</p>
+						</section>
+					</td>
+					<td>
+						<ul id="score-box">
+							<li>
+								<abbr title="Passing a challenge gives you +10">Score</abbr>
+								<a id="hall-of-fame-link" href="/">Hall of fame</a>
+							</li>
+							<li><label id="score">score-of-player</label></li>							
+						</ul>
+					</td>
+				</tr>
+			</table>
 		</section>
 
 		<div id="content">
@@ -79,6 +95,7 @@
 	
 	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
 	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>		
+	<script src="/js/utils/render.score.js"></script>	
 	<script src="/js/try.listener.js"></script>	
 	<script src="/js/start.over.listener.js"></script>	
 	<script src="/js/restart.game.listener.js"></script>	

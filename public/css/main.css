@@ -17,18 +17,52 @@
 #sidebar {
 	width:100%;
 	padding:5px;
-	min-height:70px;
+	min-height:90px;
 
 	background-color: #DAF5D7;
 	border-radius:5px;
 }
 
-#avatar {
+#toto {
 	float:left;
 }
 
+#toto ul {
+	list-style-type:none;
+	padding-left:0px;
+}
+
+#avatar {
+}
+
+#score-box {
+	list-style-type:none;
+	padding-left:40px;
+	margin-bottom:0px;
+}
+
+#score-box li {
+}
+
+#score {
+	background-color:white;
+	font-size:200%;
+	border-radius:5px;
+	padding:2px;
+	margin-top:5px;
+	color:#888888;
+}
+
+#hall-of-fame-link {
+	font-size:70%;
+}
+
 #sidebar-info {
-	margin-left:75px;
+	margin-left:5px;
+	margin-right:10px;
+	font-size:90%;
+	width:450px;
+	padding-left:10px;
 }
 
 #level {

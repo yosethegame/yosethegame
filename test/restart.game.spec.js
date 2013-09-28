@@ -35,6 +35,13 @@ describe('Start over:', function() {
 				done();
 			});
 		});
+		
+		it('sets score to 0', function(done) {
+			database.find('bilou', function(player) {
+				expect(player.score).toEqual(0);
+				done();
+			});
+		});
 	});
 	
 	describe('Strength', function() {
