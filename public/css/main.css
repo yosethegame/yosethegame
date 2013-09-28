@@ -122,14 +122,13 @@
 }
 #banner-links li{
 	float:left;
+	padding-right:20px;
 }
 #restart-game {
 }
 #help {
-	padding-left:20px;
 }
 #hall-of-fame {
-	padding-left:20px;
 }
 
 #content {
