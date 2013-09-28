@@ -9,8 +9,15 @@ var extractPlayerTemplateIn = function(page) {
 
 var buildLine = function(template, player, database) {
 	var level = thePlayer.currentLevel(player, database);
-	return template.replace('<img src=""', '<img src="' + player.avatar + '"')
-				   .replace('class="level">Level<', 'class="level">Level ' + level.number + ' : ' + level.name + '<');
+	var stars = '';
+	array.forEach(level.challenges, function(challenge) {
+		stars += '<li><img class="img-responsive" width="23" height="23" src="/img/star-undone.png"></li>';
+	});
+	var line = template.replace('<img src=""', '<img src="' + player.avatar + '"')
+				   	   .replace('class="level">Level<', 'class="level">Level ' + level.number + ' : ' + level.name + '<')
+					   .replace('<li><img src="star"></li>', stars)
+				;
+	return line;
 };
 
 var buildPlayerList = function(page, players, database) {

@@ -46,11 +46,15 @@ describe("index.html", function() {
 			describe('line template', function() {
 				
 				it('contains an empty placeholder for the avatar', function() {
-					expect(page('#players .player img').attr('src')).toEqual('');
+					expect(page('#players .player img.avatar').attr('src')).toEqual('');
 				});
 				
 				it('contains an empty placeholder for the level', function() {
 					expect(page('#players .player .level').text()).toEqual('Level');
+				});
+				
+				it('contains a placeholder for the achievements', function() {
+					expect(page('#players .player ul li img').attr('src')).toEqual('star');
 				});
 			});
 			
