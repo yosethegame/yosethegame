@@ -45,6 +45,9 @@ TryListener.prototype.displayResults = function(data) {
 		var index = 1;
 		while($('#achievement_' + index + ' img').attr('src') == '/img/star-done.png') { index++ }
 		$('#achievement_' + index + ' img').attr('src', '/img/star-done.png');
+		
+		var oldScore = parseInt($('#score').text());
+		$('#score').text(oldScore + 10);
 	} else {
 		$('#continue').removeClass('visible').addClass('hidden');
 		$('#try').prop('disabled', false);
