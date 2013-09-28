@@ -25,10 +25,6 @@ describe("index.html", function() {
 			expect(page('#welcome').length).toEqual(1);
 		});		
 
-		it("displays a 'fork me on github.com' banner", function() {
-			expect(page('#github').attr('href')).toBe('https://github.com/ericminio/you-ve-got-nutella-on-your-nose');
-		});
-		
 		describe('player list', function() {
 			
 			it('has a title', function() {
