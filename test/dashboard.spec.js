@@ -153,6 +153,12 @@ describe('Dashboard >', function() {
 				expect(page('#score').length).toEqual(1);
 			});
 		});
+
+		describe('The placeholder for the link to the hall of fame', function() {
+			it('exists', function() {
+				expect(page('#hall-of-fame').length).toEqual(1);
+			});
+		});
 	});
 	
 	describe('info/player toggle,', function() {

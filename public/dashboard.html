@@ -14,12 +14,12 @@
 		<label id="login" class="hidden">login-of-player</label>
 
 		<section id="sidebar">
-			<table>
+			<table width="100%">
 				<tr valign="top">
-					<td>
+					<td width="62">
 						<img id="avatar" class="img-circle" width="60" height="60" src="avatar-of-player">
 					</td>
-					<td nowrap>
+					<td nowrap width="100%">
 						<section id="sidebar-info">
 							<p id="level" class="lead">
 								Level&nbsp;
@@ -32,16 +32,18 @@
 							</ul>
 							<p>
 								<span class="hidden" id="server-of-player">server</span>
-								<a id="restart-game" class="hidden" onclick="new Restart().game()">restart game</a>
-								<a id="help" href="https://groups.google.com/forum/?hl=fr#!forum/yosethegame">help</help>
+								<ul id="banner-links">
+									<li><a id="restart-game" class="hidden" onclick="new Restart().game()">Restart game</a></li>
+									<li><a id="help" href="https://groups.google.com/forum/?hl=fr#!forum/yosethegame">Help</help></li>
+									<li><a id="hall-of-fame" href="/">Hall of fame</a></li>
+								</ul>
 							</p>
 						</section>
 					</td>
 					<td>
 						<ul id="score-box">
 							<li>
-								<abbr title="Passing a challenge gives you +10">Score</abbr>
-								<a id="hall-of-fame-link" href="/">Hall of fame</a>
+								<abbr title="Passing a challenge gives you +10" class="score-box-title">Score</abbr>							
 							</li>
 							<li><label id="score">score-of-player</label></li>							
 						</ul>
