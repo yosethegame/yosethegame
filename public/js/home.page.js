@@ -1,27 +1,29 @@
-var fs 		= require('fs');
-var cheerio = require('cheerio');
-var array	= require('./utils/array.utils');
+var fs 			= require('fs');
+var cheerio 	= require('cheerio');
+var array		= require('./utils/array.utils');
+var thePlayer 	= require('./utils/player.utils');
 
 var extractPlayerTemplateIn = function(page) {
 	return page.html('#players .player');
 };
 
-var buildLine = function(template, player) {
+var buildLine = function(template, player, database) {
+	var level = thePlayer.currentLevel(player, database);
 	return template.replace('<img src=""', '<img src="' + player.avatar + '"')
-				   .replace('class="level">Level<', 'class="level">Level 1<');
+				   .replace('class="level">Level<', 'class="level">Level ' + level.number + ' : ' + level.name + '<');
 };
 
-var buildPlayerList = function(page, players) {
+var buildPlayerList = function(page, players, database) {
 	var template = extractPlayerTemplateIn(page);
 	var list = '';
 	array.forEach(players, function(player) {
-		list += buildLine(template, player);
+		list += buildLine(template, player, database);
 	});
 	return list;
 };
 
-var insertPlayerList = function(page, players) {
-	var list = buildPlayerList(page, players);
+var insertPlayerList = function(page, players, database) {
+	var list = buildPlayerList(page, players, database);
 	var template = extractPlayerTemplateIn(page);
 	var html = page.html();
 	return html.replace(template, list);
@@ -32,7 +34,7 @@ var index = function(request, response, database) {
 
 	var page = cheerio.load(html);
 	database.allPlayers(function(players) {
-		html = insertPlayerList(page, players);
+		html = insertPlayerList(page, players, database);
 		response.write(html);
 		response.end();		
 	});
