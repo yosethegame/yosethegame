@@ -85,6 +85,18 @@ function ProductionDatabase() {
 					checker: '../challenge.resist.negative/resist.negative.response.matcher.js',
 				}
 			]
+		},
+		{
+			number: 5,
+			name: 'Single page app',
+			challenges: [
+				{
+					title: 'One page',
+					file: 'public/challenge.one.page/one.page.html',
+					requester: '../challenge.form/form.requester.js',
+					checker: '../challenge.one.page/one.page.response.matcher.js',
+				}
+			]
 		}
 	];
 };
