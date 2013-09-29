@@ -5,12 +5,12 @@ var extract 		= require('./utils/array.utils');
 var array 			= require('./utils/array.utils');
 var httperror 		= require('./utils/http.errors.utils');
 var thisPlayer 		= require('./utils/player.utils');
-var logSuccess 		= require('./log.success');
-var logPlayerServer = require('./log.player.server');
+var logSuccessInPlayer 	= require('./log.success');
 var Sorter			= require('./utils/challenges.utils');
 
 var responseCount;
 var output;
+var challengesToTry;
 
 var sortOutput = function(results, database) {
 	var items = [];
@@ -29,49 +29,6 @@ var sortOutput = function(results, database) {
 	return sorted;
 };
 
-var maybeClose = function(response, result, database) {
-	responseCount --;
-	output.push(result);
-	if (responseCount == 0) {
-		response.write(JSON.stringify(sortOutput(output, database)))
-		response.end();
-	}
-};
-
-var tryChallenge = function(challenge, params, player, database, response) {
-	var Requester = require(challenge.requester);
-	if (player != undefined && player.server != undefined) {
-		var requester = new Requester(player.server);
-	} else {
-		var requester = new Requester(params.query.server);
-	}	
-	var requestSent = requester.url();
-	if (requestSent == undefined) requestSent = '';
-
-	request(requestSent, function(error, remoteResponse, content) {
-		var checker = require(challenge.checker);
-		checker.validate(requestSent, remoteResponse, content, function(status) {
-			if (error != null) {
-				status.code = 404,
-				status.got = 'undefined'
-			}
-			if (status.code == 200) {
-				if (player.server == undefined) {
-					logPlayerServer(player, params.query.server, database);
-				}
-				if (! thisPlayer.hasTheGivenChallengeInPortfolio(challenge.title, player)) {
-					logSuccess(player, challenge, database);
-				}
-			}
-			maybeClose(response, {
-				challenge: challenge.title,
-				code: status.code,
-				expected: status.expected,
-				got: status.got
-			}, database);
-		});
-	});		
-};
 
 var allChallengesToTry = function(player, database) {
 	var challengesToTry = [];
@@ -90,15 +47,73 @@ var allChallengesToTry = function(player, database) {
 	return challengesToTry;
 };
 
+var tryChallengeAtIndex = function(index, params, player, database, response, callback) {
+	var challenge = challengesToTry[index];
+	var Requester = require(challenge.requester);
+	if (player != undefined && player.server != undefined) {
+		var requester = new Requester(player.server);
+	} else {
+		var requester = new Requester(params.query.server);
+	}	
+	var requestSent = requester.url();
+	if (requestSent == undefined) requestSent = '';
+
+	request(requestSent, function(error, remoteResponse, content) {
+		var checker = require(challenge.checker);
+		checker.validate(requestSent, remoteResponse, content, function(status) {
+			if (error != null) {
+				status.code = 404,
+				status.got = 'undefined'
+			}
+			if (status.code == 200) {
+				if (player.server == undefined) {
+					player.server = params.query.server;
+				}
+			}
+			output.push({
+				challenge: challenge.title,
+				code: status.code,
+				expected: status.expected,
+				got: status.got
+			});
+			if (index < challengesToTry.length-1) {
+				tryChallengeAtIndex(index + 1, params, player, database, response, callback);
+			}
+			else {
+				var fail = false;
+				array.forEach(output, function(item) {
+					if (item.code != 200) {
+						fail = true;
+					}
+				});
+				if (!fail) {
+					var challengeToSave = undefined;
+					array.forEach(output, function(item) {
+						if (! thisPlayer.hasTheGivenChallengeInPortfolio(item.challenge, player)) {
+							challengeToSave = item.challenge;
+						}				
+					});
+					logSuccessInPlayer(player, challengeToSave);
+				}
+				database.savePlayer(player, function() {
+					callback();
+				});
+			}
+		});
+	});
+};
+
 var tryAllChallengesUntilGivenChallenge = function(incoming, response, database) {
 	output = [];
+	challengesToTry = [];
 	var params = url.parse(incoming.url, true);	
 	database.find(params.query.login, function(player) {
-		var challengesToTry = allChallengesToTry(player, database);
+		challengesToTry = allChallengesToTry(player, database);
 		responseCount = challengesToTry.length;
-		array.forEach(challengesToTry, function(challenge) {
-			tryChallenge(challenge, params, player, database, response);		
-		});	
+		tryChallengeAtIndex(0, params, player, database, response, function() {
+			response.write(JSON.stringify(sortOutput(output, database)))
+			response.end();			
+		});
 	});
 };
 

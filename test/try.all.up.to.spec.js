@@ -4,7 +4,7 @@ var tryAll = require('../public/js/try-all-up-to');
 var InMemoryDatabase = require('./support/inMemoryDatabase');
 var $ = require('jquery');
 
-describe("Trying to pass challenges", function() {
+describe("Trying to pass challenges >", function() {
 
 	var server;
 	var database;
@@ -199,6 +199,15 @@ describe("Trying to pass challenges", function() {
 				});
 			});			
 		});
+		it('makes the second challenge to be in the portfolio of the player', function(done) {
+			database.levels[0].challenges[1].title = 'Get ready for fun :)';
+			request("http://localhost:5000/try-all-up-to?login=clairette", function(error, response, body) {
+				database.find('clairette', function(player) {
+					expect(player.portfolio[1].title).toEqual('Get ready for fun :)')
+					done();
+				});
+			});			
+		});
 	});		
 	
 	describe("Player's server use", function() {
@@ -372,6 +381,58 @@ describe("Trying to pass challenges", function() {
 			expect(sorted[1].challenge).toEqual('challenge 1.2');
 		});
 		
-	})
+	});
+	
+	describe('Regressions:', function() {
+		
+		var remote;
+		beforeEach(function() {
+			remote = require('http').createServer(
+				function (request, response) {
+					response.end();
+				})
+			.listen(6000);
+		});
+		afterEach(function() {
+			remote.close();
+		});
+	
+		it('considering a player with 3 challenges in his portfolio', function(done) {
+			database.find('ericminio', function(player) {
+				expect(player.portfolio.length).toEqual(3);
+				done();
+			});
+		});
+		
+		describe('When there is no regression,', function() {
+			
+			it('makes the next challenge to be in the portfolio of the player', function(done) {
+				request("http://localhost:5000/try-all-up-to?login=ericminio", function(error, response, body) {
+					database.find('ericminio', function(player) {
+						expect(player.portfolio.length).toEqual(4);
+						done();
+					});
+				});			
+			});
+		});
+		
+		describe('When there is a regression,', function() {
+		
+			beforeEach(function() {
+				database.levels[0].challenges[0].checker = '../../test/support/response.always.404';
+			});
+			
+			it('does not consider the next challenge as passing', function(done) {
+				request("http://localhost:5000/try-all-up-to?login=ericminio", function(error, response, body) {
+					database.find('ericminio', function(player) {
+						expect(player.portfolio.length).toEqual(3);
+						done();
+					});
+				});			
+			});			
+			
+		});
+		
+	});
 });
 

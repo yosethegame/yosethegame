@@ -1,18 +1,15 @@
 var thePlayer = require('./utils/player.utils');
 
-logSuccess = function(player, challenge, database) {
+logSuccess = function(player, challenge) {
 	if (thePlayer.isANew(player)) {
 		player.portfolio = [];
 	}		
 	player.portfolio.push( { 
-			title: challenge.title,
+			title: challenge,
 		} 
 	);
 	if (player.score == undefined) player.score = 0;
 	player.score += 10;
-	database.savePlayer(player, function() {
-		
-	});
 };
 
 var module = module || {};

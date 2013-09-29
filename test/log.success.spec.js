@@ -13,15 +13,15 @@ describe('Log success,', function() {
 		
 		it('adds the given challenge in the portfolio of the player', function() {
 			var player = {};
-			logSuccess(player, { title: 'challenge' }, database);
+			logSuccess(player, 'challenge', database);
 
 			expect(player.portfolio[0].title).toEqual('challenge');
 		});
 
 		it('pills up the given challenges in the portfolio of the player', function() {
 			var player = {};
-			logSuccess(player, { title: 'one' }, database);
-			logSuccess(player, { title: 'two' }, database);
+			logSuccess(player, 'one', database);
+			logSuccess(player, 'two', database);
 
 			expect(player.portfolio[1].title).toEqual('two');
 		});
