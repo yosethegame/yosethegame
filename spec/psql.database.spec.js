@@ -132,6 +132,13 @@ describe('PostgreSql database', function() {
 				});
 			});
 		});
+		
+		it('returns empty collection when there is no player', function(done) {
+			database.allPlayers(function(players) {
+				expect(players.length).toEqual(0);
+				done();
+			});
+		});
 	});
 	
 	it('can delete a player', function(done) {

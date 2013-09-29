@@ -60,9 +60,11 @@ PostgreSql.prototype.allPlayers = function(callback) {
 		client.query(sql, function(err, result) {
 			client.end();
 			var players = [];
-			array.forEach(result.rows, function(row) {
-				players.push($.parseJSON(row.json))
-			});
+			if (result != undefined) {
+				array.forEach(result.rows, function(row) {
+					players.push($.parseJSON(row.json))
+				});
+			}
 			callback(players);
 		});
 	});
