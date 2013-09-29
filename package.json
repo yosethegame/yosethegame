@@ -8,7 +8,7 @@
     "cheerio": "0.12.0",
     "jquery": "1.8.3",
     "querystring": "0.2.0",
-    "pg": "~2.6.2"
+    "pg": "2.6.2"
   },
   "devDependencies": {
     "zombie": "2.0.0-alpha19",
