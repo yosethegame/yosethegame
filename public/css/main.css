@@ -64,6 +64,11 @@
 	font-size:200%;
 }
 
+.hall-of-fame-score-leading-zeros {
+	font-size:150%;
+	color:#BBBBBB;
+	float:left;	
+}
 .hall-of-fame-score {
 	font-size:150%;
 	color:#888888;	

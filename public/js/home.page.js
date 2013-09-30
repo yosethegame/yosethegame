@@ -12,7 +12,8 @@ var buildLine = function(template, player, database) {
 	var level = thePlayer.currentLevel(player, database);
 	var line = template.replace('<img src=""', '<img src="' + player.avatar + '"')
 				   	   .replace('class="level">Level<', 'class="level">Level ' + level.number + ' : ' + level.name + '<')
-					   .replace('1234567', renderScore(player.score))
+					   .replace('1234567', renderScore.withoutLeadingZeros(player.score))
+					   .replace('0000', renderScore.leadingZeros(player.score))
 				;
 	return line;
 };

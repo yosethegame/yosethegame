@@ -48,6 +48,7 @@ describe('Home page building', function() {
 							'<ul>' +
 								'<li><img src="star"></li>' +
 							'</ul>' +
+							'<span class="hall-of-fame-score-leading-zeros">0000</span>' +
 							'<span class="hall-of-fame-score">1234567</span>' +
 					   '</li>';
 		
@@ -60,7 +61,13 @@ describe('Home page building', function() {
 		it('contains the score', function() {
 			var line = home.buildLine(template, { avatar: 'me.png', score: 420 }, database );
 
-			expect(cheerio.load(line)('.player .hall-of-fame-score').text()).toEqual('000420');
+			expect(cheerio.load(line)('.player .hall-of-fame-score').text()).toEqual('420');
+		});
+		
+		it('contains the leading zeros', function() {
+			var line = home.buildLine(template, { avatar: 'me.png', score: 420 }, database );
+
+			expect(cheerio.load(line)('.player .hall-of-fame-score-leading-zeros').text()).toEqual('000');
 		});
 		
 		describe('Level', function() {
