@@ -1,6 +1,6 @@
 var Requester = require('../../public/challenge.guard.string/guard.requester');
 
-describe('Power of two Requester', function() {
+describe('Guard string Requester', function() {
 
 	var requester;
 
@@ -9,7 +9,7 @@ describe('Power of two Requester', function() {
 	});
 	
 	it('has a string chooser', function() {
-		expect(requester.stringChooser.getString()).toBeDefined();
+		expect(typeof requester.stringChooser.getString()).toEqual('string');
 	});
 	
 	it('adds the string to the url', function() {

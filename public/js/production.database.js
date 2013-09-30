@@ -95,6 +95,12 @@ function ProductionDatabase() {
 					file: 'public/challenge.one.page/one.page.html',
 					requester: '../challenge.form/form.requester.js',
 					checker: '../challenge.one.page/one.page.response.matcher.js',
+				},
+				{
+					title: 'Multiple entries',
+					file: 'public/challenge.multiple.entries/multiple.entries.html',
+					requester: '../challenge.multiple.entries/multiple.entries.requester.js',
+					checker: '../challenge.multiple.entries/multiple.entries.response.matcher.js',
 				}
 			]
 		}

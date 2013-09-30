@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Decomposition</title>
+	<link href="/css/main.css" rel="stylesheet" type="text/css">
+	<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
+	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>		
+</head>
+<body id="challenge-content">
+	<p class="lead">
+		Update your server to make it accept a GET request 
+		with several numbers and make it respond 
+		a JSON containing the decompositions of each numbers.
+	</p>
+	
+	<p>For example, receiving</p>
+
+	<pre>http://your/server/primeFactors?number=300,120,hello</pre>
+
+	<p>You should respond</p>
+		
+	<pre>[
+    {
+        "number" : 300,
+        "decomposition" : [ 2, 2, 3, 5, 5 ]
+    },
+    {
+        "number" : 120,
+        "decomposition" : [ 2, 2, 2, 3, 5 ]
+    },
+    {
+        "number" : "hello",
+        "error" : "not a number"
+    },
+]
+	</pre>
+	
+	<legend>
+		<h2>Take it!</h2>
+	</legend>
+		
+	<section>
+		<p>
+			Your server will be called with several numbers.
+		</p>	
+
+	</section>
+</body>
+</html>

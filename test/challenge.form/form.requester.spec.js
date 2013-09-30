@@ -1,6 +1,6 @@
 var Requester = require('../../public/challenge.form/form.requester');
 
-describe('UI Requester', function() {
+describe('Form Requester', function() {
 
 	var requester;
 
