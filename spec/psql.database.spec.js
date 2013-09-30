@@ -139,6 +139,32 @@ describe('PostgreSql database', function() {
 				done();
 			});
 		});
+		
+		it('returns players order by score', function(done) {
+			var clairette = { login: 'claire' };
+			var poseidon = { login: 'poseidon' };
+			var annessou = { login: 'annessou' };
+			database.createPlayer(clairette, function() {
+				database.createPlayer(poseidon, function() {
+					database.createPlayer(annessou, function() {						
+						clairette.score = 18;
+						poseidon.score = 777;
+						annessou.score = 999;						
+						database.savePlayer(clairette, function() {
+							database.savePlayer(poseidon, function() {
+								database.savePlayer(annessou, function() {
+									database.allPlayers(function(players) {
+										expect(players[0].login).toEqual('annessou');
+										done();
+									});
+								});
+							});
+						});
+						
+					});
+				});
+			});
+		});
 	});
 	
 	it('can delete a player', function(done) {

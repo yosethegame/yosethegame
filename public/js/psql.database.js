@@ -57,7 +57,7 @@ PostgreSql.prototype.savePlayer = function(player, callback) {
 PostgreSql.prototype.allPlayers = function(callback) {
 	client = new pg.Client(this.url);
 	client.connect(function(err) {
-		var sql = "select login, json from players";
+		var sql = "select login, score, json from players order by score desc";
 		client.query(sql, function(err, result) {
 			client.end();
 			var players = [];
