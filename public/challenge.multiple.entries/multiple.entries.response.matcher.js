@@ -8,14 +8,19 @@ module.exports = {
 		params = require('url').parse(url, true);
 		var expectedContent = [];
 		var numbers = params.query.number;
-		if (typeof numbers == 'string') {
-			numbers = [numbers];
-		}
 		array.forEach(numbers, function(number) {
-			expectedContent.push({
-				number: parseInt(number),
-				decomposition: primeFactorsOf(parseInt(number))
-			});
+			if (isNaN(number)) {
+				expectedContent.push({
+					number: number,
+					error: 'not a number'
+				});
+			}
+			else {
+				expectedContent.push({
+					number: parseInt(number),
+					decomposition: primeFactorsOf(parseInt(number))
+				});
+			}
 		});
 		return expectedContent;
 	},
