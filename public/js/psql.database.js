@@ -13,7 +13,8 @@ PostgreSql.prototype.createPlayer = function(player, callback) {
 		client.query(sql, function(err, result) {
 			var count = result.rows[0].count;
 			if (count == 0) {
-				sql = "insert into players(login, json) values('" + player.login + "', '" + JSON.stringify(player) + "')";
+				player.score = 0
+				sql = "insert into players(login, json, score) values('" + player.login + "', '" + JSON.stringify(player) + "', 0)";
 				client.query(sql, function(err, result) {
 					client.end();
 					callback();
@@ -45,7 +46,7 @@ PostgreSql.prototype.find = function(login, callback) {
 PostgreSql.prototype.savePlayer = function(player, callback) {
 	client = new pg.Client(this.url);
 	client.connect(function(err) {
-		var sql = "update players set json = '" + JSON.stringify(player) + "' where login = '" + player.login + "'";
+		var sql = "update players set score = " + player.score + ", json = '" + JSON.stringify(player) + "' where login = '" + player.login + "'";
 		client.query(sql, function(err, result) {
 			client.end();
 			callback();

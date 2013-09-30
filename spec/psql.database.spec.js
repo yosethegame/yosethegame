@@ -17,7 +17,7 @@ describe('PostgreSql database', function() {
 		client = new pg.Client(url);
 		client.connect(function(err) {
 			client.query('drop table players', function(err, result) {
-				client.query('create table players(login varchar(50), json varchar(5000))', function(err, result) {
+				client.query('create table players(login varchar(50), json varchar(5000), score integer)', function(err, result) {
 					client.end();
 					expect(err).toEqual(null);
 					done();
@@ -150,6 +150,47 @@ describe('PostgreSql database', function() {
 				});								
 			});
 		});
+	});
+	
+	describe('Score:', function() {
+	
+		it('sets score to 0 when creating a player', function(done) {		
+			database.createPlayer(annessou, function() {				
+				client = new pg.Client(this.url);
+				client.connect(function(err) {
+					var sql = "select score from players where login = 'asm'";
+					client.query(sql, function(err, result) {
+						client.end();						
+						expect(err).toBe(null);
+						if (err == null) {
+							expect(result.rows[0].score).toEqual(0);
+						}
+						done();
+					});
+				});
+			});			
+		});
+		
+		it('updates the score of the player when saving a player', function(done) {
+			database.createPlayer(annessou, function() {
+				annessou.score = 42;
+				database.savePlayer(annessou, function() {
+					client = new pg.Client(this.url);
+					client.connect(function(err) {
+						var sql = "select score from players where login = 'asm'";
+						client.query(sql, function(err, result) {
+							client.end();						
+							expect(err).toBe(null);
+							if (err == null) {
+								expect(result.rows[0].score).toEqual(42);
+							}
+							done();
+						});
+					});
+				});
+			});
+		});
+		
 	});
 	
 });
