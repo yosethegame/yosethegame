@@ -53,10 +53,6 @@ describe("index.html", function() {
 					expect(page('#players .player .level').text()).toEqual('Level');
 				});
 				
-				it('contains a placeholder for the achievements', function() {
-					expect(page('#players .player ul li img').attr('src')).toEqual('star');
-				});
-				
 				it('contains an empty placeholder for the score', function() {
 					expect(page('#players .player .hall-of-fame-score').text()).toEqual('1234567');
 				});

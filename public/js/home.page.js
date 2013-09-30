@@ -10,17 +10,8 @@ var extractPlayerTemplateIn = function(page) {
 
 var buildLine = function(template, player, database) {
 	var level = thePlayer.currentLevel(player, database);
-	var stars = '';
-	array.forEach(level.challenges, function(challenge) {
-		var star = '<img class="img-responsive" width="23" height="23" src="/img/star-undone.png">';
-		if (thePlayer.hasTheGivenChallengeInPortfolio(challenge.title, player)) {
-			star = star.replace('undone', 'done');
-		}
-		stars += '<li>' + star + '</li>';
-	});
 	var line = template.replace('<img src=""', '<img src="' + player.avatar + '"')
 				   	   .replace('class="level">Level<', 'class="level">Level ' + level.number + ' : ' + level.name + '<')
-					   .replace('<li><img src="star"></li>', stars)
 					   .replace('1234567', renderScore(player.score))
 				;
 	return line;

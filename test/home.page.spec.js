@@ -78,41 +78,6 @@ describe('Home page building', function() {
 			});
 		});
 		
-		describe('Achievements:', function() {
-		
-			describe('When the player is a new player,', function() {
-
-				it('displays two stars', function() {
-					var line = home.buildLine(template, { avatar: 'me.png' }, database);
-
-					expect(cheerio.load(line)('.player ul li').length).toEqual(2);
-				});
-				
-				it('displays the first star as undone', function() {
-					var line = home.buildLine(template, { avatar: 'me.png' }, database);
-
-					expect(cheerio.load(line)('.player ul li img')[0].attribs.src).toContain('star-undone');
-				});
-
-				it('displays the second star as undone', function() {
-					var line = home.buildLine(template, { avatar: 'me.png' }, database);
-
-					expect(cheerio.load(line)('.player ul li img')[1].attribs.src).toContain('star-undone');
-				});
-			});
-			
-			describe('When the player has done the first challenge', function() {
-				
-				it('displays the first star as done', function() {
-					var line = home.buildLine(template, { avatar: 'me.png', portfolio: [ { title: 'challenge 1.1' } ] }, database);
-
-					expect(cheerio.load(line)('.player ul li img')[0].attribs.src).toContain('star-done');
-				});
-
-			});
-			
-		});
-		
 	});
 	
 });
