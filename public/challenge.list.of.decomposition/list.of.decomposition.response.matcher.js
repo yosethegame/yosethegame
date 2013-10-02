@@ -2,6 +2,7 @@ var NumberChooser 	= require('../levels.common/integer.chooser');
 var StringChooser 	= require('../levels.common/string.chooser');
 var Browser 		= require('zombie');
 var primeFactorsOf	= require('../levels.common/prime.factors');
+var array			= require('../js/utils/array.utils');
 
 module.exports = {
 
@@ -31,24 +32,19 @@ module.exports = {
 				if(browser.query('ol#results') == null) {
 					throw 'Error: missing element ol#results';
 				}
-				if(browser.query('ol#results li:nth-of-type(1)') == null) {
-					throw 'Error: missing element ol#results li:nth-of-type(1)';
-				}
-				if(browser.query('ol#results li:nth-of-type(2)') == null) {
-					throw 'Error: missing element ol#results li:nth-of-type(2)';
-				}
-				if(browser.query('ol#results li:nth-of-type(3)') == null) {
-					throw 'Error: missing element ol#results li:nth-of-type(3)';
-				}
+				array.forEach([1, 2, 3], function(index) {
+					if(browser.query('ol#results li:nth-of-type(' + index + ')') == null) {
+						throw 'Error: missing element ol#results li:nth-of-type(' + index + ')';
+					}
+				});
 				if(browser.queryAll('ol#results li').length != 3) {
 					throw 'Error: ol#results has ' + browser.queryAll('ol#results li').length + ' li';
-				}
-				if(browser.text('ol#results li:nth-of-type(1)') != self.expectedResult(numbers[0].trim())) {
-					throw 'Error: ol#results li:nth-of-type(1) contains ' + browser.text('ol#results li:nth-of-type(1)');
-				}
-				if(browser.text('ol#results li:nth-of-type(2)') != self.expectedResult(numbers[1].trim())) {
-					throw 'Error: ol#results li:nth-of-type(2) contains ' + browser.text('ol#results li:nth-of-type(2)');
-				}
+				}				
+				array.forEach([1, 2], function(index) {
+					if(browser.text('ol#results li:nth-of-type(' + index + ')') != self.expectedResult(numbers[index-1].trim())) {
+						throw 'Error: ol#results li:nth-of-type(' + index + ') contains ' + browser.text('ol#results li:nth-of-type(' + index + ')');
+					}
+				});
 				if(browser.text('ol#results li:nth-of-type(3)') != (numbers[2].trim() + ' is not a number')) {
 					throw 'Error: ol#results li:nth-of-type(3) contains ' + browser.text('ol#results li:nth-of-type(3)');
 				}
