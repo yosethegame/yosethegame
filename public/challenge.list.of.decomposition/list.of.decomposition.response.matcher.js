@@ -17,6 +17,47 @@ module.exports = {
 		return this.numberChooser.getNumber() + ', ' + this.numberChooser.getNumber() + ', ' + this.stringChooser.getString();
 	},
 	
+	listShouldExist: function(browser) {
+		if(browser.query('ol#results') == null) {
+			throw 'Error: missing element ol#results';
+		}
+	},
+	
+	listShouldHaveThreeItems: function(browser) {
+		if(browser.queryAll('ol#results li').length != 3) {
+			throw 'Error: ol#results has ' + browser.queryAll('ol#results li').length + ' li';
+		}				
+	},
+	
+	itemShouldExist: function(browser) {
+		return function(index) {
+			if(browser.query('ol#results li:nth-of-type(' + index + ')') == null) {
+				throw 'Error: missing element ol#results li:nth-of-type(' + index + ')';
+			}
+		};
+	},
+	
+	itemShouldHaveExpectedResult: function(browser, numbers, expectedResult) {
+		return function(index) {
+			if(browser.text('ol#results li:nth-of-type(' + index + ')') != expectedResult(numbers[index-1].trim())) {
+				throw 'Error: ol#results li:nth-of-type(' + index + ') contains ' + browser.text('ol#results li:nth-of-type(' + index + ')');
+			}
+		};
+	},
+	
+	lastItemShouldHaveExpectedResult: function(browser, value) {
+		if(browser.text('ol#results li:nth-of-type(3)') != (value + ' is not a number')) {
+			throw 'Error: ol#results li:nth-of-type(3) contains ' + browser.text('ol#results li:nth-of-type(3)');
+		}
+	},
+	
+	expectedAnswer: function(numbers, expectedResult) {
+		return "A page containing a list ol#results with 3 items"
+				  + " AND ol#results li:nth-of-type(1) containing " + expectedResult(numbers[0].trim())
+				  + " AND ol#results li:nth-of-type(2) containing " + expectedResult(numbers[1].trim())
+				  + " AND ol#results li:nth-of-type(3) containing " + numbers[2].trim() + ' is not a number';
+	},
+	
 	validate: function(url, remoteResponse, content, callback) {
 		var self = this;
 		var input = this.getInput();
@@ -29,43 +70,21 @@ module.exports = {
 					   		  .pressButton("button#go");
 			}).
 			then(function() {
-				if(browser.query('ol#results') == null) {
-					throw 'Error: missing element ol#results';
-				}
-				array.forEach([1, 2, 3], function(index) {
-					if(browser.query('ol#results li:nth-of-type(' + index + ')') == null) {
-						throw 'Error: missing element ol#results li:nth-of-type(' + index + ')';
-					}
-				});
-				if(browser.queryAll('ol#results li').length != 3) {
-					throw 'Error: ol#results has ' + browser.queryAll('ol#results li').length + ' li';
-				}				
-				array.forEach([1, 2], function(index) {
-					if(browser.text('ol#results li:nth-of-type(' + index + ')') != self.expectedResult(numbers[index-1].trim())) {
-						throw 'Error: ol#results li:nth-of-type(' + index + ') contains ' + browser.text('ol#results li:nth-of-type(' + index + ')');
-					}
-				});
-				if(browser.text('ol#results li:nth-of-type(3)') != (numbers[2].trim() + ' is not a number')) {
-					throw 'Error: ol#results li:nth-of-type(3) contains ' + browser.text('ol#results li:nth-of-type(3)');
-				}
-				var expected = "A page containing a list ol#results with 3 items"
-						  + " AND ol#results li:nth-of-type(1) containing " + self.expectedResult(numbers[0].trim())
-						  + " AND ol#results li:nth-of-type(2) containing " + self.expectedResult(numbers[1].trim())
-						  + " AND ol#results li:nth-of-type(3) containing " + numbers[2].trim() + ' is not a number'; 
+				self.listShouldExist(browser);
+				array.forEach([1, 2, 3], self.itemShouldExist(browser));
+				self.listShouldHaveThreeItems(browser);
+				array.forEach([1, 2], self.itemShouldHaveExpectedResult(browser, numbers, self.expectedResult));
+				self.lastItemShouldHaveExpectedResult(browser, numbers[2].trim());
 				callback({
 					code: 200,
-					expected: expected,
-					got: expected
+					expected: self.expectedAnswer(numbers, self.expectedResult),
+					got: self.expectedAnswer(numbers, self.expectedResult)
 				});
 			}).
 			fail(function(error) {
 				callback({
 					code: 501,
-					expected: "A page containing a list ol#results with 3 items"
-							  + " AND ol#results li:nth-of-type(1) containing " + self.expectedResult(numbers[0].trim())
-							  + " AND ol#results li:nth-of-type(2) containing " + self.expectedResult(numbers[1].trim())
-							  + " AND ol#results li:nth-of-type(3) containing " + numbers[2].trim() + ' is not a number'
-					,
+					expected: self.expectedAnswer(numbers, self.expectedResult),
 					got: error.toString()
 				})
 			});
