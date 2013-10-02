@@ -101,6 +101,12 @@ function ProductionDatabase() {
 					file: 'public/challenge.multiple.entries/multiple.entries.html',
 					requester: '../challenge.multiple.entries/multiple.entries.requester.js',
 					checker: '../challenge.multiple.entries/multiple.entries.response.matcher.js',
+				},
+				{
+					title: 'List of decomposition',
+					file: 'public/challenge.list.of.decomposition/list.of.decomposition.html',
+					requester: '../challenge.form/form.requester.js',
+					checker: '../challenge.list.of.decomposition/list.of.decomposition.response.matcher.js',
 				}
 			]
 		}
