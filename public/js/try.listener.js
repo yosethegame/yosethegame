@@ -11,10 +11,11 @@ TryListener.prototype.try = function() {
 		.success(this.displayResults);
 };
 
-TryListener.prototype.displayResults = function(data) {
+TryListener.prototype.displayResults = function(received) {
 	stopAnimation();
 	showResults();
-	var results = $.parseJSON(data);
+	var data = $.parseJSON(received);
+	var results = data.results;
 	if (results.length == 0) return;
 	
 	var result_n_html = $('#result_1')[0].outerHTML;
@@ -47,8 +48,7 @@ TryListener.prototype.displayResults = function(data) {
 		while($('#achievement_' + index + ' img').attr('src') == '/img/star-done.png') { index++ }
 		$('#achievement_' + index + ' img').attr('src', '/img/star-done.png');
 		
-		var oldScore = parseInt($('#score').text());
-		$('#score').text(renderScore(oldScore + 10));
+		$('#score').text(renderScore(data.score));
 	} else {
 		$('#continue').removeClass('visible').addClass('hidden');
 		$('#try').prop('disabled', false);

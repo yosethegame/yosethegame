@@ -111,7 +111,12 @@ var tryAllChallengesUntilGivenChallenge = function(incoming, response, database)
 		challengesToTry = allChallengesToTry(player, database);
 		responseCount = challengesToTry.length;
 		tryChallengeAtIndex(0, params, player, database, response, function() {
-			response.write(JSON.stringify(sortOutput(output, database)))
+			response.write(JSON.stringify(
+					{
+						score: player.score == undefined ? 0 : player.score,
+						results: sortOutput(output, database)						
+					}
+				));
 			response.end();			
 		});
 	});

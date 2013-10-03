@@ -5,6 +5,14 @@ describe("TryListener: ", function() {
 
 	var listener = new TryListener();
 	
+	var buildResultsWithDummyScore = function(results) {
+		var resultsWithDummyScore = {
+			score: 10,
+			results: results
+		};
+		return JSON.stringify(resultsWithDummyScore);
+	};
+	
 	beforeEach(function() {
 		$('body').append(
 			'<div id="results">' +
@@ -65,7 +73,7 @@ describe("TryListener: ", function() {
 		
 		it('stops when success', function() {
 			$('#avatar').addClass('rotate');
-			listener.displayResults('[]');
+			listener.displayResults('{"score":10,"results":[]}');
 			expect($('#avatar').attr('class')).toNotContain('rotate');
 		});
 		
@@ -75,10 +83,6 @@ describe("TryListener: ", function() {
 		
 		describe('Show / hide results', function() {
 
-			afterEach(function() {
-				$('#results').remove();			
-			});
-
 			it('hides the results when a try is triggered', function() {
 				listener.try();
 				expect($('#results').attr('class')).toContain('hidden');
@@ -87,7 +91,7 @@ describe("TryListener: ", function() {
 
 			it('shows the results when success', function() {
 				$('#results').removeClass('visible').addClass('hidden');
-				listener.displayResults('[{}]');
+				listener.displayResults('{"score":10,"results":[]}');
 				expect($('#results').attr('class')).toNotContain('hidden');
 				expect($('#results').attr('class')).toContain('visible');
 			})
@@ -96,7 +100,7 @@ describe("TryListener: ", function() {
 		describe('One result display:', function() {
 
 			beforeEach(function() {
-				listener.displayResults(JSON.stringify([
+				listener.displayResults(buildResultsWithDummyScore([
 					{
 						challenge: 'this-challenge',
 						code: 200,
@@ -113,7 +117,7 @@ describe("TryListener: ", function() {
 				expect($('#result_1 .status').text()).toEqual('success');
 			});
 			it('displays the first result : "fail" when receiving code != 200', function() {
-				listener.displayResults(JSON.stringify([
+				listener.displayResults(buildResultsWithDummyScore([
 					{
 						challenge: 'this-challenge',
 						code: 100,
@@ -130,7 +134,7 @@ describe("TryListener: ", function() {
 				});
 
 				it('displays a string as is', function() {
-					listener.displayResults(JSON.stringify([
+					listener.displayResults(buildResultsWithDummyScore([
 						{
 							challenge: 'this-challenge',
 							code: 200,
@@ -148,7 +152,7 @@ describe("TryListener: ", function() {
 				});
 				
 				it('displays a string as is', function() {
-					listener.displayResults(JSON.stringify([
+					listener.displayResults(buildResultsWithDummyScore([
 						{
 							challenge: 'this-challenge',
 							code: 200,
@@ -165,7 +169,7 @@ describe("TryListener: ", function() {
 		describe('Two results display:', function() {
 
 			beforeEach(function() {
-				listener.displayResults(JSON.stringify([
+				listener.displayResults(buildResultsWithDummyScore([
 					{
 						challenge: 'one',
 						code: 1,
@@ -196,7 +200,7 @@ describe("TryListener: ", function() {
 			describe('Multiple calls only keeps the results from the last call', function() {
 				
 				beforeEach(function() {
-					listener.displayResults(JSON.stringify([
+					listener.displayResults(buildResultsWithDummyScore([
 						{
 							challenge: 'one',
 							code: 200,
@@ -210,7 +214,7 @@ describe("TryListener: ", function() {
 							got: { flag: true }
 						}
 					]));	
-					listener.displayResults(JSON.stringify([
+					listener.displayResults(buildResultsWithDummyScore([
 						{
 							challenge: 'second',
 							code: 200,
@@ -232,7 +236,7 @@ describe("TryListener: ", function() {
 			describe('Highligthing failures', function() {
 
 				beforeEach(function() {
-					listener.displayResults(JSON.stringify([
+					listener.displayResults(buildResultsWithDummyScore([
 						{
 							challenge: 'one',
 							code: 404,
@@ -273,7 +277,7 @@ describe("TryListener: ", function() {
 			});
 
 			it('becomes visible when success (code == 200)', function() {
-				listener.displayResults(JSON.stringify([
+				listener.displayResults(buildResultsWithDummyScore([
 					{
 						challenge: 'this-challenge',
 						code: 200,
@@ -286,7 +290,7 @@ describe("TryListener: ", function() {
 			});
 
 			it('remains hidden otherwise (code != 200)', function() {
-				listener.displayResults(JSON.stringify([
+				listener.displayResults(buildResultsWithDummyScore([
 					{
 						challenge: 'this-challenge',
 						code: 404,
@@ -299,7 +303,7 @@ describe("TryListener: ", function() {
 			});
 
 			it('remains hidden if one result is not passing', function() {
-				listener.displayResults(JSON.stringify([
+				listener.displayResults(buildResultsWithDummyScore([
 					{
 						challenge: 'one',
 						code: 404,
@@ -318,7 +322,7 @@ describe("TryListener: ", function() {
 			});
 			
 			it('hides back when a second try is failing', function() {
-				listener.displayResults(JSON.stringify([
+				listener.displayResults(buildResultsWithDummyScore([
 					{
 						challenge: 'this-challenge',
 						code: 200,
@@ -326,7 +330,7 @@ describe("TryListener: ", function() {
 						got: { flag: true }
 					}
 				]));
-				listener.displayResults(JSON.stringify([
+				listener.displayResults(buildResultsWithDummyScore([
 					{
 						challenge: 'this-challenge',
 						code: 404,
@@ -350,7 +354,7 @@ describe("TryListener: ", function() {
 			});
 		
 			it('is disabled after success', function() {
-				listener.displayResults(JSON.stringify([
+				listener.displayResults(buildResultsWithDummyScore([
 					{
 						challenge: 'this-challenge',
 						code: 200,
@@ -362,7 +366,7 @@ describe("TryListener: ", function() {
 			});
 			
 			it('is enabled after failure', function() {
-				listener.displayResults(JSON.stringify([
+				listener.displayResults(buildResultsWithDummyScore([
 					{
 						challenge: 'this-challenge',
 						code: 200,
@@ -370,7 +374,7 @@ describe("TryListener: ", function() {
 						got: { flag: true }
 					}
 				]));
-				listener.displayResults(JSON.stringify([
+				listener.displayResults(buildResultsWithDummyScore([
 					{
 						challenge: 'this-challenge',
 						code: 404,
@@ -398,7 +402,7 @@ describe("TryListener: ", function() {
 		describe('When the player fails the challenge,', function() {
 			
 			beforeEach(function() {
-				listener.displayResults(JSON.stringify([
+				listener.displayResults(buildResultsWithDummyScore([
 					{
 						challenge: 'this-challenge',
 						code: 404,
@@ -416,7 +420,7 @@ describe("TryListener: ", function() {
 		describe('When the player passes the challenge,', function() {
 			
 			beforeEach(function() {
-				listener.displayResults(JSON.stringify([
+				listener.displayResults(buildResultsWithDummyScore([
 					{
 						challenge: 'this-challenge',
 						code: 200,
@@ -435,7 +439,7 @@ describe("TryListener: ", function() {
 			
 			beforeEach(function() {
 				$('#achievement_1 img').attr('src', '/img/star-done.png')
-				listener.displayResults(JSON.stringify([
+				listener.displayResults(buildResultsWithDummyScore([
 					{
 						challenge: 'this-challenge',
 						code: 200,
@@ -461,22 +465,21 @@ describe("TryListener: ", function() {
 			$('#score').remove();
 		});
 	
-		describe('When the player passes the challenge,', function() {
+		it('just happens', function() {
+			listener.displayResults(JSON.stringify(
+				{
+					score: 23,
+					results: [
+						{
+							challenge: 'this-challenge',
+							code: 200,
+							expected: { question: 'any', answer: 42 },
+							got: { flag: true }
+						}
+					]
+				}));
 			
-			beforeEach(function() {
-				listener.displayResults(JSON.stringify([
-					{
-						challenge: 'this-challenge',
-						code: 200,
-						expected: { question: 'any', answer: 42 },
-						got: { flag: true }
-					}
-				]));
-			});
-			
-			it('increases the score by 10', function() {
-				expect($('#score').text()).toEqual('000020');
-			});
+			expect($('#score').text()).toEqual('000023');
 		});
 		
 	});

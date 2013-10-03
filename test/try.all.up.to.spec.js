@@ -24,16 +24,19 @@ describe("Trying to pass challenges >", function() {
 		};
 		bilou = {
 			login: 'bilou',
+			score: 10,
 			server: 'guiguilove',
 			portfolio: [ { title: 'challenge 1.1' } ]
 		};
 		clairette = {
 			login: 'clairette',
+			score: 10,
 			server: 'http://localhost:6000',
 			portfolio: [ { title: 'challenge 1.1' } ]
 		};
 		ericminio = {
 			login: 'ericminio',
+			score: 30,
 			server: 'http://localhost:6000',
 			portfolio: [ { title: 'challenge 1.1' }, { title: 'challenge 1.2' }, { title: 'challenge 2.1' } ]
 		};
@@ -100,7 +103,7 @@ describe("Trying to pass challenges >", function() {
 		});
 		it('returns detailed error for 404', function(done) {
 			request("http://localhost:5000/try-all-up-to?login=annessou&server=http://localhost:6000", function(error, response, body) {
-				expect(body).toEqual(JSON.stringify([
+				expect(body).toContain(JSON.stringify([
 						{
 							challenge: 'challenge 1.1',
 							code: 404,
@@ -114,7 +117,7 @@ describe("Trying to pass challenges >", function() {
 		});
 		it('support when no server is provided', function(done) {
 			request("http://localhost:5000/try-all-up-to?login=annessou", function(error, response, body) {
-				expect(body).toEqual(JSON.stringify([
+				expect(body).toContain(JSON.stringify([
 						{
 							challenge: 'challenge 1.1',
 							code: 404,
@@ -123,6 +126,12 @@ describe("Trying to pass challenges >", function() {
 						}
 					]					
 				));
+				done();
+			});			
+		});
+		it('returns the unchanged score of the player', function(done) {
+			request("http://localhost:5000/try-all-up-to?login=annessou&server=http://localhost:6000", function(error, response, body) {
+				expect(body).toContain('"score":0');
 				done();
 			});			
 		});
@@ -165,7 +174,7 @@ describe("Trying to pass challenges >", function() {
 		});
 		it('returns detailed content for success', function(done) {
 			request("http://localhost:5000/try-all-up-to?login=annessou&server=http://localhost:6000", function(error, response, body) {
-				expect(body).toEqual(JSON.stringify([
+				expect(body).toContain(JSON.stringify([
 						{
 							challenge: 'challenge 1.1',
 							code: 200,
@@ -174,6 +183,12 @@ describe("Trying to pass challenges >", function() {
 						}
 					]					
 				));
+				done();
+			});			
+		});
+		it('returns the new score of the player', function(done) {
+			request("http://localhost:5000/try-all-up-to?login=annessou&server=http://localhost:6000", function(error, response, body) {
+				expect(body).toContain('"score":10');
 				done();
 			});			
 		});
@@ -231,16 +246,16 @@ describe("Trying to pass challenges >", function() {
 	
 		it('uses the already known server of the player even if provided', function(done) {
 			request("http://localhost:5000/try-all-up-to?login=bilou&server=any", function(error, response, body) {
-				var result = $.parseJSON(body);
-				expect(result[0].code).toEqual(200);
+				var content = $.parseJSON(body);
+				expect(content.results[0].code).toEqual(200);
 				done();
 			});			
 		});
 		
 		it('supports when no server is provided', function(done) {
 			request("http://localhost:5000/try-all-up-to?login=bilou", function(error, response, body) {
-				var result = $.parseJSON(body);
-				expect(result[0].code).toEqual(200);
+				var content = $.parseJSON(body);
+				expect(content.results[0].code).toEqual(200);
 				done();
 			});			
 		});
@@ -261,7 +276,7 @@ describe("Trying to pass challenges >", function() {
 	
 		it('returns detailed content for success', function(done) {
 			request("http://localhost:5000/try-all-up-to?login=clairette", function(error, response, body) {
-				expect(body).toEqual(JSON.stringify([
+				expect(body).toContain(JSON.stringify([
 						{
 							challenge: 'challenge 1.1',
 							code: 200,
@@ -286,6 +301,12 @@ describe("Trying to pass challenges >", function() {
 					expect(player.portfolio[1].title).toEqual('challenge 1.2');
 					done();
 				});
+			});			
+		});
+		it('returns the new score of the player', function(done) {
+			request("http://localhost:5000/try-all-up-to?login=clairette", function(error, response, body) {
+				expect(body).toContain('"score":20');
+				done();
 			});			
 		});
 	});
