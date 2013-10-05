@@ -23,7 +23,7 @@ describe('Create player listener', function() {
 			spyOn($, 'post').andCallThrough();
 			create.player();
 
-			expect($.post).toHaveBeenCalledWith('/create-player', { login: 'eric', avatar: 'avatar-of-eric' } );
+			expect($.post).toHaveBeenCalledWith('/create-player', { login: 'eric', avatar: 'avatar-of-eric' }, create.success);
 		});
 
 	});

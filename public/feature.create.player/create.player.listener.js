@@ -4,7 +4,7 @@ function CreatePlayerListener() {
 };
 
 CreatePlayerListener.prototype.player = function() {
-	$.post('/create-player', { login: $('#login').val(), avatar: $('#avatar').val() } ).done(this.succcess);
+	$.post('/create-player', { login: $('#login').val(), avatar: $('#avatar').val() }, this.success);
 };
 
 CreatePlayerListener.prototype.success = function(data) {
