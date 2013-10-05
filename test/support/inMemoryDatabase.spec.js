@@ -53,4 +53,14 @@ describe('InMemoryDatabase', function() {
 		});
 	});
 	
+	it('offers a way to create a player', function(done) {
+		var me = { login: 'me', field: 'any' };
+		database.createPlayer(me, function() {
+			database.find('me', function(player) {
+				expect(player.field).toEqual('any');
+				done();
+			});
+		});
+	});
+	
 });

@@ -26,6 +26,10 @@ module.exports = {
 		{
 			prefix: '/create-new-player',
 			target: require('../feature.create.player/create.player.request')
+		},
+		{
+			prefix: '/create-player',
+			target: require('../feature.create.player/post.new.player.request')
 		}
 	],
     

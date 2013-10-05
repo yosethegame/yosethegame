@@ -23,4 +23,9 @@ InMemoryDatabase.prototype.savePlayer = function (player, callback) {
 	callback(player);
 };
 
+InMemoryDatabase.prototype.createPlayer = function (player, callback) {
+	this.players.push(player);
+	callback();
+};
+
 module.exports = InMemoryDatabase;
