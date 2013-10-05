@@ -31,6 +31,10 @@ describe('Router', function() {
 		it('maps home page request', function() {
 			expect(router.endPointOf({ url: '/' })).toBe(require('../public/js/home.page'));
 		});
+		
+		it('maps create-new-player request', function() {
+			expect(router.endPointOf({ url: '/create-new-player' })).toBe(require('../public/feature.create.player/create.player.request.js'));
+		});
 	});
 	
 	describe('Compatibility with http module of node.js:', function() {

@@ -22,6 +22,10 @@ module.exports = {
 		{
 			prefix: '/restart-game',
 			target: require('./restart.game')
+		},
+		{
+			prefix: '/create-new-player',
+			target: require('../feature.create.player/create.player.request')
 		}
 	],
     
