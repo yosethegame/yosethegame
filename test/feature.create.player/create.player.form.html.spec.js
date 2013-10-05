@@ -26,5 +26,41 @@ describe('Create player form', function() {
 		it('has create button to trigger the creation', function() {
 			expect(page('button#create').length).toEqual(1);
 		});	
+		
+		describe('feedback section', function() {
+			
+			it('exists', function() {
+				expect(page('#feedback').length).toEqual(1);
+			});
+
+			it('is hidden by default', function() {
+				expect(page('#feedback').attr('class')).toContain('hidden');
+			});
+
+			describe('message placeholder', function() {
+
+				it('exists', function() {
+					expect(page('#feedback #message').length).toEqual(1);
+				});
+
+			});
+			
+			describe('link to newly created player', function() {
+
+				it('exists', function() {
+					expect(page('#feedback a#player-dashboard').length).toEqual(1);
+				});
+
+				it('is empty', function() {
+					expect(page('#feedback a#player-dashboard').attr('href')).toEqual('');
+				});
+
+				it('invites to access to dashboard', function() {
+					expect(page('#feedback a#player-dashboard').text().length).toBeGreaterThan(0);
+				});
+
+			});
+		});
+				
 	});
 });

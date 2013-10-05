@@ -27,19 +27,14 @@ describe('Creating a player', function() {
 								  .pressButton('#create');
 				}).
 				then(function() {
-					expect(browser.text('#message')).toEqual('Success');
-					done();
+					expect(browser.text('#message')).toEqual('Done :)');
 				}).
 				then(function() {
-					browser.visit('http://localhost:5000/players/eric').
-					then(function() {
-						expect(browser.query("img#avatar").attr('href')).toContain('this-url');
-						done();
-					}).
-					fail(function(error) {
-						expect(error.toString()).toBeNull();
-						done();
-					});
+					return browser.visit('http://localhost:5000/players/eric');
+				}).
+				then(function() {
+					expect(browser.text("#login")).toEqual('eric');
+					done();
 				}).
 				fail(function(error) {
 					expect(error.toString()).toBeNull();
