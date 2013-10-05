@@ -9,8 +9,9 @@ postNewPlayer = function(request, response, database) {
 
     request.on('end', function () {
 		var form = qs.parse(body);	
-		var player = { login: form.login, avatar: form.avatar };	
+		var player = { login: form.login, avatar: form.avatar, score: 0 };	
 		database.createPlayer(player, function() {
+			response.writeHead(201);
 			response.end();
 		});
     });

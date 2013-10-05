@@ -22,7 +22,7 @@ describe('Post player endpoint', function() {
 			database.find('eric', function(player) {
 				expect(player).toBeDefined();
 				done();
-			})
+			});
 		});
 	});
 	
@@ -31,7 +31,7 @@ describe('Post player endpoint', function() {
 			database.find('eric', function(player) {
 				expect(player.avatar).toEqual('this-avatar');
 				done();
-			})
+			});
 		});
 	});
 
@@ -40,7 +40,14 @@ describe('Post player endpoint', function() {
 			database.find('eric', function(player) {
 				expect(player.score).toEqual(0);
 				done();
-			})
+			});
+		});
+	});
+	
+	it('returns 201', function(done) {
+		require('request').post('http://localhost:5000', {form: { login:'eric', avatar:'this-avatar' } }, function(error, response, body) {
+			expect(response.statusCode).toEqual(201);
+			done();
 		});
 	});
 });

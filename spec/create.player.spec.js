@@ -1,7 +1,7 @@
 var Browser = require("zombie");
 var router = require('../public/js/router');
 var Server = require('../public/js/server');
-var InMemoryDatabase = require('../test/support/InMemoryDatabase');
+var InMemoryDatabase = require('../test/support/database.with.levels');
 
 describe('Creating a player', function() {
 
