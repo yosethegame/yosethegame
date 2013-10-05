@@ -27,5 +27,36 @@ describe('Create player listener', function() {
 		});
 
 	});
+	
+	describe('Success', function() {
+		
+		beforeEach(function() {
+			$('body').append( '' +
+				'<input id="login" />' +
+				'<section id="feedback" class="hidden" >' +
+					'<a id="player-dashboard" href="" />' +
+				'</section>'
+			);
+		});
+
+		afterEach(function() {
+			$('#player-dashboard').remove();
+			$('#feedback').remove();
+			$('#login').remove();
+		});
+		
+		it('makes visible the feedback section', function() {
+			create.success();
+			
+			expect($('#feedback').attr('class')).toContain('visible');
+		});
+
+		it('sets the dashboard link', function() {
+			$('#login').val('bilou');
+			create.success();
+			
+			expect($('a#player-dashboard').attr('href')).toEqual('/players/bilou')
+		});
+	});
 		
 });
