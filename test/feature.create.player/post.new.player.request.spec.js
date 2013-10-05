@@ -26,4 +26,21 @@ describe('Post player endpoint', function() {
 		});
 	});
 	
+	it('inserts the given player in database', function(done) {
+		require('request').post('http://localhost:5000', {form: { login:'eric', avatar:'this-avatar' } }, function(error, response, body) {
+			database.find('eric', function(player) {
+				expect(player.avatar).toEqual('this-avatar');
+				done();
+			})
+		});
+	});
+
+	it('initializes the score of the given player', function(done) {
+		require('request').post('http://localhost:5000', {form: { login:'eric', avatar:'this-avatar' } }, function(error, response, body) {
+			database.find('eric', function(player) {
+				expect(player.score).toEqual(0);
+				done();
+			})
+		});
+	});
 });
