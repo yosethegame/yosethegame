@@ -1,7 +1,8 @@
-require('../public/js/utils/string-extensions');
-var $ = require('jquery');
-var array = require('../public/js/utils/array.utils');
-var extract = require('../public/js/utils/array.utils');
+require('../../public/js/utils/string-extensions');
+
+var $ 		= require('jquery');
+var array 	= require('../../public/js/utils/array.utils');
+var extract = require('../../public/js/utils/array.utils');
 
 describe('School', function() {
 
