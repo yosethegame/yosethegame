@@ -1,8 +1,8 @@
-var request = require('request');
-var Server = require('../public/js/server');
-var tryAll = require('../public/js/try-all-up-to');
-var DatabaseWithChallenges = require('../test/support/database.with.levels');
-var $ = require('jquery');
+var request 				= require('request');
+var Server 					= require('../../public/js/server');
+var tryAll 					= require('../../public/feature.try/try-all-up-to');
+var DatabaseWithChallenges  = require('../support/database.with.levels');
+var $ 						= require('jquery');
 
 describe("Trying to pass challenges >", function() {
 

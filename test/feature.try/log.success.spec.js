@@ -1,5 +1,5 @@
-var logSuccess 		= require('../public/js/log.success');
-var InMemoryDatabase	= require('./support/inMemoryDatabase');
+var logSuccess 			= require('../../public/feature.try/log.success');
+var InMemoryDatabase	= require('../support/inMemoryDatabase');
 
 describe('Log success,', function() {
 

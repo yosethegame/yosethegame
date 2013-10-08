@@ -1,5 +1,5 @@
-var $ = require('jquery');
-var TryListener = require('../public/js/try.listener');
+var $ 			= require('jquery');
+var TryListener = require('../../public/feature.try/try.listener');
 
 describe("TryListener: ", function() {
 

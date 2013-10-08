@@ -1,4 +1,4 @@
-var thePlayer = require('./utils/player.utils');
+var thePlayer = require('../js/utils/player.utils');
 
 logSuccess = function(player, challenge) {
 	if (thePlayer.isANew(player)) {

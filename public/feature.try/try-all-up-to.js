@@ -1,12 +1,12 @@
 var request 		= require('request');
 var url 			= require('url');
-var withAttribute 	= require('./utils/array.matchers');
-var extract 		= require('./utils/array.utils');
-var array 			= require('./utils/array.utils');
-var httperror 		= require('./utils/http.errors.utils');
-var thisPlayer 		= require('./utils/player.utils');
-var logSuccessInPlayer 	= require('./log.success');
-var Sorter			= require('./utils/challenges.utils');
+var withAttribute 	= require('../js/utils/array.matchers');
+var extract 		= require('../js/utils/array.utils');
+var array 			= require('../js/utils/array.utils');
+var httperror 		= require('../js/utils/http.errors.utils');
+var thisPlayer 		= require('../js/utils/player.utils');
+var Sorter			= require('../js/utils/challenges.utils');
+var logSuccess 		= require('./log.success');
 
 var responseCount;
 var output;
@@ -93,7 +93,7 @@ var tryChallengeAtIndex = function(index, params, player, database, response, ca
 							challengeToSave = item.challenge;
 						}				
 					});
-					logSuccessInPlayer(player, challengeToSave);
+					logSuccess(player, challengeToSave);
 				}
 				database.savePlayer(player, function() {
 					callback();

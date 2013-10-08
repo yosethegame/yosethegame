@@ -1,5 +1,5 @@
 var $ 			= $ || require('jquery');
-var renderScore = renderScore || require('./utils/render.score');
+var renderScore = renderScore || require('../js/utils/render.score');
 
 function TryListener() {	
 };

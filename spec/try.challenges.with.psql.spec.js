@@ -1,6 +1,6 @@
 var request = require('request');
 var Server = require('../public/js/server');
-var tryAll = require('../public/js/try-all-up-to');
+var tryAll = require('../public/feature.try/try-all-up-to');
 var PSql = require('../public/js/psql.database');
 var $ = require('jquery');
 var DatabaseWithChallenges = require('../test/support/database.with.levels');

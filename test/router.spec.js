@@ -17,7 +17,7 @@ describe('Router', function() {
 		});
 		
 		it('maps try-all-up-to request', function() {
-			expect(router.endPointOf({ url: '/try-all-up-to' })).toBe(require('../public/js/try-all-up-to'));
+			expect(router.endPointOf({ url: '/try-all-up-to' })).toBe(require('../public/feature.try/try-all-up-to'));
 		});
 		
 		it('maps restart-game request', function() {

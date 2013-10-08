@@ -13,7 +13,7 @@ module.exports = {
         },
         {
         	prefix: '/try-all-up-to',
-        	target: require('./try-all-up-to')
+        	target: require('../feature.try/try-all-up-to')
         },
 		{
 			prefix: '/restart-game',
