@@ -16,10 +16,6 @@ module.exports = {
         	target: require('./try-all-up-to')
         },
 		{
-			prefix: '/start-over',
-			target: require('./start.over')
-		},
-		{
 			prefix: '/restart-game',
 			target: require('../feature.restart.game/restart.game')
 		},

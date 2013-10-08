@@ -20,10 +20,6 @@ describe('Router', function() {
 			expect(router.endPointOf({ url: '/try-all-up-to' })).toBe(require('../public/js/try-all-up-to'));
 		});
 		
-		it('maps start-over request', function() {
-			expect(router.endPointOf({ url: '/start-over' })).toBe(require('../public/js/start.over'));
-		});
-
 		it('maps restart-game request', function() {
 			expect(router.endPointOf({ url: '/restart-game' })).toBe(require('../public/feature.restart.game/restart.game'));
 		});
