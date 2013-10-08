@@ -1,5 +1,5 @@
 var $ = require('jquery');
-var Restart = require('../public/js/restart.game.listener');
+var Restart = require('../../public/feature.restart.game/restart.game.listener');
 
 describe("Restart game listener: ", function() {
 

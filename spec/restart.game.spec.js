@@ -4,7 +4,7 @@ var Server = require('../public/js/server');
 var DatabaseWithChallenges = require('../test/support/database.with.levels');
 var fs = require('fs');
 
-describe("Start over all", function() {
+describe("Restart game:", function() {
 
 	var server = new Server(router);
 	var remote;
@@ -33,7 +33,7 @@ describe("Start over all", function() {
 		server.stop();
 	});
 	
-	describe('When one starts over,', function() {
+	describe('When one restarts game,', function() {
 		
 		it('he sees the first challenge', function(done) {
 			var browser = new Browser();

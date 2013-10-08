@@ -1,5 +1,5 @@
 var url 			= require('url');
-var thePlayer 		= require('./utils/player.utils');
+var thePlayer 		= require('../js/utils/player.utils');
 
 restartgame = function(request, response, database) {
 	var params = url.parse(request.url, true);	

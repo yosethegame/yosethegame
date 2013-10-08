@@ -1,7 +1,7 @@
-var restartgame = require('../public/js/restart.game');
-var Example = require('./support/database.with.levels');
+var restartgame = require('../../public/feature.restart.game/restart.game');
+var Example = require('../support/database.with.levels');
 
-describe('Start over:', function() {
+describe('Restart game:', function() {
 
 	var database;
 

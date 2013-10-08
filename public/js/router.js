@@ -21,7 +21,7 @@ module.exports = {
 		},
 		{
 			prefix: '/restart-game',
-			target: require('./restart.game')
+			target: require('../feature.restart.game/restart.game')
 		},
 		{
 			prefix: '/create-new-player',
