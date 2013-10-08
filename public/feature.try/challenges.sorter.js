@@ -1,4 +1,4 @@
-var array = require('./array.utils');
+var array = require('../js/utils/array.utils');
 
 function Sorter() { };
 

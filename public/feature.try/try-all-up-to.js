@@ -5,7 +5,7 @@ var extract 		= require('../js/utils/array.utils');
 var array 			= require('../js/utils/array.utils');
 var httperror 		= require('../js/utils/http.errors.utils');
 var thisPlayer 		= require('../js/utils/player.utils');
-var Sorter			= require('../js/utils/challenges.utils');
+var Sorter			= require('./challenges.sorter');
 var logSuccess 		= require('./log.success');
 
 var responseCount;
@@ -28,7 +28,6 @@ var sortOutput = function(results, database) {
 	});
 	return sorted;
 };
-
 
 var allChallengesToTry = function(player, database) {
 	var challengesToTry = [];

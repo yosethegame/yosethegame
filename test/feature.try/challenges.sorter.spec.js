@@ -1,4 +1,4 @@
-var Sorter = require('../../public/js/utils/challenges.utils');
+var Sorter = require('../../public/feature.try/challenges.sorter');
 
 describe('Challenges utils >', function() {
 
