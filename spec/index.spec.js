@@ -1,7 +1,7 @@
 var Browser = require("zombie");
 var router = require('../public/js/router');
 var Server = require('../public/js/server');
-var InMemoryDatabase = require('../test/support/InMemoryDatabase');
+var DatabaseWithChallenges = require('../test/support/database.with.levels');
 
 describe("Home page", function() {
 
@@ -12,7 +12,7 @@ describe("Home page", function() {
 		server = new Server(router);
 		browser = new Browser();
 
-		database = new InMemoryDatabase();
+		database = new DatabaseWithChallenges();
 		database.players = [
 			{
 				login: 'annessou',
@@ -22,19 +22,6 @@ describe("Home page", function() {
 				login: 'bilou',
 				avatar: 'https://si0.twimg.com/profile_images/2646228289/8e597d3fd146485733ad4f132738898d_bigger.png',
 				portfolio: [ { title: 'challenge 1.1' } ]
-			}
-		];
-		database.levels = [
-			{
-				number: 1,
-				name: 'level 1',
-				challenges: [
-					{
-						title: 'challenge 1.1',
-						file: '../spec/data/dummy.html',
-						requester: '../../test/support/empty.request',
-						checker: '../../test/support/response.always.valid',
-					}				]
 			}
 		];
 		server.useDatabase(database);

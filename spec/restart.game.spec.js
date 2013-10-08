@@ -1,7 +1,7 @@
 var Browser = require("zombie");
 var router = require('../public/js/router');
 var Server = require('../public/js/server');
-var InMemoryDatabase = require('../test/support/InMemoryDatabase');
+var DatabaseWithChallenges = require('../test/support/database.with.levels');
 var fs = require('fs');
 
 describe("Start over all", function() {
@@ -16,41 +16,13 @@ describe("Start over all", function() {
 			})
 		.listen(6000);			
 
-		database = new InMemoryDatabase();
+		database = new DatabaseWithChallenges();
 		database.players = [
 			{
 				login: 'bilou',
 				server: 'http://localhost:6000',
-				portfolio: [ { title: 'Ping' }
-				]
+				portfolio: [ { title: 'challenge 1.1' } ]
 			}
-		];
-		database.levels = [
-			{
-				number: 1,
-				name: 'level 1',
-				challenges: [
-					{
-						title: 'Ping',
-						file: 'public/challenge.ping/ping.html',
-						requester: '../../test/support/empty.request',
-						checker: '../../test/support/response.always.valid',
-					}
-				]
-			},
-			{
-				number: 2,
-				name: 'level 2',
-				challenges: [
-					{
-						title: 'Power of two',
-						file: 'public/challenge.power.of.two/power.of.two.html',
-						requester: '../../test/support/empty.request',
-						checker: '../../test/support/response.always.valid',
-					}
-				]
-			}
-			
 		];
 		server.useDatabase(database);
 		server.start();
@@ -70,7 +42,7 @@ describe("Start over all", function() {
 					return browser.clickLink("#restart-game");
 				}).
 				then(function() {
-					expect(browser.text("#next-challenge-title")).toEqual('Ping');
+					expect(browser.text("#next-challenge-title")).toEqual('challenge 1.1');
 					done();
 				}).
 				fail(function(error) {

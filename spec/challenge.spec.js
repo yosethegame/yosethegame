@@ -1,10 +1,10 @@
 var Browser = require("zombie");
 var router = require('../public/js/router');
 var Server = require('../public/js/server');
-var InMemoryDatabase = require('../test/support/InMemoryDatabase');
+var DatabaseWithChallenges = require('../test/support/database.with.levels');
 var fs = require('fs');
 
-describe("Prime factors decomposition level", function() {
+describe("Game experience", function() {
 
 	var server = new Server(router);
 	var remote;
@@ -16,7 +16,7 @@ describe("Prime factors decomposition level", function() {
 			})
 		.listen(6000);			
 
-		database = new InMemoryDatabase();
+		database = new DatabaseWithChallenges();
 		database.players = [
 			{
 				login: 'annessou',
@@ -24,27 +24,7 @@ describe("Prime factors decomposition level", function() {
 			{
 				login: 'bilou',
 				server: 'http://localhost:6000',
-				portfolio: [ { title: 'Get ready for fun :)' } ]
-			}
-		];
-		database.levels = [
-			{
-				number: 1,
-				name: 'level 1',
-				challenges: [
-					{
-						title: 'Get ready for fun :)',
-						file: 'public/challenge.ping/ping.html',
-						requester: '../../test/support/empty.request',
-						checker: '../../test/support/response.always.valid',
-					},
-					{
-						title: 'Power of two',
-						file: 'public/challenge.power.of.two/power.of.two.html',
-						requester: '../../test/support/empty.request',
-						checker: '../../test/support/response.always.valid',
-					}
-				]
+				portfolio: [ { title: 'challenge 1.1' } ]
 			}
 		];
 		server.useDatabase(database);
@@ -66,7 +46,7 @@ describe("Prime factors decomposition level", function() {
 						   .pressButton("#try");
 				}).
 				then(function() {
-					expect(browser.text("#result_1 .challenge")).toEqual('Get ready for fun :)');
+					expect(browser.text("#result_1 .challenge")).toEqual('challenge 1.1');
 					done();
 				}).
 				then(function() {
@@ -102,7 +82,7 @@ describe("Prime factors decomposition level", function() {
 						   .pressButton("#try");
 				}).
 				then(function() {
-					expect(browser.text("#result_1 .challenge")).toEqual('Get ready for fun :)');
+					expect(browser.text("#result_1 .challenge")).toEqual('challenge 1.1');
 					done();
 				}).
 				then(function() {
@@ -133,7 +113,7 @@ describe("Prime factors decomposition level", function() {
 					return browser.pressButton("#try");
 				}).
 				then(function() {
-					expect(browser.text("#result_1 .challenge")).toEqual('Get ready for fun :)');
+					expect(browser.text("#result_1 .challenge")).toEqual('challenge 1.1');
 					done();
 				}).
 				then(function() {
@@ -161,7 +141,7 @@ describe("Prime factors decomposition level", function() {
 					return browser.pressButton("#try");
 				}).
 				then(function() {
-					expect(browser.text("#result_2 .challenge")).toEqual('Power of two');
+					expect(browser.text("#result_2 .challenge")).toEqual('challenge 1.2');
 					done();
 				}).
 				fail(function(error) {
