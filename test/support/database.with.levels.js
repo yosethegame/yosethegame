@@ -4,7 +4,7 @@ function Example() {
 	this.levels = [
 		{ 
 			number: 1,
-			name: 'level 1',
+			name: 'The first level',
 			challenges: [ 
 				{ 
 					title: 'challenge 1.1',
@@ -21,7 +21,7 @@ function Example() {
 		},
 		{ 
 			number: 2,
-			name: 'level 2',
+			name: 'The second level',
 			challenges: [ 
 				{ 
 					title: 'challenge 2.1', 

@@ -1,13 +1,10 @@
-var home 			 = require('../public/js/home.page');
-var cheerio 		 = require('cheerio');
-var InMemoryDatabase = require('./support/InMemoryDatabase');
+var home 			 	   = require('../public/js/home.page');
+var cheerio 		 	   = require('cheerio');
+var DatabaseWithChallenges = require('../test/support/database.with.levels');
 
 describe('Home page building', function() {
 
-	var database = { levels: [
-			{ number: 1, name: 'one', challenges: [ { title: 'challenge 1.1' }, { title: 'challenge 1.2' } ] },
-			{ number: 2, name: 'two', challenges: [ { title: 'challenge 2.1' } ] }
-		]};
+	var database = new DatabaseWithChallenges();
 
 	it('is based on player line template', function() {
 		var html = '<ul id="players"><li class="player"></li></ul>';
@@ -75,13 +72,13 @@ describe('Home page building', function() {
 			it('is level 1 when the player is a new player', function() {
 				var line = home.buildLine(template, { avatar: 'me.png' }, database );
 				
-				expect(cheerio.load(line)('.player .level').text()).toEqual('Level 1 : one');
+				expect(cheerio.load(line)('.player .level').text()).toEqual('Level 1 : The first level');
 			});
 			
 			it('is level 2 when player has completed level 1', function() {
 				var line = home.buildLine(template, { avatar: 'me.png', portfolio: [ { title: 'challenge 1.1' }, { title: 'challenge 1.2' } ] }, database );
 
-				expect(cheerio.load(line)('.player .level').text()).toEqual('Level 2 : two');
+				expect(cheerio.load(line)('.player .level').text()).toEqual('Level 2 : The second level');
 			});
 		});
 		

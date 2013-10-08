@@ -1,7 +1,7 @@
 var request = require('request');
 var Server = require('../public/js/server');
 var tryAll = require('../public/js/try-all-up-to');
-var InMemoryDatabase = require('./support/inMemoryDatabase');
+var DatabaseWithChallenges = require('../test/support/database.with.levels');
 var $ = require('jquery');
 
 describe("Trying to pass challenges >", function() {
@@ -12,11 +12,6 @@ describe("Trying to pass challenges >", function() {
 	var bilou;
 	var clairette;
 	var ericminio;
-
-	var challenge11;
-	var challenge12;
-	var challenge21;
-	var challenge22;
 
 	beforeEach(function() {
 		annessou = {
@@ -41,45 +36,8 @@ describe("Trying to pass challenges >", function() {
 			portfolio: [ { title: 'challenge 1.1' }, { title: 'challenge 1.2' }, { title: 'challenge 2.1' } ]
 		};
 		
-		challenge11 = {
-			title: 'challenge 1.1',
-			file: 'thisFile',
-			checker: '../../test/support/response.always.valid',
-			requester: '../../test/support/empty.request',
-		};
-		challenge12 = {
-			title: 'challenge 1.2',
-			file: 'secondFile',
-			checker: '../../test/support/response.always.valid',
-			requester: '../../test/support/empty.request',
-		};
-		challenge21 = {
-			title: 'challenge 2.1',
-			file: 'thisFile',
-			checker: '../../test/support/response.always.valid',
-			requester: '../../test/support/empty.request',
-		};
-		challenge22 = {
-			title: 'challenge 2.2',
-			file: 'secondFile',
-			checker: '../../test/support/response.always.valid',
-			requester: '../../test/support/empty.request',
-		};
-		
-		database = new InMemoryDatabase();
+		database = new DatabaseWithChallenges();
 		database.players = [ annessou, bilou, clairette, ericminio ];
-		database.levels = [
-			{
-				number: 1,
-				name: 'level 1',
-				challenges: [ challenge11, challenge12 ]
-			},
-			{
-				number: 2,
-				name: 'level 2',
-				challenges: [ challenge21, challenge22 ]
-			}
-		];
 		server = require('http').createServer(function(incoming, response) {
 			tryAll(incoming, response, database);
 		}).listen(5000);
@@ -326,7 +284,7 @@ describe("Trying to pass challenges >", function() {
 			});
 			
 			it('is the first challenge', function() {
-				expect(challenges[0]).toEqual(challenge11);
+				expect(challenges[0].title).toEqual('challenge 1.1');
 			});
 		});
 		
@@ -341,11 +299,11 @@ describe("Trying to pass challenges >", function() {
 			});
 			
 			it('must try the first challenge', function() {
-				expect(challenges[0]).toEqual(challenge11);
+				expect(challenges[0].title).toEqual('challenge 1.1');
 			});
 			
 			it('must try the second challenge', function() {
-				expect(challenges[1]).toEqual(challenge12);
+				expect(challenges[1].title).toEqual('challenge 1.2');
 			});
 		});
 		
@@ -360,19 +318,19 @@ describe("Trying to pass challenges >", function() {
 			});
 			
 			it('must try the first challenge', function() {
-				expect(challenges[0]).toEqual(challenge11);
+				expect(challenges[0].title).toEqual('challenge 1.1');
 			});
 			
 			it('must try the second challenge', function() {
-				expect(challenges[1]).toEqual(challenge12);
+				expect(challenges[1].title).toEqual('challenge 1.2');
 			});
 
 			it('must try the third challenge', function() {
-				expect(challenges[2]).toEqual(challenge21);
+				expect(challenges[2].title).toEqual('challenge 2.1');
 			});
 
 			it('must try the fourth challenge', function() {
-				expect(challenges[3]).toEqual(challenge22);
+				expect(challenges[3].title).toEqual('challenge 2.2');
 			});
 		});
 

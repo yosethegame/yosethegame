@@ -336,7 +336,7 @@ describe('Dashboard >', function() {
 			});
 			
 			it('displays the name of level 1', function() {
-				expect(page('#level-name').text()).toEqual('level 1');
+				expect(page('#level-name').text()).toEqual('The first level');
 			});
 		});
 		
