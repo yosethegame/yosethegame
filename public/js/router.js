@@ -9,7 +9,7 @@ module.exports = {
     routes: [
     	{
         	prefix: '/players/',
-        	target: require('./dashboard.js')
+        	target: require('../feature.dashboard/display.dashboard.js')
         },
         {
         	prefix: '/try-all-up-to',

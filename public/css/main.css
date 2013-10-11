@@ -8,19 +8,17 @@
 	-webkit-animation:horizontal-loop 1s linear infinite alternate; 
 }
 
-.fond {
-	margin-left:5px;
-	margin-top:5px;
-	margin-right:5px;
-}
-
 #sidebar {
 	width:100%;
-	padding:5px;
+	padding-left:5px;
+	padding-right:5px;
+	padding-top:5px;
+	padding-bottom:5px;
 	min-height:90px;
 
 	background-color: #DAF5D7;
-	border-radius:5px;
+	
+	position:fixed;
 }
 
 #toto {
@@ -82,7 +80,7 @@
 }
 
 #level {
-	float:left;
+	clear: both;
 	margin:0;
 }
 
@@ -138,6 +136,8 @@
 
 #content {
 	padding-left:80px;
+	padding-top:120px;
+	padding-right:5px;
 }
 
 .title {
@@ -186,4 +186,30 @@
 	background-color: #eeeeee;
 	border:1px solid green;
 	border-radius:5px;
+}
+
+#worlds {
+	margin-top:20px;
+	margin-right:50px;
+}
+
+#worlds td {
+	vertical-align:top;
+}
+
+.levels {
+	list-style-type:none;
+	margin-left:20px;
+	padding-left:10px;
+	padding-top:0px;
+	border-left:5px solid #DAF5D7;
+}
+
+.progress {
+	height:33px;
+	margin-bottom:0px;
+}
+
+#worlds .progress {
+	width: 100%;
 }

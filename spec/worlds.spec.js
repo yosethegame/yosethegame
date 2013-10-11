@@ -17,16 +17,6 @@ describe("Dasboard,", function() {
 		.listen(6000);			
 
 		database = new DatabaseWithChallenges();
-		database.players = [
-			{
-				login: 'annessou',
-			},
-			{
-				login: 'bilou',
-				server: 'http://localhost:6000',
-				portfolio: [ { title: 'challenge 1.1' } ]
-			}
-		];
 		server.useDatabase(database);
 		server.start();
 	});
@@ -38,11 +28,19 @@ describe("Dasboard,", function() {
 	
 	describe("when player is a new player,", function() {
 		
+		beforeEach(function() {
+			database.players = [
+				{
+					login: 'annessou',
+				},
+			];
+		});
+		
 		it('displays the first world as open', function(done) {
 			var browser = new Browser();
 			browser.visit('http://localhost:5000/players/annessou').
 				then(function() {
-					expect(browser.text("a#world1")).toEqual('world 1');
+					expect(browser.text("table#worlds tr:nth-child(1) td:nth-child(1)")).toEqual('world 1');
 					done();
 				}).
 				fail(function(error) {
