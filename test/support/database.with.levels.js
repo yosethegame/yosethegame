@@ -3,8 +3,13 @@ var InMemoryDatabase = require('./inMemoryDatabase');
 function Example() {
 	this.worlds = [
 		{
-			number: 1,
-			name: 'world 1'
+			name: 'world 1',
+			levels: [ 
+				{
+					id: 1,
+					title: 'the first challenge',
+				}
+			]
 		},
 		{
 			number: 2,

@@ -9,7 +9,7 @@ describe('Router', function() {
 		});
 
 		it('maps dashboard request', function() {
-			expect(router.endPointOf({ url: '/players/any' })).toBe(require('../public/js/dashboard'));
+			expect(router.endPointOf({ url: '/players/any' })).toBe(require('../public/feature.dashboard/display.dashboard'));
 		});
 		
 		it('maps static content request', function() {

@@ -9,5 +9,11 @@ module.exports = {
 		return function(item) {
 			return item.title == title;
 		};
+	},
+	
+	equalsTo: function(value) {
+		return function(item) {
+			return item == value;
+		};
 	}
 }

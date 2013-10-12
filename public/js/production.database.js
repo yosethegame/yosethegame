@@ -1,6 +1,20 @@
 var PSql = require('./psql.database');
 
 function ProductionDatabase() {
+	this.worlds = [
+	{
+		name: 'world 1',
+		levels: [ 
+			{
+				title: 'the ping challenge',
+			}
+		]
+	},
+	{
+		number: 2,
+		name: 'world 2'
+	}
+	]
 	this.levels = [
 		{
 			number: 1,
