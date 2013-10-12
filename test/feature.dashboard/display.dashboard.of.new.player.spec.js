@@ -13,6 +13,8 @@ describe('The dashboard of a new player', function() {
 	var level;
 	
 	var loadPageWithDatabase = function(database) {
+		database.worlds[0].isOpenFor = function(player) { return true; }
+		database.worlds[1].isOpenFor = function(player) { return false; }
 		database.players = [ { login: 'ericminio', } ];
 		dashboard({ url: '/players/ericminio' }, response, database);
 		page = cheerio.load(response.html);

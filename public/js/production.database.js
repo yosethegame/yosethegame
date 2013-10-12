@@ -4,6 +4,7 @@ function ProductionDatabase() {
 	this.worlds = [
 	{
 		name: 'world 1',
+		isOpenFor: function(player) { return true; },
 		levels: [ 
 			{
 				title: 'the ping challenge',
@@ -12,7 +13,8 @@ function ProductionDatabase() {
 	},
 	{
 		number: 2,
-		name: 'world 2'
+		isOpenFor: function(player) { return false; },
+		name: 'world 2',
 	}
 	]
 	this.levels = [

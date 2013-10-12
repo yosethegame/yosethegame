@@ -8,12 +8,29 @@ function Example() {
 				{
 					id: 1,
 					title: 'the first challenge',
-				}
+				},
+				{
+					id: 2,
+					title: 'the second challenge',
+				},
 			]
 		},
 		{
-			number: 2,
-			name: 'world 2'
+			name: 'world 2',
+			levels: [ 
+				{
+					id: 3,
+					title: 'the third challenge',
+				},
+				{
+					id: 4,
+					title: 'the fourth challenge',
+				},
+				{
+					id: 5,
+					title: 'the fifth challenge',
+				},
+			]
 		}
 	];
 	

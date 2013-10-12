@@ -18,27 +18,40 @@ dashboard = function(request, response, database) {
 									 .empty().append(player.server);
 		}
 		
-		var world1 = 'table#worlds tr:nth-child(1) td:nth-child(1)';
-		page(world1).text(database.worlds[0].name);
+		var openWorldTemplate = page.html('table#worlds tr.open-world');
+		var lockedWorldTemplate = page.html('table#worlds tr.locked-world');
+		page('table#worlds').empty();
+		
+		var worldNumber = 0;
+		array.forEach(database.worlds, function(world) {
+			worldNumber ++;
+			
+			if (world.isOpenFor(player)) {
+				page('table#worlds').append(openWorldTemplate);
 
-		var world = database.worlds[0];
-		var levelNumber = 0;
-		var wordLevelsSelector = 'table#worlds tr:nth-child(1) td:nth-child(2) ul.levels';
-		page(wordLevelsSelector).empty();
-		var nextChallengeOfWorldDisplayed = false;
-		array.forEach(world.levels, function(level) {
-			levelNumber ++;
-			if (!thePlayer.isANew(player) && array.hasOneItemIn(player.portfolio, withValue.equalsTo(level.id))) {
-				var levelMention = 'level 1.' + levelNumber + ' : ' + level.title;
+				var worldSelector = 'table#worlds tr:nth-child(' + worldNumber + ')';
+				page(worldSelector+ ' td:nth-child(1)').text(world.name);
+				var levelNumber = 0;
+				var wordLevelsSelector = worldSelector + ' td:nth-child(2) ul.levels';
+				page(wordLevelsSelector).empty();
+				var nextChallengeOfWorldDisplayed = false;
+				array.forEach(world.levels, function(level) {
+					levelNumber ++;
+					if (!thePlayer.isANew(player) && array.hasOneItemIn(player.portfolio, withValue.equalsTo(level.id))) {
+						var levelMention = 'level ' + worldNumber + '.' + levelNumber + ' : ' + level.title;
+					} else {
+						if (! nextChallengeOfWorldDisplayed ) {
+							var levelMention = '<a href="/players/' + login + '/play/world/' + worldNumber + '">level ' + worldNumber + '.' + levelNumber + ' : ' + level.title + '</a>';
+							nextChallengeOfWorldDisplayed = true;
+						} else {
+							var levelMention = '<img src="/img/locker.png" width="60" height="60" class="img-responsive">';
+						}
+					}
+					page(wordLevelsSelector).append('<li>' + levelMention + '</li>');			
+				});
 			} else {
-				if (! nextChallengeOfWorldDisplayed ) {
-					var levelMention = '<a href="/players/' + login + '/play/world/1">level 1.' + levelNumber + ' : ' + level.title + '</a>';
-					nextChallengeOfWorldDisplayed = true;
-				} else {
-					var levelMention = '<img src="/img/locker.png" width="60" height="60" class="img-responsive">';
-				}
+				page('table#worlds').append(lockedWorldTemplate);
 			}
-			page(wordLevelsSelector).append('<li>' + levelMention + '</li>');
 			
 		});
 
