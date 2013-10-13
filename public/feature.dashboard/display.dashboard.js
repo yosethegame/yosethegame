@@ -27,6 +27,7 @@ dashboard = function(request, response, database) {
 		if (!thePlayer.isANew(player)) {
 			page('#server-of-player').addClass('visible').removeClass('hidden')
 									 .empty().append(player.server);
+			page('#restart-game-link').addClass('visible').removeClass('hidden');
 		}
 		
 		var openWorldTemplate = page.html('table#worlds tr.open-world');
