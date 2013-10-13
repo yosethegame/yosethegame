@@ -23,7 +23,7 @@ describe('Unknown player mention', function() {
 		dashboard({ url: '/players/ericminio' }, response, database);
 		page = cheerio.load(response.html);
 
-		expect(page.html()).toContain('hidden');
+		expect(page('#info').attr('class')).toContain('hidden');
 	});
 	
 	it('is visible when player is unknown', function() {
@@ -33,5 +33,10 @@ describe('Unknown player mention', function() {
 		expect(page('#info').attr('class')).toContain('visible');
 	});
 	
-		
+	it('switches player section to hidden when the player is unknown', function() {
+		dashboard({ url: '/players/stef' }, response, database);
+		page = cheerio.load(response.html);
+
+		expect(page('#player').attr('class')).toContain('hidden');
+	});
 });

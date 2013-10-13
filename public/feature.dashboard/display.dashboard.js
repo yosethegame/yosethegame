@@ -15,6 +15,8 @@ dashboard = function(request, response, database) {
 	database.find(login, function(player) {
 
 		if (player == undefined) {
+			page('#info').addClass('visible').removeClass('hidden');
+			page('#player').addClass('hidden').removeClass('visible');
 			response.write(page.html());
 			response.end();
 			return;
