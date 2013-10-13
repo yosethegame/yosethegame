@@ -37,7 +37,7 @@ describe('Router', function() {
 		});
 		
 		it('maps playground request', function() {
-			expect(router.endPointOf({ url: '/players/any/play/world/42' })).toBe(require('../public/feature.playground/playground.request.js'));
+			expect(router.endPointOf({ url: '/players/any/play/world/42' })).toBe(require('../public/feature.playground/display.playground.request.js'));
 		});
 	});
 	
@@ -59,7 +59,7 @@ describe('Router', function() {
 			var called = false;
 			router.routes = [ 
 				{ 
-					prefix: '/gate', 
+					pattern: /.*/, 
 					target: function(request, response) { 
 						called = true; 
 						response.end();

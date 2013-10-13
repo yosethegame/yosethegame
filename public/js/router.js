@@ -8,30 +8,34 @@ module.exports = {
 	
     routes: [
     	{
-        	prefix: '/players/',
+        	pattern: /^\/players\/[A-z]+$/,
         	target: require('../feature.dashboard/display.dashboard.js')
         },
         {
-        	prefix: '/try-all-up-to',
+        	pattern: /^\/try-all-up-to$/,
         	target: require('../feature.try/try-all-up-to')
         },
 		{
-			prefix: '/restart-game',
+        	pattern: /^\/restart-game$/,
 			target: require('../feature.restart.game/restart.game')
 		},
 		{
-			prefix: '/create-new-player',
+        	pattern: /^\/create-new-player$/,
 			target: require('../feature.create.player/create.player.request')
 		},
 		{
-			prefix: '/create-player',
+        	pattern: /^\/create-player$/,
 			target: require('../feature.create.player/post.new.player.request')
+		},
+		{
+			pattern: /^\/players\/[A-z]+\/play\/world\/[0-9]+$/,
+			target: require('../feature.playground/display.playground.request')
 		}
 	],
     
 	endPointOf: function(request) {
     	for (i=0; i<this.routes.length; i++) {
-        	if (request.url.startsWith(this.routes[i].prefix)) {
+			if (this.routes[i].pattern.test(request.url)) {
             	return this.routes[i].target;
 	        }
 	    }
