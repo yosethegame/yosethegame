@@ -1,6 +1,7 @@
 var url 		= require('url');
 var fs 			= require('fs');
 var cheerio 	= require('cheerio');
+var renderScore	= require('../js/utils/render.score');
 
 playground = function(request, response, database) {
 	var login = /^\/players\/(.*)\/play/.exec(request.url)[1];
@@ -18,6 +19,7 @@ playground = function(request, response, database) {
 		}
 		
 		page("#avatar").attr('src', player.avatar);
+		page('#score').text(renderScore(player.score));
 
 		response.write(page.html());
 		response.end();

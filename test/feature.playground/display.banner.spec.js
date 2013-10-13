@@ -28,8 +28,14 @@ describe('The banner', function() {
 	});
 	
 	it('displays the score', function() {
-		expect(page('#score').text()).toEqual('000120');
+		expect(page('#score').text()).toEqual('000042');
 	});
 	
-	
+	describe('Greetings', function() {
+		
+		it('are the title of the level', function() {
+			expect(page('#greetings').text()).toContain('level 1.1 : the first challenge');
+		});
+		
+	});
 });
