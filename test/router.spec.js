@@ -35,6 +35,10 @@ describe('Router', function() {
 		it('maps create-player post request', function() {
 			expect(router.endPointOf({ url: '/create-player' })).toBe(require('../public/feature.create.player/post.new.player.request.js'));
 		});
+		
+		it('maps playground request', function() {
+			expect(router.endPointOf({ url: '/players/any/play/world/42' })).toBe(require('../public/feature.playground/playground.request.js'));
+		});
 	});
 	
 	describe('Compatibility with http module of node.js:', function() {
