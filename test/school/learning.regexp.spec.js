@@ -81,10 +81,14 @@ describe('Regexp', function() {
 	
 	describe('Data extraction', function() {
 		
-		var pattern = /^\/players\/(.*)\/play/;
+		var pattern = /^\/players\/(.*)\/play\/world\/(.*)/;
 	
 		it('is built-in', function() {
 			expect(pattern.exec('/players/ericminio/play/world/1')[1]).toEqual('ericminio');
+		});
+		
+		it('can handle multiple parameters', function() {
+			expect(pattern.exec('/players/ericminio/play/world/42')[2]).toEqual('42');
 		});
 		
 		it('returns null when not found', function() {

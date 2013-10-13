@@ -14,13 +14,12 @@ describe('The banner', function() {
 			login: 'ericminio', 			
 			avatar: 'this-avatar',
 			score: 42
-		}
+		};
 		database.worlds[0].isOpenFor = function(player) { return true; }
 		database.worlds[1].isOpenFor = function(player) { return true; }
 		database.players = [ player ];
 		playground({ url: '/players/ericminio/play/world/1' }, response, database);
 		page = cheerio.load(response.html);
-
 	});
 	
 	it('displays the avatar', function() {
@@ -33,9 +32,21 @@ describe('The banner', function() {
 	
 	describe('Greetings', function() {
 		
-		it('are the title of the level', function() {
+		it('contains the title of the level', function() {
 			expect(page('#greetings').text()).toContain('level 1.1 : the first challenge');
 		});
 		
+		it('adapts to the portfolio of the player', function() {
+			player.portfolio = [ 1, 2, 3 ];
+			playground({ url: '/players/ericminio/play/world/2' }, response, database);
+			page = cheerio.load(response.html);
+
+			expect(page('#greetings').text()).toContain('level 2.2 : the fourth challenge');
+		});
+		
+	});
+	
+	it('updates the link to the dashboard of the player', function() {
+		expect(page('#dashboard-link').attr('href')).toEqual('/players/ericminio');
 	});
 });
