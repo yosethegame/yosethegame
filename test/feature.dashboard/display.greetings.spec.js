@@ -23,7 +23,7 @@ describe('The warm welcome message', function() {
 		dashboard({ url: '/players/ericminio' }, response, database);
 		page = cheerio.load(response.html);
 
-		expect(page('#greetings').text()).toEqual('Welcome home ericminio :)');
+		expect(page('#greetings').text()).toContain('Welcome home ericminio :)');
 	});
 	
 	
