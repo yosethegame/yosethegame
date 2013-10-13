@@ -51,8 +51,25 @@ describe('The progress bar', function() {
 			loadPageWithDatabase(database);
 		});
 		
-		it('is empty', function() {
+		it('is in sync with the portfolio', function() {
 			expect(world.number(1)).toHaveProgressBarOf('50%');
+		});
+
+	});
+	
+	describe('of a player with a portfolio that might lead to not rounded value', function() {
+		
+		beforeEach(function() {	
+			player = {
+				login: 'ericminio', 			
+				server: 'this-server',
+				portfolio: [ 1, 2, 3 ]
+			}
+			loadPageWithDatabase(database);
+		});
+		
+		it('is rounded', function() {
+			expect(world.number(2)).toHaveProgressBarOf('33%');
 		});
 
 	});

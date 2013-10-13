@@ -35,9 +35,11 @@ dashboard = function(request, response, database) {
 				var wordLevelsSelector = worldSelector + ' td:nth-child(2) ul.levels';
 				page(wordLevelsSelector).empty();
 				var nextChallengeOfWorldDisplayed = false;
+				var challengesDoneInThisWorld = 0
 				array.forEach(world.levels, function(level) {
 					levelNumber ++;
 					if (!thePlayer.isANew(player) && array.hasOneItemIn(player.portfolio, withValue.equalsTo(level.id))) {
+						challengesDoneInThisWorld ++;
 						var levelMention = 'level ' + worldNumber + '.' + levelNumber + ' : ' + level.title;
 					} else {
 						if (! nextChallengeOfWorldDisplayed ) {
@@ -49,6 +51,8 @@ dashboard = function(request, response, database) {
 					}
 					page(wordLevelsSelector).append('<li>' + levelMention + '</li>');			
 				});
+				var progress = 100 * challengesDoneInThisWorld / world.levels.length;
+				page(worldSelector + ' td:nth-child(2) .progress-bar').attr('style', 'width:' + Math.round(progress) + '%')
 			} else {
 				page('table#worlds').append(lockedWorldTemplate);
 			}
