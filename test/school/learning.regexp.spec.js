@@ -78,4 +78,17 @@ describe('Regexp', function() {
 		});
 		
 	});
+	
+	describe('Data extraction', function() {
+		
+		var pattern = /^\/players\/(.*)\/play/;
+	
+		it('is built-in', function() {
+			expect(pattern.exec('/players/ericminio/play/world/1')[1]).toEqual('ericminio');
+		});
+		
+		it('returns null when not found', function() {
+			expect(pattern.exec('/non/matching')).toEqual(null);
+		});
+	});
 });
