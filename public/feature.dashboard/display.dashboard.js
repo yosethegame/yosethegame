@@ -1,8 +1,9 @@
-var fs 				= require('fs');
-var cheerio			= require('cheerio');
-var thePlayer		= require('../js/utils/player.utils');
-var array			= require('../js/utils/array.utils');
-var withValue		= require('../js/utils/array.matchers');
+var fs 			= require('fs');
+var cheerio		= require('cheerio');
+var thePlayer	= require('../js/utils/player.utils');
+var array		= require('../js/utils/array.utils');
+var withValue	= require('../js/utils/array.matchers');
+var renderScore	= require('../js/utils/render.score');
 
 require('../js/utils/string-extensions');
 
@@ -12,6 +13,14 @@ dashboard = function(request, response, database) {
 	var page = cheerio.load(html);
 
 	database.find(login, function(player) {
+
+		if (player == undefined) {
+			response.write(page.html());
+			response.end();
+			return;
+		}
+
+		page('#score').text(renderScore(player.score));
 
 		if (!thePlayer.isANew(player)) {
 			page('#server-of-player').addClass('visible').removeClass('hidden')
