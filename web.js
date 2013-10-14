@@ -12,8 +12,6 @@ var ericminio = {
 };
 
 database.createPlayer(ericminio, function() {
-	database.createPlayer(fperron, function() {
-	});
 });
 
 
