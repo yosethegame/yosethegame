@@ -185,7 +185,6 @@ describe("Trying to pass challenges >", function() {
 			});			
 		});
 		it('makes the second challenge to be in the portfolio of the player', function(done) {
-			database.levels[0].challenges[1].title = 'Get ready for fun :)';
 			request("http://localhost:5000/try?login=clairette&world=1", function(error, response, body) {
 				database.find('clairette', function(player) {
 					expect(player.portfolio[1]).toEqual(database.worlds[0].levels[1].id)

@@ -41,10 +41,6 @@ describe('Home page building', function() {
 	
 		var template = '<li class="player">' +
 							'<img src="" class="avatar">' +
-							'<span class="level">Level</span>' +
-							'<ul>' +
-								'<li><img src="star"></li>' +
-							'</ul>' +
 							'<span class="hall-of-fame-score-leading-zeros">0000</span>' +
 							'<span class="hall-of-fame-score">1234567</span>' +
 					   '</li>';
@@ -65,21 +61,6 @@ describe('Home page building', function() {
 			var line = home.buildLine(template, { avatar: 'me.png', score: 420 }, database );
 
 			expect(cheerio.load(line)('.player .hall-of-fame-score-leading-zeros').text()).toEqual('000');
-		});
-		
-		describe('Level', function() {
-			
-			it('is level 1 when the player is a new player', function() {
-				var line = home.buildLine(template, { avatar: 'me.png' }, database );
-				
-				expect(cheerio.load(line)('.player .level').text()).toEqual('Level 1 : The first level');
-			});
-			
-			it('is level 2 when player has completed level 1', function() {
-				var line = home.buildLine(template, { avatar: 'me.png', portfolio: [ { title: 'challenge 1.1' }, { title: 'challenge 1.2' } ] }, database );
-
-				expect(cheerio.load(line)('.player .level').text()).toEqual('Level 2 : The second level');
-			});
 		});
 		
 	});

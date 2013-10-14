@@ -17,7 +17,8 @@ function Example() {
 					requester: '../../test/support/empty.request',
 					checker: '../../test/support/response.always.valid',
 				},
-			]
+			],
+			isOpenFor: function(player) { return true; }
 		},
 		{
 			name: 'world 2',
@@ -40,7 +41,8 @@ function Example() {
 					requester: '../../test/support/empty.request',
 					checker: '../../test/support/response.always.valid',
 				},
-			]
+			],
+			isOpenFor: function(player) { return true; }
 		}
 	];
 };

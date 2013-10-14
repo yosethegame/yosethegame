@@ -49,10 +49,6 @@ describe("index.html", function() {
 					expect(page('#players .player img.avatar').attr('src')).toEqual('');
 				});
 				
-				it('contains an empty placeholder for the level', function() {
-					expect(page('#players .player .level').text()).toEqual('Level');
-				});
-				
 				it('contains an empty placeholder for the leading zeros before the score', function() {
 					expect(page('#players .player .hall-of-fame-score-leading-zeros').text()).toEqual('0000');
 				});

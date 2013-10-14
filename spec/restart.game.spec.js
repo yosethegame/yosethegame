@@ -21,7 +21,7 @@ describe("Restart game:", function() {
 			{
 				login: 'bilou',
 				server: 'http://localhost:6000',
-				portfolio: [ { title: 'challenge 1.1' } ]
+				portfolio: [ 1 ]
 			}
 		];
 		server.useDatabase(database);
@@ -42,7 +42,7 @@ describe("Restart game:", function() {
 					return browser.clickLink("#restart-game");
 				}).
 				then(function() {
-					expect(browser.text("#next-challenge-title")).toEqual('challenge 1.1');
+					expect(browser.text("#next-challenge-title")).toEqual(database.worlds[0].levels[0].title);
 					done();
 				}).
 				fail(function(error) {
