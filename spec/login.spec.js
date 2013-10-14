@@ -1,12 +1,16 @@
-var Browser = require("zombie");
-var router = require('../public/js/router');
-var Server = require('../public/js/server');
+var Browser 				= require("zombie");
+var router 					= require('../public/js/router');
+var Server 					= require('../public/js/server');
+var DatabaseWithChallenges 	= require('../test/support/database.with.levels');
 
 describe("Login", function() {
 
 	var server = new Server(router);
+	var database;
 	
 	beforeEach(function() {
+		database = new DatabaseWithChallenges();
+		server.useDatabase(database);
 		server.start();
 	});
 

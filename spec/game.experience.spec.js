@@ -1,8 +1,8 @@
-var Browser = require("zombie");
-var router = require('../public/js/router');
-var Server = require('../public/js/server');
-var DatabaseWithChallenges = require('../test/support/database.with.levels');
-var fs = require('fs');
+var Browser 				= require("zombie");
+var router 					= require('../public/js/router');
+var Server 					= require('../public/js/server');
+var DatabaseWithChallenges 	= require('../test/support/database.with.levels');
+var fs 						= require('fs');
 
 describe("Game experience", function() {
 
@@ -20,11 +20,12 @@ describe("Game experience", function() {
 		database.players = [
 			{
 				login: 'annessou',
+				server: 'http://localhost:6000',
 			},
 			{
 				login: 'bilou',
 				server: 'http://localhost:6000',
-				portfolio: [ { title: 'challenge 1.1' } ]
+				portfolio: [ database.worlds[0].levels[0].id ]
 			}
 		];
 		server.useDatabase(database);
@@ -40,22 +41,18 @@ describe("Game experience", function() {
 		
 		it('displays the detail of the success', function(done) {
 			var browser = new Browser();
-			browser.visit('http://localhost:5000/players/annessou').
+			browser.visit('http://localhost:5000/players/annessou/play/world/1').
 				then(function () {
-					return browser.fill("#server", "http://localhost:6000")
-						   .pressButton("#try");
+					return browser.pressButton("#try");
 				}).
 				then(function() {
-					expect(browser.text("#result_1 .challenge")).toEqual('challenge 1.1');
-					done();
+					expect(browser.text("#result_1 .challenge")).toEqual(database.worlds[0].levels[0].title);
 				}).
 				then(function() {
 					expect(browser.text("#result_1 .status")).toEqual('success');
-					done();
 				}).
 				then(function() {
 					expect(browser.text("#result_1 .expected")).toEqual('a correct expected value');
-					done();
 				}).
 				then(function() {
 					expect(browser.text("#result_1 .got")).toEqual('a correct actual value');
@@ -71,27 +68,24 @@ describe("Game experience", function() {
 	describe("When player fails the first challenge", function() {
 		
 		beforeEach(function() {
-			database.levels[0].challenges[0].checker = '../../test/support/response.always.501';
+			database.worlds[0].levels[0].checker = '../../test/support/response.always.501';
 		});
 
 		it('displays the detail of the error', function(done) {
 			var browser = new Browser();
-			browser.visit('http://localhost:5000/players/annessou').
+			browser.visit('http://localhost:5000/players/annessou/play/world/1').
 				then(function () {
-					return browser.fill("#server", "http://localhost:6000")
-						   .pressButton("#try");
+					return browser.pressButton("#try");
 				}).
 				then(function() {
-					expect(browser.text("#result_1 .challenge")).toEqual('challenge 1.1');
+					expect(browser.text("#result_1 .challenge")).toEqual(database.worlds[0].levels[0].title);
 					done();
 				}).
 				then(function() {
 					expect(browser.text("#result_1 .status")).toEqual('fail');
-					done();
 				}).
 				then(function() {
 					expect(browser.text("#result_1 .expected")).toEqual('a correct expected value');
-					done();
 				}).
 				then(function() {
 					expect(browser.text("#result_1 .got")).toEqual('an incorrect value');
@@ -108,21 +102,18 @@ describe("Game experience", function() {
 		
 		it('displays the detail of the success of the first challenge', function(done) {
 			var browser = new Browser();
-			browser.visit('http://localhost:5000/players/bilou').
+			browser.visit('http://localhost:5000/players/bilou/play/world/1').
 				then(function () {
 					return browser.pressButton("#try");
 				}).
 				then(function() {
-					expect(browser.text("#result_1 .challenge")).toEqual('challenge 1.1');
-					done();
+					expect(browser.text("#result_1 .challenge")).toEqual(database.worlds[0].levels[0].title);
 				}).
 				then(function() {
 					expect(browser.text("#result_1 .status")).toEqual('success');
-					done();
 				}).
 				then(function() {
 					expect(browser.text("#result_1 .expected")).toEqual('a correct expected value');
-					done();
 				}).
 				then(function() {
 					expect(browser.text("#result_1 .got")).toEqual('a correct actual value');
@@ -136,12 +127,12 @@ describe("Game experience", function() {
 
 		it('displays the detail of the success of the second challenge too', function(done) {
 			var browser = new Browser();
-			browser.visit('http://localhost:5000/players/bilou').
+			browser.visit('http://localhost:5000/players/bilou/play/world/1').
 				then(function () {
 					return browser.pressButton("#try");
 				}).
 				then(function() {
-					expect(browser.text("#result_2 .challenge")).toEqual('challenge 1.2');
+					expect(browser.text("#result_2 .challenge")).toEqual(database.worlds[0].levels[1].title);
 					done();
 				}).
 				fail(function(error) {

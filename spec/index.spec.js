@@ -1,12 +1,13 @@
-var Browser = require("zombie");
-var router = require('../public/js/router');
-var Server = require('../public/js/server');
-var DatabaseWithChallenges = require('../test/support/database.with.levels');
+var Browser 				= require("zombie");
+var router 					= require('../public/js/router');
+var Server 					= require('../public/js/server');
+var DatabaseWithChallenges 	= require('../test/support/database.with.levels');
 
 describe("Home page", function() {
 
 	var server;
 	var browser;
+	var database;
 	
 	beforeEach(function() {
 		server = new Server(router);

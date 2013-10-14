@@ -16,7 +16,7 @@ module.exports = {
         	target: require('../feature.try/try.request')
         },
 		{
-        	pattern: /^\/restart-game$/,
+        	pattern: /^\/restart-game/,
 			target: require('../feature.restart.game/restart.game')
 		},
 		{

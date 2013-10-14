@@ -1,13 +1,14 @@
-var Browser = require("zombie");
-var router = require('../public/js/router');
-var Server = require('../public/js/server');
-var DatabaseWithChallenges = require('../test/support/database.with.levels');
-var fs = require('fs');
+var Browser 				= require("zombie");
+var router 					= require('../public/js/router');
+var Server 					= require('../public/js/server');
+var DatabaseWithChallenges 	= require('../test/support/database.with.levels');
+var fs 						= require('fs');
 
 describe("Restart game:", function() {
 
 	var server = new Server(router);
 	var remote;
+	var database;
 	
 	beforeEach(function() {
 		remote = require('http').createServer(
@@ -39,10 +40,10 @@ describe("Restart game:", function() {
 			var browser = new Browser();
 			browser.visit('http://localhost:5000/players/bilou').
 				then(function () {
-					return browser.clickLink("#restart-game");
+					return browser.clickLink("#restart-game-link");
 				}).
 				then(function() {
-					expect(browser.text("#next-challenge-title")).toEqual(database.worlds[0].levels[0].title);
+					expect(browser.text("#worlds tr:nth-child(1) td:nth-child(2) ul.levels li:nth-child(1) a")).toContain(database.worlds[0].levels[0].title);
 					done();
 				}).
 				fail(function(error) {

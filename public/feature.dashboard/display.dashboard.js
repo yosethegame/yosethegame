@@ -26,6 +26,7 @@ dashboard = function(request, response, database) {
 			return;
 		}
 
+		page('#login').text(player.login);
 		page("#avatar").attr('src', player.avatar);
 		page('#greetings').text('Welcome home ' + login + ' :)');
 		page('#score').text(renderScore(player.score));

@@ -21,7 +21,7 @@ describe('Router', function() {
 		});
 		
 		it('maps restart-game request', function() {
-			expect(router.endPointOf({ url: '/restart-game' })).toBe(require('../public/feature.restart.game/restart.game'));
+			expect(router.endPointOf({ url: '/restart-game?login=any' })).toBe(require('../public/feature.restart.game/restart.game'));
 		});
 
 		it('maps home page request', function() {

@@ -1,9 +1,9 @@
-var request = require('request');
-var Server = require('../public/js/server');
-var tryAll = require('../public/feature.try/try-all-up-to');
-var PSql = require('../public/js/psql.database');
-var $ = require('jquery');
-var DatabaseWithChallenges = require('../test/support/database.with.levels');
+var request 				= require('request');
+var Server 					= require('../public/js/server');
+var tryAll 					= require('../public/feature.try/try.request');
+var PSql 					= require('../public/js/psql.database');
+var $ 						= require('jquery');
+var DatabaseWithChallenges 	= require('../test/support/database.with.levels');
 
 describe("Trying to pass challenges >", function() {
 
@@ -11,15 +11,14 @@ describe("Trying to pass challenges >", function() {
 	var database;
 	var ericminio;
 
-	beforeEach(function(done) {
+	beforeEach(function(done) {				
+		database = new PSql(process.env.DATABASE_URL);
+		database.worlds = new DatabaseWithChallenges().worlds;
 		ericminio = {
 			login: 'ericminio',
 			server: 'http://localhost:6000',
-			portfolio: [ { title: 'challenge 1.1' }, { title: 'challenge 1.2' }, { title: 'challenge 2.1' } ]
+			portfolio: [ database.worlds[0].levels[0].id ]
 		};
-				
-		database = new PSql(process.env.DATABASE_URL);
-		database.levels = new DatabaseWithChallenges().levels;
 		database.createPlayer(ericminio, function() {				
 			server = require('http').createServer(function(incoming, response) {
 				tryAll(incoming, response, database);
@@ -49,9 +48,9 @@ describe("Trying to pass challenges >", function() {
 			remote.close();
 		});
 	
-		it('considering a player with 3 challenges in his portfolio', function(done) {
+		it('considering a player with 1 challenges in his portfolio', function(done) {
 			database.find('ericminio', function(player) {
-				expect(player.portfolio.length).toEqual(3);
+				expect(player.portfolio.length).toEqual(1);
 				done();
 			});
 		});
@@ -59,9 +58,9 @@ describe("Trying to pass challenges >", function() {
 		describe('When there is no regression,', function() {
 			
 			it('makes the next challenge to be in the portfolio of the player', function(done) {
-				request("http://localhost:5000/try-all-up-to?login=ericminio", function(error, response, body) {
+				request("http://localhost:5000/try?login=ericminio&world=1", function(error, response, body) {
 					database.find('ericminio', function(player) {
-						expect(player.portfolio.length).toEqual(4);
+						expect(player.portfolio.length).toEqual(2);
 						done();
 					});
 				});			
@@ -71,13 +70,13 @@ describe("Trying to pass challenges >", function() {
 		describe('When there is a regression,', function() {
 		
 			beforeEach(function() {
-				database.levels[0].challenges[0].checker = '../../test/support/response.always.404';
+				database.worlds[0].levels[0].checker = '../../test/support/response.always.404';
 			});
 			
 			it('does not consider the next challenge as passing', function(done) {
-				request("http://localhost:5000/try-all-up-to?login=ericminio", function(error, response, body) {
+				request("http://localhost:5000/try?login=ericminio&world=1", function(error, response, body) {
 					database.find('ericminio', function(player) {
-						expect(player.portfolio.length).toEqual(3);
+						expect(player.portfolio.length).toEqual(1);
 						done();
 					});
 				});			
