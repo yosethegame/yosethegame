@@ -7,6 +7,10 @@ var renderScore	= require('../js/utils/render.score');
 
 require('../js/utils/string-extensions');
 
+var playerHasDoneThisLevel = function(player, level) {
+	return !thePlayer.isANew(player) && array.hasOneItemIn(player.portfolio, withValue.equalsTo(level.id));
+}
+
 dashboard = function(request, response, database) {
 	var login = request.url.lastSegment();
 	var html = fs.readFileSync('./public/feature.dashboard/dashboard.html').toString();
@@ -49,10 +53,12 @@ dashboard = function(request, response, database) {
 				var wordLevelsSelector = worldSelector + ' td:nth-child(2) ul.levels';
 				page(wordLevelsSelector).empty();
 				var nextChallengeOfWorldDisplayed = false;
+				var shouldDisplayMention = true;
+				var lockerDisplayed = false;
 				var challengesDoneInThisWorld = 0
 				array.forEach(world.levels, function(level) {
 					levelNumber ++;
-					if (!thePlayer.isANew(player) && array.hasOneItemIn(player.portfolio, withValue.equalsTo(level.id))) {
+					if (playerHasDoneThisLevel(player, level)) {
 						challengesDoneInThisWorld ++;
 						var levelMention = 'level ' + worldNumber + '.' + levelNumber + ' : ' + level.title;
 					} else {
@@ -61,9 +67,15 @@ dashboard = function(request, response, database) {
 							nextChallengeOfWorldDisplayed = true;
 						} else {
 							var levelMention = '<img src="/img/locker.png" width="60" height="60" class="img-responsive">';
+							lockerDisplayed = true;
 						}
 					}
-					page(wordLevelsSelector).append('<li>' + levelMention + '</li>');			
+					if (shouldDisplayMention) {
+						page(wordLevelsSelector).append('<li>' + levelMention + '</li>');			
+					}
+					if (lockerDisplayed) {
+						shouldDisplayMention = false;
+					}
 				});
 				var progress = 100 * challengesDoneInThisWorld / world.levels.length;
 				page(worldSelector + ' td:nth-child(2) .progress-bar').attr('style', 'width:' + Math.round(progress) + '%')

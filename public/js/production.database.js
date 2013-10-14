@@ -122,10 +122,7 @@ function ProductionDatabase() {
 	}
 	];
 	
-	this.worlds[0].isOpenFor = function(player) { 
-		var hasCompletedWorld = hasAllLevelOfGivenWorldInPortfolio(player, self.worlds[0]);
-		return thisPlayer.isANew(player) || ! hasCompletedWorld;
-	};
+	this.worlds[0].isOpenFor = function(player) { return true; };
 	
 	this.worlds[1].isOpenFor = function(player) { 
 		if (thisPlayer.isANew(player)) return false;

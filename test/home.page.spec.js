@@ -13,7 +13,7 @@ describe('Home page building', function() {
 		expect(home.extractPlayerTemplateIn(page)).toEqual('<li class="player"></li>');
 	});
 	
-	it('bulds two lines when there are 2 players', function() {
+	it('builds two lines when there are 2 players', function() {
 		var players = [
 				{ login: 'me' },
 				{ login: 'you' }

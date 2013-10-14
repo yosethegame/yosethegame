@@ -66,7 +66,12 @@ playground = function(request, response, database) {
 		}
 		
 		if (isWorldCompletedByPlayer(player, world)) {
-			return exitWithMessage('this world is completed', page, response);
+			page('#next-challenge').addClass('hidden').removeClass('visible');
+			page('#result').addClass('hidden').removeClass('visible');
+			page('#world-completed').addClass('visible').removeClass('hidden');
+			response.write(page.html());
+			response.end();
+			return;
 		}
 			
 		page('#login').empty().text(player.login);

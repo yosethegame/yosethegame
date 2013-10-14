@@ -2,6 +2,7 @@ var cheerio 	= require('cheerio');
 var Data		= require('../support/database.with.levels');
 var playground	= require('../../public/feature.playground/display.playground.request.js');
 var response	= require('../support/fake.response');
+var array		= require('../../public/js/utils/array.utils');
 
 describe('Control Access', function() {
 	
@@ -123,26 +124,36 @@ describe('Control Access', function() {
 	describe('when the player has completed the world', function() {
 
 		beforeEach(function() {
-			database.worlds[1].isOpenFor = function(player) { return true; }
-			player = {
-				login: 'ericminio',
-				portfolio: [1, 2]
-			}
-			database.players = [ player ];
+			player.portfolio = [];
+			array.forEach(database.worlds[0].levels, function(level) {
+				player.portfolio.push(level.id);
+			});
 			playground({ url: '/players/ericminio/play/world/1' }, response, database);
 			page = cheerio.load(response.html);
 		});
 
-		it('info section is visible', function() {
-			expect(page('#info').attr('class')).toContain('visible');
+		it('hides the info section', function() {
+			expect(page('#info').attr('class')).toContain('hidden');
 		});
 		
-		it('mentions that this world is completed', function() {
-			expect(page('#info').text()).toEqual('this world is completed');
+		it('shows the player section', function() {
+			expect(page('#player').attr('class')).toContain('visible');
 		});
 		
-		it('player section is hidden', function() {
-			expect(page('#player').attr('class')).toContain('hidden');
+		it('hides section next-challenge', function() {
+			expect(page('#next-challenge').attr('class')).toContain('hidden');
+		});
+
+		it('hides section result', function() {
+			expect(page('#result').attr('class')).toContain('hidden');
+		});
+		
+		it('hides section continue', function() {
+			expect(page('#continue').attr('class')).toContain('hidden');
+		});
+		
+		it('shows section world-completed', function() {
+			expect(page('#world-completed').attr('class')).toContain('visible');
 		});
 
 	});

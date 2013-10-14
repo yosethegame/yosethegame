@@ -12,16 +12,16 @@ describe('Production Levels:', function() {
 
 	describe('world 1 access', function() {
 		
-		xit('lets player with empty portfolio play world 1', function() {
+		it('lets player with empty portfolio play world 1', function() {
 			expect(database.worlds[0].isOpenFor({})).toBe(true);
 		});
 		
-		it('is locked when player has completed world 1', function() {
+		it('is always unlocked', function() {
 			var player = { portfolio: [] };
 			array.forEach(database.worlds[0].levels, function(level) {
 				player.portfolio.push(level.id);
 			});
-			expect(database.worlds[0].isOpenFor(player)).toBe(false);
+			expect(database.worlds[0].isOpenFor(player)).toBe(true);
 		});
 
 	});
