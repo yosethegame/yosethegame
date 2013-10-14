@@ -8,11 +8,7 @@ server.useDatabase(database);
 
 var ericminio = {
 	login: 'ericminio',
-	avatar: 'https://si0.twimg.com/profile_images/848367249/moi_bigger.jpg'
-};
-var fperron = {
-	login: 'fperron',
-	avatar: 'https://si0.twimg.com/profile_images/2022210891/fperron-bw_bigger.png'
+	avatar: 'http://www.gravatar.com/avatar/8274a8b8d2c4aa2f42c1bbe2f130a0a7.png'
 };
 
 database.createPlayer(ericminio, function() {
