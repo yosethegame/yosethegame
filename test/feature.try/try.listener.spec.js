@@ -102,7 +102,7 @@ describe("TryListener: ", function() {
 			beforeEach(function() {
 				listener.displayResults(buildResultsWithDummyScore([
 					{
-						challenge: 'this-challenge',
+						title: 'this-challenge',
 						code: 200,
 						expected: { question: 'any', answer: 42 },
 						got: { flag: true }
@@ -119,7 +119,7 @@ describe("TryListener: ", function() {
 			it('displays the first result : "fail" when receiving code != 200', function() {
 				listener.displayResults(buildResultsWithDummyScore([
 					{
-						challenge: 'this-challenge',
+						title: 'this-challenge',
 						code: 100,
 						expected: { question: 'any', answer: 42 },
 						got: { flag: true }
@@ -136,7 +136,7 @@ describe("TryListener: ", function() {
 				it('displays a string as is', function() {
 					listener.displayResults(buildResultsWithDummyScore([
 						{
-							challenge: 'this-challenge',
+							title: 'this-challenge',
 							code: 200,
 							expected: 'any',
 							got: { flag: true }
@@ -154,7 +154,7 @@ describe("TryListener: ", function() {
 				it('displays a string as is', function() {
 					listener.displayResults(buildResultsWithDummyScore([
 						{
-							challenge: 'this-challenge',
+							title: 'this-challenge',
 							code: 200,
 							expected: { question: 'any', answer: 42 },
 							got: 'any'
@@ -171,13 +171,13 @@ describe("TryListener: ", function() {
 			beforeEach(function() {
 				listener.displayResults(buildResultsWithDummyScore([
 					{
-						challenge: 'one',
+						title: 'one',
 						code: 1,
 						expected: { one: 1 },
 						got: { oneone: 11 }
 					},
 					{
-						challenge: 'second',
+						title: 'second',
 						code: 2,
 						expected: { two: 2 },
 						got: { twotwo: 2 }
@@ -202,13 +202,13 @@ describe("TryListener: ", function() {
 				beforeEach(function() {
 					listener.displayResults(buildResultsWithDummyScore([
 						{
-							challenge: 'one',
+							title: 'one',
 							code: 200,
 							expected: { question: 'any', answer: 42 },
 							got: { flag: true }
 						},
 						{
-							challenge: 'one',
+							title: 'one',
 							code: 200,
 							expected: { question: 'any', answer: 42 },
 							got: { flag: true }
@@ -216,7 +216,7 @@ describe("TryListener: ", function() {
 					]));	
 					listener.displayResults(buildResultsWithDummyScore([
 						{
-							challenge: 'second',
+							title: 'second',
 							code: 200,
 							expected: { question: 'any', answer: 42 },
 							got: { flag: true }
@@ -238,13 +238,13 @@ describe("TryListener: ", function() {
 				beforeEach(function() {
 					listener.displayResults(buildResultsWithDummyScore([
 						{
-							challenge: 'one',
+							title: 'one',
 							code: 404,
 							expected: { question: 'any', answer: 42 },
 							got: { flag: true }
 						},
 						{
-							challenge: 'two',
+							title: 'two',
 							code: 200,
 							expected: { question: 'any', answer: 42 },
 							got: { flag: true }
@@ -279,7 +279,7 @@ describe("TryListener: ", function() {
 			it('becomes visible when success (code == 200)', function() {
 				listener.displayResults(buildResultsWithDummyScore([
 					{
-						challenge: 'this-challenge',
+						title: 'this-challenge',
 						code: 200,
 						expected: { question: 'any', answer: 42 },
 						got: { flag: true }
@@ -292,7 +292,7 @@ describe("TryListener: ", function() {
 			it('remains hidden otherwise (code != 200)', function() {
 				listener.displayResults(buildResultsWithDummyScore([
 					{
-						challenge: 'this-challenge',
+						title: 'this-challenge',
 						code: 404,
 						expected: { question: 'any', answer: 42 },
 						got: { flag: true }
@@ -305,13 +305,13 @@ describe("TryListener: ", function() {
 			it('remains hidden if one result is not passing', function() {
 				listener.displayResults(buildResultsWithDummyScore([
 					{
-						challenge: 'one',
+						title: 'one',
 						code: 404,
 						expected: { question: 'any', answer: 42 },
 						got: { flag: true }
 					},
 					{
-						challenge: 'two',
+						title: 'two',
 						code: 200,
 						expected: { question: 'any', answer: 42 },
 						got: { flag: true }
@@ -324,7 +324,7 @@ describe("TryListener: ", function() {
 			it('hides back when a second try is failing', function() {
 				listener.displayResults(buildResultsWithDummyScore([
 					{
-						challenge: 'this-challenge',
+						title: 'this-challenge',
 						code: 200,
 						expected: { question: 'any', answer: 42 },
 						got: { flag: true }
@@ -332,7 +332,7 @@ describe("TryListener: ", function() {
 				]));
 				listener.displayResults(buildResultsWithDummyScore([
 					{
-						challenge: 'this-challenge',
+						title: 'this-challenge',
 						code: 404,
 						expected: { question: 'any', answer: 42 },
 						got: { flag: true }
@@ -356,7 +356,7 @@ describe("TryListener: ", function() {
 			it('is disabled after success', function() {
 				listener.displayResults(buildResultsWithDummyScore([
 					{
-						challenge: 'this-challenge',
+						title: 'this-challenge',
 						code: 200,
 						expected: { question: 'any', answer: 42 },
 						got: { flag: true }
@@ -368,7 +368,7 @@ describe("TryListener: ", function() {
 			it('is enabled after failure', function() {
 				listener.displayResults(buildResultsWithDummyScore([
 					{
-						challenge: 'this-challenge',
+						title: 'this-challenge',
 						code: 200,
 						expected: { question: 'any', answer: 42 },
 						got: { flag: true }
@@ -376,7 +376,7 @@ describe("TryListener: ", function() {
 				]));
 				listener.displayResults(buildResultsWithDummyScore([
 					{
-						challenge: 'this-challenge',
+						title: 'this-challenge',
 						code: 404,
 						expected: { question: 'any', answer: 42 },
 						got: { flag: true }
@@ -404,7 +404,7 @@ describe("TryListener: ", function() {
 					score: 23,
 					results: [
 						{
-							challenge: 'this-challenge',
+							title: 'this-challenge',
 							code: 200,
 							expected: { question: 'any', answer: 42 },
 							got: { flag: true }

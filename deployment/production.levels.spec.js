@@ -10,13 +10,24 @@ describe('Production Levels:', function() {
 		database = new ProductionDatabase();
 	});
 
+    describe('Ids:', function() {
+	
+        it('All challenges must have an id', function() {
+			array.forEach(database.worlds, function(world) {
+				array.forEach(world.levels, function(level) {
+					expect(level.id).toBeDefined();
+				});
+			});
+	    });
+    });
+    
     describe('Titles:', function() {
 	
         it('All challenges must have a title', function() {
-			array.forEach(database.levels, function(level) {
-		       	array.forEach(level.challenges, function(challenge) {
-					expect(challenge.title).toBeDefined();
-	    	    });
+			array.forEach(database.worlds, function(world) {
+				array.forEach(world.levels, function(level) {
+					expect(level.title).toBeDefined();
+				});
 			});
 	    });
     });
@@ -24,10 +35,10 @@ describe('Production Levels:', function() {
     describe('Files:', function() {
 	
         it('All challenges must have a file', function() {
-			array.forEach(database.levels, function(level) {
-		       	array.forEach(level.challenges, function(challenge) {
-					if (!fs.existsSync(challenge.file)) {
-						throw 'File "' + challenge.file + '" of challenge "' + challenge.title + '" not found';
+			array.forEach(database.worlds, function(world) {
+				array.forEach(world.levels, function(level) {
+					if (!fs.existsSync(level.file)) {
+						throw 'File "' + level.file + '" of level "' + level.title + '" not found';
 					}
 				});
     	    });
@@ -37,12 +48,12 @@ describe('Production Levels:', function() {
     describe('Requesters:', function() {
 	
         it('All requesters can be required from public/js and provide an url() api', function() {
-			array.forEach(database.levels, function(level) {
-		       	array.forEach(level.challenges, function(challenge) {
-        			var Requester = require('../public/js/' + challenge.requester);
+			array.forEach(database.worlds, function(world) {
+				array.forEach(world.levels, function(level) {
+        			var Requester = require('../public/js/' + level.requester);
                 	var requester = new Requester();
                 	if (requester.url == undefined) {
-                		throw 'Requester ' + challenge.requester + ' of challenge "' + challenge.title + '" should have an url() method';
+                		throw 'Requester ' + level.requester + ' of level "' + level.title + '" should have an url() method';
                 	}
 				});
     	    });
@@ -52,16 +63,47 @@ describe('Production Levels:', function() {
     describe('Checkers:', function() {
     
 	    it('All checkers can be required from public/js and provide a validate api', function() {
-			array.forEach(database.levels, function(level) {
-		       	array.forEach(level.challenges, function(challenge) {
-        			var checker = require('../public/js/' + challenge.checker);
+			array.forEach(database.worlds, function(world) {
+				array.forEach(world.levels, function(level) {
+        			var checker = require('../public/js/' + level.checker);
                 	if (checker.validate == undefined) {
-                		throw 'Checker ' + challenge.checker + ' of challenge "' + challenge.title + '" should have a validate() method';
+                		throw 'Checker ' + level.checker + ' of level "' + level.title + '" should have a validate() method';
                 	}
 				});
     	    });
         });
     });
     
+	describe('world 1 access', function() {
+		
+		it('lets player with empty portfolio play world 1', function() {
+			expect(database.worlds[0].isOpenFor({})).toBe(true);
+		});
+		
+		it('is locked when player has completed world 1', function() {
+			var player = { portfolio: [] };
+			array.forEach(database.worlds[0].levels, function(level) {
+				player.portfolio.push(level.id);
+			});
+			expect(database.worlds[0].isOpenFor(player)).toBe(false);
+		});
+
+	});
+
+	describe('world 2 access', function() {
+		
+		it('locks world 2 for player with empty portfolio', function() {
+			expect(database.worlds[1].isOpenFor({})).toBe(false);
+		});
+
+		it('is unlocked when player has completed world 1', function() {
+			var player = { portfolio: [] };
+			array.forEach(database.worlds[0].levels, function(level) {
+				player.portfolio.push(level.id);
+			});
+			expect(database.worlds[1].isOpenFor(player)).toBe(true);
+		});
+
+	});
 	
 });

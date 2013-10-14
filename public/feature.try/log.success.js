@@ -1,13 +1,10 @@
 var thePlayer = require('../js/utils/player.utils');
 
-logSuccess = function(player, challenge) {
+logSuccess = function(player, levelId) {
 	if (thePlayer.isANew(player)) {
 		player.portfolio = [];
 	}		
-	player.portfolio.push( { 
-			title: challenge,
-		} 
-	);
+	player.portfolio.push(levelId);
 	if (player.score == undefined) player.score = 0;
 	player.score += 10;
 };

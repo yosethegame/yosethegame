@@ -1,6 +1,7 @@
 var request 		= require('request');
 var url 			= require('url');
 var withAttribute 	= require('../js/utils/array.matchers');
+var withValue	 	= require('../js/utils/array.matchers');
 var extract 		= require('../js/utils/array.utils');
 var array 			= require('../js/utils/array.utils');
 var httperror 		= require('../js/utils/http.errors.utils');
@@ -10,14 +11,14 @@ var logSuccess 		= require('./log.success');
 
 var responseCount;
 var output;
-var challengesToTry;
+var levelsToTry;
 
-var sortOutput = function(results, database) {
+var sortOutput = function(results, world) {
 	var items = [];
 	array.forEach(results, function(result) {
 		items.push({
 			item: result,
-			database: database
+			world: world
 		});
 	});
 	var sorter = new Sorter();	
@@ -29,26 +30,26 @@ var sortOutput = function(results, database) {
 	return sorted;
 };
 
-var allChallengesToTry = function(player, database) {
-	var challengesToTry = [];
-
-	array.forEach(database.levels, function(level) {
-		array.forEach(level.challenges, function(challenge) {
-			if (thisPlayer.hasTheGivenChallengeInPortfolio(challenge.title, player)) {
-				challengesToTry.push(challenge);
+var allLevelsToTry = function(player, world) {
+	if (thisPlayer.isANew(player)) { return [world.levels[0]]; }
+	var levelsToTry = [];
+	var nextLevelFound = false;
+	array.forEach(world.levels, function(level) {
+		if (array.hasOneItemIn(player.portfolio, withValue.equalsTo(level.id))) {
+			levelsToTry.push(level);
+		} else {
+			if (! nextLevelFound ) {
+				levelsToTry.push(level);
 			}
-		});
-	})
-	var level = thisPlayer.currentLevel(player, database);
-	challengesToTry.push(array.firstItemIn(level.challenges, function(challenge) {
-		return !thisPlayer.hasTheGivenChallengeInPortfolio(challenge.title, player);
-	}));
-	return challengesToTry;
+			nextLevelFound = true;
+		}
+	});
+	return levelsToTry;
 };
 
-var tryChallengeAtIndex = function(index, params, player, database, response, callback) {
-	var challenge = challengesToTry[index];
-	var Requester = require(challenge.requester);
+var tryLevelAtIndex = function(index, params, player, database, response, callback) {
+	var level = levelsToTry[index];
+	var Requester = require(level.requester);
 	if (player != undefined && player.server != undefined) {
 		var requester = new Requester(player.server);
 	} else {
@@ -58,7 +59,7 @@ var tryChallengeAtIndex = function(index, params, player, database, response, ca
 	if (requestSent == undefined) requestSent = '';
 
 	request(requestSent, function(error, remoteResponse, content) {
-		var checker = require(challenge.checker);
+		var checker = require(level.checker);
 		checker.validate(requestSent, remoteResponse, content, function(status) {
 			if (error != null) {
 				status.code = 404,
@@ -70,13 +71,14 @@ var tryChallengeAtIndex = function(index, params, player, database, response, ca
 				}
 			}
 			output.push({
-				challenge: challenge.title,
+				id: level.id,
+				title: level.title,
 				code: status.code,
 				expected: status.expected,
 				got: status.got
 			});
-			if (index < challengesToTry.length-1) {
-				tryChallengeAtIndex(index + 1, params, player, database, response, callback);
+			if (index < levelsToTry.length-1) {
+				tryLevelAtIndex(index + 1, params, player, database, response, callback);
 			}
 			else {
 				var fail = false;
@@ -86,13 +88,17 @@ var tryChallengeAtIndex = function(index, params, player, database, response, ca
 					}
 				});
 				if (!fail) {
-					var challengeToSave = undefined;
-					array.forEach(output, function(item) {
-						if (! thisPlayer.hasTheGivenChallengeInPortfolio(item.challenge, player)) {
-							challengeToSave = item.challenge;
-						}				
-					});
-					logSuccess(player, challengeToSave);
+					var levelIdToSave = undefined;
+					if (thisPlayer.isANew(player)) {
+						levelIdToSave = output[0].id;
+					} else {
+						array.forEach(output, function(item) {
+							if (! array.hasOneItemIn(player.portfolio, withValue.equalsTo(item.id))) {
+								levelIdToSave = item.id;
+							}				
+						});
+					}
+					logSuccess(player, levelIdToSave);
 				}
 				database.savePlayer(player, function() {
 					callback();
@@ -102,18 +108,19 @@ var tryChallengeAtIndex = function(index, params, player, database, response, ca
 	});
 };
 
-var tryAllChallengesUntilGivenChallenge = function(incoming, response, database) {
+var tryWorld = function(incoming, response, database) {
 	output = [];
-	challengesToTry = [];
+	levelsToTry = [];
 	var params = url.parse(incoming.url, true);	
+	var world = database.worlds[params.query.world - 1];
 	database.find(params.query.login, function(player) {
-		challengesToTry = allChallengesToTry(player, database);
-		responseCount = challengesToTry.length;
-		tryChallengeAtIndex(0, params, player, database, response, function() {
+		levelsToTry = allLevelsToTry(player, world);
+		responseCount = levelsToTry.length;
+		tryLevelAtIndex(0, params, player, database, response, function() {
 			response.write(JSON.stringify(
 					{
 						score: player.score == undefined ? 0 : player.score,
-						results: sortOutput(output, database)						
+						results: sortOutput(output, world)
 					}
 				));
 			response.end();			
@@ -121,7 +128,7 @@ var tryAllChallengesUntilGivenChallenge = function(incoming, response, database)
 	});
 };
 
-module.exports = tryAllChallengesUntilGivenChallenge;
-module.exports.allChallengesToTry = allChallengesToTry;
+module.exports = tryWorld;
+module.exports.allLevelsToTry = allLevelsToTry;
 module.exports.sortOutput = sortOutput;
 

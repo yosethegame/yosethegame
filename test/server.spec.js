@@ -17,7 +17,7 @@ describe('Server >', function() {
             };
 			router.routes = [
 				{ 
-					prefix: '/this-path', 
+					pattern: /.*/, 
 					target: endPoint
 				} 
 			];
@@ -50,7 +50,7 @@ describe('Server >', function() {
             };
 			router.routes = [
 				{ 
-					prefix: '/this-path', 
+					pattern: /.*/, 
 					target: endPoint
 				} 
 			];

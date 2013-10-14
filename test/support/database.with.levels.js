@@ -8,10 +8,14 @@ function Example() {
 				{
 					id: 1,
 					title: 'the first challenge',
+					requester: '../../test/support/empty.request',
+					checker: '../../test/support/response.always.valid',
 				},
 				{
 					id: 2,
 					title: 'the second challenge',
+					requester: '../../test/support/empty.request',
+					checker: '../../test/support/response.always.valid',
 				},
 			]
 		},
@@ -21,14 +25,20 @@ function Example() {
 				{
 					id: 3,
 					title: 'the third challenge',
+					requester: '../../test/support/empty.request',
+					checker: '../../test/support/response.always.valid',
 				},
 				{
 					id: 4,
 					title: 'the fourth challenge',
+					requester: '../../test/support/empty.request',
+					checker: '../../test/support/response.always.valid',
 				},
 				{
 					id: 5,
 					title: 'the fifth challenge',
+					requester: '../../test/support/empty.request',
+					checker: '../../test/support/response.always.valid',
 				},
 			]
 		}

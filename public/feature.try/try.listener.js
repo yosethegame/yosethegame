@@ -4,10 +4,10 @@ var renderScore = renderScore || require('../js/utils/render.score');
 function TryListener() {	
 };
 
-TryListener.prototype.try = function() {
+TryListener.prototype.try = function(worldNumber) {
 	startAnimation();
 	hideResults();
-	$.get('/try-all-up-to?login=' + $('#login').text() + '&server=' + $('#server').val())
+	$.get('/try?login=' + $('#login').text() + '&server=' + $('#server').val() + '&world=' + worldNumber)
 		.success(this.displayResults);
 };
 
@@ -27,7 +27,7 @@ TryListener.prototype.displayResults = function(received) {
 		$('#results').append(result_i_html);
 
 		var result = results[i];
-		$('#result_' + (i+1) + ' .challenge').text(result.challenge);
+		$('#result_' + (i+1) + ' .challenge').text(result.title);
 		$('#result_' + (i+1) + ' .status').text(result.code == 200 ? 'success': 'fail');
 		$('#result_' + (i+1) + ' .expected').text(typeof result.expected == 'string' ? result.expected: JSON.stringify(result.expected));
 		$('#result_' + (i+1) + ' .got').text(typeof result.got == 'string' ? result.got: JSON.stringify(result.got));
@@ -43,11 +43,6 @@ TryListener.prototype.displayResults = function(received) {
 	if (canContinue) {
 		$('#continue').removeClass('hidden').addClass('visible');
 		$('#try').prop('disabled', true);
-
-		var index = 1;
-		while($('#achievement_' + index + ' img').attr('src') == '/img/star-done.png') { index++ }
-		$('#achievement_' + index + ' img').attr('src', '/img/star-done.png');
-		
 		$('#score').text(renderScore(data.score));
 	} else {
 		$('#continue').removeClass('visible').addClass('hidden');

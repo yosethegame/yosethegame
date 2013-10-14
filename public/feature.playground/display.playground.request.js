@@ -81,6 +81,8 @@ playground = function(request, response, database) {
 		}
 		page('#try').attr('onclick', 'new TryListener().try(' + worldNumber + ')');
 
+		page('#continue-link').attr('href', '/players/' + player.login);
+
 		response.write(page.html());
 		response.end();
 	});

@@ -12,8 +12,8 @@ module.exports = {
         	target: require('../feature.dashboard/display.dashboard.js')
         },
         {
-        	pattern: /^\/try-all-up-to$/,
-        	target: require('../feature.try/try-all-up-to')
+        	pattern: /^\/try/,
+        	target: require('../feature.try/try.request')
         },
 		{
         	pattern: /^\/restart-game$/,

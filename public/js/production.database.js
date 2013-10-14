@@ -7,8 +7,11 @@ function ProductionDatabase() {
 		isOpenFor: function(player) { return true; },
 		levels: [ 
 			{
+				id: 1,
 				title: 'the ping challenge',
 				file: 'public/challenge.ping/ping.html',
+				requester: '../challenge.ping/ping.requester.js',
+				checker: '../challenge.ping/ping.response.matcher.js'
 			}
 		]
 	},
@@ -16,6 +19,15 @@ function ProductionDatabase() {
 		number: 2,
 		isOpenFor: function(player) { return false; },
 		name: 'world 2',
+		levels: [
+			{
+				id: 2,
+				title: 'Power of two challenge',
+				file: 'public/challenge.power.of.two/power.of.two.html',
+				requester: '../challenge.power.of.two/power.of.two.requester.js',
+				checker: '../challenge.power.of.two/power.of.two.response.matcher.js'
+			},
+		]
 	}
 	]
 	this.levels = [

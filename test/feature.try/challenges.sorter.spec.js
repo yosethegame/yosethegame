@@ -5,11 +5,14 @@ describe('Challenges utils >', function() {
 	var database;
 	
 	beforeEach(function() {
-		database = {
-			levels: [
-				{ challenges: [ { title: '1.1' }, { title: '1.2' } ] },
-				{ challenges: [ { title: '2.1' }, { title: '2.2' } ] }
-			]
+		database = { worlds: [
+			{
+				levels : [
+					{ id: 1 },
+					{ id: 2 },
+					{ id: 3 },
+				]
+			}]
 		};
 	});
 	
@@ -22,38 +25,35 @@ describe('Challenges utils >', function() {
 		});
 	
 		it('does not modify an already sorted array', function() {
-			var challenges = [
-				{ item: { challenge: '1.1' }, database: database },
-				{ item: { challenge: '1.2' }, database: database },		
+			var items = [
+				{ item: { id: 1 }, world: database.worlds[0] },
+				{ item: { id: 2 }, world: database.worlds[0] },		
 			]
-			challenges.sort(sorter.sort);
+			items.sort(sorter.sort);
 			
-			expect(challenges[0].item.challenge).toEqual('1.1');
+			expect(items[0].item.id).toEqual(1);
 		});
 		
 		it('does invert two challenges in incorrect order', function() {
-			var challenges = [
-				{ item: { challenge: '1.2' }, database: database },		
-				{ item: { challenge: '1.1' }, database: database },
+			var items = [
+				{ item: { id: 2 }, world: database.worlds[0] },		
+				{ item: { id: 1 }, world: database.worlds[0] },
 			]
-			challenges.sort(sorter.sort);
+			items.sort(sorter.sort);
 			
-			expect(challenges[0].item.challenge).toEqual('1.1');
+			expect(items[0].item.id).toEqual(1);
 		});
 		
-		describe('Index lookup of challenges in database', function() {					
+		describe('Index lookup by id of level in world', function() {					
 		
-			it('knows the index of first challenge is 0', function() {
-				expect(Sorter.indexOf({ item: { challenge: '1.1' }, database: database })).toEqual(0);
+			it('knows the index of first level is 0', function() {
+				expect(Sorter.indexOf({ item: { id: database.worlds[0].levels[0].id }, world: database.worlds[0] })).toEqual(0);
 			});
 			
-			it('knows the index of second challenge is 1', function() {
-				expect(Sorter.indexOf({ item: { challenge: '1.2' }, database: database })).toEqual(1);
+			it('knows the index of second level is 1', function() {
+				expect(Sorter.indexOf({ item: { id: database.worlds[0].levels[1].id }, world: database.worlds[0] })).toEqual(1);
 			});	
 			
-			it('knows the index of first challenge of second level', function() {
-				expect(Sorter.indexOf({ item: { challenge: '2.1' }, database: database })).toEqual(2);
-			});		
 		});
 	});
 });
