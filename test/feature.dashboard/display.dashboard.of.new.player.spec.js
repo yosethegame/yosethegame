@@ -46,12 +46,16 @@ describe('The dashboard of a new player', function() {
 	describe('When first world has more than one level,', function() {
 		
 		beforeEach(function() {
-			database.worlds[0].levels = [ { title: 'first challenge' }, { title: 'second challenge' } ];
+			database.worlds[0].levels = [ { title: 'first challenge' }, { title: 'second challenge' }, { title: 'third challenge' } ];
 			loadPageWithDatabase(database);
 		});
 		
 		it('hides the second challenge', function() {
 			expect(level.number(1, 2)).toBeLocked();
+		});
+		
+		it('displays only one locker', function() {
+			expect(world.number(1)).toHaveLevelCount(2);
 		});
 		
 	});
