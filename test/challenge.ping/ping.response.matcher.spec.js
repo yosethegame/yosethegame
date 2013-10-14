@@ -10,7 +10,7 @@ describe('Ping response matcher:', function() {
 	});
 	
 	it('knows the expected answer from the sent request', function() {
-		expect(matcher.expectedContent('this-url')).toEqual({ alive: true });
+		expect(matcher.expectedContent('this-url/ping')).toEqual({ alive: true });
 	});
 		
 });

@@ -3,7 +3,7 @@ function Requester(server) {
 };
 
 Requester.prototype.url = function() {
-	return this.server;
+	return this.server + '/ping';
 };
 
 var module = module || {};

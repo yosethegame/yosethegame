@@ -10,8 +10,8 @@ describe('Ping challenge requester', function() {
 	
 	describe('target url', function() {
 		
-		it('simply uses the given url', function() {
-			expect(requester.url()).toEqual('this-url');
+		it('simply uses the given url and add /ping to it', function() {
+			expect(requester.url()).toEqual('this-url/ping');
 		});
 
 	});
