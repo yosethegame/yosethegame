@@ -53,6 +53,37 @@
 				<div id="next-challenge-content">Next challenge content</div>
 				<button type="button" class="btn btn-primary" id="try" onclick="new TryListener().try()" >Try</button>
 			</section>
+			
+			<section id="result">
+				<br>
+				<div class="table-responsive">
+				<table id="results" class="hidden table">
+					<thead><tr>
+						<th>Challenge</th><th>Result</th><th>Expected</th><th>Got</th>
+					</tr></thead>
+					<tr id="result_1" class="result">
+						<td class="challenge">Challenge</td>
+						<td class="status">Result</td>
+						<td class="expected">Expected</td>
+						<td class="got">Got</td>
+					</tr>
+				</table>
+				</div>
+			</section>
+			
+			<section id="when-no-more-challenges" class="hidden">
+				<p>
+					New challenges coming soon... Follow <a href="http://twitter.com/yosethegame">@YoseTheGame</a>
+				</p>
+			</section>
+				
+			<section id="continue" class="hidden">
+				<p>
+					<a href="javascript:location.reload(true)">continue to the next challenge</a>
+				</p>
+			</section>
+				
+			<section id="scroll-anchor"></section>
 
 		</div>
 		

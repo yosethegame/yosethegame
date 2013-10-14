@@ -44,12 +44,12 @@ describe("TryListener: ", function() {
 			$('#server').remove();
 		});
 		
-		it("send a get request to the chosen server", function() {
+		it("sends a try request", function() {
 			$('#server').val('any');
 			spyOn($, 'get').andCallThrough();
-			listener.try();
+			listener.try(2);
 
-			expect($.get).toHaveBeenCalledWith('/try-all-up-to?login=eric&server=any');
+			expect($.get).toHaveBeenCalledWith('/try?login=eric&server=any&world=2');
 		});
 	});
 	
@@ -387,73 +387,6 @@ describe("TryListener: ", function() {
 		});
 		
 	});	
-	
-	describe('Achievements update:', function() {
-
-		beforeEach(function() {
-			$('body').append('<span id="achievement_1"><img src="star-undone"></span>');
-			$('body').append('<span id="achievement_2"><img src="star-undone"></span>');
-		});
-		
-		afterEach(function() {
-			$('#achievement_1').remove();
-		});
-	
-		describe('When the player fails the challenge,', function() {
-			
-			beforeEach(function() {
-				listener.displayResults(buildResultsWithDummyScore([
-					{
-						challenge: 'this-challenge',
-						code: 404,
-						expected: { question: 'any', answer: 42 },
-						got: { flag: true }
-					}
-				]));
-			});
-			
-			it('remains undone', function() {
-				expect($('#achievement_1 img').attr('src')).toContain('star-undone');
-			});
-		});
-		
-		describe('When the player passes the challenge,', function() {
-			
-			beforeEach(function() {
-				listener.displayResults(buildResultsWithDummyScore([
-					{
-						challenge: 'this-challenge',
-						code: 200,
-						expected: { question: 'any', answer: 42 },
-						got: { flag: true }
-					}
-				]));
-			});
-			
-			it('switches to done', function() {
-				expect($('#achievement_1 img').attr('src')).toContain('star-done');
-			});
-		});
-		
-		describe('When the player passes the second challenge,', function() {
-			
-			beforeEach(function() {
-				$('#achievement_1 img').attr('src', '/img/star-done.png')
-				listener.displayResults(buildResultsWithDummyScore([
-					{
-						challenge: 'this-challenge',
-						code: 200,
-						expected: { question: 'any', answer: 42 },
-						got: { flag: true }
-					}
-				]));
-			});
-			
-			it('switches to done the second achievement', function() {
-				expect($('#achievement_2 img').attr('src')).toContain('star-done');
-			});
-		});
-	});
 	
 	describe('Score update', function() {
 	

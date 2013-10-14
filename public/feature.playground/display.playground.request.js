@@ -69,6 +69,8 @@ playground = function(request, response, database) {
 			return exitWithMessage('this world is completed', page, response);
 		}
 			
+		page('#login').empty().text(player.login);
+			
 		fillBanner(page, player, world, worldNumber);
 		
 		var level = world.levels[nextLevelOf(player, world)];
@@ -77,6 +79,7 @@ playground = function(request, response, database) {
 			var challenge = cheerio.load(fs.readFileSync(level.file).toString());
 			page('#next-challenge-content').empty().append(challenge('#challenge-content').html());
 		}
+		page('#try').attr('onclick', 'new TryListener().try(' + worldNumber + ')');
 
 		response.write(page.html());
 		response.end();
