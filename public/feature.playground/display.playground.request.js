@@ -73,6 +73,10 @@ playground = function(request, response, database) {
 		
 		var level = world.levels[nextLevelOf(player, world)];
 		page('#next-challenge-title').text(level.title);
+		if (level.file != undefined) {
+			var challenge = cheerio.load(fs.readFileSync(level.file).toString());
+			page('#next-challenge-content').empty().append(challenge('#challenge-content').html());
+		}
 
 		response.write(page.html());
 		response.end();

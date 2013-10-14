@@ -4,7 +4,7 @@ var playground	= require('../../public/feature.playground/display.playground.req
 var response	= require('../support/fake.response');
 var fs			= require('fs');
 
-describe('Level invitation', function() {
+describe('Try button', function() {
 	
 	var database = new Data();
 	var page;
@@ -21,22 +21,10 @@ describe('Level invitation', function() {
 	});
 	
 	it('displays the title of the challenge', function() {
-		database.worlds[1].levels[2].title = 'this is the next challenge';
 		playground({ url: '/players/ericminio/play/world/2' }, response, database);
 		page = cheerio.load(response.html);
 
-		expect(page('#next-challenge-title').text()).toEqual('this is the next challenge');
+		expect(page('#try').attr('onclick')).toEqual('new TryListener().try(2)');
 	});
-	
-	it('displays the content of the challenge', function() {
-		var content = '<html><body>anything before<div id="challenge-content">content<label>with html</label></div>anything after</body></html>';
-		fs.writeFileSync('test/data/level-content', content);
-		database.worlds[1].levels[2].file = 'test/data/level-content';
-		playground({ url: '/players/ericminio/play/world/2' }, response, database);
-		page = cheerio.load(response.html);
-
-		expect(page('#next-challenge-content').html()).toEqual('content<label>with html</label>');
-	});
-
 	
 });

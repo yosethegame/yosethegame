@@ -8,6 +8,7 @@ function ProductionDatabase() {
 		levels: [ 
 			{
 				title: 'the ping challenge',
+				file: 'public/challenge.ping/ping.html',
 			}
 		]
 	},
