@@ -24,24 +24,55 @@ var fillBanner = function(page, player, world, worldNumber) {
 	page('#dashboard-link').attr('href', '/players/' + player.login);
 };
 
-playground = function(request, response, database) {
-	var login = /^\/players\/(.*)\/play/.exec(request.url)[1];
-	var worldNumber = parseInt(/^\/players\/(.*)\/play\/world\/(.*)/.exec(request.url)[2]);
-	var world = database.worlds[worldNumber - 1];
+var exitWithMessage = function(message, page, response) {
+	page('#info').addClass('visible').removeClass('hidden');
+	page('#info').text(message);
+	page('#player').addClass('hidden').removeClass('visible');
+	response.write(page.html());
+	response.end();
+	return;	
+};
 
+var isWorldCompletedByPlayer = function(player, world) {
+	if (thePlayer.isANew(player)) { return false; }
+	var completed = true;
+	array.forEach(world.levels, function(level) {
+		if (! array.hasOneItemIn(player.portfolio, withValue.equalsTo(level.id))) {
+			completed = false;
+		}
+	});
+	return completed;
+}
+
+playground = function(request, response, database) {
 	var html = fs.readFileSync('./public/feature.playground/playground.html').toString();
 	var page = cheerio.load(html);
 	
+	var login = /^\/players\/(.*)\/play/.exec(request.url)[1];
+	var worldNumber = parseInt(/^\/players\/(.*)\/play\/world\/(.*)/.exec(request.url)[2]);
+	var world = database.worlds[worldNumber - 1];
+	if (world == undefined) {
+		return exitWithMessage('this world is unknown', page, response);
+	}
+
 	database.find(login, function(player) {
 
 		if (player == undefined) {
-			page('#info').addClass('visible').removeClass('hidden');
-			page('#player').addClass('hidden').removeClass('visible');
-			response.write(page.html());
-			response.end();
-			return;
-		}		
+			return exitWithMessage('this player is unknown', page, response);
+		}	
+		
+		if (!world.isOpenFor(player)) {
+			return exitWithMessage('this world is locked', page, response);
+		}
+		
+		if (isWorldCompletedByPlayer(player, world)) {
+			return exitWithMessage('this world is completed', page, response);
+		}
+			
 		fillBanner(page, player, world, worldNumber);
+		
+		var level = world.levels[nextLevelOf(player, world)];
+		page('#next-challenge-title').text(level.title);
 
 		response.write(page.html());
 		response.end();
