@@ -1,5 +1,6 @@
-var array = require('./array.utils');
-var withAttribute = require('./array.matchers');
+var array 			= require('./array.utils');
+var withAttribute 	= require('./array.matchers');
+var withValue		= require('./array.matchers');
 
 module.exports = {
 	isANew: function(player) {
@@ -8,5 +9,9 @@ module.exports = {
 	
 	scoreOf: function(player) {
 		return player.score ? player.score : 0;
-	}
+	},
+	
+	hasDoneThisLevel: function(player, level) {
+		return !this.isANew(player) && array.hasOneItemIn(player.portfolio, withValue.equalsTo(level.id));
+	},
 }

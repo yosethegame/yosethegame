@@ -6,7 +6,7 @@ var thisPlayer	= require('./utils/player.utils');
 var hasAllLevelOfGivenWorldInPortfolio = function(player, world) {
 	var hasAll = true;
 	array.forEach(world.levels, function(level) {
-		if(! array.hasOneItemIn(player.portfolio, withValue.equalsTo(level.id))) {
+		if(! thisPlayer.hasDoneThisLevel(player, level)) {
 			hasAll = false;
 		}
 	});

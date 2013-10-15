@@ -35,7 +35,7 @@ var allLevelsToTry = function(player, world) {
 	var levelsToTry = [];
 	var nextLevelFound = false;
 	array.forEach(world.levels, function(level) {
-		if (array.hasOneItemIn(player.portfolio, withValue.equalsTo(level.id))) {
+		if (thisPlayer.hasDoneThisLevel(player, level)) {
 			levelsToTry.push(level);
 		} else {
 			if (! nextLevelFound ) {
@@ -93,7 +93,7 @@ var tryLevelAtIndex = function(index, params, player, database, response, callba
 						levelIdToSave = output[0].id;
 					} else {
 						array.forEach(output, function(item) {
-							if (! array.hasOneItemIn(player.portfolio, withValue.equalsTo(item.id))) {
+							if (! thisPlayer.hasDoneThisLevel(player, item)) {
 								levelIdToSave = item.id;
 							}				
 						});

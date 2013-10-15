@@ -9,7 +9,7 @@ var thePlayer	= require('../js/utils/player.utils');
 var nextLevelOf = function(player, world) {
 	var levelIndex = 0;
 	if (!thePlayer.isANew(player)) {
-		while(array.hasOneItemIn(player.portfolio, withValue.equalsTo(world.levels[levelIndex].id))) { levelIndex ++; }
+		while(thePlayer.hasDoneThisLevel(player, world.levels[levelIndex])) { levelIndex ++; }
 	}
 	return levelIndex;
 };
@@ -37,7 +37,7 @@ var isWorldCompletedByPlayer = function(player, world) {
 	if (thePlayer.isANew(player)) { return false; }
 	var completed = true;
 	array.forEach(world.levels, function(level) {
-		if (! array.hasOneItemIn(player.portfolio, withValue.equalsTo(level.id))) {
+		if (! thePlayer.hasDoneThisLevel(player, level)) {
 			completed = false;
 		}
 	});

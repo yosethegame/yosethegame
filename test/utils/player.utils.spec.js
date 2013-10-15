@@ -14,4 +14,20 @@ describe('Player utils:', function() {
 		});
 		
 	});
+	
+	describe('Level presence in portfolio', function() {
+	
+		it('is false when porftfolio is empty', function() {
+			expect(thisPlayer.hasDoneThisLevel({ portfolio: [] }, { id: 1 })).toBe(false);
+		});
+		
+		it('is true when portfolio contains the id of the given level', function() {
+			expect(thisPlayer.hasDoneThisLevel({ portfolio: [2, 1] }, { id: 1 })).toBe(true);
+		});
+		
+		it('is false when porftfolio does not exist', function() {
+			expect(thisPlayer.hasDoneThisLevel({ }, { id: 1 })).toBe(false);
+		});
+		
+	});
 });
