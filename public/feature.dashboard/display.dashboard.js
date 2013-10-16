@@ -23,82 +23,73 @@ var exitWithMessage = function(message, page, response) {
 	return;	
 };
 
+var displayWorld = function(page, player, world, worldNumber) {
+	var worldSelector = 'table#worlds tr:nth-child(' + worldNumber + ')';
+	var wordLevelsSelector = worldSelector + ' td:nth-child(2) ul.levels';
+	
+	page(worldSelector+ ' td:nth-child(1)').text(world.name);								
+	page(wordLevelsSelector).empty();				
+	var nextChallengeOfWorldDisplayed = false;
+	var lockerDisplayed = false;
+	var challengesDoneInThisWorld = 0
+	array.forEach(world.levels, function(level, levelIndex) {
+		if (!lockerDisplayed) {
+			var levelNumber = levelIndex + 1;
+			if (thePlayer.hasDoneThisLevel(player, level)) {
+				challengesDoneInThisWorld ++;
+				var levelMention = 'level ' + worldNumber + '.' + levelNumber + ' : ' + level.title;
+			} else {
+				if (! nextChallengeOfWorldDisplayed ) {
+					var levelMention = '<a href="/players/' + player.login + '/play/world/' + worldNumber + '">level ' + worldNumber + '.' + levelNumber + ' : ' + level.title + '</a>';
+					nextChallengeOfWorldDisplayed = true;
+				} else {
+					var levelMention = '<img src="/img/locker.png" width="60" height="60" class="img-responsive">';
+					lockerDisplayed = true;
+				}
+			}
+			page(wordLevelsSelector).append('<li>' + levelMention + '</li>');			
+		}
+	});
+	var progress = 100 * challengesDoneInThisWorld / world.levels.length;
+	page(worldSelector + ' td:nth-child(2) .progress-bar').attr('style', 'width:' + Math.round(progress) + '%')
+};
+
+var showServerOfPlayer = function(page, player) {
+	if (!thePlayer.isANew(player)) {
+		page('#server-of-player').addClass('visible').removeClass('hidden').empty().append(player.server);
+		page('#restart-game-link').addClass('visible').removeClass('hidden');
+	}	
+};
+
 dashboard = function(request, response, database) {
 	var login = request.url.lastSegment();
 	var html = fs.readFileSync('./public/feature.dashboard/dashboard.html').toString();
 	var page = cheerio.load(html);
 
 	database.find(login, function(player) {
-
 		if (player == undefined) {
 			return exitWithMessage('this player is unknown', page, response);
 		}
-
-		page('#login').text(player.login);
-		
+		page('#login').text(player.login);		
 		fillBanner(page, player);
+		showServerOfPlayer(page, player);
 
-		if (!thePlayer.isANew(player)) {
-			page('#server-of-player').addClass('visible').removeClass('hidden').empty().append(player.server);
-			page('#restart-game-link').addClass('visible').removeClass('hidden');
-		}
-		
 		var openWorldTemplate = page.html('table#worlds tr.open-world');
 		var lockedWorldTemplate = page.html('table#worlds tr.locked-world');
-		page('table#worlds').empty();
 		
-		var worldNumber = 0;
-		array.forEach(database.worlds, function(world) {
-			worldNumber ++;
-			
+		page('table#worlds').empty();		
+		array.forEach(database.worlds, function(world, worldIndex) {
 			if (world.isOpenFor(player)) {
 				page('table#worlds').append(openWorldTemplate);
-
-				var worldSelector = 'table#worlds tr:nth-child(' + worldNumber + ')';
-				page(worldSelector+ ' td:nth-child(1)').text(world.name);
-				
-				var wordLevelsSelector = worldSelector + ' td:nth-child(2) ul.levels';
-				page(wordLevelsSelector).empty();
-				
-				var nextChallengeOfWorldDisplayed = false;
-				var shouldDisplayMention = true;
-				var lockerDisplayed = false;
-				var challengesDoneInThisWorld = 0
-				var levelNumber = 0;
-				array.forEach(world.levels, function(level) {
-					levelNumber ++;
-					if (thePlayer.hasDoneThisLevel(player, level)) {
-						challengesDoneInThisWorld ++;
-						var levelMention = 'level ' + worldNumber + '.' + levelNumber + ' : ' + level.title;
-					} else {
-						if (! nextChallengeOfWorldDisplayed ) {
-							var levelMention = '<a href="/players/' + login + '/play/world/' + worldNumber + '">level ' + worldNumber + '.' + levelNumber + ' : ' + level.title + '</a>';
-							nextChallengeOfWorldDisplayed = true;
-						} else {
-							var levelMention = '<img src="/img/locker.png" width="60" height="60" class="img-responsive">';
-							lockerDisplayed = true;
-						}
-					}
-					if (shouldDisplayMention) {
-						page(wordLevelsSelector).append('<li>' + levelMention + '</li>');			
-					}
-					if (lockerDisplayed) {
-						shouldDisplayMention = false;
-					}
-				});
-				var progress = 100 * challengesDoneInThisWorld / world.levels.length;
-				page(worldSelector + ' td:nth-child(2) .progress-bar').attr('style', 'width:' + Math.round(progress) + '%')
+				displayWorld(page, player, world, worldIndex + 1);
 			} else {
 				page('table#worlds').append(lockedWorldTemplate);
-			}
-			
+			}			
 		});
 
 		response.write(page.html());
 		response.end();
-
 	});
-	
 }
 
 module.exports = dashboard;

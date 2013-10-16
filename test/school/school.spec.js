@@ -73,6 +73,20 @@ describe('School', function() {
 			
 			expect(ten).toEqual(mouse);
 		});
+		
+		it('injects the index of the item in collection as second parameter', function() {
+			mouse = { price: 10 };
+			keyboard = { price: 100 };
+			array.forEach([mouse, keyboard], function(item, index) {
+				if (item.price == 10) {
+					expect(index).toEqual(0);
+				}
+				if (item.price == 100) {
+					expect(index).toEqual(1);
+				}
+			});			
+		});
+		
 	});
 	
 	describe('array.first', function() {
