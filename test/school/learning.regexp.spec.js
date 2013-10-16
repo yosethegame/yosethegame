@@ -69,7 +69,7 @@ describe('Regexp', function() {
 
 	});
 
-	describe('matching *', function() {
+	describe('matching all', function() {
 		
 		var pattern = /.*/;
 	
@@ -87,7 +87,7 @@ describe('Regexp', function() {
 			expect(pattern.exec('/players/ericminio/play/world/1')[1]).toEqual('ericminio');
 		});
 		
-		it('can handle multiple parameters', function() {
+		it('can extract second parameter', function() {
 			expect(pattern.exec('/players/ericminio/play/world/42')[2]).toEqual('42');
 		});
 		
