@@ -7,6 +7,22 @@ var renderScore	= require('../js/utils/render.score');
 
 require('../js/utils/string-extensions');
 
+var fillBanner = function(page, player) {
+	page("#avatar").attr('src', player.avatar);
+	page('#score').text(renderScore(player.score));
+	page('#greetings').text('Welcome home ' + player.login);
+	page('#dashboard-link').attr('href', '/players/' + player.login);
+};
+
+var exitWithMessage = function(message, page, response) {
+	page('#info').addClass('visible').removeClass('hidden');
+	page('#info').text(message);
+	page('#player').addClass('hidden').removeClass('visible');
+	response.write(page.html());
+	response.end();
+	return;	
+};
+
 dashboard = function(request, response, database) {
 	var login = request.url.lastSegment();
 	var html = fs.readFileSync('./public/feature.dashboard/dashboard.html').toString();
@@ -15,21 +31,15 @@ dashboard = function(request, response, database) {
 	database.find(login, function(player) {
 
 		if (player == undefined) {
-			page('#info').addClass('visible').removeClass('hidden');
-			page('#player').addClass('hidden').removeClass('visible');
-			response.write(page.html());
-			response.end();
-			return;
+			return exitWithMessage('this player is unknown', page, response);
 		}
 
 		page('#login').text(player.login);
-		page("#avatar").attr('src', player.avatar);
-		page('#greetings').text('Welcome home ' + login);
-		page('#score').text(renderScore(player.score));
+		
+		fillBanner(page, player);
 
 		if (!thePlayer.isANew(player)) {
-			page('#server-of-player').addClass('visible').removeClass('hidden')
-									 .empty().append(player.server);
+			page('#server-of-player').addClass('visible').removeClass('hidden').empty().append(player.server);
 			page('#restart-game-link').addClass('visible').removeClass('hidden');
 		}
 		
@@ -46,13 +56,15 @@ dashboard = function(request, response, database) {
 
 				var worldSelector = 'table#worlds tr:nth-child(' + worldNumber + ')';
 				page(worldSelector+ ' td:nth-child(1)').text(world.name);
-				var levelNumber = 0;
+				
 				var wordLevelsSelector = worldSelector + ' td:nth-child(2) ul.levels';
 				page(wordLevelsSelector).empty();
+				
 				var nextChallengeOfWorldDisplayed = false;
 				var shouldDisplayMention = true;
 				var lockerDisplayed = false;
 				var challengesDoneInThisWorld = 0
+				var levelNumber = 0;
 				array.forEach(world.levels, function(level) {
 					levelNumber ++;
 					if (thePlayer.hasDoneThisLevel(player, level)) {
