@@ -6,18 +6,10 @@ var array		= require('../js/utils/array.utils');
 var withValue	= require('../js/utils/array.matchers');
 var thePlayer	= require('../js/utils/player.utils');
 
-var nextLevelOf = function(player, world) {
-	var levelIndex = 0;
-	if (!thePlayer.isANew(player)) {
-		while(thePlayer.hasDoneThisLevel(player, world.levels[levelIndex])) { levelIndex ++; }
-	}
-	return levelIndex;
-};
-
 var fillBanner = function(page, player, world, worldNumber) {
 	page("#avatar").attr('src', player.avatar);
 	page('#score').text(renderScore(player.score));
-	var levelIndex = nextLevelOf(player, world);
+	var levelIndex = thePlayer.nextLevelIndexInThisWorld(player, world);
 	var level = world.levels[levelIndex];
 	var greetings = 'level ' + worldNumber + '.' + (levelIndex + 1) + ' : ' + level.title;
 	page('#greetings').text(greetings);		
@@ -32,17 +24,6 @@ var exitWithMessage = function(message, page, response) {
 	response.end();
 	return;	
 };
-
-var isWorldCompletedByPlayer = function(player, world) {
-	if (thePlayer.isANew(player)) { return false; }
-	var completed = true;
-	array.forEach(world.levels, function(level) {
-		if (! thePlayer.hasDoneThisLevel(player, level)) {
-			completed = false;
-		}
-	});
-	return completed;
-}
 
 playground = function(request, response, database) {
 	var html = fs.readFileSync('./public/feature.playground/playground.html').toString();
@@ -65,7 +46,7 @@ playground = function(request, response, database) {
 			return exitWithMessage('this world is locked', page, response);
 		}
 		
-		if (isWorldCompletedByPlayer(player, world)) {
+		if (thePlayer.hasCompletedThisWorld(player, world)) {
 			page('#next-challenge').addClass('hidden').removeClass('visible');
 			page('#result').addClass('hidden').removeClass('visible');
 			page('#world-completed').addClass('visible').removeClass('hidden');
@@ -78,7 +59,7 @@ playground = function(request, response, database) {
 			
 		fillBanner(page, player, world, worldNumber);
 		
-		var level = world.levels[nextLevelOf(player, world)];
+		var level = thePlayer.nextLevelInThisWorld(player, world);
 		page('#next-challenge-title').text(level.title);
 		if (level.file != undefined) {
 			var challenge = cheerio.load(fs.readFileSync(level.file).toString());
