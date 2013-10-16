@@ -5,8 +5,6 @@ var array		= require('../js/utils/array.utils');
 var withValue	= require('../js/utils/array.matchers');
 var renderScore	= require('../js/utils/render.score');
 
-require('../js/utils/string-extensions');
-
 var fillBanner = function(page, player) {
 	page("#avatar").attr('src', player.avatar);
 	page('#score').text(renderScore(player.score));
@@ -62,7 +60,7 @@ var showServerOfPlayer = function(page, player) {
 };
 
 dashboard = function(request, response, database) {
-	var login = request.url.lastSegment();
+	var login = /^\/players\/(.*)$/.exec(request.url)[1];
 	var html = fs.readFileSync('./public/feature.dashboard/dashboard.html').toString();
 	var page = cheerio.load(html);
 
