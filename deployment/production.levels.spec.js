@@ -19,6 +19,24 @@ describe('Production Levels:', function() {
 				});
 			});
 	    });
+	
+		it('must be unique', function() {
+			var ids = [];
+			array.forEach(database.worlds, function(world) {
+				array.forEach(world.levels, function(level) {
+					ids.push(level.id);
+				});
+			});
+			array.forEach(ids, function(id) {
+				var count = 0;
+				for(var index=0; index<ids.length; index++) {
+					if (ids[index] == id) {
+						count = count + 1;
+					}
+				}
+				expect(count).toEqual(1);
+			});
+		});
     });
     
     describe('Titles:', function() {
