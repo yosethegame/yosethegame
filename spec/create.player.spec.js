@@ -19,27 +19,26 @@ describe('Creating a player', function() {
 	});
 	
 	it('makes the dashboard of this player available', function(done) {
-			var browser = new Browser();
-			browser.visit('http://localhost:5000/create-new-player').
-				then(function () {
-					return browser.fill('#login', 'eric')
-								  .fill('#avatar', 'this-url')
-								  .pressButton('#create');
-				}).
-				then(function() {
-					expect(browser.text('#message')).toEqual('Done :)');
-				}).
-				then(function() {
-					return browser.visit('http://localhost:5000/players/eric');
-				}).
-				then(function() {
-					expect(browser.text("#login")).toEqual('eric');
-					done();
-				}).
-				fail(function(error) {
-					expect(error.toString()).toBeNull();
-					done();
-				});
+		var browser = new Browser();
+		browser.visit('http://localhost:5000/create-new-player').
+			then(function () {
+				return browser.fill('#login', 'eric')
+							  .fill('#avatar', 'this-url')
+							  .pressButton('#create');
+			}).
+			then(function() {
+				expect(browser.text('#message')).toEqual('Done :)');
+			}).
+			then(function() {
+				return browser.visit('http://localhost:5000/players/eric');
+			}).
+			then(function() {
+				expect(browser.text("#login")).toEqual('eric');
+				done();
+			}).
+			fail(function(error) {
+				expect(error.toString()).toBeNull();
+				done();
+			});
 	});
-	
 });

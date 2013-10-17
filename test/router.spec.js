@@ -12,6 +12,10 @@ describe('Router', function() {
 			expect(router.endPointOf({ url: '/players/any' })).toBe(require('../public/feature.dashboard/display.dashboard'));
 		});
 		
+		it('maps dashboard request', function() {
+			expect(router.endPointOf({ url: '/players/any.name' })).toBe(require('../public/feature.dashboard/display.dashboard'));
+		});
+		
 		it('maps static content request', function() {
 			expect(router.endPointOf({ url: '/anything-else' }).toString()).toEqual(servecontent('public').toString());
 		});
@@ -38,6 +42,10 @@ describe('Router', function() {
 		
 		it('maps playground request', function() {
 			expect(router.endPointOf({ url: '/players/any/play/world/42' })).toBe(require('../public/feature.playground/display.playground.request.js'));
+		});
+
+		it('maps playground request', function() {
+			expect(router.endPointOf({ url: '/players/any.name/play/world/42' })).toBe(require('../public/feature.playground/display.playground.request.js'));
 		});
 	});
 	

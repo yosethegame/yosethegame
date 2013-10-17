@@ -41,6 +41,20 @@ describe('Regexp', function() {
 
 	});
 	
+	describe('matching /players/{login} with a dot in the login', function() {
+		
+		var pattern = /^\/players\/[A-z|\.]+$/;
+	
+		it('passes with a matching string', function() {
+			expect(pattern.test('/players/any.name')).toBe(true);
+		});
+		
+		it('fails with a non-matching string', function() {
+			expect(pattern.test('/players/any:name')).toBe(false);
+		});
+
+	});
+	
 	describe('matching /players/{login}/play/world/{id}', function() {
 		
 		var pattern = /^\/players\/[A-z]+\/play\/world\/[0-9]+$/;
@@ -93,6 +107,10 @@ describe('Regexp', function() {
 		
 		it('returns null when not found', function() {
 			expect(pattern.exec('/non/matching')).toEqual(null);
+		});
+		
+		it('can extract a parameter with a dot', function() {
+			expect(pattern.exec('/players/eric.mignot/play/world/1')[1]).toEqual('eric.mignot');
 		});
 	});
 });
