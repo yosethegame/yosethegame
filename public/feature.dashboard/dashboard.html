@@ -24,7 +24,6 @@
 							<p>
 								<ul id="banner-links">
 									<li><a href="">Dashboard</a></li>
-									<li><a id="restart-game-link" class="hidden" onclick="new Restart().game()">Restart game</a></li>
 									<li><a id="help" href="https://groups.google.com/forum/?hl=fr#!forum/yosethegame">Help</help></li>
 									<li><a id="hall-of-fame" href="/">Hall of fame</a></li>
 								</ul>
@@ -48,7 +47,12 @@
 
 		<div id="content">
 
-			<a class="hidden" id="server-of-player">http://ericminio.herokuapp.com/yose</a>
+			<table id="profile">
+				<tr>
+					<td><a class="hidden" id="server-of-player">http://ericminio.herokuapp.com/yose</a></td>
+					<td nowrap><a id="restart-game-link" href="#" class="hidden" onclick="new Restart().game()">Restart game</a></td>
+				</tr>
+			</table>
 
 			<table id="worlds" class="lead">
 				

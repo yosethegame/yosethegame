@@ -213,3 +213,11 @@
 #worlds .progress {
 	width: 100%;
 }
+
+#profile {
+	margin-right:50px;
+}
+
+#profile td {
+	width:100%;
+}
