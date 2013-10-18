@@ -4,15 +4,26 @@ var withValue		= require('./array.matchers');
 
 module.exports = {
 	isANew: function(player) {
-		return player.portfolio == undefined || player.portfolio.length == 0;
+		return player.portfolio == undefined || player.portfolio.length == 0 || player.portfolio[0].achievements.length == 0;
 	},
 	
 	scoreOf: function(player) {
 		return player.score ? player.score : 0;
 	},
 	
+	serverOf: function(player) {
+		return player.portfolio[0].server;
+	},
+	
+	hasServer: function(player) {
+		return player != undefined 
+			&& player.portfolio != undefined 
+			&& player.portfolio[0] != undefined 
+			&& player.portfolio[0].server != undefined;
+	},
+	
 	hasDoneThisLevel: function(player, level) {
-		return !this.isANew(player) && array.hasOneItemIn(player.portfolio, withValue.equalsTo(level.id));
+		return !this.isANew(player) && array.hasOneItemIn(player.portfolio[0].achievements, withValue.equalsTo(level.id));
 	},
 	
 	hasCompletedThisWorld: function(player, world) {

@@ -54,7 +54,7 @@ var displayWorld = function(page, player, world, worldNumber) {
 
 var showServerOfPlayer = function(page, player) {
 	if (!thePlayer.isANew(player)) {
-		page('#server-of-player').addClass('visible').removeClass('hidden').empty().append(player.server);
+		page('#server-of-player').addClass('visible').removeClass('hidden').empty().append(thePlayer.serverOf(player));
 		page('#restart-game-link').addClass('visible').removeClass('hidden');
 	}	
 };

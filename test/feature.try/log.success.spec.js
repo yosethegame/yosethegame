@@ -1,13 +1,6 @@
-var logSuccess 			= require('../../public/feature.try/log.success');
-var InMemoryDatabase	= require('../support/inMemoryDatabase');
+var logSuccess 	= require('../../public/feature.try/log.success');
 
 describe('Log success,', function() {
-
-	var database;
-	
-	beforeEach(function() {
-		database = new InMemoryDatabase();
-	});
 
 	describe('Portfolio', function() {
 		
@@ -15,7 +8,7 @@ describe('Log success,', function() {
 			var player = {};
 			logSuccess(player, 1);
 
-			expect(player.portfolio[0]).toEqual(1);
+			expect(player.portfolio[0].achievements[0]).toEqual(1);
 		});
 
 		it('pills up the given challenges in the portfolio of the player', function() {
@@ -23,7 +16,7 @@ describe('Log success,', function() {
 			logSuccess(player, 1);
 			logSuccess(player, 2);
 
-			expect(player.portfolio[1]).toEqual(2);
+			expect(player.portfolio[0].achievements[1]).toEqual(2);
 		});
 
 	});

@@ -8,6 +8,7 @@ var httperror 		= require('../js/utils/http.errors.utils');
 var thisPlayer 		= require('../js/utils/player.utils');
 var Sorter			= require('./challenges.sorter');
 var logSuccess 		= require('./log.success');
+var logServer		= require('../levels.common/log.server')
 
 var responseCount;
 var output;
@@ -50,8 +51,8 @@ var allLevelsToTry = function(player, world) {
 var tryLevelAtIndex = function(index, params, player, database, response, callback) {
 	var level = levelsToTry[index];
 	var Requester = require(level.requester);
-	if (player != undefined && player.server != undefined) {
-		var requester = new Requester(player.server);
+	if (thisPlayer.hasServer(player)) {
+		var requester = new Requester(thisPlayer.serverOf(player));
 	} else {
 		var requester = new Requester(params.query.server);
 	}	
@@ -66,8 +67,8 @@ var tryLevelAtIndex = function(index, params, player, database, response, callba
 				status.got = 'undefined'
 			}
 			if (status.code == 200) {
-				if (player.server == undefined) {
-					player.server = params.query.server;
+				if (! thisPlayer.hasServer(player)) {
+					logServer(player, params.query.server);
 				}
 			}
 			output.push({
