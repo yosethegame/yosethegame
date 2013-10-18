@@ -53,8 +53,10 @@ var displayWorld = function(page, player, world, worldNumber) {
 };
 
 var showServerOfPlayer = function(page, player) {
-	if (!thePlayer.isANew(player)) {
-		page('#server-of-player').addClass('visible').removeClass('hidden').empty().append(thePlayer.serverOf(player));
+	if (thePlayer.hasServer(player)) {
+		var serverOfPlayer = thePlayer.serverOf(player);
+		page('#server-of-player').addClass('visible').removeClass('hidden').empty().append(serverOfPlayer);
+		page('#server-of-player').attr('href', serverOfPlayer);
 		page('#restart-game-link').addClass('visible').removeClass('hidden');
 	}	
 };

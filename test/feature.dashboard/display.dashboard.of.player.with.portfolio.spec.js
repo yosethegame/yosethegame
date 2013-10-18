@@ -32,11 +32,6 @@ describe('The dashboard of a player with a portfolio:', function() {
 		loadPageWithDatabase(database);
 	});
 	
-	it('shows the server of the player', function() {
-		expect(page('#server-of-player').attr('class')).toContain('visible');
-		expect(page('#server-of-player').text()).toEqual('this-server');
-	});
-	
 	describe('When the player has done one out of two levels of the first world,', function() {
 		
 		beforeEach(function() {
