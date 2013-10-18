@@ -27,8 +27,7 @@ describe('The dashboard of a more advanced player:', function() {
 	beforeEach(function() {	
 		player = {
 			login: 'ericminio', 			
-			server: 'this-server',
-			portfolio: [ 1, 2, 3, 4 ]
+			portfolio: [ { server: 'this-server', achievements: [1, 2, 3, 4] } ]
 		}
 		loadPageWithDatabase(database);
 	});

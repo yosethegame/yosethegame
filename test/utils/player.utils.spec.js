@@ -22,7 +22,7 @@ describe('Player utils:', function() {
 		});
 		
 		it('is true when portfolio contains the id of the given level', function() {
-			expect(thisPlayer.hasDoneThisLevel({ portfolio: [2, 1] }, { id: 1 })).toBe(true);
+			expect(thisPlayer.hasDoneThisLevel({ portfolio: [ { achievements: [2, 1] }] }, { id: 1 })).toBe(true);
 		});
 		
 		it('is false when porftfolio does not exist', function() {

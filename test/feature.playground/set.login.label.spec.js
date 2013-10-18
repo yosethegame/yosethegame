@@ -15,7 +15,7 @@ describe('Login hidden label', function() {
 		database.worlds[1].isOpenFor = function(player) { return true; }
 		player = {
 			login: 'ericminio',
-			portfolio: [1, 2, 3, 4]
+			portfolio: [ { server: 'this-server', achievements: [1] } ]
 		}
 		database.players = [ player ];
 	});

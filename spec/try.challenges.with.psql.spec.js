@@ -15,16 +15,20 @@ describe("Trying to pass challenges >", function() {
 		database = new PSql(process.env.DATABASE_URL);
 		database.worlds = new DatabaseWithChallenges().worlds;
 		ericminio = {
-			login: 'ericminio',
-			server: 'http://localhost:6000',
-			portfolio: [ database.worlds[0].levels[0].id ]
+			login: 'ericminio',			
+			portfolio: [ { 
+				server: 'http://localhost:6000', 
+				achievements: [database.worlds[0].levels[0].id] 
+			} ]
 		};
-		database.createPlayer(ericminio, function() {				
-			server = require('http').createServer(function(incoming, response) {
-				tryAll(incoming, response, database);
-			}).listen(5000);
-			done();
-		});
+		database.deletePlayer(ericminio, function() {
+			database.createPlayer(ericminio, function() {				
+				server = require('http').createServer(function(incoming, response) {
+					tryAll(incoming, response, database);
+				}).listen(5000);
+				done();
+			});
+		});		
 	});
 
 	afterEach(function(done) {
@@ -50,7 +54,7 @@ describe("Trying to pass challenges >", function() {
 	
 		it('considering a player with 1 challenges in his portfolio', function(done) {
 			database.find('ericminio', function(player) {
-				expect(player.portfolio.length).toEqual(1);
+				expect(player.portfolio[0].achievements.length).toEqual(1);
 				done();
 			});
 		});
@@ -60,7 +64,7 @@ describe("Trying to pass challenges >", function() {
 			it('makes the next challenge to be in the portfolio of the player', function(done) {
 				request("http://localhost:5000/try?login=ericminio&world=1", function(error, response, body) {
 					database.find('ericminio', function(player) {
-						expect(player.portfolio.length).toEqual(2);
+						expect(player.portfolio[0].achievements.length).toEqual(2);
 						done();
 					});
 				});			
@@ -76,7 +80,7 @@ describe("Trying to pass challenges >", function() {
 			it('does not consider the next challenge as passing', function(done) {
 				request("http://localhost:5000/try?login=ericminio&world=1", function(error, response, body) {
 					database.find('ericminio', function(player) {
-						expect(player.portfolio.length).toEqual(1);
+						expect(player.portfolio[0].achievements.length).toEqual(1);
 						done();
 					});
 				});			

@@ -3,6 +3,7 @@ var Data		= require('../support/database.with.levels');
 var playground	= require('../../public/feature.playground/display.playground.request.js');
 var response	= require('../support/fake.response');
 var array		= require('../../public/js/utils/array.utils');
+var logSuccess	= require('../../public/feature.try/log.success');
 
 describe('Control Access', function() {
 	
@@ -126,7 +127,7 @@ describe('Control Access', function() {
 		beforeEach(function() {
 			player.portfolio = [];
 			array.forEach(database.worlds[0].levels, function(level) {
-				player.portfolio.push(level.id);
+				logSuccess(player, level.id);
 			});
 			playground({ url: '/players/ericminio/play/world/1' }, response, database);
 			page = cheerio.load(response.html);

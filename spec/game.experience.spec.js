@@ -20,12 +20,12 @@ describe("Game experience", function() {
 		database.players = [
 			{
 				login: 'annessou',
-				server: 'http://localhost:6000',
+				portfolio: [ { server: 'http://localhost:6000', achievements: [] } ]
 			},
 			{
 				login: 'bilou',
 				server: 'http://localhost:6000',
-				portfolio: [ database.worlds[0].levels[0].id ]
+				portfolio: [ { server: 'http://localhost:6000', achievements: [database.worlds[0].levels[0].id ] } ]
 			}
 		];
 		server.useDatabase(database);

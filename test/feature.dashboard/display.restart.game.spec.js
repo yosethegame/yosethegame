@@ -29,7 +29,6 @@ describe('The Restart game link', function() {
 		beforeEach(function() {	
 			player = {
 				login: 'ericminio', 			
-				server: 'this-server'
 			}
 			loadPageWithDatabase(database);
 		});
@@ -45,8 +44,7 @@ describe('The Restart game link', function() {
 		beforeEach(function() {	
 			player = {
 				login: 'ericminio', 			
-				server: 'this-server',
-				portfolio: [ 1 ]
+				portfolio: [ { server: 'any', achievements: [1] } ]
 			}
 			loadPageWithDatabase(database);
 		});

@@ -37,7 +37,7 @@ describe('The banner', function() {
 		});
 		
 		it('adapts to the portfolio of the player', function() {
-			player.portfolio = [ 1, 2, 3 ];
+			player.portfolio = [ { server: 'this-server', achievements: [1, 2, 3] } ];
 			playground({ url: '/players/ericminio/play/world/2' }, response, database);
 			page = cheerio.load(response.html);
 

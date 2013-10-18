@@ -21,8 +21,7 @@ describe("Restart game:", function() {
 		database.players = [
 			{
 				login: 'bilou',
-				server: 'http://localhost:6000',
-				portfolio: [ 1 ]
+				portfolio: [ { server: 'http://localhost:6000', achievements: [1] } ]
 			}
 		];
 		server.useDatabase(database);

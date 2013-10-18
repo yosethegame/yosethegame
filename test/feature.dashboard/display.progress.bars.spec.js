@@ -29,7 +29,6 @@ describe('The progress bar', function() {
 		beforeEach(function() {	
 			player = {
 				login: 'ericminio', 			
-				server: 'this-server'
 			}
 			loadPageWithDatabase(database);
 		});
@@ -45,8 +44,7 @@ describe('The progress bar', function() {
 		beforeEach(function() {	
 			player = {
 				login: 'ericminio', 			
-				server: 'this-server',
-				portfolio: [ 1 ]
+				portfolio: [ { server: 'this-server', achievements: [1] } ]
 			}
 			loadPageWithDatabase(database);
 		});
@@ -62,8 +60,7 @@ describe('The progress bar', function() {
 		beforeEach(function() {	
 			player = {
 				login: 'ericminio', 			
-				server: 'this-server',
-				portfolio: [ 1, 2, 3 ]
+				portfolio: [ { server: 'this-server', achievements: [1, 2, 3] } ]
 			}
 			loadPageWithDatabase(database);
 		});

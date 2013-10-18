@@ -27,8 +27,7 @@ describe('The dashboard of a player with a portfolio:', function() {
 	beforeEach(function() {	
 		player = {
 			login: 'ericminio', 			
-			server: 'this-server',
-			portfolio: [ 1 ]
+			portfolio: [ { server: 'this-server', achievements: [1] } ]
 		}
 		loadPageWithDatabase(database);
 	});
@@ -42,7 +41,7 @@ describe('The dashboard of a player with a portfolio:', function() {
 		
 		beforeEach(function() {
 			database.worlds[0].levels = [ { id: 1, title: 'first challenge' }, { id: 2, title: 'second challenge' } ];
-			player.portfolio = [1];
+			player.portfolio[0].achievements = [1];
 			loadPageWithDatabase(database);
 		});
 		
@@ -63,7 +62,7 @@ describe('The dashboard of a player with a portfolio:', function() {
 		
 		beforeEach(function() {
 			database.worlds[0].levels = [ { id: 1, title: 'first challenge' }, { id: 2, title: 'second challenge' }, { id: 3, title: 'third challenge' } ];
-			player.portfolio = [1];
+			player.portfolio[0].achievements = [1];
 			loadPageWithDatabase(database);
 		});
 		
@@ -84,7 +83,7 @@ describe('The dashboard of a player with a portfolio:', function() {
 		
 		beforeEach(function() {
 			database.worlds[0].levels = [ { id: 1, title: 'first challenge' }, { id: 2, title: 'second challenge' }, { id: 3, title: 'third challenge' } ];
-			player.portfolio = [1, 2];
+			player.portfolio[0].achievements = [1, 2];
 			loadPageWithDatabase(database);
 		});
 		

@@ -1,6 +1,7 @@
-var ProductionDatabase = require('../public/js/production.database');
-var fs = require('fs');
-var array = require('../public/js/utils/array.utils');
+var ProductionDatabase 	= require('../public/js/production.database');
+var fs 					= require('fs');
+var array 				= require('../public/js/utils/array.utils');
+var logSuccess 			= require('../public/feature.try/log.success');
 
 describe('Production Levels:', function() {
 	
@@ -33,9 +34,9 @@ describe('Production Levels:', function() {
 		});
 
 		it('is unlocked when player has completed world 1', function() {
-			var player = { portfolio: [] };
+			var player = { portfolio: [ { server: 'any', achievements: [1] } ] };
 			array.forEach(database.worlds[0].levels, function(level) {
-				player.portfolio.push(level.id);
+				logSuccess(player, level.id);
 			});
 			expect(database.worlds[1].isOpenFor(player)).toBe(true);
 		});

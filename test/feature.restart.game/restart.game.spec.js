@@ -15,8 +15,7 @@ describe('Restart game:', function() {
 			database.players = [
 				{
 					login: 'bilou',
-					server: 'guiguilove',
-					portfolio: [ { title: 'challenge 1.1' } ]
+					portfolio: [ { server: 'any', achievements: [1] } ]
 				}
 			];
 			restartgame({ url: '/restart-game?login=bilou' }, { end: function() {} }, database);
@@ -29,13 +28,6 @@ describe('Restart game:', function() {
 			});
 		});
 
-		it('empties the server', function(done) {
-			database.find('bilou', function(player) {
-				expect(player.server).toBe(undefined);
-				done();
-			});
-		});
-		
 		it('sets score to 0', function(done) {
 			database.find('bilou', function(player) {
 				expect(player.score).toEqual(0);
