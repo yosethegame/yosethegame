@@ -10,12 +10,9 @@ describe('The working icon', function() {
 	var world;
 	var level;
 	
-	beforeEach(function() {
+	it('appears when all worlds are open', function() {
 		database.worlds[0].isOpenFor = function(player) { return true; }
-		database.worlds[1].isOpenFor = function(player) { return false; }
-	});
-
-	it('appears when the player has completed all the worlds', function() {
+		database.worlds[1].isOpenFor = function(player) { return true; }
 		database.players = [ {
 			login: 'ericminio', 			
 			portfolio: [ { server: 'this-server', achievements: [1, 2, 3, 4, 5] } ]
@@ -26,10 +23,12 @@ describe('The working icon', function() {
 		expect(page('table#worlds tr.working').length).toEqual(1);
 	});
 	
-	it('is hidden when the player has not completed all the worlds', function() {
+	it('is hidden when one world is hidden', function() {
+		database.worlds[0].isOpenFor = function(player) { return true; }
+		database.worlds[1].isOpenFor = function(player) { return false; }
 		database.players = [ {
 			login: 'ericminio', 			
-			portfolio: [ { server: 'this-server', achievements: [1, 2, 3, 4] } ]
+			portfolio: [ { server: 'this-server', achievements: [] } ]
 		} ];
 		dashboard({ url: '/players/ericminio' }, response, database);
 		page = cheerio.load(response.html);
@@ -37,5 +36,17 @@ describe('The working icon', function() {
 		expect(page('table#worlds tr.working').length).toEqual(0);
 	});
 	
+	it('appears when all worlds are open, even if the player has not completed all the worlds', function() {
+		database.worlds[0].isOpenFor = function(player) { return true; }
+		database.worlds[1].isOpenFor = function(player) { return true; }
+		database.players = [ {
+			login: 'ericminio', 			
+			portfolio: [ { server: 'this-server', achievements: [1, 2, 3] } ]
+		} ];
+		dashboard({ url: '/players/ericminio' }, response, database);
+		page = cheerio.load(response.html);
+
+		expect(page('table#worlds tr.working').length).toEqual(1);
+	});
 	
 });

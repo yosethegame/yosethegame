@@ -132,7 +132,7 @@ function ProductionDatabase() {
 	
 	this.worlds[1].isOpenFor = function(player) { 
 		if (thisPlayer.isANew(player)) return false;
-		if (hasAllLevelOfGivenWorldInPortfolio(player, self.worlds[0])) return true;
+		if (thisPlayer.hasDoneThisLevel(player, self.worlds[0].levels[0])) return true;
 		return false;
 	};
 	
