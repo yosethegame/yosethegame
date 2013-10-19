@@ -193,8 +193,13 @@
 	margin-right:50px;
 }
 
+#worlds tr {
+	border-left:5px solid #DAF5D7;	
+}
+
 #worlds td {
 	vertical-align:top;
+	padding-left:10px;
 }
 
 .levels {
