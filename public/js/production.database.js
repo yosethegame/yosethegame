@@ -26,6 +26,13 @@ function ProductionDatabase() {
 				file: 'public/challenge.ping/ping.html',
 				requester: '../challenge.ping/ping.requester.js',
 				checker: '../challenge.ping/ping.response.matcher.js'
+			},
+			{
+				id: 14,
+				title: 'the share challenge',
+				file: 'public/challenge.share/share.html',
+				requester: '../challenge.share/share.requester.js',
+				checker: '../challenge.share/share.response.matcher.js'
 			}
 		]
 	},
