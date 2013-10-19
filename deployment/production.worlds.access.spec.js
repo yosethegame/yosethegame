@@ -33,11 +33,8 @@ describe('Production Levels:', function() {
 			expect(database.worlds[1].isOpenFor({})).toBe(false);
 		});
 
-		it('is unlocked when player has completed world 1', function() {
+		it('is unlocked when player has completed level id:1', function() {
 			var player = { portfolio: [ { server: 'any', achievements: [1] } ] };
-			array.forEach(database.worlds[0].levels, function(level) {
-				logSuccess(player, level.id);
-			});
 			expect(database.worlds[1].isOpenFor(player)).toBe(true);
 		});
 

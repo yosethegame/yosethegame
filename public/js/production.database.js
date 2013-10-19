@@ -38,7 +38,6 @@ function ProductionDatabase() {
 	},
 	{
 		number: 2,
-		isOpenFor: function(player) { return false; },
 		name: 'world 2',
 		levels: [
 			{
@@ -134,6 +133,7 @@ function ProductionDatabase() {
 	this.worlds[1].isOpenFor = function(player) { 
 		if (thisPlayer.isANew(player)) return false;
 		if (hasAllLevelOfGivenWorldInPortfolio(player, self.worlds[0])) return true;
+		return false;
 	};
 	
 	
