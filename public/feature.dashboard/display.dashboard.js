@@ -79,17 +79,17 @@ dashboard = function(request, response, database) {
 		var workingWorldTemplate = page.html('table#worlds tr.working');
 		
 		page('table#worlds').empty();
-		var hasCompletedAllWorlds = true;		
+		var allWorldsAreOpen = true;		
 		array.forEach(database.worlds, function(world, worldIndex) {
 			if (world.isOpenFor(player)) {
 				page('table#worlds').append(openWorldTemplate);
 				displayWorld(page, player, world, worldIndex + 1);
 			} else {
 				page('table#worlds').append(lockedWorldTemplate);
+				allWorldsAreOpen = false;
 			}
-			hasCompletedAllWorlds &= thePlayer.hasCompletedThisWorld(player, world);			
 		});
-		if (hasCompletedAllWorlds) {
+		if (allWorldsAreOpen) {
 			page('table#worlds').append(workingWorldTemplate);
 		}
 
