@@ -9,21 +9,24 @@
 </head>
 <body id="challenge-content">
 	<p>
-		Sharing code is a way to learn from others and let the other learn from you. 
-		And when time comes to share your work, chances are that you will want to share
-		code that you feel proud about.
+		Sharing code is a way to learn from others and let the other learn from you.
 	</p>
 	<p class="lead">
-		Update your server and make it serve an html page
-		with a link to your source repository. <br/>
+		Update your server and make it accept a GET request on /
+		and respond an html page
+		with a link to your source repository.
 		When accessing your repository, one should should read 
 		a welcome message referencing this game.
 	</p>
 		
-	<p class="lead">
-		The id of the link should be #repository-link.<br/>
-		The repository home should contain a #readme element containing the text 'YoseTheGame'
-	</p>
+	<p>Receiving</p>
+
+	<pre>http://your/server/</pre>
+
+	<p>You should respond</p>
+	
+	<pre>an html page containing an element a#repository-link targeting a page whose element #readme contains the text 'YoseTheGame'</pre>
+		
 	
 	Note: <a href="http://github.com">github</a> and <a href="http://bitbucket.org">bitbucket</a> both display, in a #readme element, the content of a readme file present in the root folder of a repository.
 	<legend>

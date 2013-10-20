@@ -3,7 +3,7 @@ var Browser = require('zombie');
 module.exports = {
 
 	validate: function(url, remoteResponse, content, callback) {
-		var self = this;
+		var expected = "a page containing a#repository-link AND a repository with a readme file containing 'YoseTheGame'";
 
 		var browser = new Browser();
 		browser.visit(url).
@@ -17,17 +17,19 @@ module.exports = {
 				if(browser.query('#readme') == null) {
 					throw 'Error: missing element #readme';
 				}
-				
+				if(browser.text('#readme').indexOf('YoseTheGame') == -1) {
+					throw "Error: missing reference to 'YoseTheGame' in element #readme";
+				}
 				callback({
 					code: 200,
-					expected: "a page containing a#repository-link AND a repository with a readme file containing 'YoseTheGame'",
-					got: "a page containing a#repository-link AND a repository with a readme file containing 'YoseTheGame'",
+					expected: expected,
+					got: expected,
 				})
 			}).
 			fail(function(error) {
 				callback({
 					code: 501,
-					expected: "a page containing a#repository-link AND a repository with a readme file containing 'YoseTheGame'",
+					expected: expected,
 					got: error.toString()
 				});
 			});
