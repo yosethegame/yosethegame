@@ -4,7 +4,7 @@ var cheerio = require('cheerio');
 
 var expected = "a page containing a#repository-link AND a repository with a readme file containing 'YoseTheGame'";
 
-var exitWithError = function(message, callback) {
+var withError = function(message, callback) {
 	callback({
 		code: 501,
 		expected: expected,
@@ -16,37 +16,23 @@ module.exports = {
 
 	validate: function(url, remoteResponse, content, callback) {
 		request(url, function (error, response, body) {
-			if (error || response.statusCode != 200) {
-				return exitWithError(error.toString(), callback);
-			} 
-			else {
-				var page = cheerio.load(body);
-				if (page('a#repository-link').length == 0) {
-					return exitWithError('Error: missing element a#repository-link', callback);
-				}
-				else {
-					var repoUrl = page('a#repository-link').attr('href');
-					request(repoUrl, function (repoError, repoResponse, repoBody) {
-						if (repoError || repoResponse.statusCode != 200) {
-							return exitWithError(repoError.toString(),callback);
-						} 
-						else {
-							var pageRepo = cheerio.load(repoBody);
-							if (pageRepo('#readme').length == 0) {
-								return exitWithError('Error: missing element #readme', callback);
-							}
-							if (pageRepo('#readme').html().indexOf('YoseTheGame') == -1) {
-								return exitWithError("missing reference to 'YoseTheGame' in element #readme", callback);
-							}
-							callback({
-								code: 200,
-								expected: expected,
-								got: expected,
-							});
-						}
-					});
-				}
-			}
+			var page = cheerio.load(body);
+			if (error || response.statusCode != 200) { return withError(error.toString(), callback); } 
+			if (page('a#repository-link').length == 0) { return withError('Error: missing element a#repository-link', callback); }
+
+			var repoUrl = page('a#repository-link').attr('href');
+			request(repoUrl, function (repoError, repoResponse, repoBody) {
+				var pageRepo = cheerio.load(repoBody);
+				if (repoError || repoResponse.statusCode != 200) { return withError(repoError.toString(),callback); } 
+				if (pageRepo('#readme').length == 0) { return withError('Error: missing element #readme', callback); }
+				if (pageRepo('#readme').html().indexOf('YoseTheGame') == -1) { return withError("missing reference to 'YoseTheGame' in element #readme", callback); }
+
+				callback({
+					code: 200,
+					expected: expected,
+					got: expected,
+				});
+			});
 		});	
 	}
 };
