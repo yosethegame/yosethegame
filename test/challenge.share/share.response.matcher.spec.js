@@ -51,7 +51,7 @@ describe('Share response matcher,', function() {
 		beforeEach(function() {
 			matcher.numberChooser = { getNumber: function() { return 42; } }
 			var content = '<html><body>' + 
-							'<a href="/" id="repository-link">42</label>' +
+							'<a href="http://localhost:6000" id="repository-link">42</label>' +
 			  			'</body></html>';			
 			remote = require('http').createServer(
 				function (request, response) {
@@ -93,7 +93,7 @@ describe('Share response matcher,', function() {
 		beforeEach(function() {
 			matcher.numberChooser = { getNumber: function() { return 42; } }
 			var content = '<html><body>' + 
-							'<a href="/" id="repository-link">42</label>' +
+							'<a href="http://localhost:6000" id="repository-link">42</label>' +
 							'<label id="readme">42</label>' +
 			  			'</body></html>';			
 			remote = require('http').createServer(
