@@ -22,14 +22,14 @@ function ProductionDatabase() {
 		levels: [ 
 			{
 				id: 1,
-				title: 'the ping challenge',
+				title: 'Ping challenge',
 				file: 'public/challenge.ping/ping.html',
 				requester: '../challenge.ping/ping.requester.js',
 				checker: '../challenge.ping/ping.response.matcher.js'
 			},
 			{
 				id: 14,
-				title: 'the share challenge',
+				title: 'Share challenge',
 				file: 'public/challenge.share/share.html',
 				requester: '../challenge.share/share.requester.js',
 				checker: '../challenge.share/share.response.matcher.js'
@@ -37,7 +37,6 @@ function ProductionDatabase() {
 		]
 	},
 	{
-		number: 2,
 		name: 'world 2',
 		levels: [
 			{
@@ -125,6 +124,18 @@ function ProductionDatabase() {
 				checker: '../challenge.list.of.decomposition/list.of.decomposition.response.matcher.js',
 			}
 		]
+	},
+	{
+		name: 'world 3',
+		levels: [
+			{
+				id: 15,
+				title: 'Minesweeper board challenge',
+				file: 'public/world.minesweeper/challenge.board/board.html',
+				requester: '../world.minesweeper/challenge.board/board.requester.js',
+				checker: '../world.minesweeper/challenge.board/board.response.matcher.js',
+			}
+		]
 	}
 	];
 	
@@ -136,7 +147,7 @@ function ProductionDatabase() {
 		return false;
 	};
 	
-	
+	this.worlds[2].isOpenFor = this.worlds[1].isOpenFor;
 };
 
 ProductionDatabase.prototype = new PSql(process.env.DATABASE_URL);

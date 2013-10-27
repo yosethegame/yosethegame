@@ -2,7 +2,7 @@ var ProductionDatabase = require('../public/js/production.database');
 var fs = require('fs');
 var array = require('../public/js/utils/array.utils');
 
-describe('Production Levels:', function() {
+describe('Levels:', function() {
 	
 	var database;
 	
