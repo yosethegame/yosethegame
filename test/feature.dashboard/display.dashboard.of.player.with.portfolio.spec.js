@@ -70,7 +70,7 @@ describe('The dashboard of a player with a portfolio:', function() {
 		});
 
 		it('locks the third level', function() {
-			expect(level.number(1, 3)).toBeLocked();
+			expect(level.number(1, 3)).toBeALockedLevel();
 		});
 	});
 

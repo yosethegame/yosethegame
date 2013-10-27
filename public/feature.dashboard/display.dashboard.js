@@ -85,13 +85,12 @@ dashboard = function(request, response, database) {
 				page('table#worlds').append(openWorldTemplate);
 				displayWorld(page, player, world, worldIndex + 1);
 			} else {
-				page('table#worlds').append(lockedWorldTemplate);
+				var lockerWithWorldName = lockedWorldTemplate.replace('name', world.name);
+				page('table#worlds').append(lockerWithWorldName);
 				allWorldsAreOpen = false;
 			}
 		});
-		if (allWorldsAreOpen) {
-			page('table#worlds').append(workingWorldTemplate);
-		}
+		page('table#worlds').append(workingWorldTemplate);
 
 		response.write(page.html());
 		response.end();

@@ -36,7 +36,7 @@ describe('The dashboard of a new player', function() {
 	});
 	
 	it('displays the second world as locked', function() {
-		expect(world.number(2)).toBeLocked();
+		expect(world.number(2)).toBeALockedWorld();
 	});
 	
 	it('invites the player to play level 1.1', function() {
@@ -51,7 +51,7 @@ describe('The dashboard of a new player', function() {
 		});
 		
 		it('hides the second challenge', function() {
-			expect(level.number(1, 2)).toBeLocked();
+			expect(level.number(1, 2)).toBeALockedLevel();
 		});
 		
 		it('displays only one locker', function() {

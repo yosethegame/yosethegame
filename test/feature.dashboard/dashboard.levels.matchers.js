@@ -1,5 +1,14 @@
 beforeEach(function() {
 
+	var toBeALockedLevel = function() {
+		var actual = this.actual.html;
+		var expected = '<img src="/img/locker.png" width="60" height="60" class="img-responsive">';
+		this.message = function() {
+			return "Expected '" + actual + "' to equal '" + expected + "' in " + this.actual.selector;
+		};
+		return actual == expected;
+	};
+	
 	var toBePlayableBy = function(login) {
 		var actual = this.actual.html;
 		var expected = '<a href="/players/' + login + '/play/world/' + this.actual.worldNumber + '">level ' + this.actual.worldNumber + '.' + this.actual.levelNumber + ' : ' + this.actual.levelTitle + '</a>';
@@ -18,7 +27,10 @@ beforeEach(function() {
 		return actual == expected;
 	};
 
-	this.addMatchers({ toBePlayableBy: toBePlayableBy, toBeDone: toBeDone });
+	this.addMatchers({ 
+		toBeALockedLevel: toBeALockedLevel,
+		toBePlayableBy: toBePlayableBy, 
+		toBeDone: toBeDone });
 });
 
 function DashboardLevelMatcherData(page, database) {

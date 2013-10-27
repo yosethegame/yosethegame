@@ -1,8 +1,8 @@
 beforeEach(function() {
 
-	var toBeLocked = function() {
+	var toBeALockedWorld = function() {
 		var actual = this.actual.html;
-		var expected = '<img src="/img/locker.png" width="60" height="60" class="img-responsive">';
+		var expected = this.actual.worldName + '<img src="/img/locker.png" width="60" height="60" class="img-responsive">';
 		this.message = function() {
 			return "Expected '" + actual + "' to equal '" + expected + "' in " + this.actual.selector;
 		};
@@ -35,7 +35,7 @@ beforeEach(function() {
 	};
 
 	this.addMatchers({ 
-		toBeLocked: toBeLocked, 
+		toBeALockedWorld: toBeALockedWorld, 
 		toBeOpen: toBeOpen, 
 		toHaveLevelCount: toHaveLevelCount, 
 		toHaveProgressBarOf: toHaveProgressBarOf 
