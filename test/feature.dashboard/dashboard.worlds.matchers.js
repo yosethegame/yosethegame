@@ -2,11 +2,11 @@ beforeEach(function() {
 
 	var toBeALockedWorld = function() {
 		var actual = this.actual.html;
-		var expected = this.actual.worldName + '<img src="/img/locker.png" width="60" height="60" class="img-responsive">';
+		var expected = "'" + this.actual.worldName + "' and 'lock'";
 		this.message = function() {
-			return "Expected '" + actual + "' to equal '" + expected + "' in " + this.actual.selector;
+			return "Expected '" + actual + "' to contain " + expected + " in " + this.actual.selector;
 		};
-		return actual == expected;
+		return actual.indexOf(this.actual.worldName) != -1 && actual.indexOf('lock') != -1;
 	};
 	
 	var toBeOpen = function() {

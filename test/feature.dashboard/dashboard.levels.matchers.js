@@ -2,11 +2,10 @@ beforeEach(function() {
 
 	var toBeALockedLevel = function() {
 		var actual = this.actual.html;
-		var expected = '<img src="/img/locker.png" width="60" height="60" class="img-responsive">';
 		this.message = function() {
-			return "Expected '" + actual + "' to equal '" + expected + "' in " + this.actual.selector;
+			return "Expected '" + actual + "' to contain 'lock' in " + this.actual.selector;
 		};
-		return actual == expected;
+		return actual.indexOf('lock') != -1;
 	};
 	
 	var toBePlayableBy = function(login) {

@@ -24,6 +24,7 @@ var exitWithMessage = function(message, page, response) {
 var displayWorld = function(page, player, world, worldNumber) {
 	var worldSelector = 'table#worlds tr:nth-child(' + worldNumber + ')';
 	var wordLevelsSelector = worldSelector + ' td:nth-child(2) ul.levels';
+	var lockedLevelTemplate = page(wordLevelsSelector + ' li.locked-level').html();
 	
 	page(worldSelector+ ' td:nth-child(1)').text(world.name);								
 	page(wordLevelsSelector).empty();				
@@ -41,7 +42,7 @@ var displayWorld = function(page, player, world, worldNumber) {
 					var levelMention = '<a href="/players/' + player.login + '/play/world/' + worldNumber + '">level ' + worldNumber + '.' + levelNumber + ' : ' + level.title + '</a>';
 					nextChallengeOfWorldDisplayed = true;
 				} else {
-					var levelMention = '<img src="/img/locker.png" width="60" height="60" class="img-responsive">';
+					var levelMention = lockedLevelTemplate;
 					lockerDisplayed = true;
 				}
 			}
