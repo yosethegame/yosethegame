@@ -1,6 +1,6 @@
 var cheerio = require('cheerio');
 
-var expectedContent = "A page with an element #title containing 'Minesweeper'";
+var expectedContent = "A page with an element #title containing 'Minesweeper' AND a 8x8 cells grid";
 
 module.exports = {
 
@@ -14,10 +14,17 @@ module.exports = {
 				got: 'A page missing element #title'
 			}
 		}
+		if (page('#title').text().indexOf('Minesweeper') == -1) {
+			return {
+				code: 501,
+				expected: expectedContent,
+				got: "#title text = '" +  page('#title').text() + "'"
+			}
+		}
 		return {
 			code: 501,
 			expected: expectedContent,
-			got: "#title text = '" +  page('#title').text() + "'"
+			got: "missing element #cell-1x3"
 		}
 	},
 
