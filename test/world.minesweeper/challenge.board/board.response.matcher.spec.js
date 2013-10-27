@@ -1,71 +1,178 @@
-var checkThatStatusIs = require('../../levels.common/status.checker');
-var matcher 		  = require('../../../public/world.minesweeper/challenge.board/board.response.matcher');
+var matcher = require('../../../public/world.minesweeper/challenge.board/board.response.matcher');
 
 describe('Minesweeper response matcher', function() {
 
 	var status;
+	var remote;
 	
 	describe('Fails when the page is missing #title:', function() {
-		content = '<html><body>' +
-						'<label id="not-title">anything</label>' +
-				  '</body></html>';			
-		status = matcher.computeStatus({ headers: {'content-type': 'text/html' } }, content);
 		
-		checkThatStatusIs(status, {
-			code: 501,
-			expected: 'A page with an element #title',
-			got: 'A page missing element #title'
+		beforeEach(function() {
+			content = '<html><body>' +
+							'<label id="not-title">anything</label>' +
+					  '</body></html>';			
+
+			remote = require('http').createServer(
+				function (request, response) {
+					response.write(content);
+					response.end();
+				})
+			.listen(6000);			
+		});
+		
+		afterEach(function() {
+			remote.close();
+		});
+
+		it('sets code to 501', function(done) {
+			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
+				expect(status.code).toEqual(501);
+				done();
+			});
+		});
+		
+		it('sets expected', function(done) {
+			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
+				expect(status.expected).toContain('A #title');
+				done();
+			});
+		});
+		
+		it('sets actual', function(done) {
+			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
+				expect(status.got).toContain('missing element #title');
+				done();
+			});
 		});
 	});
 	
 	describe('Fails when #title does not contain Minesweeper:', function() {
-		content = '<html><body>' +
-						'<label id="title">anything</label>' +
-				  '</body></html>';			
-		status = matcher.computeStatus({ headers: {'content-type': 'text/html' } }, content);
+		beforeEach(function() {
+			content = '<html><body>' +
+							'<label id="title">anything</label>' +
+					  '</body></html>';			
+
+			remote = require('http').createServer(
+				function (request, response) {
+					response.write(content);
+					response.end();
+				})
+			.listen(6000);			
+		});
 		
-		checkThatStatusIs(status, {
-			code: 501,
-			expected: "A page with an element #title containing 'Minesweeper'",
-			got: "#title text = 'anything'"
+		afterEach(function() {
+			remote.close();
+		});
+
+		it('sets code to 501', function(done) {
+			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
+				expect(status.code).toEqual(501);
+				done();
+			});
+		});
+		
+		it('sets expected', function(done) {
+			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
+				expect(status.expected).toContain("A #title containing 'Minesweeper'");
+				done();
+			});
+		});
+		
+		it('sets actual', function(done) {
+			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
+				expect(status.got).toContain("#title text = 'anything'");
+				done();
+			});
 		});
 	});
 	
 	describe('Fails when the page is missing cell-1x3:', function() {
-		content = '<html><body>' +
-						'<label id="title">Minesweeper</label>' +
+		beforeEach(function() {
+			content = '<html><body>' +
+							'<label id="title">Minesweeper</label>' +
 
-						'<label id="cell-1x1"></label>' +
-						'<label id="cell-1x2"></label>' +
-				  '</body></html>';
-		status = matcher.computeStatus({ headers: {'content-type': 'text/html' } }, content);
+							'<label id="cell-1x1"></label>' +
+							'<label id="cell-1x2"></label>' +
+					  '</body></html>';
 
-		checkThatStatusIs(status, {
-			code: 501,
-			expected: 'a 8x8 cells grid',
-			got: 'missing element #cell-1x3'
+			remote = require('http').createServer(
+				function (request, response) {
+					response.write(content);
+					response.end();
+				})
+			.listen(6000);			
+		});
+		
+		afterEach(function() {
+			remote.close();
+		});
+
+		it('sets code to 501', function(done) {
+			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
+				expect(status.code).toEqual(501);
+				done();
+			});
+		});
+		
+		it('sets expected', function(done) {
+			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
+				expect(status.expected).toContain('a 8x8 cells grid');
+				done();
+			});
+		});
+		
+		it('sets actual', function(done) {
+			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
+				expect(status.got).toContain('missing element #cell-1x3');
+				done();
+			});
 		});
 	});
 	
-	describe('Fails when the page is missing cell-2x1:', function() {
-		content = '<html><body>' +
-						'<label id="title">Minesweeper</label>' +
+	describe('Passes when all required cells are present', function() {
+		beforeEach(function() {
+			var grid = '';
+			for(var line=1; line<=8; line++) {
+				for(var column=1; column<=8; column++) {
+					grid += '<label id="cell-' + line + 'x' + column + '"></label>';
+				}
+			}
+			content = '<html><body>' +
+							'<label id="title">Minesweeper</label>' +
+							grid
+					  '</body></html>';
 
-						'<label id="cell-1x1"></label>' +
-						'<label id="cell-1x2"></label>' +
-						'<label id="cell-1x3"></label>' +
-						'<label id="cell-1x4"></label>' +
-						'<label id="cell-1x5"></label>' +
-						'<label id="cell-1x6"></label>' +
-						'<label id="cell-1x7"></label>' +
-						'<label id="cell-1x8"></label>' +
-				  '</body></html>';
-		status = matcher.computeStatus({ headers: {'content-type': 'text/html' } }, content);
+			remote = require('http').createServer(
+				function (request, response) {
+					response.write(content);
+					response.end();
+				})
+			.listen(6000);			
+		});
+		
+		afterEach(function() {
+			remote.close();
+		});
 
-		checkThatStatusIs(status, {
-			code: 501,
-			expected: 'a 8x8 cells grid',
-			got: 'missing element #cell-2x1'
+		it('sets code to 200', function(done) {
+			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
+				expect(status.code).toEqual(200);
+				done();
+			});
+		});
+		
+		it('sets expected', function(done) {
+			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
+				expect(status.expected).toContain('a 8x8 cells grid');
+				done();
+			});
+		});
+		
+		it('sets actual', function(done) {
+			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
+				expect(status.got).toContain("#title containing 'Minesweeper' and 8x8 cells grid");
+				done();
+			});
 		});
 	});
 });
