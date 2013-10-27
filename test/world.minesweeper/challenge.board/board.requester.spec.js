@@ -1,4 +1,4 @@
-var Requester = require('../../public/world.minesweeper/challenge.board/board.requester');
+var Requester = require('../../../public/world.minesweeper/challenge.board/board.requester');
 
 describe('Board Requester', function() {
 
