@@ -134,6 +134,13 @@ function ProductionDatabase() {
 				file: 'public/world.minesweeper/challenge.board/board.html',
 				requester: '../world.minesweeper/challenge.board/board.requester.js',
 				checker: '../world.minesweeper/challenge.board/board.response.matcher.js',
+			},
+			{
+				id: 16,
+				title: 'Data injection challenge',
+				file: 'public/world.minesweeper/challenge.injection/injection.html',
+				requester: '../world.minesweeper/challenge.board/board.requester.js',
+				checker: '../world.minesweeper/challenge.injection/injection.response.matcher.js',
 			}
 		]
 	}

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>UI</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="/css/main.css" rel="stylesheet" type="text/css">
+	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
+	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>		
+</head>
+<body id="challenge-content">
+	<p>
+		We now need to work on an adapter between your code and the game
+		to be able to inject a specific grid and execute deterministic tests.
+	</p>
+	<p class="lead">
+		This level will:
+		<dl>
+			<dt>inject data into document.grid</dt><dd>The data format is [ ['bomb', 'empty', 'bomb' ], ['empty', 'empty', 'empty'] ]</dd>
+			<dt>call the load() method</dt><dd>Yes, the load() method should be a Javascript method available in your page</dd>
+			<dt>verify the class attributes of the cells</dt><dd>#cell-1x1 and #cell-1x3 class attribute should contain 'bomb' and the others should contain 'empty'</dd>
+		</dl>
+		The point here is to verify that you actually do something with the injected data.
+	</p>
+				
+	<legend>
+		<h2>Take it!</h2>
+	</legend>
+		
+	<section>
+		<p>
+			Your server will be called with /minesweeper postfix
+		</p>	
+
+	</section>
+</body>
+</html>

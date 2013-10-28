@@ -1,4 +1,3 @@
-var cheerio = require('cheerio');
 var Browser = require('zombie');
 
 var expectedContent = "A #title containing 'Minesweeper' AND a 8x8 cells grid";
