@@ -10,17 +10,17 @@
 </head>
 <body id="challenge-content">
 	<p>
-		We now need to work on an adapter between your code and the game
-		to be able to inject a specific grid and execute deterministic tests.
+		It's time to play!
 	</p>
 	<p class="lead">
-		This level will:
+		Update your page so that we can:
 		<dl>
-			<dt>inject data into document.grid</dt><dd>The data format is [ ['bomb', 'empty', 'bomb' ], ['empty', 'empty', 'empty'] ]</dd>
-			<dt>call the load() method</dt><dd>Yes, the load() method should be a Javascript method available in your page</dd>
-			<dt>verify the class attributes of the cells</dt><dd>#cell-1x1 and #cell-1x3 class attribute should contain 'bomb' and the others should contain 'empty'</dd>
+			<dt>inject data into document.grid</dt><dd>The data format is [ ['bomb', 'empty' ], ['empty', 'empty' ] ]</dd>
+			<dt>call the load() method</dt><dd>The load() method should be a Javascript method available in your page</dd>
+			<dt>call play(x, y) on a bomb</dt><dd>x & y will be chosen to target a cell with a bomb</dd>
+			<dt>check that the class of the played cell contains 'lost'</dt>
+				<dd>For example, if we inject a single-line grid [ ['bomb', 'empty', 'bomb' ] ] and play(1, 3), then the class of #cell-1x3 should contain 'lost'</dd>
 		</dl>
-		The point here is to verify that you actually do something with the injected data.
 	</p>
 				
 	<legend>
