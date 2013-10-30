@@ -137,6 +137,13 @@ function ProductionDatabase() {
 			},
 			{
 				id: 16,
+				title: 'Ready to play challenge',
+				file: 'public/world.minesweeper/challenge.ready/ready.html',
+				requester: '../world.minesweeper/challenge.board/board.requester.js',
+				checker: '../world.minesweeper/challenge.ready/ready.response.matcher.js',
+			},
+			{
+				id: 17,
 				title: 'Data injection challenge',
 				file: 'public/world.minesweeper/challenge.injection/injection.html',
 				requester: '../world.minesweeper/challenge.board/board.requester.js',
