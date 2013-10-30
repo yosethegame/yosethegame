@@ -1,4 +1,4 @@
-var matcher = require('../../public/challenge.share/share.response.matcher');
+var matcher = require('../../../public/world.get.ready/challenge.share/share.response.matcher');
 
 describe('Share response matcher,', function() {
 	

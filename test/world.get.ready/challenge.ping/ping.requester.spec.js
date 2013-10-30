@@ -1,4 +1,4 @@
-var Requester = require('../../public/challenge.ping/ping.requester');
+var Requester = require('../../../public/world.get.ready/challenge.ping/ping.requester');
 
 describe('Ping challenge requester', function() {
 	

@@ -23,16 +23,16 @@ function ProductionDatabase() {
 			{
 				id: 1,
 				title: 'Ping challenge',
-				file: 'public/challenge.ping/ping.html',
-				requester: '../challenge.ping/ping.requester.js',
-				checker: '../challenge.ping/ping.response.matcher.js'
+				file: 'public/world.get.ready/challenge.ping/ping.html',
+				requester: '../world.get.ready/challenge.ping/ping.requester.js',
+				checker: '../world.get.ready/challenge.ping/ping.response.matcher.js'
 			},
 			{
 				id: 14,
 				title: 'Share challenge',
-				file: 'public/challenge.share/share.html',
-				requester: '../challenge.share/share.requester.js',
-				checker: '../challenge.share/share.response.matcher.js'
+				file: 'public/world.get.ready/challenge.share/share.html',
+				requester: '../world.get.ready/challenge.share/share.requester.js',
+				checker: '../world.get.ready/challenge.share/share.response.matcher.js'
 			}
 		]
 	},

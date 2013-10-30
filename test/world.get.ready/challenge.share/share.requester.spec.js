@@ -1,4 +1,4 @@
-var Requester = require('../../public/challenge.share/share.requester');
+var Requester = require('../../../public/world.get.ready/challenge.share/share.requester');
 
 describe('Share challenge requester', function() {
 	
