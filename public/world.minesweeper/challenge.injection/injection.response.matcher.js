@@ -28,17 +28,18 @@ module.exports = {
 				if(browser.evaluate("typeof load") != 'function') {
 					throw 'Error: missing load() method';
 				}
+			}).
+			then(function() {
 				browser.document.grid = self.data;
 				var result = browser.evaluate('load()');
-				
-				var onclick = browser.query('[id=' + cellId + ']').onclick;
-				browser.evaluate(onclick);
-				
+				browser.evaluate(browser.query('[id=' + cellId + ']').onclick);
 				var classes = browser.query('[id=' + cellId + ']').className;
+				
 				if (classes.indexOf('lost') == -1) {
 					throw "Error: #" + cellId + " class = '" + classes + "'"; 
 				}
-				
+			}).
+			then(function() {
 				callback({
 					code: 200,
 					expected: "A load() method and #" + cellId + " class containing 'lost'",
