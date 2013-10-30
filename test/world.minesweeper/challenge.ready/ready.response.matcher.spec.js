@@ -88,17 +88,66 @@ describe('Minesweeper ready to play', function() {
 		
 		it('sets expected', function(done) {
 			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
-				expect(status.expected).toContain('#cell-2x1 onclick = play(2, 1)');
+				expect(status.expected).toContain('onclick attribute of each #cell-NxP set to play(N, P)');
 				done();
 			});
 		});
 		
 		it('sets actual', function(done) {
 			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
-				expect(status.got).toContain('missing play(2, 1) onclick on #cell-2x1');
+				expect(status.got).toContain('missing onclick="play(2, 1)" on #cell-2x1');
 				done();
 			});
 		});
 	});
+	
+	describe('fails when one cell has onclick event not set to play(N, P)', function() {
+		
+		beforeEach(function() {
+			content = '<html><body>' +
+							'<label id="title">Minesweeper</label>' +
+
+							'<label id="cell-1x1" onclick="play(1, 1)"></label>' +
+							'<label id="cell-1x2" onclick="play(1, 2)"></label>' +
+							'<label id="cell-2x1" onclick="any"       ></label>' +
+							'<label id="cell-2x2" onclick="play(2, 2)"></label>' +
+							
+							'<script>function play(){}</script>' +
+					  '</body></html>';			
+
+			remote = require('http').createServer(
+				function (request, response) {
+					response.write(content);
+					response.end();
+				})
+			.listen(6000);	
+			
+		});
+		
+		afterEach(function() {
+			remote.close();
+		});
+
+		it('sets code to 501', function(done) {
+			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
+				expect(status.code).toEqual(501);
+				done();
+			});
+		});
+		
+		it('sets expected', function(done) {
+			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
+				expect(status.expected).toContain('onclick attribute of each #cell-NxP set to play(N, P)');
+				done();
+			});
+		});
+		
+		it('sets actual', function(done) {
+			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
+				expect(status.got).toContain('onclick="any" on #cell-2x1');
+				done();
+			});
+		});
+	});	
 		
 });
