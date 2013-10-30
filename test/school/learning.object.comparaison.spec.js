@@ -23,4 +23,12 @@ describe('Object comparaison', function() {
 	it('considers different objects with two fields and same values but different order', function() {
 		expect({ one: 'one', two: 'two' }).not.toEqual({ two: 'not two', one: 'one' });
 	});
+	
+	it('can consider equal two objects with two fields in different orders when using deep-equal', function() {
+		var first = { one: 'one', two: 'two' };
+		var second = { two: 'two', one: 'one' };
+		var equal = require('deep-equal');
+
+		expect(equal(first, second)).toBe(true);
+	});
 });

@@ -18,6 +18,7 @@ describe('Power of two response matcher,', function() {
 	});
 	
 	var correctContent = { number: 8, decomposition: [2, 2, 2] };
+	var shuffledContent= { decomposition: [2, 2, 2], number: 8 };
 	var correctAnswer = { 'content-type': 'application/json', body: correctContent };
 
 	it('can compare object after json/de-json only via stringify', function() {
@@ -47,6 +48,18 @@ describe('Power of two response matcher,', function() {
 			beforeEach(function() {
 				remoteResponse.headers['content-type'] = 'application/json';
 				status = matcher.computeStatus('this-url?number=8',  remoteResponse,  JSON.stringify(correctContent) + '\n', matcher);
+			});
+			
+			it('sets code to 200', function() {
+				expect(status.code).toEqual(200);
+			});
+
+		});
+		
+		describe('supports shuffled correct content', function() {
+			beforeEach(function() {
+				remoteResponse.headers['content-type'] = 'application/json';
+				status = matcher.computeStatus('this-url?number=8',  remoteResponse,  JSON.stringify(shuffledContent), matcher);
 			});
 			
 			it('sets code to 200', function() {

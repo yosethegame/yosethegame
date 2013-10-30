@@ -1,4 +1,5 @@
-var $ = require('jquery');
+var $		= require('jquery');
+var equal	= require('deep-equal');
 
 var expectedContentType = 'application/json';
 
@@ -15,7 +16,7 @@ hasExpectedContentType = function(response) {
 };
 
 hasExpectedContent = function(request, content, matcher) {
-	return content == JSON.stringify(matcher.expectedContent(request));
+	return equal(content, matcher.expectedContent(request));
 };
 
 computeStatus = function(request, remoteResponse, content, matcher) {
@@ -33,7 +34,7 @@ computeStatus = function(request, remoteResponse, content, matcher) {
 	        var parsedContent = content;
 	    }
 	    var status = {
-	        code: hasExpectedContentType(remoteResponse) && hasExpectedContent(request, JSON.stringify(parsedContent), matcher) ? 200 : 501,
+	        code: hasExpectedContentType(remoteResponse) && hasExpectedContent(request, parsedContent, matcher) ? 200 : 501,
 	        expected : expectedAnswer(request, matcher),
 	        got: { 'content-type': remoteResponse.headers['content-type'], body: parsedContent }
 	    };
