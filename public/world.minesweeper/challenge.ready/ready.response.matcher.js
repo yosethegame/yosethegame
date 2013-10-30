@@ -7,6 +7,9 @@ module.exports = {
 		var browser = new Browser();
 		browser.visit(url).
 			then(function() {
+				if(browser.evaluate("typeof play") != 'function') {
+					throw 'Error: missing play() method';
+				}
 				callback({
 					code: 200,
 					expected: "A play() method",
