@@ -10,7 +10,7 @@ describe('The working icon', function() {
 	var world;
 	var level;
 	
-	it('appears in the last line', function() {
+	it('does not appear in the last line - temporary modification to see how players feel about this', function() {
 		database.worlds[0].isOpenFor = function(player) { return true; }
 		database.worlds[1].isOpenFor = function(player) { return true; }
 		database.players = [ {
@@ -21,7 +21,7 @@ describe('The working icon', function() {
 		page = cheerio.load(response.html);
 		var worldCount = database.worlds.length;
 
-		expect(page('table#worlds tr:nth-child('+ (worldCount+1) + ').working').length).toEqual(1);
+		expect(page('table#worlds tr:nth-child('+ (worldCount+1) + ').working').length).toEqual(0);
 	});
 	
 	

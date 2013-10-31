@@ -91,7 +91,6 @@ dashboard = function(request, response, database) {
 				allWorldsAreOpen = false;
 			}
 		});
-		page('table#worlds').append(workingWorldTemplate);
 
 		response.write(page.html());
 		response.end();
