@@ -2,10 +2,11 @@ beforeEach(function() {
 
 	var toBeALockedLevel = function() {
 		var actual = this.actual.html;
+		var levelNumberMention = this.actual.worldNumber + '.' + this.actual.levelNumber;
 		this.message = function() {
-			return "Expected '" + actual + "' to contain 'lock' in " + this.actual.selector;
+			return "Expected '" + actual + "' to contain 'lock' and 'level " + levelNumberMention + "' in " + this.actual.selector;
 		};
-		return actual.indexOf('lock') != -1;
+		return actual.indexOf('lock') != -1 && actual.indexOf(levelNumberMention) != -1;
 	};
 	
 	var toBePlayableBy = function(login) {

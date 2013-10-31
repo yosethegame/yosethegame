@@ -42,7 +42,7 @@ var displayWorld = function(page, player, world, worldNumber) {
 					var levelMention = '<a href="/players/' + player.login + '/play/world/' + worldNumber + '">level ' + worldNumber + '.' + levelNumber + ' : ' + level.title + '</a>';
 					nextChallengeOfWorldDisplayed = true;
 				} else {
-					var levelMention = lockedLevelTemplate;
+					var levelMention = lockedLevelTemplate.replace('w.l', worldNumber+'.'+levelNumber);
 					lockerDisplayed = true;
 				}
 			}
