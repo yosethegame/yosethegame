@@ -8,7 +8,7 @@ module.exports = {
 		return {
 			number: parseInt(number),
 			error: 'too big number (>1e6)'
-		}
+		};
 	},
 		
 	validate: function(request, remoteResponse, content, callback) {		

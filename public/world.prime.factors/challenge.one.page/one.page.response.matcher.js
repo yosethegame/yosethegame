@@ -1,5 +1,5 @@
-var Browser 		= require('zombie');
-var Chooser 		= require('../../levels.common/integer.chooser');
+var Browser         = require('zombie');
+var Chooser         = require('../../levels.common/integer.chooser');
 var primeFactorsOf	= require('../../levels.common/prime.factors');
 
 module.exports = {
@@ -21,29 +21,29 @@ module.exports = {
 		browser.visit(url).
 			then(function () {
 				return browser.fill('input#number', number)
-					   		  .pressButton("button#go");
+                              .pressButton("button#go");
 			}).
 			then(function() {
-				if(browser.location != url) {
+				if(browser.location.toString() !== url) {
 					throw "browser.location '" + browser.location + "'";
 				}
-				if(browser.query('#result') == null) {
+				if(browser.query('#result') === null) {
 					throw 'Error: missing element #result';
 				}
 				var result = browser.text('#result');
 				var expectedResult = self.expectedResult(number);
 				callback({
-					code: result == expectedResult ? 200 : 501,
+					code: result === expectedResult ? 200 : 501,
 					expected: "browser.location '" + url +"' AND " + self.expectedAnswer(number),
 					got: "browser.location '" + url +"' AND #result containing '" + result + "'"
-				})
+				});
 			}).
 			fail(function(error) {
 				callback({
 					code: 501,
 					expected: "browser.location '" + url +"' AND " + self.expectedAnswer(number),
 					got: error.toString()
-				})
+				});
 			});	
 	}
 	

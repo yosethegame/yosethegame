@@ -1,5 +1,5 @@
 var abstractMatcher = require('../../levels.common/abstract.prime.factors.decomposition.response.matcher');
-var Chooser 		= require('../../levels.common/big.integer.chooser');
+var Chooser         = require('../../levels.common/big.integer.chooser');
 
 module.exports = {
 

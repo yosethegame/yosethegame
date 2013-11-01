@@ -5,7 +5,7 @@ function Chooser() {
 		return [2, 4, 8, 16, 64, 128, 256, 512, 1024, 2048][index];
 	};
 	
-};
+}
 
 var module = module || {};
 module.exports = Chooser;

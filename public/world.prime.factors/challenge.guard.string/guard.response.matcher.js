@@ -8,7 +8,7 @@ module.exports = {
 		return {
 			number: number,
 			error: 'not a number'
-		}
+		};
 	},
 		
 	validate: function(request, remoteResponse, content, callback) {		

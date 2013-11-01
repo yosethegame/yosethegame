@@ -19,11 +19,10 @@ module.exports = {
 		var browser = new Browser();
 		browser.visit(url).
 			then(function () {
-				return browser.fill('input#number', number)
-					   		  .pressButton("button#go");
+                return browser.fill('input#number', number).pressButton("button#go");
 			}).
 			then(function() {
-				if(browser.query('#result') == null) {
+				if(browser.query('#result') === null) {
 					throw 'Error: missing element #result';
 				}
 			}).
@@ -41,7 +40,7 @@ module.exports = {
 					code: 501,
 					expected: self.expectedAnswer(number),
 					got: error.toString()
-				})
+				});
 			});	
 	}
 	

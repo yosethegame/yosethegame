@@ -5,15 +5,15 @@ function Requester(server) {
 	this.server = server;
 	this.numberChooser = new IntegerChooser();
 	this.stringChooser = new StringChooser();
-};
+}
 
 Requester.prototype.url = function() {
 	return this.server + '/primeFactors?' +
 							'number=' + this.numberChooser.getNumber() +
 							'&number=' + this.numberChooser.getNumber() +
 							'&number=' + this.stringChooser.getString()
-		   ;
-}
+           ;
+};
 
 var module = module || {};
 module.exports = Requester;
