@@ -44,7 +44,7 @@ module.exports = {
 				var cells = browser.queryAll('[id^=cell-]');				
 				
 				array.forEach(cells, function(cell) {
-					if (cell.onclick == null) {
+					if (cell.onclick === null) {
 						throw 'Error: missing onclick="' + self.expectedOnClick(cell) + '" on #' + cell.id;
 					}
 				});
