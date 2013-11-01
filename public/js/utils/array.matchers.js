@@ -2,7 +2,7 @@ module.exports = {
 	fileEqualsTo: function(name) {
 		return function(item) {
 			return item.file == name;
-		}
+		};
 	},
 	
 	titleEqualsTo: function(title) {
@@ -16,4 +16,4 @@ module.exports = {
 			return item == value;
 		};
 	}
-}
+};

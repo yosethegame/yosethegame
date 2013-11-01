@@ -12,7 +12,7 @@ module.exports = {
 	},
 	
 	hasOneItemIn: function(collection, callback) {
-		return this.first(collection, callback) == undefined ? false : true;
+		return this.first(collection, callback) === undefined ? false : true;
 	},
 	
 	firstItemIn: function(collection, matcher) {

@@ -18,4 +18,4 @@ module.exports = {
 		response.writeHead(401);
 		response.end();
 	}
-}
+};
