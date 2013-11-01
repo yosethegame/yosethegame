@@ -9,11 +9,10 @@ var validate = function(url, matcher, callback) {
 	var browser = new Browser();
 	browser.visit(url).
 		then(function () {
-			return browser.fill('input#number', number)
-				   		  .pressButton("button#go");
+			return browser.fill('input#number', number).pressButton("button#go");
 		}).
 		then(function() {
-			if(browser.query('#result') == null) {
+			if(browser.query('#result') === null) {
 				throw 'Error: missing element #result';
 			}
 		}).
@@ -31,7 +30,7 @@ var validate = function(url, matcher, callback) {
 				code: 501,
 				expected: expectedAnswer(matcher, number),
 				got: error.toString()
-			})
+			});
 		});	
 };
 

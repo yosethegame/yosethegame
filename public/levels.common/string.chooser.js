@@ -16,7 +16,7 @@ function Chooser() {
 		][index];
 	};
 	
-};
+}
 
 var module = module || {};
 module.exports = Chooser;

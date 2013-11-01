@@ -4,7 +4,7 @@ function Chooser() {
 		return Math.floor(Math.random()*10000) + 2;
 	};
 	
-};
+}
 
 var module = module || {};
 module.exports = Chooser;
