@@ -27,6 +27,6 @@
     "npm": "1.3.11"
   },
   "scripts": {
-    "test": "jasmine-node test ; jasmine-node deployment"
+    "test": "./validate.sh"
   }
 }
