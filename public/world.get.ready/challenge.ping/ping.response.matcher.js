@@ -1,4 +1,4 @@
-var $ = require('jquery');
+	var $ = require('jquery');
 var abstractMatcher = require('../../js/abstract.response.matcher');
 
 module.exports = {
