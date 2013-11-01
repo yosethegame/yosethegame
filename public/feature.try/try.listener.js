@@ -1,8 +1,8 @@
-var $ 			= $ || require('jquery');
+var $           = $ || require('jquery');
 var renderScore = renderScore || require('../js/utils/render.score');
 
 function TryListener() {	
-};
+}
 
 TryListener.prototype.try = function(worldNumber) {
 	startAnimation();
@@ -16,7 +16,7 @@ TryListener.prototype.displayResults = function(received) {
 	showResults();
 	var data = $.parseJSON(received);
 	var results = data.results;
-	if (results.length == 0) return;
+	if (results.length === 0) return;
 	
 	var result_n_html = $('#result_1')[0].outerHTML;
 	$('.result').remove();
@@ -49,7 +49,7 @@ TryListener.prototype.displayResults = function(received) {
 		$('#try').prop('disabled', false);
 	}
 	
-	if ($('#scroll-anchor')[0].scrollIntoView != undefined) $('#scroll-anchor')[0].scrollIntoView(true);
+	if ($('#scroll-anchor')[0].scrollIntoView !== undefined) $('#scroll-anchor')[0].scrollIntoView(true);
 };
 
 var startAnimation = function() {

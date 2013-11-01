@@ -1,6 +1,6 @@
 var array = require('../js/utils/array.utils');
 
-function Sorter() { };
+function Sorter() { }
 
 Sorter.prototype.sort = function(a, b) {
 	return indexOfLevel(a) - indexOfLevel(b);

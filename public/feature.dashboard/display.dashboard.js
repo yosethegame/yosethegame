@@ -1,4 +1,4 @@
-var fs 			= require('fs');
+var fs          = require('fs');
 var cheerio		= require('cheerio');
 var thePlayer	= require('../js/utils/player.utils');
 var array		= require('../js/utils/array.utils');
@@ -30,19 +30,20 @@ var displayWorld = function(page, player, world, worldNumber) {
 	page(wordLevelsSelector).empty();				
 	var nextChallengeOfWorldDisplayed = false;
 	var lockerDisplayed = false;
-	var challengesDoneInThisWorld = 0
+	var challengesDoneInThisWorld = 0;
 	array.forEach(world.levels, function(level, levelIndex) {
 		if (!lockerDisplayed) {
 			var levelNumber = levelIndex + 1;
+			var levelMention;
 			if (thePlayer.hasDoneThisLevel(player, level)) {
 				challengesDoneInThisWorld ++;
-				var levelMention = 'level ' + worldNumber + '.' + levelNumber + ' : ' + level.title;
+				levelMention = 'level ' + worldNumber + '.' + levelNumber + ' : ' + level.title;
 			} else {
 				if (! nextChallengeOfWorldDisplayed ) {
-					var levelMention = '<a href="/players/' + player.login + '/play/world/' + worldNumber + '">level ' + worldNumber + '.' + levelNumber + ' : ' + level.title + '</a>';
+					levelMention = '<a href="/players/' + player.login + '/play/world/' + worldNumber + '">level ' + worldNumber + '.' + levelNumber + ' : ' + level.title + '</a>';
 					nextChallengeOfWorldDisplayed = true;
 				} else {
-					var levelMention = lockedLevelTemplate.replace('w.l', worldNumber+'.'+levelNumber);
+					levelMention = lockedLevelTemplate.replace('w.l', worldNumber+'.'+levelNumber);
 					lockerDisplayed = true;
 				}
 			}
@@ -50,7 +51,7 @@ var displayWorld = function(page, player, world, worldNumber) {
 		}
 	});
 	var progress = 100 * challengesDoneInThisWorld / world.levels.length;
-	page(worldSelector + ' td:nth-child(2) .progress-bar').attr('style', 'width:' + Math.round(progress) + '%')
+	page(worldSelector + ' td:nth-child(2) .progress-bar').attr('style', 'width:' + Math.round(progress) + '%');
 };
 
 var showServerOfPlayer = function(page, player) {
@@ -68,7 +69,7 @@ dashboard = function(request, response, database) {
 	var page = cheerio.load(html);
 
 	database.find(login, function(player) {
-		if (player == undefined) {
+		if (player === undefined) {
 			return exitWithMessage('this player is unknown', page, response);
 		}
 		page('#login').text(player.login);		
@@ -95,6 +96,6 @@ dashboard = function(request, response, database) {
 		response.write(page.html());
 		response.end();
 	});
-}
+};
 
 module.exports = dashboard;

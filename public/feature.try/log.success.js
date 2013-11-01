@@ -7,7 +7,7 @@ logSuccess = function(player, levelId) {
 		player.portfolio[0].achievements = player.portfolio[0].achievements || [] ;
 	}		
 	player.portfolio[0].achievements.push(levelId);
-	if (player.score == undefined) player.score = 0;
+	if (player.score === undefined) player.score = 0;
 	player.score += 10;
 };
 

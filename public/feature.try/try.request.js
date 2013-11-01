@@ -1,14 +1,14 @@
-var request 		= require('request');
-var url 			= require('url');
-var withAttribute 	= require('../js/utils/array.matchers');
-var withValue	 	= require('../js/utils/array.matchers');
-var extract 		= require('../js/utils/array.utils');
-var array 			= require('../js/utils/array.utils');
-var httperror 		= require('../js/utils/http.errors.utils');
-var thisPlayer 		= require('../js/utils/player.utils');
-var Sorter			= require('./challenges.sorter');
-var logSuccess 		= require('./log.success');
-var logServer		= require('../levels.common/log.server')
+var request         = require('request');
+var url             = require('url');
+var withAttribute   = require('../js/utils/array.matchers');
+var withValue       = require('../js/utils/array.matchers');
+var extract         = require('../js/utils/array.utils');
+var array           = require('../js/utils/array.utils');
+var httperror       = require('../js/utils/http.errors.utils');
+var thisPlayer      = require('../js/utils/player.utils');
+var Sorter          = require('./challenges.sorter');
+var logSuccess      = require('./log.success');
+var logServer       = require('../levels.common/log.server');
 
 var responseCount;
 var output;
@@ -51,20 +51,21 @@ var allLevelsToTry = function(player, world) {
 var tryLevelAtIndex = function(index, params, player, database, response, callback) {
 	var level = levelsToTry[index];
 	var Requester = require(level.requester);
+	var requester;
 	if (thisPlayer.hasServer(player)) {
-		var requester = new Requester(thisPlayer.serverOf(player));
+		requester = new Requester(thisPlayer.serverOf(player));
 	} else {
-		var requester = new Requester(params.query.server);
+		requester = new Requester(params.query.server);
 	}	
 	var requestSent = requester.url();
-	if (requestSent == undefined) requestSent = '';
+	if (requestSent === undefined) requestSent = '';
 
 	request(requestSent, function(error, remoteResponse, content) {
 		var checker = require(level.checker);
 		checker.validate(requestSent, remoteResponse, content, function(status) {
-			if (error != null) {
-				status.code = 404,
-				status.got = 'undefined'
+			if (error !== null) {
+				status.code = 404;
+				status.got = 'undefined';
 			}
 			if (status.code == 200) {
 				if (! thisPlayer.hasServer(player)) {
@@ -89,7 +90,7 @@ var tryLevelAtIndex = function(index, params, player, database, response, callba
 					}
 				});
 				if (!fail) {
-					var levelIdToSave = undefined;
+					var levelIdToSave;
 					if (thisPlayer.isANew(player)) {
 						levelIdToSave = output[0].id;
 					} else {
@@ -120,7 +121,7 @@ var tryWorld = function(incoming, response, database) {
 		tryLevelAtIndex(0, params, player, database, response, function() {
 			response.write(JSON.stringify(
 					{
-						score: player.score == undefined ? 0 : player.score,
+						score: player.score === undefined ? 0 : player.score,
 						results: sortOutput(output, world)
 					}
 				));

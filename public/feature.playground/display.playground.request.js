@@ -1,10 +1,10 @@
-var url 		= require('url');
-var fs 			= require('fs');
-var cheerio 	= require('cheerio');
-var renderScore	= require('../js/utils/render.score');
-var array		= require('../js/utils/array.utils');
-var withValue	= require('../js/utils/array.matchers');
-var thePlayer	= require('../js/utils/player.utils');
+var url         = require('url');
+var fs          = require('fs');
+var cheerio     = require('cheerio');
+var renderScore = require('../js/utils/render.score');
+var array       = require('../js/utils/array.utils');
+var withValue   = require('../js/utils/array.matchers');
+var thePlayer   = require('../js/utils/player.utils');
 
 var fillBanner = function(page, player, world, worldNumber) {
 	page("#avatar").attr('src', player.avatar);
@@ -32,13 +32,13 @@ playground = function(request, response, database) {
 	var login = /^\/players\/(.*)\/play/.exec(request.url)[1];
 	var worldNumber = parseInt(/^\/players\/(.*)\/play\/world\/(.*)/.exec(request.url)[2]);
 	var world = database.worlds[worldNumber - 1];
-	if (world == undefined) {
+	if (world === undefined) {
 		return exitWithMessage('this world is unknown', page, response);
 	}
 
 	database.find(login, function(player) {
 
-		if (player == undefined) {
+		if (player === undefined) {
 			return exitWithMessage('this player is unknown', page, response);
 		}	
 		
@@ -61,7 +61,7 @@ playground = function(request, response, database) {
 		
 		var level = thePlayer.nextLevelInThisWorld(player, world);
 		page('#next-challenge-title').text(level.title);
-		if (level.file != undefined) {
+		if (level.file !== undefined) {
 			var challenge = cheerio.load(fs.readFileSync(level.file).toString());
 			page('#next-challenge-content').empty().append(challenge('#challenge-content').html());
 		}
@@ -73,6 +73,6 @@ playground = function(request, response, database) {
 		response.end();
 	});
 	
-}
+};
 
 module.exports = playground;
