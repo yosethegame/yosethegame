@@ -21,6 +21,7 @@ module.exports = {
 	extractOnClick: function(cell) {
 		var html = cell.outerHTML;
 		var onClickIndex = html.indexOf('onclick="');
+		if (onClickIndex === -1) { return undefined; }
 		var htmlFromOnClick = html.substring(onClickIndex + 9);
 		var endOfOnClick = htmlFromOnClick.indexOf('"');
 		
@@ -44,7 +45,7 @@ module.exports = {
 				var cells = browser.queryAll('[id^=cell-]');				
 				
 				array.forEach(cells, function(cell) {
-					if (cell.onclick === null) {
+					if (self.extractOnClick(cell) === undefined) {
 						throw 'Error: missing onclick="' + self.expectedOnClick(cell) + '" on #' + cell.id;
 					}
 				});
