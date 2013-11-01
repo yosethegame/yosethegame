@@ -12,6 +12,6 @@ servecontent = function(folder) {
 		response.end();
 	};
 	
-}
+};
 
 module.exports = servecontent;

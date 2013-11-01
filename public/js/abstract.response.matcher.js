@@ -11,8 +11,8 @@ expectedAnswer = function(url, matcher) {
 };
 
 hasExpectedContentType = function(response) {
-	return response.headers['content-type'] != undefined 
-		&& response.headers['content-type'].indexOf(expectedContentType) != -1;
+	return response.headers['content-type'] !== undefined &&
+           response.headers['content-type'].indexOf(expectedContentType) !== -1;
 };
 
 hasExpectedContent = function(request, content, matcher) {
@@ -20,24 +20,26 @@ hasExpectedContent = function(request, content, matcher) {
 };
 
 computeStatus = function(request, remoteResponse, content, matcher) {
-	if (remoteResponse == undefined) {
-        var status = {
+    var status;
+	if (remoteResponse === undefined) {
+        status = {
             code: 404,
             expected: expectedAnswer(request, matcher),
         };
     }
 	else {
-	    try {
-	        var parsedContent = $.parseJSON(content);
-	    }
-	    catch(e) {
-	        var parsedContent = content;
-	    }
-	    var status = {
-	        code: hasExpectedContentType(remoteResponse) && hasExpectedContent(request, parsedContent, matcher) ? 200 : 501,
-	        expected : expectedAnswer(request, matcher),
-	        got: { 'content-type': remoteResponse.headers['content-type'], body: parsedContent }
-	    };
+        var parsedContent;
+        try {
+            parsedContent = $.parseJSON(content);
+        }
+        catch(e) {
+            parsedContent = content;
+        }
+        status = {
+            code: hasExpectedContentType(remoteResponse) && hasExpectedContent(request, parsedContent, matcher) ? 200 : 501,
+            expected : expectedAnswer(request, matcher),
+            got: { 'content-type': remoteResponse.headers['content-type'], body: parsedContent }
+        };
 	}
     return status;
 };

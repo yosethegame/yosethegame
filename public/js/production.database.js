@@ -1,4 +1,4 @@
-var PSql 		= require('./psql.database');
+var PSql        = require('./psql.database');
 var array		= require('./utils/array.utils');
 var withValue	= require('./utils/array.matchers');
 var thisPlayer	= require('./utils/player.utils');
@@ -162,7 +162,7 @@ function ProductionDatabase() {
 	};
 	
 	this.worlds[2].isOpenFor = this.worlds[1].isOpenFor;
-};
+}
 
 ProductionDatabase.prototype = new PSql(process.env.DATABASE_URL);
 

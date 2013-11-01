@@ -1,7 +1,7 @@
-var fs 			= require('fs');
-var cheerio 	= require('cheerio');
-var array		= require('./utils/array.utils');
-var thePlayer 	= require('./utils/player.utils');
+var fs          = require('fs');
+var cheerio     = require('cheerio');
+var array       = require('./utils/array.utils');
+var thePlayer   = require('./utils/player.utils');
 var renderScore	= require('./utils/render.score');
 
 var extractPlayerTemplateIn = function(page) {
@@ -10,8 +10,8 @@ var extractPlayerTemplateIn = function(page) {
 
 var buildLine = function(template, player, database) {
 	var line = template.replace('<img src=""', '<img src="' + player.avatar + '"')
-					   .replace('1234567', renderScore.withoutLeadingZeros(player.score))
-					   .replace('0000', renderScore.leadingZeros(player.score))
+                       .replace('1234567', renderScore.withoutLeadingZeros(player.score))
+                       .replace('0000', renderScore.leadingZeros(player.score))
 				;
 	return line;
 };
@@ -41,7 +41,7 @@ var index = function(request, response, database) {
 		response.write(html);
 		response.end();		
 	});
-}
+};
 
 module.exports = index;
 module.exports.extractPlayerTemplateIn = extractPlayerTemplateIn;

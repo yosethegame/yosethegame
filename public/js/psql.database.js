@@ -1,10 +1,10 @@
-var pg 		= require('pg');
-var $ 		= require('jquery');
-var array 	= require('./utils/array.utils');
+var pg      = require('pg');
+var $       = require('jquery');
+var array   = require('./utils/array.utils');
 
 function PostgreSql(url) {
 	this.url = url;	
-};
+}
 
 PostgreSql.prototype.createPlayer = function(player, callback) {
 	client = new pg.Client(this.url);
@@ -12,8 +12,8 @@ PostgreSql.prototype.createPlayer = function(player, callback) {
 		var sql = "select count(1) from players where login = '" + player.login + "'";
 		client.query(sql, function(err, result) {
 			var count = result.rows[0].count;
-			if (count == 0) {
-				player.score = 0
+			if (parseInt(count) === 0) {
+				player.score = 0;
 				sql = "insert into players(login, json, score) values('" + player.login + "', '" + JSON.stringify(player) + "', 0)";
 				client.query(sql, function(err, result) {
 					client.end();
@@ -61,9 +61,9 @@ PostgreSql.prototype.allPlayers = function(callback) {
 		client.query(sql, function(err, result) {
 			client.end();
 			var players = [];
-			if (result != undefined) {
+			if (result !== undefined) {
 				array.forEach(result.rows, function(row) {
-					players.push($.parseJSON(row.json))
+					players.push($.parseJSON(row.json));
 				});
 			}
 			callback(players);
