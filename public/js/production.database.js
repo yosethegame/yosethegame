@@ -61,6 +61,20 @@ function ProductionDatabase() {
 				checker: '../world.prime.factors/challenge.decomposition/decomposition.response.matcher.js',
 			},
 			{
+				id: 7,
+				title: 'Big number guard challenge',
+				file: 'public/world.prime.factors/challenge.guard.big.number/big.number.html',
+				requester: '../world.prime.factors/challenge.guard.big.number/big.number.requester.js',
+				checker: '../world.prime.factors/challenge.guard.big.number/big.number.response.matcher.js',
+			},
+			{
+				id: 12,
+				title: 'Multiple entries',
+				file: 'public/world.prime.factors/challenge.multiple.entries/multiple.entries.html',
+				requester: '../world.prime.factors/challenge.multiple.entries/multiple.entries.requester.js',
+				checker: '../world.prime.factors/challenge.multiple.entries/multiple.entries.response.matcher.js',
+			},
+			{
 				id: 5,
 				title: 'Form challenge',
 				file: 'public/world.prime.factors/challenge.form/form.html',
@@ -73,13 +87,6 @@ function ProductionDatabase() {
 				file: 'public/world.prime.factors/challenge.input/input.html',
 				requester: '../world.prime.factors/challenge.form/form.requester.js',
 				checker: '../world.prime.factors/challenge.input/input.response.matcher.js'
-			},
-			{
-				id: 7,
-				title: 'Big number guard challenge',
-				file: 'public/world.prime.factors/challenge.guard.big.number/big.number.html',
-				requester: '../world.prime.factors/challenge.guard.big.number/big.number.requester.js',
-				checker: '../world.prime.factors/challenge.guard.big.number/big.number.response.matcher.js',
 			},
 			{
 				id: 8,
@@ -108,13 +115,6 @@ function ProductionDatabase() {
 				file: 'public/world.prime.factors/challenge.one.page/one.page.html',
 				requester: '../world.prime.factors/challenge.form/form.requester.js',
 				checker: '../world.prime.factors/challenge.one.page/one.page.response.matcher.js',
-			},
-			{
-				id: 12,
-				title: 'Multiple entries',
-				file: 'public/world.prime.factors/challenge.multiple.entries/multiple.entries.html',
-				requester: '../world.prime.factors/challenge.multiple.entries/multiple.entries.requester.js',
-				checker: '../world.prime.factors/challenge.multiple.entries/multiple.entries.response.matcher.js',
 			},
 			{
 				id: 13,
