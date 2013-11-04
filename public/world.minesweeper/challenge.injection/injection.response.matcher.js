@@ -32,7 +32,9 @@ module.exports = {
 			then(function() {
 				browser.document.grid = self.data;
 				var result = browser.evaluate('load()');
-				browser.evaluate(browser.query('[id=' + cellId + ']').onclick);
+			}).
+			then(function() {
+				browser.click('[id=' + cellId + ']');
 				var classes = browser.query('[id=' + cellId + ']').className;
 				
 				if (classes.indexOf('lost') == -1) {

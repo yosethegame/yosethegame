@@ -17,16 +17,16 @@
 		<dl>
 			<dt>inject data into document.grid</dt><dd>The data format is [ ['bomb', 'empty' ], ['empty', 'empty' ] ]</dd>
 			<dt>call the load() method</dt><dd>The load() method should be a Javascript method available in your page</dd>
-			<dt>call play(x, y) on a bomb</dt><dd>x & y will be chosen to target a cell with a bomb</dd>
+			<dt>click on a cell with a bomb</dt><dd>we will choose a cell that contains a bomb in the injected data</dd>
 			<dt>check that the class of the played cell contains 'lost'</dt>
-				<dd>For example, if we inject a single-line grid [ ['bomb', 'empty', 'bomb' ] ] and play(1, 3), then the class of #cell-1x3 should contain 'lost'</dd>
+				<dd>For example, if we inject a single-line grid [ ['bomb', 'empty', 'bomb' ] ] and click on cell-1x3, then the class of #cell-1x3 should contain 'lost'</dd>
 		</dl>
 	</p>
 		
 	<p>For example, when</p>
 
 	<pre>we set document.grid to [ ['bomb', 'empty', 'bomb' ] ]
-and we call play(1, 3)
+and we click on #cell-1x3
 	</pre>
 
 	<p>Then</p>
