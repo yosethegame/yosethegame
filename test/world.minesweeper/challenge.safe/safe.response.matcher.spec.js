@@ -2,6 +2,22 @@ var matcher = require('../../../public/world.minesweeper/challenge.safe/safe.res
 
 describe('Safe cells in Minesweeper game', function() {
    
+	it('injects a grid with a bomb', function() {
+		expect(matcher.data).toEqual([
+				['bomb' , 'empty', 'bomb' ],
+				['empty', 'empty', 'empty'],
+			]);
+	});
+		
+	it('plays on cell-2x2', function() {
+		expect(matcher.line).toEqual(2);
+		expect(matcher.column).toEqual(2);
+	});
+	
+	it('expects a bomb count 2', function() {
+		expect(matcher.expectedCount).toEqual('2');
+	});
+	
    	describe("fails when playing on a empty cell does not set the class of the cell to 'safe':", function() {
    	    
    	    beforeEach(function() {

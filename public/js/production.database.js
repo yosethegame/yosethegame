@@ -141,6 +141,13 @@ function ProductionDatabase() {
 				file: 'public/world.minesweeper/challenge.injection/injection.html',
 				requester: '../world.minesweeper/challenge.board/board.requester.js',
 				checker: '../world.minesweeper/challenge.injection/injection.response.matcher.js',
+			},
+			{
+				id: 18,
+				title: 'Safe cells challenge',
+				file: 'public/world.minesweeper/challenge.safe/safe.html',
+				requester: '../world.minesweeper/challenge.board/board.requester.js',
+				checker: '../world.minesweeper/challenge.safe/safe.response.matcher.js',
 			}
 		]
 	}

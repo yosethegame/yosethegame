@@ -2,6 +2,15 @@ var Browser = require('zombie');
 
 module.exports = {
 
+	data: [
+		['bomb' , 'empty', 'bomb' ],
+		['empty', 'empty', 'empty'],
+	],
+	
+	line: 2,
+	column: 2,
+	expectedCount: '2',
+
 	useData: function(data) {
 		this.data = data;
 	},
@@ -12,15 +21,15 @@ module.exports = {
 	},
 	
 	cellId: function() {
-	   return 'cell-' + this.line +'x' + this.column; 
+        return 'cell-' + this.line +'x' + this.column; 
 	},
 	
 	expectBombAroundCount: function(count) {
-	    this.expectedCount = count;
+        this.expectedCount = count;
 	},
 	
 	expected: function() {
-	  return "#" + this.cellId() + " with class containing 'safe' and text containing '" + this.expectedCount + "'"  
+        return "#" + this.cellId() + " with class containing 'safe' and text containing '" + this.expectedCount + "'";
 	},
 
 	validate: function(url, remoteResponse, content, callback) {
