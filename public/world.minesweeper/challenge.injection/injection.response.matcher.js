@@ -37,7 +37,7 @@ module.exports = {
 				browser.click('[id=' + cellId + ']');
 				var classes = browser.query('[id=' + cellId + ']').className;
 				
-				if (classes.indexOf('lost') == -1) {
+				if (classes.indexOf('lost') === -1) {
 					throw "Error: #" + cellId + " class = '" + classes + "'"; 
 				}
 			}).
@@ -54,7 +54,7 @@ module.exports = {
 					expected: "A load() method and #" + cellId + " class containing 'lost'",
 					got: error.toString()
 				});
-			});	
+			});
 	}
 	
 };
