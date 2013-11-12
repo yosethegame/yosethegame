@@ -35,7 +35,7 @@ PostgreSql.prototype.find = function(login, callback) {
 		client.query(sql, function(err, result) {
 			client.end();
 			if (result && result.rows[0]) {
-				callback($.parseJSON(result.rows[0].json));
+				callback(JSON.parse(result.rows[0].json));
 			} else {
 				callback(undefined);
 			}
@@ -63,7 +63,7 @@ PostgreSql.prototype.allPlayers = function(callback) {
 			var players = [];
 			if (result !== undefined) {
 				array.forEach(result.rows, function(row) {
-					players.push($.parseJSON(row.json));
+					players.push(JSON.parse(row.json));
 				});
 			}
 			callback(players);

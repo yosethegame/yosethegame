@@ -14,7 +14,7 @@ TryListener.prototype.try = function(worldNumber) {
 TryListener.prototype.displayResults = function(received) {
 	stopAnimation();
 	showResults();
-	var data = $.parseJSON(received);
+	var data = JSON.parse(received);
 	var results = data.results;
 	if (results.length === 0) return;
 	

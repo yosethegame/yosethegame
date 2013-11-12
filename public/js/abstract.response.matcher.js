@@ -30,7 +30,7 @@ computeStatus = function(request, remoteResponse, content, matcher) {
 	else {
         var parsedContent;
         try {
-            parsedContent = $.parseJSON(content);
+            parsedContent = JSON.parse(content);
         }
         catch(e) {
             parsedContent = content;
