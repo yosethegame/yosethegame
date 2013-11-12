@@ -18,20 +18,29 @@
 			<dt>inject data into document.grid</dt><dd>The data format is [ ['bomb', 'empty' ], ['empty', 'empty' ] ]</dd>
 			<dt>call the load() method</dt><dd>The load() method should be a Javascript method available in your page</dd>
 			<dt>click on a cell with a bomb</dt><dd>we will choose a cell that contains a bomb in the injected data</dd>
-			<dt>check that the class of the played cell contains 'lost'</dt>
-				<dd>For example, if we inject a single-line grid [ ['bomb', 'empty', 'bomb' ] ] and click on cell-1x3, then the class of #cell-1x3 should contain 'lost'</dd>
+			<dt>check that the class of the played cell contains 'lost'</dt>				
 		</dl>
 	</p>
 		
 	<p>For example, when</p>
 
-	<pre>we set document.grid to [ ['bomb', 'empty', 'bomb' ] ]
-and we click on #cell-1x3
+	<pre>we set document.grid to 
+		[
+			['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+			['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+			['empty', 'empty', 'empty', 'empty', 'empty', 'bomb' , 'empty', 'empty'],
+			['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+			['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+			['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+			['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+			['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+		]
+and we click on #cell-3x6
 	</pre>
 
 	<p>Then</p>
 		
-	<pre>the class of #cell-1x3 should contain 'lost'</pre>
+	<pre>the class of #cell-3x6 should contain 'lost'</pre>
 	
 	<img src="/img/minesweeper-lost.png" class="img-responsive" />
 				
