@@ -53,5 +53,50 @@ describe("Serve Content callback", function() {
 			done();
 		});
 	});
+	
+	it("serves a css with text/css content-type", function(done) {
+	    fs.writeFileSync(folder + '/a-file.css', 'content');
+
+		request("http://localhost:5000/a-file.css", function(error, response, body) {
+			expect(response.headers['content-type']).toEqual('text/css');
+			done();
+		});
+	});
+	
+	it("serves a js with text/script content-type", function(done) {
+	    fs.writeFileSync(folder + '/a-file.js', 'content');
+
+		request("http://localhost:5000/a-file.js", function(error, response, body) {
+			expect(response.headers['content-type']).toEqual('application/javascript');
+			done();
+		});
+	});
+	
+	it("serves a jpeg with image/jpeg content-type", function(done) {
+	    fs.writeFileSync(folder + '/a-file.jpeg', 'content');
+
+		request("http://localhost:5000/a-file.jpeg", function(error, response, body) {
+			expect(response.headers['content-type']).toEqual('image/jpeg');
+			done();
+		});
+	});
+
+	it("serves a png with image/png content-type", function(done) {
+	    fs.writeFileSync(folder + '/a-file.png', 'content');
+
+		request("http://localhost:5000/a-file.png", function(error, response, body) {
+			expect(response.headers['content-type']).toEqual('image/png');
+			done();
+		});
+	});
+
+	it("serves other files with text/plain content-type", function(done) {
+	    fs.writeFileSync(folder + '/a-file', 'content');
+
+		request("http://localhost:5000/a-file", function(error, response, body) {
+			expect(response.headers['content-type']).toEqual('text/plain');
+			done();
+		});
+	});
 });
 
