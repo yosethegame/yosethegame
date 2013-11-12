@@ -1,23 +1,36 @@
 var matcher = require('../../../public/world.minesweeper/challenge.safe/safe.response.matcher');
+var array = require('../../../public/js/utils/array.utils');
 
 describe('Safe cells in Minesweeper game', function() {
    
-	it('injects a grid with a bomb', function() {
-		expect(matcher.data).toEqual([
-				['bomb' , 'empty', 'bomb' ],
-				['empty', 'empty', 'empty'],
-			]);
+	it('injects a 8x8 grid', function() {
+		expect(matcher.data.length).toEqual(8);
+		array.forEach(matcher.data, function(row) {
+		   expect(row.length).toEqual(8); 
+		});
+	});
+	
+	it('the candidates target empty cells', function() {
+	    array.forEach(matcher.candidates, function(candidate) {
+	       expect(matcher.data[candidate.row-1][candidate.column-1]).toEqual('empty'); 
+	    });
+	});
+	
+	it('plays randomly on an empty cell', function() {
+		var first = matcher.cellIndex();
+		var same = true;
+		array.forEach([1, 2, 3, 4, 5], function(index) {
+		    var second = matcher.cellIndex();
+    		if (second !== first) { same = false; }
+		});
+		
+		expect(same).toBe(false);
+	});
+	
+	it('builds the cell id of the cell to play', function() {
+	   expect(matcher.cellId(1)).toEqual('cell-3x1');
 	});
 		
-	it('plays on cell-2x2', function() {
-		expect(matcher.line).toEqual(2);
-		expect(matcher.column).toEqual(2);
-	});
-	
-	it('expects a bomb count 2', function() {
-		expect(matcher.expectedCount).toEqual('2');
-	});
-	
    	describe("fails when playing on a empty cell does not set the class of the cell to 'safe':", function() {
    	    
    	    beforeEach(function() {
@@ -38,8 +51,9 @@ describe('Safe cells in Minesweeper game', function() {
 				})
 			.listen(6000);	
 			
-			matcher.useData([ [ 'bomb' , 'empty', 'bomb'] ]);		
-			matcher.playOnCell(1, 2);		
+			matcher.data = [ [ 'bomb' , 'empty', 'bomb'] ];
+			matcher.candidates = [ { row:1, column:2, bombAround:2 } ];
+			matcher.cellIndex = function() { return 0; }
 		});
 		
 		afterEach(function() {
@@ -69,17 +83,18 @@ describe('Safe cells in Minesweeper game', function() {
 		
     });
     
-    describe("fails when playing on a empty cell does not display the number of bomb around:", function() {
-   	    
-   	    beforeEach(function() {
+    describe("fails when the game starts with 'safe' class in the cell and the correct bomb count,", function() {
+        
+		beforeEach(function() {
 			content = '<html><body>' +
 							'<label id="title">Minesweeper</label>' +
 
-							'<label id="cell-1x1" onclick="play(1, 1)"></label>' +
-							'<label id="cell-1x2" class="safe" onclick="play(1, 2)">1</label>' +
-							'<label id="cell-1x3" onclick="play(1, 3)"></label>' +
+							'<label id="cell-1x1" class="safe" onclick="play(1, 1)"></label>' +
+							'<label id="cell-1x2" class="safe" onclick="play(1, 2)">2</label>' +
+							'<label id="cell-1x3" class="safe" onclick="play(1, 3)"></label>' +
 							
 							'<script>function load() { }</script>' +
+							'<script>function play(line, column) { }</script>' +
 					  '</body></html>';			
 
 			remote = require('http').createServer(
@@ -89,9 +104,52 @@ describe('Safe cells in Minesweeper game', function() {
 				})
 			.listen(6000);	
 			
-			matcher.useData([ [ 'bomb' , 'empty', 'bomb'] ]);		
-			matcher.playOnCell(1, 2);
-			matcher.expectBombAroundCount('2');		
+			matcher.data = [ [ 'bomb' , 'empty', 'bomb'] ];
+			matcher.candidates = [ { row:1, column:2, bombAround:2 } ];
+			matcher.cellIndex = function() { return 0; }
+		});
+		
+		afterEach(function() {
+			remote.close();
+		});
+
+		it('sets code to 501', function(done) {
+			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
+				expect(status.code).toEqual(501);
+				done();
+			});
+		});
+    });
+    
+    describe("fails when playing on a empty cell does not display the number of bomb around:", function() {
+   	    
+   	    beforeEach(function() {
+			content = '<html><body>' +
+							'<label id="title">Minesweeper</label>' +
+
+							'<label id="cell-1x1" onclick="play(1, 1)"></label>' +
+							'<label id="cell-1x2" onclick="play(1, 2)"></label>' +
+							'<label id="cell-1x3" onclick="play(1, 3)"></label>' +
+							
+							'<script>function load() { }</script>' +
+							'<script>function play(line, column) { ' +
+							' 			 var id = "cell-" + line + "x" + column;' +
+							'            document.getElementById(id).className = "safe"; ' +
+							'            document.getElementById(id).innerHTML = "1"; ' +
+							'        }' +
+							'</script>' +
+					  '</body></html>';			
+
+			remote = require('http').createServer(
+				function (request, response) {
+					response.write(content);
+					response.end();
+				})
+			.listen(6000);	
+			
+			matcher.data = [ [ 'bomb' , 'empty', 'bomb'] ];
+			matcher.candidates = [ { row:1, column:2, bombAround:2 } ];
+			matcher.cellIndex = function() { return 0; }
 		});
 		
 		afterEach(function() {
@@ -128,10 +186,16 @@ describe('Safe cells in Minesweeper game', function() {
 							'<label id="title">Minesweeper</label>' +
 
 							'<label id="cell-1x1" onclick="play(1, 1)"></label>' +
-							'<label id="cell-1x2" class="safe" onclick="play(1, 2)">2</label>' +
+							'<label id="cell-1x2" onclick="play(1, 2)"></label>' +
 							'<label id="cell-1x3" onclick="play(1, 3)"></label>' +
 							
 							'<script>function load() { }</script>' +
+							'<script>function play(line, column) { ' +
+							' 			 var id = "cell-" + line + "x" + column;' +
+							'            document.getElementById(id).className = "safe"; ' +
+							'            document.getElementById(id).innerHTML = "2"; ' +
+							'        }' +
+							'</script>' +
 					  '</body></html>';			
 
 			remote = require('http').createServer(
@@ -141,9 +205,9 @@ describe('Safe cells in Minesweeper game', function() {
 				})
 			.listen(6000);	
 			
-			matcher.useData([ [ 'bomb' , 'empty', 'bomb'] ]);		
-			matcher.playOnCell(1, 2);
-			matcher.expectBombAroundCount('2');		
+			matcher.data = [ [ 'bomb' , 'empty', 'bomb'] ];
+			matcher.candidates = [ { row:1, column:2, bombAround:2 } ];
+			matcher.cellIndex = function() { return 0; }
 		});
 		
 		afterEach(function() {

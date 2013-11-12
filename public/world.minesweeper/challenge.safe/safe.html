@@ -20,13 +20,23 @@
 		
 	<p>For example, when</p>
 
-	<pre>we set document.grid to [ ['bomb', 'empty', 'bomb' ] ]
-and we click on #cell-1x2
+	<pre>we set document.grid to
+		[
+			['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+			['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+			['empty', 'empty', 'empty', 'empty', 'empty', 'bomb' , 'empty', 'empty'],
+			['empty', 'empty', 'empty', 'empty', 'bomb' , 'empty', 'empty', 'empty'],
+			['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+			['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+			['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+			['empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty', 'empty'],
+		]
+and we click on #cell-4x4
 	</pre>
 
 	<p>Then</p>
 		
-	<pre>the class of #cell-1x2 should contain 'safe' AND the text of the cell should contain '2'</pre>
+	<pre>the class of #cell-4x4 should contain 'safe' AND the text of the cell should contain '1'</pre>
 	
 	<img src="/img/minesweeper-safe.png" class="img-responsive" />
 				
