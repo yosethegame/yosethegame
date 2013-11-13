@@ -60,7 +60,7 @@ module.exports = {
 	],
 	
 	candidateIndex: function() {
-	    
+
 	},
 	
     validate: function(url, remoteResponse, content, callback) {

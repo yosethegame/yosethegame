@@ -1,7 +1,7 @@
 var matcher = require('../../../public/world.minesweeper/challenge.open/open.response.matcher');
 var array = require('../../../public/js/utils/array.utils');
 
-describe('Open field in Minesweeper game:', function() {
+xdescribe('Open field in Minesweeper game:', function() {
     
     it('uses a 8x8 grid', function() {
 		expect(matcher.data.length).toEqual(8);
