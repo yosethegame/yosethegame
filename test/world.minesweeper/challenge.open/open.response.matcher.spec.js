@@ -1,7 +1,7 @@
 var matcher = require('../../../public/world.minesweeper/challenge.open/open.response.matcher');
 var array = require('../../../public/js/utils/array.utils');
 
-xdescribe('Open field in Minesweeper game:', function() {
+describe('Open field in Minesweeper game:', function() {
     
     it('uses a 8x8 grid', function() {
 		expect(matcher.data.length).toEqual(8);
@@ -25,6 +25,64 @@ xdescribe('Open field in Minesweeper game:', function() {
 		});
 		
 		expect(same).toBe(false);
+	});
+	
+	describe('fails when clicking on a cell with zero bomb around set text of cell to 0', function() {
+	   
+	    beforeEach(function() {
+			content = '<html><body>' +
+							'<label id="title">Minesweeper</label>' +
+
+							'<label id="cell-1x1">0</label>' +
+							'<label id="cell-1x2"></label>' +
+							'<label id="cell-1x3"></label>' +
+							
+							'<script>function load() { }</script>' +
+					  '</body></html>';			
+
+			remote = require('http').createServer(
+				function (request, response) {
+					response.write(content);
+					response.end();
+				})
+			.listen(6000);	
+			
+			matcher.data = [ [ 'empty' , 'empty', 'empty'] ];
+			matcher.candidates = [ 
+			    { 
+			        row:1, 
+			        column:1, 
+                    zeros: [ {row:1, column:2}, {row:1, column:3} ],			    
+                } 
+			];
+			matcher.candidateIndex = function() { return 0; }
+		});
+		
+		afterEach(function() {
+			remote.close();
+		});
+
+		it('sets code to 501', function(done) {
+			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
+				expect(status.code).toEqual(501);
+				done();
+			});
+		});
+		
+		it('sets expected', function(done) {
+			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
+				expect(status.expected).toContain("empty text in #cell-1x1");
+				done();
+			});
+		});
+		
+		it('sets actual', function(done) {
+			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
+				expect(status.got).toContain("#cell-1x1 text = '0'");
+				done();
+			});
+		});
+	    
 	});
 	
 });

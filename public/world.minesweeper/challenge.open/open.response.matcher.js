@@ -60,13 +60,11 @@ module.exports = {
 	],
 	
 	candidateIndex: function() {
-
+        return Math.floor(Math.random() * this.candidates.length);
 	},
 	
     validate: function(url, remoteResponse, content, callback) {
 		var self = this;
-		var cellIndex = this.cellIndex();
-		var emptyCellId = this.cellId(cellIndex);
 		var expected = "";
 		
 		var browser = new Browser();		
@@ -74,9 +72,6 @@ module.exports = {
 			then(function() {
 				browser.document.grid = self.data;
 				var result = browser.evaluate('load()');
-			}).
-			then(function() {
-				var text = browser.text('[id=' + emptyCellId + ']');
 			}).
 			then(function() {
 				callback({
