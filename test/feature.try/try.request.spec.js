@@ -127,6 +127,12 @@ describe("Trying to pass challenges >", function() {
 		afterEach(function() {
 			remote.close();
 		});
+    	it('returns json', function(done) {
+			request("http://localhost:5000/try?login=annessou&server=http://localhost:6000&world=1", function(error, response, body) {
+			    expect(response.headers['content-type']).toEqual('application/json');
+				done();
+			});			
+    	});
 		it('saves the server used by the player', function(done) {
 			request("http://localhost:5000/try?login=annessou&server=http://localhost:6000&world=1", function(error, response, body) {
 				database.find('annessou', function(player) {

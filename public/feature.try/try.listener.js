@@ -11,10 +11,9 @@ TryListener.prototype.try = function(worldNumber) {
 		.success(this.displayResults);
 };
 
-TryListener.prototype.displayResults = function(received) {
+TryListener.prototype.displayResults = function(data) {
 	stopAnimation();
 	showResults();
-	var data = JSON.parse(received);
 	var results = data.results;
 	if (results.length === 0) return;
 	

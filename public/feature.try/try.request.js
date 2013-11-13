@@ -119,12 +119,9 @@ var tryWorld = function(incoming, response, database) {
 		levelsToTry = allLevelsToTry(player, world);
 		responseCount = levelsToTry.length;
 		tryLevelAtIndex(0, params, player, database, response, function() {
-			response.write(JSON.stringify(
-					{
-						score: player.score === undefined ? 0 : player.score,
-						results: sortOutput(output, world)
-					}
-				));
+            var jsonResponse = JSON.stringify( { score: player.score === undefined ? 0 : player.score, results: sortOutput(output, world) } );
+            response.writeHead(200, { 'Content-Type': 'application/json' } );
+			response.write(jsonResponse);
 			response.end();			
 		});
 	});

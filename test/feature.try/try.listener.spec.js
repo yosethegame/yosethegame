@@ -10,7 +10,7 @@ describe("TryListener: ", function() {
 			score: 10,
 			results: results
 		};
-		return JSON.stringify(resultsWithDummyScore);
+		return resultsWithDummyScore;
 	};
 	
 	beforeEach(function() {
@@ -73,7 +73,7 @@ describe("TryListener: ", function() {
 		
 		it('stops when success', function() {
 			$('#avatar').addClass('rotate');
-			listener.displayResults('{"score":10,"results":[]}');
+			listener.displayResults({"score":10,"results":[]});
 			expect($('#avatar').attr('class')).toNotContain('rotate');
 		});
 		
@@ -91,7 +91,7 @@ describe("TryListener: ", function() {
 
 			it('shows the results when success', function() {
 				$('#results').removeClass('visible').addClass('hidden');
-				listener.displayResults('{"score":10,"results":[]}');
+				listener.displayResults({"score":10,"results":[]});
 				expect($('#results').attr('class')).toNotContain('hidden');
 				expect($('#results').attr('class')).toContain('visible');
 			})
@@ -399,7 +399,7 @@ describe("TryListener: ", function() {
 		});
 	
 		it('just happens', function() {
-			listener.displayResults(JSON.stringify(
+			listener.displayResults(
 				{
 					score: 23,
 					results: [
@@ -410,7 +410,7 @@ describe("TryListener: ", function() {
 							got: { flag: true }
 						}
 					]
-				}));
+				});
 			
 			expect($('#score').text()).toEqual('000023');
 		});
