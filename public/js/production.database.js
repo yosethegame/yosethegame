@@ -148,6 +148,13 @@ function ProductionDatabase() {
 				file: 'public/world.minesweeper/challenge.safe/safe.html',
 				requester: '../world.minesweeper/challenge.board/board.requester.js',
 				checker: '../world.minesweeper/challenge.safe/safe.response.matcher.js',
+			},
+			{
+				id: 19,
+				title: 'Zero mine around challenge',
+				file: 'public/world.minesweeper/challenge.zero/zero.html',
+				requester: '../world.minesweeper/challenge.board/board.requester.js',
+				checker: '../world.minesweeper/challenge.zero/zero.response.matcher.js',
 			}
 		]
 	}

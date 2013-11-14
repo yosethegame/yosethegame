@@ -38,9 +38,9 @@ module.exports = {
 	
 	validate: function(url, remoteResponse, content, callback) {
 		var self = this;
-		var expected = "";
 		var candidateIndex = this.candidateIndex();
 		var cellWithNoBombAroundId = this.cellId(candidateIndex);
+		var expected = 'empty text in #' + cellWithNoBombAroundId;
 		var browser = new Browser();		
 		browser.visit(url).
 			then(function() {
@@ -52,7 +52,6 @@ module.exports = {
 				var text = browser.text('[id=' + cellWithNoBombAroundId + ']');
 				
 				if (text !== '') {
-                    expected = 'empty text in #' + cellWithNoBombAroundId;
                     throw "Error: #" + cellWithNoBombAroundId + " text = '" + text + "'";
 				}
 			}).
