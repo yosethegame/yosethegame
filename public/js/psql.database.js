@@ -94,4 +94,16 @@ PostgreSql.prototype.playerCount = function(callback) {
     });
 };
 
+PostgreSql.prototype.getScoreCommunity = function(callback) {
+	client = new pg.Client(this.url);
+	client.connect(function(err) {
+		var sql = "select sum(score) from players";
+		client.query(sql, function(err, result) {
+            var sum = result.rows[0].sum;
+			client.end();
+			callback(parseInt(sum));
+		});
+    });
+};
+
 module.exports = PostgreSql;

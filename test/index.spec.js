@@ -29,6 +29,10 @@ describe("index.html", function() {
 		    expect(page('#player-count').length).toEqual(1);
 		});
 		
+		it('has a placeholder for the total score', function() {
+		    expect(page('#score-community').length).toEqual(1);
+		});
+		
 		describe('login form', function() {
 		  
 		  it('has a login input field', function() {

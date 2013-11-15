@@ -229,5 +229,23 @@ describe('PostgreSql database', function() {
 		});
 	});
 	
+	it('offers a way to get the total score of the community', function(done) {
+	    var me = { login: 'me', field: 'any' };
+	    var you = { login: 'you', field: 'any' };
+		database.createPlayer(me, function() {
+    		database.createPlayer(you, function() {
+    		    me.score = 10;
+    		    you.score = 20;
+    		    database.savePlayer(me, function() {
+    		        database.savePlayer(you, function() {
+        			    database.getScoreCommunity(function(score) {
+        				    expect(score).toEqual(30);
+        				    done();
+        			    });
+    		        });
+    		    });
+			});
+		});
+	});
 	
 });

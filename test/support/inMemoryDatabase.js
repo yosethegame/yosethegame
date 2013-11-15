@@ -32,4 +32,12 @@ InMemoryDatabase.prototype.playerCount = function (callback) {
 	callback(this.players.length);
 };
 
+InMemoryDatabase.prototype.getScoreCommunity = function (callback) {
+    var total = 0;
+    array.forEach(this.players, function(player) {
+        total += player.score;
+    });
+	callback(total);
+};
+
 module.exports = InMemoryDatabase;

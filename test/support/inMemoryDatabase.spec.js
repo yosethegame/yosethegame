@@ -73,4 +73,16 @@ describe('InMemoryDatabase', function() {
 		});
 	});
 	
+	it('offers a way to get the total score of the community', function(done) {
+	    var me = { login: 'me', field: 'any', score:10 };
+	    var you = { login: 'you', field: 'any', score:20 };
+		database.createPlayer(me, function() {
+    		database.createPlayer(you, function() {
+			    database.getScoreCommunity(function(score) {
+				    expect(score).toEqual(30);
+				    done();
+			    });
+			});
+		});
+	});
 });

@@ -40,8 +40,11 @@ var index = function(request, response, database) {
 		html = insertPlayerList(page, players, database);
 		database.playerCount(function(count) {
             html = html.replace('id="player-count">4</', 'id="player-count">' + count + '</');
-            response.write(html);
-            response.end();		
+            database.getScoreCommunity(function(score) {
+                html = html.replace('id="score-community">000040</', 'id="score-community">' + renderScore(score) + '</');
+                response.write(html);
+                response.end();		
+            });
 		});
 	});
 };
