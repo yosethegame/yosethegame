@@ -38,6 +38,10 @@ describe("index.html", function() {
 		  it('triggers login()', function() {
 		      expect(page('button#enter').attr('onclick')).toEqual('login()');
 		  });
+		  
+		  it('offers a way to create a new player', function() {
+              expect(page('a#create-new-player-link').attr('href')).toEqual('/create-new-player');
+		  });
 		    
 		});
 
