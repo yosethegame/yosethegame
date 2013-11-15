@@ -23,10 +23,11 @@ describe('Creating a player', function() {
 		browser.visit('http://localhost:5000/create-new-player').
 			then(function () {
 				return browser.fill('#login', 'eric')
-							  .fill('#avatar', 'this-url');
+							  .fill('#avatar', 'http://this-url');
 			}).
 			then(function() {
-				expect(browser.query('#avatar-preview').src).toEqual('this-url');
+				expect(browser.query('#avatar-preview').src).toEqual('http://this-url/');
+				done();
 			}).
 			fail(function(error) {
 				expect(error.toString()).toBeNull();
