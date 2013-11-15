@@ -23,7 +23,23 @@ describe("index.html", function() {
 
 		it("has a placeholder for a welcome message", function() {
 			expect(page('#welcome').length).toEqual(1);
-		});		
+		});	
+		
+		describe('login form', function() {
+		  
+		  it('has a login input field', function() {
+              expect(page('input#login').length).toEqual(1);
+		  });
+		  
+		  it('has a enter button', function() {
+		      expect(page('button#enter').length).toEqual(1);
+		  });
+		    
+		  it('triggers login()', function() {
+		      expect(page('button#enter').attr('onclick')).toEqual('login()');
+		  });
+		    
+		});
 
 		describe('player list', function() {
 			

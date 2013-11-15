@@ -20,7 +20,7 @@ describe("Login", function() {
 	
 	it("lands on user's dashbord", function(done) {
 		var browser = new Browser();
-		browser.visit("http://localhost:5000/login.html").
+		browser.visit("http://localhost:5000").
 			then(function () {
 				return browser.fill("#login", "ericminio")
 					   .pressButton("#enter");
