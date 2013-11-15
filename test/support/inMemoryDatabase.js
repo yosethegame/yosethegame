@@ -28,4 +28,8 @@ InMemoryDatabase.prototype.createPlayer = function (player, callback) {
 	callback();
 };
 
+InMemoryDatabase.prototype.playerCount = function (callback) {
+	callback(this.players.length);
+};
+
 module.exports = InMemoryDatabase;

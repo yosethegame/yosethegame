@@ -49,5 +49,19 @@ describe("Home page", function() {
 		});
 	
 	});
+	
+	it('displays player count', function(done) {
+			
+		browser.visit("http://localhost:5000").
+			then(function() {
+				expect(browser.text("#player-count")).toEqual('2');
+				done();
+			}).
+			fail(function(error) {
+				expect(error.toString()).toBeNull();
+				done();
+			});
+	});
+		
 			
 });

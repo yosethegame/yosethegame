@@ -38,8 +38,11 @@ var index = function(request, response, database) {
 	var page = cheerio.load(html);
 	database.allPlayers(function(players) {
 		html = insertPlayerList(page, players, database);
-		response.write(html);
-		response.end();		
+		database.playerCount(function(count) {
+            html = html.replace('id="player-count">4</', 'id="player-count">' + count + '</');
+            response.write(html);
+            response.end();		
+		});
 	});
 };
 

@@ -82,4 +82,16 @@ PostgreSql.prototype.deletePlayer = function(player, callback) {
 	});
 };
 
+PostgreSql.prototype.playerCount = function(callback) {
+	client = new pg.Client(this.url);
+	client.connect(function(err) {
+		var sql = "select count(1) as count from players";
+		client.query(sql, function(err, result) {
+            var count = result.rows[0].count;
+			client.end();
+			callback(parseInt(count));
+		});
+    });
+};
+
 module.exports = PostgreSql;

@@ -3,41 +3,71 @@
 <head>
 	<title>YoseTheGame</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
 	<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
 </head>
 <body>
 	<h1 id="title" class="title">You've got Nutella on your nose</h1>
 	
 	<div class="container">
-		<div class="form-group">
-			<label>Direct access to dashboard</label>
-			<input type="text" class="form-control" id="login" placeholder="player"/>
+		<div class="row">
+
+			<div class="col-xs-12 col-md-4 pull-right row">
+				
+			<div class="box lead">
+			
+				<label>Access your dashboard</label>
+
+				<div class="form-inline">
+					<div class="form-group">
+						<input type="text" class="form-control" id="login" placeholder="player"/>
+					</div>
+					<button id="enter" type="submit" class="btn btn-success" onclick="login()"><span class="glyphicon glyphicon-ok-sign"></span></button>
+				</div>
+		
+				<a id="create-new-player-link" href="/create-new-player">New player?</a>
+		
+			</div>
+			
+			<div class="box lead">
+				
+				<span class="glyphicon glyphicon-user"></span>				
+				<span id="player-count">4</span>								
+				
+			</div>
+			
+			</div>
+			
+			<div class="col-xs-12 col-md-7">
+				
+				<div class="center">
+					<label id="welcome"><img src="/img/hall-of-fame.jpeg" width="230" height="141" class="img-responsive"></label>
+				</div>
+
+				<table id="players" class="table table-condensed">
+					<tr class="hall-of-fame-header">
+						<td id="players-title">Top 10 Players</td>
+						<td id="score-title">Score</td>
+					</tr>
+					<tr class="player">
+						<td>
+							<img src="" class="avatar img-circle img-responsive" width="60" height="60"/>
+						</td>
+						<td>
+							<span class="hall-of-fame-score-leading-zeros">0000</span>
+							<span class="hall-of-fame-score">1234567</span>
+						</td>
+					</tr>
+				</table>
+
+			<div>
+			
+			
 		</div>
-		<button id="enter" type="submit" class="btn btn-primary" onclick="login()">Enter</button>
-		<a id="create-new-player-link" href="/create-new-player">create new player</a>
 	</div>
 	
-	<div class="center">
-		<label id="welcome"><img src="/img/hall-of-fame.jpeg" width="230" height="141" class="img-responsive"></label>
-	</div>
 	
 	<div class="container">
-		<table id="players" class="table table-condensed">
-			<tr class="hall-of-fame-header">
-				<td id="players-title">Top 10 Players</td>
-				<td id="score-title">Score</td>
-			</tr>
-			<tr class="player">
-				<td>
-					<img src="" class="avatar img-circle img-responsive" width="60" height="60"/>
-				</td>
-				<td>
-					<span class="hall-of-fame-score-leading-zeros">0000</span>
-					<span class="hall-of-fame-score">1234567</span>
-				</td>
-			</tr>
-		</table>
 	<div>
 		
 	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>

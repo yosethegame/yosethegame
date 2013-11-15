@@ -63,4 +63,14 @@ describe('InMemoryDatabase', function() {
 		});
 	});
 	
+	it('offers a way to get the player count', function(done) {
+	    var me = { login: 'me', field: 'any' };
+		database.createPlayer(me, function() {
+			database.playerCount(function(count) {
+				expect(count).toEqual(1);
+				done();
+			});
+		});
+	});
+	
 });

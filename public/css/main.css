@@ -70,6 +70,18 @@
 	color:#888888;
 }
 
+.box {
+    border-radius: 6px;
+    background-color: #EEEEEE;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-top: 20px;
+    margin-right:5px;
+    margin-bottom:20px;
+    line-height:2;
+}
+
 .hall-of-fame-header {
 	font-size:200%;
 }
