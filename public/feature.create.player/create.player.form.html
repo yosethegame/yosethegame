@@ -18,7 +18,13 @@
 		</div>
 		<div class="form-group">
 			<label>An url for the image of the new player</label>
-			<input type="text" class="form-control" id="avatar" placeholder="avatar"/>
+			<input type="text" class="form-control" id="avatar" value="/img/default-avatar.png" />
+		</div>
+		<div class="form-group">
+			<label>Preview</label>
+			<br/>
+			<img src="/img/default-avatar.png" 
+				 width="60" heigth="60" id="avatar-preview" class="img-circle"/>
 		</div>
 		<button type="button" class="btn btn-primary" id="create" onclick="new CreatePlayerListener().player()">Create this player</button>
 	</section>

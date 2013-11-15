@@ -19,11 +19,31 @@ describe('Create player form', function() {
 			expect(page('input#login').length).toEqual(1);
 		});		
 		
-		it('has an input field for the avatar', function() {			
-			expect(page('input#avatar').length).toEqual(1);
-		});	
+		describe('avatar input field', function() {
+		    
+    		it('exists', function() {			
+    			expect(page('input#avatar').length).toEqual(1);
+    		});	
+    		
+    		it('proposes default value', function() {
+    		   expect(page('#avatar').attr('value')).toEqual('/img/default-avatar.png'); 
+    		});
+
+		});
 		
-		it('has create button to trigger the creation', function() {
+		describe('preview avatar', function() {
+		    
+    		it('exists', function() {			
+    			expect(page('#avatar-preview').length).toEqual(1);
+    		});	
+    		
+    		it('is initialzed with default avatar', function() {
+    		    expect(page('#avatar-preview').attr('src')).toEqual('/img/default-avatar.png');
+    		});
+
+		});
+
+        it('has create button to trigger the creation', function() {
 			expect(page('button#create').length).toEqual(1);
 		});	
 		
