@@ -8,7 +8,7 @@ module.exports = {
 	
     routes: [
         {
-            pattern: /^\/players\/[A-z|\.]+$/,
+            pattern: /^\/players\/[A-z|\.|\-]+$/,
             target: require('../feature.dashboard/display.dashboard.js')
         },
         {

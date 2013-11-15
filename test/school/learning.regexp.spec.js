@@ -55,6 +55,20 @@ describe('Regexp', function() {
 
 	});
 	
+	describe('matching /players/{login} with a dash in the login', function() {
+		
+		var pattern = /^\/players\/[A-z|\.|\-]+$/;
+	
+		it('passes with a matching string', function() {
+			expect(pattern.test('/players/any-name')).toBe(true);
+		});
+		
+		it('fails with a non-matching string', function() {
+			expect(pattern.test('/players/any:name')).toBe(false);
+		});
+
+	});
+	
 	describe('matching /players/{login}/play/world/{id}', function() {
 		
 		var pattern = /^\/players\/[A-z]+\/play\/world\/[0-9]+$/;

@@ -12,8 +12,12 @@ describe('Router', function() {
 			expect(router.endPointOf({ url: '/players/any' })).toBe(require('../public/feature.dashboard/display.dashboard'));
 		});
 		
-		it('maps dashboard request', function() {
+		it('maps dashboard request with a dot in the login', function() {
 			expect(router.endPointOf({ url: '/players/any.name' })).toBe(require('../public/feature.dashboard/display.dashboard'));
+		});
+		
+		it('maps dashboard request with a dash in the login', function() {
+			expect(router.endPointOf({ url: '/players/any-name' })).toBe(require('../public/feature.dashboard/display.dashboard'));
 		});
 		
 		it('maps static content request', function() {
