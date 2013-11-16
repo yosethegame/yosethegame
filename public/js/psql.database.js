@@ -14,7 +14,7 @@ PostgreSql.prototype.createPlayer = function(player, callback) {
 			var count = result.rows[0].count;
 			if (parseInt(count) === 0) {
 				player.score = 0;
-				sql = "insert into players(login, json, score) values('" + player.login + "', '" + JSON.stringify(player) + "', 0)";
+				sql = "insert into players(login, json, score, creation_date) values('" + player.login + "', '" + JSON.stringify(player) + "', 0, now())";
 				client.query(sql, function(err, result) {
 					client.end();
 					callback();

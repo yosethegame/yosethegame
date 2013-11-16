@@ -17,7 +17,7 @@ describe('PostgreSql database', function() {
 		client = new pg.Client(url);
 		client.connect(function(err) {
 			client.query('drop table players', function(err, result) {
-				client.query('create table players(login varchar(50), json varchar(5000), score integer)', function(err, result) {
+				client.query('create table players(login varchar(50), json varchar(5000), score integer, creation_date timestamp with time zone)', function(err, result) {
 					client.end();
 					expect(err).toEqual(null);
 					done();
@@ -247,5 +247,23 @@ describe('PostgreSql database', function() {
 			});
 		});
 	});
+	
+	it('sets creation date to now when creating a player', function(done) {		
+		database.createPlayer({login: 'asm'}, function() {				
+			client = new pg.Client(this.url);
+			client.connect(function(err) {
+				var sql = "select extract(microseconds from now() - creation_date) as diff from players where login = 'asm'";
+				client.query(sql, function(err, result) {
+					client.end();						
+					expect(err).toBe(null);
+					if (err == null) {
+						expect(result.rows[0].diff).toBeLessThan(1000000);
+					}
+					done();
+				});
+			});
+		});			
+	});
+	
 	
 });
