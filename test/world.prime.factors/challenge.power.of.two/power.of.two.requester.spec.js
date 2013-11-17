@@ -9,6 +9,10 @@ describe('Power of two Requester', function() {
 		requester = new Requester('this-url');
 	});
 	
+	it('suppresses eventual training slash', function() {
+	   expect(new Requester('this-url/').server).toEqual('this-url'); 
+	});
+	
 	it('has a number chooser', function() {
 		expect(requester.numberChooser.getNumber()).toBeGreaterThan(0);
 	});

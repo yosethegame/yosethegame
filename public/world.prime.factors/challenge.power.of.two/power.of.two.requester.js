@@ -1,7 +1,8 @@
+var removeTrailingSlashOf = require('../../levels.common/remove.trailing.slash');
 var Chooser = require('./power.of.two.chooser');
 
-function Requester(server) {
-	this.server = server;
+function Requester(server) {    
+	this.server = removeTrailingSlashOf(server);
 	this.numberChooser = new Chooser();
 }
 

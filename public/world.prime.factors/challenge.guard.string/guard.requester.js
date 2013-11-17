@@ -1,7 +1,8 @@
+var removeTrailingSlashOf = require('../../levels.common/remove.trailing.slash');
 var StringChooser = require('../../levels.common/string.chooser');
 
 function Requester(server) {
-	this.server = server;
+	this.server = removeTrailingSlashOf(server);
 	this.stringChooser = new StringChooser();
 }
 

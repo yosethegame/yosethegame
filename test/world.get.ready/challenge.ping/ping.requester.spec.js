@@ -15,4 +15,9 @@ describe('Ping challenge requester', function() {
 		});
 
 	});
+	
+	it('suppresses eventual training slash', function() {
+	   expect(new Requester('this-url/').server).toEqual('this-url'); 
+	});
+	
 });
