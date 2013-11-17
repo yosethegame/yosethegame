@@ -20,6 +20,10 @@ describe('Router', function() {
 			expect(router.endPointOf({ url: '/players/any-name' })).toBe(require('../public/feature.dashboard/display.dashboard'));
 		});
 		
+		it('maps dashboard request with a @ in the login', function() {
+			expect(router.endPointOf({ url: '/players/any@name' })).toBe(require('../public/feature.dashboard/display.dashboard'));
+		});
+		
 		it('maps static content request', function() {
 			expect(router.endPointOf({ url: '/anything-else' }).toString()).toEqual(servecontent('public').toString());
 		});
