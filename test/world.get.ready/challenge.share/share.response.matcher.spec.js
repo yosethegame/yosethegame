@@ -4,7 +4,7 @@ describe('Share response matcher,', function() {
 	
 	var remote;
 	
-	describe('When no serve answer', function() {
+	describe('When no server answers', function() {
 		it('sets code to 501', function(done) {
 			matcher.validate('http://localhost:6000', {}, {}, function(status) {
 				expect(status.code).toEqual(501);
@@ -67,7 +67,7 @@ describe('Share response matcher,', function() {
 		
 		beforeEach(function() {
 			var content = '<html><body>' + 
-							'<labe>42</label>' +
+							'<label>42</label>' +
 			  			'</body></html>';			
 			remote = require('http').createServer(
 				function (request, response) {
@@ -104,7 +104,48 @@ describe('Share response matcher,', function() {
 		
 	});
 	
-	describe('When repository home page does not contain #readme element,', function() {
+	describe('When server answers a page with a#repository-link but without href,', function() {
+		
+		beforeEach(function() {
+			var content = '<html><body>' + 
+							'<a id="repository-link">42</a>' +
+			  			'</body></html>';			
+			remote = require('http').createServer(
+				function (request, response) {
+					response.write(content);
+					response.end();
+				})
+			.listen(6000);			
+		});
+
+		afterEach(function() {
+			remote.close();
+		});
+
+		it('sets code to 501', function(done) {
+			matcher.validate('http://localhost:6000', {}, {}, function(status) {
+				expect(status.code).toEqual(501);
+				done();
+			});
+		});
+		
+		it('sets expected', function(done) {
+			matcher.validate('http://localhost:6000', {}, {}, function(status) {
+				expect(status.expected).toContain("a page containing a#repository-link with href attribute");
+				done();
+			});
+		});
+		
+		it('sets actual', function(done) {
+			matcher.validate('http://localhost:6000/primeFactors/ui', {}, {}, function(status) {
+				expect(status.got).toContain("missing element a#repository-link with href attribute");
+				done();
+			});
+		});
+		
+	});
+	
+    describe('When repository home page does not contain #readme element,', function() {
 		
 		beforeEach(function() {
 			var content = '<html><body>' + 

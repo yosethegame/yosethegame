@@ -2,7 +2,7 @@ var Browser = require('zombie');
 var request = require('request');
 var cheerio = require('cheerio');
 
-var expected = "a page containing a#repository-link AND a repository with a readme file containing 'YoseTheGame'";
+var expected = "a page containing a#repository-link with href attribute AND a repository with a readme file containing 'YoseTheGame'";
 
 var withError = function(message, callback) {
 	callback({
@@ -22,6 +22,7 @@ module.exports = {
 			if (page('a#repository-link').length === 0) { return withError('Error: missing element a#repository-link', callback); }
 
 			var repoUrl = page('a#repository-link').attr('href');
+			if (repoUrl === undefined) { return withError('Error: missing element a#repository-link with href attribute', callback); }
 			request(repoUrl, function (repoError, repoResponse, repoBody) {
 				var pageRepo = cheerio.load(repoBody);
 				if (repoResponse === undefined) { return withError('Error: 404', callback); } 
