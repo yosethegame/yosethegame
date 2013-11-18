@@ -23,6 +23,7 @@ module.exports = {
 
 			var repoUrl = page('a#repository-link').attr('href');
 			if (repoUrl === undefined) { return withError('Error: missing element a#repository-link with href attribute', callback); }
+			if (repoUrl === '') { return withError('Error: missing element a#repository-link with href attribute', callback); }
 			request(repoUrl, function (repoError, repoResponse, repoBody) {
 				var pageRepo = cheerio.load(repoBody);
 				if (repoResponse === undefined) { return withError('Error: 404', callback); } 

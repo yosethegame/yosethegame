@@ -144,6 +144,47 @@ describe('Share response matcher,', function() {
 		});
 		
 	});
+
+	describe('When server answers a page with a#repository-link with an empty href,', function() {
+		
+		beforeEach(function() {
+			var content = '<html><body>' + 
+							'<a id="repository-link" href="">42</a>' +
+			  			'</body></html>';			
+			remote = require('http').createServer(
+				function (request, response) {
+					response.write(content);
+					response.end();
+				})
+			.listen(6000);			
+		});
+
+		afterEach(function() {
+			remote.close();
+		});
+
+		it('sets code to 501', function(done) {
+			matcher.validate('http://localhost:6000', {}, {}, function(status) {
+				expect(status.code).toEqual(501);
+				done();
+			});
+		});
+		
+		it('sets expected', function(done) {
+			matcher.validate('http://localhost:6000', {}, {}, function(status) {
+				expect(status.expected).toContain("a page containing a#repository-link with href attribute");
+				done();
+			});
+		});
+		
+		it('sets actual', function(done) {
+			matcher.validate('http://localhost:6000/primeFactors/ui', {}, {}, function(status) {
+				expect(status.got).toContain("missing element a#repository-link with href attribute");
+				done();
+			});
+		});
+		
+	});
 	
     describe('When repository home page does not contain #readme element,', function() {
 		
