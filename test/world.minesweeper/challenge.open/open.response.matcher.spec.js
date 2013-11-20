@@ -85,24 +85,17 @@ describe('Open challenge response matcher', function() {
 				})
 			.listen(6000);	
 			
-			matcher.target = {
-                grid: [
-                    ['bomb' , 'empty', 'empty'],
-                    ['empty', 'empty', 'empty'],
-                    ['empty', 'empty', 'bomb' ]
-                ],
-                cellId: '#cell-3x1',
-                expectedSafeCells: [
-                    [''    , ''    , ''],
-                    ['safe', 'safe', ''],
-                    ['safe', 'safe', '']
-                ],
-                expectedContent: [
-                    ['' , '', '' ],
-                    ['1', '2', '' ],
-                    ['' , '1', '' ]
-                ]
-            };
+			matcher.target = function() {
+			    return {
+                    grid: [
+                        ['bomb' , 'empty', 'empty'],
+                        ['empty', 'empty', 'empty'],
+                        ['empty', 'empty', 'bomb' ]
+                    ],
+                    cellId: '#cell-3x1',
+                    expectedSafeCells: [ '#cell-2x1', '#cell-2x2', '#cell-3x1', '#cell-3x2' ]
+                };
+			};
 		});
 		
 		afterEach(function() {

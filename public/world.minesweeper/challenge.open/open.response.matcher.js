@@ -1,4 +1,5 @@
 var Browser = require('zombie');
+var array = require('../../../public/js/utils/array.utils');
 
 module.exports = {
     
@@ -10,11 +11,7 @@ module.exports = {
                 ['empty', 'empty', 'bomb' ]
             ],
             cellId: '#cell-3x1',
-            expectedSafeCells: [
-                [''    , ''    , ''],
-                ['safe', 'safe', ''],
-                ['safe', 'safe', '']
-            ],
+            expectedSafeCells: [ '#cell-2x1', '#cell-2x2', '#cell-3x1', '#cell-3x2' ],
             expectedContent: [
                 ['' , '', '' ],
                 ['1', '2', '' ],
@@ -28,11 +25,7 @@ module.exports = {
                 ['empty', 'empty', 'empty']
             ],
             cellId: '#cell-3x1',
-            expectedSafeCells: [
-                ['safe', 'safe', ''    ],
-                ['safe', 'safe', 'safe'],
-                ['safe', 'safe', 'safe']
-            ],
+            expectedSafeCells: [ '#cell-1x1', '#cell-1x2', '#cell-2x1', '#cell-2x2', '#cell-2x3', '#cell-3x1', '#cell-3x2', '#cell-3x3' ],
             expectedContent: [
                 ['', '1', '' ],
                 ['', '1', '1'],
@@ -46,11 +39,7 @@ module.exports = {
                 ['empty', 'empty', 'empty']
             ],
             cellId: '#cell-3x3',
-            expectedSafeCells: [
-                [''    , ''    , ''    ],
-                ['safe', 'safe', 'safe'],
-                ['safe', 'safe', 'safe']
-            ],
+            expectedSafeCells: [ '#cell-2x1', '#cell-2x2', '#cell-2x3', '#cell-3x1', '#cell-3x2', '#cell-3x3' ],
             expectedContent: [
                 ['' , '' , '' ],
                 ['2', '3', '2'],
@@ -64,11 +53,7 @@ module.exports = {
                 ['empty', 'empty', 'empty']
             ],
             cellId: '#cell-3x3',
-            expectedSafeCells: [
-                ['', ''    , ''    ],
-                ['', 'safe', 'safe'],
-                ['', 'safe', 'safe']
-            ],
+            expectedSafeCells: [ '#cell-2x2', '#cell-2x3', '#cell-3x2', '#cell-3x3' ],
             expectedContent: [
                 ['', '' , '' ],
                 ['', '2', '1'],
@@ -86,9 +71,22 @@ module.exports = {
 	},
 	validate: function(url, remoteResponse, content, callback) {
 		var self = this;
+		var target = this.target();
 		var expected = "";
 		var browser = new Browser();		
 		browser.visit(url).
+		    then(function() {
+			    browser.document.grid = target.grid;
+			    var result = browser.evaluate('load()');
+		    }).
+		    then(function() {
+		        array.forEach(target.expectedSafeCells, function(cellId) {
+                    var classes = browser.query(cellId).className;
+                    if (classes.indexOf('safe') === -1) {
+                        throw 'Error : ';
+                    }
+		        });
+		    }).
 			then(function() {
 				callback({
 					code: 200,
