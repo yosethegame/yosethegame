@@ -155,7 +155,14 @@ function ProductionDatabase() {
 				file: 'public/world.minesweeper/challenge.zero/zero.html',
 				requester: '../world.minesweeper/challenge.board/board.requester.js',
 				checker: '../world.minesweeper/challenge.zero/zero.response.matcher.js',
-			}
+			},
+			{
+				id: 20,
+				title: 'Open field challenge',
+				file: 'public/world.minesweeper/challenge.open/open.html',
+				requester: '../world.minesweeper/challenge.board/board.requester.js',
+				checker: '../world.minesweeper/challenge.open/open.response.matcher.js',
+			}			
 		]
 	}
 	];

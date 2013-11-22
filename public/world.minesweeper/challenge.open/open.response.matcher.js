@@ -10,13 +10,8 @@ module.exports = {
                 ['empty', 'empty', 'empty'],
                 ['empty', 'empty', 'bomb' ]
             ],
-            cellId: '#cell-3x1',
-            expectedSafeCells: [ '#cell-2x1', '#cell-2x2', '#cell-3x1', '#cell-3x2' ],
-            expectedContent: [
-                ['' , '', '' ],
-                ['1', '2', '' ],
-                ['' , '1', '' ]
-            ]
+            cellId: 'cell-3x1',
+            expectedOpenCells: [ {id:'cell-2x1', text:'1'}, {id:'cell-2x2', text:'2'}, {id:'cell-3x2', text:'1'} ]
         },
         {
             grid: [
@@ -24,12 +19,10 @@ module.exports = {
                 ['empty', 'empty', 'empty'],
                 ['empty', 'empty', 'empty']
             ],
-            cellId: '#cell-3x1',
-            expectedSafeCells: [ '#cell-1x1', '#cell-1x2', '#cell-2x1', '#cell-2x2', '#cell-2x3', '#cell-3x1', '#cell-3x2', '#cell-3x3' ],
-            expectedContent: [
-                ['', '1', '' ],
-                ['', '1', '1'],
-                ['', '' , '' ]
+            cellId: 'cell-3x1',
+            expectedOpenCells: [ {id:'cell-1x1', text:''}, {id:'cell-1x2', text:'1'},
+                                 {id:'cell-2x1', text:''}, {id:'cell-2x2', text:'1'}, {id:'cell-2x3', text:'1'},
+                                                           {id:'cell-3x2', text:''} , {id:'cell-3x3', text:'' }
             ]
         },
         {
@@ -38,12 +31,10 @@ module.exports = {
                 ['empty', 'empty', 'empty'],
                 ['empty', 'empty', 'empty']
             ],
-            cellId: '#cell-3x3',
-            expectedSafeCells: [ '#cell-2x1', '#cell-2x2', '#cell-2x3', '#cell-3x1', '#cell-3x2', '#cell-3x3' ],
-            expectedContent: [
-                ['' , '' , '' ],
-                ['2', '3', '2'],
-                ['' , '' , '' ]
+            cellId: 'cell-3x3',
+            expectedOpenCells: [ 
+                                 {id:'cell-2x1', text:'2'}, {id:'cell-2x2', text:'3'}, {id:'cell-2x3', text:'2'},
+                                 {id:'cell-3x1', text:'' }, {id:'cell-3x2', text:'' } 
             ]
         },
         {
@@ -52,12 +43,9 @@ module.exports = {
                 ['bomb' , 'empty', 'empty'],
                 ['empty', 'empty', 'empty']
             ],
-            cellId: '#cell-3x3',
-            expectedSafeCells: [ '#cell-2x2', '#cell-2x3', '#cell-3x2', '#cell-3x3' ],
-            expectedContent: [
-                ['', '' , '' ],
-                ['', '2', '1'],
-                ['', '1', '' ]
+            cellId: 'cell-3x3',
+            expectedOpenCells: [ {id:'cell-2x2', text:'2'}, {id:'cell-2x3', text:'1'},
+                                 {id:'cell-3x2', text:'1' } 
             ]
         }        
     ],
@@ -69,29 +57,51 @@ module.exports = {
 	candidateIndex: function() {
         return Math.floor(Math.random() * this.candidates.length);
 	},
+	
+	buildExpected: function(target) {
+        var expected = "Playing on " + target.cellId + " reveals the following safe cells:";
+		var safeCells = '';
+		array.forEach(target.expectedOpenCells, function(cell) {
+            safeCells += " " + cell.id + " (text = '" + cell.text + "')";
+		});
+		expected += safeCells;
+
+		return expected;
+	},
+	
 	validate: function(url, remoteResponse, content, callback) {
 		var self = this;
-		var target = this.target();
-		var expected = "";
+		var target = this.target();		
+		var expected = this.buildExpected(target);
+		
 		var browser = new Browser();		
 		browser.visit(url).
-		    then(function() {
-			    browser.document.grid = target.grid;
-			    var result = browser.evaluate('load()');
-		    }).
-		    then(function() {
-		        array.forEach(target.expectedSafeCells, function(cellId) {
-                    var classes = browser.query(cellId).className;
+            then(function() {
+                browser.document.grid = target.grid;
+                var result = browser.evaluate('load()');
+                browser.click('[id=' + target.cellId + ']');
+            }).
+            then(function() {
+                array.forEach(target.expectedOpenCells, function(cell) {
+                    var classes = browser.query('#' + cell.id).className;
                     if (classes.indexOf('safe') === -1) {
-                        throw 'Error : ';
+                        throw "Error : " + cell.id + " classes = '" + classes + "'";
                     }
-		        });
-		    }).
+                });
+            }).
+            then(function() {
+                array.forEach(target.expectedOpenCells, function(cell) {
+                    var text = browser.text('#' + cell.id);
+                    if (text != cell.text) {
+                        throw "Error : " + cell.id + " text = '" + text + "'";
+                    }
+                });
+            }).
 			then(function() {
 				callback({
 					code: 200,
 					expected: expected,
-					got: expected
+					got: 'it works :)'
 				});
 			}).
 			fail(function(error) {
