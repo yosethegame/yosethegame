@@ -56,6 +56,29 @@ describe("Change avatar:", function() {
 		});
 	});
 	
+	describe('avatar preview', function() {
+	   
+	   it('is updated when the user changes its value', function(done) {
+			var browser = new Browser();
+			browser.visit('http://localhost:5000/players/annessou').
+				then(function() {
+					return browser.clickLink('#settings-link');
+				}).
+				then(function() {
+					return browser.fill('#avatar-url', 'http://new-avatar');
+				}).
+				then(function() {
+					expect(browser.query("#avatar-preview").src).toEqual('http://new-avatar/');
+					done();
+				}).
+				fail(function(error) {
+					expect(error.toString()).toBeNull();
+					done();
+				});
+	   });
+	   
+	});
+	
 		
 });
 		
