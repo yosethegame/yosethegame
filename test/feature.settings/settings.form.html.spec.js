@@ -1,8 +1,10 @@
 var form	= require('../../public/feature.settings/display.settings.request');
 var cheerio = require('cheerio');
+var Data	= require('../support/database.with.levels');
 
 describe('Settings form', function() {
 	
+	var database = new Data();
 	var response = {
 		write: function(content) { this.html = content; },
 		end: function() {}
@@ -11,9 +13,8 @@ describe('Settings form', function() {
 	describe('The elements of the page:', function() {
 
 		beforeEach(function() {	
-			form( { url: '/players/ericminio/settings' }, 
-			      response, 
-			      { players: [ { login: 'ericminio', avatar: 'http://old-avatar' } ] } );
+		    database.players = [ { login: 'ericminio', avatar: 'http://old-avatar' } ];
+			form( { url: '/players/ericminio/settings' }, response, database );
 			page = cheerio.load(response.html);
 		});
 
