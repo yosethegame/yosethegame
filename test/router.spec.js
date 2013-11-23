@@ -59,6 +59,10 @@ describe('Router', function() {
 		it('maps playground request with a complex name', function() {
 			expect(router.endPointOf({ url: '/players/any@name-with.dash.and.dot/play/world/42' })).toBe(require('../public/feature.playground/display.playground.request.js'));
 		});
+		
+		it('maps settings request', function() {
+			expect(router.endPointOf({ url: '/players/any/settings' })).toBe(require('../public/feature.settings/display.settings.request.js'));
+		});
 	});
 	
 	describe('Compatibility with http module of node.js:', function() {

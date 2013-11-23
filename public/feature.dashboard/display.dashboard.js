@@ -10,6 +10,7 @@ var fillBanner = function(page, player) {
 	page('#score').text(renderScore(player.score));
 	page('#greetings').text('Welcome home ' + player.login);
 	page('#dashboard-link').attr('href', '/players/' + player.login);
+	page('#settings-link').attr('href', '/players/' + player.login + '/settings');
 };
 
 var exitWithMessage = function(message, page, response) {

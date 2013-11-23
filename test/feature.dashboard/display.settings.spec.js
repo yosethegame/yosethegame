@@ -17,7 +17,7 @@ describe('The settings link', function() {
 		dashboard({ url: '/players/ericminio' }, response, database);
 		page = cheerio.load(response.html);
 
-		expect(page('a#settings-link').href).toEqual('/players/ericminio/settings');
+		expect(page('a#settings-link').attr('href')).toEqual('/players/ericminio/settings');
 	});
 	
 });
