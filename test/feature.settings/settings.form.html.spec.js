@@ -17,6 +17,17 @@ describe('Settings form', function() {
 			form( { url: '/players/ericminio/settings' }, response, database );
 			page = cheerio.load(response.html);
 		});
+		
+		describe('login label', function() {
+		    
+		    it('exists', function() {			
+    			expect(page('#login').length).toEqual(1);
+    		});		
+
+    		it('displays', function() {			
+    			expect(page('#login').text()).toEqual('ericminio');
+    		});
+		});
 
 		describe('avatar input field', function() {
 		    
