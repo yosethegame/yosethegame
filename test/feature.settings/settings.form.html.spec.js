@@ -33,6 +33,18 @@ describe('Settings form', function() {
 		it('has a button to trigger the save', function() {
 			expect(page('button#save-settings-button').length).toEqual(1);
 		});	
-						
+		
+		describe('preview avatar', function() {
+		    
+    		it('exists', function() {			
+    			expect(page('#avatar-preview').length).toEqual(1);
+    		});	
+    		
+    		it('is initialzed with old value', function() {
+    		    expect(page('#avatar-preview').attr('src')).toEqual('http://old-avatar');
+    		});
+
+		});
+        				
 	});
 });

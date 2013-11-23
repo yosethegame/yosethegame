@@ -8,6 +8,8 @@ settings = function(request, response, database) {
 	var pattern = /^\/players\/(.*)\/settings$/;
 	var login = pattern.exec(request.url)[1];
 	database.find(login, function(player) {
+	    page('input#avatar-url').attr('value', player.avatar);
+	    
     	response.write(page.html());
     	response.end();
 	});	
