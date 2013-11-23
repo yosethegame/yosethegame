@@ -30,10 +30,22 @@ describe('Settings form', function() {
 
 		});
 		
-		it('has a button to trigger the save', function() {
-			expect(page('button#save-settings-button').length).toEqual(1);
-		});	
-		
+		describe('Save settings button', function() {
+		    
+    		it('exists', function() {
+    			expect(page('button#save-settings-button').length).toEqual(1);
+    		});	
+    		
+    		it('calls local javascript', function() {
+    		    expect(page('button#save-settings-button').attr('onclick')).toEqual('new SaveSettings().go()');
+    		});
+    		
+    		it('calls an existing script', function() {
+    		    expect(page.html('body')).toContain('<script src="/feature.settings/save.settings.listener.js"></script>');
+    		});
+
+		});
+
 		describe('preview avatar', function() {
 		    
     		it('exists', function() {			

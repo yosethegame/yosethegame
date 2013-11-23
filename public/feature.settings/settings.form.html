@@ -14,7 +14,8 @@
 	<section>
 		<div class="form-group">
 			<label>An url for your avatar</label>
-			<input type="text" class="form-control" id="avatar-url" value="" />
+			<input type="text" class="form-control" id="avatar-url" value="" 
+				   onkeyup="javascript:$('#avatar-preview').attr('src', $('#avatar-url').val());"/>
 		</div>
 		<div class="form-group">
 			<label>Preview</label>
@@ -22,7 +23,8 @@
 			<img src="" 
 				 width="60" heigth="60" id="avatar-preview" class="img-circle"/>
 		</div>
-		<button type="button" class="btn btn-primary" id="save-settings-button" onclick="">Save settings</button>
+		<button type="button" class="btn btn-primary" id="save-settings-button" 
+				onclick="">Save settings</button>
 	</section>
 	
 	<br/>
