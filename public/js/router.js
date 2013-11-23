@@ -30,6 +30,10 @@ module.exports = {
         {
             pattern: /^\/players\/[A-z|\.|\-|@]+\/play\/world\/[0-9]+$/,
             target: require('../feature.playground/display.playground.request')
+        },
+        {
+            pattern: /^\/players\/[A-z|\.|\-|@]+\/settings$/,
+            target: require('../feature.settings/display.settings.request')
         }
     ],
     
