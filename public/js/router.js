@@ -34,7 +34,11 @@ module.exports = {
         {
             pattern: /^\/players\/[A-z|\.|\-|@]+\/settings$/,
             target: require('../feature.settings/display.settings.request')
-        }
+        },
+        {
+            pattern: /^\/save-settings$/,
+            target: require('../feature.settings/post.settings.request')
+        },        
     ],
     
 	endPointOf: function(request) {
