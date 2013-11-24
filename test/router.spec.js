@@ -60,8 +60,12 @@ describe('Router', function() {
 			expect(router.endPointOf({ url: '/players/any@name-with.dash.and.dot/play/world/42' })).toBe(require('../public/feature.playground/display.playground.request.js'));
 		});
 		
-		it('maps settings request', function() {
+		it('maps display settings request', function() {
 			expect(router.endPointOf({ url: '/players/any/settings' })).toBe(require('../public/feature.settings/display.settings.request.js'));
+		});
+
+		it('maps post settings request', function() {
+			expect(router.endPointOf({ url: '/save-settings' })).toBe(require('../public/feature.settings/post.settings.request.js'));
 		});
 	});
 	
