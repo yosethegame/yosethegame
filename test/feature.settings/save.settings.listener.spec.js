@@ -23,7 +23,25 @@ describe('Save settings listener', function() {
 			spyOn($, 'post').andCallThrough();
 			listener.go();
 
-			expect($.post).toHaveBeenCalledWith('/save-settings', { login: 'eric', avatar: 'avatar-of-eric' });
+			expect($.post).toHaveBeenCalledWith('/save-settings', { login: 'eric', avatar: 'avatar-of-eric' }, listener.success);
+		});
+
+	});
+	
+	describe('Success', function() {
+		
+		beforeEach(function() {
+			$('body').append( '<section id="feedback" class="hidden" />' );
+		});
+
+		afterEach(function() {
+			$('#feedback').remove();
+		});
+		
+		it('makes visible the feedback section', function() {
+			listener.success();
+			
+			expect($('#feedback').attr('class')).toContain('visible');
 		});
 
 	});
