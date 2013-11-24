@@ -46,7 +46,7 @@ describe("Change avatar:", function() {
 			var browser = new Browser();
 			browser.visit('http://localhost:5000/players/annessou').
 				then(function() {
-					expect(browser.query("#avatar").src).toEqual('http://new-avatar');
+					expect(browser.query("#avatar").src).toEqual('http://new-avatar/');
 					done();
 				}).
 				fail(function(error) {

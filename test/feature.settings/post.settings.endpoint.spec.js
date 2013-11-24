@@ -27,9 +27,9 @@ describe('Save settings endpoint', function() {
 		});
 	});
 	
-	it('returns 200', function(done) {
+	it('returns 204', function(done) {
 		require('request').post('http://localhost:5000/save-settings', {form: { login:'eric', avatar:'this-avatar' } }, function(error, response, body) {
-			expect(response.statusCode).toEqual(200);
+			expect(response.statusCode).toEqual(204);
 			done();
 		});
 	});

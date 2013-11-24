@@ -68,6 +68,41 @@ describe('Settings form', function() {
     		});
 
 		});
+		
+		describe('feedback section', function() {
+			
+			it('exists', function() {
+				expect(page('#feedback').length).toEqual(1);
+			});
+
+			it('is hidden by default', function() {
+				expect(page('#feedback').attr('class')).toContain('hidden');
+			});
+
+			describe('message placeholder', function() {
+
+				it('exists', function() {
+					expect(page('#feedback #message').length).toEqual(1);
+				});
+
+			});
+			
+			describe('link to dashboard of player', function() {
+
+				it('exists', function() {
+					expect(page('#feedback a#player-dashboard').length).toEqual(1);
+				});
+
+				it('targets the dashboard', function() {
+					expect(page('#feedback a#player-dashboard').attr('href')).toEqual('/players/ericminio');
+				});
+
+				it('invites to access to dashboard', function() {
+					expect(page('#feedback a#player-dashboard').text().length).toBeGreaterThan(0);
+				});
+
+			});
+		});
         				
 	});
 });
