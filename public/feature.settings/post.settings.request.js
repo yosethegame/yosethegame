@@ -13,7 +13,7 @@ post = function(request, response, database) {
             database.savePlayer(player, function() {
                 response.writeHead(204);
                 response.end();
-		    });
+            });
 		});
     });
 	
