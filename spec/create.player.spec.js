@@ -27,7 +27,7 @@ describe('Creating a player', function() {
 							  .pressButton('#create');
 			}).
 			then(function() {
-				expect(browser.text('#message')).toEqual('Done :)');
+				expect(browser.text('#message')).toEqual('Done');
 			}).
 			then(function() {
 				return browser.visit('http://localhost:5000/players/eric');
