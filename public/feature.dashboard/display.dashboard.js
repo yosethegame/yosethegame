@@ -51,6 +51,13 @@ var displayWorld = function(page, player, world, worldNumber) {
 			page(wordLevelsSelector).append('<li>' + levelMention + '</li>');			
 		}
 	});
+
+    page('a.rerun-world-n-link').removeClass('rerun-world-n-link').addClass('rerun-world-'+ worldNumber +'-link');
+    if (challengesDoneInThisWorld == world.levels.length) {
+        page('a.rerun-world-'+ worldNumber +'-link').removeClass('hidden').addClass('visible')
+            .attr('href', '/players/' + player.login + '/rerun/world/' + worldNumber);
+    }
+
 	var progress = 100 * challengesDoneInThisWorld / world.levels.length;
 	page(worldSelector + ' td:nth-child(2) .progress-bar').attr('style', 'width:' + Math.round(progress) + '%');
 };

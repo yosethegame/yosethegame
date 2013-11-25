@@ -67,6 +67,11 @@ describe('Router', function() {
 		it('maps post settings request', function() {
 			expect(router.endPointOf({ url: '/save-settings' })).toBe(require('../public/feature.settings/post.settings.request.js'));
 		});
+
+		it('maps rerun request', function() {
+			expect(router.endPointOf({ url: '/players/any/rerun/world/42' })).toBe(require('../public/feature.rerun/display.rerun.request.js'));
+		});
+
 	});
 	
 	describe('Compatibility with http module of node.js:', function() {

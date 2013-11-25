@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Dashboard</title>
+		<title>Rerun</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<link href="/css/main.css" rel="stylesheet" type="text/css">
@@ -23,8 +23,8 @@
 						<section id="sidebar-info">
 							<p>
 								<ul id="banner-links">
-									<li><a id="settings-link" href="toto">Settings</a></li>
-									<li><a href="">Dashboard</a></li>
+									<li><a id="dashboard-link" href="">Dashboard</a></li>
+									<li><a id="restart-game-link" class="hidden" onclick="new Restart().game()">Restart game</a></li>
 									<li><a id="help" href="https://groups.google.com/forum/?#!forum/yosethegame">Help</help></li>
 									<li><a id="hall-of-fame" href="/">Hall of fame</a></li>
 								</ul>
@@ -48,37 +48,13 @@
 
 		<div id="content">
 
-			<table id="profile">
-				<tr>
-					<td><a class="hidden" id="server-of-player">http://ericminio.herokuapp.com/yose</a></td>
-					<td nowrap><a id="restart-game-link" href="#" class="hidden" onclick="new Restart().game()">Restart game</a></td>
-				</tr>
-			</table>
+			<section>
+				<p>
+					This feature is in development
+				</p>
+			</section>
 
-			<table id="worlds" class="lead">
-				
-				<tr class="open-world">
-					<td nowrap class="world">first world</td>
-					<td width="100%">
-						<div class="progress">
-						  <div class="progress-bar progress-bar-success" role="progressbar" style="width:0%"></div>
-						</div>
-						<ul class="levels">
-							<li>level 1.1 : the ping challenge</li>
-							<li class="locked-level">level w.l : <span class="glyphicon glyphicon-lock" style="color:#888888;"></span> (locked)</li>
-						</ul>
-						<a class="rerun-world-n-link hidden" href="">Rerun all the completed levels of this world</a>					
-					</td>
-				</tr>
-				
-				<tr class="locked-world">
-					<td nowrap class="world">
-						name<br/><span class="glyphicon glyphicon-lock" style="color:#888888;">
-					</td>
-					<td></td>
-				</tr>				
-
-			</table>
+			<section id="scroll-anchor"></section>
 
 		</div>
 		
@@ -87,6 +63,6 @@
 	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
 	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>		
 
-	<script src="/feature.restart.game/restart.game.listener.js"></script>		
+	<script src="/js/utils/render.score.js"></script>	
 </body>
 </html>

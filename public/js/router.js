@@ -39,6 +39,10 @@ module.exports = {
             pattern: /^\/save-settings$/,
             target: require('../feature.settings/post.settings.request')
         },        
+        {
+            pattern: /^\/players\/[A-z|\.|\-|@]+\/rerun\/world\/[0-9]+$/,
+            target: require('../feature.rerun/display.rerun.request')
+        },
     ],
     
 	endPointOf: function(request) {
