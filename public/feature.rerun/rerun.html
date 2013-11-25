@@ -48,12 +48,29 @@
 
 		<div id="content">
 
-			<section>
-				<p>
-					This feature is in development
-				</p>
-			</section>
+			<table id="profile">
+				<tr>
+					<td><a class="visible" id="server-of-player">http://ericminio.herokuapp.com/yose</a></td>
+				</tr>
+			</table>
 
+			<section id="result" class="visible">
+				<br>
+				<div class="table-responsive">
+				<table id="results" class="table">
+					<thead><tr>
+						<th>Challenge</th><th>Result</th><th>Expected</th><th>Got</th>
+					</tr></thead>
+					<tr id="result_1" class="result success">
+						<td nowrap class="challenge">Challenge</td>
+						<td class="status">Result</td>
+						<td class="expected">Expected</td>
+						<td class="got">Got</td>
+					</tr>
+				</table>
+				</div>
+			</section>
+						
 			<section id="scroll-anchor"></section>
 
 		</div>
