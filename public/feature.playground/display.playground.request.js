@@ -1,19 +1,18 @@
 var url         = require('url');
 var fs          = require('fs');
 var cheerio     = require('cheerio');
-var renderScore = require('../js/utils/render.score');
 var array       = require('../js/utils/array.utils');
 var withValue   = require('../js/utils/array.matchers');
 var thePlayer   = require('../js/utils/player.utils');
 
+var fillBannerWithGreetings = require('../js/banner');
+
 var fillBanner = function(page, player, world, worldNumber) {
-	page("#avatar").attr('src', player.avatar);
-	page('#score').text(renderScore(player.score));
 	var levelIndex = thePlayer.nextLevelIndexInThisWorld(player, world);
 	var level = world.levels[levelIndex];
 	var greetings = 'level ' + worldNumber + '.' + (levelIndex + 1) + ' : ' + level.title;
-	page('#greetings').text(greetings);		
-	page('#dashboard-link').attr('href', '/players/' + player.login);
+	
+	fillBannerWithGreetings(page, player, greetings);
 };
 
 var exitWithMessage = function(message, page, response) {

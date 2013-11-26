@@ -5,13 +5,7 @@ var array		= require('../js/utils/array.utils');
 var withValue	= require('../js/utils/array.matchers');
 var renderScore	= require('../js/utils/render.score');
 
-var fillBanner = function(page, player) {
-	page("#avatar").attr('src', player.avatar);
-	page('#score').text(renderScore(player.score));
-	page('#greetings').text('Welcome home ' + player.login);
-	page('#dashboard-link').attr('href', '/players/' + player.login);
-	page('#settings-link').attr('href', '/players/' + player.login + '/settings');
-};
+var fillBannerWithGreetings = require('../js/banner');
 
 var exitWithMessage = function(message, page, response) {
 	page('#info').addClass('visible').removeClass('hidden');
@@ -81,7 +75,7 @@ dashboard = function(request, response, database) {
 			return exitWithMessage('this player is unknown', page, response);
 		}
 		page('#login').text(player.login);		
-		fillBanner(page, player);
+		fillBannerWithGreetings(page, player, 'Welcome home ' + player.login);
 		showServerOfPlayer(page, player);
 
 		var openWorldTemplate = page.html('table#worlds tr.open-world');

@@ -8,13 +8,7 @@ var thePlayer   = require('../js/utils/player.utils');
 var thisPlayer  = require('../js/utils/player.utils');
 var request     = require('request');
 
-var fillBanner = function(page, player, world, worldNumber) {
-	page("#avatar").attr('src', player.avatar);
-	page('#score').text(renderScore(player.score));
-	page('#dashboard-link').attr('href', '/players/' + player.login);
-	page('#greetings').text('Rerun the completed levels of ' + world.name);
-	page('#settings-link').attr('href', '/players/' + player.login + '/settings');
-};
+var fillBannerWithGreetings = require('../js/banner');
 
 var showServerOfPlayer = function(page, player) {
 	if (thePlayer.hasServer(player)) {
@@ -114,7 +108,7 @@ var rerun = function(request, response, database, done) {
 		
 		page('#login').empty().text(player.login);
 			
-		fillBanner(page, player, world, worldNumber);
+		fillBannerWithGreetings(page, player, 'Rerun the completed levels of ' + world.name);
 		showServerOfPlayer(page, player);
 		
 		tryLevelAtIndex(0, allLevelsToTry(player, world), player, database, response, [], function(output) {
