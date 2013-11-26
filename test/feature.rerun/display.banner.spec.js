@@ -42,4 +42,8 @@ describe('The banner', function() {
 	it('updates the link to the dashboard of the player', function() {
 		expect(page('#dashboard-link').attr('href')).toEqual('/players/ericminio');
 	});
+	
+	it('updates the link to the settings of the player', function() {
+		expect(page('a#settings-link').attr('href')).toEqual('/players/ericminio/settings');
+	});
 });
