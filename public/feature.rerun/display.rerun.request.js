@@ -9,14 +9,7 @@ var thisPlayer  = require('../js/utils/player.utils');
 var request     = require('request');
 
 var fillBannerWithGreetings = require('../js/banner');
-
-var showServerOfPlayer = function(page, player) {
-	if (thePlayer.hasServer(player)) {
-		var serverOfPlayer = thePlayer.serverOf(player);
-		page('#server-of-player').addClass('visible').removeClass('hidden').empty().append(serverOfPlayer);
-		page('#server-of-player').attr('href', serverOfPlayer);
-	}	
-};
+var showServerOfPlayer      = require('../js/show.server.of.player');
 
 var exitWithMessage = function(message, page, response) {
 	page('#info').addClass('visible').removeClass('hidden');

@@ -6,6 +6,7 @@ var withValue	= require('../js/utils/array.matchers');
 var renderScore	= require('../js/utils/render.score');
 
 var fillBannerWithGreetings = require('../js/banner');
+var showServerOfPlayer      = require('../js/show.server.of.player');
 
 var exitWithMessage = function(message, page, response) {
 	page('#info').addClass('visible').removeClass('hidden');
@@ -56,15 +57,6 @@ var displayWorld = function(page, player, world, worldNumber) {
 	page(worldSelector + ' td:nth-child(2) .progress-bar').attr('style', 'width:' + Math.round(progress) + '%');
 };
 
-var showServerOfPlayer = function(page, player) {
-	if (thePlayer.hasServer(player)) {
-		var serverOfPlayer = thePlayer.serverOf(player);
-		page('#server-of-player').addClass('visible').removeClass('hidden').empty().append(serverOfPlayer);
-		page('#server-of-player').attr('href', serverOfPlayer);
-		page('#restart-game-link').addClass('visible').removeClass('hidden');
-	}	
-};
-
 dashboard = function(request, response, database) {
 	var login = /^\/players\/(.*)$/.exec(request.url)[1];
 	var html = fs.readFileSync('./public/feature.dashboard/dashboard.html').toString();
@@ -77,6 +69,9 @@ dashboard = function(request, response, database) {
 		page('#login').text(player.login);		
 		fillBannerWithGreetings(page, player, 'Welcome home ' + player.login);
 		showServerOfPlayer(page, player);
+		if (thePlayer.hasServer(player)) {
+            page('#restart-game-link').addClass('visible').removeClass('hidden');
+        }
 
 		var openWorldTemplate = page.html('table#worlds tr.open-world');
 		var lockedWorldTemplate = page.html('table#worlds tr.locked-world');
