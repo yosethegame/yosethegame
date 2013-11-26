@@ -7,15 +7,7 @@ var renderScore	= require('../js/utils/render.score');
 
 var fillBannerWithGreetings = require('../js/banner');
 var showServerOfPlayer      = require('../js/show.server.of.player');
-
-var exitWithMessage = function(message, page, response) {
-	page('#info').addClass('visible').removeClass('hidden');
-	page('#info').text(message);
-	page('#player').addClass('hidden').removeClass('visible');
-	response.write(page.html());
-	response.end();
-	return;	
-};
+var exitWithMessage         = require('../js/exit.with.message');
 
 var displayWorld = function(page, player, world, worldNumber) {
 	var worldSelector = 'table#worlds tr:nth-child(' + worldNumber + ')';

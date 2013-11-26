@@ -10,15 +10,7 @@ var request     = require('request');
 
 var fillBannerWithGreetings = require('../js/banner');
 var showServerOfPlayer      = require('../js/show.server.of.player');
-
-var exitWithMessage = function(message, page, response) {
-	page('#info').addClass('visible').removeClass('hidden');
-	page('#info').text(message);
-	page('#player').addClass('hidden').removeClass('visible');
-	response.write(page.html());
-	response.end();
-	return;	
-};
+var exitWithMessage         = require('../js/exit.with.message');
 
 var allLevelsToTry = function(player, world) {
 	var levelsToTry = [];

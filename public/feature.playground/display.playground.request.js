@@ -6,6 +6,7 @@ var withValue   = require('../js/utils/array.matchers');
 var thePlayer   = require('../js/utils/player.utils');
 
 var fillBannerWithGreetings = require('../js/banner');
+var exitWithMessage         = require('../js/exit.with.message');
 
 var fillBanner = function(page, player, world, worldNumber) {
 	var levelIndex = thePlayer.nextLevelIndexInThisWorld(player, world);
@@ -13,15 +14,6 @@ var fillBanner = function(page, player, world, worldNumber) {
 	var greetings = 'level ' + worldNumber + '.' + (levelIndex + 1) + ' : ' + level.title;
 	
 	fillBannerWithGreetings(page, player, greetings);
-};
-
-var exitWithMessage = function(message, page, response) {
-	page('#info').addClass('visible').removeClass('hidden');
-	page('#info').text(message);
-	page('#player').addClass('hidden').removeClass('visible');
-	response.write(page.html());
-	response.end();
-	return;	
 };
 
 playground = function(request, response, database) {
