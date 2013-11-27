@@ -43,6 +43,10 @@ module.exports = {
             pattern: /^\/players\/[A-z|\.|\-|@]+\/rerun\/world\/[0-9]+$/,
             target: require('../feature.rerun/display.rerun.request')
         },
+        {
+            pattern: /^\/players\/tags\/(.*)+$/,
+            target: require('../feature.search/search.request')
+        },
     ],
     
 	endPointOf: function(request) {

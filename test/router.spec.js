@@ -72,6 +72,10 @@ describe('Router', function() {
 			expect(router.endPointOf({ url: '/players/any/rerun/world/42' })).toBe(require('../public/feature.rerun/display.rerun.request.js'));
 		});
 
+		it('maps search by tag request', function() {
+			expect(router.endPointOf({ url: '/players/tags/any' })).toBe(require('../public/feature.search/search.request.js'));
+		});
+
 	});
 	
 	describe('Compatibility with http module of node.js:', function() {

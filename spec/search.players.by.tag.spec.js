@@ -36,7 +36,7 @@ describe("Search players by tags:", function() {
 		var browser = new Browser();
 		browser.visit('http://localhost:5000/players/tags/st-jean').
 			then(function() {
-				expect(browser.query('#players tr').length).toEqual(1 + 2);
+				expect(browser.queryAll('#players tr').length).toEqual(1 + 2);
 				done();
 			}).
 			fail(function(error) {
