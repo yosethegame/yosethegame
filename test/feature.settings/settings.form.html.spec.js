@@ -13,7 +13,7 @@ describe('Settings form', function() {
 	describe('The elements of the page:', function() {
 
 		beforeEach(function() {	
-		    database.players = [ { login: 'ericminio', avatar: 'http://old-avatar' } ];
+		    database.players = [ { login: 'ericminio', avatar: 'http://old-avatar', tags: 'épicurien Québec' } ];
 			form( { url: '/players/ericminio/settings' }, response, database );
 			page = cheerio.load(response.html);
 		});
@@ -39,6 +39,18 @@ describe('Settings form', function() {
     		   expect(page('input#avatar-url').attr('value')).toEqual('http://old-avatar'); 
     		});
 
+		});
+		
+		describe('tags input field', function() {
+
+    		it('exists', function() {			
+    			expect(page('input#tags').length).toEqual(1);
+    		});	
+    		
+    		it('proposes old value', function() {
+    		   expect(page('input#tags').attr('value')).toEqual('épicurien Québec'); 
+    		});
+		    
 		});
 		
 		describe('Save settings button', function() {

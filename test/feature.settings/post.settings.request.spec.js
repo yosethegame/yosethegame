@@ -8,7 +8,7 @@ describe('Save settings endpoint', function() {
 	
 	beforeEach(function() {
 		database = new InMemoryDatabase();
-	    database.players = [ { login: 'eric', avatar: 'old-avatar' } ];
+	    database.players = [ { login: 'eric', avatar: 'old-avatar', tags: 'old tags' } ];
 		server = require('http').createServer(function(request, response){
 			post(request, response, database);
 		}).listen(5000, 'localhost');
@@ -22,6 +22,15 @@ describe('Save settings endpoint', function() {
 		require('request').post('http://localhost:5000/save-settings', {form: { login:'eric', avatar:'new-avatar' } }, function(error, response, body) {
 			database.find('eric', function(player) {
 				expect(player.avatar).toEqual('new-avatar');
+				done();
+			});
+		});
+	});
+	
+	it('updates the tags of the player', function(done) {
+		require('request').post('http://localhost:5000/save-settings', {form: { login:'eric', avatar:'new-avatar', tags: 'new tags' } }, function(error, response, body) {
+			database.find('eric', function(player) {
+				expect(player.tags).toEqual('new tags');
 				done();
 			});
 		});

@@ -10,6 +10,7 @@ post = function(request, response, database) {
 		var form = qs.parse(body);	
 		database.find(form.login, function(player) {
             player.avatar = form.avatar;
+            player.tags = form.tags;
             database.savePlayer(player, function() {
                 response.writeHead(204);
                 response.end();
