@@ -1,4 +1,4 @@
-[![Travis Build Status](https://api.travis-ci.org/ericminio/yose.png)](http://travis-ci.org/ericminio/yose)
+[![Travis Build Status](https://api.travis-ci.org/yosethegame/yosethegame.png)](http://travis-ci.org/yosethegame/yosethegame)
 
 You've got Nutella on your nose :) 
 
