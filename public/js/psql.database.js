@@ -106,4 +106,21 @@ PostgreSql.prototype.getScoreCommunity = function(callback) {
     });
 };
 
+PostgreSql.prototype.findPlayersMatching = function(criteria, callback) {
+	client = new pg.Client(this.url);
+	client.connect(function(err) {
+		var sql = "select login, json from players where json like '%" + criteria + "%' order by score desc";
+		client.query(sql, function(err, result) {
+			client.end();
+			var players = [];
+			if (result !== undefined) {
+				array.forEach(result.rows, function(row) {
+					players.push(JSON.parse(row.json));
+				});
+			}
+			callback(players);
+		});
+    });
+};
+
 module.exports = PostgreSql;

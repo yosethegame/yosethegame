@@ -40,4 +40,15 @@ InMemoryDatabase.prototype.getScoreCommunity = function (callback) {
 	callback(total);
 };
 
+InMemoryDatabase.prototype.findPlayersMatching = function(criteria, callback) {
+    var found = [];
+    array.forEach(this.players, function(player) {
+        var asString = JSON.stringify(player);
+        if (asString.indexOf(criteria) !== -1) {
+            found.push(player);
+        }
+    });
+    callback(found);
+};
+
 module.exports = InMemoryDatabase;

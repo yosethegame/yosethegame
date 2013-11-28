@@ -74,12 +74,26 @@ describe('InMemoryDatabase', function() {
 	});
 	
 	it('offers a way to get the total score of the community', function(done) {
-	    var me = { login: 'me', field: 'any', score:10 };
-	    var you = { login: 'you', field: 'any', score:20 };
+	    var me = { login: 'me', field: 'blue', score:10 };
+	    var you = { login: 'you', field: 'red', score:20 };
 		database.createPlayer(me, function() {
     		database.createPlayer(you, function() {
 			    database.getScoreCommunity(function(score) {
 				    expect(score).toEqual(30);
+				    done();
+			    });
+			});
+		});
+	});
+	
+	it('offers a way to find players matching a criteria', function(done) {
+	    var me = { login: 'me', field: 'blue', score:10 };
+	    var you = { login: 'you', field: 'red', score:20 };
+		database.createPlayer(me, function() {
+    		database.createPlayer(you, function() {
+			    database.findPlayersMatching('blue', function(players) {
+				    expect(players.length).toEqual(1);
+				    expect(players[0].login).toEqual('me');
 				    done();
 			    });
 			});

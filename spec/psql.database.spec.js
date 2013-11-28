@@ -265,5 +265,41 @@ describe('PostgreSql database', function() {
 		});			
 	});
 	
+	describe('searching players matching a criteria', function() {
+	    
+    	it('returns only the players with the criteria somewhere in the json', function(done) {
+    	    var me = { login: 'me', one: 'blue' };
+    	    var you = { login: 'you', two: 'red' };
+    		database.createPlayer(me, function() {
+        		database.createPlayer(you, function() {
+    			    database.findPlayersMatching('blue', function(players) {
+    				    expect(players.length).toEqual(1);
+    				    done();
+    			    });
+    			});
+    		});
+    	});
+
+    	it('returns the matching players order by score desc', function(done) {
+    	    var me = { login: 'me', one: 'blue' };
+    	    var you = { login: 'you', two: 'blue'};
+    		database.createPlayer(me, function() {
+        		database.createPlayer(you, function() {
+        		    me.score = 10;
+        		    you.score = 20;
+        		    database.savePlayer(me, function() {
+        		        database.savePlayer(you, function() {
+    			            database.findPlayersMatching('blue', function(players) {
+    				            expect(players.length).toEqual(2);
+    				            expect(players[0].login).toEqual('you');
+    				            done();
+    			            });
+			            });
+		            });
+    			});
+    		});
+    	});
+	});
+	
 	
 });
