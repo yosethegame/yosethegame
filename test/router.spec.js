@@ -73,7 +73,7 @@ describe('Router', function() {
 		});
 
 		it('maps search by tag request', function() {
-			expect(router.endPointOf({ url: '/players/tags/any' })).toBe(require('../public/feature.search/search.request.js'));
+			expect(router.endPointOf({ url: '/players/search/any' })).toBe(require('../public/feature.search/search.request.js'));
 		});
 
 	});

@@ -44,7 +44,7 @@ module.exports = {
             target: require('../feature.rerun/display.rerun.request')
         },
         {
-            pattern: /^\/players\/tags\/(.*)+$/,
+            pattern: /^\/players\/search\/(.*)+$/,
             target: require('../feature.search/search.request')
         },
     ],

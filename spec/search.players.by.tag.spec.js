@@ -34,7 +34,13 @@ describe("Search players by tags:", function() {
 	
 	it('can find players from st-jean in a list with a line of header', function(done) {
 		var browser = new Browser();
-		browser.visit('http://localhost:5000/players/tags/st-jean').
+		browser.visit('http://localhost:5000').
+		    then(function() {
+			    return browser.clickLink('a#search-players-link');
+		    }).
+		    then(function() {
+			    return browser.fill('input#criteria', 'st-jean').pressButton('#search-button');
+		    }).
 			then(function() {
 				expect(browser.queryAll('#players tr').length).toEqual(1 + 2);
 				done();

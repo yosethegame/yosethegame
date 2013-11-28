@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>Settings - Yose</title>
+		<title>Search - Yose</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<link href="/css/main.css" rel="stylesheet" type="text/css">
@@ -9,26 +9,56 @@
 <body class="container">
 
 	<legend>
-		<h2>Found players</h2>
+		<h2>Search players</h2>
 	</legend>
 	
-	<table id="players" class="table table-condensed">
-		<tr class="hall-of-fame-header">
-			<td id="players-title">Players</td>
-			<td id="score-title">Score</td>
-		</tr>
+	<div class="form-inline container">
+		
+		<div class="row">
+			<div class="form-group col-xs-6 col-md-6 lead">
+				<input type="text" class="form-control" id="criteria" placeholder="criteria"/>
+			</div>
+			<div class="form-group col-xs-6 col-md-6 lead">
+				<button id="search-button" type="submit" class="btn btn-success" onclick="search()">
+					<span class="glyphicon glyphicon-search"></span>
+				</button>
+			</div>
+		</div>
+	</div>
+
+	
+	<div id="results" class="visible" style="margin-top:50px">
+
+	<legend>
+		<h2 id="result-count"># matching players</h2>
+	</legend>
+	
+	<table id="players" class="table table-striped">
+		<thead>
+			<tr class="lead">
+				<th>Player</td>
+				<th style="padding-left:30px">Server</td>
+				<th style="padding-right:20px;padding-left:10px">Score</td>
+			</tr>
+		</thead>
 		<tr class="player">
-			<td>
+			<td class="avatar-column">
 				<img src="" class="avatar img-circle" width="60" height="60"/>
 			</td>
-			<td>
+			<td class="server-column" style="vertical-align:middle;padding-left:30px">
+				<a href=""></a>
+			</td>
+			<td nowrap class="score-column" style="vertical-align:middle;">
 				<span class="hall-of-fame-score-leading-zeros">0000</span>
 				<span class="hall-of-fame-score">1234567</span>
 			</td>
 		</tr>
 	</table>
+	
+	</div>
 		
 	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
 	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>		
+	<script src="/feature.search/search.js"></script>		
 </body>
 </html>
