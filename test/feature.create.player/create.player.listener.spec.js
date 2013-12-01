@@ -25,6 +25,15 @@ describe('Create player listener', function() {
 
 			expect($.post).toHaveBeenCalledWith('/create-player', { login: 'eric', avatar: 'avatar-of-eric' }, create.success);
 		});
+		
+		it('suppresses the spaces in the given login if any', function() {
+			$('#login').val('eric mignot of laval');
+			$('#avatar').val('avatar-of-eric');
+			spyOn($, 'post').andCallThrough();
+			create.player();
+
+			expect($.post).toHaveBeenCalledWith('/create-player', { login: 'ericmignotoflaval', avatar: 'avatar-of-eric' }, create.success);
+		});
 
 	});
 	
