@@ -59,6 +59,13 @@
 		
 	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
 	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>		
-	<script src="/feature.search/search.js"></script>		
+	<script src="/feature.search/search.js"></script>
+	<script>
+		$(function() {
+			var location = window.location.toString();
+			var criteria = location.split('/').pop();
+			$('#criteria').val(criteria);
+		});
+	</script>		
 </body>
 </html>
