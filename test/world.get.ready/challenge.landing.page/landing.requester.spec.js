@@ -17,7 +17,7 @@ describe('Landing page challenge requester', function() {
 	});
 	
 	it('keep given trailing slash if any', function() {
-	   expect(new Requester('this-url/').server).toEqual('this-url/'); 
+	   expect(new Requester('this-url/').url()).toEqual('this-url/'); 
 	});
 	
 });
