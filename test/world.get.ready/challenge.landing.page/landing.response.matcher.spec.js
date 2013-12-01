@@ -37,9 +37,34 @@ describe('Landing page response matcher,', function() {
 	describe('When remote server does not respond with content-type text/html', function() {
 	
 		beforeEach(function() {
-			contentType = 'application/json';
+			status = matcher.computeStatus({ headers: {'content-type': 'any' } }, 'any content');
+		});
+		
+		it('sets code to 501', function() {
+			expect(status.code).toEqual(501);
+		});
+		
+		it('sets expected', function() {
+			expect(status.expected).toEqual(matcher.expected);
+		});
+		
+		it('sets actual', function() {
+			expect(status.got).toEqual('Error: Content-Type = any');
+		});
+		
+		it('reports text/plain when content-type is not found', function() {
+		    status = matcher.computeStatus({ headers: {} }, 'any content');
+
+			expect(status.got).toEqual('Error: Content-Type = text/plain');
+		});
+		
+	});
+	
+	describe('When remote server responds with page containing #welcome,', function() {
+	
+		beforeEach(function() {
+			contentType = 'text/html';
 			content = '<html><body>' +
-							'<label id="welcome">title</label>' +
 							'<a id="ping-challenge-link" href="ping">The ping challenge</a>' +
 					  '</body></html>';			
 			status = matcher.computeStatus({ headers: {'content-type': contentType} }, content);
@@ -54,10 +79,10 @@ describe('Landing page response matcher,', function() {
 		});
 		
 		it('sets actual', function() {
-			expect(status.got).toEqual('Error: Content-Type = application/json');
+			expect(status.got).toEqual('Error: missing element #welcome');
 		});
 		
-	});
+	});	
 	
 	
 });
