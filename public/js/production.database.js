@@ -28,6 +28,13 @@ function ProductionDatabase() {
 				checker: '../world.get.ready/challenge.ping/ping.response.matcher.js'
 			},
 			{
+				id: 21,
+				title: 'Landing page challenge',
+				file: 'public/world.get.ready/challenge.landing.page/landing.html',
+				requester: '../world.get.ready/challenge.landing.page/landing.requester.js',
+				checker: '../world.get.ready/challenge.landing.page/landing.page.response.matcher.js'
+			},
+			{
 				id: 14,
 				title: 'Share challenge',
 				file: 'public/world.get.ready/challenge.share/share.html',

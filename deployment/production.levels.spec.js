@@ -80,7 +80,7 @@ describe('Levels:', function() {
     
     describe('Checkers:', function() {
     
-	    it('All checkers can be required from public/js and provide a validate api', function() {
+	    it('All checkers can be required from public/js and provide a validate() api', function() {
 			array.forEach(database.worlds, function(world) {
 				array.forEach(world.levels, function(level) {
         			var checker = require('../public/js/' + level.checker);
