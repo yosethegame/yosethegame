@@ -32,7 +32,7 @@ function ProductionDatabase() {
 				title: 'Landing page challenge',
 				file: 'public/world.get.ready/challenge.landing.page/landing.html',
 				requester: '../world.get.ready/challenge.landing.page/landing.requester.js',
-				checker: '../world.get.ready/challenge.landing.page/landing.page.response.matcher.js'
+				checker: '../world.get.ready/challenge.landing.page/landing.response.matcher.js'
 			},
 			{
 				id: 14,
