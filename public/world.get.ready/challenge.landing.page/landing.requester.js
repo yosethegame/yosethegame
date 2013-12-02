@@ -5,7 +5,7 @@ function Requester(server) {
 }
 
 Requester.prototype.url = function() {
-	return this.server + '/';
+	return this.server;
 };
 
 var module = module || {};

@@ -10,14 +10,14 @@ describe('Landing page challenge requester', function() {
 	
 	describe('target url', function() {
 		
-		it('simply uses the given url and add / to it', function() {
-			expect(requester.url()).toEqual('this-url/');
+		it('simply uses the given url', function() {
+			expect(requester.url()).toEqual('this-url');
 		});
 
 	});
 	
-	it('keep given trailing slash if any', function() {
-	   expect(new Requester('this-url/').url()).toEqual('this-url/'); 
+	it('removes the trailing slash is any', function() {
+	   expect(new Requester('this-url/').url()).toEqual('this-url'); 
 	});
 	
 });
