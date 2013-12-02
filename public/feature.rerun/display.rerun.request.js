@@ -31,6 +31,7 @@ var tryLevelAtIndex = function(index, levelsToTry, player, database, response, o
 
 	request(requestSent, function(error, remoteResponse, content) {
 		var checker = require(level.checker);
+		checker.player = player;
 		checker.validate(requestSent, remoteResponse, content, function(status) {
 			if (error !== null) {
 				status.code = 404;
