@@ -1,3 +1,4 @@
+var cheerio = require('cheerio');
 var $ = require('jquery');
 var abstractMatcher = require('../../js/abstract.response.matcher');
 
@@ -25,6 +26,29 @@ module.exports = {
 			};
 		}
 		
+		var page = cheerio.load(content);
+		if (page('#welcome').length == 0) {
+		    return {
+    			code: 501,
+    			expected: this.expected,
+    			got: 'Error: missing element #welcome'
+		    };
+		}
+		if (page('a#ping-challenge-link').length == 0) {
+		    return {
+    			code: 501,
+    			expected: this.expected,
+    			got: 'Error: missing element a#ping-challenge-link'
+		    };
+		}
+		if (page('a#ping-challenge-link[href="ping"]').length == 0) {
+		    return {
+    			code: 501,
+    			expected: this.expected,
+    			got: 'Error: a#ping-challenge-link attribute href="any"'
+		    };
+		}
+								
         return {
 			code: 200,
 			expected: this.expected,

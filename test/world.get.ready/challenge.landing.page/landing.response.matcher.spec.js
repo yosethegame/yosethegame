@@ -60,7 +60,7 @@ describe('Landing page response matcher,', function() {
 		
 	});
 	
-	describe('When remote server responds with page containing #welcome,', function() {
+	describe('When remote server responds with page missing element #welcome,', function() {
 	
 		beforeEach(function() {
 			contentType = 'text/html';
@@ -84,5 +84,52 @@ describe('Landing page response matcher,', function() {
 		
 	});	
 	
+	describe('When remote server responds with page missing element a#ping-challenge-link,', function() {
 	
+		beforeEach(function() {
+			contentType = 'text/html';
+			content = '<html><body>' +
+			                '<label id="welcome">title</label>' +
+					  '</body></html>';			
+			status = matcher.computeStatus({ headers: {'content-type': contentType} }, content);
+		});
+		
+		it('sets code to 501', function() {
+			expect(status.code).toEqual(501);
+		});
+		
+		it('sets expected', function() {
+			expect(status.expected).toEqual(matcher.expected);
+		});
+		
+		it('sets actual', function() {
+			expect(status.got).toEqual('Error: missing element a#ping-challenge-link');
+		});
+		
+	});	
+
+	describe('When remote server responds with an element a#ping-challenge-link and incorrect href attribute,', function() {
+	
+		beforeEach(function() {
+			contentType = 'text/html';
+			content = '<html><body>' +
+			                '<label id="welcome">title</label>' +
+							'<a id="ping-challenge-link" href="any">The ping challenge</a>' +
+					  '</body></html>';			
+			status = matcher.computeStatus({ headers: {'content-type': contentType} }, content);
+		});
+		
+		it('sets code to 501', function() {
+			expect(status.code).toEqual(501);
+		});
+		
+		it('sets expected', function() {
+			expect(status.expected).toEqual(matcher.expected);
+		});
+		
+		it('sets actual', function() {
+			expect(status.got).toEqual('Error: a#ping-challenge-link attribute href="any"');
+		});
+		
+	});
 });
