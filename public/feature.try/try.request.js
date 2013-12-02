@@ -62,6 +62,7 @@ var tryLevelAtIndex = function(index, params, player, database, response, callba
 
 	request(requestSent, function(error, remoteResponse, content) {
 		var checker = require(level.checker);
+		checker.player = player;
 		checker.validate(requestSent, remoteResponse, content, function(status) {
 			if (error !== null) {
 				status.code = 404;

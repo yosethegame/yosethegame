@@ -3,6 +3,26 @@ var matcher = require('../../../public/world.get.ready/challenge.landing.page/la
 describe('Landing page response matcher,', function() {
 
 	var status;
+	
+	beforeEach(function() {
+	    matcher.player = { portfolio: [ { server: 'http://this-url' } ] };
+	});
+	
+	it('knows the expected response', function() {
+	    expect(matcher.expected()).toEqual("content-type text/html AND a #welcome element AND a a#ping-challenge-link with href='http://this-url/ping'");
+	});
+	
+	describe('href validation', function() {
+	   
+	   it('fails when the ping url does not end with given href', function() {
+           expect(matcher.endsWith('http://this-url/ping', 'any')).toEqual(false);
+	   }); 
+	   
+	   it('passes when the ping url ends with given href', function() {
+           expect(matcher.endsWith('http://this-url/ping', '/ping')).toEqual(true);
+	   }); 
+	   
+	});
 
 	describe('When remote server responds the expected elements and the expected content-type', function() {
 	
@@ -10,7 +30,7 @@ describe('Landing page response matcher,', function() {
 			contentType = 'text/html';
 			content = '<html><body>' +
 							'<label id="welcome">title</label>' +
-							'<a id="ping-challenge-link" href="anything/before/ping">The ping challenge</a>' +
+							'<a id="ping-challenge-link" href="http://this-url/ping">The ping challenge</a>' +
 					  '</body></html>';			
 			status = matcher.computeStatus({ headers: {'content-type': contentType} }, content);
 		});
@@ -20,15 +40,15 @@ describe('Landing page response matcher,', function() {
 		});
 		
 		it('sets expected', function() {
-			expect(status.expected).toEqual(matcher.expected);
+			expect(status.expected).toEqual(matcher.expected());
 		});
 		
 		it('sets actual', function() {
-			expect(status.got).toEqual(matcher.expected);
+			expect(status.got).toEqual(matcher.expected());
 		});
 		
 		it('support extra info in content-type like the charset', function() {
-			status = matcher.computeStatus({ headers: {'content-type': contentType + '; charset=utf-8'} }, content);
+			status = matcher.computeStatus({ headers: {'content-type': 'text/html; charset=utf-8'} }, content);
 			expect(status.code).toEqual(200);
 		});
 		
@@ -45,7 +65,7 @@ describe('Landing page response matcher,', function() {
 		});
 		
 		it('sets expected', function() {
-			expect(status.expected).toEqual(matcher.expected);
+			expect(status.expected).toEqual(matcher.expected());
 		});
 		
 		it('sets actual', function() {
@@ -65,7 +85,7 @@ describe('Landing page response matcher,', function() {
 		beforeEach(function() {
 			contentType = 'text/html';
 			content = '<html><body>' +
-							'<a id="ping-challenge-link" href="ping">The ping challenge</a>' +
+							'<a id="ping-challenge-link" href="http://this-url/ping">The ping challenge</a>' +
 					  '</body></html>';			
 			status = matcher.computeStatus({ headers: {'content-type': contentType} }, content);
 		});
@@ -75,7 +95,7 @@ describe('Landing page response matcher,', function() {
 		});
 		
 		it('sets expected', function() {
-			expect(status.expected).toEqual(matcher.expected);
+			expect(status.expected).toEqual(matcher.expected());
 		});
 		
 		it('sets actual', function() {
@@ -99,7 +119,7 @@ describe('Landing page response matcher,', function() {
 		});
 		
 		it('sets expected', function() {
-			expect(status.expected).toEqual(matcher.expected);
+			expect(status.expected).toEqual(matcher.expected());
 		});
 		
 		it('sets actual', function() {
@@ -114,7 +134,7 @@ describe('Landing page response matcher,', function() {
 			contentType = 'text/html';
 			content = '<html><body>' +
 			                '<label id="welcome">title</label>' +
-							'<a id="ping-challenge-link" href="ping/not/at/the/end/of/href">The ping challenge</a>' +
+							'<a id="ping-challenge-link" href="any/ping">The ping challenge</a>' +
 					  '</body></html>';			
 			status = matcher.computeStatus({ headers: {'content-type': contentType} }, content);
 		});
@@ -124,11 +144,36 @@ describe('Landing page response matcher,', function() {
 		});
 		
 		it('sets expected', function() {
-			expect(status.expected).toEqual(matcher.expected);
+			expect(status.expected).toEqual(matcher.expected());
 		});
 		
 		it('sets actual', function() {
-			expect(status.got).toEqual('Error: a#ping-challenge-link attribute href="ping/not/at/the/end/of/href"');
+			expect(status.got).toEqual('Error: a#ping-challenge-link attribute href="any/ping"');
+		});
+		
+	});
+
+	describe('When remote server responds with an element a#ping-challenge-link and correct href attribute,', function() {
+	
+		beforeEach(function() {
+			contentType = 'text/html';
+			content = '<html><body>' +
+			                '<label id="welcome">title</label>' +
+							'<a id="ping-challenge-link" href="/ping">The ping challenge</a>' +
+					  '</body></html>';			
+			status = matcher.computeStatus({ headers: {'content-type': contentType} }, content);
+		});
+		
+		it('sets code to 200', function() {
+			expect(status.code).toEqual(200);
+		});
+		
+		it('sets expected', function() {
+			expect(status.expected).toEqual(matcher.expected());
+		});
+		
+		it('sets actual', function() {
+			expect(status.got).toEqual(matcher.expected());
 		});
 		
 	});
