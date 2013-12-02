@@ -35,6 +35,13 @@ function ProductionDatabase() {
 				checker: '../world.get.ready/challenge.landing.page/landing.response.matcher.js'
 			},
 			{
+				id: 22,
+				title: 'Contact information challenge',
+				file: 'public/world.get.ready/challenge.contact/contact.html',
+				requester: '../world.get.ready/challenge.landing.page/landing.requester.js',
+				checker: '../world.get.ready/challenge.contact/contact.response.matcher.js'
+			},
+			{
 				id: 14,
 				title: 'Share challenge',
 				file: 'public/world.get.ready/challenge.share/share.html',
