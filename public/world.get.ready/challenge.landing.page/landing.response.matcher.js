@@ -42,7 +42,7 @@ module.exports = {
             };
         }
 		if (page('a#ping-challenge-link[href$="ping"]').length === 0) {
-		    var href = page('a#ping-challenge-link').attr('href');
+            var href = page('a#ping-challenge-link').attr('href');
             return {
                 code: 501,
                 expected: this.expected,
