@@ -4,7 +4,7 @@ var abstractMatcher = require('../../js/abstract.response.matcher');
 
 module.exports = {
 
-    expected: 'content-type text/html AND a #welcome element AND a a#ping-challenge-link with href="ping" element',
+    expected: 'content-type text/html AND a #welcome element AND a a#ping-challenge-link with href ending with "ping" element',
 
     contentTypeOf: function(remoteResponse) {
 		if (remoteResponse === undefined ||
