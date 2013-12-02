@@ -41,11 +41,12 @@ module.exports = {
                 got: 'Error: missing element a#ping-challenge-link'
             };
         }
-		if (page('a#ping-challenge-link[href="ping"]').length === 0) {
+		if (page('a#ping-challenge-link[href$="ping"]').length === 0) {
+		    var href = page('a#ping-challenge-link').attr('href');
             return {
                 code: 501,
                 expected: this.expected,
-                got: 'Error: a#ping-challenge-link attribute href="any"'
+                got: 'Error: a#ping-challenge-link attribute href="' + href + '"'
             };
         }
 								

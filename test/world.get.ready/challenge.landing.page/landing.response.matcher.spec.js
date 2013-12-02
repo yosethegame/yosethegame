@@ -10,7 +10,7 @@ describe('Landing page response matcher,', function() {
 			contentType = 'text/html';
 			content = '<html><body>' +
 							'<label id="welcome">title</label>' +
-							'<a id="ping-challenge-link" href="ping">The ping challenge</a>' +
+							'<a id="ping-challenge-link" href="anything/before/ping">The ping challenge</a>' +
 					  '</body></html>';			
 			status = matcher.computeStatus({ headers: {'content-type': contentType} }, content);
 		});
@@ -114,7 +114,7 @@ describe('Landing page response matcher,', function() {
 			contentType = 'text/html';
 			content = '<html><body>' +
 			                '<label id="welcome">title</label>' +
-							'<a id="ping-challenge-link" href="any">The ping challenge</a>' +
+							'<a id="ping-challenge-link" href="ping/not/at/the/end/of/href">The ping challenge</a>' +
 					  '</body></html>';			
 			status = matcher.computeStatus({ headers: {'content-type': contentType} }, content);
 		});
@@ -128,7 +128,7 @@ describe('Landing page response matcher,', function() {
 		});
 		
 		it('sets actual', function() {
-			expect(status.got).toEqual('Error: a#ping-challenge-link attribute href="any"');
+			expect(status.got).toEqual('Error: a#ping-challenge-link attribute href="ping/not/at/the/end/of/href"');
 		});
 		
 	});
