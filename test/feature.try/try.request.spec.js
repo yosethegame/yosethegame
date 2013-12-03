@@ -404,31 +404,5 @@ describe("Trying to pass challenges >", function() {
 		
 	});
 	
-	describe('Sort output', function() {
-		
-		it('does nothing when two levels are in correct order', function() {		
-			var output = [ { id: database.worlds[0].levels[0].id }, { id: database.worlds[0].levels[1].id } ];
-			var sorted = tryAll.sortOutput(output, database.worlds[0]);
-			
-			expect(sorted[0].id).toEqual(database.worlds[0].levels[0].id);
-		});
-		
-		it('inverts two levels in incorrect order', function() {
-			var output = [ { id: database.worlds[0].levels[1].id }, { id: database.worlds[0].levels[0].id } ];
-			var sorted = tryAll.sortOutput(output, database.worlds[0]);
-			
-			expect(sorted[0].id).toEqual(database.worlds[0].levels[0].id);
-		});
-		
-		it('orders correctly three challenged', function() {
-			var output = [ { id: database.worlds[1].levels[2].id }, { id: database.worlds[1].levels[1].id }, { id: database.worlds[1].levels[0].id } ];
-			var sorted = tryAll.sortOutput(output, database.worlds[1]);
-			
-			expect(sorted[0].id).toEqual(database.worlds[1].levels[0].id);
-		});
-		
-	});
-	
-
 });
 

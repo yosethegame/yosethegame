@@ -10,23 +10,6 @@ var Sorter          = require('./challenges.sorter');
 var logSuccess      = require('./log.success');
 var logServer       = require('../levels.common/log.server');
 
-var sortOutput = function(results, world) {
-	var items = [];
-	array.forEach(results, function(result) {
-		items.push({
-			item: result,
-			world: world
-		});
-	});
-	var sorter = new Sorter();	
-	items.sort(sorter.sort);
-	var sorted = [];
-	array.forEach(items, function(item) {
-		sorted.push(item.item);
-	});
-	return sorted;
-};
-
 var allLevelsToTry = function(player, world) {
 	if (thisPlayer.isANew(player)) { return [world.levels[0]]; }
 	var levelsToTry = [];
@@ -125,7 +108,7 @@ var tryWorld = function(incoming, response, database) {
 	database.find(params.query.login, function(player) {
 		levelsToTry = allLevelsToTry(player, world);
 		tryAllLevelsAndSaveResults(levelsToTry, params, player, database, response, function(output) {
-            var jsonResponse = JSON.stringify( { score: player.score === undefined ? 0 : player.score, results: sortOutput(output, world) } );
+            var jsonResponse = JSON.stringify( { score: player.score === undefined ? 0 : player.score, results: output } );
             response.writeHead(200, { 'Content-Type': 'application/json' } );
 			response.write(jsonResponse);
 			response.end();			
@@ -135,6 +118,5 @@ var tryWorld = function(incoming, response, database) {
 
 module.exports = tryWorld;
 module.exports.allLevelsToTry = allLevelsToTry;
-module.exports.sortOutput = sortOutput;
 module.exports.tryLevelsStartingAtIndex = tryLevelsStartingAtIndex;
 
