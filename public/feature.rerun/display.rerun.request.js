@@ -12,6 +12,8 @@ var fillBannerWithGreetings = require('../js/banner');
 var showServerOfPlayer      = require('../js/show.server.of.player');
 var exitWithMessage         = require('../js/exit.with.message');
 
+var tryRequest = require('../feature.try/try.request');
+
 var allLevelsToTry = function(player, world) {
 	var levelsToTry = [];
 	array.forEach(world.levels, function(level) {
@@ -20,38 +22,6 @@ var allLevelsToTry = function(player, world) {
 		}
 	});
 	return levelsToTry;
-};
-
-var tryLevelAtIndex = function(index, levelsToTry, player, database, response, output, callback) {
-	var level = levelsToTry[index];
-	var Requester = require(level.requester);
-	var requester = new Requester(thisPlayer.serverOf(player));
-	var requestSent = requester.url();
-	if (requestSent === undefined) requestSent = '';
-
-	request(requestSent, function(error, remoteResponse, content) {
-		var checker = require(level.checker);
-		checker.player = player;
-		checker.validate(requestSent, remoteResponse, content, function(status) {
-			if (error !== null) {
-				status.code = 404;
-				status.got = 'undefined';
-			}
-			output.push({
-				id: level.id,
-				title: level.title,
-				code: status.code,
-				expected: status.expected,
-				got: status.got
-			});
-			if (index < levelsToTry.length-1) {
-				tryLevelAtIndex(index + 1, levelsToTry, player, database, response, output, callback);
-			}
-			else {
-				callback(output);
-			}
-		});
-	});
 };
 
 var displayOuput = function(output, page) {
@@ -97,7 +67,7 @@ var rerun = function(request, response, database, done) {
 		fillBannerWithGreetings(page, player, 'Rerun the completed levels of ' + world.name);
 		showServerOfPlayer(page, player);
 		
-		tryLevelAtIndex(0, allLevelsToTry(player, world), player, database, response, [], function(output) {
+		tryRequest.tryLevelsStartingAtIndex(0, allLevelsToTry(player, world), {}, player, database, response, [], function(output) {
             displayOuput(output, page);
 
             response.write(page.html());

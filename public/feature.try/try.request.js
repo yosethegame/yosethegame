@@ -10,10 +10,6 @@ var Sorter          = require('./challenges.sorter');
 var logSuccess      = require('./log.success');
 var logServer       = require('../levels.common/log.server');
 
-var responseCount;
-var output;
-var levelsToTry;
-
 var sortOutput = function(results, world) {
 	var items = [];
 	array.forEach(results, function(result) {
@@ -48,7 +44,7 @@ var allLevelsToTry = function(player, world) {
 	return levelsToTry;
 };
 
-var tryLevelAtIndex = function(index, params, player, database, response, callback) {
+var tryLevelsStartingAtIndex = function(index, levelsToTry, params, player, database, response, output, callback) {
 	var level = levelsToTry[index];
 	var Requester = require(level.requester);
 	var requester;
@@ -68,11 +64,6 @@ var tryLevelAtIndex = function(index, params, player, database, response, callba
 				status.code = 404;
 				status.got = 'undefined';
 			}
-			if (status.code == 200) {
-				if (! thisPlayer.hasServer(player)) {
-					logServer(player, params.query.server);
-				}
-			}
 			output.push({
 				id: level.id,
 				title: level.title,
@@ -81,34 +72,49 @@ var tryLevelAtIndex = function(index, params, player, database, response, callba
 				got: status.got
 			});
 			if (index < levelsToTry.length-1) {
-				tryLevelAtIndex(index + 1, params, player, database, response, callback);
+				tryLevelsStartingAtIndex(index + 1, levelsToTry, params, player, database, response, output, callback);
 			}
 			else {
-				var fail = false;
-				array.forEach(output, function(item) {
-					if (item.code != 200) {
-						fail = true;
-					}
-				});
-				if (!fail) {
-					var levelIdToSave;
-					if (thisPlayer.isANew(player)) {
-						levelIdToSave = output[0].id;
-					} else {
-						array.forEach(output, function(item) {
-							if (! thisPlayer.hasDoneThisLevel(player, item)) {
-								levelIdToSave = item.id;
-							}				
-						});
-					}
-					logSuccess(player, levelIdToSave);
-				}
-				database.savePlayer(player, function() {
-					callback();
-				});
+                callback(output);
 			}
 		});
 	});
+};
+
+var tryAllLevelsAndSaveResults = function(levelsToTry, params, player, database, response, callback) {
+    tryLevelsStartingAtIndex(0, levelsToTry, params, player, database, response, [], function(output) {
+        var fail = false;
+        var oneSuccess = false;
+		array.forEach(output, function(item) {
+			if (item.code != 200) {
+				fail = true;
+			}
+			else {
+                oneSuccess = true;
+			}
+		});
+		if (oneSuccess) {
+			if (! thisPlayer.hasServer(player)) {
+				logServer(player, params.query.server);
+            }
+		}
+		if (!fail) {
+			var levelIdToSave;
+			if (thisPlayer.isANew(player)) {
+				levelIdToSave = output[0].id;
+			} else {
+				array.forEach(output, function(item) {
+					if (! thisPlayer.hasDoneThisLevel(player, item)) {
+						levelIdToSave = item.id;
+					}				
+				});
+			}
+			logSuccess(player, levelIdToSave);
+		}
+		database.savePlayer(player, function() {
+			callback(output);
+		});
+    });
 };
 
 var tryWorld = function(incoming, response, database) {
@@ -118,8 +124,7 @@ var tryWorld = function(incoming, response, database) {
 	var world = database.worlds[params.query.world - 1];
 	database.find(params.query.login, function(player) {
 		levelsToTry = allLevelsToTry(player, world);
-		responseCount = levelsToTry.length;
-		tryLevelAtIndex(0, params, player, database, response, function() {
+		tryAllLevelsAndSaveResults(levelsToTry, params, player, database, response, function(output) {
             var jsonResponse = JSON.stringify( { score: player.score === undefined ? 0 : player.score, results: sortOutput(output, world) } );
             response.writeHead(200, { 'Content-Type': 'application/json' } );
 			response.write(jsonResponse);
@@ -131,4 +136,5 @@ var tryWorld = function(incoming, response, database) {
 module.exports = tryWorld;
 module.exports.allLevelsToTry = allLevelsToTry;
 module.exports.sortOutput = sortOutput;
+module.exports.tryLevelsStartingAtIndex = tryLevelsStartingAtIndex;
 
