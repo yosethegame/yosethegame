@@ -67,7 +67,7 @@ var rerun = function(request, response, database, done) {
 		fillBannerWithGreetings(page, player, 'Rerun the completed levels of ' + world.name);
 		showServerOfPlayer(page, player);
 		
-		tryRequest.tryLevelsStartingAtIndex(0, allLevelsToTry(player, world), {}, player, database, response, [], function(output) {
+		tryRequest.tryLevelsStartingAtIndex(0, allLevelsToTry(player, world), {}, player, database, [], function(output) {
             displayOuput(output, page);
 
             response.write(page.html());

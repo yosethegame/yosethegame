@@ -9,7 +9,7 @@ describe('Trying levels', function() {
     
     beforeEach(function(done) {
         var levels = [ database.worlds[0].levels[0] ];
-        tryRequest.tryLevelsStartingAtIndex(0, levels, {}, annessou, database, {}, [], function(output) {
+        tryRequest.tryLevelsStartingAtIndex(0, levels, {}, annessou, database, [], function(output) {
             done();
         }); 
     });

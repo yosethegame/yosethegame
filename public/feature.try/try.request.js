@@ -27,7 +27,7 @@ var allLevelsToTry = function(player, world) {
 	return levelsToTry;
 };
 
-var tryLevelsStartingAtIndex = function(index, levelsToTry, params, player, database, response, output, callback) {
+var tryLevelsStartingAtIndex = function(index, levelsToTry, params, player, database, output, callback) {
 	var level = levelsToTry[index];
 	var Requester = require(level.requester);
 	var requester;
@@ -55,7 +55,7 @@ var tryLevelsStartingAtIndex = function(index, levelsToTry, params, player, data
 				got: status.got
 			});
 			if (index < levelsToTry.length-1) {
-				tryLevelsStartingAtIndex(index + 1, levelsToTry, params, player, database, response, output, callback);
+				tryLevelsStartingAtIndex(index + 1, levelsToTry, params, player, database, output, callback);
 			}
 			else {
                 callback(output);
@@ -64,8 +64,8 @@ var tryLevelsStartingAtIndex = function(index, levelsToTry, params, player, data
 	});
 };
 
-var tryAllLevelsAndSaveResults = function(levelsToTry, params, player, database, response, callback) {
-    tryLevelsStartingAtIndex(0, levelsToTry, params, player, database, response, [], function(output) {
+var tryAllLevelsAndSaveResults = function(levelsToTry, params, player, database, callback) {
+    tryLevelsStartingAtIndex(0, levelsToTry, params, player, database, [], function(output) {
         var fail = false;
         var oneSuccess = false;
 		array.forEach(output, function(item) {
@@ -107,7 +107,7 @@ var tryWorld = function(incoming, response, database) {
 	var world = database.worlds[params.query.world - 1];
 	database.find(params.query.login, function(player) {
 		levelsToTry = allLevelsToTry(player, world);
-		tryAllLevelsAndSaveResults(levelsToTry, params, player, database, response, function(output) {
+		tryAllLevelsAndSaveResults(levelsToTry, params, player, database, function(output) {
             var jsonResponse = JSON.stringify( { score: player.score === undefined ? 0 : player.score, results: output } );
             response.writeHead(200, { 'Content-Type': 'application/json' } );
 			response.write(jsonResponse);
