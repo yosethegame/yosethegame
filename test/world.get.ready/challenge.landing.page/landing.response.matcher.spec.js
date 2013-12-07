@@ -12,18 +12,6 @@ describe('Landing page response matcher,', function() {
 	    expect(matcher.expected()).toEqual("content-type text/html AND a #welcome element AND a a#ping-challenge-link with href='http://this-url/ping'");
 	});
 	
-	describe('href validation', function() {
-	   
-	   it('fails when the ping url does not end with given href', function() {
-           expect(matcher.endsWith('http://this-url/ping', 'any')).toEqual(false);
-	   }); 
-	   
-	   it('passes when the ping url ends with given href', function() {
-           expect(matcher.endsWith('http://this-url/ping', '/ping')).toEqual(true);
-	   }); 
-	   
-	});
-
 	describe('When remote server responds the expected elements and the expected content-type', function() {
 	
 		beforeEach(function() {

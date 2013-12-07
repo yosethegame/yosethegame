@@ -136,7 +136,14 @@ function ProductionDatabase() {
 				file: 'public/world.prime.factors/challenge.list.of.decomposition/list.of.decomposition.html',
 				requester: '../world.prime.factors/challenge.form/form.requester.js',
 				checker: '../world.prime.factors/challenge.list.of.decomposition/list.of.decomposition.response.matcher.js',
-			}
+			},
+			{
+				id: 23,
+				title: 'Portfolio challenge',
+				file: 'public/world.prime.factors/challenge.portfolio/portfolio.html',
+				requester: '../world.get.ready/challenge.landing.page/landing.requester.js',
+				checker: '../world.prime.factors/challenge.portfolio/portfolio.response.matcher.js'
+			},
 		]
 	},
 	{
