@@ -59,7 +59,7 @@ dashboard = function(request, response, database) {
 			return exitWithMessage('this player is unknown', page, response);
 		}
 		page('#login').text(player.login);		
-		fillBannerWithGreetings(page, player, 'Welcome home ' + player.login);
+		fillBannerWithGreetings(page, player, 'Welcome ' + player.login);
 		showServerOfPlayer(page, player);
 		if (thePlayer.hasServer(player)) {
             page('#restart-game-link').addClass('visible').removeClass('hidden');
