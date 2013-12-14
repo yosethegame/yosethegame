@@ -1,9 +1,13 @@
-var Browser = require('zombie');
-var equal   = require('deep-equal');
+var Browser     = require('zombie');
+var equal       = require('deep-equal');
+var error501    = require('../../levels.common/501');
 
 module.exports = {
     
+    expected: 'Not always the same document.grid',
+    
     validate: function(url, remoteResponse, content, callback) {
+        var self = this;
         var browser = new Browser();
         
         browser.visit(url).
@@ -13,33 +17,21 @@ module.exports = {
                 then(function() {
                     var second = browser.evaluate('document.grid');
                     if (equal(second, first)) {
-                        callback({
-                			code: 501,
-                			expected: 'Not always the same document.grid',
-                			got: 'The same document.grid'
-                		});
+                        throw 'The same document.grid';
                     } else {
                         callback({
-                			code: 200,
-                			expected: 'Not always the same document.grid',
-                			got: 'Not always the same document.grid'
-                		});
+                            code: 200,
+                            expected: self.expected,
+                            got: self.expected
+                        });
                     }
                 }).
                 fail(function(error) {
-    				callback({
-    					code: 501,
-    					expected: 'Not always the same document.grid',
-    					got: error.toString()
-    				});                
+                    callback(error501.withValues(self.expected, error.toString()));
                 });                
             }).
             fail(function(error) {
-				callback({
-					code: 501,
-					expected: 'Not always the same document.grid',
-					got: error.toString()
-				});                
+				callback(error501.withValues(self.expected, error.toString()));
             });        
     }
 };

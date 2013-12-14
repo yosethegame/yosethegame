@@ -99,4 +99,5 @@ describe('Random challenge response matcher', function() {
 			});
 		});
     });
+    
 });
