@@ -6,6 +6,7 @@ var contentTypes = [
     { extension: 'js', contentType: 'application/javascript'},
     { extension: 'jpeg', contentType: 'image/jpeg'},
     { extension: 'png', contentType: 'image/png'},
+    { extension: 'html', contentType: 'text/html'},
     { extension: '', contentType: 'text/plain'}
 ];
 

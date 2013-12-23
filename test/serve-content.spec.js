@@ -90,6 +90,15 @@ describe("Serve Content callback", function() {
 		});
 	});
 
+	it("serves a html with text/html content-type", function(done) {
+	    fs.writeFileSync(folder + '/a-file.html', 'content');
+
+		request("http://localhost:5000/a-file.html", function(error, response, body) {
+			expect(response.headers['content-type']).toEqual('text/html');
+			done();
+		});
+	});
+
 	it("serves other files with text/plain content-type", function(done) {
 	    fs.writeFileSync(folder + '/a-file', 'content');
 
