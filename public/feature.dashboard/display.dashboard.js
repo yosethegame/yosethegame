@@ -52,7 +52,9 @@ var displayWorld = function(page, player, world, worldNumber) {
 dashboard = function(request, response, database) {
 	var login = /^\/players\/(.*)$/.exec(request.url)[1];
 	var html = fs.readFileSync('./public/feature.dashboard/dashboard.html').toString();
+	var banner = cheerio.load(fs.readFileSync('./public/feature.dashboard/banner.html').toString())('#sidebar').html();
 	var page = cheerio.load(html);
+	page('#sidebar').empty().append(banner);
 
 	database.find(login, function(player) {
 		if (player === undefined) {

@@ -18,7 +18,9 @@ var fillBanner = function(page, player, world, worldNumber) {
 
 playground = function(request, response, database) {
 	var html = fs.readFileSync('./public/feature.playground/playground.html').toString();
+	var banner = cheerio.load(fs.readFileSync('./public/feature.dashboard/banner.html').toString())('#sidebar').html();
 	var page = cheerio.load(html);
+	page('#sidebar').empty().append(banner);
 	
 	var login = /^\/players\/(.*)\/play/.exec(request.url)[1];
 	var worldNumber = parseInt(/^\/players\/(.*)\/play\/world\/(.*)/.exec(request.url)[2]);
