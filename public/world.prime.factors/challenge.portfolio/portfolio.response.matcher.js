@@ -9,7 +9,7 @@ module.exports = {
 
     expected: function() {
         formUrl= new FormRequester(thePlayer.serverOf(this.player)).url();
-        return "An element a#prime-factors-decomposition-link with href='" + formUrl + "'";
+        return "An element a#prime-factors-decomposition-link with href='" + formUrl + "' (case sensitive)";
     },
     
     isNotTheExpected: function(href) {

@@ -9,7 +9,7 @@ describe('Landing page response matcher,', function() {
 	});
 	
 	it('knows the expected response', function() {
-	    expect(matcher.expected()).toEqual("An element a#prime-factors-decomposition-link with href='http://this-url/primeFactors/ui'");
+	    expect(matcher.expected()).toEqual("An element a#prime-factors-decomposition-link with href='http://this-url/primeFactors/ui' (case sensitive)");
 	});
 	
 	describe('When remote server responds the expected element', function() {
@@ -32,6 +32,21 @@ describe('Landing page response matcher,', function() {
 		
 		it('sets actual', function() {
 			expect(status.got).toEqual(matcher.expected());
+		});
+		
+		describe('a case diff', function() {
+		   
+    	    beforeEach(function() {
+    		    contentType = 'text/html';
+    			content = '<html><body>' +
+    							'<a id="prime-factors-decomposition-link" href="http://this-url/PrimeFactors/UI">The prime factors challenges</a>' +
+    					  '</body></html>';			
+    			status = matcher.computeStatus({}, content);
+    		});
+
+ 		   it('is not accepted', function() {
+    			expect(status.code).toEqual(501);
+		   }); 
 		});
 		
 	});	
