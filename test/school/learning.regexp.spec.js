@@ -69,6 +69,20 @@ describe('Regexp', function() {
 
 	});
 	
+	describe('matching /players/{login} with a number in the login', function() {
+		
+		var pattern = /^\/players\/[A-z|\.|\-|0-9]+$/;
+	
+		it('passes with a matching string', function() {
+			expect(pattern.test('/players/any-name-42')).toBe(true);
+		});
+		
+		it('fails with a non-matching string', function() {
+			expect(pattern.test('/players/any:name')).toBe(false);
+		});
+
+	});
+	
 	describe('matching /players/{login} with a @ in the login', function() {
 		
 		var pattern = /^\/players\/[A-z|\.|\-|@]+$/;
@@ -140,5 +154,22 @@ describe('Regexp', function() {
 		it('can extract a parameter with a dot', function() {
 			expect(pattern.exec('/players/eric.mignot/play/world/1')[1]).toEqual('eric.mignot');
 		});
+	});
+	
+	describe('Regex concatanation', function() {
+	   
+        it('works', function() {
+    	    var start = /\/any/;
+    	    var end = /\/route/;
+    	    var pattern = /^/ && start && end && /$/;
+
+            expect(pattern.test('/any/route')).toBe(true);
+        }); 
+
+        it('works inline', function() {
+    	    var pattern = /^/ && /\/any/ && /\/route/ && /$/;
+
+            expect(pattern.test('/any/route')).toBe(true);
+        }); 
 	});
 });

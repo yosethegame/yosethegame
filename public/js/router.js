@@ -8,7 +8,7 @@ module.exports = {
 	
     routes: [
         {
-            pattern: /^\/players\/[A-z|\.|\-|@]+$/,
+            pattern: /^\/players\/[A-z|\.|\-|@|0-9]+$/,
             target: require('../feature.dashboard/display.dashboard.js')
         },
         {
@@ -28,11 +28,11 @@ module.exports = {
             target: require('../feature.create.player/post.new.player.request')
         },
         {
-            pattern: /^\/players\/[A-z|\.|\-|@]+\/play\/world\/[0-9]+$/,
+            pattern: /^\/players\/[A-z|\.|\-|@|0-9]+\/play\/world\/[0-9]+$/,
             target: require('../feature.playground/display.playground.request')
         },
         {
-            pattern: /^\/players\/[A-z|\.|\-|@]+\/settings$/,
+            pattern: /^\/players\/[A-z|\.|\-|@|0-9]+\/settings$/,
             target: require('../feature.settings/display.settings.request')
         },
         {
@@ -40,7 +40,7 @@ module.exports = {
             target: require('../feature.settings/post.settings.request')
         },        
         {
-            pattern: /^\/players\/[A-z|\.|\-|@]+\/rerun\/world\/[0-9]+$/,
+            pattern: /^\/players\/[A-z|\.|\-|@|0-9]+\/rerun\/world\/[0-9]+$/,
             target: require('../feature.rerun/display.rerun.request')
         },
         {
