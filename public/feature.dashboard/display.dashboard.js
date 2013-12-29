@@ -10,11 +10,11 @@ var showServerOfPlayer      = require('../js/show.server.of.player');
 var exitWithMessage         = require('../js/exit.with.message');
 
 var displayWorld = function(page, player, world, worldNumber) {
-	var worldSelector = 'table#worlds tr:nth-child(' + worldNumber + ')';
-	var wordLevelsSelector = worldSelector + ' td:nth-child(2) ul.levels';
+	var worldSelector = 'table#worlds > tr:nth-child(' + worldNumber + ')';
+	var wordLevelsSelector = worldSelector + ' > td:nth-child(2) ul.levels';
 	var lockedLevelTemplate = page(wordLevelsSelector + ' li.locked-level').html();
 	
-	page(worldSelector+ ' td:nth-child(1)').text(world.name);								
+	page(worldSelector+ ' > td:nth-child(1)').text(world.name);								
 	page(wordLevelsSelector).empty();				
 	var nextChallengeOfWorldDisplayed = false;
 	var lockerDisplayed = false;
@@ -35,7 +35,7 @@ var displayWorld = function(page, player, world, worldNumber) {
 					lockerDisplayed = true;
 				}
 			}
-			page(wordLevelsSelector).append('<li>' + levelMention + '</li>');			
+			page(wordLevelsSelector).append('<li>' + levelMention + '</li>');
 		}
 	});
 
@@ -69,7 +69,6 @@ dashboard = function(request, response, database) {
 
 		var openWorldTemplate = page.html('table#worlds tr.open-world');
 		var lockedWorldTemplate = page.html('table#worlds tr.locked-world');
-		var workingWorldTemplate = page.html('table#worlds tr.working');
 		
 		page('table#worlds').empty();
 		var allWorldsAreOpen = true;		
