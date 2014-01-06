@@ -40,7 +40,7 @@ describe("Dasboard,", function() {
 			var browser = new Browser();
 			browser.visit('http://localhost:5000/players/annessou').
 				then(function() {
-					expect(browser.text("table#worlds tr:nth-child(1) td:nth-child(1)")).toEqual('world 1');
+					expect(browser.text('table#worlds tr.open-world:nth-child(1) > td:nth-child(1)')).toEqual('world 1');
 					done();
 				}).
 				fail(function(error) {
