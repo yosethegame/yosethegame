@@ -1,68 +1,50 @@
-var cheerio 			= require('cheerio');
-var Data	 			= require('../support/database.with.levels');
-var dashboard			= require('../../public/feature.dashboard/display.dashboard.js');
-var response			= require('../support/fake.response');
+var cheerio 	= require('cheerio');
+var Data	 	= require('../support/database.with.levels');
+var dashboard	= require('../../public/feature.dashboard/display.dashboard.js');
+var response	= require('../support/fake.response');
 
-describe('When a player', function() {
+describe('Restart world link', function() {
    
-	var database = new Data();
-	var page;
-	var player;
-	
-	var loadPageWithDatabase = function(database) {
+    var database;
+    
+    beforeEach(function() {
+        database = new Data();
 		database.worlds[0].isOpenFor = function(player) { return true; }
 		database.worlds[1].isOpenFor = function(player) { return true; }
+    });
+
+	var loadDashboardOfPlayer = function(player) {
 		database.players = [ player ];
-		dashboard({ url: '/players/ericminio' }, response, database);
-		page = cheerio.load(response.html);
+		dashboard({ url: '/players/' + player.login }, response, database);
+		
+		return cheerio.load(response.html);
 	};
 	
-	describe('has achievements for world #1,', function() {
-	    
-     	beforeEach(function() {	
-     		player = {
-     			login: 'ericminio', 			
-     			portfolio: [ { server: 'any', achievements: [database.worlds[0].levels[0].id] } ]
-     		}
-     		loadPageWithDatabase(database);
-     	});		
-
-        it('displays a link to restart world #1', function() {
-            expect(page('#restart-world-1-link').attr('class')).toContain('visible');
-        });
-
+	it('is displayed in world #1 when player has one achievement of world #1', function() {
+ 		var page = loadDashboardOfPlayer({
+ 			login: 'ericminio', 			
+ 			portfolio: [ { achievements: [database.worlds[0].levels[0].id] } ]
+ 		});
+ 		
+        expect(page('#restart-world-1-link').attr('class')).toContain('visible');
 	});
-
-	describe('has achievements for world #2,', function() {
-	    
-     	beforeEach(function() {	
-     		player = {
-     			login: 'ericminio', 			
-     			portfolio: [ { server: 'any', achievements: [database.worlds[0].levels[0].id, database.worlds[1].levels[0].id] } ]
-     		}
-     		loadPageWithDatabase(database);
-     	});		
-
-        it('displays a link to restart world #2', function() {
-            expect(page('#restart-world-2-link').attr('class')).toContain('visible');
-        });
-
+	
+	it('is displayed in world #2 when player has one achievement of world #2', function() {
+ 		var page = loadDashboardOfPlayer({
+ 			login: 'ericminio', 			
+ 			portfolio: [ { achievements: [database.worlds[1].levels[0].id] } ]
+ 		});
+ 		
+        expect(page('#restart-world-2-link').attr('class')).toContain('visible');
 	});
-
-	describe('has no achievement for world #2,', function() {
-	    
-     	beforeEach(function() {	
-     		player = {
-     			login: 'ericminio', 			
-     			portfolio: [ { server: 'any', achievements: [database.worlds[0].levels[0].id] } ]
-     		}
-     		loadPageWithDatabase(database);
-     	});		
-
-        it('hides the link to restart world #2', function() {
-            expect(page('#restart-world-2-link').attr('class')).toContain('hidden');
-        });
-
+	
+	it('is not displayed in world #1 when player has no achievement of world #1', function() {
+ 		var page = loadDashboardOfPlayer({
+ 			login: 'ericminio', 			
+ 			portfolio: [ { achievements: [] } ]
+ 		});
+ 		
+        expect(page('#restart-world-1-link').attr('class')).toContain('hidden');
 	});
-
+	
 });
