@@ -47,6 +47,8 @@ var displayWorld = function(page, player, world, worldNumber) {
 
 	var progress = 100 * challengesDoneInThisWorld / world.levels.length;
 	page(worldSelector + ' td:nth-child(2) .progress-bar').attr('style', 'width:' + Math.round(progress) + '%');
+	
+	page('#restart-world-n-link').attr('id', 'restart-world-' + worldNumber + '-link');
 };
 
 dashboard = function(request, response, database) {
