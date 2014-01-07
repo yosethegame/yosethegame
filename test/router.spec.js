@@ -80,6 +80,10 @@ describe('Router', function() {
 			expect(router.endPointOf({ url: '/players/search/any' })).toBe(require('../public/feature.search/search.request.js'));
 		});
 
+		it('maps restart world request', function() {
+			expect(router.endPointOf({ url: '/players/any/restart/world/42' })).toBe(require('../public/feature.restart.world/restart.world.request.js'));
+		});
+
 	});
 	
 	describe('Compatibility with http module of node.js:', function() {

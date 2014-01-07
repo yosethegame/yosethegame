@@ -17,5 +17,16 @@ module.exports = {
 	
 	firstItemIn: function(collection, matcher) {
 		return this.first(collection, matcher);
+	},
+	
+	remove: function(item, collection) {
+        var index = collection.indexOf(item);
+        if (index == -1) {
+            return collection;
+        }
+        else {
+            collection = collection.slice(0, index).concat(collection.slice(index+1));
+            return collection;
+        }
 	}
 };

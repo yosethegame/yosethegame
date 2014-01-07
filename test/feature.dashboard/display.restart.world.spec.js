@@ -47,4 +47,17 @@ describe('Restart world link', function() {
         expect(page('#restart-world-1-link').attr('class')).toContain('hidden');
 	});
 	
+	describe('Target', function() {
+	   
+	   it('is world-specific', function() {
+    		var page = loadDashboardOfPlayer({
+    			login: 'ericminio', 			
+    			portfolio: [ { achievements: [database.worlds[1].levels[0].id] } ]
+    		});
+
+           expect(page('#restart-world-2-link').attr('href')).toContain('/players/ericminio/restart/world/2');
+	   });
+	   
+	});
+	
 });

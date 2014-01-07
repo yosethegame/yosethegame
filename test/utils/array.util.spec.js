@@ -131,4 +131,22 @@ describe('Arrays', function() {
 		
 	});
 	
+	describe('array.remove', function() {
+	   
+	   var items;
+	   
+	   beforeEach(function() {
+	       items = [1, 2, 3, 4];
+	   });
+	   
+	   it('can remove one item from a given array', function() {
+	       expect(array.remove(3, items)).toEqual([1, 2, 4]);
+	   });
+	   
+	   it('supports a non-existing object', function() {
+	       expect(array.remove(5, items)).toEqual([1, 2, 3, 4]);
+	   });
+	    
+	});
+	
 });

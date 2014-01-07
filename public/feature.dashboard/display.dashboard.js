@@ -52,6 +52,9 @@ var displayWorld = function(page, player, world, worldNumber) {
     if (challengesDoneInThisWorld === 0) {
         page('#restart-world-' + worldNumber + '-link').removeClass('visible').addClass('hidden');
 	}
+	else {
+        page('#restart-world-' + worldNumber + '-link').attr('href', '/players/' + player.login + '/restart/world/' + worldNumber);
+	}
 };
 
 dashboard = function(request, response, database) {
