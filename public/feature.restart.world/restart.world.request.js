@@ -12,7 +12,7 @@ var extractWorldNumber = function(request) {
 };
 
 var removeAchievementsOfWorld = function(login, database, world, callback) {
-    if (world === undefined) {
+    if (world === undefined || world == database.worlds[0]) {
         callback();
     } else {
         database.find(login, function(player) {

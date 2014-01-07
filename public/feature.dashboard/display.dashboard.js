@@ -49,7 +49,7 @@ var displayWorld = function(page, player, world, worldNumber) {
 	page(worldSelector + ' td:nth-child(2) .progress-bar').attr('style', 'width:' + Math.round(progress) + '%');
 	
 	page('#restart-world-n-link').attr('id', 'restart-world-' + worldNumber + '-link');
-    if (challengesDoneInThisWorld === 0) {
+    if (challengesDoneInThisWorld === 0 || worldNumber === 1) {
         page('#restart-world-' + worldNumber + '-link').removeClass('visible').addClass('hidden');
 	}
 	else {

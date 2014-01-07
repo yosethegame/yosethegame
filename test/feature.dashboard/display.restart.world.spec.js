@@ -20,13 +20,13 @@ describe('Restart world link', function() {
 		return cheerio.load(response.html);
 	};
 	
-	it('is displayed in world #1 when player has one achievement of world #1', function() {
+	it('is never displayed for world #1', function() {
  		var page = loadDashboardOfPlayer({
  			login: 'ericminio', 			
  			portfolio: [ { achievements: [database.worlds[0].levels[0].id] } ]
  		});
  		
-        expect(page('#restart-world-1-link').attr('class')).toContain('visible');
+        expect(page('#restart-world-1-link').attr('class')).toContain('hidden');
 	});
 	
 	it('is displayed in world #2 when player has one achievement of world #2', function() {
@@ -38,13 +38,13 @@ describe('Restart world link', function() {
         expect(page('#restart-world-2-link').attr('class')).toContain('visible');
 	});
 	
-	it('is not displayed in world #1 when player has no achievement of world #1', function() {
+	it('is not displayed in world #2 when player has no achievement of world #2', function() {
  		var page = loadDashboardOfPlayer({
  			login: 'ericminio', 			
- 			portfolio: [ { achievements: [] } ]
+ 			portfolio: [ { achievements: [database.worlds[0].levels[0].id] } ]
  		});
  		
-        expect(page('#restart-world-1-link').attr('class')).toContain('hidden');
+        expect(page('#restart-world-2-link').attr('class')).toContain('hidden');
 	});
 	
 	describe('Target', function() {

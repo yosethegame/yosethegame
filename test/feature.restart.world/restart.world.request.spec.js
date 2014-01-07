@@ -8,7 +8,7 @@ describe('Restart world', function() {
 		database = new Database();
 	});
 	
-   xdescribe('#1 when player has only done level 1.1:', function() {
+   describe('#1', function() {
        
         beforeEach(function() {		
             database.players = [{
@@ -19,22 +19,22 @@ describe('Restart world', function() {
 			restartworld({ url: '/players/bilou/restart/world/1' }, { end: function() {}, writeHead: function() {} }, database);
         });
 
-        it('empties the portfolio of the player', function(done) {
+        it('is innefective', function(done) {
             database.find('bilou', function(player) {
-			    expect(player.portfolio[0].achievements.length).toEqual(0);
+			    expect(player.portfolio[0].achievements.length).toEqual(1);
                 done(); 
             });
         });
 
-        it('sets the score back to zero', function(done) {
+        it('does not change the score', function(done) {
             database.find('bilou', function(player) {
-			    expect(player.score).toEqual(0);
+			    expect(player.score).toEqual(10);
                 done(); 
             });
         });
     });
     
-    xdescribe('#2 when player has done levels 1.1 and 2.1', function() {
+    describe('#2 when player has done levels 1.1 and 2.1', function() {
 
          beforeEach(function() {		
              database.players = [{
