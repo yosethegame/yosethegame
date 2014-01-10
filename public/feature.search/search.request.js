@@ -15,7 +15,8 @@ search = function(request, response, database) {
     database.findPlayersMatching(criteria, function(players) {
         page('#result-count').text(players.length + ' matching players');
         array.forEach(players, function(player) {
-            var line = template.replace('<img src=""', '<img src="' + player.avatar + '"')
+            var line = template.replace('<a href="/players/login">', '<a href="/players/' + player.login + '">')
+                               .replace('<img src=""', '<img src="' + player.avatar + '"')
                                .replace('1234567', renderScore.withoutLeadingZeros(player.score))
                                .replace('0000', renderScore.leadingZeros(player.score))
                                ;

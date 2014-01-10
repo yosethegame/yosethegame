@@ -40,11 +40,19 @@ describe('Home page building', function() {
 	describe('player line', function() {
 	
 		var template = '<li class="player">' +
-							'<img src="" class="avatar">' +
+							'<a href="">' +
+							'   <img src="" class="avatar">' +
+							'</a>' +
 							'<span class="hall-of-fame-score-leading-zeros">0000</span>' +
 							'<span class="hall-of-fame-score">1234567</span>' +
 					   '</li>';
 		
+        it('links to the dashboard of the player', function() {
+            var line = home.buildLine(template, { login: 'eric', avatar: 'me.png' }, database );
+
+            expect(cheerio.load(line)('.player a')[0].attribs.href).toEqual('/players/eric');
+  		});
+
 		it('contains the avatar', function() {
 			var line = home.buildLine(template, { avatar: 'me.png' }, database );
 

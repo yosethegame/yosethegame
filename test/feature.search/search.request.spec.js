@@ -30,24 +30,44 @@ describe('Search', function() {
 	    expect(page('#players tr').length).toEqual(2 + 1);
 	});
 	
-	it('displays the avatar of each player', function() {
-	    expect(page.html('#players tr:nth-child(2) td.avatar-column')).toContain('asm.png');
-	});
-	
-	describe('server', function() {
+	describe('matching player line', function() {
 	    
-    	it('displays the server of each player', function() {
-    	    expect(page.html('#players tr:nth-child(2) td.server-column')).toContain('server of asm');
+	    var line;
+	    
+	    beforeEach(function() {
+	       line = page('#players tr:nth-child(2)');
+	    });
+	    
+	    describe('avatar column', function() {
+	        
+	        var column;
+	        
+	        beforeEach(function() {
+	            column = line.find('td.avatar-column');
+	        });
+	        
+	        it('links to the dashboard of the player', function() {
+	            expect(column.find('a').attr('href')).toEqual('/players/annessou'); 
+	        });
+	       
+        	it('displays the avatar of the player as the link', function() {
+	            expect(column.find('a > img').attr('src')).toEqual('asm.png'); 
+        	});
+	        
+	    });
+	    
+    	it('displays the server of the player', function() {
+    	    expect(line.find('td.server-column').find('a').attr('href')).toEqual('server of asm');
     	});
 
-    	it('does not display an undefined server', function() {
-    	    expect(page('#players tr:nth-child(3) td.server-column').html().trim()).toEqual('undefined');
+    	it('displays the score of the player', function() {
+    	    expect(line.find('td.score-column').html()).toContain('20');
     	});
 
 	});
-	
-	it('displays the score of each player', function() {
-	    expect(page.html('#players tr:nth-child(2) td.score-column')).toContain('20');
+
+	it('does not display an undefined server', function() {
+	    expect(page('#players tr:nth-child(3) td.server-column').html().trim()).toEqual('undefined');
 	});
-    
+
 });

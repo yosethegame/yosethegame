@@ -73,6 +73,10 @@ describe("index.html", function() {
 			
 			describe('line template', function() {
 				
+				it('contains an empty placeholder for the link to the dashboard', function() {
+					expect(page('#players .player a').attr('href')).toEqual('');
+				});
+				
 				it('contains an empty placeholder for the avatar', function() {
 					expect(page('#players .player img.avatar').attr('src')).toEqual('');
 				});
