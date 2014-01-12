@@ -84,6 +84,10 @@ describe('Router', function() {
 			expect(router.endPointOf({ url: '/players/any/restart/world/42' })).toBe(require('../public/feature.restart.world/restart.world.request.js'));
 		});
 
+		it('maps what-is-yose request', function() {
+			expect(router.endPointOf({ url: '/what-is-yose' })).toBe(require('../public/feature.what.is.yose/what.is.yose.request.js'));
+		});
+
 	});
 	
 	describe('Compatibility with http module of node.js:', function() {

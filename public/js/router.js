@@ -47,6 +47,10 @@ module.exports = {
             pattern: /^\/players\/[A-z|\.|\-|@|0-9]+\/restart\/world\/[0-9]+$/,
             target: require('../feature.restart.world/restart.world.request')
         },
+        {
+            pattern: /^\/what-is-yose$/,
+            target: require('../feature.what.is.yose/what.is.yose.request')
+        },        
     ],
     
 	endPointOf: function(request) {
