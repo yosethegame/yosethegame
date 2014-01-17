@@ -48,9 +48,9 @@ describe('Home page building', function() {
 					   '</li>';
 		
         it('links to the dashboard of the player', function() {
-            var line = home.buildLine(template, { login: 'eric', avatar: 'me.png' }, database );
+            var line = home.buildLine(template, { login: 'eric', avatar: 'me.png', portfolio: [ { server: 'server of eric' }] }, database );
 
-            expect(cheerio.load(line)('.player a')[0].attribs.href).toEqual('/players/eric');
+            expect(cheerio.load(line)('.player a')[0].attribs.href).toEqual('server of eric');
   		});
 
 		it('contains the avatar', function() {

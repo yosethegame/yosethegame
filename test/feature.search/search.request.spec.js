@@ -46,12 +46,8 @@ describe('Search', function() {
 	            column = line.find('td.avatar-column');
 	        });
 	        
-	        it('links to the dashboard of the player', function() {
-	            expect(column.find('a').attr('href')).toEqual('/players/annessou'); 
-	        });
-	       
         	it('displays the avatar of the player as the link', function() {
-	            expect(column.find('a > img').attr('src')).toEqual('asm.png'); 
+	            expect(column.find('img').attr('src')).toEqual('asm.png'); 
         	});
 	        
 	    });
