@@ -11,7 +11,7 @@ describe("index.html", function() {
 	describe("page's title", function() {	
 
 		it("is 'YoseTheGame'", function() {			
-			expect(page('title').text()).toBe('YoseTheGame');
+			expect(page('title').text()).toContain('YoseTheGame');
 		});		
 	});
 	
