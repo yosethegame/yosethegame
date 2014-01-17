@@ -17,14 +17,6 @@ describe("index.html", function() {
 	
 	describe("page's elements:", function() {
 		
-		it("has a placeholder for a title", function() {			
-			expect(page('#title').text()).toContain("You've got Nutella on your nose");
-		});
-
-		it("has a placeholder for a welcome message", function() {
-			expect(page('#welcome').length).toEqual(1);
-		});	
-		
 		it('has a placeholder for the player count', function() {
 		    expect(page('#player-count').length).toEqual(1);
 		});
@@ -37,14 +29,6 @@ describe("index.html", function() {
 		  
 		  it('has a login input field', function() {
               expect(page('input#login').length).toEqual(1);
-		  });
-		  
-		  it('has a enter button', function() {
-		      expect(page('button#enter').length).toEqual(1);
-		  });
-		    
-		  it('triggers login()', function() {
-		      expect(page('button#enter').attr('onclick')).toEqual('login()');
 		  });
 		  
 		  it('offers a way to create a new player', function() {

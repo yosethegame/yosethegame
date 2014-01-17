@@ -18,12 +18,13 @@ describe("Login", function() {
 		server.stop();
 	});
 	
-	it("lands on user's dashbord", function(done) {
+	it("lands on user's dashbaord", function(done) {
 		var browser = new Browser();
 		browser.visit("http://localhost:5000").
 			then(function () {
-				return browser.fill("#login", "ericminio")
-					   .pressButton("#enter");
+				browser.fill("#login", "ericminio");
+                browser.evaluate("login()");
+                return browser;
 			}).
 			then(function() {
 				expect(browser.location.toString()).toEqual("http://localhost:5000/players/ericminio");
