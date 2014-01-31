@@ -14,8 +14,8 @@ describe('World 3', function() {
 		expect(world.isOpenFor({})).toBe(false);
 	});
 
-	it('is unlocked when player has completed level id:1', function() {
-		var player = { portfolio: [ { server: 'any', achievements: [1] } ] };
+	it('is unlocked when player has completed level id:25', function() {
+		var player = { portfolio: [ { server: 'any', achievements: [25] } ] };
 
 		expect(world.isOpenFor(player)).toBe(true);
 	});

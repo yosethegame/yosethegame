@@ -210,7 +210,12 @@ function ProductionDatabase() {
 		return false;
 	};
 	
-	this.worlds[2].isOpenFor = this.worlds[1].isOpenFor;
+	this.worlds[2].isOpenFor = function(player) { 
+		if (thisPlayer.isANew(player)) return false;
+		if (thisPlayer.hasDoneThisLevel(player, self.worlds[0].levels[0])) return true;
+		return false;
+	};
+	
 }
 
 ProductionDatabase.prototype = new PSql(process.env.DATABASE_URL);
