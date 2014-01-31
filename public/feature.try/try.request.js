@@ -45,7 +45,6 @@ var tryLevelsStartingAtIndex = function(index, levelsToTry, params, player, data
 		checker.validate(requestSent, remoteResponse, content, function(status) {
 			if (error !== null) {
 				status.code = 404;
-				status.got = 'undefined';
 			}
 			output.push({
 				id: level.id,

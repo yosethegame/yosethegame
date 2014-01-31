@@ -20,6 +20,13 @@ function ProductionDatabase() {
 	{
 		name: 'world 1',
 		levels: [ 
+            {
+                id: 25,
+                title: 'Hello Yose',
+                file: 'public/world.get.ready/challenge.hello.yose/hello.yose.html',
+                requester: '../world.get.ready/challenge.hello.yose/hello.yose.requester.js',
+                checker: '../world.get.ready/challenge.hello.yose/hello.yose.response.matcher.js'
+            },
 			{
 				id: 1,
 				title: 'Ping challenge',
@@ -199,7 +206,7 @@ function ProductionDatabase() {
 	
 	this.worlds[1].isOpenFor = function(player) { 
 		if (thisPlayer.isANew(player)) return false;
-		if (thisPlayer.hasDoneThisLevel(player, self.worlds[0].levels[0])) return true;
+		if (thisPlayer.hasDoneThisLevel(player, self.worlds[0].levels[1])) return true;
 		return false;
 	};
 	

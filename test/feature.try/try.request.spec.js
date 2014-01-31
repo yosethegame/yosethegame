@@ -228,7 +228,7 @@ describe("Trying to pass challenges >", function() {
 							title: database.worlds[0].levels[0].title,
 							code: 404,
 							expected: 'a correct expected value',
-							got: 'undefined'
+							got: 'un incorrect value'
 						}
 					]					
 				));
@@ -243,7 +243,7 @@ describe("Trying to pass challenges >", function() {
 							title: database.worlds[0].levels[0].title,
 							code: 404,
 							expected: 'a correct expected value',
-							got: 'undefined'
+							got: 'un incorrect value'
 						}
 					]					
 				));
