@@ -57,6 +57,9 @@ playground = function(request, response, database) {
 		if (level.file !== undefined) {
 			var challenge = cheerio.load(fs.readFileSync(level.file).toString());
 			page('#next-challenge-content').empty().append(challenge('#challenge-content').html());
+			if(!thePlayer.hasServer(player)) {
+                page("#server-input-section").addClass('visible').removeClass('hidden');
+			}
 		}
 		page('#try').attr('onclick', 'new TryListener().try(' + worldNumber + ')');
 
