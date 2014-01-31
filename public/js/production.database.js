@@ -22,14 +22,14 @@ function ProductionDatabase() {
 		levels: [ 
             {
                 id: 25,
-                title: 'Hello Yose',
+                title: 'First Web page challenge',
                 file: 'public/world.get.ready/challenge.hello.yose/hello.yose.html',
                 requester: '../world.get.ready/challenge.hello.yose/hello.yose.requester.js',
                 checker: '../world.get.ready/challenge.hello.yose/hello.yose.response.matcher.js'
             },
 			{
 				id: 1,
-				title: 'Ping challenge',
+				title: 'First Web service challenge',
 				file: 'public/world.get.ready/challenge.ping/ping.html',
 				requester: '../world.get.ready/challenge.ping/ping.requester.js',
 				checker: '../world.get.ready/challenge.ping/ping.response.matcher.js'
