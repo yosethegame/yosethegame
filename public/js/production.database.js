@@ -59,7 +59,7 @@ function ProductionDatabase() {
 			},
 			{
 				id: 23,
-				title: 'Portfolio challenge',
+				title: 'Portfolio - Prime factors',
 				file: 'public/world.prime.factors/challenge.portfolio/portfolio.html',
 				requester: '../world.get.ready/challenge.landing.page/landing.requester.js',
 				checker: '../world.prime.factors/challenge.portfolio/portfolio.response.matcher.js',
