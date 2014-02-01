@@ -62,7 +62,7 @@ describe("Trying to pass challenges >", function() {
 		describe('When there is no regression,', function() {
 			
 			it('makes the next challenge to be in the portfolio of the player', function(done) {
-				request("http://localhost:5000/try?login=ericminio&world=1", function(error, response, body) {
+				request("http://localhost:5000/try?login=ericminio&world=1&level=2", function(error, response, body) {
 					database.find('ericminio', function(player) {
 						expect(player.portfolio[0].achievements.length).toEqual(2);
 						done();
@@ -78,7 +78,7 @@ describe("Trying to pass challenges >", function() {
 			});
 			
 			it('does not consider the next challenge as passing', function(done) {
-				request("http://localhost:5000/try?login=ericminio&world=1", function(error, response, body) {
+				request("http://localhost:5000/try?login=ericminio&world=1&level=2", function(error, response, body) {
 					database.find('ericminio', function(player) {
 						expect(player.portfolio[0].achievements.length).toEqual(1);
 						done();

@@ -25,35 +25,40 @@ function ProductionDatabase() {
                 title: 'First Web page challenge',
                 file: 'public/world.get.ready/challenge.hello.yose/hello.yose.html',
                 requester: '../world.get.ready/challenge.hello.yose/hello.yose.requester.js',
-                checker: '../world.get.ready/challenge.hello.yose/hello.yose.response.matcher.js'
+                checker: '../world.get.ready/challenge.hello.yose/hello.yose.response.matcher.js',
+                isOpenLevelFor: function(player) { return true; }
             },
 			{
 				id: 1,
 				title: 'First Web service challenge',
 				file: 'public/world.get.ready/challenge.ping/ping.html',
 				requester: '../world.get.ready/challenge.ping/ping.requester.js',
-				checker: '../world.get.ready/challenge.ping/ping.response.matcher.js'
+				checker: '../world.get.ready/challenge.ping/ping.response.matcher.js',
+                isOpenLevelFor: function(player) { return true; }
 			},
 			{
 				id: 21,
 				title: 'Landing page challenge',
 				file: 'public/world.get.ready/challenge.landing.page/landing.html',
 				requester: '../world.get.ready/challenge.landing.page/landing.requester.js',
-				checker: '../world.get.ready/challenge.landing.page/landing.response.matcher.js'
+				checker: '../world.get.ready/challenge.landing.page/landing.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 25); }
 			},
 			{
 				id: 22,
 				title: 'Contact information challenge',
 				file: 'public/world.get.ready/challenge.contact/contact.html',
 				requester: '../world.get.ready/challenge.landing.page/landing.requester.js',
-				checker: '../world.get.ready/challenge.contact/contact.response.matcher.js'
+				checker: '../world.get.ready/challenge.contact/contact.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 21); }
 			},
 			{
 				id: 14,
 				title: 'Share challenge',
 				file: 'public/world.get.ready/challenge.share/share.html',
 				requester: '../world.get.ready/challenge.share/share.requester.js',
-				checker: '../world.get.ready/challenge.share/share.response.matcher.js'
+				checker: '../world.get.ready/challenge.share/share.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 22); }
 			}
 		]
 	},
@@ -65,7 +70,8 @@ function ProductionDatabase() {
 				title: 'Power of two challenge',
 				file: 'public/world.prime.factors/challenge.power.of.two/power.of.two.html',
 				requester: '../world.prime.factors/challenge.power.of.two/power.of.two.requester.js',
-				checker: '../world.prime.factors/challenge.power.of.two/power.of.two.response.matcher.js'
+				checker: '../world.prime.factors/challenge.power.of.two/power.of.two.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 1); }
 			},
 			{
 				id: 3,
@@ -73,6 +79,7 @@ function ProductionDatabase() {
 				file: 'public/world.prime.factors/challenge.guard.string/guard.html',
 				requester: '../world.prime.factors/challenge.guard.string/guard.requester.js',
 				checker: '../world.prime.factors/challenge.guard.string/guard.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 2); }
 			},
 			{
 				id: 4,
@@ -80,6 +87,7 @@ function ProductionDatabase() {
 				file: 'public/world.prime.factors/challenge.decomposition/decomposition.html',
 				requester: '../world.prime.factors/challenge.decomposition/decomposition.requester.js',
 				checker: '../world.prime.factors/challenge.decomposition/decomposition.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 3); }
 			},
 			{
 				id: 7,
@@ -87,6 +95,7 @@ function ProductionDatabase() {
 				file: 'public/world.prime.factors/challenge.guard.big.number/big.number.html',
 				requester: '../world.prime.factors/challenge.guard.big.number/big.number.requester.js',
 				checker: '../world.prime.factors/challenge.guard.big.number/big.number.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 4); }
 			},
 			{
 				id: 12,
@@ -94,20 +103,23 @@ function ProductionDatabase() {
 				file: 'public/world.prime.factors/challenge.multiple.entries/multiple.entries.html',
 				requester: '../world.prime.factors/challenge.multiple.entries/multiple.entries.requester.js',
 				checker: '../world.prime.factors/challenge.multiple.entries/multiple.entries.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 7); }
 			},
 			{
 				id: 5,
 				title: 'Form challenge',
 				file: 'public/world.prime.factors/challenge.form/form.html',
 				requester: '../world.prime.factors/challenge.form/form.requester.js',
-				checker: '../world.prime.factors/challenge.form/form.response.matcher.js'
+				checker: '../world.prime.factors/challenge.form/form.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 12); }
 			},
 			{
 				id: 6,
 				title: 'Input challenge',
 				file: 'public/world.prime.factors/challenge.input/input.html',
 				requester: '../world.prime.factors/challenge.form/form.requester.js',
-				checker: '../world.prime.factors/challenge.input/input.response.matcher.js'
+				checker: '../world.prime.factors/challenge.input/input.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 5); }
 			},
 			{
 				id: 8,
@@ -115,6 +127,7 @@ function ProductionDatabase() {
 				file: 'public/world.prime.factors/challenge.resist.big.number/resist.big.number.html',
 				requester: '../world.prime.factors/challenge.form/form.requester.js',
 				checker: '../world.prime.factors/challenge.resist.big.number/resist.big.number.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 6); }
 			},
 			{
 				id: 9,
@@ -122,6 +135,7 @@ function ProductionDatabase() {
 				file: 'public/world.prime.factors/challenge.resist.strings/resist.strings.html',
 				requester: '../world.prime.factors/challenge.form/form.requester.js',
 				checker: '../world.prime.factors/challenge.resist.strings/resist.strings.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 8); }
 			},
 			{
 				id: 10,
@@ -129,6 +143,7 @@ function ProductionDatabase() {
 				file: 'public/world.prime.factors/challenge.resist.negative/resist.negative.html',
 				requester: '../world.prime.factors/challenge.form/form.requester.js',
 				checker: '../world.prime.factors/challenge.resist.negative/resist.negative.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 9); }
 			},
 			{
 				id: 11,
@@ -136,6 +151,7 @@ function ProductionDatabase() {
 				file: 'public/world.prime.factors/challenge.one.page/one.page.html',
 				requester: '../world.prime.factors/challenge.form/form.requester.js',
 				checker: '../world.prime.factors/challenge.one.page/one.page.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 10); }
 			},
 			{
 				id: 13,
@@ -143,13 +159,15 @@ function ProductionDatabase() {
 				file: 'public/world.prime.factors/challenge.list.of.decomposition/list.of.decomposition.html',
 				requester: '../world.prime.factors/challenge.form/form.requester.js',
 				checker: '../world.prime.factors/challenge.list.of.decomposition/list.of.decomposition.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 11); }
 			},
 			{
 				id: 23,
 				title: 'Portfolio challenge',
 				file: 'public/world.prime.factors/challenge.portfolio/portfolio.html',
 				requester: '../world.get.ready/challenge.landing.page/landing.requester.js',
-				checker: '../world.prime.factors/challenge.portfolio/portfolio.response.matcher.js'
+				checker: '../world.prime.factors/challenge.portfolio/portfolio.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 13); }
 			},
 		]
 	},
@@ -162,6 +180,7 @@ function ProductionDatabase() {
 				file: 'public/world.minesweeper/challenge.board/board.html',
 				requester: '../world.minesweeper/challenge.board/board.requester.js',
 				checker: '../world.minesweeper/challenge.board/board.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 25); }
 			},
 			{
 				id: 17,
@@ -169,6 +188,7 @@ function ProductionDatabase() {
 				file: 'public/world.minesweeper/challenge.injection/injection.html',
 				requester: '../world.minesweeper/challenge.board/board.requester.js',
 				checker: '../world.minesweeper/challenge.injection/injection.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 15); }
 			},
 			{
 				id: 18,
@@ -176,6 +196,7 @@ function ProductionDatabase() {
 				file: 'public/world.minesweeper/challenge.safe/safe.html',
 				requester: '../world.minesweeper/challenge.board/board.requester.js',
 				checker: '../world.minesweeper/challenge.safe/safe.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 17); }
 			},
 			{
 				id: 19,
@@ -183,6 +204,7 @@ function ProductionDatabase() {
 				file: 'public/world.minesweeper/challenge.zero/zero.html',
 				requester: '../world.minesweeper/challenge.board/board.requester.js',
 				checker: '../world.minesweeper/challenge.zero/zero.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 18); }
 			},
 			{
 				id: 20,
@@ -190,6 +212,7 @@ function ProductionDatabase() {
 				file: 'public/world.minesweeper/challenge.open/open.html',
 				requester: '../world.minesweeper/challenge.board/board.requester.js',
 				checker: '../world.minesweeper/challenge.open/open.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 19); }
 			},
             {
                 id: 24,
@@ -197,6 +220,7 @@ function ProductionDatabase() {
                 file: 'public/world.minesweeper/challenge.random/random.html',
                 requester: '../world.minesweeper/challenge.board/board.requester.js',
                 checker: '../world.minesweeper/challenge.random/random.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 20); }
             }		
 		]
 	}
@@ -206,14 +230,12 @@ function ProductionDatabase() {
 	
 	this.worlds[1].isOpenFor = function(player) { 
 		if (thisPlayer.isANew(player)) return false;
-		if (thisPlayer.hasDoneThisLevel(player, self.worlds[0].levels[1])) return true;
-		return false;
+		return thisPlayer.hasDoneLevelWithId(player, 1);
 	};
 	
 	this.worlds[2].isOpenFor = function(player) { 
 		if (thisPlayer.isANew(player)) return false;
-		if (thisPlayer.hasDoneThisLevel(player, self.worlds[0].levels[0])) return true;
-		return false;
+		return thisPlayer.hasDoneLevelWithId(player, 25);
 	};
 	
 }

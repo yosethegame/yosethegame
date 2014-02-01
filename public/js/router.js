@@ -24,7 +24,7 @@ module.exports = {
             target: require('../feature.create.player/post.new.player.request')
         },
         {
-            pattern: /^\/players\/[A-z|\.|\-|@|0-9]+\/play\/world\/[0-9]+$/,
+            pattern: /^\/players\/[A-z|\.|\-|@|0-9]+\/play\/world\/[0-9]+\/level\/[0-9]+$/,
             target: require('../feature.playground/display.playground.request')
         },
         {

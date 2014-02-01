@@ -26,6 +26,10 @@ module.exports = {
 		return !this.isANew(player) && array.hasOneItemIn(player.portfolio[0].achievements, withValue.equalsTo(level.id));
 	},
 	
+	hasDoneLevelWithId: function(player, levelId) {
+        return !this.isANew(player) && array.hasOneItemIn(player.portfolio[0].achievements, withValue.equalsTo(levelId));
+	},
+
 	hasCompletedThisWorld: function(player, world) {
 		if (this.isANew(player)) { return false; }
 		var completed = true;
@@ -48,5 +52,17 @@ module.exports = {
 	
 	nextLevelInThisWorld: function(player, world) {
 		return world.levels[this.nextLevelIndexInThisWorld(player, world)];
-	}
+	},
+	
+	doneLevelsInWorld: function(player, world) {
+        var self = this;
+        var levels = [];
+        array.forEach(world.levels, function(candidateLevel) {
+            if (self.hasDoneThisLevel(player, candidateLevel)) {
+                levels.push(candidateLevel);
+            }
+        });
+        return levels;
+	},
+	
 };

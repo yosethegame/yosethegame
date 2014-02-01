@@ -13,7 +13,7 @@ describe("When a player restarts world #2", function() {
 		database.players = [
 			{
 				login: 'bilou',
-				portfolio: [ { server: 'http://localhost:6000', achievements: [1, 3] } ]
+				portfolio: [ { server: 'http://localhost:6000', achievements: [1, 2, 3] } ]
 			}
 		];
 		server.useDatabase(database);

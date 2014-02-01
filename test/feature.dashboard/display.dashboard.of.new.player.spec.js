@@ -13,8 +13,6 @@ describe('The dashboard of a new player', function() {
 	var level;
 	
 	var loadPageWithDatabase = function(database) {
-		database.worlds[0].isOpenFor = function(player) { return true; }
-		database.worlds[1].isOpenFor = function(player) { return false; }
 		database.players = [ { login: 'ericminio', } ];
 		dashboard({ url: '/players/ericminio' }, response, database);
 		page = cheerio.load(response.html);
@@ -39,38 +37,52 @@ describe('The dashboard of a new player', function() {
 		expect(world.number(2)).toBeALockedWorld();
 	});
 	
-	it('invites the player to play level 1.1', function() {
-		expect(level.number(1, 1)).toBePlayableBy('ericminio');
-	});
-	
-	describe('When first world has more than one level,', function() {
-		
+	describe('When only the first level of first world is open', function() {
+	    
 		beforeEach(function() {
-			database.worlds[0].levels = [ { title: 'first challenge' }, { title: 'second challenge' }, { title: 'third challenge' } ];
+			database.worlds[0].levels = [ 
+			    { title: 'first challenge',  isOpenLevelFor: function(player) { return true; } }, 
+			    { title: 'second challenge', isOpenLevelFor: function(player) { return false; } }, 
+			    { title: 'third challenge',  isOpenLevelFor: function(player) { return false; } }
+			];
 			loadPageWithDatabase(database);
 		});
 		
-		it('hides the second challenge', function() {
-			expect(level.number(1, 2)).toBeALockedLevel();
-		});
-		
-		it('displays only one locker', function() {
+    	it('invites the player to play level 1.1', function() {
+    		expect(level.number(1, 1)).toBePlayableBy('ericminio');
+    	});
+
+    	it('displays level 1.2 as locked', function() {
+    		expect(level.number(1, 2)).toBeALockedLevel();
+    	});
+
+		it('does not clue the third level', function() {
 			expect(world.number(1)).toHaveLevelCount(2);
 		});
 		
 	});
 	
-	describe('When the first world has exactly one level,', function() {
-		
+	describe('When the two first levels of first world are open', function() {
+	    
 		beforeEach(function() {
-			database.worlds[0].levels = [ { title: 'first challenge' } ];
+			database.worlds[0].levels = [ 
+			    { title: 'first challenge',  isOpenLevelFor: function(player) { return true; } }, 
+			    { title: 'second challenge', isOpenLevelFor: function(player) { return true; } }
+			];
 			loadPageWithDatabase(database);
 		});
 		
-		it('displays only this level', function() {
-			expect(world.number(1)).toHaveLevelCount(1);
+    	it('invites the player to play level 1.1', function() {
+    		expect(level.number(1, 1)).toBePlayableBy('ericminio');
+    	});
+
+    	it('invites the player to play level 1.2', function() {
+    		expect(level.number(1, 2)).toBePlayableBy('ericminio');
+    	});
+
+		it('does not display the locker', function() {
+			expect(world.number(1)).toHaveLevelCount(2);
 		});
 		
 	});
-	
 });

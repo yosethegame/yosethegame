@@ -10,20 +10,9 @@ var Sorter          = require('./challenges.sorter');
 var logSuccess      = require('./log.success');
 var logServer       = require('../levels.common/log.server');
 
-var allLevelsToTry = function(player, world) {
-	if (thisPlayer.isANew(player)) { return [world.levels[0]]; }
-	var levelsToTry = [];
-	var nextLevelFound = false;
-	array.forEach(world.levels, function(level) {
-		if (thisPlayer.hasDoneThisLevel(player, level)) {
-			levelsToTry.push(level);
-		} else {
-			if (! nextLevelFound ) {
-				levelsToTry.push(level);
-			}
-			nextLevelFound = true;
-		}
-	});
+var allLevelsToTry = function(player, world, level) {
+	var levelsToTry = thisPlayer.doneLevelsInWorld(player, world);
+	levelsToTry.push(level);
 	return levelsToTry;
 };
 
@@ -104,8 +93,9 @@ var tryWorld = function(incoming, response, database) {
 	levelsToTry = [];
 	var params = url.parse(incoming.url, true);	
 	var world = database.worlds[params.query.world - 1];
+	var level = world.levels[params.query.level - 1];
 	database.find(params.query.login, function(player) {
-		levelsToTry = allLevelsToTry(player, world);
+		levelsToTry = allLevelsToTry(player, world, level);
 		tryAllLevelsAndSaveResults(levelsToTry, params, player, database, function(output) {
             var jsonResponse = JSON.stringify( { score: player.score === undefined ? 0 : player.score, results: output } );
             response.writeHead(200, { 'Content-Type': 'application/json' } );

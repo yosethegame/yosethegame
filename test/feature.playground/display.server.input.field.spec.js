@@ -11,31 +11,27 @@ describe('Server input field', function() {
 	var player;
 	
 	it('is displayed when the player has no server', function() {
-		database.worlds[0].isOpenFor = function(player) { return true; }
-		player = {
-			login: 'ericminio',
-		}
-		database.players = [ player ];
+		database.players = [ {login: 'ericminio'} ];
 		var content = '<html><body>anything before<div id="challenge-content">content<label>with html</label></div>anything after</body></html>';
 		fs.writeFileSync('test/data/level-content', content);
 		database.worlds[0].levels[0].file = 'test/data/level-content';
-		playground({ url: '/players/ericminio/play/world/1' }, response, database);
+		playground({ url: '/players/ericminio/play/world/1/level/1' }, response, database);
 		page = cheerio.load(response.html);
 
 	    expect(page("#server-input-section").attr('class')).toContain('visible');
 	});
 
 	it('is hidden when the player has a server', function() {
-		database.worlds[0].isOpenFor = function(player) { return true; }
+		database.worlds[0].levels[1].isOpenLevelFor = function(player) { return true; }
 		player = {
 			login: 'ericminio',
-			portfolio: [ { server: 'this-server', achievements: [1, 2, 3, 4] } ]
+			portfolio: [ { server: 'this-server', achievements: [1] } ]
 		}
 		database.players = [ player ];
 		var content = '<html><body>anything before<div id="challenge-content">content<label>with html</label></div>anything after</body></html>';
 		fs.writeFileSync('test/data/level-content', content);
 		database.worlds[0].levels[0].file = 'test/data/level-content';
-		playground({ url: '/players/ericminio/play/world/1' }, response, database);
+		playground({ url: '/players/ericminio/play/world/1/level/2' }, response, database);
 		page = cheerio.load(response.html);
 
 	    expect(page("#server-input-section").attr('class')).toContain('hidden');

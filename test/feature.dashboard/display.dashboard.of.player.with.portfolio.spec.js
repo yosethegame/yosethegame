@@ -14,8 +14,6 @@ describe('The dashboard of a player with a portfolio:', function() {
 	var player;
 	
 	var loadPageWithDatabase = function(database) {
-		database.worlds[0].isOpenFor = function(player) { return true; }
-		database.worlds[1].isOpenFor = function(player) { return false; }
 		database.players = [ player ];
 		dashboard({ url: '/players/ericminio' }, response, database);
 		page = cheerio.load(response.html);
@@ -32,71 +30,19 @@ describe('The dashboard of a player with a portfolio:', function() {
 		loadPageWithDatabase(database);
 	});
 	
-	describe('When the player has done one out of two levels of the first world,', function() {
-		
-		beforeEach(function() {
-			database.worlds[0].levels = [ { id: 1, title: 'first challenge' }, { id: 2, title: 'second challenge' } ];
-			player.portfolio[0].achievements = [1];
-			loadPageWithDatabase(database);
-		});
-		
-		it('displays the first challenge as done', function() {
-			expect(level.number(1, 1)).toBeDone();
-		});
-		
-		it('invites the player to play the second level of the first world', function() {
-			expect(level.number(1, 2)).toBePlayableBy('ericminio');
-		});
-
-		it('displays only these two levels', function() {
-			expect(world.number(1)).toHaveLevelCount(2);
-		});
+	it('shows the server section because the player has a server', function() {
+		expect(page('#server-of-player').attr('class')).toContain('visible');
+	});
+	
+	it('displays level 1.1 as done', function() {
+	    expect(level.number(1, 1)).toBeDone();
+	});
+	
+	it('invites the player to play level 1.2', function() {
+		expect(level.number(1, 2)).toBePlayableBy('ericminio');
 	});
 
-	describe('When the player has done one out of three levels of the first world,', function() {
-		
-		beforeEach(function() {
-			database.worlds[0].levels = [ { id: 1, title: 'first challenge' }, { id: 2, title: 'second challenge' }, { id: 3, title: 'third challenge' } ];
-			player.portfolio[0].achievements = [1];
-			loadPageWithDatabase(database);
-		});
-		
-		it('displays the first challenge as done', function() {
-			expect(level.number(1, 1)).toBeDone();
-		});
-		
-		it('invites the player to play the second level', function() {
-			expect(level.number(1, 2)).toBePlayableBy('ericminio');
-		});
-
-		it('locks the third level', function() {
-			expect(level.number(1, 3)).toBeALockedLevel();
-		});
-	});
-
-	describe('When the player has done two out of three levels of the first world,', function() {
-		
-		beforeEach(function() {
-			database.worlds[0].levels = [ { id: 1, title: 'first challenge' }, { id: 2, title: 'second challenge' }, { id: 3, title: 'third challenge' } ];
-			player.portfolio[0].achievements = [1, 2];
-			loadPageWithDatabase(database);
-		});
-		
-		it('displays the first challenge as done', function() {
-			expect(level.number(1, 1)).toBeDone();
-		});
-		
-		it('displays the second challenge as done', function() {
-			expect(level.number(1, 2)).toBeDone();
-		});
-
-		it('invites the player to play the third level', function() {
-			expect(level.number(1, 3)).toBePlayableBy('ericminio');
-		});
-		
-		it('displays only these three levels', function() {
-			expect(world.number(1)).toHaveLevelCount(3);
-		});
-		
+	it('displays only these two levels', function() {
+		expect(world.number(1)).toHaveLevelCount(2);
 	});
 });

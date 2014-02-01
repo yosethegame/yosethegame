@@ -30,4 +30,20 @@ describe('Player utils:', function() {
 		});
 		
 	});
+	
+	describe('Level presence by id in portfolio', function() {
+	    
+		it('is false when porftfolio is empty', function() {
+			expect(thisPlayer.hasDoneLevelWithId({ portfolio: [] }, 1)).toBe(false);
+		});
+		
+		it('is true when portfolio contains the id of the given level', function() {
+			expect(thisPlayer.hasDoneLevelWithId({ portfolio: [ { achievements: [2, 1] }] }, 1)).toBe(true);
+		});
+		
+		it('is false when porftfolio does not exist', function() {
+			expect(thisPlayer.hasDoneLevelWithId({ }, 1)).toBe(false);
+		});
+		
+	});
 });

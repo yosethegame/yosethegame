@@ -16,28 +16,30 @@ var displayWorld = function(page, player, world, worldNumber) {
 	
 	page(worldSelector+ ' > td:nth-child(1)').text(world.name);								
 	page(wordLevelsSelector).empty();				
-	var nextChallengeOfWorldDisplayed = false;
-	var lockerDisplayed = false;
 	var challengesDoneInThisWorld = 0;
+	var challengesDisplayedInThisWorld = 0;
 	array.forEach(world.levels, function(level, levelIndex) {
-		if (!lockerDisplayed) {
-			var levelNumber = levelIndex + 1;
-			var levelMention;
-			if (thePlayer.hasDoneThisLevel(player, level)) {
-				challengesDoneInThisWorld ++;
-				levelMention = 'level ' + worldNumber + '.' + levelNumber + ' : ' + level.title;
-			} else {
-				if (! nextChallengeOfWorldDisplayed ) {
-					levelMention = '<a href="/players/' + player.login + '/play/world/' + worldNumber + '">level ' + worldNumber + '.' + levelNumber + ' : ' + level.title + '</a>';
-					nextChallengeOfWorldDisplayed = true;
-				} else {
-					levelMention = lockedLevelTemplate.replace('w.l', worldNumber+'.'+levelNumber);
-					lockerDisplayed = true;
-				}
-			}
-			page(wordLevelsSelector).append('<li>' + levelMention + '</li>');
-		}
+		var levelNumber = levelIndex + 1;
+		var levelMention = '';
+		if (thePlayer.hasDoneThisLevel(player, level)) {
+			challengesDoneInThisWorld ++;
+			levelMention = 'level ' + worldNumber + '.' + levelNumber + ' : ' + level.title;
+        }
+        else {
+            if (level.isOpenLevelFor(player)) {
+                levelMention = '<a href="/players/' + player.login + '/play/world/' + worldNumber + '/level/' + levelNumber + '">level ' + worldNumber + '.' + levelNumber + ' : ' + level.title + '</a>';
+            }
+        }
+        if (levelMention !== '') { 
+            page(wordLevelsSelector).append('<li>' + levelMention + '</li>'); 
+            challengesDisplayedInThisWorld ++;
+        }
 	});
+	
+    if (challengesDisplayedInThisWorld < world.levels.length) {
+        var lockerMention = lockedLevelTemplate.replace('w.l', worldNumber + '.' + (challengesDisplayedInThisWorld + 1));
+        page(wordLevelsSelector).append('<li>' + lockerMention + '</li>');
+    }
 
     page('a.rerun-world-n-link').removeClass('rerun-world-n-link').addClass('rerun-world-'+ worldNumber +'-link');
     if (challengesDoneInThisWorld == world.levels.length) {

@@ -92,5 +92,15 @@ describe('Levels:', function() {
         });
     });
 
+    describe('IsOpenLevel functions', function() {
+        
+        it('All challenges must have a function isOpenLevelFor', function() {
+			array.forEach(database.worlds, function(world) {
+				array.forEach(world.levels, function(level) {
+					expect(level.isOpenLevelFor).toBeDefined();
+				});
+			});
+	    });
+    });
 	
 });

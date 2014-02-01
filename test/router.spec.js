@@ -53,15 +53,15 @@ describe('Router', function() {
 		});
 		
 		it('maps playground request', function() {
-			expect(router.endPointOf({ url: '/players/any/play/world/42' })).toBe(require('../public/feature.playground/display.playground.request.js'));
+			expect(router.endPointOf({ url: '/players/any/play/world/42/level/18' })).toBe(require('../public/feature.playground/display.playground.request.js'));
 		});
 
 		it('maps playground request', function() {
-			expect(router.endPointOf({ url: '/players/any.name/play/world/42' })).toBe(require('../public/feature.playground/display.playground.request.js'));
+			expect(router.endPointOf({ url: '/players/any.name/play/world/42/level/18' })).toBe(require('../public/feature.playground/display.playground.request.js'));
 		});
 
 		it('maps playground request with a complex name', function() {
-			expect(router.endPointOf({ url: '/players/any@name-with.dash.and.dot/play/world/42' })).toBe(require('../public/feature.playground/display.playground.request.js'));
+			expect(router.endPointOf({ url: '/players/any@name-with.dash.and.dot/play/world/42/level/18' })).toBe(require('../public/feature.playground/display.playground.request.js'));
 		});
 		
 		it('maps display settings request', function() {

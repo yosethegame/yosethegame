@@ -8,6 +8,7 @@ describe("Game experience", function() {
 
 	var server = new Server(router);
 	var remote;
+	var database;
 	
 	beforeEach(function() {
 		remote = require('http').createServer(
@@ -41,7 +42,7 @@ describe("Game experience", function() {
 		
 		it('displays the detail of the success', function(done) {
 			var browser = new Browser();
-			browser.visit('http://localhost:5000/players/annessou/play/world/1').
+			browser.visit('http://localhost:5000/players/annessou/play/world/1/level/1').
 				then(function () {
 					return browser.pressButton("#try");
 				}).
@@ -73,7 +74,7 @@ describe("Game experience", function() {
 
 		it('displays the detail of the error', function(done) {
 			var browser = new Browser();
-			browser.visit('http://localhost:5000/players/annessou/play/world/1').
+			browser.visit('http://localhost:5000/players/annessou/play/world/1/level/1').
 				then(function () {
 					return browser.pressButton("#try");
 				}).
@@ -100,9 +101,13 @@ describe("Game experience", function() {
 	
 	describe("When player passes the second challenge", function() {
 		
+		beforeEach(function() {
+		    database.worlds[0].levels[1].isOpenLevelFor = function(player) { return true; }
+		});
+		
 		it('displays the detail of the success of the first challenge', function(done) {
 			var browser = new Browser();
-			browser.visit('http://localhost:5000/players/bilou/play/world/1').
+			browser.visit('http://localhost:5000/players/bilou/play/world/1/level/2').
 				then(function () {
 					return browser.pressButton("#try");
 				}).
@@ -127,7 +132,7 @@ describe("Game experience", function() {
 
 		it('displays the detail of the success of the second challenge too', function(done) {
 			var browser = new Browser();
-			browser.visit('http://localhost:5000/players/bilou/play/world/1').
+			browser.visit('http://localhost:5000/players/bilou/play/world/1/level/2').
 				then(function () {
 					return browser.pressButton("#try");
 				}).

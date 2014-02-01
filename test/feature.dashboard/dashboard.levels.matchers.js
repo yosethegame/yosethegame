@@ -11,7 +11,7 @@ beforeEach(function() {
 	
 	var toBePlayableBy = function(login) {
 		var actual = this.actual.html;
-		var expected = '<a href="/players/' + login + '/play/world/' + this.actual.worldNumber + '">level ' + this.actual.worldNumber + '.' + this.actual.levelNumber + ' : ' + this.actual.levelTitle + '</a>';
+		var expected = '<a href="/players/' + login + '/play/world/' + this.actual.worldNumber + '/level/' + this.actual.levelNumber + '">level ' + this.actual.worldNumber + '.' + this.actual.levelNumber + ' : ' + this.actual.levelTitle + '</a>';
 		this.message = function() {
 			return "Expected '" + actual + "' to equal '" + expected + "'";
 		}

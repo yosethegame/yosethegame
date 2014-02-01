@@ -13,18 +13,19 @@ describe('Try button', function() {
 	beforeEach(function() {	
 		database.worlds[0].isOpenFor = function(player) { return true; }
 		database.worlds[1].isOpenFor = function(player) { return true; }
+		database.worlds[1].levels[0].isOpenLevelFor = function(player) { return true; }
 		player = {
 			login: 'ericminio',
-			portfolio: [ { server: 'this-server', achievements: [1, 2, 3, 4] } ]
+			portfolio: [ { server: 'this-server', achievements: [1, 2] } ]
 		}
 		database.players = [ player ];
 	});
 	
-	it('displays the title of the challenge', function() {
-		playground({ url: '/players/ericminio/play/world/2' }, response, database);
+	it('targets the given level in the given world', function() {
+		playground({ url: '/players/ericminio/play/world/2/level/1' }, response, database);
 		page = cheerio.load(response.html);
 
-		expect(page('#try').attr('onclick')).toEqual('new TryListener().try(2)');
+		expect(page('#try').attr('onclick')).toEqual('new TryListener().try(2, 1)');
 	});
 	
 });

@@ -4,10 +4,10 @@ var renderScore = renderScore || require('../js/utils/render.score');
 function TryListener() {	
 }
 
-TryListener.prototype.try = function(worldNumber) {
+TryListener.prototype.try = function(worldNumber, levelNumber) {
 	startAnimation();
 	hideResults();
-	$.get('/try?login=' + $('#login').text() + '&server=' + $('#server').val() + '&world=' + worldNumber)
+	$.get('/try?login=' + $('#login').text() + '&server=' + $('#server').val() + '&world=' + worldNumber + '&level=' + levelNumber)
 		.success(this.displayResults);
 };
 

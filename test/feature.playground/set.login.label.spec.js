@@ -11,17 +11,11 @@ describe('Login hidden label', function() {
 	var player;
 	
 	beforeEach(function() {	
-		database.worlds[0].isOpenFor = function(player) { return true; }
-		database.worlds[1].isOpenFor = function(player) { return true; }
-		player = {
-			login: 'ericminio',
-			portfolio: [ { server: 'this-server', achievements: [1] } ]
-		}
-		database.players = [ player ];
+		database.players = [ { login: 'ericminio' } ];
 	});
 	
 	it('is set with login of the player', function() {
-		playground({ url: '/players/ericminio/play/world/2' }, response, database);
+		playground({ url: '/players/ericminio/play/world/1/level/1' }, response, database);
 		page = cheerio.load(response.html);
 
 		expect(page('#login').text()).toEqual('ericminio');

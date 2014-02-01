@@ -28,6 +28,11 @@ playground = function(request, response, database) {
 	if (world === undefined) {
 		return exitWithMessage('this world is unknown', page, response);
 	}
+	var levelNumber = parseInt(/^\/players\/(.*)\/play\/world\/(.*)\/level\/(.*)/.exec(request.url)[3]);
+    var level = world.levels[levelNumber - 1];
+	if (level === undefined) {
+		return exitWithMessage('this level is unknown', page, response);
+	}
 
 	database.find(login, function(player) {
 
@@ -38,7 +43,11 @@ playground = function(request, response, database) {
 		if (!world.isOpenFor(player)) {
 			return exitWithMessage('this world is locked', page, response);
 		}
-		
+
+        if (!level.isOpenLevelFor(player)) {
+            return exitWithMessage('this level is locked', page, response);
+        }
+
 		if (thePlayer.hasCompletedThisWorld(player, world)) {
 			page('#next-challenge').addClass('hidden').removeClass('visible');
 			page('#result').addClass('hidden').removeClass('visible');
@@ -47,12 +56,15 @@ playground = function(request, response, database) {
 			response.end();
 			return;
 		}
+		
+		if (thePlayer.hasDoneThisLevel(player, level)) {
+            return exitWithMessage('this level is completed', page, response);
+		}
 			
 		page('#login').empty().text(player.login);
 			
 		fillBanner(page, player, world, worldNumber);
 		
-		var level = thePlayer.nextLevelInThisWorld(player, world);
 		page('#next-challenge-title').text(level.title);
 		if (level.file !== undefined) {
 			var challenge = cheerio.load(fs.readFileSync(level.file).toString());
@@ -61,7 +73,8 @@ playground = function(request, response, database) {
                 page("#server-input-section").addClass('visible').removeClass('hidden');
 			}
 		}
-		page('#try').attr('onclick', 'new TryListener().try(' + worldNumber + ')');
+
+		page('#try').attr('onclick', 'new TryListener().try(' + worldNumber + ', ' + levelNumber + ')');
 
 		page('#continue-link').attr('href', '/players/' + player.login);
 
