@@ -1,13 +1,13 @@
 var ProductionDatabase 	= require('../public/js/production.database');
 var array 				= require('../public/js/utils/array.utils');
 
-describe('World 2', function() {
+describe('World 4', function() {
 	
 	var world;
 	
 	beforeEach(function() {
 		var database = new ProductionDatabase();
-		world = database.worlds[1];
+		world = database.worlds[3];
 	});
 
 	it('is locked for players with empty portfolio', function() {

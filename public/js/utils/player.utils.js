@@ -29,6 +29,19 @@ module.exports = {
 	hasDoneLevelWithId: function(player, levelId) {
         return !this.isANew(player) && array.hasOneItemIn(player.portfolio[0].achievements, withValue.equalsTo(levelId));
 	},
+	
+	hasDoneOneOfThoseLevelsWithId: function(player, ids) {
+        if (this.isANew(player)) return false;
+
+        var found = false;
+        array.forEach(ids, function(id) {
+            if (array.hasOneItemIn(player.portfolio[0].achievements, withValue.equalsTo(id))) {
+                found = true;
+            }
+        });
+
+        return found;
+	},
 
 	hasCompletedThisWorld: function(player, world) {
 		if (this.isANew(player)) { return false; }

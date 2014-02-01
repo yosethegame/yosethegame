@@ -46,4 +46,15 @@ describe('Player utils:', function() {
 		});
 		
 	});
+	
+	describe('Level presence by sevelral ids in portfolio', function() {
+	    
+	    it('is false when the player has done no challenge', function() {
+	        expect(thisPlayer.hasDoneOneOfThoseLevelsWithId({ }, [1])).toBe(false);
+	    }); 
+	    
+	    it('is true when the player has done one of the given challenges', function() {
+	        expect(thisPlayer.hasDoneOneOfThoseLevelsWithId({ portfolio: [ { achievements: [2, 1] }] }, [1, 3])).toBe(true);
+	    });	    
+	});
 });

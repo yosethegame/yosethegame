@@ -37,33 +37,38 @@ function ProductionDatabase() {
                 isOpenLevelFor: function(player) { return true; }
 			},
 			{
-				id: 21,
-				title: 'Landing page challenge',
-				file: 'public/world.get.ready/challenge.landing.page/landing.html',
-				requester: '../world.get.ready/challenge.landing.page/landing.requester.js',
-				checker: '../world.get.ready/challenge.landing.page/landing.response.matcher.js',
-				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 25); }
-			},
+				id: 14,
+				title: 'Share challenge',
+				file: 'public/world.get.ready/challenge.share/share.html',
+				requester: '../world.get.ready/challenge.share/share.requester.js',
+				checker: '../world.get.ready/challenge.share/share.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneOneOfThoseLevelsWithId(player, [25, 1]); }
+			}
+		]
+	},
+	{
+		name: 'world 2',
+		levels: [ 
 			{
 				id: 22,
 				title: 'Contact information challenge',
 				file: 'public/world.get.ready/challenge.contact/contact.html',
 				requester: '../world.get.ready/challenge.landing.page/landing.requester.js',
 				checker: '../world.get.ready/challenge.contact/contact.response.matcher.js',
-				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 21); }
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 25); }
 			},
 			{
-				id: 14,
-				title: 'Share challenge',
-				file: 'public/world.get.ready/challenge.share/share.html',
-				requester: '../world.get.ready/challenge.share/share.requester.js',
-				checker: '../world.get.ready/challenge.share/share.response.matcher.js',
-				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 22); }
-			}
+				id: 23,
+				title: 'Portfolio challenge',
+				file: 'public/world.prime.factors/challenge.portfolio/portfolio.html',
+				requester: '../world.get.ready/challenge.landing.page/landing.requester.js',
+				checker: '../world.prime.factors/challenge.portfolio/portfolio.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 13); }
+			},
 		]
 	},
 	{
-		name: 'world 2',
+		name: 'world 3',
 		levels: [
 			{
 				id: 2,
@@ -161,18 +166,10 @@ function ProductionDatabase() {
 				checker: '../world.prime.factors/challenge.list.of.decomposition/list.of.decomposition.response.matcher.js',
 				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 11); }
 			},
-			{
-				id: 23,
-				title: 'Portfolio challenge',
-				file: 'public/world.prime.factors/challenge.portfolio/portfolio.html',
-				requester: '../world.get.ready/challenge.landing.page/landing.requester.js',
-				checker: '../world.prime.factors/challenge.portfolio/portfolio.response.matcher.js',
-				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 13); }
-			},
 		]
 	},
 	{
-		name: 'world 3',
+		name: 'world 4',
 		levels: [
 			{
 				id: 15,
@@ -230,10 +227,15 @@ function ProductionDatabase() {
 	
 	this.worlds[1].isOpenFor = function(player) { 
 		if (thisPlayer.isANew(player)) return false;
-		return thisPlayer.hasDoneLevelWithId(player, 1);
+		return thisPlayer.hasDoneLevelWithId(player, 25);
 	};
 	
 	this.worlds[2].isOpenFor = function(player) { 
+		if (thisPlayer.isANew(player)) return false;
+		return thisPlayer.hasDoneLevelWithId(player, 1);
+	};
+	
+	this.worlds[3].isOpenFor = function(player) { 
 		if (thisPlayer.isANew(player)) return false;
 		return thisPlayer.hasDoneLevelWithId(player, 25);
 	};
