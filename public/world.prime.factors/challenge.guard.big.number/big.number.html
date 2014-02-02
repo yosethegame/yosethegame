@@ -7,35 +7,35 @@
 	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
 	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>		
 </head>
-<body id="challenge-content">
-	<p class="lead">
+<body>
+	
+	<div id="challenge-assignment">	
 		Update your server to make it accept a 
 		GET request with a positive integer parameter and make it respond
 		a JSON containing the 'too big number (>1e6)' error message
 		when the number is actually > 1e6
-	</p>
+	</div>
 	
-	<p>For example, receiving</p>
+	<div id="challenge-details">
+		<p>For example, receiving</p>
 
-	<pre>http://your-server/primeFactors?number=1000001</pre>
+		<pre>http://your-server/primeFactors?number=1000001</pre>
 
-	<p>You should respond</p>
-		
-	<pre>{
+		<p>You should respond</p>
+
+		<pre>{
     "number" : 1000001,
     "error" : "too big number (>1e6)"
 }
-	</pre>
-	
-	<legend>
-		<h2>Take it!</h2>
-	</legend>
-		
-	<section>
+		</pre>
+
 		<p>
 			Your server will be called with a number > 1000000
 		</p>	
-
-	</section>
+	</div>
+	
+	<div id="challenge-tips">		
+	</div>
+	
 </body>
 </html>

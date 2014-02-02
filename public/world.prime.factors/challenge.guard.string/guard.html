@@ -7,39 +7,34 @@
 	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
 	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>		
 </head>
-<body id="challenge-content">
-	<p>
-		You might now
-		feel a little nervous about all the hackers around that will eventually
-		try to crash down your wonderful code.
-	</p>
-	<p class="lead">
+<body>
+	
+	<div id="challenge-assignment">	
 		Update your server to make it accept a 
 		GET request with a string as parameter and make it respond 
 		a JSON containing the 'not a number' error message.
-	</p>
+	</div>
 	
-	<p>For example, receiving</p>
+	<div id="challenge-details">
+		<p>For example, receiving</p>
 
-	<pre>http://your-server/primeFactors?number=hello</pre>
+		<pre>http://your-server/primeFactors?number=hello</pre>
 
-	<p>You should respond</p>
-		
-	<pre>{
+		<p>You should respond</p>
+
+		<pre>{
     "number" : "hello",
     "error" : "not a number"
 }
-	</pre>
-	
-	<legend>
-		<h2>Take it!</h2>
-	</legend>
-		
-	<section>
+		</pre>
+
 		<p>
 			Your server will be called with a string.
 		</p>	
+	</div>
+	
+	<div id="challenge-tips">		
+	</div>
 
-	</section>
 </body>
 </html>

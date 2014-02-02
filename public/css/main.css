@@ -34,15 +34,6 @@
 	z-index: 1000;
 }
 
-#toto {
-	float:left;
-}
-
-#toto ul {
-	list-style-type:none;
-	padding-left:0px;
-}
-
 #score-box {
 	list-style-type:none;
 	margin-bottom:0px;
@@ -170,10 +161,16 @@
 #hall-of-fame {
 }
 
-#content {
-	padding-left:35px;
+#dashboard-content {
 	padding-top:120px;
+	padding-left:35px;
 	padding-right:5px;
+}
+
+#playground-content {
+	padding-top:120px;
+	padding-left:0px;
+	padding-right:0px;
 }
 
 .title {
@@ -214,8 +211,46 @@
 	border-radius: 5px
 }
 
+#next-challenge-header-section {
+    background-color:#515151;
+	color: white;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left: 50px;
+}
+
 #next-challenge-title {
-	color: red;
+    font-size:200%;
+}
+
+#next-challenge-content {
+    margin-top: 10px;
+    background-color: #EEEEEE;
+    padding-top: 1px;
+	padding-left:50px;
+	padding-bottom: 5px;
+	padding-right: 5px;
+}
+
+#next-challenge-assignment {
+    padding-left: 5px;
+}
+
+#server-input-section {
+    margin-top: 10px;
+    padding-left: 50px;
+}
+
+#try {
+    margin-left: 50px;
+}
+
+#next-challenge-tips, #result, #continue, #world-completed {
+    padding-left: 50px;
+}
+
+#result {
+    padding-right: 5px;
 }
 
 .header {

@@ -68,7 +68,9 @@ playground = function(request, response, database) {
 		page('#next-challenge-title').text(level.title);
 		if (level.file !== undefined) {
 			var challenge = cheerio.load(fs.readFileSync(level.file).toString());
-			page('#next-challenge-content').empty().append(challenge('#challenge-content').html());
+			page('#next-challenge-assignment').empty().append(challenge('#challenge-assignment').html());
+			page('#next-challenge-details').empty().append(challenge('#challenge-details').html());
+			page('#next-challenge-tips').empty().append(challenge('#challenge-tips').html());
 			if(!thePlayer.hasServer(player)) {
                 page("#server-input-section").addClass('visible').removeClass('hidden');
 			}

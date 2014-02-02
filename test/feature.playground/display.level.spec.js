@@ -9,6 +9,7 @@ describe('Level invitation', function() {
 	var database = new Data();
 	var page;
 	var player;
+	var levelFileContent;
 	
 	beforeEach(function() {	
 		database.worlds[1].isOpenFor = function(player) { return true; }
@@ -17,7 +18,7 @@ describe('Level invitation', function() {
 			login: 'ericminio',
 			portfolio: [ { server: 'this-server', achievements: [1, 2, 3, 4] } ]
 		}
-		database.players = [ player ];
+		database.players = [ player ];		
 	});
 	
 	it('displays the title of the challenge', function() {
@@ -28,15 +29,32 @@ describe('Level invitation', function() {
 		expect(page('#next-challenge-title').text()).toEqual('this is the next challenge');
 	});
 	
-	it('displays the content of the challenge', function() {
-		var content = '<html><body>anything before<div id="challenge-content">content<label>with html</label></div>anything after</body></html>';
-		fs.writeFileSync('test/data/level-content', content);
-		database.worlds[1].levels[2].file = 'test/data/level-content';
-		playground({ url: '/players/ericminio/play/world/2/level/3' }, response, database);
-		page = cheerio.load(response.html);
+	describe('content', function() {
+	
+	    beforeEach(function() {
+    		levelFileContent = '<html><body>' 
+    		                +       '<div id="challenge-assignment">this assignment</div>'
+    		                +       '<div id="challenge-details">those details</div>'
+    		                +       '<div id="challenge-tips">these tips</div>'
+    		                + '</body></html>';
+            fs.writeFileSync('test/data/level-content', levelFileContent);
+    		database.worlds[1].levels[2].file = 'test/data/level-content';
+    		playground({ url: '/players/ericminio/play/world/2/level/3' }, response, database);
+    		page = cheerio.load(response.html);
+	    });
+	    
+    	it('displays the assignment of the challenge', function() {
+    		expect(page('#next-challenge-assignment').html()).toEqual('this assignment');
+    	});
 
-		expect(page('#next-challenge-content').html()).toEqual('content<label>with html</label>');
+    	it('displays the details of the challenge', function() {
+    		expect(page('#next-challenge-details').html()).toEqual('those details');
+    	});
+
+    	it('displays the tips of the challenge', function() {
+    		expect(page('#next-challenge-tips').html()).toEqual('these tips');
+    	});
+
 	});
-
 	
 });

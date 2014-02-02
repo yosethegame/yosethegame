@@ -7,20 +7,22 @@
 	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
 	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>		
 </head>
-<body id="challenge-content">
-	<p class="lead">
+<body>
+	
+	<div id="challenge-assignment">	
 		Update your server to make it accept a GET request 
 		with several numbers and make it respond 
 		a JSON containing the decompositions of each numbers.
-	</p>
+	</div>
 	
-	<p>For example, receiving</p>
+	<div id="challenge-details">
+		<p>For example, receiving</p>
 
-	<pre>http://your-server/primeFactors?number=300&number=120&number=hello</pre>
+		<pre>http://your-server/primeFactors?number=300&number=120&number=hello</pre>
 
-	<p>You should respond</p>
-		
-	<pre>[
+		<p>You should respond</p>
+
+		<pre>[
     {
         "number" : 300,
         "decomposition" : [ 2, 2, 3, 5, 5 ]
@@ -34,17 +36,15 @@
         "error" : "not a number"
     },
 ]
-	</pre>
-	
-	<legend>
-		<h2>Take it!</h2>
-	</legend>
-		
-	<section>
+		</pre>
+
 		<p>
 			Your server will be called with several numbers.
 		</p>	
-
-	</section>
+	</div>
+	
+	<div id="challenge-tips">		
+	</div>
+		
 </body>
 </html>

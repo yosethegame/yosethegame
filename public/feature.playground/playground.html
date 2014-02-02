@@ -17,11 +17,32 @@
 			content of section sidebar in feature.dashboard/banner.html will be included
 		</section>
 
-		<div id="content">
+		<div id="playground-content">
 
 			<section id="next-challenge" class="visible">
-				<h1 id="next-challenge-title">Next challenge title</h1>
-				<div id="next-challenge-content">Next challenge content</div>
+				<div id="next-challenge-header-section">
+					<span id="next-challenge-title">Next challenge title</span>
+				</div>		
+						
+				<div id="next-challenge-content">
+					<table>
+						<tr>
+							<td style="vertical-align: top">
+								<span class="glyphicon glyphicon-info-sign"
+								 	  style="color:#428bca; font-size:300%"
+									  >
+								</span>
+							</td>
+							<td><div id="next-challenge-assignment">assignment</div></td>
+						</tr>
+					</table>
+					<br/>
+					<div id="next-challenge-details">details</div>
+				</div>
+				<br/>
+				<div id="next-challenge-tips">tips</div>
+				
+				<br/>
 				<div class="form-group" id="server-input-section" class="hidden">
 					<label>Enter the url of your server</label>
 					<input type="text" class="form-control" id="server" placeholder="http://your-server"/>

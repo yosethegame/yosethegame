@@ -7,39 +7,39 @@
 	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
 	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>		
 </head>
-<body id="challenge-content">
-	<p>
-		Nice ! I guess you can't wait to show that you can do more.
-		Here it is: the decomposition challenge, to explore the decomposition
-		of any number in its <a href="http://en.wikipedia.org/wiki/Prime_factor">prime factors</a>.
-	</p>
-	<p class="lead">
+<body>
+	
+	<div id="challenge-assignment">	
 		Update your server to make it accept a 
 		GET request with a positive integer parameter and make it respond 
 		a JSON containing the prime factors decomposition of this number
-	</p>
+	</div>
 	
-	<p>For example, receiving</p>
+	<div id="challenge-details">
+		<p>For example, receiving</p>
 
-	<pre>http://your-server/primeFactors?number=300</pre>
+		<pre>http://your-server/primeFactors?number=300</pre>
 
-	<p>You should respond</p>
-		
-	<pre>{
+		<p>You should respond</p>
+
+		<pre>{
     "number" : 300,
     "decomposition" : [ 2, 2, 3, 5, 5 ]
 }
-	</pre>
-	
-	<legend>
-		<h2>Take it!</h2>
-	</legend>
+		</pre>
 		
-	<section>
 		<p>
 			Your server will be called with a random number.
 		</p>	
-
-	</section>
+	</div>
+	
+	<div id="challenge-tips">
+		In number theory, the prime factors of a positive integer are the prime numbers that divide that integer exactly.
+		Learn more about prime factors decomposition on <a href="http://en.wikipedia.org/wiki/Prime_factor">Wikipedia</a>
+		<br/>
+		You can find several examples of the Prime factors kata on 
+		the <a href="https://www.google.ca/search?q=prime+factors+kata">Internet</a>.
+	</div>
+		
 </body>
 </html>

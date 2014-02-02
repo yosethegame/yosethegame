@@ -7,40 +7,38 @@
 	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
 	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>		
 </head>
-<body id="challenge-content">
-	<p>
+<body>
+	
+	<div id="challenge-assignment">	
+		Update your server to make it accept a 
+		GET request with a power of 2 as parameter and make it respond 
+		a JSON containing the decomposition of this number
+	</div>
+	
+	<div id="challenge-details">
+		<p>For example, receiving</p>
+
+		<pre>http://your-server/primeFactors?number=16</pre>
+
+		<p>You should respond</p>
+
+		<pre>{
+    "number" : 16,
+    "decomposition" : [ 2, 2, 2, 2 ]
+}
+		</pre>
+
+		<p>
+			Your server will be called with a random power of two.
+		</p>	
+	</div>
+	
+	<div id="challenge-tips">		
 		In mathematics, a 
 		<a href="http://en.wikipedia.org/wiki/Power_of_two">power of two</a>
 		means a number of the form 2*exp(n) where n is an integer, 
 		i.e. the result of exponentiation with as base the number 2 and as exponent the integer n.
-	</p>
-	<p class="lead">
-		Update your server to make it accept a 
-		GET request with a power of 2 as parameter and make it respond 
-		a JSON containing the decomposition of this number
-	</p>
-	
-	<p>For example, receiving</p>
-
-	<pre>http://your-server/primeFactors?number=16</pre>
-
-	<p>You should respond</p>
+	</div>
 		
-	<pre>{
-    "number" : 16,
-    "decomposition" : [ 2, 2, 2, 2 ]
-}
-	</pre>
-	
-	<legend>
-		<h2>Take it!</h2>
-	</legend>
-		
-	<section>
-		<p>
-			Your server will be called with a random power of two.
-		</p>	
-
-	</section>
 </body>
 </html>

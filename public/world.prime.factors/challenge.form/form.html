@@ -7,36 +7,31 @@
 	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
 	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>		
 </head>
-<body id="challenge-content">
-	<p>
-		Time for real app!
-	</p>
-	<p class="lead">
+<body>
+	
+	<div id="challenge-assignment">	
 		Update your server to accept /primeFactors/ui request and serve a page with a form to let
 		a user ask for the decomposition of a number.
-	</p>
-	<p class="lead">
+	</div>
+	
+	<div id="challenge-details">
 		Your page should include the following elements:
-		<dl>
+		<dl style="padding-left:30px">
 			<dt>#title</dt><dd>An element that will help the user knows where he is</dd>
 			<dt>#invitation</dt><dd>An element that will describe to the user what we expect from him</dd>
 			<dt>input#number</dt><dd>The input field where the user can enter the number to be decomposed</dd>
 			<dt>button#go</dt><dd>The button to trigger the decomposition</dd>
 		</dl>
-	</p>
-				
-	<legend>
-		<h2>Take it!</h2>
-	</legend>
-		
-	<p>
+
+		<p>
+			Your server will be called with /primeFactors/ui postfix
+		</p>	
+	</div>
+	
+	<div id="challenge-tips">		
 		You can learn more about CSS selectors on the 
 		<a href="http://www.w3schools.com/cssref/css_selectors.asp">CSS Selector Reference</a> page of the w3schools site.
-	</p>
-				
-	<p>
-		Your server will be called with /primeFactors/ui postfix
-	</p>	
-
+	</div>
+	
 </body>
 </html>
