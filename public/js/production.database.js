@@ -3,14 +3,12 @@ var array		= require('./utils/array.utils');
 var withValue	= require('./utils/array.matchers');
 var thisPlayer	= require('./utils/player.utils');
 
-var hasAllLevelOfGivenWorldInPortfolio = function(player, world) {
-	var hasAll = true;
-	array.forEach(world.levels, function(level) {
-		if(! thisPlayer.hasDoneThisLevel(player, level)) {
-			hasAll = false;
-		}
-	});
-	return hasAll;
+var isWorldOpenFor = function(player) {
+    var open = false;
+    array.forEach(this.levels, function(level) {
+        if (level.isOpenLevelFor(player)) { open = true; }
+    });
+    return open;
 };
 
 function ProductionDatabase() {
@@ -19,6 +17,7 @@ function ProductionDatabase() {
 	this.worlds = [
 	{
 		name: 'world 1',
+		isOpenFor: isWorldOpenFor,
 		levels: [ 
             {
                 id: 25,
@@ -48,6 +47,7 @@ function ProductionDatabase() {
 	},
 	{
 		name: 'world 2',
+		isOpenFor: isWorldOpenFor,
 		levels: [ 
 			{
 				id: 22,
@@ -77,6 +77,7 @@ function ProductionDatabase() {
 	},
 	{
 		name: 'world 3',
+		isOpenFor: isWorldOpenFor,
 		levels: [
 			{
 				id: 2,
@@ -178,6 +179,7 @@ function ProductionDatabase() {
 	},
 	{
 		name: 'world 4',
+		isOpenFor: isWorldOpenFor,
 		levels: [
 			{
 				id: 15,
@@ -229,27 +231,10 @@ function ProductionDatabase() {
             }		
 		]
 	}
-	];
-	
-	this.worlds[0].isOpenFor = function(player) { return true; };
-	
-	this.worlds[1].isOpenFor = function(player) { 
-		if (thisPlayer.isANew(player)) return false;
-		return thisPlayer.hasDoneLevelWithId(player, 25);
-	};
-	
-	this.worlds[2].isOpenFor = function(player) { 
-		if (thisPlayer.isANew(player)) return false;
-		return thisPlayer.hasDoneLevelWithId(player, 1);
-	};
-	
-	this.worlds[3].isOpenFor = function(player) { 
-		if (thisPlayer.isANew(player)) return false;
-		return thisPlayer.hasDoneLevelWithId(player, 25);
-	};
-	
+	];	
 }
 
 ProductionDatabase.prototype = new PSql(process.env.DATABASE_URL);
 
 module.exports = ProductionDatabase;
+module.exports.isWorldOpenFor = isWorldOpenFor;

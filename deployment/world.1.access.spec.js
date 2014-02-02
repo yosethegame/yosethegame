@@ -15,9 +15,9 @@ describe('World 1', function() {
 	});
 		
 	it('is always unlocked even if world 1 is completed', function() {
-		var player = { portfolio: [] };
+		var player = { portfolio: [ { server: 'any', achievements: [] } ] };
 		array.forEach(world.levels, function(level) {
-			player.portfolio.push(level.id);
+			player.portfolio[0].achievements.push(level.id);
 		});
 		expect(world.isOpenFor(player)).toBe(true);
 	});

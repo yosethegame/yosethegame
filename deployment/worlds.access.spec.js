@@ -26,4 +26,13 @@ describe('Worlds', function() {
 			expect(typeof world.isOpenFor).toEqual('function');
 		});
 	});
+	
+	describe('isOpenFor', function() {
+	    
+	    it('must be the common one', function() {
+    		array.forEach(database.worlds, function(world) {
+    			expect(world.isOpenFor).toBe(ProductionDatabase.isWorldOpenFor);
+    		});
+	    });    
+	});
 });
