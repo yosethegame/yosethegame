@@ -9,7 +9,7 @@ describe('Landing page response matcher,', function() {
 	});
 	
 	it('knows the expected response', function() {
-	    expect(matcher.expected()).toEqual("content-type text/html AND a #welcome element AND a a#ping-challenge-link with href='http://this-url/ping'");
+	    expect(matcher.expected()).toEqual("content-type text/html AND a a#ping-challenge-link with href='http://this-url/ping'");
 	});
 	
 	describe('When remote server responds the expected elements and the expected content-type', function() {
@@ -67,30 +67,6 @@ describe('Landing page response matcher,', function() {
 		});
 		
 	});
-	
-	describe('When remote server responds with page missing element #welcome,', function() {
-	
-		beforeEach(function() {
-			contentType = 'text/html';
-			content = '<html><body>' +
-							'<a id="ping-challenge-link" href="http://this-url/ping">The ping challenge</a>' +
-					  '</body></html>';			
-			status = matcher.computeStatus({ headers: {'content-type': contentType} }, content);
-		});
-		
-		it('sets code to 501', function() {
-			expect(status.code).toEqual(501);
-		});
-		
-		it('sets expected', function() {
-			expect(status.expected).toEqual(matcher.expected());
-		});
-		
-		it('sets actual', function() {
-			expect(status.got).toEqual('Error: missing element #welcome');
-		});
-		
-	});	
 	
 	describe('When remote server responds with page missing element a#ping-challenge-link,', function() {
 	

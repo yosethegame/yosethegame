@@ -58,6 +58,14 @@ function ProductionDatabase() {
 				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 25); }
 			},
 			{
+				id: 21,
+				title: 'Portfolio - Ping',
+				file: 'public/world.get.ready/challenge.landing.page/landing.html',
+				requester: '../world.get.ready/challenge.landing.page/landing.requester.js',
+				checker: '../world.get.ready/challenge.landing.page/landing.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 1); }
+			},
+			{
 				id: 23,
 				title: 'Portfolio - Prime factors',
 				file: 'public/world.prime.factors/challenge.portfolio/portfolio.html',

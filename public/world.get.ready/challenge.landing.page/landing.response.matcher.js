@@ -9,7 +9,7 @@ module.exports = {
 
     expected: function() {
         pingUrl= new PingRequester(thePlayer.serverOf(this.player)).url();
-        return "content-type text/html AND a #welcome element AND a a#ping-challenge-link with href='" + pingUrl + "'";
+        return "content-type text/html AND a a#ping-challenge-link with href='" + pingUrl + "'";
     },
     
     contentTypeOf: function(remoteResponse) {
@@ -34,10 +34,6 @@ module.exports = {
 		}
 		
 		var page = cheerio.load(content);
-		if (page('#welcome').length === 0) {
-            return error501.withValues(this.expected(), 'Error: missing element #welcome');
-        }
-        
         var linkId = 'a#ping-challenge-link';
         if (page(linkId).length === 0) {
             return error501.withValues(this.expected(), 'Error: missing element ' + linkId);
