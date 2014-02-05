@@ -1,9 +1,9 @@
 var $ = require('jquery');
-var CreatePlayerListener = require('../../public/feature.create.player/create.player.listener');
+var CreatePlayerController = require('../../public/feature.create.player/create.player.controller');
 
 describe('Create player listener', function() {
 	
-	var create = new CreatePlayerListener();
+	var create = new CreatePlayerController();
 	
 	describe('Request sent', function() {
 		

@@ -1,14 +1,14 @@
 var $ = $ || require('jquery');
 
-function CreatePlayerListener() {
+function CreatePlayerController() {
     self = this;	
 }
 
-CreatePlayerListener.prototype.isLoginCorrect = function() {
+CreatePlayerController.prototype.isLoginCorrect = function() {
     return (/^[A-z|\\.|\\-|@|0-9]+$/).test($('#login').val());
 };
 
-CreatePlayerListener.prototype.updateLoginFeedback = function() {
+CreatePlayerController.prototype.updateLoginFeedback = function() {
     if (this.isLoginCorrect()) {
         $('#login-feedback').removeClass('alert-danger').addClass('alert-success');
         $('#login-feedback label').text('Login correct');
@@ -19,12 +19,12 @@ CreatePlayerListener.prototype.updateLoginFeedback = function() {
     }
 };
 
-CreatePlayerListener.prototype.updatePreview = function() {
+CreatePlayerController.prototype.updatePreview = function() {
     $('#avatar-preview').attr('src', $('#avatar').val());
     $.get($('#avatar').val()).success(this.succesGettingAvatar).error(this.errorGettingAvatar);
 };
 
-CreatePlayerListener.prototype.player = function() {
+CreatePlayerController.prototype.player = function() {
     var login = $('#login').val().replace(/\s/g, '');
     var avatar = $('#avatar').val();
 
@@ -33,7 +33,7 @@ CreatePlayerListener.prototype.player = function() {
     }
 };
 
-CreatePlayerListener.prototype.succesGettingAvatar = function(data, textStatus, jqXHR) {
+CreatePlayerController.prototype.succesGettingAvatar = function(data, textStatus, jqXHR) {
     var headers = jqXHR.getAllResponseHeaders();
     var type = headers.indexOf('Content-Type: image');
     if (type === -1) {
@@ -43,24 +43,24 @@ CreatePlayerListener.prototype.succesGettingAvatar = function(data, textStatus, 
     }
 };
 
-CreatePlayerListener.prototype.errorGettingAvatar = function(jqXHR, textStatus, errorThrown) {
+CreatePlayerController.prototype.errorGettingAvatar = function(jqXHR, textStatus, errorThrown) {
     self.displayError();
 };
 
-CreatePlayerListener.prototype.displayError = function() {
+CreatePlayerController.prototype.displayError = function() {
     $('#preview-feedback').removeClass('alert-success').addClass('alert-danger');
     $('#preview-feedback label').text('Not an image');
 };
 
-CreatePlayerListener.prototype.displaySuccess = function() {
+CreatePlayerController.prototype.displaySuccess = function() {
     $('#preview-feedback').removeClass('alert-danger').addClass('alert-success');
     $('#preview-feedback label').text('Image found');
 };
 
-CreatePlayerListener.prototype.success = function(data) {
+CreatePlayerController.prototype.success = function(data) {
 	$('#feedback').removeClass('hidden').addClass('visible');
 	$('#player-dashboard').attr('href', '/players/' + $('#login').val());
 };
 
 var module = module || {};
-module.exports = CreatePlayerListener;
+module.exports = CreatePlayerController;
