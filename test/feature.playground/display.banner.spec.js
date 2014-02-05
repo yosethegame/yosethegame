@@ -30,15 +30,18 @@ describe('The banner', function() {
 	
 	describe('Greetings', function() {
 		
-		it('contains the title of the level', function() {
-			expect(page('#greetings').text()).toContain('level 1.1 : the first challenge');
+		beforeEach(function() {
+		    database.worlds[0].levels[1].isOpenLevelFor = function(player) { return true; } 
+    		playground({ url: '/players/ericminio/play/world/1/level/2' }, response, database);
+    		page = cheerio.load(response.html);
 		});
 		
-		it('adapts to the portfolio of the player', function() {
-			playground({ url: '/players/ericminio/play/world/1/level/1' }, response, database);
-			page = cheerio.load(response.html);
-
-			expect(page('#greetings').text()).toContain('level 1.1 : ' + database.worlds[0].levels[0].title);
+		it('contains the number of the level', function() {
+			expect(page('#greetings').text()).toContain('level 1.2');
+		});
+		
+		it('contains the title of the level', function() {
+			expect(page('#greetings').text()).toContain('the second challenge');
 		});
 		
 	});

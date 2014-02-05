@@ -8,10 +8,8 @@ var thePlayer   = require('../js/utils/player.utils');
 var fillBannerWithGreetings = require('../js/banner');
 var exitWithMessage         = require('../js/exit.with.message');
 
-var fillBanner = function(page, player, world, worldNumber) {
-	var levelIndex = thePlayer.nextLevelIndexInThisWorld(player, world);
-	var level = world.levels[levelIndex];
-	var greetings = 'level ' + worldNumber + '.' + (levelIndex + 1) + ' : ' + level.title;
+var fillBanner = function(page, player, world, worldNumber, level, levelNumber) {
+	var greetings = 'level ' + worldNumber + '.' + levelNumber + ' : ' + level.title;
 	
 	fillBannerWithGreetings(page, player, greetings);
 };
@@ -63,7 +61,7 @@ playground = function(request, response, database) {
 			
 		page('#login').empty().text(player.login);
 			
-		fillBanner(page, player, world, worldNumber);
+		fillBanner(page, player, world, worldNumber, level, levelNumber);
 		
 		page('#next-challenge-title').text(level.title);
 		if (level.file !== undefined) {
