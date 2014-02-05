@@ -14,7 +14,11 @@
 	<section>
 		<div class="form-group">
 			<label>The login of the new player</label>
-			<input type="text" class="form-control" id="login" placeholder="player"/>
+			<input type="text" class="form-control" id="login" placeholder="choose a login"
+				   onkeyup="new CreatePlayerListener().updateLoginFeedback();"/>
+			<div id="login-feedback" class="alert alert-danger">
+				<label>Login incorrect. Must match /^[A-z|\.|\-|@|0-9]+$/</label>
+			</div>
 		</div>
 		<div class="form-group">
 			<label>An url for the image of the new player</label>

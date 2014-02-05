@@ -81,6 +81,17 @@ describe('Create player form', function() {
 
 			});
 		});
+		
+		describe('login feedback', function() {
+		    
+			it('exists', function() {
+				expect(page('#login-feedback').length).toEqual(1);
+			});
+
+            it('is bad by default', function() {
+				expect(page('#login-feedback').attr('class')).toContain('alert-danger');
+            });
+		});
 				
 	});
 });

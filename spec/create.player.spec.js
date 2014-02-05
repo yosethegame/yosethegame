@@ -41,28 +41,4 @@ describe('Creating a player', function() {
 				done();
 			});
 	});
-	
-	it('suppresses all spaces', function(done) {
-		var browser = new Browser();
-		browser.visit('http://localhost:5000/create-new-player').
-			then(function () {
-				return browser.fill('#login', 'eric mignot')
-							  .fill('#avatar', 'this-url')
-							  .pressButton('#create');
-			}).
-			then(function() {
-				expect(browser.text('#message')).toEqual('Done');
-			}).
-			then(function() {
-				return browser.visit('http://localhost:5000/players/ericmignot');
-			}).
-			then(function() {
-				expect(browser.text("#greetings")).toContain('ericmignot');
-				done();
-			}).
-			fail(function(error) {
-				expect(error.toString()).toBeNull();
-				done();
-			});
-	});
 });

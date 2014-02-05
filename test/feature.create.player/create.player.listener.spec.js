@@ -26,15 +26,43 @@ describe('Create player listener', function() {
 			expect($.post).toHaveBeenCalledWith('/create-player', { login: 'eric', avatar: 'avatar-of-eric' }, create.success);
 		});
 		
-		it('suppresses the spaces in the given login if any', function() {
-			$('#login').val('eric mignot of laval');
+	    it('does not send the request when the login is not correct', function() {
+			$('#login').val('eric mignot');
 			$('#avatar').val('avatar-of-eric');
 			spyOn($, 'post').andCallThrough();
 			create.player();
 
-			expect($.post).toHaveBeenCalledWith('/create-player', { login: 'ericmignotoflaval', avatar: 'avatar-of-eric' }, create.success);
+	        expect($.post).not.toHaveBeenCalled();
+	    });
+	});
+	
+	describe('Login correctness', function() {
+	
+		beforeEach(function() {
+			$('body').append('<input id="login" />');
 		});
 
+		afterEach(function() {
+			$('#login').remove();
+		});
+
+	    it('is not correct when empty', function() {
+	        $('#login').val('');
+	        
+	        expect(create.isLoginCorrect()).toEqual(false);
+	    });
+
+	    it('is correct with numbers and letters', function() {
+	        $('#login').val('eric.mignot.42@gmail.com');
+	        
+	        expect(create.isLoginCorrect()).toEqual(true);
+	    });
+
+	    it('is incorrect when not matching [A-z|\\.|\\-|@|0-9]+', function() {
+	        $('#login').val('2&é""');
+	        
+	        expect(create.isLoginCorrect()).toEqual(false);
+	    });
 	});
 	
 	describe('Success', function() {

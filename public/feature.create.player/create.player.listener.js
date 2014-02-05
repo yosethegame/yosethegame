@@ -4,6 +4,21 @@ function CreatePlayerListener() {
     self = this;	
 }
 
+CreatePlayerListener.prototype.isLoginCorrect = function() {
+    return (/^[A-z|\\.|\\-|@|0-9]+$/).test($('#login').val());
+};
+
+CreatePlayerListener.prototype.updateLoginFeedback = function() {
+    if (this.isLoginCorrect()) {
+        $('#login-feedback').removeClass('alert-danger').addClass('alert-success');
+        $('#login-feedback label').text('Login correct');
+    }
+    else {
+        $('#login-feedback').removeClass('alert-success').addClass('alert-danger');
+        $('#login-feedback label').text('Login incorrect. Must match /^[A-z|\\.|\\-|@|0-9]+$/');
+    }
+};
+
 CreatePlayerListener.prototype.updatePreview = function() {
     $('#avatar-preview').attr('src', $('#avatar').val());
     $.get($('#avatar').val()).success(this.succesGettingAvatar).error(this.errorGettingAvatar);
@@ -13,7 +28,9 @@ CreatePlayerListener.prototype.player = function() {
     var login = $('#login').val().replace(/\s/g, '');
     var avatar = $('#avatar').val();
 
-	$.post('/create-player', { login: login, avatar: avatar }, this.success);
+    if (this.isLoginCorrect()) {
+        $.post('/create-player', { login: login, avatar: avatar }, this.success);
+    }
 };
 
 CreatePlayerListener.prototype.succesGettingAvatar = function(data, textStatus, jqXHR) {
