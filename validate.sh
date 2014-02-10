@@ -3,11 +3,11 @@
 set -e
 clear
 
-jshint public --exclude public/lib
-echo "SUCCESS: jshint public --exclude public/lib"
+jshint app --exclude app/lib/bootstrap --exclude app/lib/jquery
+echo "SUCCESS: jshint app"
 
-jasmine-node test
-echo "SUCCESS: jasmine-node test"
+jasmine-node app
+echo "SUCCESS: jasmine-node app"
 
-jasmine-node deployment
-echo "SUCCESS: jasmine-node deployment"
+jasmine-node spec
+echo "SUCCESS: jasmine-node spec"

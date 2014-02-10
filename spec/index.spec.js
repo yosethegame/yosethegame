@@ -1,7 +1,7 @@
 var Browser 				= require("zombie");
-var router 					= require('../public/js/router');
-var Server 					= require('../public/js/server');
-var DatabaseWithChallenges 	= require('../test/support/database.with.levels');
+var router 					= require('../app/lib/router');
+var Server 					= require('../app/lib/server');
+var DatabaseWithChallenges 	= require('../app/support/database.with.levels');
 
 describe("Home page", function() {
 

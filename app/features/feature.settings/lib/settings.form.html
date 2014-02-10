@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Settings - Yose</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link href="/lib/css/main.css" rel="stylesheet" type="text/css">
+	</head>
+<body class="container">
+	<legend>
+		<h2>Settings</h2>
+	</legend>
+		
+	<section>
+		<div class="form-group">
+			<label>Login</label>
+			<br/>
+			<span id="login"></span>
+		</div>
+		<div class="form-group">
+			<label>An url for your avatar</label>
+			<input type="text" class="form-control" id="avatar-url" value="" 
+				   onkeyup="javascript:$('#avatar-preview').attr('src', $('#avatar-url').val());"/>
+		</div>
+		<div class="form-group">
+			<label>Preview</label>
+			<br/>
+			<img src="" 
+				 width="60" height="60" id="avatar-preview" class="img-circle"/>
+		</div>
+		<div class="form-group">
+			<label>Tags</label> (techno, practices, team's name, location, ...)
+			<input type="text" class="form-control" id="tags" />
+		</div>
+		<button type="button" class="btn btn-primary" id="save-settings-button" 
+				onclick="new SaveSettings().go()">Save settings</button>
+	</section>
+	
+	<br/>
+
+	<section id="feedback" class="alert alert-success hidden">
+		<label id="message">Done</label>
+		<br/>
+		Go back to <a id="player-dashboard" class="alert-link" href="">your dashboard</a>
+	</section>
+	
+	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
+	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>		
+	<script src="/features/feature.settings/lib/save.settings.listener.js"></script>
+</body>
+</html>

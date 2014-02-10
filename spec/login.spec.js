@@ -1,14 +1,15 @@
 var Browser 				= require("zombie");
-var router 					= require('../public/js/router');
-var Server 					= require('../public/js/server');
-var DatabaseWithChallenges 	= require('../test/support/database.with.levels');
+var router 					= require('../app/lib/router');
+var Server 					= require('../app/lib/server');
+var DatabaseWithChallenges 	= require('../app/support/database.with.levels');
 
 describe("Login", function() {
 
-	var server = new Server(router);
+	var server;
 	var database;
 	
 	beforeEach(function() {
+	    server = new Server(router);
 		database = new DatabaseWithChallenges();
 		server.useDatabase(database);
 		server.start();
@@ -23,8 +24,7 @@ describe("Login", function() {
 		browser.visit("http://localhost:5000").
 			then(function () {
 				browser.fill("#login", "ericminio");
-                browser.evaluate("login()");
-                return browser;
+                return browser.evaluate("login()");
 			}).
 			then(function() {
 				expect(browser.location.toString()).toEqual("http://localhost:5000/players/ericminio");

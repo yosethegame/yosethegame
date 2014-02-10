@@ -1,9 +1,9 @@
 var request 				= require('request');
-var Server 					= require('../public/js/server');
-var tryAll 					= require('../public/feature.try/try.request');
-var PSql 					= require('../public/js/psql.database');
+var Server 					= require('../app/lib/server');
+var tryAll 					= require('../app/features/feature.try/lib/try.request');
+var PSql 					= require('../app/lib/psql.database');
 var $ 						= require('jquery');
-var DatabaseWithChallenges 	= require('../test/support/database.with.levels');
+var DatabaseWithChallenges 	= require('../app/support/database.with.levels');
 
 describe("Trying to pass challenges >", function() {
 
@@ -74,7 +74,7 @@ describe("Trying to pass challenges >", function() {
 		describe('When there is a regression,', function() {
 		
 			beforeEach(function() {
-				database.worlds[0].levels[0].checker = '../../test/support/response.always.404';
+				database.worlds[0].levels[0].checker = '../../../../app/support/response.always.404';
 			});
 			
 			it('does not consider the next challenge as passing', function(done) {

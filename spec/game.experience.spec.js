@@ -1,7 +1,7 @@
 var Browser 				= require("zombie");
-var router 					= require('../public/js/router');
-var Server 					= require('../public/js/server');
-var DatabaseWithChallenges 	= require('../test/support/database.with.levels');
+var router 					= require('../app/lib/router');
+var Server 					= require('../app/lib/server');
+var DatabaseWithChallenges 	= require('../app/support/database.with.levels');
 var fs 						= require('fs');
 
 describe("Game experience", function() {
@@ -69,7 +69,7 @@ describe("Game experience", function() {
 	describe("When player fails the first challenge", function() {
 		
 		beforeEach(function() {
-			database.worlds[0].levels[0].checker = '../../test/support/response.always.501';
+			database.worlds[0].levels[0].checker = '../../../support/response.always.501';
 		});
 
 		it('displays the detail of the error', function(done) {

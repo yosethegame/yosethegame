@@ -1,4 +1,4 @@
-var PSql = require('../public/js/psql.database');
+var PSql = require('../app/lib/psql.database');
 var pg = require('pg');
 
 describe('PostgreSql database', function() {
