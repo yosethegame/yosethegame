@@ -165,7 +165,7 @@ describe('Safe cells in Minesweeper game', function() {
 		
 		it('sets expected', function(done) {
 			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
-				expect(status.expected).toContain("text containing '2'");
+				expect(status.expected).toContain("text = '2'");
 				done();
 			});
 		});
@@ -223,14 +223,14 @@ describe('Safe cells in Minesweeper game', function() {
 		
 		it('sets expected', function(done) {
 			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
-				expect(status.expected).toEqual("#cell-1x2 with class containing 'safe' and text containing '2'");
+				expect(status.expected).toEqual("#cell-1x2 with class containing 'safe' and text = '2'");
 				done();
 			});
 		});
 		
 		it('sets actual', function(done) {
 			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
-				expect(status.got).toEqual("#cell-1x2 with class containing 'safe' and text containing '2'");
+				expect(status.got).toEqual("#cell-1x2 with class containing 'safe' and text = '2'");
 				done();
 			});
 		});

@@ -37,7 +37,7 @@ module.exports = {
 		var cellIndex = this.cellIndex();
 		var emptyCellId = this.cellId(cellIndex);
 		var expectedCount = this.candidates[cellIndex].bombAround;
-		var expected = "#" + emptyCellId + " with class containing 'safe' and text containing '" + expectedCount + "'";
+		var expected = "#" + emptyCellId + " with class containing 'safe' and text = '" + expectedCount + "'";
 		var browser = new Browser();
 		browser.visit(url).
 			then(function() {
