@@ -184,6 +184,12 @@
 	padding-right:0px;
 }
 
+#rerun-content {
+	padding-top:120px;
+	padding-left:35px;
+	padding-right:5px;
+}
+
 .title {
 	padding: 0px 0px 20px 0px;
 	text-align: center;
