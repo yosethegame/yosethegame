@@ -20,26 +20,26 @@ describe('Create player form', function() {
 		});		
 		
 		describe('avatar input field', function() {
-		    
-    		it('exists', function() {			
-    			expect(page('input#avatar').length).toEqual(1);
-    		});	
-    		
-    		it('proposes default value', function() {
-    		   expect(page('#avatar').attr('value')).toEqual('/img/default-avatar.png'); 
-    		});
+
+            it('exists', function() {
+                expect(page('input#avatar').length).toEqual(1);
+            });
+
+            it('proposes default value', function() {
+                expect(page('#avatar').attr('value')).toEqual('/img/default-avatar.png'); 
+            });
 
 		});
 		
 		describe('preview avatar', function() {
-		    
-    		it('exists', function() {			
-    			expect(page('#avatar-preview').length).toEqual(1);
-    		});	
-    		
-    		it('is initialzed with default avatar', function() {
-    		    expect(page('#avatar-preview').attr('src')).toEqual('/img/default-avatar.png');
-    		});
+
+            it('exists', function() {			
+                expect(page('#avatar-preview').length).toEqual(1);
+            });
+
+            it('is initialzed with default avatar', function() {
+                expect(page('#avatar-preview').attr('src')).toEqual('/img/default-avatar.png');
+            });
 
 		});
 
@@ -83,7 +83,7 @@ describe('Create player form', function() {
 		});
 		
 		describe('login feedback', function() {
-		    
+
 			it('exists', function() {
 				expect(page('#login-feedback').length).toEqual(1);
 			});

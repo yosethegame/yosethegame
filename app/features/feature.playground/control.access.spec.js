@@ -1,4 +1,4 @@
-var cheerio 	= require('cheerio');
+var cheerio     = require('cheerio');
 var Data		= require('../../support/database.with.levels');
 var playground	= require('./lib/display.playground.request.js');
 var response	= require('../../support/fake.response');
@@ -12,11 +12,11 @@ describe('Control Access', function() {
 	var player;
 	
 	beforeEach(function() {	
-		database.worlds[0].isOpenFor = function(player) { return true; }
-		database.worlds[1].isOpenFor = function(player) { return true; }
+		database.worlds[0].isOpenFor = function(player) { return true; };
+		database.worlds[1].isOpenFor = function(player) { return true; };
 		player = {
 			login: 'ericminio'
-		}
+		};
 		database.players = [ player ];
 	});
 
@@ -59,7 +59,7 @@ describe('Control Access', function() {
 	describe('when world is locked for the player', function() {
 		
 		beforeEach(function() {
-			database.worlds[0].isOpenFor = function(player) { return false; }
+			database.worlds[0].isOpenFor = function(player) { return false; };
 			playground({ url: '/players/ericminio/play/world/1/level/1' }, response, database);
 			page = cheerio.load(response.html);
 		});
@@ -81,7 +81,7 @@ describe('Control Access', function() {
 	describe('when the world number is unknown', function() {
 		
 		beforeEach(function() {
-			database.worlds[1].isOpenFor = function(player) { return false; }
+			database.worlds[1].isOpenFor = function(player) { return false; };
 			playground({ url: '/players/ericminio/play/world/22/level/1' }, response, database);
 			page = cheerio.load(response.html);
 		});
@@ -103,7 +103,7 @@ describe('Control Access', function() {
 	describe('when the world number is corrupted', function() {
 		
 		beforeEach(function() {
-			database.worlds[1].isOpenFor = function(player) { return false; }
+			database.worlds[1].isOpenFor = function(player) { return false; };
 			playground({ url: '/players/ericminio/play/world/any/level/1' }, response, database);
 			page = cheerio.load(response.html);
 		});
@@ -162,8 +162,8 @@ describe('Control Access', function() {
 	describe('when the level is locked for the player', function() {
 		
 		beforeEach(function() {
-			database.worlds[1].isOpenFor = function(player) { return true; }
-			database.worlds[1].levels[2].isOpenLevelFor = function(player) { return false; }
+			database.worlds[1].isOpenFor = function(player) { return true; };
+			database.worlds[1].levels[2].isOpenLevelFor = function(player) { return false; };
 			
 			playground({ url: '/players/ericminio/play/world/2/level/3' }, response, database);
 			page = cheerio.load(response.html);
@@ -225,7 +225,7 @@ describe('Control Access', function() {
 	});
 	
 	describe('when the player has completed this level', function() {
-	    
+
 		beforeEach(function() {
 			player.portfolio = [];
 			logSuccess(player, database.worlds[0].levels[0].id);

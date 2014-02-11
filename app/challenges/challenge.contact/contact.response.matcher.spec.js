@@ -2,7 +2,7 @@ var matcher = require('./lib/contact.response.matcher');
 
 describe('Contact information response matcher,', function() {
 
-	var status;
+    var status;
 
 	describe('When the contact-me link is present', function() {
 	
@@ -10,7 +10,7 @@ describe('Contact information response matcher,', function() {
 			contentType = 'text/html';
 			content = '<html><body>' +
 							'<a id="contact-me-link" href="any">Contact me</a>' +
-					  '</body></html>';			
+                        '</body></html>';
 			status = matcher.computeStatus({ headers: {'content-type': contentType} }, content);
 		});
 		
@@ -33,7 +33,7 @@ describe('Contact information response matcher,', function() {
 		beforeEach(function() {
 			contentType = 'text/html';
 			content = '<html><body>' +
-					  '</body></html>';			
+                        '</body></html>';
 			status = matcher.computeStatus({ headers: {'content-type': contentType} }, content);
 		});
 		
@@ -56,8 +56,8 @@ describe('Contact information response matcher,', function() {
 		beforeEach(function() {
 			contentType = 'text/html';
 			content = '<html><body>' +
-			                '<a id="contact-me-link"> </a>' +
-					  '</body></html>';			
+                            '<a id="contact-me-link"> </a>' +
+                        '</body></html>';
 			status = matcher.computeStatus({ headers: {'content-type': contentType} }, content);
 		});
 		
@@ -80,8 +80,8 @@ describe('Contact information response matcher,', function() {
 		beforeEach(function() {
 			contentType = 'text/html';
 			content = '<html><body>' +
-			                '<a id="contact-me-link">Any text works</a>' +
-					  '</body></html>';			
+                            '<a id="contact-me-link">Any text works</a>' +
+                        '</body></html>';
 			status = matcher.computeStatus({ headers: {'content-type': contentType} }, content);
 		});
 		
@@ -104,8 +104,8 @@ describe('Contact information response matcher,', function() {
 		beforeEach(function() {
 			contentType = 'text/html';
 			content = '<html><body>' +
-			                '<a id="contact-me-link" href=" ">Any text works</a>' +
-					  '</body></html>';			
+                            '<a id="contact-me-link" href=" ">Any text works</a>' +
+                        '</body></html>';
 			status = matcher.computeStatus({ headers: {'content-type': contentType} }, content);
 		});
 		

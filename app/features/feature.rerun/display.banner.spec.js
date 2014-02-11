@@ -1,7 +1,7 @@
-var cheerio  = require('cheerio');
-var Data	 = require('../../support/database.with.levels');
-var rerun    = require('./lib/display.rerun.request');
-var response = require('../../support/fake.response');
+var cheerio     = require('cheerio');
+var Data        = require('../../support/database.with.levels');
+var rerun       = require('./lib/display.rerun.request');
+var response    = require('../../support/fake.response');
 
 describe('The banner', function() {
 	
@@ -11,13 +11,13 @@ describe('The banner', function() {
 	
 	beforeEach(function() {	
 		player = {
-			login: 'ericminio', 			
+            login: 'ericminio',
 			avatar: 'this-avatar',
 			score: 42,
 			portfolio: [ { server: 'this-server', achievements: [1, 2] } ]
 		};
-		database.worlds[0].isOpenFor = function(player) { return true; }
-		database.worlds[1].isOpenFor = function(player) { return true; }
+		database.worlds[0].isOpenFor = function(player) { return true; };
+		database.worlds[1].isOpenFor = function(player) { return true; };
 		database.players = [ player ];
 		rerun({ url: '/players/ericminio/rerun/world/1' }, response, database);
 		page = cheerio.load(response.html);

@@ -1,4 +1,4 @@
-var cheerio 	= require('cheerio');
+var cheerio     = require('cheerio');
 var Data		= require('../../support/database.with.levels');
 var dashboard	= require('./lib/display.dashboard.js');
 var response	= require('../../support/fake.response');
@@ -11,11 +11,11 @@ describe('The avatar', function() {
 	
 	beforeEach(function() {	
 		player = {
-			login: 'ericminio', 			
+            login: 'ericminio',
 			avatar: 'this-avatar'
-		}
-		database.worlds[0].isOpenFor = function(player) { return true; }
-		database.worlds[1].isOpenFor = function(player) { return true; }
+		};
+		database.worlds[0].isOpenFor = function(player) { return true; };
+		database.worlds[1].isOpenFor = function(player) { return true; };
 		database.players = [ player ];
 	});
 	

@@ -7,12 +7,12 @@ describe('Server >', function() {
 	var server;
 
 	describe('router use:', function() {
-    	
+
         var endPointCalled = false;
-    	
+
         beforeEach(function() {
-	        endPoint = function(request, response) {
-            	endPointCalled = true;
+            endPoint = function(request, response) {
+                endPointCalled = true;
                 response.end();
             };
 			router.routes = [
@@ -25,26 +25,26 @@ describe('Server >', function() {
             server.start();
         });
              
-    	afterEach(function() {
+        afterEach(function() {
             server.stop();
         });
 
-	    it('calls the endpoint found in the given router', function(done) {
+        it('calls the endpoint found in the given router', function(done) {
             request("http://localhost:5000/this-path", function(error, response, body) {
                 expect(endPointCalled).toBe(true);
                 done();
             });       
-    	});
+        });
         
     });
 
 	describe('database use:', function() {
              
-    	var database = {};
+        var database = {};
         var databaseReceived;
-    	
+
         beforeEach(function() {
-	        endPoint = function(request, response, database) {
+            endPoint = function(request, response, database) {
                 databaseReceived = database;
                 response.end();
             };
@@ -59,16 +59,16 @@ describe('Server >', function() {
             server.start();
         });
              
-    	afterEach(function() {
+        afterEach(function() {
             server.stop();
         });
 
-	    it('send the database to the endpoint', function(done) {
+        it('send the database to the endpoint', function(done) {
             request("http://localhost:5000/this-path", function(error, response, body) {
                 expect(databaseReceived).toBe(database);
                 done();
             });       
-    	});
+        });
         
 	});
 });	

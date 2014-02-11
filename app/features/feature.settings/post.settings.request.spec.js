@@ -1,5 +1,5 @@
-var post 			 = require('./lib/post.settings.request');
-var InMemoryDatabase = require('../../support/database.with.levels');
+var post                = require('./lib/post.settings.request');
+var InMemoryDatabase    = require('../../support/database.with.levels');
 
 describe('Save settings endpoint', function() {
 
@@ -8,7 +8,7 @@ describe('Save settings endpoint', function() {
 	
 	beforeEach(function() {
 		database = new InMemoryDatabase();
-	    database.players = [ { login: 'eric', avatar: 'old-avatar', tags: 'old tags' } ];
+        database.players = [ { login: 'eric', avatar: 'old-avatar', tags: 'old tags' } ];
 		server = require('http').createServer(function(request, response){
 			post(request, response, database);
 		}).listen(5000, 'localhost');

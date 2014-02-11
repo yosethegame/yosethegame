@@ -45,7 +45,8 @@ beforeEach(function() {
 function DashboardWorldMatcherData(page, database) {
 	this.database = database;
 	this.page = page;
-};
+}
+
 DashboardWorldMatcherData.prototype.number = function(index) {
 	var selector = 'table#worlds tr:nth-child(' + index + ') td:nth-child(1)';
 	return {

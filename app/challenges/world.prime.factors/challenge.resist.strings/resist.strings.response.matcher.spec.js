@@ -21,7 +21,7 @@ describe('Resist strings response matcher', function() {
 					'<label id="invitation">invitation</label>' +
 					'<input id="number">' +
 					'<button id="go" onclick="window.location=\'/go\'">go</button>' +
-			  '</body></html>';			
+                '</body></html>';
 			
 	describe('When server answer expected answer,', function() {
 		
@@ -29,7 +29,7 @@ describe('Resist strings response matcher', function() {
 			matcher.getInput = function() { return '2AZER'; };
 			var error = '<html><body>' + 
 							'<label id="result">2AZER is not a number</label>' +
-			  			'</body></html>';			
+                        '</body></html>';
 			remote = require('http').createServer(
 				function (request, response) {
 					if (request.url == '/go') {

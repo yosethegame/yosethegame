@@ -1,6 +1,6 @@
-var cheerio 		 	   = require('cheerio');
-var home 			 	   = require('./lib/home.page');
-var DatabaseWithChallenges = require('../../support/database.with.levels');
+var cheerio                 = require('cheerio');
+var home                    = require('./lib/home.page');
+var DatabaseWithChallenges  = require('../../support/database.with.levels');
 
 describe('Home page building', function() {
 
@@ -45,13 +45,13 @@ describe('Home page building', function() {
 							'</a>' +
 							'<span class="hall-of-fame-score-leading-zeros">0000</span>' +
 							'<span class="hall-of-fame-score">1234567</span>' +
-					   '</li>';
+                        '</li>';
 		
         it('links to the dashboard of the player', function() {
             var line = home.buildLine(template, { login: 'eric', avatar: 'me.png', portfolio: [ { server: 'server of eric' }] }, database );
 
             expect(cheerio.load(line)('.player a')[0].attribs.href).toEqual('server of eric');
-  		});
+        });
 
 		it('contains the avatar', function() {
 			var line = home.buildLine(template, { avatar: 'me.png' }, database );

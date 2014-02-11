@@ -55,7 +55,7 @@ describe("Serve Content callback", function() {
 	});
 	
 	it("serves a css with text/css content-type", function(done) {
-	    fs.writeFileSync(folder + '/a-file.css', 'content');
+        fs.writeFileSync(folder + '/a-file.css', 'content');
 
 		request("http://localhost:5000/a-file.css", function(error, response, body) {
 			expect(response.headers['content-type']).toEqual('text/css');
@@ -64,7 +64,7 @@ describe("Serve Content callback", function() {
 	});
 	
 	it("serves a js with text/script content-type", function(done) {
-	    fs.writeFileSync(folder + '/a-file.js', 'content');
+        fs.writeFileSync(folder + '/a-file.js', 'content');
 
 		request("http://localhost:5000/a-file.js", function(error, response, body) {
 			expect(response.headers['content-type']).toEqual('application/javascript');
@@ -73,7 +73,7 @@ describe("Serve Content callback", function() {
 	});
 	
 	it("serves a jpeg with image/jpeg content-type", function(done) {
-	    fs.writeFileSync(folder + '/a-file.jpeg', 'content');
+        fs.writeFileSync(folder + '/a-file.jpeg', 'content');
 
 		request("http://localhost:5000/a-file.jpeg", function(error, response, body) {
 			expect(response.headers['content-type']).toEqual('image/jpeg');
@@ -82,7 +82,7 @@ describe("Serve Content callback", function() {
 	});
 
 	it("serves a png with image/png content-type", function(done) {
-	    fs.writeFileSync(folder + '/a-file.png', 'content');
+        fs.writeFileSync(folder + '/a-file.png', 'content');
 
 		request("http://localhost:5000/a-file.png", function(error, response, body) {
 			expect(response.headers['content-type']).toEqual('image/png');
@@ -91,7 +91,7 @@ describe("Serve Content callback", function() {
 	});
 
 	it("serves a html with text/html content-type", function(done) {
-	    fs.writeFileSync(folder + '/a-file.html', 'content');
+        fs.writeFileSync(folder + '/a-file.html', 'content');
 
 		request("http://localhost:5000/a-file.html", function(error, response, body) {
 			expect(response.headers['content-type']).toEqual('text/html');
@@ -100,7 +100,7 @@ describe("Serve Content callback", function() {
 	});
 
 	it("serves other files with text/plain content-type", function(done) {
-	    fs.writeFileSync(folder + '/a-file', 'content');
+        fs.writeFileSync(folder + '/a-file', 'content');
 
 		request("http://localhost:5000/a-file", function(error, response, body) {
 			expect(response.headers['content-type']).toEqual('text/plain');

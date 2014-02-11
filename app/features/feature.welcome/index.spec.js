@@ -18,23 +18,23 @@ describe("index.html", function() {
 	describe("page's elements:", function() {
 		
 		it('has a placeholder for the player count', function() {
-		    expect(page('#player-count').length).toEqual(1);
+            expect(page('#player-count').length).toEqual(1);
 		});
 		
 		it('has a placeholder for the total score', function() {
-		    expect(page('#score-community').length).toEqual(1);
+            expect(page('#score-community').length).toEqual(1);
 		});
 		
 		describe('login form', function() {
-		  
-		  it('has a login input field', function() {
-              expect(page('input#login').length).toEqual(1);
-		  });
-		  
-		  it('offers a way to create a new player', function() {
-              expect(page('a#create-new-player-link').attr('href')).toEqual('/create-new-player');
-		  });
-		    
+
+            it('has a login input field', function() {
+                expect(page('input#login').length).toEqual(1);
+            });
+            
+            it('offers a way to create a new player', function() {
+                expect(page('a#create-new-player-link').attr('href')).toEqual('/create-new-player');
+            });
+
 		});
 
 		describe('player list', function() {

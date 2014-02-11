@@ -5,20 +5,20 @@ describe('Landing page response matcher,', function() {
 	var status;
 	
 	beforeEach(function() {
-	    matcher.player = { portfolio: [ { server: 'http://this-url' } ] };
+        matcher.player = { portfolio: [ { server: 'http://this-url' } ] };
 	});
 	
 	it('knows the expected response', function() {
-	    expect(matcher.expected()).toEqual("An element a#prime-factors-decomposition-link with href='http://this-url/primeFactors/ui' (case sensitive)");
+        expect(matcher.expected()).toEqual("An element a#prime-factors-decomposition-link with href='http://this-url/primeFactors/ui' (case sensitive)");
 	});
 	
 	describe('When remote server responds the expected element', function() {
 	
 		beforeEach(function() {
 			contentType = 'text/html';
-			content = '<html><body>' +
-							'<a id="prime-factors-decomposition-link" href="http://this-url/primeFactors/ui">The prime factors challenges</a>' +
-					  '</body></html>';			
+			content =   '<html><body>' +
+                            '<a id="prime-factors-decomposition-link" href="http://this-url/primeFactors/ui">The prime factors challenges</a>' +
+                        '</body></html>';
 			status = matcher.computeStatus({}, content);
 		});
 		
@@ -35,18 +35,18 @@ describe('Landing page response matcher,', function() {
 		});
 		
 		describe('a case diff', function() {
-		   
-    	    beforeEach(function() {
-    		    contentType = 'text/html';
-    			content = '<html><body>' +
-    							'<a id="prime-factors-decomposition-link" href="http://this-url/PrimeFactors/UI">The prime factors challenges</a>' +
-    					  '</body></html>';			
-    			status = matcher.computeStatus({}, content);
-    		});
 
- 		   it('is not accepted', function() {
-    			expect(status.code).toEqual(501);
-		   }); 
+            beforeEach(function() {
+                contentType = 'text/html';
+                content =   '<html><body>' +
+                                '<a id="prime-factors-decomposition-link" href="http://this-url/PrimeFactors/UI">The prime factors challenges</a>' +
+                            '</body></html>';			
+                status = matcher.computeStatus({}, content);
+            });
+
+            it('is not accepted', function() {
+                expect(status.code).toEqual(501);
+            }); 
 		});
 		
 	});	
@@ -55,8 +55,8 @@ describe('Landing page response matcher,', function() {
 	
 		beforeEach(function() {
 			contentType = 'text/html';
-			content = '<html><body>' +
-					  '</body></html>';			
+			content =   '<html><body>' +
+                        '</body></html>';			
 			status = matcher.computeStatus({}, content);
 		});
 		
@@ -78,9 +78,9 @@ describe('Landing page response matcher,', function() {
 	
 		beforeEach(function() {
 			contentType = 'text/html';
-			content = '<html><body>' +
-							'<a id="prime-factors-decomposition-link" href="any/primeFactors/ui">The prime factors</a>' +
-					  '</body></html>';			
+			content =   '<html><body>' +
+                            '<a id="prime-factors-decomposition-link" href="any/primeFactors/ui">The prime factors</a>' +
+                        '</body></html>';			
 			status = matcher.computeStatus({}, content);
 		});
 		

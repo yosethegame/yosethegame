@@ -157,17 +157,17 @@ describe('Regexp', function() {
 	});
 	
 	describe('Regex concatanation', function() {
-	   
+
         it('works', function() {
-    	    var start = /\/any/;
-    	    var end = /\/route/;
-    	    var pattern = /^/ && start && end && /$/;
+            var start = /\/any/;
+            var end = /\/route/;
+            var pattern = /^/ && start && end && /$/;
 
             expect(pattern.test('/any/route')).toBe(true);
         }); 
 
         it('works inline', function() {
-    	    var pattern = /^/ && /\/any/ && /\/route/ && /$/;
+            var pattern = /^/ && /\/any/ && /\/route/ && /$/;
 
             expect(pattern.test('/any/route')).toBe(true);
         }); 

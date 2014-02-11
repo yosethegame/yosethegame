@@ -70,7 +70,7 @@ describe('Open challenge response matcher', function() {
 							'<label id="cell-3x3"></label>' +
 							
 							'<script>function load() { }</script>' +
-					  '</body></html>';			
+                        '</body></html>';			
 
 			remote = require('http').createServer(
 				function (request, response) {
@@ -80,7 +80,7 @@ describe('Open challenge response matcher', function() {
 			.listen(6000);	
 			
 			matcher.target = function() {
-			    return {
+                return {
                     grid: [
                         ['bomb' , 'empty', 'empty'],
                         ['empty', 'empty', 'empty'],
@@ -119,7 +119,7 @@ describe('Open challenge response matcher', function() {
 				done();
 			});
 		});
-	   
+		
    });
    
    describe("fails when one of the expected open cells does not contain the expected bomb count", function() {
@@ -141,7 +141,7 @@ describe('Open challenge response matcher', function() {
 							'<label id="cell-3x3"></label>' +
 							
 							'<script>function load() { }</script>' +
-					  '</body></html>';			
+                        '</body></html>';			
 
 			remote = require('http').createServer(
 				function (request, response) {
@@ -151,7 +151,7 @@ describe('Open challenge response matcher', function() {
 			.listen(6000);	
 			
 			matcher.target = function() {
-			    return {
+                return {
                     grid: [
                         ['bomb' , 'empty', 'empty'],
                         ['empty', 'empty', 'empty'],
@@ -190,7 +190,7 @@ describe('Open challenge response matcher', function() {
 				done();
 			});
 		});
-	   
+
    });
    
    describe("passes when the open cells contain the expected bomb count", function() {
@@ -212,7 +212,7 @@ describe('Open challenge response matcher', function() {
 							'<label id="cell-3x3"></label>' +
 							
 							'<script>function load() { }</script>' +
-					  '</body></html>';			
+                        '</body></html>';			
 
 			remote = require('http').createServer(
 				function (request, response) {
@@ -222,7 +222,7 @@ describe('Open challenge response matcher', function() {
 			.listen(6000);	
 			
 			matcher.target = function() {
-			    return {
+                return {
                     grid: [
                         ['bomb' , 'empty', 'empty'],
                         ['empty', 'empty', 'empty'],
@@ -261,7 +261,7 @@ describe('Open challenge response matcher', function() {
 				done();
 			});
 		});
-	   
+
    });
    
 });

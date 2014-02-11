@@ -1,11 +1,11 @@
 describe('List of decomposition response matcher', function() {
 
 	var matcher;
-	var initialStringChooser = undefined;
+	var initialStringChooser;
 	
 	beforeEach(function() {
 		matcher = require('./lib/list.of.decomposition.response.matcher');
-		if (initialStringChooser == undefined) {
+		if (initialStringChooser === undefined) {
 			initialStringChooser = matcher.stringChooser;
 		} else {
 			matcher.stringChooser = initialStringChooser;
@@ -47,10 +47,10 @@ describe('List of decomposition response matcher', function() {
 	describe('When the result list is missing,', function() {
 		
 		beforeEach(function() {
-			var page = '<html><body>' +
-							'<input id="number">' +
-							'<button id="go">go</button>' +
-					  '</body></html>';			
+			var page =  '<html><body>' +
+                            '<input id="number">' +
+                            '<button id="go">go</button>' +
+                        '</body></html>';
 
 			remote = require('http').createServer(
 				function (request, response) {
@@ -92,12 +92,12 @@ describe('List of decomposition response matcher', function() {
 		beforeEach(function() {
 			alreadyCalled = false;
 			matcher.numberChooser = fakeNumberChooser;
-			var page = '<html><body>' +
-							'<input id="number">' +
-							'<button id="go">go</button>' +							
-							'<ol id="results">' +
-							'</ol>' +
-					  '</body></html>';			
+			var page =  '<html><body>' +
+                            '<input id="number">' +
+                            '<button id="go">go</button>' +							
+                            '<ol id="results">' +
+                            '</ol>' +
+                        '</body></html>';
 
 			remote = require('http').createServer(
 				function (request, response) {
@@ -139,13 +139,13 @@ describe('List of decomposition response matcher', function() {
 		beforeEach(function() {
 			alreadyCalled = false;
 			matcher.numberChooser = fakeNumberChooser;
-			var page = '<html><body>' +
-							'<input id="number">' +
-							'<button id="go">go</button>' +							
-							'<ol id="results">' +
-								'<li>300 = 2 x 2 x 3 x 5 x 5</li>' +
-							'</ol>' +
-					  '</body></html>';			
+			var page =  '<html><body>' +
+                            '<input id="number">' +
+                            '<button id="go">go</button>' +							
+                            '<ol id="results">' +
+                                '<li>300 = 2 x 2 x 3 x 5 x 5</li>' +
+                            '</ol>' +
+                        '</body></html>';
 
 			remote = require('http').createServer(
 				function (request, response) {
@@ -195,7 +195,7 @@ describe('List of decomposition response matcher', function() {
 								'<li>300 = 2 x 2 x 3 x 5 x 5</li>' +
 								'<li>42 = 2 x 3 x 7</li>' +
 							'</ol>' +
-					  '</body></html>';			
+                        '</body></html>';
 
 			remote = require('http').createServer(
 				function (request, response) {
@@ -247,7 +247,7 @@ describe('List of decomposition response matcher', function() {
 								'<li>yolo is not a number</li>' +
 								'<li>hello yose :)</li>' +
 							'</ol>' +
-					  '</body></html>';			
+                        '</body></html>';
 
 			remote = require('http').createServer(
 				function (request, response) {
@@ -297,7 +297,7 @@ describe('List of decomposition response matcher', function() {
 								'<li>42 = 2 x 3 x 7</li>' +
 								'<li>yolo is not a number</li>' +
 							'</ol>' +
-					  '</body></html>';			
+                        '</body></html>';
 
 			remote = require('http').createServer(
 				function (request, response) {
@@ -347,7 +347,7 @@ describe('List of decomposition response matcher', function() {
 								'<li>42 = 2 x 3 x 7 x 1000</li>' +
 								'<li>yolo is not a number</li>' +
 							'</ol>' +
-					  '</body></html>';			
+                        '</body></html>';
 
 			remote = require('http').createServer(
 				function (request, response) {
@@ -398,7 +398,7 @@ describe('List of decomposition response matcher', function() {
 								'<li>42 = 2 x 3 x 7</li>' +
 								'<li>hello :)</li>' +
 							'</ol>' +
-					  '</body></html>';			
+                        '</body></html>';
 
 			remote = require('http').createServer(
 				function (request, response) {
@@ -451,7 +451,7 @@ describe('List of decomposition response matcher', function() {
 								'<li>42 = 2 x 3 x 7</li>' +
 								'<li>yolo is not a number</li>' +
 							'</ol>' +
-					  '</body></html>';			
+                        '</body></html>';
 
 			remote = require('http').createServer(
 				function (request, response) {
@@ -460,11 +460,10 @@ describe('List of decomposition response matcher', function() {
 				})
 			.listen(6000);			
 			
-			expected= "A page containing a list ol#results with 3 items"
-					  + " AND ol#results li:nth-of-type(1) containing 300 = 2 x 2 x 3 x 5 x 5"
-					  + " AND ol#results li:nth-of-type(2) containing 42 = 2 x 3 x 7"
-					  + " AND ol#results li:nth-of-type(3) containing yolo is not a number"
-			
+			expected= 'A page containing a list ol#results with 3 items' +
+                      ' AND ol#results li:nth-of-type(1) containing 300 = 2 x 2 x 3 x 5 x 5' +
+                      ' AND ol#results li:nth-of-type(2) containing 42 = 2 x 3 x 7' +
+                      ' AND ol#results li:nth-of-type(3) containing yolo is not a number';
 		});
 
 		afterEach(function() {

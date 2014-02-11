@@ -5,7 +5,7 @@ describe('Hello Yose response matcher,', function() {
 	var status;
 	
 	it('knows the expected response', function() {
-	    expect(matcher.expected).toEqual("A page containing the text 'Hello Yose'");
+        expect(matcher.expected).toEqual("A page containing the text 'Hello Yose'");
 	});
 	
 	describe('When remote server responds the expected content', function() {
@@ -13,7 +13,7 @@ describe('Hello Yose response matcher,', function() {
 		beforeEach(function() {
 			content = '<html><body>' +
 							'Hello Yose' +
-					  '</body></html>';			
+                        '</body></html>';
 			status = matcher.computeStatus({ }, content);
 		});
 		

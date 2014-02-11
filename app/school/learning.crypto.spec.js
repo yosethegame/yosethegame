@@ -16,7 +16,7 @@ describe('crypto', function() {
 			var hash = crypto.createHash('md5');
 			hash.update(secret);
 			return hash.digest('hex');				
-		}
+		};
 
 		it('encrypts consistently', function() {
 			var secret = 'my secret, cab be long or short, as you wish';
@@ -28,4 +28,4 @@ describe('crypto', function() {
 		});
 		
 	});
-})
+});

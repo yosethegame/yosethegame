@@ -92,7 +92,7 @@ describe('Router', function() {
 		
 		beforeEach(function() {
 			server = require('http').createServer(function(request, response){
-            	router.endPointOf(request)(request, response);
+                router.endPointOf(request)(request, response);
             }).listen(5000, 'localhost');
 		});
 		
@@ -116,7 +116,7 @@ describe('Router', function() {
 				expect(called).toBe(true);
 				done();
 			});
-		})
+		});
 	});
 	
 });

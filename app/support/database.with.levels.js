@@ -51,7 +51,7 @@ function Example() {
 			isOpenFor: function(player) { return thePlayer.hasDoneLevelWithId(player, 2); }
 		}
 	];
-};
+}
 
 Example.prototype = new InMemoryDatabase();
 

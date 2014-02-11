@@ -10,7 +10,7 @@ describe('Big number guard Requester', function() {
 	});
 	
 	it('suppresses eventual training slash', function() {
-	   expect(new Requester('this-url/').server).toEqual('this-url'); 
+        expect(new Requester('this-url/').server).toEqual('this-url');
 	});
 	
 	it('has a number chooser choosing a positive integer > 1e6', function() {

@@ -6,12 +6,12 @@ describe('Random challenge response matcher', function() {
     
     describe('fails when document.grid is always the same,', function() {
         
-   	    beforeEach(function() {
+        beforeEach(function() {
 			content = '<html><body>' +
 							'<script>' +
 							'   document.grid = [ ["empty", "empty"], [ "empty", "bomb" ] ]; ' +
 							'</script>' +
-					  '</body></html>';			
+                        '</body></html>';
 
 			remote = require('http').createServer(
 				function (request, response) {
@@ -51,24 +51,24 @@ describe('Random challenge response matcher', function() {
     
         var access;
     
-   	    beforeEach(function() {
-   	        access = 1;
+        beforeEach(function() {
+            access = 1;
 			firstContent = '<html><body>' +
 							'<script>' +
 							'   document.grid = [ ["empty", "empty"], [ "empty", "bomb" ] ]; ' +
 							'</script>' +
-					  '</body></html>';			
+                        '</body></html>';
 
-          	secondContent = '<html><body>' +
-			                '<script>' +
+            secondContent = '<html><body>' +
+                            '<script>' +
 							'   document.grid = [ ["empty", "empty"], [ "bomb", "bomb" ] ]; ' +
-			                '</script>' +
-  						  '</body></html>';			
+                            '</script>' +
+                            '</body></html>';
 
 			remote = require('http').createServer(
 				function (request, response) {
-				    access += 1;
-					response.write(access % 2 == 0 ? firstContent : secondContent);
+                    access += 1;
+                    response.write(access % 2 === 0 ? firstContent : secondContent);
 					response.end();
 				})
 			.listen(6000);				
@@ -78,7 +78,7 @@ describe('Random challenge response matcher', function() {
 			remote.close();
 		});
 		
-   	    it('sets code to 200', function(done) {
+        it('sets code to 200', function(done) {
 			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
 				expect(status.code).toEqual(200);
 				done();

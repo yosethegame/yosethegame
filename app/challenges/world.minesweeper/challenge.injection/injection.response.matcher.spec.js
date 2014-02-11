@@ -9,29 +9,29 @@ describe('Minesweeper data injection', function() {
 	it('injects a 8x8 grid', function() {
 		expect(matcher.data.length).toEqual(8);
 		array.forEach(matcher.data, function(row) {
-		   expect(row.length).toEqual(8); 
+            expect(row.length).toEqual(8);
 		});
 	});
 	
 	it('knows where the bombs are', function() {
-	    array.forEach(matcher.candidates, function(candidate) {
-	       expect(matcher.data[candidate.row-1][candidate.column-1]).toEqual('bomb'); 
-	    });
+        array.forEach(matcher.candidates, function(candidate) {
+            expect(matcher.data[candidate.row-1][candidate.column-1]).toEqual('bomb');
+        });
 	});
 	
 	it('plays randomly on a bomb', function() {
 		var first = matcher.bombIndex();
 		var same = true;
 		array.forEach([1, 2, 3, 4, 5], function(index) {
-		    var second = matcher.bombIndex();
-    		if (second !== first) { same = false; }
+            var second = matcher.bombIndex();
+            if (second !== first) { same = false; }
 		});
 		
 		expect(same).toBe(false);
 	});
 	
 	it('builds the cell id of the bomb to play', function() {
-	   expect(matcher.cellId(0)).toEqual('cell-2x1');
+        expect(matcher.cellId(0)).toEqual('cell-2x1');
 	});
 	
 	describe('fails when load() function does not exist', function() {
@@ -45,7 +45,7 @@ describe('Minesweeper data injection', function() {
 							'<label id="cell-2x1"></label>' +
 							'<label id="cell-2x2"></label>' +
 							
-					  '</body></html>';			
+                        '</body></html>';
 
 			remote = require('http').createServer(
 				function (request, response) {
@@ -94,7 +94,7 @@ describe('Minesweeper data injection', function() {
 							
 							'<script>function load() { }</script>' +
 							'<script>function play(line, column) { }</script>' +
-					  '</body></html>';			
+                        '</body></html>';
 
 			remote = require('http').createServer(
 				function (request, response) {
@@ -105,7 +105,7 @@ describe('Minesweeper data injection', function() {
 			
 			matcher.data = [ [ 'bomb' , 'empty', 'bomb'] ];
 			matcher.candidates = [ {row:1, column:1}, {row:1, column:3} ];
-			matcher.bombIndex = function() { return 1; }		
+            matcher.bombIndex = function() { return 1; };
 		});
 		
 		afterEach(function() {
@@ -113,8 +113,8 @@ describe('Minesweeper data injection', function() {
 		});
 		
 		it('plays the second bomb', function() {
-		    expect(matcher.bombIndex()).toEqual(1);
-		})
+            expect(matcher.bombIndex()).toEqual(1);
+		});
 
 		it('sets code to 501', function(done) {
 			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
@@ -150,7 +150,7 @@ describe('Minesweeper data injection', function() {
 							
 							'<script>function load() { }</script>' +
 							'<script>function play(line, column) { }</script>' +
-					  '</body></html>';			
+                        '</body></html>';
 
 			remote = require('http').createServer(
 				function (request, response) {
@@ -161,7 +161,7 @@ describe('Minesweeper data injection', function() {
 			
 			matcher.data = [ [ 'bomb' , 'empty', 'bomb'] ];
 			matcher.candidates = [ {row:1, column:1}, {row:1, column:3} ];
-			matcher.bombIndex = function() { return 1; }		
+            matcher.bombIndex = function() { return 1; };
 		});
 		
 		afterEach(function() {
@@ -202,12 +202,12 @@ describe('Minesweeper data injection', function() {
 							
 							'<script>function load() { }</script>' +
 							'<script>function play(line, column) { ' +
-							' 			 var id = "cell-" + line + "x" + column;' +
-							' 			 var state = document.grid[line-1][column-1] == "bomb" ? "lost" : "";' +
+                            '            var id = "cell-" + line + "x" + column;' +
+                            '            var state = document.grid[line-1][column-1] == "bomb" ? "lost" : "";' +
 							'            document.getElementById(id).className = state; ' +
 							'        }' +
 							'</script>' +
-					  '</body></html>';			
+                        '</body></html>';
 
 			remote = require('http').createServer(
 				function (request, response) {
@@ -218,7 +218,7 @@ describe('Minesweeper data injection', function() {
 			
 			matcher.data = [ [ 'bomb' , 'empty', 'bomb'] ];
 			matcher.candidates = [ {row:1, column:1}, {row:1, column:3} ];
-			matcher.bombIndex = function() { return 1; }		
+            matcher.bombIndex = function() { return 1; };
 		});
 		
 		afterEach(function() {

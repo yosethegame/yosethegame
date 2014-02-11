@@ -1,5 +1,5 @@
-var ProductionDatabase 	= require('./lib/production.database');
-var array 				= require('./utils/lib/array.utils');
+var ProductionDatabase  = require('./lib/production.database');
+var array               = require('./utils/lib/array.utils');
 
 describe('Worlds', function() {
 	
@@ -28,11 +28,11 @@ describe('Worlds', function() {
 	});
 	
 	describe('isOpenFor', function() {
-	    
-	    it('must be the common one', function() {
-    		array.forEach(database.worlds, function(world) {
-    			expect(world.isOpenFor).toBe(ProductionDatabase.isWorldOpenFor);
-    		});
-	    });    
+
+        it('must be the common one', function() {
+            array.forEach(database.worlds, function(world) {
+                expect(world.isOpenFor).toBe(ProductionDatabase.isWorldOpenFor);
+            });
+        });    
 	});
 });

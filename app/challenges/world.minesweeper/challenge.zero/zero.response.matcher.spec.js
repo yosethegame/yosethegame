@@ -6,30 +6,30 @@ describe('Zero challenge in Minesweeper game:', function() {
     it('uses a 8x8 grid', function() {
 		expect(matcher.data.length).toEqual(8);
 		array.forEach(matcher.data, function(row) {
-		   expect(row.length).toEqual(8); 
+            expect(row.length).toEqual(8);
 		});
 	});
 	
 	it('the candidates target empty cells', function() {
-	    array.forEach(matcher.candidates, function(candidate) {
-	       expect(matcher.data[candidate.row-1][candidate.column-1]).toEqual('empty'); 
-	    });
+        array.forEach(matcher.candidates, function(candidate) {
+            expect(matcher.data[candidate.row-1][candidate.column-1]).toEqual('empty');
+        });
 	});
 	
 	it('plays randomly on a candidate', function() {
 		var first = matcher.candidateIndex();
 		var same = true;
 		array.forEach([1, 2, 3, 4, 5], function(index) {
-		    var second = matcher.candidateIndex();
-    		if (second !== first) { same = false; }
+            var second = matcher.candidateIndex();
+            if (second !== first) { same = false; }
 		});
 		
 		expect(same).toBe(false);
 	});
 	
 	describe('fails when clicking on a cell with zero bomb around set text of cell to anything but empty', function() {
-	   
-	    beforeEach(function() {
+
+        beforeEach(function() {
 			content = '<html><body>' +
 							'<label id="title">Minesweeper</label>' +
 
@@ -38,7 +38,7 @@ describe('Zero challenge in Minesweeper game:', function() {
 							'<label id="cell-1x3"></label>' +
 							
 							'<script>function load() { }</script>' +
-					  '</body></html>';			
+                        '</body></html>';
 
 			remote = require('http').createServer(
 				function (request, response) {
@@ -49,7 +49,7 @@ describe('Zero challenge in Minesweeper game:', function() {
 			
 			matcher.data = [ [ 'empty' , 'empty', 'empty'] ];
 			matcher.candidates = [{ row:1, column:1 } ];
-			matcher.candidateIndex = function() { return 0; }
+            matcher.candidateIndex = function() { return 0; };
 		});
 		
 		afterEach(function() {
@@ -76,12 +76,12 @@ describe('Zero challenge in Minesweeper game:', function() {
 				done();
 			});
 		});
-	    
+
 	});
 	
 	describe('passes when clicking on a cell with zero bomb around set text of cell to empty', function() {
-	   
-	    beforeEach(function() {
+
+        beforeEach(function() {
 			content = '<html><body>' +
 							'<label id="title">Minesweeper</label>' +
 
@@ -90,7 +90,7 @@ describe('Zero challenge in Minesweeper game:', function() {
 							'<label id="cell-1x3"></label>' +
 							
 							'<script>function load() { }</script>' +
-					  '</body></html>';			
+                        '</body></html>';
 
 			remote = require('http').createServer(
 				function (request, response) {
@@ -101,7 +101,7 @@ describe('Zero challenge in Minesweeper game:', function() {
 			
 			matcher.data = [ [ 'empty' , 'empty', 'empty'] ];
 			matcher.candidates = [{ row:1, column:1 } ];
-			matcher.candidateIndex = function() { return 0; }
+			matcher.candidateIndex = function() { return 0; };
 		});
 		
 		afterEach(function() {
@@ -128,7 +128,7 @@ describe('Zero challenge in Minesweeper game:', function() {
 				done();
 			});
 		});
-	    
+
 	});
 	
 });

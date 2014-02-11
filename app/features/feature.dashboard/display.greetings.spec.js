@@ -1,5 +1,5 @@
-var cheerio 			= require('cheerio');
-var Data	 			= require('../../support/database.with.levels');
+var cheerio             = require('cheerio');
+var Data                = require('../../support/database.with.levels');
 var dashboard			= require('./lib/display.dashboard.js');
 var response			= require('../../support/fake.response');
 
@@ -11,11 +11,11 @@ describe('The warm welcome message', function() {
 	
 	beforeEach(function() {	
 		player = {
-			login: 'ericminio', 			
+			login: 'ericminio',
 			server: 'this-server'
-		}
-		database.worlds[0].isOpenFor = function(player) { return true; }
-		database.worlds[1].isOpenFor = function(player) { return true; }
+		};
+		database.worlds[0].isOpenFor = function(player) { return true; };
+		database.worlds[1].isOpenFor = function(player) { return true; };
 		database.players = [ player ];
 	});
 	

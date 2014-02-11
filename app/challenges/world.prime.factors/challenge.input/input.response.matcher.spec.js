@@ -17,15 +17,15 @@ describe('Input response matcher,', function() {
 					'<label id="invitation">invitation</label>' +
 					'<input id="number">' +
 					'<button id="go" onclick="window.location=\'/go\'">go</button>' +
-			  '</body></html>';			
+                '</body></html>';
 			
 	describe('When server answer expected answer,', function() {
 		
 		beforeEach(function() {
-			matcher.numberChooser = { getNumber: function() { return 42; } }
+			matcher.numberChooser = { getNumber: function() { return 42; } };
 			var decomposition = '<html><body>' + 
 							'<label id="result">42 = 2 x 3 x 7</label>' +
-			  			'</body></html>';			
+                            '</body></html>';
 			remote = require('http').createServer(
 				function (request, response) {
 					if (request.url == '/go') {
@@ -106,10 +106,10 @@ describe('Input response matcher,', function() {
 	describe('When server does not respond correct decomposition,', function () {
 		
 		beforeEach(function() {
-			matcher.numberChooser = { getNumber: function() { return 42; } }
+			matcher.numberChooser = { getNumber: function() { return 42; } };
 			var decomposition = '<html><body>' + 
 							'<label id="result">42 = 2 x 3 x 7 x 1000</label>' +
-			  			'</body></html>';			
+                            '</body></html>';
 			remote = require('http').createServer(
 				function (request, response) {
 					if (request.url == '/go') {

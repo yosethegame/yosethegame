@@ -1,5 +1,5 @@
-var ProductionDatabase 	= require('./lib/production.database');
-var array 				= require('./utils/lib/array.utils');
+var ProductionDatabase  = require('./lib/production.database');
+var array               = require('./utils/lib/array.utils');
 
 describe('World 1', function() {
 	

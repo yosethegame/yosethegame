@@ -8,11 +8,8 @@ describe('Minesweeper response matcher', function() {
 	describe('Fails when the page is missing #title:', function() {
 		
 		beforeEach(function() {
-			content = '<html><body>' +
-							'<label id="not-title">anything</label>' +
-					  '</body></html>';			
-
-			remote = require('http').createServer(
+			content = '<html><body><label id="not-title">anything</label></body></html>';
+            remote = require('http').createServer(
 				function (request, response) {
 					response.write(content);
 					response.end();
@@ -50,7 +47,7 @@ describe('Minesweeper response matcher', function() {
 		beforeEach(function() {
 			content = '<html><body>' +
 							'<label id="title">anything</label>' +
-					  '</body></html>';			
+                        '</body></html>';
 
 			remote = require('http').createServer(
 				function (request, response) {
@@ -93,7 +90,7 @@ describe('Minesweeper response matcher', function() {
 
 							'<label id="cell-1x1"></label>' +
 							'<label id="cell-1x2"></label>' +
-					  '</body></html>';
+                        '</body></html>';
 
 			remote = require('http').createServer(
 				function (request, response) {
@@ -139,8 +136,8 @@ describe('Minesweeper response matcher', function() {
 			}
 			content = '<html><body>' +
 							'<label id="title">Minesweeper</label>' +
-							grid
-					  '</body></html>';
+							grid +
+                        '</body></html>';
 
 			remote = require('http').createServer(
 				function (request, response) {

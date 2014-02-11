@@ -1,5 +1,5 @@
-var post 			 = require('./lib/post.new.player.request');
-var InMemoryDatabase = require('../../support/database.with.levels');
+var post                = require('./lib/post.new.player.request');
+var InMemoryDatabase    = require('../../support/database.with.levels');
 
 describe('Post player endpoint', function() {
 

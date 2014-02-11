@@ -18,7 +18,7 @@ describe('Levels:', function() {
 					expect(level.id).toBeDefined();
 				});
 			});
-	    });
+        });
 	
 		it('must be unique', function() {
 			var ids = [];
@@ -47,7 +47,7 @@ describe('Levels:', function() {
 					expect(level.title).toBeDefined();
 				});
 			});
-	    });
+        });
     });
     
     describe('Files:', function() {
@@ -59,8 +59,8 @@ describe('Levels:', function() {
 						throw 'File "' + level.file + '" of level "' + level.title + '" not found';
 					}
 				});
-    	    });
-	    });
+            });
+        });
     });
     
     describe('Requesters:', function() {
@@ -68,27 +68,27 @@ describe('Levels:', function() {
         it('All requesters can be required from feature.try/lib and provide an url() api', function() {
 			array.forEach(database.worlds, function(world) {
 				array.forEach(world.levels, function(level) {
-        			var Requester = require('./features/feature.try/lib/' + level.requester);
-                	var requester = new Requester();
-                	if (requester.url == undefined) {
-                		throw 'Requester ' + level.requester + ' of level "' + level.title + '" should have an url() method';
-                	}
-				});
-    	    });
-	    });
+                    var Requester = require('./features/feature.try/lib/' + level.requester);
+                    var requester = new Requester();
+                    if (requester.url === undefined) {
+                        throw 'Requester ' + level.requester + ' of level "' + level.title + '" should have an url() method';
+                    }
+                });
+            });
+        });
     });
     
     describe('Checkers:', function() {
     
-	    it('All checkers can be required from feature.try/lib and provide a validate() api', function() {
+        it('All checkers can be required from feature.try/lib and provide a validate() api', function() {
 			array.forEach(database.worlds, function(world) {
 				array.forEach(world.levels, function(level) {
-        			var checker = require('./features/feature.try/lib/' + level.checker);
-                	if (checker.validate == undefined) {
-                		throw 'Checker ' + level.checker + ' of level "' + level.title + '" should have a validate() method';
-                	}
-				});
-    	    });
+                    var checker = require('./features/feature.try/lib/' + level.checker);
+                    if (checker.validate === undefined) {
+                        throw 'Checker ' + level.checker + ' of level "' + level.title + '" should have a validate() method';
+                    }
+                });
+            });
         });
     });
 
@@ -100,7 +100,7 @@ describe('Levels:', function() {
 					expect(level.isOpenLevelFor).toBeDefined();
 				});
 			});
-	    });
+        });
     });
 	
 });

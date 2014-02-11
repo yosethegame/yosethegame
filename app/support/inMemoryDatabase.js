@@ -2,7 +2,7 @@ var array = require('../utils/lib/array.utils');
 
 function InMemoryDatabase() {
 	this.players = [];
-};
+}
 
 InMemoryDatabase.prototype.withPlayers = function(players) {
 	this.players = players;

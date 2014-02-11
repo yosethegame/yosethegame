@@ -17,7 +17,7 @@ describe('Resist negative response matcher', function() {
 					'<label id="invitation">invitation</label>' +
 					'<input id="number">' +
 					'<button id="go" onclick="window.location=\'/go\'">go</button>' +
-			  '</body></html>';			
+                '</body></html>';
 			
 	describe('When server answer expected answer,', function() {
 		
@@ -25,7 +25,7 @@ describe('Resist negative response matcher', function() {
 			matcher.numberChooser = { getNumber: function() { return -2342; } };
 			var error = '<html><body>' + 
 							'<label id="result">-2342 is not an integer > 1</label>' +
-			  			'</body></html>';			
+                        '</body></html>';
 			remote = require('http').createServer(
 				function (request, response) {
 					if (request.url == '/go') {

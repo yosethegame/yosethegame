@@ -1,4 +1,4 @@
-var $ 			= require('jquery');
+var $           = require('jquery');
 var TryListener = require('./lib/try.listener');
 
 describe("TryListener: ", function() {
@@ -94,7 +94,7 @@ describe("TryListener: ", function() {
 				listener.displayResults({"score":10,"results":[]});
 				expect($('#results').attr('class')).toNotContain('hidden');
 				expect($('#results').attr('class')).toContain('visible');
-			})
+			});
 		});
 
 		describe('One result display:', function() {

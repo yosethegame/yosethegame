@@ -1,4 +1,4 @@
-var cheerio 	= require('cheerio');
+var cheerio     = require('cheerio');
 var Data		= require('../../support/database.with.levels');
 var playground	= require('./lib/display.playground.request.js');
 var response	= require('../../support/fake.response');

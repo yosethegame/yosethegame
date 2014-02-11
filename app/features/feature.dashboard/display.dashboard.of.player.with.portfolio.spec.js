@@ -1,5 +1,5 @@
-var cheerio 			= require('cheerio');
-var Data	 			= require('../../support/database.with.levels');
+var cheerio             = require('cheerio');
+var Data                = require('../../support/database.with.levels');
 var WorldMatcherData	= require('./dashboard.worlds.matchers');
 var LevelMatcherData	= require('./dashboard.levels.matchers');
 var dashboard			= require('./lib/display.dashboard.js');
@@ -24,9 +24,9 @@ describe('The dashboard of a player with a portfolio:', function() {
 
 	beforeEach(function() {	
 		player = {
-			login: 'ericminio', 			
+			login: 'ericminio',	
 			portfolio: [ { server: 'this-server', achievements: [1] } ]
-		}
+		};
 		loadPageWithDatabase(database);
 	});
 	
@@ -35,7 +35,7 @@ describe('The dashboard of a player with a portfolio:', function() {
 	});
 	
 	it('displays level 1.1 as done', function() {
-	    expect(level.number(1, 1)).toBeDone();
+        expect(level.number(1, 1)).toBeDone();
 	});
 	
 	it('invites the player to play level 1.2', function() {

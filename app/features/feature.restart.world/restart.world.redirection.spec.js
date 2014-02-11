@@ -1,4 +1,4 @@
-var response	    = require('../../support/fake.response');
+var response        = require('../../support/fake.response');
 var Database        = require('../../support/database.with.levels');
 var restartworld    = require('./lib/restart.world.request');
 
@@ -11,9 +11,9 @@ describe('Restart world link', function() {
             this.headers = headers; 
         }
     };
-       
+
     beforeEach(function() {		
-    	database = new Database();
+        database = new Database();
         database.players = [{
            login: 'bilou',
            score: 10,

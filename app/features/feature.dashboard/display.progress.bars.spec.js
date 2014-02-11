@@ -1,5 +1,5 @@
-var cheerio 			= require('cheerio');
-var Data	 			= require('../../support/database.with.levels');
+var cheerio             = require('cheerio');
+var Data                = require('../../support/database.with.levels');
 var WorldMatcherData	= require('./dashboard.worlds.matchers');
 var LevelMatcherData	= require('./dashboard.levels.matchers');
 var dashboard			= require('./lib/display.dashboard.js');
@@ -14,8 +14,8 @@ describe('The progress bar', function() {
 	var player;
 	
 	var loadPageWithDatabase = function(database) {
-		database.worlds[0].isOpenFor = function(player) { return true; }
-		database.worlds[1].isOpenFor = function(player) { return true; }
+		database.worlds[0].isOpenFor = function(player) { return true; };
+		database.worlds[1].isOpenFor = function(player) { return true; };
 		database.players = [ player ];
 		dashboard({ url: '/players/ericminio' }, response, database);
 		page = cheerio.load(response.html);
@@ -28,8 +28,8 @@ describe('The progress bar', function() {
 		
 		beforeEach(function() {	
 			player = {
-				login: 'ericminio', 			
-			}
+				login: 'ericminio',
+			};
 			loadPageWithDatabase(database);
 		});
 		
@@ -43,9 +43,9 @@ describe('The progress bar', function() {
 		
 		beforeEach(function() {	
 			player = {
-				login: 'ericminio', 			
+				login: 'ericminio',	
 				portfolio: [ { server: 'this-server', achievements: [1] } ]
-			}
+			};
 			loadPageWithDatabase(database);
 		});
 		
@@ -59,9 +59,9 @@ describe('The progress bar', function() {
 		
 		beforeEach(function() {	
 			player = {
-				login: 'ericminio', 			
+				login: 'ericminio',
 				portfolio: [ { server: 'this-server', achievements: [1, 2, 3] } ]
-			}
+			};
 			loadPageWithDatabase(database);
 		});
 		

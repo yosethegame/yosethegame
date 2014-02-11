@@ -1,5 +1,5 @@
-var cheerio 			= require('cheerio');
-var Data	 			= require('../../support/database.with.levels');
+var cheerio             = require('cheerio');
+var Data                = require('../../support/database.with.levels');
 var WorldMatcherData	= require('./dashboard.worlds.matchers');
 var LevelMatcherData	= require('./dashboard.levels.matchers');
 var dashboard			= require('./lib/display.dashboard.js');
@@ -14,8 +14,8 @@ describe('The dashboard of a player with a portfolio:', function() {
 	var player;
 	
 	var loadPageWithDatabase = function(database) {
-		database.worlds[0].isOpenFor = function(player) { return true; }
-		database.worlds[1].isOpenFor = function(player) { return false; }
+		database.worlds[0].isOpenFor = function(player) { return true; };
+		database.worlds[1].isOpenFor = function(player) { return false; };
 		database.players = [ player ];
 		dashboard({ url: '/players/ericminio' }, response, database);
 		page = cheerio.load(response.html);
@@ -26,9 +26,9 @@ describe('The dashboard of a player with a portfolio:', function() {
 
 	beforeEach(function() {	
 		player = {
-			login: 'ericminio', 			
+            login: 'ericminio',
 			portfolio: [ { server: 'this-server', achievements: [1] } ]
-		}
+		};
 		loadPageWithDatabase(database);
 	});
 	

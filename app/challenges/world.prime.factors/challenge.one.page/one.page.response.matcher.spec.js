@@ -12,10 +12,10 @@ describe('One page response matcher', function() {
 	describe('When the form triggers a new location,', function() {
 		
 		beforeEach(function() {
-			var form = '<html><body>' +
-							'<input id="number">' +
-							'<button id="go" onclick="window.location=\'/go\'">go</button>' +
-					  '</body></html>';			
+			var form =  '<html><body>' +
+                            '<input id="number">' +
+                            '<button id="go" onclick="window.location=\'/go\'">go</button>' +
+                        '</body></html>';			
 
 			remote = require('http').createServer(
 				function (request, response) {
@@ -60,10 +60,10 @@ describe('One page response matcher', function() {
 		
 		beforeEach(function() {
 			matcher.numberChooser = { getNumber: function() { return 6; } };
-			var page = '<html><body>' +
-							'<input id="number">' +
-							'<button id="go">go</button>' +
-					  '</body></html>';			
+			var page =  '<html><body>' +
+                            '<input id="number">' +
+                            '<button id="go">go</button>' +
+                        '</body></html>';			
 
 			remote = require('http').createServer(
 				function (request, response) {
@@ -104,11 +104,11 @@ describe('One page response matcher', function() {
 		
 		beforeEach(function() {
 			matcher.numberChooser = { getNumber: function() { return 6; } };
-			var page = '<html><body>' +
-							'<input id="number">' +
-							'<button id="go">go</button>' +
-							'<label id="result">any</label>' +
-					  '</body></html>';			
+			var page =  '<html><body>' +
+                            '<input id="number">' +
+                            '<button id="go">go</button>' +
+                            '<label id="result">any</label>' +
+                        '</body></html>';			
 
 			remote = require('http').createServer(
 				function (request, response) {
@@ -149,11 +149,11 @@ describe('One page response matcher', function() {
 		
 		beforeEach(function() {
 			matcher.numberChooser = { getNumber: function() { return 6; } };
-			var page = '<html><body>' +
-							'<input id="number">' +
-							'<button id="go">go</button>' +
-							'<label id="result">6 = 2 x 3</label>' +
-					  '</body></html>';			
+			var page =  '<html><body>' +
+                            '<input id="number">' +
+                            '<button id="go">go</button>' +
+                            '<label id="result">6 = 2 x 3</label>' +
+                        '</body></html>';			
 
 			remote = require('http').createServer(
 				function (request, response) {

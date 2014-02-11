@@ -2,4 +2,4 @@
 
 You've got Nutella on your nose :) 
 
-See it live: http://yose.herokuapp.com
+See it live: http://yosethegame.com

@@ -10,7 +10,7 @@ describe('Power of two Requester', function() {
 	});
 	
 	it('suppresses eventual training slash', function() {
-	   expect(new Requester('this-url/').server).toEqual('this-url'); 
+        expect(new Requester('this-url/').server).toEqual('this-url');
 	});
 	
 	it('has a number chooser', function() {

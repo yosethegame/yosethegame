@@ -1,4 +1,4 @@
-var cheerio 	= require('cheerio');
+var cheerio     = require('cheerio');
 var Data		= require('../../support/database.with.levels');
 var playground	= require('./lib/display.playground.request.js');
 var response	= require('../../support/fake.response');
@@ -11,13 +11,13 @@ describe('Try button', function() {
 	var player;
 	
 	beforeEach(function() {	
-		database.worlds[0].isOpenFor = function(player) { return true; }
-		database.worlds[1].isOpenFor = function(player) { return true; }
-		database.worlds[1].levels[0].isOpenLevelFor = function(player) { return true; }
+		database.worlds[0].isOpenFor = function(player) { return true; };
+		database.worlds[1].isOpenFor = function(player) { return true; };
+		database.worlds[1].levels[0].isOpenLevelFor = function(player) { return true; };
 		player = {
 			login: 'ericminio',
 			portfolio: [ { server: 'this-server', achievements: [1, 2] } ]
-		}
+		};
 		database.players = [ player ];
 	});
 	

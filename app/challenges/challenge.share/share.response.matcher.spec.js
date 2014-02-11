@@ -68,7 +68,7 @@ describe('Share response matcher,', function() {
 		beforeEach(function() {
 			var content = '<html><body>' + 
 							'<label>42</label>' +
-			  			'</body></html>';			
+                        '</body></html>';
 			remote = require('http').createServer(
 				function (request, response) {
 					response.write(content);
@@ -109,7 +109,7 @@ describe('Share response matcher,', function() {
 		beforeEach(function() {
 			var content = '<html><body>' + 
 							'<a id="repository-link">42</a>' +
-			  			'</body></html>';			
+                        '</body></html>';
 			remote = require('http').createServer(
 				function (request, response) {
 					response.write(content);
@@ -150,7 +150,7 @@ describe('Share response matcher,', function() {
 		beforeEach(function() {
 			var content = '<html><body>' + 
 							'<a id="repository-link" href="">42</a>' +
-			  			'</body></html>';			
+                            '</body></html>';
 			remote = require('http').createServer(
 				function (request, response) {
 					response.write(content);
@@ -191,7 +191,7 @@ describe('Share response matcher,', function() {
 		beforeEach(function() {
 			var content = '<html><body>' + 
 							'<a href="http://localhost:6000" id="repository-link">42</label>' +
-			  			'</body></html>';			
+                            '</body></html>';
 			remote = require('http').createServer(
 				function (request, response) {
 					response.write(content);
@@ -233,7 +233,7 @@ describe('Share response matcher,', function() {
 			var content = '<html><body>' + 
 							'<a href="http://localhost:6000" id="repository-link">42</label>' +
 							'<label id="readme">42</label>' +
-			  			'</body></html>';			
+                        '</body></html>';
 			remote = require('http').createServer(
 				function (request, response) {
 					response.write(content);

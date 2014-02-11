@@ -1,4 +1,4 @@
-var logSuccess 	= require('./lib/log.success');
+var logSuccess = require('./lib/log.success');
 
 describe('Log success,', function() {
 

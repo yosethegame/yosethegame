@@ -17,12 +17,12 @@ describe('Form response matcher,', function() {
 							'<label id="invitation">invitation</label>' +
 							'<input id="number">' +
 							'<button id="go">go</button>' +
-					  '</body></html>';			
+                        '</body></html>';
 			status = matcher.computeStatus({ headers: {'content-type': contentType} }, content);
 		});
 		
 		it('sets code to 200', function() {
-			expect(status.code).toEqual(200);
+            expect(status.code).toEqual(200);
 		});
 		
 		it('sets expected', function() {
@@ -66,9 +66,8 @@ describe('Form response matcher,', function() {
 			content = '<html><body>' +
 							'<label id="title">title</label>' +
 							'<label id="invitation">invitation</label>' +
-
-							'<button id="go">go</button>'
-					  '</body></html>';			
+							'<button id="go">go</button>' +
+                        '</body></html>';
 			status = matcher.computeStatus({ headers: {'content-type': 'text/html' } }, content);
 		});
 		

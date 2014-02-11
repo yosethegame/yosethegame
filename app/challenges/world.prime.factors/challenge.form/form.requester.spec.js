@@ -9,7 +9,7 @@ describe('Form Requester', function() {
 	});
 	
 	it('suppresses eventual training slash', function() {
-	   expect(new Requester('this-url/').server).toEqual('this-url'); 
+        expect(new Requester('this-url/').server).toEqual('this-url');
 	});
 	
 	it('adds /ui to the url', function() {

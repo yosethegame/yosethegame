@@ -1,5 +1,5 @@
-var cheerio 			= require('cheerio');
-var Data	 			= require('../../support/database.with.levels');
+var cheerio             = require('cheerio');
+var Data                = require('../../support/database.with.levels');
 var WorldMatcherData	= require('./dashboard.worlds.matchers');
 var LevelMatcherData	= require('./dashboard.levels.matchers');
 var dashboard			= require('./lib/display.dashboard.js');
@@ -14,7 +14,7 @@ describe('The rerun all levels link:', function() {
 	var player;
 	
 	var loadPageWithDatabase = function(database) {
-		database.worlds[0].isOpenFor = function(player) { return true; }
+		database.worlds[0].isOpenFor = function(player) { return true; };
 		database.players = [ player ];
 		dashboard({ url: '/players/ericminio' }, response, database);
 		page = cheerio.load(response.html);
@@ -31,7 +31,7 @@ describe('The rerun all levels link:', function() {
 	});
 
 	it('is displayed when the world is completed', function() {
-		player = { login: 'ericminio', 			
+        player = { login: 'ericminio',
 			portfolio: [ { server: 'this-server', achievements: [1, 2] } ]
 		};
 		loadPageWithDatabase(database);
@@ -40,7 +40,7 @@ describe('The rerun all levels link:', function() {
 	});
 	
 	it('is not displayed when the world is not completed', function() {
-		player = { login: 'ericminio', 			
+        player = { login: 'ericminio',
 			portfolio: [ { server: 'this-server', achievements: [1] } ]
 		};
 		loadPageWithDatabase(database);
@@ -49,7 +49,7 @@ describe('The rerun all levels link:', function() {
 	});
 	
 	it('targets rerun of the world for the player', function() {
-		player = { login: 'ericminio', 			
+        player = { login: 'ericminio',
 			portfolio: [ { server: 'this-server', achievements: [1, 2] } ]
 		};
 		loadPageWithDatabase(database);

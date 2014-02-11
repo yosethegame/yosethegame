@@ -1,4 +1,4 @@
-var cheerio 	= require('cheerio');
+var cheerio     = require('cheerio');
 var Data		= require('../../support/database.with.levels');
 var dashboard	= require('./lib/display.dashboard.js');
 var response	= require('../../support/fake.response');
@@ -11,11 +11,11 @@ describe('Login hidden label', function() {
 	var player;
 	
 	beforeEach(function() {	
-		database.worlds[0].isOpenFor = function(player) { return true; }
-		database.worlds[1].isOpenFor = function(player) { return true; }
+		database.worlds[0].isOpenFor = function(player) { return true; };
+		database.worlds[1].isOpenFor = function(player) { return true; };
 		player = {
 			login: 'ericminio'
-		}
+		};
 		database.players = [ player ];
 	});
 	

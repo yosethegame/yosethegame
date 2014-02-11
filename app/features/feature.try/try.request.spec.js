@@ -1,7 +1,7 @@
-var request 				= require('request');
-var $ 						= require('jquery');
-var tryAll 					= require('./lib/try.request');
-var Server 					= require('../../lib/server');
+var request                 = require('request');
+var $                       = require('jquery');
+var tryAll                  = require('./lib/try.request');
+var Server                  = require('../../lib/server');
 var DatabaseWithChallenges  = require('../../support/database.with.levels');
 var logServer				= require('./lib/log.server');
 var thePlayer				= require('../../lib/player.utils');
@@ -127,12 +127,12 @@ describe("Trying to pass challenges >", function() {
 		afterEach(function() {
 			remote.close();
 		});
-    	it('returns json', function(done) {
+        it('returns json', function(done) {
 			request("http://localhost:5000/try?login=annessou&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
-			    expect(response.headers['content-type']).toEqual('application/json');
+                expect(response.headers['content-type']).toEqual('application/json');
 				done();
 			});			
-    	});
+        });
 		it('saves the server used by the player', function(done) {
 			request("http://localhost:5000/try?login=annessou&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
 				database.find('annessou', function(player) {
@@ -144,7 +144,7 @@ describe("Trying to pass challenges >", function() {
 		it('makes the challenge to be in the portfolio of the player', function(done) {
 			request("http://localhost:5000/try?login=annessou&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
 				database.find('annessou', function(player) {
-					expect(player.portfolio[0].achievements[0]).toEqual(database.worlds[0].levels[0].id)
+                    expect(player.portfolio[0].achievements[0]).toEqual(database.worlds[0].levels[0].id);
 					done();
 				});
 			});			
@@ -201,7 +201,7 @@ describe("Trying to pass challenges >", function() {
 		it('makes the second challenge to be in the portfolio of the player', function(done) {
 			request("http://localhost:5000/try?login=clairette&world=1&level=2", function(error, response, body) {
 				database.find('clairette', function(player) {
-					expect(player.portfolio[0].achievements[1]).toEqual(database.worlds[0].levels[1].id)
+                    expect(player.portfolio[0].achievements[1]).toEqual(database.worlds[0].levels[1].id);
 					done();
 				});
 			});			
@@ -211,7 +211,7 @@ describe("Trying to pass challenges >", function() {
 	describe("When no remote server answers, ", function() {
 
 		beforeEach(function() {
-			database.worlds[0].levels[0].checker = '../../../support/response.always.404'
+            database.worlds[0].levels[0].checker = '../../../support/response.always.404';
 		});
 
 		it("returns normally", function(done) {
@@ -270,7 +270,7 @@ describe("Trying to pass challenges >", function() {
 				logServer(player, 'http://localhost:6000');
 				database.savePlayer(player, function() {
 					done();
-				})
+				});
 			});
 		});
 		afterEach(function() {
@@ -359,7 +359,7 @@ describe("Trying to pass challenges >", function() {
 				logServer(player, 'http://localhost:6000');
 				database.savePlayer(player, function() {
 					done();
-				})
+				});
 			});
 		});
 		afterEach(function() {

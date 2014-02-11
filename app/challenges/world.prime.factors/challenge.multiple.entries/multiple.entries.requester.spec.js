@@ -10,7 +10,7 @@ describe('Multiple entries Requester', function() {
 	});
 	
 	it('suppresses eventual training slash', function() {
-	   expect(new Requester('this-url/').server).toEqual('this-url'); 
+        expect(new Requester('this-url/').server).toEqual('this-url'); 
 	});
 	
 	it('has a number chooser choosing a positive integer > 1', function() {
@@ -29,7 +29,7 @@ describe('Multiple entries Requester', function() {
 				this.alreadyCalled = true;
 				return 300;
 			}
-		}
+		};
 		requester.numberChooser = FakeNumberChooser;
 		requester.stringChooser = { getString: function() { return 'yolo'; } };
 				

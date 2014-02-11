@@ -1,4 +1,4 @@
-var cheerio 	= require('cheerio');
+var cheerio     = require('cheerio');
 var Data		= require('../../support/database.with.levels');
 var playground	= require('./lib/display.playground.request.js');
 var response	= require('../../support/fake.response');
@@ -11,7 +11,7 @@ describe('The banner', function() {
 	
 	beforeEach(function() {	
 		player = {
-			login: 'ericminio', 			
+            login: 'ericminio',
 			avatar: 'this-avatar',
 			score: 42
 		};
@@ -31,9 +31,9 @@ describe('The banner', function() {
 	describe('Greetings', function() {
 		
 		beforeEach(function() {
-		    database.worlds[0].levels[1].isOpenLevelFor = function(player) { return true; } 
-    		playground({ url: '/players/ericminio/play/world/1/level/2' }, response, database);
-    		page = cheerio.load(response.html);
+            database.worlds[0].levels[1].isOpenLevelFor = function(player) { return true; };
+            playground({ url: '/players/ericminio/play/world/1/level/2' }, response, database);
+            page = cheerio.load(response.html);
 		});
 		
 		it('contains the number of the level', function() {

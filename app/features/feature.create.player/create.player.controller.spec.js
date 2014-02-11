@@ -26,14 +26,14 @@ describe('Create player listener', function() {
 			expect($.post).toHaveBeenCalledWith('/create-player', { login: 'eric', avatar: 'avatar-of-eric' }, create.success);
 		});
 		
-	    it('does not send the request when the login is not correct', function() {
+        it('does not send the request when the login is not correct', function() {
 			$('#login').val('eric mignot');
 			$('#avatar').val('avatar-of-eric');
 			spyOn($, 'post').andCallThrough();
 			create.player();
 
-	        expect($.post).not.toHaveBeenCalled();
-	    });
+            expect($.post).not.toHaveBeenCalled();
+        });
 	});
 	
 	describe('Login correctness', function() {
@@ -46,23 +46,23 @@ describe('Create player listener', function() {
 			$('#login').remove();
 		});
 
-	    it('is not correct when empty', function() {
-	        $('#login').val('');
-	        
-	        expect(create.isLoginCorrect()).toEqual(false);
-	    });
+        it('is not correct when empty', function() {
+            $('#login').val('');
 
-	    it('is correct with numbers and letters', function() {
-	        $('#login').val('eric.mignot.42@gmail.com');
-	        
-	        expect(create.isLoginCorrect()).toEqual(true);
-	    });
+            expect(create.isLoginCorrect()).toEqual(false);
+        });
 
-	    it('is incorrect when not matching [A-z|\\.|\\-|@|0-9]+', function() {
-	        $('#login').val('2&é""');
-	        
-	        expect(create.isLoginCorrect()).toEqual(false);
-	    });
+        it('is correct with numbers and letters', function() {
+            $('#login').val('eric.mignot.42@gmail.com');
+
+            expect(create.isLoginCorrect()).toEqual(true);
+        });
+
+        it('is incorrect when not matching [A-z|\\.|\\-|@|0-9]+', function() {
+            $('#login').val('2&é""');
+
+            expect(create.isLoginCorrect()).toEqual(false);
+        });
 	});
 	
 	describe('Success', function() {
@@ -92,7 +92,7 @@ describe('Create player listener', function() {
 			$('#login').val('bilou');
 			create.success();
 			
-			expect($('a#player-dashboard').attr('href')).toEqual('/players/bilou')
+			expect($('a#player-dashboard').attr('href')).toEqual('/players/bilou');
 		});
 	});
 		

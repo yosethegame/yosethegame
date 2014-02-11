@@ -1,5 +1,5 @@
-var $ 		= require('jquery');
-var array 	= require('./lib/array.utils');
+var $       = require('jquery');
+var array   = require('./lib/array.utils');
 var extract = require('./lib/array.utils');
 
 describe('Arrays', function() {
@@ -118,7 +118,7 @@ describe('Arrays', function() {
 		var withPrice = function(price) {
 			return function(item) {
 				return item.price == price;
-			}
+            };
 		};
 		
 		it('can select one item from a collection', function() {
@@ -132,21 +132,21 @@ describe('Arrays', function() {
 	});
 	
 	describe('array.remove', function() {
-	   
-	   var items;
-	   
-	   beforeEach(function() {
-	       items = [1, 2, 3, 4];
-	   });
-	   
-	   it('can remove one item from a given array', function() {
-	       expect(array.remove(3, items)).toEqual([1, 2, 4]);
-	   });
-	   
-	   it('supports a non-existing object', function() {
-	       expect(array.remove(5, items)).toEqual([1, 2, 3, 4]);
-	   });
-	    
+
+        var items;
+
+        beforeEach(function() {
+            items = [1, 2, 3, 4];
+        });
+
+        it('can remove one item from a given array', function() {
+            expect(array.remove(3, items)).toEqual([1, 2, 4]);
+        });
+
+        it('supports a non-existing object', function() {
+            expect(array.remove(5, items)).toEqual([1, 2, 3, 4]);
+        });
+
 	});
 	
 });
