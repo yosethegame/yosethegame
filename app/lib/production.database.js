@@ -235,7 +235,7 @@ function ProductionDatabase() {
                 file: 'app/challenges/world.minesweeper/challenge.suspect/lib/suspect.html',
 				requester: '../../../challenges/world.minesweeper/challenge.board/lib/board.requester.js',
                 checker: '../../../challenges/world.minesweeper/challenge.suspect/lib/suspect.response.matcher.js',
-				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 20); }
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 24); }
             }		
 		]
 	}
