@@ -46,9 +46,9 @@ module.exports = {
 				var result = browser.evaluate('load()');
 			}).
 			then(function() {
-    			if(browser.query('input#suspect-mode[type=checkbox]') === null) {
-    				throw 'Error: missing element input#suspect-mode[type=checkbox]';
-    			}
+                if(browser.query('input#suspect-mode[type=checkbox]') === null) {
+                    throw 'Error: missing element input#suspect-mode[type=checkbox]';
+                }
 			}).
 			then(function() {
 				return browser.check('input#suspect-mode[type=checkbox]');
@@ -65,7 +65,7 @@ module.exports = {
 				callback({
 					code: 200,
 					expected: expected,
-					got: 'to be defined'
+					got: 'it works :)'
 				});
 			}).
 			fail(function(error) {

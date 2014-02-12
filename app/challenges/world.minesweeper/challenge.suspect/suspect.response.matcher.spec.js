@@ -32,7 +32,7 @@ describe('Suspect mode challenge in Minesweeper game', function() {
 	});
 	
 	it('has a pool of 7 candidates', function() {
-	    expect(matcher.candidates.length).toEqual(7);	    
+        expect(matcher.candidates.length).toEqual(7);
 	});
 	
 	describe('Fails when the page is missing the suspect-mode checkbox activator', function() {
