@@ -35,4 +35,44 @@ describe('Suspect mode challenge in Minesweeper game', function() {
 	    expect(matcher.candidates.length).toEqual(7);	    
 	});
 	
+	describe('Fails when the page is missing the suspect-mode checkbox activator', function() {
+		beforeEach(function() {
+			content = '<html><body>' +
+							'<label id="suspect-mode">anything</label>' +
+                        '</body></html>';
+
+			remote = require('http').createServer(
+				function (request, response) {
+					response.write(content);
+					response.end();
+				})
+			.listen(6000);			
+		});
+		
+		afterEach(function() {
+			remote.close();
+		});
+
+		it('sets code to 501', function(done) {
+			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
+				expect(status.code).toEqual(501);
+				done();
+			});
+		});
+		
+		it('sets expected', function(done) {
+			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
+				expect(status.expected).toContain('a checkbox with id="suspect-mode"');
+				done();
+			});
+		});
+		
+		it('sets actual', function(done) {
+			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
+				expect(status.got).toContain('missing element input#suspect-mode[type=checkbox]');
+				done();
+			});
+		});
+	});
+	
 });
