@@ -33,13 +33,12 @@ module.exports = {
 	},
 	
     validate: function(url, remoteResponse, content, callback) {
-        var expected = 'A page containing a checkbox with id="suspect-mode"';
-        var error = 'Error: missing element input#suspect-mode[type=checkbox]';
-        
         var self = this;
 		var cellIndex = this.cellIndex();
 		var cellId = this.cellId(cellIndex);
-		
+        var expected = 'A page containing a checkbox with id="suspect-mode" and #' + 
+                        cellId + " with class containing 'suspect' after clicking on it in suspect-mode";
+
         var browser = new Browser();
 		browser.visit(url).
 			then(function() {
@@ -61,6 +60,13 @@ module.exports = {
 				if (classes.indexOf('suspect') === -1) {
 					throw "Error: #" + cellId + " class = '" + classes + "'"; 
 				}
+			}).
+			then(function() {
+				callback({
+					code: 200,
+					expected: expected,
+					got: 'to be defined'
+				});
 			}).
 			fail(function(error) {
 				callback({
