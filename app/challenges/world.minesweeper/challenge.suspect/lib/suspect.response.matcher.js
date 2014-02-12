@@ -1,3 +1,5 @@
+var Browser = require('zombie');
+
 module.exports = {
 
 	data: [
@@ -31,11 +33,42 @@ module.exports = {
 	},
 	
     validate: function(url, remoteResponse, content, callback) {
-		callback({
-			code: 501,
-			expected: 'To be defined',
-			got: 'To be defined'
-		});
+        var expected = 'A page containing a checkbox with id="suspect-mode"';
+        var error = 'Error: missing element input#suspect-mode[type=checkbox]';
+        
+        var self = this;
+		var cellIndex = this.cellIndex();
+		var cellId = this.cellId(cellIndex);
+		
+        var browser = new Browser();
+		browser.visit(url).
+			then(function() {
+				browser.document.grid = self.data;
+				var result = browser.evaluate('load()');
+			}).
+			then(function() {
+    			if(browser.query('input#suspect-mode[type=checkbox]') === null) {
+    				throw 'Error: missing element input#suspect-mode[type=checkbox]';
+    			}
+			}).
+			then(function() {
+				return browser.check('input#suspect-mode[type=checkbox]');
+			}).
+			then(function() {
+				browser.click('[id=' + cellId + ']');
+				var classes = browser.query('[id=' + cellId + ']').className;
+				
+				if (classes.indexOf('suspect') === -1) {
+					throw "Error: #" + cellId + " class = '" + classes + "'"; 
+				}
+			}).
+			fail(function(error) {
+				callback({
+					code: 501,
+					expected: expected,
+					got: error.toString()
+				});
+			});
 	}
 	
 };
