@@ -228,6 +228,14 @@ function ProductionDatabase() {
 				requester: '../../../challenges/world.minesweeper/challenge.board/lib/board.requester.js',
                 checker: '../../../challenges/world.minesweeper/challenge.random/lib/random.response.matcher.js',
 				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 20); }
+            },
+            {
+                id: 26,
+                title: 'Suspect mode challenge',
+                file: 'app/challenges/world.minesweeper/challenge.suspect/lib/suspect.html',
+				requester: '../../../challenges/world.minesweeper/challenge.board/lib/board.requester.js',
+                checker: '../../../challenges/world.minesweeper/challenge.suspect/lib/suspect.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 20); }
             }		
 		]
 	}
