@@ -25,6 +25,11 @@ module.exports = {
             return error501.withValues(this.expected(), 'Error: missing element ' + linkId);
         }
         
+        var href = page(linkId).attr('href');
+        if (this.isNotTheExpected(href)) {
+            return error501.withValues(this.expected(), 'Error: ' + linkId + ' href="' + href + '"');
+        }
+								
 		return {
 			code: 200,
 			expected: this.expected(),
