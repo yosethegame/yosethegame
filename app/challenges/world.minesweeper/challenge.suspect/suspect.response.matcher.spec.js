@@ -189,5 +189,62 @@ describe('Suspect mode challenge in Minesweeper game', function() {
 		});
 		
     });
+    
+    describe("fails when playing on a bomb sets the class of the cell to 'lost':", function() {
+
+        beforeEach(function() {
+			content = '<html><body>' +
+							'<label id="title">Minesweeper</label>' +
+                            '<input id="suspect-mode" type="checkbox" />' +
+							'<label id="cell-1x1" onclick="play(1, 1)"></label>' +
+							'<label id="cell-1x2" onclick="play(1, 2)"></label>' +
+							'<label id="cell-1x3" onclick="play(1, 3)"></label>' +
+							
+							'<script>function load() { }</script>' +
+							'<script>function play(line, column) { ' +
+                            '            var id = "cell-" + line + "x" + column;'+
+							'            document.getElementById(id).className = "lost suspect"; ' +
+							'        }' +
+							'</script>' +
+                            '</body></html>';
+
+			remote = require('http').createServer(
+				function (request, response) {
+					response.write(content);
+					response.end();
+				})
+			.listen(6000);	
+			
+			matcher.data = [ [ 'bomb' , 'bomb', 'bomb'] ];
+			matcher.candidates = [ { row:1, column:2 } ];
+            matcher.cellIndex = function() { return 0; };
+		});
+		
+		afterEach(function() {
+			remote.close();
+		});
+
+		it('sets code to 501', function(done) {
+			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
+				expect(status.code).toEqual(501);
+				done();
+			});
+		});
+		
+		it('sets expected', function(done) {
+			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
+				expect(status.expected).toContain("#cell-1x2 with class containing 'suspect' and not containing 'lost'");
+				done();
+			});
+		});
+		
+		it('sets actual', function(done) {
+			matcher.validate('http://localhost:6000/minesweeper', {}, {}, function(status) {
+				expect(status.got).toContain("#cell-1x2 class = 'lost suspect'");
+				done();
+			});
+		});
+		
+    });
 	
 });

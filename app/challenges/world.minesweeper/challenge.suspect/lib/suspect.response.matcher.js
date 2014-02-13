@@ -37,7 +37,7 @@ module.exports = {
 		var cellIndex = this.cellIndex();
 		var cellId = this.cellId(cellIndex);
         var expected = 'A page containing a checkbox with id="suspect-mode" and #' + 
-                        cellId + " with class containing 'suspect' after clicking on it in suspect-mode";
+                        cellId + " with class containing 'suspect'";
 
         var browser = new Browser();
 		browser.visit(url).
