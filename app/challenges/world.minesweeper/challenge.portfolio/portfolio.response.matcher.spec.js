@@ -59,4 +59,28 @@ describe('Minesweper portfolio challenge response matcher,', function() {
 		
 	});
 	
+	describe('When remote server responds with the correct link id and incorrect href attribute,', function() {
+	
+		beforeEach(function() {
+			contentType = 'text/html';
+			content =   '<html><body>' +
+                            '<a id="minesweeper-link" href="any/url">A Minesweeper game</a>' +
+                        '</body></html>';			
+			status = matcher.computeStatus({}, content);
+		});
+		
+		it('sets code to 501', function() {
+			expect(status.code).toEqual(501);
+		});
+		
+		it('sets expected', function() {
+			expect(status.expected).toEqual(matcher.expected());
+		});
+		
+		it('sets actual', function() {
+			expect(status.got).toEqual('Error: a#minesweeper-link href="any/url"');
+		});
+		
+	});
+	
 });

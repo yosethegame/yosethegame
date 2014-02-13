@@ -20,6 +20,11 @@ module.exports = {
     computeStatus: function(remoteResponse, content) {        
 		var page = cheerio.load(content);
 
+        var linkId = "a#minesweeper-link";
+        if (page(linkId).length === 0) {
+            return error501.withValues(this.expected(), 'Error: missing element ' + linkId);
+        }
+        
 		return {
 			code: 200,
 			expected: this.expected(),
