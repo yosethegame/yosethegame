@@ -190,7 +190,7 @@ describe('Suspect mode challenge in Minesweeper game', function() {
 		
     });
     
-    describe("fails when playing on a bomb sets the class of the cell to 'lost':", function() {
+    describe("fails when playing on a bomb sets the class of the cell to 'lost suspect':", function() {
 
         beforeEach(function() {
 			content = '<html><body>' +

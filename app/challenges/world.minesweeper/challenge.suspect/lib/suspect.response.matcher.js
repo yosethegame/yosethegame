@@ -37,7 +37,7 @@ module.exports = {
 		var cellIndex = this.cellIndex();
 		var cellId = this.cellId(cellIndex);
         var expected = 'A page containing a checkbox with id="suspect-mode" and #' + 
-                        cellId + " with class containing 'suspect'";
+                        cellId + " with class containing 'suspect' and not containing 'lost'";
 
         var browser = new Browser();
 		browser.visit(url).
@@ -58,6 +58,10 @@ module.exports = {
 				var classes = browser.query('[id=' + cellId + ']').className;
 				
 				if (classes.indexOf('suspect') === -1) {
+					throw "Error: #" + cellId + " class = '" + classes + "'"; 
+				}
+
+				if (classes.indexOf('lost') !== -1) {
 					throw "Error: #" + cellId + " class = '" + classes + "'"; 
 				}
 			}).
