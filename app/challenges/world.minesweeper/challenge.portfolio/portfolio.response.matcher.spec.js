@@ -34,21 +34,29 @@ describe('Minesweper portfolio challenge response matcher,', function() {
 			expect(status.got).toEqual(matcher.expected());
 		});
 		
-		describe('a case diff', function() {
-
-            beforeEach(function() {
-                contentType = 'text/html';
-                content =   '<html><body>' +
-                                '<a id="minesweeper-link" href="http://this-url/Minesweeper">A minesweeper game</a>' +
-                            '</body></html>';			
-                status = matcher.computeStatus({}, content);
-            });
-
-            it('is not accepted', function() {
-                expect(status.code).toEqual(501);
-            }); 
-		});
-		
 	});	
 
+	describe('When remote server responds with page missing link element,', function() {
+	
+		beforeEach(function() {
+			contentType = 'text/html';
+			content =   '<html><body>' +
+                        '</body></html>';			
+			status = matcher.computeStatus({}, content);
+		});
+		
+		it('sets code to 501', function() {
+			expect(status.code).toEqual(501);
+		});
+		
+		it('sets expected', function() {
+			expect(status.expected).toEqual(matcher.expected());
+		});
+		
+		it('sets actual', function() {
+			expect(status.got).toEqual('Error: missing element a#minesweeper-link');
+		});
+		
+	});
+	
 });
