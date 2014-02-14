@@ -10,9 +10,44 @@
 <body>
 	
 	<div id="challenge-assignment">
+		Imagine you are a fire-fighting plane pilot...
 	</div>
 	
 	<div id="challenge-details">
+		<p>When you receive</p>
+		<pre>http://your-server/fire/geek?width=3&map=...P...WF</pre>
+		
+		<p>You should respond the following Json</p>
+		<pre>{
+    map: [
+        "...",
+	"P..",
+	".WF"
+    ],
+    moves: [
+        { dx: 0, dy: 1 },
+        { dx: 1, dy: 0 },
+        { dx: 1, dy: 0 },
+    ]
+}</pre>
+		<p>OR</p>
+		
+		<pre>{
+    map: [
+        "...",
+	"P..",
+	".WF"
+    ],
+    moves: [
+        { dx: 1, dy: 0 },
+        { dx: 0, dy: 1 },
+        { dx: 1, dy: 0 },
+    ]
+}</pre>
+		<p>OR</p>
+		
+		<pre>Any moves that will lead your plane (P) to the Fire (F), passing first above the Water (W)</pre>
+		
 	</div>
 	
 	<div id="challenge-tips">		

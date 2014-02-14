@@ -257,7 +257,7 @@ function ProductionDatabase() {
 				file: 'app/challenges/world.canadair/challenge.first.fire/lib/first.fire.html',
 				requester: '../../../challenges/world.canadair/challenge.first.fire/lib/first.fire.requester.js',
 				checker: '../../../challenges/world.canadair/challenge.first.fire/lib/first.fire.response.matcher.js',
-				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 12); }
+				isOpenLevelFor: function(player) { return true; }
 			},		
 		]
 	}
