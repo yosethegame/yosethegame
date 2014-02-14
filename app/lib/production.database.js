@@ -246,6 +246,20 @@ function ProductionDatabase() {
 				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 24); }
             },		
 		]
+	},
+	{
+		name: 'world 5',
+		isOpenFor: isWorldOpenFor,
+		levels: [
+			{
+				id: 28,
+				title: 'First fire challenge',
+				file: 'app/challenges/world.canadair/challenge.first.fire/lib/first.fire.html',
+				requester: '../../../challenges/world.canadair/challenge.first.fire/lib/first.fire.requester.js',
+				checker: '../../../challenges/world.canadair/challenge.first.fire/lib/first.fire.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 12); }
+			},		
+		]
 	}
 	];	
 }
