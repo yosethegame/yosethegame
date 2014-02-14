@@ -172,4 +172,21 @@ describe('Regexp', function() {
             expect(pattern.test('/any/route')).toBe(true);
         }); 
 	});
+	
+	describe('Regex string spliting', function() {
+	    
+	    it('can be used to split a string at each space', function() {
+	        expect('Hello world'.split(/\s/)).toEqual(['Hello', 'world']);
+	    });
+
+	    it('can be used to split a string at each 2 characters', function() {
+	        expect('Helo'.match(/.{2}/g)).toEqual(['He', 'lo']);
+	    });
+
+	    it('can be used with a variable', function() {
+	        var length = 2;
+	        var regex = new RegExp('.{' + length + '}', 'g');
+	        expect('Helo'.match(regex)).toEqual(['He', 'lo']);
+	    });
+	});
 });
