@@ -1,4 +1,4 @@
-var moveCountBeforeBeingAboveWater = require('./lib/move.count');
+var moveCountBeforeBeingAboveWater = require('./lib/move.count').moveCountBeforeBeingAboveWater;
 
 describe('moveCountBeforeBeingAboveWater method', function() {
     

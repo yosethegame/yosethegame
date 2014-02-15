@@ -2,7 +2,8 @@ var urlParser           = require('url');
 var error501            = require('../../../common/lib/501');
 var equal               = require('deep-equal');
 var array               = require('../../../../utils/lib/array.utils');
-var moveCountBeforeBeingAboveWater = require('./move.count');
+var moveCountBeforeBeingAboveWater = require('./move.count').moveCountBeforeBeingAboveWater;
+var moveCountBeforeBeingAboveFire = require('./move.count').moveCountBeforeBeingAboveFire;
 
 module.exports = {
 
@@ -57,6 +58,11 @@ module.exports = {
 
         if (moveCountBeforeBeingAboveWater(sentMap, answer.moves) === -1) {
             callback(error501.withValues('your plane must fly over the water', 'your plane never flew over the water'));
+            return;
+        }
+		
+        if (moveCountBeforeBeingAboveFire(sentMap, answer.moves) === -1) {
+            callback(error501.withValues('your plane must fly over the fire', 'your plane never reached the fire'));
             return;
         }
 		

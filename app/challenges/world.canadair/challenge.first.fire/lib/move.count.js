@@ -2,20 +2,34 @@ var planePositionIn     = require('./plane.position.in.map');
 var whatIsBelowPlaneIn  = require('./what.is.below.plane');
 var array               = require('../../../../utils/lib/array.utils');
 
-moveCountBeforeBeingAboveWater = function(map, moves) {
+moveCountBeforeGivenTarget = function(map, moves, target) {
     var plane = planePositionIn(map);
     var point;
     
     var count = 0;
+    var found = false;
     array.forEach(moves, function(offset) {
-        count ++;
-        plane.move(offset);
-        point = whatIsBelowPlaneIn(map, plane);
-        if (point == 'W') { return; }
+        if (!found) {
+            count ++;
+            plane.move(offset);
+            point = whatIsBelowPlaneIn(map, plane);
+            if (point == target) {
+                found = true;
+            }
+        }
     });
     
-    return point == 'W' ? count : -1;
+    return point == target ? count : -1;
 };
 
-module.exports = moveCountBeforeBeingAboveWater;
+moveCountBeforeBeingAboveWater = function(map, moves) {
+    return moveCountBeforeGivenTarget(map, moves, 'W');
+};
+
+moveCountBeforeBeingAboveFire = function(map, moves) {
+    return moveCountBeforeGivenTarget(map, moves, 'F');
+};
+
+module.exports.moveCountBeforeBeingAboveWater = moveCountBeforeBeingAboveWater;
+module.exports.moveCountBeforeBeingAboveFire = moveCountBeforeBeingAboveFire;
 
