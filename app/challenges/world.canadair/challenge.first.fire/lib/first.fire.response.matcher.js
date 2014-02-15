@@ -8,8 +8,8 @@ var moveCountBeforeBeingAboveFire = require('./move.count').moveCountBeforeBeing
 module.exports = {
 
     hasExpectedContentType: function(response) {
-    	return response.headers !== undefined &&
-    	       response.headers['content-type'] !== undefined &&
+        return response.headers !== undefined &&
+               response.headers['content-type'] !== undefined &&
                response.headers['content-type'].indexOf('application/json') !== -1;
     },
     
