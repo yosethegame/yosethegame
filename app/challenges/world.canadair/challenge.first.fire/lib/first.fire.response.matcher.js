@@ -75,8 +75,8 @@ module.exports = {
 		
 		callback({
             code: 200,
-            expected: expected,
-            got: expected
+            expected: 'Extinguish that fire!',
+            got: 'You did it!'
 		});
 	}
 };
