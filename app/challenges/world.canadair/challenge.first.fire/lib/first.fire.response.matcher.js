@@ -22,8 +22,6 @@ module.exports = {
     
 	validate: function(url, remoteResponse, content, callback) {
         var sentMap = this.extractSentMap(url);
-        var expected = 'map = ' + JSON.stringify(sentMap) +
-                       ' AND an array field "moves" with elements like {dx: -1/0/1, dy: -1/0/1}';
 
         if (remoteResponse === undefined) {
             callback(error501.withValues('A Json object', 'An empty response'));
@@ -45,60 +43,62 @@ module.exports = {
         }
 
         if (answer === null || answer.map === undefined) {
-            callback(error501.withValues(expected, 'missing field "map"'));
+            callback(error501.withValues('A Json object with map and moves', 'missing field "map"'));
             return;
         }
 
         if (!equal(answer.map, sentMap)) {
-            callback(error501.withValues(expected, 'map = ' + JSON.stringify(answer.map)));
+            callback(error501.withValues('A Json object with map = ' + JSON.stringify(sentMap), 'map = ' + JSON.stringify(answer.map)));
             return;
         }
 
         if(answer.moves === undefined) {
-            callback(error501.withValues(expected, 'missing field "moves"'));
+            callback(error501.withValues('A Json object with map and moves', 'missing field "moves"'));
             return;
         }
 
         if(answer.moves.length === undefined) {
-            callback(error501.withValues(expected, 'moves = ' + answer.moves));
+            callback(error501.withValues('moves should be in an array', 'moves = ' + answer.moves));
             return;
         }
 
         var stop = false;
         array.forEach(answer.moves, function(move) {
             if (move.dx === undefined || move.dy === undefined) {
-                callback(error501.withValues(expected, 'moves = "' + answer.moves + '"'));
+                callback(error501.withValues('Each move should have fields dx and dy', 'moves = ' + JSON.stringify(answer.moves)));
                 stop = true;
                 return;
             }
             if (move.dx*move.dx > 1 || move.dy*move.dy > 1) {
-                callback(error501.withValues(expected, 'dx or dy outside of authorized values'));
+                callback(error501.withValues('Possible values for dx and dy are -1, 0 or 1', 'one move { dx:' + move.dx + ', dy:' + move.dy + ' }'));
                 stop = true;
                 return;
             }
         });
         if (stop) { return; }
 
+        var expected = 'Your plane must first take water and then reach the fire. map = ' + JSON.stringify(sentMap);
+        
         var moveCountBeforeWater = moveCountBeforeBeingAboveWater(sentMap, answer.moves);
         if (moveCountBeforeWater === -1) {
-            callback(error501.withValues('your plane must fly over the water', 'your plane never flew over the water'));
+            callback(error501.withValues(expected, 'Your plane never took water'));
             return;
         }
 		
 		var moveCountBeforeFire = moveCountBeforeBeingAboveFire(sentMap, answer.moves);
         if (moveCountBeforeFire === -1) {
-            callback(error501.withValues('your plane must fly over the fire', 'your plane never reached the fire'));
+            callback(error501.withValues(expected, 'Your plane never reached the fire'));
             return;
         }
         
         if (moveCountBeforeFire < moveCountBeforeWater) {
-            callback(error501.withValues('your plane must fly over water before flying over the fire', 'your plane flew over the fire without water'));
+            callback(error501.withValues(expected, 'Your plane reached the fire without water'));
             return;
         }
 		
 		callback({
             code: 200,
-            expected: 'Extinguish that fire!',
+            expected: expected,
             got: 'You did it!'
 		});
 	}

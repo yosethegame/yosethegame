@@ -4,9 +4,13 @@ function Requester(server) {
 	this.server = removeTrailingSlashOf(server);
 	
 	this.candidates = [
-        { map: "...P...WF" , width: 3 },
-        { map: "W....P.F." , width: 3 },
+        { map: "PFW......" , width: 3 },
+        { map: "P..F..W.." , width: 3 },
         { map: ".P..F..W." , width: 3 },
+        { map: "......PFW" , width: 3 },
+        { map: ".W..F..P." , width: 3 },
+        { map: "..W..F..P" , width: 3 },
+        { map: "......WFP" , width: 3 },
     ];
 	
 	this.mapWidth = function() {

@@ -33,7 +33,7 @@ describe('First fire challenge requester', function() {
 	describe('Candidate list', function() {
 
         it('is not empty', function() {
-            expect(requester.candidates.length).toEqual(3);
+            expect(requester.candidates.length).toBeGreaterThan(3);
         });
 
         it('is made of elements containing a map', function() {
@@ -45,6 +45,12 @@ describe('First fire challenge requester', function() {
         it('is made of elements containing the width of the map', function() {
             array.forEach(requester.candidates, function(candidate) {
                 expect(candidate.width).toBeDefined();
+            });
+        });
+        
+        it('is made of map with correct size', function() {
+            array.forEach(requester.candidates, function(candidate) {
+                expect(candidate.map.length % candidate.width).toEqual(0);
             });
         });
 
@@ -62,7 +68,7 @@ describe('First fire challenge requester', function() {
         it('is random', function() {
             var first = requester.candidateIndex();
             var same = true;
-            array.forEach([1, 2, 3, 4, 5], function(index) {
+            array.forEach([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], function(index) {
                 var second = requester.candidateIndex();
                 if (second !== first) { same = false; }
             });

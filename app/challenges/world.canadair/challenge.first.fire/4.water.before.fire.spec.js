@@ -6,7 +6,7 @@ describe('When the answer has the correct format,', function() {
 	var remoteAnswer;
 	var status;
 
-    describe('but the plane never flies over the water,', function() {
+    describe('but the plane never takes water,', function() {
         
 		beforeEach(function(done) {
             request = 'http://localhost:6000/fire/api?width=2&map=PW.F';
@@ -32,15 +32,15 @@ describe('When the answer has the correct format,', function() {
 		});
 
 		it('sets expected', function() {
-			expect(status.expected).toContain('your plane must fly over the water');
+			expect(status.expected).toContain('plane must first take water and then reach the fire');
 		});
 
 		it('sets actual', function() {
-			expect(status.got).toContain('your plane never flew over the water');
+			expect(status.got).toContain('plane never took water');
 		});
     });
     
-    describe('but the plane never flies over the fire,', function() {
+    describe('but the plane never reaches the fire,', function() {
         
 		beforeEach(function(done) {
             request = 'http://localhost:6000/fire/api?width=2&map=PW.F';
@@ -65,15 +65,15 @@ describe('When the answer has the correct format,', function() {
 		});
 
 		it('sets expected', function() {
-			expect(status.expected).toContain('your plane must fly over the fire');
+			expect(status.expected).toContain('plane must first take water and then reach the fire');
 		});
 
 		it('sets actual', function() {
-			expect(status.got).toContain('your plane never reached the fire');
+			expect(status.got).toContain('plane never reached the fire');
 		});
     });
     
-    describe('but the plane flies over the fire before flying over the water,', function() {
+    describe('but the plane reaches the fire before taking water,', function() {
         
 		beforeEach(function(done) {
             request = 'http://localhost:6000/fire/api?width=2&map=PW.F';
@@ -100,15 +100,15 @@ describe('When the answer has the correct format,', function() {
 		});
 
 		it('sets expected', function() {
-			expect(status.expected).toContain('your plane must fly over water before flying over the fire');
+			expect(status.expected).toContain('plane must first take water and then reach the fire');
 		});
 
 		it('sets actual', function() {
-			expect(status.got).toContain('your plane flew over the fire without water');
+			expect(status.got).toContain('plane reached the fire without water');
 		});
     });
     
-    describe('and the plane flies over the water and then over the fire,', function() {
+    describe('and the plane takes water and then reaches the fire,', function() {
         
 		beforeEach(function(done) {
             request = 'http://localhost:6000/fire/api?width=2&map=PW.F';
@@ -134,7 +134,7 @@ describe('When the answer has the correct format,', function() {
 		});
 
 		it('sets expected', function() {
-			expect(status.expected).toContain('Extinguish that fire!');
+			expect(status.expected).toContain('plane must first take water and then reach the fire');
 		});
 
 		it('sets actual', function() {

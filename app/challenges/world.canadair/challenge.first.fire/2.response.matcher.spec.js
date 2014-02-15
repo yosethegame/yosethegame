@@ -53,7 +53,7 @@ describe('First fire response matcher,', function() {
 		});
 		
 		it('sets expected', function() {
-			expect(status.expected).toContain('map = ["AB","CD"]');
+			expect(status.expected).toContain('A Json object with map and moves');
 		});
 		
 		it('sets actual', function() {
@@ -78,7 +78,7 @@ describe('First fire response matcher,', function() {
 		});
 		
 		it('sets expected', function() {
-			expect(status.expected).toContain('map = ["AB","CD"]');
+			expect(status.expected).toContain('A Json object with map and moves');
 		});
 		
 		it('sets actual', function() {
