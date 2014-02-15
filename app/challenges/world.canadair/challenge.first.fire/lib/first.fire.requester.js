@@ -4,21 +4,21 @@ function Requester(server) {
 	this.server = removeTrailingSlashOf(server);
 	
 	this.candidates = [
-	    { map: "...P...WF" , width: 3 },
-	    { map: "W....P.F." , width: 3 },
-	    { map: ".P..F..W." , width: 3 },
-	];
+        { map: "...P...WF" , width: 3 },
+        { map: "W....P.F." , width: 3 },
+        { map: ".P..F..W." , width: 3 },
+    ];
 	
 	this.mapWidth = function() {
-	    return this.candidates[this.candidateIndex()].width;
+        return this.candidates[this.candidateIndex()].width;
 	};
 	
 	this.map = function() {
-	    return this.candidates[this.candidateIndex()].map;
+        return this.candidates[this.candidateIndex()].map;
 	};
 	
 	this.candidateIndex = function() {
-	    return Math.floor(Math.random() * this.candidates.length);
+        return Math.floor(Math.random() * this.candidates.length);
 	};
 }
 

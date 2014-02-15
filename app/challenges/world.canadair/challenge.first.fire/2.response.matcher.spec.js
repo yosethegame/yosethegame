@@ -6,22 +6,22 @@ describe('First fire response matcher,', function() {
 	var status;
 	
     describe('When the answer does not contain the sent map', function() {
-	    
+
 		beforeEach(function(done) {
-    	    request = 'http://localhost:6000/fire/api?width=2&map=ABCD';
-    	    remoteAnswer = JSON.stringify({
-    	        map: [
-    	            "anything",
-    	            "but",
-    	            "the expected map"
-    	        ]
-    	    });
+            request = 'http://localhost:6000/fire/api?width=2&map=ABCD';
+            remoteAnswer = JSON.stringify({
+                map: [
+                    "anything",
+                    "but",
+                    "the expected map"
+                ]
+            });
 
 			matcher.validate(request, { headers: { 'content-type': 'application/json; charset=utf-8'}}, remoteAnswer, function(receivedStatus) {
-			    status = receivedStatus;
+                status = receivedStatus;
 				done();
 			});
-    	});
+        });
 
 		it('sets code to 501', function() {
 			expect(status.code).toEqual(501);
@@ -37,16 +37,16 @@ describe('First fire response matcher,', function() {
 	});
 	
 	describe('When the answer does not contain a map', function() {
-	    
+
 		beforeEach(function(done) {
-    	    request = 'http://localhost:6000/fire/api?width=2&map=ABCD';
-    	    remoteAnswer = JSON.stringify({});
+            request = 'http://localhost:6000/fire/api?width=2&map=ABCD';
+            remoteAnswer = JSON.stringify({});
 
 			matcher.validate(request, { headers: { 'content-type': 'application/json; charset=utf-8'}}, remoteAnswer, function(receivedStatus) {
-			    status = receivedStatus;
+                status = receivedStatus;
 				done();
 			});
-    	});
+        });
 
 		it('sets code to 501', function() {
 			expect(status.code).toEqual(501);
@@ -62,16 +62,16 @@ describe('First fire response matcher,', function() {
 	});
 		
 	describe('When the answer is null', function() {
-	    
+
 		beforeEach(function(done) {
-    	    request = 'http://localhost:6000/fire/api?width=2&map=ABCD';
-    	    remoteAnswer = JSON.stringify(null);
+            request = 'http://localhost:6000/fire/api?width=2&map=ABCD';
+            remoteAnswer = JSON.stringify(null);
 
 			matcher.validate(request, { headers: { 'content-type': 'application/json; charset=utf-8'}}, remoteAnswer, function(receivedStatus) {
-			    status = receivedStatus;
+                status = receivedStatus;
 				done();
 			});
-    	});
+        });
 
 		it('sets code to 501', function() {
 			expect(status.code).toEqual(501);

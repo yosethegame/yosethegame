@@ -9,19 +9,19 @@ describe('When the answer contains the correct map,', function() {
     describe('but does not contain the moves,', function() {
         
 		beforeEach(function(done) {
-    	    request = 'http://localhost:6000/fire/api?width=2&map=ABCD';
-    	    remoteAnswer = JSON.stringify({
-    	        map: [
-    	            "AB",
-    	            "CD"
-    	        ]
-    	    });
+            request = 'http://localhost:6000/fire/api?width=2&map=ABCD';
+            remoteAnswer = JSON.stringify({
+                map: [
+                    "AB",
+                    "CD"
+                ]
+            });
 
 			matcher.validate(request, { headers: { 'content-type': 'application/json; charset=utf-8'}}, remoteAnswer, function(receivedStatus) {
-			    status = receivedStatus;
-				done();
+                status = receivedStatus;
+                done();
 			});
-    	});
+        });
 
 		it('sets code to 501', function() {
 			expect(status.code).toEqual(501);
@@ -39,20 +39,20 @@ describe('When the answer contains the correct map,', function() {
     describe('but the moves are in incorrect format,', function() {
         
 		beforeEach(function(done) {
-    	    request = 'http://localhost:6000/fire/api?width=2&map=ABCD';
-    	    remoteAnswer = JSON.stringify({
-    	        map: [
-    	            "AB",
-    	            "CD"
-    	        ],
-    	        moves: 'any'
-    	    });
+            request = 'http://localhost:6000/fire/api?width=2&map=ABCD';
+            remoteAnswer = JSON.stringify({
+                map: [
+                    "AB",
+                    "CD"
+                ],
+                moves: 'any'
+            });
 
 			matcher.validate(request, { headers: { 'content-type': 'application/json; charset=utf-8'}}, remoteAnswer, function(receivedStatus) {
-			    status = receivedStatus;
+                status = receivedStatus;
 				done();
 			});
-    	});
+        });
 
 		it('sets code to 501', function() {
 			expect(status.code).toEqual(501);
@@ -70,22 +70,22 @@ describe('When the answer contains the correct map,', function() {
     describe('but the moves have offsets out of [-1, 0, +1] authorized values,', function() {
         
 		beforeEach(function(done) {
-    	    request = 'http://localhost:6000/fire/api?width=2&map=ABCD';
-    	    remoteAnswer = JSON.stringify({
-    	        map: [
-    	            "AB",
-    	            "CD"
-    	        ],
-    	        moves: [
-    	            { dx: 1, dy: -5 }
-    	        ]
-    	    });
+            request = 'http://localhost:6000/fire/api?width=2&map=ABCD';
+            remoteAnswer = JSON.stringify({
+                map: [
+                    "AB",
+                    "CD"
+                ],
+                moves: [
+                    { dx: 1, dy: -5 }
+                ]
+            });
 
 			matcher.validate(request, { headers: { 'content-type': 'application/json; charset=utf-8'}}, remoteAnswer, function(receivedStatus) {
-			    status = receivedStatus;
+                status = receivedStatus;
 				done();
 			});
-    	});
+        });
 
 		it('sets code to 501', function() {
 			expect(status.code).toEqual(501);
@@ -103,20 +103,20 @@ describe('When the answer contains the correct map,', function() {
     describe('but the moves is in very incorrect format,', function() {
         
 		beforeEach(function(done) {
-    	    request = 'http://localhost:6000/fire/api?width=2&map=ABCD';
-    	    remoteAnswer = JSON.stringify({
-    	        map: [
-    	            "AB",
-    	            "CD"
-    	        ],
-    	        moves: 23
-    	    });
+            request = 'http://localhost:6000/fire/api?width=2&map=ABCD';
+            remoteAnswer = JSON.stringify({
+                map: [
+                    "AB",
+                    "CD"
+                ],
+                moves: 23
+            });
 
 			matcher.validate(request, { headers: { 'content-type': 'application/json; charset=utf-8'}}, remoteAnswer, function(receivedStatus) {
-			    status = receivedStatus;
+                status = receivedStatus;
 				done();
 			});
-    	});
+        });
 
 		it('sets code to 501', function() {
 			expect(status.code).toEqual(501);
