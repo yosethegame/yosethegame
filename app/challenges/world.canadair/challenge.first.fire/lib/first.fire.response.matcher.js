@@ -7,6 +7,12 @@ var moveCountBeforeBeingAboveFire = require('./move.count').moveCountBeforeBeing
 
 module.exports = {
 
+    hasExpectedContentType: function(response) {
+    	return response.headers !== undefined &&
+    	       response.headers['content-type'] !== undefined &&
+               response.headers['content-type'].indexOf('application/json') !== -1;
+    },
+    
     extractSentMap: function(url) {
         var mapWidth = urlParser.parse(url, true).query.width;
         var regex = new RegExp('.{' + mapWidth + '}', 'g');
@@ -19,7 +25,24 @@ module.exports = {
         var expected = 'map = ' + JSON.stringify(sentMap) +
                        ' AND an array field "moves" with elements like {dx: -1/0/1, dy: -1/0/1}';
 
-        var answer = JSON.parse(content);
+        if (remoteResponse === undefined) {
+            callback(error501.withValues('A Json object', 'An empty response'));
+            return;
+        }
+
+        if (! this.hasExpectedContentType(remoteResponse)) {
+            callback(error501.withValues('A content-type application/json in header', 'A different content-type'));
+            return;
+        }
+        
+        var answer;
+        try {
+            answer = JSON.parse(content);
+        }
+        catch (e) {
+            callback(error501.withValues('A Json object', '"' + content + '"'));
+            return;
+        }
 
         if (answer === null || answer.map === undefined) {
             callback(error501.withValues(expected, 'missing field "map"'));
