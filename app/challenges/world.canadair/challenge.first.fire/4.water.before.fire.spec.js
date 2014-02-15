@@ -6,7 +6,7 @@ describe('When the answer has the correct format,', function() {
 	var remoteAnswer;
 	var status;
 
-    xdescribe('but the plane never flies over the water,', function() {
+    describe('but the plane never flies over the water,', function() {
         
 		beforeEach(function(done) {
             request = 'http://localhost:6000/fire/api?width=2&map=PW.F';
@@ -40,7 +40,7 @@ describe('When the answer has the correct format,', function() {
 		});
     });
     
-    xdescribe('but the plane never flies over the fire,', function() {
+    describe('but the plane never flies over the fire,', function() {
         
 		beforeEach(function(done) {
             request = 'http://localhost:6000/fire/api?width=2&map=PW.F';
@@ -105,6 +105,40 @@ describe('When the answer has the correct format,', function() {
 
 		it('sets actual', function() {
 			expect(status.got).toContain('your plane flew over the fire without water');
+		});
+    });
+    
+    describe('and the plane flies over the water and then over the fire,', function() {
+        
+		beforeEach(function(done) {
+            request = 'http://localhost:6000/fire/api?width=2&map=PW.F';
+            remoteAnswer = JSON.stringify({
+                map: [
+                    "PW",
+                    ".F"
+                ],
+                moves: [
+                    { dx:1, dy:0 },
+                    { dx:0, dy:1 },
+                ]
+            });
+
+			matcher.validate(request, { headers: { 'content-type': 'application/json; charset=utf-8'}}, remoteAnswer, function(receivedStatus) {
+                status = receivedStatus;
+				done();
+			});
+        });
+
+		it('sets code to 200', function() {
+			expect(status.code).toEqual(200);
+		});
+
+		it('sets expected', function() {
+			expect(status.expected).toContain('Extinguish that fire!');
+		});
+
+		it('sets actual', function() {
+			expect(status.got).toContain('You did it!');
 		});
     });
 });

@@ -56,13 +56,20 @@ module.exports = {
         });
         if (stop) { return; }
 
-        if (moveCountBeforeBeingAboveWater(sentMap, answer.moves) === -1) {
+        var moveCountBeforeWater = moveCountBeforeBeingAboveWater(sentMap, answer.moves);
+        if (moveCountBeforeWater === -1) {
             callback(error501.withValues('your plane must fly over the water', 'your plane never flew over the water'));
             return;
         }
 		
-        if (moveCountBeforeBeingAboveFire(sentMap, answer.moves) === -1) {
+		var moveCountBeforeFire = moveCountBeforeBeingAboveFire(sentMap, answer.moves);
+        if (moveCountBeforeFire === -1) {
             callback(error501.withValues('your plane must fly over the fire', 'your plane never reached the fire'));
+            return;
+        }
+        
+        if (moveCountBeforeFire < moveCountBeforeWater) {
+            callback(error501.withValues('your plane must fly over water before flying over the fire', 'your plane flew over the fire without water'));
             return;
         }
 		
