@@ -19,7 +19,7 @@ moveCountBeforeGivenTarget = function(map, moves, target) {
         }
     });
     
-    return point == target ? count : -1;
+    return found === true ? count : -1;
 };
 
 moveCountBeforeBeingAboveWater = function(map, moves) {

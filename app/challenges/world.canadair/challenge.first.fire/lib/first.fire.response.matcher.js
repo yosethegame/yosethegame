@@ -81,18 +81,18 @@ module.exports = {
         
         var moveCountBeforeWater = moveCountBeforeBeingAboveWater(sentMap, answer.moves);
         if (moveCountBeforeWater === -1) {
-            callback(error501.withValues(expected, 'Your plane never took water'));
+            callback(error501.withValues(expected, 'Your plane never took water moves = ' + JSON.stringify(answer.moves)));
             return;
         }
 		
 		var moveCountBeforeFire = moveCountBeforeBeingAboveFire(sentMap, answer.moves);
         if (moveCountBeforeFire === -1) {
-            callback(error501.withValues(expected, 'Your plane never reached the fire'));
+            callback(error501.withValues(expected, 'Your plane never reached the fire. moves = ' + JSON.stringify(answer.moves)));
             return;
         }
         
         if (moveCountBeforeFire < moveCountBeforeWater) {
-            callback(error501.withValues(expected, 'Your plane reached the fire without water'));
+            callback(error501.withValues(expected, 'Your plane reached the fire without water moves = ' + JSON.stringify(answer.moves)));
             return;
         }
 		
