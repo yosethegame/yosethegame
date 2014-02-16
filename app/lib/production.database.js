@@ -77,7 +77,7 @@ function ProductionDatabase() {
                 id: 27,
                 title: 'Portfolio - Minesweeper challenge',
                 file: 'app/challenges/world.minesweeper/challenge.portfolio/lib/portfolio.html',
-				requester: '../../../challenges/world.minesweeper/challenge.board/lib/board.requester.js',
+				requester: '../../../challenges/challenge.landing.page/lib/landing.requester.js',
                 checker: '../../../challenges/world.minesweeper/challenge.portfolio/lib/portfolio.response.matcher.js',
 				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 26); }
             },		
