@@ -1,0 +1,55 @@
+.world-ellipse {
+    width: 140px;
+    height:88px;
+    -webkit-border-radius: 95px / 60px;
+    -moz-border-radius:    95px / 60px; 
+    border-radius:         95px / 60px; 
+	text-align:center;
+	font-weight:normal;
+	font-size:120%;
+
+	padding-top:30px;
+}
+
+.world-completed {
+    background: #00722d;
+}
+
+.world-in-progress {
+    background: #89c122;
+}
+
+.world-locked {
+    background: #888888;
+}
+
+.world-detail {
+    margin-left:20px;    
+}
+
+.world-detail td {
+    padding-left:5px;
+    padding-right:5px;
+}
+
+.level-list-header {
+    border-right-color:white;
+	border-right-style:solid;
+	border-right-width:1px;
+}
+
+.level-list {
+    color:white;
+    padding:0px;
+    display: inline-block;
+    text-align:left;
+    list-style:none;
+}
+
+.level-list-header, .new-level {
+    color:#03a1fc;
+}
+
+.locked-level {
+    color:#949494;
+}

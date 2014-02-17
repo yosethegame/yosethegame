@@ -5,8 +5,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 		<link href="/css/main.css" rel="stylesheet" type="text/css">
+		<link href="/features/feature.dashboard/lib/dashboard.css" rel="stylesheet" type="text/css">
 	</head>
-<body>
+<body style="background-color:#424242">
 	
 	<label class="text-danger hidden" id="info">Unknown player</label>
 	
@@ -27,38 +28,118 @@
 					<td nowrap><a id="restart-game-link" href="#" class="hidden" onclick="new Restart().game()">Restart game</a></td>
 				</tr>
 			</table>
-
-			<table id="worlds">
-				
-				<tr class="open-world">
-					<td nowrap class="world lead">first world</td>
-					<td width="100%" nowrap>
-						<div class="progress">
-						  <div class="progress-bar progress-bar-success" role="progressbar" style="width:0%"></div>
-						</div>
-						<table width="100%"><tr>
-							<td width="100%">
-								<ul class="levels lead">
-									<li>level 1.1 : the ping challenge</li>
-									<li class="locked-level">level w.l : <span class="glyphicon glyphicon-lock" style="color:#888888;"></span> (locked)</li>
-								</ul>
-								<a class="rerun-world-n-link hidden lead" href="">Rerun all the completed levels of this world</a>					
+			
+	<div>
+			
+		<div class="row">
+			<div class="col-sm-6" align="left">
+				<div>
+					<div class="world-ellipse world-completed">To start</div>
+					<table class="world-detail">
+						<tr valign="top">
+							<td class="level-list-header">
+								<span class="glyphicon glyphicon-repeat"></span>
+								<br/>
+								<span class="glyphicon glyphicon-play"></span>							
 							</td>
-							<td style="padding-right:0px">
-								<a id="restart-world-n-link" class="visible" href="">Restart world</a>
+							<td>
+								<ul class="level-list">
+									<li>First web page</li>
+									<li>First web service</li>
+									<li>Share</li>
+								<ul>
 							</td>
-						</tr></table>
-					</td>
-				</tr>
-				
-				<tr class="locked-world">
-					<td nowrap class="world">
-						name<br/><span class="glyphicon glyphicon-lock" style="color:#888888;">
-					</td>
-					<td></td>
-				</tr>				
-
-			</table>
+						</tr>
+					</table>
+				</div>
+				<div style="padding-left:150px;">
+					<div class="world-ellipse world-in-progress">Portfolio</div>
+					<table class="world-detail">
+						<tr valign="top">
+							<td class="level-list-header">
+								<span class="glyphicon glyphicon-repeat"></span>							
+							</td>
+							<td>
+								<ul class="level-list">
+									<li>Contact</li>
+									<li class="new-level">Portfolio - Ping</li>
+									<li class="new-level">Portfolio - Prime factors</li>
+									<li class="locked-level">Locked</li>
+								<ul>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="col-sm-6" align="left">
+				<div class="world-ellipse world-in-progress">Prime factors</div>
+				<table class="world-detail">
+					<tr valign="top">
+						<td class="level-list-header">
+							<span class="glyphicon glyphicon-repeat"></span>							
+						</td>
+						<td>
+							<ul class="level-list">
+								<li>Power of two</li>
+								<li>Guard</li>
+								<li>Decomposition</li>
+								<li>Bif number guard</li>
+								<li>Multiple entries</li>
+								<li>Form</li>
+								<li>Input</li>
+								<li>Resist big number</li>
+								<li>Resist string</li>
+								<li>Resist negative number</li>
+								<li>One page</li>
+								<li class="new-level">List of decomposition</li>
+							<ul>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		
+		<div class="row" style="padding-top:10px;">
+			<div class="col-sm-7" align="left">
+				<div style="padding-left:90px;">
+					<div class="world-ellipse world-locked">Fire</div>
+					<table class="world-detail hidden">
+						<tr valign="top">
+							<td class="level-list-header">
+								<span class="glyphicon glyphicon-repeat"></span>							
+							</td>
+							<td>
+								<ul class="level-list">
+									<li class="locked-level">locked</li>
+								<ul>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="col-sm-4" align="left">
+				<div class="world-ellipse world-in-progress">Minesweeper</div>
+				<table class="world-detail">
+					<tr valign="top">
+						<td class="level-list-header">
+							<span class="glyphicon glyphicon-repeat"></span>							
+						</td>
+						<td>
+							<ul class="level-list">
+								<li>Minesweeper board</li>
+								<li>Data injection</li>
+								<li>Safe cells</li>
+								<li class="new-level">Zero mine around</li>
+								<li class="locked-level">locked</li>
+							<ul>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		
+	</div>
+			
 
 		</div>
 		
