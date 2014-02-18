@@ -33,7 +33,7 @@ describe('Creating a player', function() {
 				return browser.visit('http://localhost:5000/players/eric');
 			}).
 			then(function() {
-				expect(browser.text("#greetings")).toContain('eric');
+				expect(browser.text("#world-1 .world-ellipse")).toContain('To start');
 				done();
 			}).
 			fail(function(error) {
