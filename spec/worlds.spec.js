@@ -4,7 +4,7 @@ var Server = require('../app/lib/server');
 var DatabaseWithChallenges = require('../app/support/database.with.levels');
 var fs = require('fs');
 
-describe("Dasboard,", function() {
+describe("Dashboard,", function() {
 
 	var server = new Server(router);
 	var remote;
@@ -40,7 +40,7 @@ describe("Dasboard,", function() {
 			var browser = new Browser();
 			browser.visit('http://localhost:5000/players/annessou').
 				then(function() {
-					expect(browser.text('table#worlds tr.open-world:nth-child(1) > td:nth-child(1)')).toEqual('world 1');
+					expect(browser.query('#world-1 .world-detail').className).toContain('visible');
 					done();
 				}).
 				fail(function(error) {

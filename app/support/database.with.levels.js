@@ -47,6 +47,13 @@ function Example() {
 					checker: '../../../support/response.always.valid',
 					isOpenLevelFor: function(player) { return false; }
 				},
+				{
+					id: 6,
+					title: 'the sixth challenge',
+					requester: '../../../support/empty.request',
+					checker: '../../../support/response.always.valid',
+					isOpenLevelFor: function(player) { return false; }
+				},
 			],
 			isOpenFor: function(player) { return thePlayer.hasDoneLevelWithId(player, 2); }
 		}

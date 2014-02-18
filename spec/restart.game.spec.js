@@ -42,7 +42,7 @@ describe("Restart game:", function() {
 					return browser.clickLink("#restart-game-link");
 				}).
 				then(function() {
-					expect(browser.text("#worlds tr:nth-child(1) td:nth-child(2) ul.levels li:nth-child(1) a")).toContain(database.worlds[0].levels[0].title);
+					expect(browser.text("#world-1 ul.level-list li:nth-child(1) a")).toContain(database.worlds[0].levels[0].title);
 					done();
 				}).
 				fail(function(error) {

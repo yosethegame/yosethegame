@@ -4,6 +4,7 @@ var WorldMatcherData	= require('./dashboard.worlds.matchers');
 var LevelMatcherData	= require('./dashboard.levels.matchers');
 var dashboard			= require('./lib/display.dashboard.js');
 var response			= require('../../support/fake.response');
+var array               = require('../../utils/lib/array.utils');
 
 describe('The progress bar', function() {
 	
@@ -12,6 +13,15 @@ describe('The progress bar', function() {
 	var world;
 	var level;
 	var player;
+	
+	var totalLevelCount;
+	
+	beforeEach(function() {
+        totalLevelCount = 0;
+        array.forEach(database.worlds, function(world) {
+            totalLevelCount += world.levels.length;
+        });
+    });
 	
 	var loadPageWithDatabase = function(database) {
 		database.worlds[0].isOpenFor = function(player) { return true; };
@@ -33,8 +43,12 @@ describe('The progress bar', function() {
 			loadPageWithDatabase(database);
 		});
 		
+        it('is visible', function(){
+            expect(page('#server-of-player-area').attr('class')).toEqual('visible');
+        });
+
 		it('is empty', function() {
-			expect(world.number(1)).toHaveProgressBarOf('0%');
+			expect(page('.progress-bar').attr('style')).toEqual('width:0%');
 		});
 
 	});
@@ -50,23 +64,10 @@ describe('The progress bar', function() {
 		});
 		
 		it('is in sync with the portfolio', function() {
-			expect(world.number(1)).toHaveProgressBarOf('50%');
-		});
-
-	});
-	
-	describe('of a player with a portfolio that might lead to not rounded value', function() {
-		
-		beforeEach(function() {	
-			player = {
-				login: 'ericminio',
-				portfolio: [ { server: 'this-server', achievements: [1, 2, 3] } ]
-			};
-			loadPageWithDatabase(database);
-		});
-		
-		it('is rounded', function() {
-			expect(world.number(2)).toHaveProgressBarOf('33%');
+            var percentage = Math.round(100 * 1 / totalLevelCount);
+            var style = 'width:' + percentage + '%';
+			
+            expect(page('.progress-bar').attr('style')).toEqual(style);
 		});
 
 	});

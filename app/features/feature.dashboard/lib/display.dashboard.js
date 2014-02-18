@@ -22,9 +22,23 @@ dashboard = function(request, response, database) {
 		}
 		page('#login').text(player.login);		
 		fillBannerWithGreetings(page, player, 'Welcome ' + player.login);
+
+        page('#server-of-player-area').removeClass('hidden').addClass('visible');
 		showServerOfPlayer(page, player);
 		if (thePlayer.hasServer(player)) {
             page('#restart-game-link').addClass('visible').removeClass('hidden');
+
+            var totalLevelCount = 0;
+            array.forEach(database.worlds, function(world) {
+                totalLevelCount += world.levels.length;
+            });
+            var achievementCount = player.portfolio[0].achievements.length;
+            var percentage = Math.round(100 * achievementCount / totalLevelCount);
+            var style = 'width:' + percentage + '%';
+            page('.progress-bar').attr('style', style);
+        }
+        else {
+            page('.progress-bar').attr('style', 'width:0%');
         }
 
 		array.forEach(database.worlds, function(world, worldIndex) {

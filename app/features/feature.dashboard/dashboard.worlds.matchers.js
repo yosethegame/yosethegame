@@ -26,19 +26,10 @@ beforeEach(function() {
 		return actual == expected;
 	};
 	
-	var toHaveProgressBarOf = function(expected) {
-		var actual = this.actual.progress;
-		this.message = function() {
-			return "Expected '" + actual + "' to equal 'width:" + expected + "'";
-		};
-		return actual == 'width:' + expected;
-	};
-
 	this.addMatchers({ 
 		toBeALockedWorld: toBeALockedWorld, 
 		toBeOpen: toBeOpen, 
 		toHaveLevelCount: toHaveLevelCount, 
-		toHaveProgressBarOf: toHaveProgressBarOf 
 	});
 });
 
