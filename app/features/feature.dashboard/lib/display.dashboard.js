@@ -43,6 +43,7 @@ dashboard = function(request, response, database) {
 
 		array.forEach(database.worlds, function(world, worldIndex) {
             var ellipse = page('#world-' + (worldIndex+1) + ' .world-ellipse');
+            ellipse.text(world.name);
             var worldDetail = page('#world-' + (worldIndex+1) + ' .world-detail');
             if (world.isOpenFor(player)) {
                 ellipse.addClass('world-open');

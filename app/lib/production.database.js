@@ -16,7 +16,7 @@ function ProductionDatabase() {
 	
 	this.worlds = [
 	{
-		name: 'To start',
+		name: 'Start',
 		isOpenFor: isWorldOpenFor,
 		levels: [ 
 			{
