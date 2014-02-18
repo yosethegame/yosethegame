@@ -43,7 +43,7 @@ dashboard = function(request, response, database) {
 
 		array.forEach(database.worlds, function(world, worldIndex) {
             var ellipse = page('#world-' + (worldIndex+1) + ' .world-ellipse');
-            ellipse.text(world.name);
+            page('#world-' + (worldIndex+1) + ' .world-ellipse .world-name').text(world.name);
             var worldDetail = page('#world-' + (worldIndex+1) + ' .world-detail');
             if (world.isOpenFor(player)) {
                 ellipse.addClass('world-open');
@@ -77,6 +77,9 @@ dashboard = function(request, response, database) {
                     page('#rerun-world-' + (worldIndex+1) + '-link').removeClass('hidden').addClass('visible');
                     page('#rerun-world-' + (worldIndex+1) + '-link').attr('href', '/players/' + login + '/rerun/world/' + (worldIndex+1));
                     ellipse.removeClass('world-open').addClass('world-completed');
+                }
+                else {
+                    page('#world-' + (worldIndex+1) + ' .world-ellipse .glyphicon-ok').remove();
                 }
             } else {
                 ellipse.addClass('world-locked');

@@ -17,7 +17,7 @@ describe('The dashboard of a new player', function() {
 
 	it('sets name of worlds', function() {
         array.forEach(database.worlds, function(world, worldIndex) {
-            expect(page('#world-' + (worldIndex+1) + ' .world-ellipse').text()).toEqual(world.name);
+            expect(page('#world-' + (worldIndex+1) + ' .world-name').text()).toEqual(world.name);
         });
 	});
 });

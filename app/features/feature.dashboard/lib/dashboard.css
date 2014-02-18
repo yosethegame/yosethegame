@@ -1,9 +1,7 @@
 #server-of-player {
-
 }
 
 #restart-game-link {
-
 }
 
 .dashboard {
@@ -25,15 +23,19 @@
 }
 
 .world-open {
-    background: #89c122;
+    background: #B4D196;
+}
+
+.glyphicon-ok {
+    color:white;
 }
 
 .world-completed {
-    background: #00722d;
+    background: #B4D196;
 }
 
 .world-locked {
-    background: #888888;
+    background: #F5F5F5;
 }
 
 .world-detail {

@@ -37,7 +37,11 @@ describe('The dashboard of a new player', function() {
 		expect(world.number(2)).toBeALockedWorld();
 	});
 	
-	describe('When only the first level of first world is open', function() {
+	it('removes the completed icon', function() {
+        expect(page('#world-1 .world-ellipse .glyphicon-ok').length).toEqual(0);
+    });
+    
+    describe('When only the first level of first world is open', function() {
 
 		beforeEach(function() {
 			database.worlds[0].levels = [ 

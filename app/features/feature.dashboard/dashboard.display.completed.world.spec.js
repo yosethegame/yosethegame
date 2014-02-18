@@ -5,7 +5,7 @@ var LevelMatcherData	= require('./dashboard.levels.matchers');
 var dashboard			= require('./lib/display.dashboard.js');
 var response			= require('../../support/fake.response');
 
-describe('The dashboard of a player with a portfolio:', function() {
+describe('When the player has completed a world', function() {
 	
 	var database = new Data();
 	var page;
@@ -22,28 +22,19 @@ describe('The dashboard of a player with a portfolio:', function() {
 		level = new LevelMatcherData(page, database);
 	};
 
-	beforeEach(function() {	
-		player = {
-			login: 'ericminio',	
-			portfolio: [ { server: 'this-server', achievements: [1] } ]
-		};
-		loadPageWithDatabase(database);
-	});
-	
-	it('shows the server section because the player has a server', function() {
-		expect(page('#server-of-player').attr('class')).toContain('visible');
-	});
-	
-	it('displays level 1.1 as done', function() {
-        expect(level.number(1, 1)).toBeDone();
-	});
-	
-	it('invites the player to play level 1.2', function() {
-		expect(level.number(1, 2)).toBePlayableBy('ericminio');
-	});
+    beforeEach(function() {	
+        player = {
+            login: 'ericminio',	
+            portfolio: [ { server: 'this-server', achievements: [1, 2] } ]
+        };
+        loadPageWithDatabase(database);
+    });
 
-	it('displays only these two levels', function() {
-		expect(world.number(1)).toHaveLevelCount(2);
-	});
-	
+    it('shows this world has completed', function() {
+        expect(world.number(1)).toBeCompleted();
+    });
+    
+    it('displays the completed icon', function() {
+        expect(page('#world-1 .world-ellipse .glyphicon-ok').length).toEqual(1);
+    });
 });
