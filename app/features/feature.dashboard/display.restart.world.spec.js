@@ -26,7 +26,7 @@ describe('Restart world link', function() {
             portfolio: [ { achievements: [database.worlds[0].levels[0].id] } ]
         });
 
-        expect(page('#restart-world-1-link').length).toEqual(0);
+        expect(page('#world-1 .restart-world-link').length).toEqual(0);
 	});
 	
 	it('is displayed in world #2 when player has one achievement of world #2', function() {
@@ -35,7 +35,7 @@ describe('Restart world link', function() {
             portfolio: [ { achievements: [database.worlds[1].levels[0].id] } ]
         });
 
-        expect(page('#restart-world-2-link').attr('class')).toContain('visible');
+        expect(page('#world-2 .restart-world-link').attr('class')).toContain('visible');
 	});
 	
 	it('is not displayed in world #2 when player has no achievement of world #2', function() {
@@ -44,7 +44,7 @@ describe('Restart world link', function() {
             portfolio: [ { achievements: [database.worlds[0].levels[0].id] } ]
         });
         
-        expect(page('#restart-world-2-link').attr('class')).toContain('hidden');
+        expect(page('#world-2 .restart-world-link').attr('class')).toContain('hidden');
 	});
 	
 	describe('Target', function() {
@@ -55,7 +55,7 @@ describe('Restart world link', function() {
                 portfolio: [ { achievements: [database.worlds[1].levels[0].id] } ]
             });
 
-            expect(page('#restart-world-2-link').attr('href')).toContain('/players/ericminio/restart/world/2');
+            expect(page('#world-2 .restart-world-link').attr('href')).toContain('/players/ericminio/restart/world/2');
         });
 
 	});

@@ -70,12 +70,12 @@ dashboard = function(request, response, database) {
                     levelList.append('<li class="level level-locked">Locked</li>');
                 }
                 if (levelDoneCount > 0) {
-                    page('#restart-world-' + (worldIndex+1) + '-link').removeClass('hidden').addClass('visible');
-                    page('#restart-world-' + (worldIndex+1) + '-link').attr('href', '/players/' + login + '/restart/world/' + (worldIndex+1));
+                    page('#world-' + (worldIndex+1) + ' .restart-world-link').removeClass('hidden').addClass('visible');
+                    page('#world-' + (worldIndex+1) + ' .restart-world-link').attr('href', '/players/' + login + '/restart/world/' + (worldIndex+1));
                 }
                 if (levelDoneCount == world.levels.length) {
-                    page('#rerun-world-' + (worldIndex+1) + '-link').removeClass('hidden').addClass('visible');
-                    page('#rerun-world-' + (worldIndex+1) + '-link').attr('href', '/players/' + login + '/rerun/world/' + (worldIndex+1));
+                    page('#world-' + (worldIndex+1) + ' .rerun-world-link').removeClass('hidden').addClass('visible');
+                    page('#world-' + (worldIndex+1) + ' .rerun-world-link').attr('href', '/players/' + login + '/rerun/world/' + (worldIndex+1));
                     ellipse.removeClass('world-open').addClass('world-completed');
                 }
                 else {
@@ -84,6 +84,7 @@ dashboard = function(request, response, database) {
             } else {
                 ellipse.addClass('world-locked');
                 worldDetail.addClass('hidden');
+                page('#world-' + (worldIndex+1) + ' .world-ellipse .glyphicon-ok').remove();
             }
 		});
 

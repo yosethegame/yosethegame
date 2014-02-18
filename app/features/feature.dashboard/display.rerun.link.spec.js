@@ -27,7 +27,7 @@ describe('The rerun all levels link:', function() {
 		player = { login: 'ericminio' };
 		loadPageWithDatabase(database);
 
-        expect(page('#rerun-world-1-link').attr('class')).toContain('hidden');
+        expect(page('#world-1 .rerun-world-link').attr('class')).toContain('hidden');
 	});
 
 	it('is displayed when the world is completed', function() {
@@ -36,7 +36,7 @@ describe('The rerun all levels link:', function() {
 		};
 		loadPageWithDatabase(database);
 
-        expect(page('#rerun-world-1-link').attr('class')).toContain('visible');
+        expect(page('#world-1 .rerun-world-link').attr('class')).toContain('visible');
 	});
 	
 	it('is not displayed when the world is not completed', function() {
@@ -45,7 +45,7 @@ describe('The rerun all levels link:', function() {
 		};
 		loadPageWithDatabase(database);
 
-        expect(page('#rerun-world-1-link').attr('class')).toContain('hidden');
+        expect(page('#world-1 .rerun-world-link').attr('class')).toContain('hidden');
 	});
 	
 	it('targets rerun of the world for the player', function() {
@@ -54,7 +54,7 @@ describe('The rerun all levels link:', function() {
 		};
 		loadPageWithDatabase(database);
 
-        expect(page('#rerun-world-1-link').attr('href')).toEqual('/players/ericminio/rerun/world/1');
+        expect(page('#world-1 .rerun-world-link').attr('href')).toEqual('/players/ericminio/rerun/world/1');
 	});
 	
 });
