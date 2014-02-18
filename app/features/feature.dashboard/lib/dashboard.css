@@ -1,3 +1,11 @@
+#server-of-player {
+    color:#03a1fc;
+}
+
+#restart-game-link {
+    color:#03a1fc;
+}
+
 .world-ellipse {
     width: 140px;
     height:88px;
@@ -7,16 +15,17 @@
 	text-align:center;
 	font-weight:normal;
 	font-size:120%;
+	background:white;
 
 	padding-top:30px;
 }
 
-.world-completed {
-    background: #00722d;
+.world-open {
+    background: #89c122;
 }
 
-.world-in-progress {
-    background: #89c122;
+.world-completed {
+    background: #00722d;
 }
 
 .world-locked {
@@ -32,24 +41,37 @@
     padding-right:5px;
 }
 
+
 .level-list-header {
     border-right-color:white;
 	border-right-style:solid;
 	border-right-width:1px;
+    color:#03a1fc;
 }
 
 .level-list {
-    color:white;
     padding:0px;
     display: inline-block;
     text-align:left;
     list-style:none;
+    white-space: nowrap;
 }
 
-.level-list-header, .new-level {
+.level {
+}
+
+.level-open {
     color:#03a1fc;
 }
 
-.locked-level {
+.world-detail a:link, .world-detail a:hover, .world-detail a:visited {
+    color:#03a1fc;
+}
+
+.level-done {
+    color: white;
+}
+
+.level-locked {
     color:#949494;
 }

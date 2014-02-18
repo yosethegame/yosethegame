@@ -16,7 +16,7 @@ function ProductionDatabase() {
 	
 	this.worlds = [
 	{
-		name: 'world 1',
+		name: 'To start',
 		isOpenFor: isWorldOpenFor,
 		levels: [ 
 			{
@@ -46,7 +46,7 @@ function ProductionDatabase() {
 		]
 	},
 	{
-		name: 'world 2',
+		name: 'Portfolio',
 		isOpenFor: isWorldOpenFor,
 		levels: [ 
 			{
@@ -84,7 +84,7 @@ function ProductionDatabase() {
 		]
 	},
 	{
-		name: 'world 3',
+		name: 'Prime factors',
 		isOpenFor: isWorldOpenFor,
 		levels: [
 			{
@@ -186,7 +186,7 @@ function ProductionDatabase() {
 		]
 	},
 	{
-		name: 'world 4',
+		name: 'Minesweeper',
 		isOpenFor: isWorldOpenFor,
 		levels: [
 			{
@@ -248,7 +248,7 @@ function ProductionDatabase() {
 		]
 	},
 	{
-		name: 'world 5',
+		name: 'Fire',
 		isOpenFor: isWorldOpenFor,
 		levels: [
 			{

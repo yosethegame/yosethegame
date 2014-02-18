@@ -26,7 +26,7 @@ describe('Restart world link', function() {
             portfolio: [ { achievements: [database.worlds[0].levels[0].id] } ]
         });
 
-        expect(page('#restart-world-1-link').attr('class')).toContain('hidden');
+        expect(page('#restart-world-1-link').length).toEqual(0);
 	});
 	
 	it('is displayed in world #2 when player has one achievement of world #2', function() {

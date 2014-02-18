@@ -1,30 +1,32 @@
 beforeEach(function() {
 
 	var toBeALockedLevel = function() {
-		var actual = this.actual.html;
-		var levelNumberMention = this.actual.worldNumber + '.' + this.actual.levelNumber;
+		var levelClass = this.actual.level.attr('class');
 		this.message = function() {
-			return "Expected '" + actual + "' to contain 'lock' and 'level " + levelNumberMention + "' in " + this.actual.selector;
+			return "Expected '" + levelClass + "' to contain 'level-locked'";
 		};
-		return actual.indexOf('lock') != -1 && actual.indexOf(levelNumberMention) != -1;
+		return levelClass.indexOf('level-locked') !== -1;
 	};
 	
 	var toBePlayableBy = function(login) {
-		var actual = this.actual.html;
-		var expected = '<a href="/players/' + login + '/play/world/' + this.actual.worldNumber + '/level/' + this.actual.levelNumber + '">level ' + this.actual.worldNumber + '.' + this.actual.levelNumber + ' : ' + this.actual.levelTitle + '</a>';
+		var levelClass = this.actual.level.attr('class');
+		var expectedLink = '<a href="/players/' + login + '/play/world/' + this.actual.worldNumber + '/level/' + this.actual.levelNumber + '">' + this.actual.levelTitle + '</a>';
 		this.message = function() {
-			return "Expected '" + actual + "' to equal '" + expected + "'";
+			return "Expected '" + levelClass + "' to contain 'level-open' and " +
+                   "'" + this.actual.level.html() + "'" +
+                   " to equal " + expectedLink;
 		};
-		return actual == expected;
+		return levelClass.indexOf('level-open') !== -1 && this.actual.level.html() == expectedLink;
 	};
 	
 	var toBeDone = function() {
-		var actual = this.actual.html;
-		var expected = 'level ' + this.actual.worldNumber + '.' + this.actual.levelNumber + ' : ' + this.actual.levelTitle;
+		var levelClass = this.actual.level.attr('class');
 		this.message = function() {
-			return "Expected '" + actual + "' to equal '" + expected + "'";
+			return "Expected '" + levelClass + "' to contain 'level-done' and " +
+                    "'" + this.actual.level.html() + "'" + 
+                    " to equal '" + this.actual.levelTitle + "'";
 		};
-		return actual == expected;
+		return levelClass.indexOf('level-done') !== -1 && this.actual.level.html() == this.actual.levelTitle;
 	};
 
 	this.addMatchers({ 
@@ -39,13 +41,13 @@ function DashboardLevelMatcherData(page, database) {
 }
 
 DashboardLevelMatcherData.prototype.number = function(world, level) {
-	var selector = 'table#worlds tr:nth-child(' + world + ') td:nth-child(2) ul.levels li:nth-child(' + level + ')';
+	var selector = '#world-' + world + ' ul.level-list li:nth-child(' + level + ')';
 	return {
 		worldNumber: world,
 		levelNumber: level,
 		levelTitle : this.database.worlds[world - 1].levels[level - 1].title,
 		selector: selector,
-		html: this.page(selector).html()
+		level: this.page(selector)
 	};
 };
 
