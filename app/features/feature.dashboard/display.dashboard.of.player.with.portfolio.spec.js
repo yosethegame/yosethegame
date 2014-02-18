@@ -45,4 +45,19 @@ describe('The dashboard of a player with a portfolio:', function() {
 	it('displays only these two levels', function() {
 		expect(world.number(1)).toHaveLevelCount(2);
 	});
+	
+	describe('When the player has completed a world', function() {
+
+        beforeEach(function() {	
+            player = {
+                login: 'ericminio',	
+                portfolio: [ { server: 'this-server', achievements: [1, 2] } ]
+            };
+            loadPageWithDatabase(database);
+        });
+
+        it('shows this world has completed', function() {
+            expect(world.number(1)).toBeCompleted();
+        });
+	});
 });

@@ -23,10 +23,10 @@ dashboard = function(request, response, database) {
 		page('#login').text(player.login);		
 		fillBannerWithGreetings(page, player, 'Welcome ' + player.login);
 
-        page('#server-of-player-area').removeClass('hidden').addClass('visible');
 		showServerOfPlayer(page, player);
 		if (thePlayer.hasServer(player)) {
             page('#restart-game-link').addClass('visible').removeClass('hidden');
+            page('#server-of-player-area').removeClass('hidden').addClass('visible');
 
             var totalLevelCount = 0;
             array.forEach(database.worlds, function(world) {
@@ -75,6 +75,7 @@ dashboard = function(request, response, database) {
                 if (levelDoneCount == world.levels.length) {
                     page('#rerun-world-' + (worldIndex+1) + '-link').removeClass('hidden').addClass('visible');
                     page('#rerun-world-' + (worldIndex+1) + '-link').attr('href', '/players/' + login + '/rerun/world/' + (worldIndex+1));
+                    ellipse.removeClass('world-open').addClass('world-completed');
                 }
             } else {
                 ellipse.addClass('world-locked');

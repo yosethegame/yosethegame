@@ -18,6 +18,15 @@ beforeEach(function() {
 		return ellipseClass.indexOf('world-open') != -1 && worldDetailClass.indexOf('visible') != -1;
 	};
 	
+	var toBeCompleted = function() {
+        var ellipseClass = this.actual.ellipse.attr('class');
+        var worldDetailClass = this.actual.worldDetail.attr('class');
+		this.message = function() {
+			return "Expected '" + ellipseClass + "' to contain 'world-completed' and '" + worldDetailClass +"' to contain 'visible'";
+		};
+		return ellipseClass.indexOf('world-completed') != -1 && worldDetailClass.indexOf('visible') != -1;
+	};
+	
 	var toHaveLevelCount = function(expected) {
 		var actual = this.actual.levelCount;
 		this.message = function() {
@@ -30,6 +39,7 @@ beforeEach(function() {
 		toBeALockedWorld: toBeALockedWorld, 
 		toBeOpen: toBeOpen, 
 		toHaveLevelCount: toHaveLevelCount, 
+		toBeCompleted: toBeCompleted,
 	});
 });
 

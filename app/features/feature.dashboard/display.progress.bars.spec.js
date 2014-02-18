@@ -43,8 +43,8 @@ describe('The progress bar', function() {
 			loadPageWithDatabase(database);
 		});
 		
-        it('is visible', function(){
-            expect(page('#server-of-player-area').attr('class')).toEqual('visible');
+        it('is not visible', function(){
+            expect(page('#server-of-player-area').attr('class')).toEqual('hidden');
         });
 
 		it('is empty', function() {
