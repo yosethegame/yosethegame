@@ -259,6 +259,14 @@ function ProductionDatabase() {
 				checker: '../../../challenges/world.canadair/challenge.first.fire/lib/first.fire.response.matcher.js',
 				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 12); }
 			},		
+			{
+				id: 29,
+				title: 'Get water fast challenge',
+				file: 'app/challenges/world.canadair/challenge.get.water.fast/lib/get.water.fast.html',
+				requester: '../../../challenges/world.canadair/challenge.get.water.fast/lib/get.water.fast.requester.js',
+				checker: '../../../challenges/world.canadair/challenge.get.water.fast/lib/get.water.fast.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 28); }
+			},		
 		]
 	}
 	];	
