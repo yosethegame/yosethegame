@@ -19,14 +19,6 @@ function ProductionDatabase() {
 		name: 'Start',
 		isOpenFor: isWorldOpenFor,
 		levels: [ 
-			{
-				id: 1,
-				title: 'First Web service challenge',
-				file: 'app/challenges/challenge.ping/lib/ping.html',
-				requester: '../../../challenges/challenge.ping/lib/ping.requester.js',
-				checker: '../../../challenges/challenge.ping/lib/ping.response.matcher.js',
-                isOpenLevelFor: function(player) { return true; }
-			},
             {
                 id: 25,
                 title: 'First Web page challenge',
@@ -35,6 +27,14 @@ function ProductionDatabase() {
                 checker: '../../../challenges/challenge.hello.yose/lib/hello.yose.response.matcher.js',
                 isOpenLevelFor: function(player) { return true; }
             },
+			{
+				id: 1,
+				title: 'First Web service challenge',
+				file: 'app/challenges/challenge.ping/lib/ping.html',
+				requester: '../../../challenges/challenge.ping/lib/ping.requester.js',
+				checker: '../../../challenges/challenge.ping/lib/ping.response.matcher.js',
+                isOpenLevelFor: function(player) { return true; }
+			},
 			{
 				id: 14,
 				title: 'Share challenge',
