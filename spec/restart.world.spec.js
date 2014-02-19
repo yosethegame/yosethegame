@@ -22,7 +22,7 @@ describe("When a player restarts world #2", function() {
 		var browser = new Browser();
 		browser.visit('http://localhost:5000/players/bilou').
 			then(function () {
-				return browser.clickLink("#restart-world-2-link");
+				return browser.clickLink("#world-2 .restart-world-link");
 			}).
 			then(function() {
 				done();
