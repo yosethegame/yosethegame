@@ -15,6 +15,7 @@ dashboard = function(request, response, database) {
 	var banner = cheerio.load(fs.readFileSync('./app/features/common/lib/banner.html').toString())('#sidebar').html();
 	var page = cheerio.load(html);
 	page('#sidebar').empty().append(banner);
+	var worldTemplate = cheerio.load(fs.readFileSync('./app/features/feature.dashboard/lib/world.html').toString()).html();
 
 	database.find(login, function(player) {
 		if (player === undefined) {
@@ -42,6 +43,7 @@ dashboard = function(request, response, database) {
         }
 
 		array.forEach(database.worlds, function(world, worldIndex) {
+            page('#world-' + (worldIndex+1)).empty().append(worldTemplate);
             var ellipse = page('#world-' + (worldIndex+1) + ' .world-ellipse');
             page('#world-' + (worldIndex+1) + ' .world-ellipse .world-name').text(world.name);
             var worldDetail = page('#world-' + (worldIndex+1) + ' .world-detail');
@@ -69,14 +71,14 @@ dashboard = function(request, response, database) {
                 if (drawLockedLevel) {
                     levelList.append('<li class="level level-locked">Locked</li>');
                 }
-                if (levelDoneCount > 0) {
+                if (levelDoneCount > 0 && worldIndex !== 0) {
                     page('#world-' + (worldIndex+1) + ' .restart-world-link').removeClass('hidden').addClass('visible');
                     page('#world-' + (worldIndex+1) + ' .restart-world-link').attr('href', '/players/' + login + '/restart/world/' + (worldIndex+1));
                 }
                 if (levelDoneCount == world.levels.length) {
+                    ellipse.removeClass('world-open').addClass('world-completed');
                     page('#world-' + (worldIndex+1) + ' .rerun-world-link').removeClass('hidden').addClass('visible');
                     page('#world-' + (worldIndex+1) + ' .rerun-world-link').attr('href', '/players/' + login + '/rerun/world/' + (worldIndex+1));
-                    ellipse.removeClass('world-open').addClass('world-completed');
                 }
                 else {
                     page('#world-' + (worldIndex+1) + ' .world-ellipse .glyphicon-ok').remove();
