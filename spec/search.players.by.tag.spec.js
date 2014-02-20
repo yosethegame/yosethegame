@@ -23,6 +23,10 @@ describe("Search players by tags:", function() {
 				login: 'frank',
 				tags: 'st-jean'
 			},
+			{
+                login: 'leo',
+                tags: 'España'
+			},
 		];
 		server.useDatabase(database);
 		server.start();
@@ -63,7 +67,41 @@ describe("Search players by tags:", function() {
 				done();
 			});
 	});
-		
+	
+	describe('It works with special characters', function() {
+
+    	it('reminds the search value with special characters', function(done) {
+    		var browser = new Browser();
+    		browser.visit('http://localhost:5000/players/search/Espa%C3%B1a').
+    			then(function() {
+    				expect(browser.query('#criteria').value).toEqual('España');
+    				done();
+    			}).
+    			fail(function(error) {
+    				expect(error.toString()).toBeNull();
+    				done();
+    			});
+    	});
+
+    	it('can find players from criteria with a special character', function(done) {
+    		var browser = new Browser();
+    		browser.visit('http://localhost:5000').
+    		    then(function() {
+    			    return browser.clickLink('a#search-players-link');
+    		    }).
+    		    then(function() {
+    			    return browser.fill('input#criteria', 'Espa%C3%B1a').pressButton('#search-button');
+    		    }).
+    			then(function() {
+    				expect(browser.queryAll('#players tr').length).toEqual(1 + 1);
+    				done();
+    			}).
+    			fail(function(error) {
+    				expect(error.toString()).toBeNull();
+    				done();
+    			});
+    	});	    
+	});
 });
 		
 		

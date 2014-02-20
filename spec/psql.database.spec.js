@@ -299,6 +299,19 @@ describe('PostgreSql database', function() {
     			});
     		});
     	});
+    	
+    	it('works with special characters', function(done) {
+    	    var me = { login: 'me', one: 'año' };
+    	    var you = { login: 'you', two: 'red' };
+    		database.createPlayer(me, function() {
+        		database.createPlayer(you, function() {
+    			    database.findPlayersMatching('año', function(players) {
+    				    expect(players.length).toEqual(1);
+    				    done();
+    			    });
+    			});
+    		});
+    	});
 	});
 	
 	

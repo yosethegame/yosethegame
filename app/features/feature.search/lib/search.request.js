@@ -5,7 +5,8 @@ var renderScore	= require('../../common/lib/render.score');
 var thisPlayer	= require('../../../lib/player.utils');
 
 search = function(request, response, database) {
-	var criteria = /^\/players\/search\/(.*)$/.exec(request.url)[1];
+	var segment = /^\/players\/search\/(.*)$/.exec(request.url)[1];
+	var criteria = decodeURIComponent(segment);
 	var html = fs.readFileSync('./app/features/feature.search/lib/results.html').toString();
 	var page = cheerio.load(html);
 
