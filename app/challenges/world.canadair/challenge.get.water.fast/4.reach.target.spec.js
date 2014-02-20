@@ -33,11 +33,51 @@ describe('When the answer has the correct format,', function() {
 		});
 
 		it('sets expected', function() {
-			expect(status.expected).toContain('plane must reach nearest water at { x:0, y:0 }');
+			expect(status.expected).toContain('plane must reach water at {"x":0,"y":0}');
 		});
 
 		it('sets actual', function() {
 			expect(status.got).toContain('plane never reached target');
+		});
+    });
+
+    describe('but the plane reaches the targeted water after the other one,', function() {
+        
+		beforeEach(function(done) {
+            request = 'http://localhost:6000/fire/api?width=5&map=W..P......W....';
+            remoteAnswer = JSON.stringify({
+                map: [
+                    "W..P.",
+                    ".....",
+                    "W...."
+                ],
+                moves: [
+                    { dx:0, dy:1 },
+                    { dx:0, dy:1 },
+                    { dx:-1, dy:0 },
+                    { dx:-1, dy:0 },
+                    { dx:-1, dy:0 },
+                    { dx:0, dy:-1 },
+                    { dx:0, dy:-1 },
+                ]
+            });
+
+			matcher.validate(request, { headers: { 'content-type': 'application/json; charset=utf-8'}}, remoteAnswer, function(receivedStatus) {
+                status = receivedStatus;
+				done();
+			});
+        });
+
+		it('sets code to 501', function() {
+			expect(status.code).toEqual(501);
+		});
+
+		it('sets expected', function() {
+			expect(status.expected).toContain('plane must first reach water at {"x":0,"y":0}');
+		});
+
+		it('sets actual', function() {
+			expect(status.got).toContain('plane reached target after another one');
 		});
     });
 });
