@@ -2,6 +2,7 @@ var urlParser           = require('url');
 var error501            = require('../../../common/lib/501');
 var equal               = require('deep-equal');
 var array               = require('../../../../utils/lib/array.utils');
+var Requester           = require('./get.water.fast.requester');
 
 module.exports = {
 
@@ -75,8 +76,43 @@ module.exports = {
         });
         if (stop) { return; }
 
-        
+        var target;
+        var candidates = new Requester().candidates;
+        for (var i = 0; i<candidates.length; i++) {
+            var sentMapAsOneLine = sentMap.join('');
+            if (equal(candidates[i].map, sentMapAsOneLine)) {
+                target = candidates[i].target;
+            }
+        }
+
+        var planePositionIn     = require('../../challenge.first.fire/lib/plane.position.in.map');
+        var whatIsBelowPlaneIn  = require('../../challenge.first.fire/lib/what.is.below.plane');
+        var plane = planePositionIn(sentMap);
+        var point;
+
+        var count = 0;
+        var found = false;
+        array.forEach(answer.moves, function(offset) {
+            if (!found) {
+                count ++;
+                plane.move(offset);
+                point = whatIsBelowPlaneIn(sentMap, plane);
+                if (point == 'W') {
+                    found = true;
+                }
+            }
+        });
+
+        if(!equal(plane, target)) {
+            if (!found) {
+                callback(error501.withValues('Your plane must reach water at ' + JSON.stringify(target) , 'plane never reached target. moves=' + JSON.stringify(answer.moves)));
+                return;
+            }
+            callback(error501.withValues('Your plane must first reach water at ' + JSON.stringify(target) , 'plane reached target after another one. moves=' + JSON.stringify(answer.moves)));
+            return;
+        }
 		
+
 		callback({
             code: 200,
             expected: 'TBD',
