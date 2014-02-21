@@ -30,7 +30,7 @@ function Requester(server) {
             if (candidate.map == criteria) { 
                 return candidate; 
             }
-        }	    
+        }
 	};
 }
 

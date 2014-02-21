@@ -35,7 +35,7 @@ module.exports = {
     },
     
 	validate: function(url, remoteResponse, content, callback) {
-	    var query = urlParser.parse(url, true).query;
+        var query = urlParser.parse(url, true).query;
         var sentMap = this.extractSentMap(query);
 
         if (remoteResponse === undefined) {
@@ -98,19 +98,19 @@ module.exports = {
         moveUntilWaterOrEnd(plane, sentMap, answer.moves);          
         if (whatIsBelowPlaneIn(sentMap, plane) == 'W') {
             if (equal(plane, target)) {
-        		callback({
+                callback({
                     code: 200,
-                    expected: 'TBD',
+                    expected: 'Your plane must reach water at ' + JSON.stringify(target),
                     got: 'You did it!'
-        		});
+                });
                 return;
             } else {
-                callback(error501.withValues('Your plane must first reach water at ' + JSON.stringify(target) , 
-                                             'plane reached target after another one. moves=' + JSON.stringify(answer.moves)));
+                callback(error501.withValues('Your plane must first reach water at ' + JSON.stringify(target), 
+                                             'plane reached another water point. moves=' + JSON.stringify(answer.moves)));
                 return;
             }
         } else {
-            callback(error501.withValues('Your plane must reach water at ' + JSON.stringify(target) , 
+            callback(error501.withValues('Your plane must reach water at ' + JSON.stringify(target), 
                                          'plane never reached target. moves=' + JSON.stringify(answer.moves)));
             return;
         }

@@ -6,7 +6,7 @@ describe('When the answer has the correct format,', function() {
 	var remoteAnswer;
 	var status;
 
-    describe('but the plane never reaches the targeted water,', function() {
+    describe('but the plane does not end on the targeted water,', function() {
         
 		beforeEach(function(done) {
             request = 'http://localhost:6000/fire/api?width=5&map=W..P......W....';
@@ -41,7 +41,7 @@ describe('When the answer has the correct format,', function() {
 		});
     });
 
-    describe('but the plane reaches the targeted water after the other one,', function() {
+    describe('but the plane reaches another water point before,', function() {
         
 		beforeEach(function(done) {
             request = 'http://localhost:6000/fire/api?width=5&map=W..P......W....';
@@ -77,7 +77,7 @@ describe('When the answer has the correct format,', function() {
 		});
 
 		it('sets actual', function() {
-			expect(status.got).toContain('plane reached target after another one');
+			expect(status.got).toContain('plane reached another water point');
 		});
     });
     
