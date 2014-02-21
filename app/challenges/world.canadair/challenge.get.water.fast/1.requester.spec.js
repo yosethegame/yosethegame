@@ -82,6 +82,13 @@ describe('Get water fast challenge requester', function() {
             expect(requester.mapWidth()).toEqual(23);
             expect(requester.map()).toEqual('this map');
         });
+        
+        it('can be searched by map', function() {
+            var theCandidate = { map: 'this map', width: 23 };
+            requester.candidates = [ { map: 'a map', width: 18 }, theCandidate ];
+            
+            expect(requester.candidateHavingMap('this map')).toEqual(theCandidate);
+        });
     });
     
     describe('Candidate choice', function() {

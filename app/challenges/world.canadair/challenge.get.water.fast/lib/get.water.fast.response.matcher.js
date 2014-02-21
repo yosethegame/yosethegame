@@ -4,6 +4,21 @@ var equal               = require('deep-equal');
 var array               = require('../../../../utils/lib/array.utils');
 var Requester           = require('./get.water.fast.requester');
 
+var planePositionIn     = require('../../challenge.first.fire/lib/plane.position.in.map');
+var whatIsBelowPlaneIn  = require('../../challenge.first.fire/lib/what.is.below.plane');
+
+var moveUntilWaterOrEnd = function(plane, map, moves) {
+    var waterFound = false;     
+    array.forEach(moves, function(offset) {
+        if (!waterFound) {
+            plane.move(offset);
+            if (whatIsBelowPlaneIn(map, plane) == 'W') {
+                waterFound = true;
+            }
+        }
+    });    
+};
+
 module.exports = {
 
     hasExpectedContentType: function(response) {
@@ -12,15 +27,16 @@ module.exports = {
                response.headers['content-type'].indexOf('application/json') !== -1;
     },
     
-    extractSentMap: function(url) {
-        var mapWidth = urlParser.parse(url, true).query.width;
+    extractSentMap: function(query) {
+        var mapWidth = query.width;
         var regex = new RegExp('.{' + mapWidth + '}', 'g');
 
-        return urlParser.parse(url, true).query.map.match(regex);
+        return query.map.match(regex);
     },
     
 	validate: function(url, remoteResponse, content, callback) {
-        var sentMap = this.extractSentMap(url);
+	    var query = urlParser.parse(url, true).query;
+        var sentMap = this.extractSentMap(query);
 
         if (remoteResponse === undefined) {
             callback(error501.withValues('A Json object', 'An empty response'));
@@ -76,47 +92,27 @@ module.exports = {
         });
         if (stop) { return; }
 
-        var target;
-        var candidates = new Requester().candidates;
-        for (var i = 0; i<candidates.length; i++) {
-            var sentMapAsOneLine = sentMap.join('');
-            if (equal(candidates[i].map, sentMapAsOneLine)) {
-                target = candidates[i].target;
-            }
-        }
-
-        var planePositionIn     = require('../../challenge.first.fire/lib/plane.position.in.map');
-        var whatIsBelowPlaneIn  = require('../../challenge.first.fire/lib/what.is.below.plane');
-        var plane = planePositionIn(sentMap);
-        var point;
-
-        var count = 0;
-        var found = false;
-        array.forEach(answer.moves, function(offset) {
-            if (!found) {
-                count ++;
-                plane.move(offset);
-                point = whatIsBelowPlaneIn(sentMap, plane);
-                if (point == 'W') {
-                    found = true;
-                }
-            }
-        });
-
-        if(!equal(plane, target)) {
-            if (!found) {
-                callback(error501.withValues('Your plane must reach water at ' + JSON.stringify(target) , 'plane never reached target. moves=' + JSON.stringify(answer.moves)));
+        var target = new Requester().candidateHavingMap(query.map).target;
+        var plane = planePositionIn(sentMap); 
+        
+        moveUntilWaterOrEnd(plane, sentMap, answer.moves);          
+        if (whatIsBelowPlaneIn(sentMap, plane) == 'W') {
+            if (equal(plane, target)) {
+        		callback({
+                    code: 200,
+                    expected: 'TBD',
+                    got: 'You did it!'
+        		});
+                return;
+            } else {
+                callback(error501.withValues('Your plane must first reach water at ' + JSON.stringify(target) , 
+                                             'plane reached target after another one. moves=' + JSON.stringify(answer.moves)));
                 return;
             }
-            callback(error501.withValues('Your plane must first reach water at ' + JSON.stringify(target) , 'plane reached target after another one. moves=' + JSON.stringify(answer.moves)));
+        } else {
+            callback(error501.withValues('Your plane must reach water at ' + JSON.stringify(target) , 
+                                         'plane never reached target. moves=' + JSON.stringify(answer.moves)));
             return;
         }
-		
-
-		callback({
-            code: 200,
-            expected: 'TBD',
-            got: 'You did it!'
-		});
 	}
 };
