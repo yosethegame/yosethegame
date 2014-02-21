@@ -1,4 +1,5 @@
 var removeTrailingSlashOf = require('../../../common/lib/remove.trailing.slash');
+var equal = require('deep-equal');
 
 function Requester(server) {
 	this.server = removeTrailingSlashOf(server);
@@ -21,6 +22,15 @@ function Requester(server) {
 	
 	this.candidateIndex = function() {
         return Math.floor(Math.random() * this.candidates.length);
+	};
+	
+	this.candidateHavingMap = function(criteria) {
+        for (var i = 0; i<this.candidates.length; i++) {
+            var candidate = this.candidates[i];
+            if (candidate.map == criteria) { 
+                return candidate; 
+            }
+        }	    
 	};
 }
 
