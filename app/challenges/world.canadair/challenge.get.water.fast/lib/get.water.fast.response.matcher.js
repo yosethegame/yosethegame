@@ -1,5 +1,6 @@
 var urlParser           = require('url');
 var error501            = require('../../../common/lib/501');
+var success             = require('../../../common/lib/200');
 var equal               = require('deep-equal');
 var array               = require('../../../../utils/lib/array.utils');
 var Requester           = require('./get.water.fast.requester');
@@ -94,25 +95,19 @@ module.exports = {
 
         var target = new Requester().candidateHavingMap(query.map).target;
         var plane = planePositionIn(sentMap); 
+        var expected = 'Your plane must end over water at ' + JSON.stringify(target);
         
-        moveUntilWaterOrEnd(plane, sentMap, answer.moves);          
+        moveUntilWaterOrEnd(plane, sentMap, answer.moves);
         if (whatIsBelowPlaneIn(sentMap, plane) == 'W') {
             if (equal(plane, target)) {
-                callback({
-                    code: 200,
-                    expected: 'Your plane must reach water at ' + JSON.stringify(target),
-                    got: 'You did it!'
-                });
-                return;
+                var status = success.withValues(expected, 'You did it!');
             } else {
-                callback(error501.withValues('Your plane must first reach water at ' + JSON.stringify(target), 
-                                             'plane reached another water point. moves=' + JSON.stringify(answer.moves)));
-                return;
+                var status = error501.withValues(expected, 'plane reached another water point first. moves=' + JSON.stringify(answer.moves));
             }
         } else {
-            callback(error501.withValues('Your plane must reach water at ' + JSON.stringify(target), 
-                                         'plane never reached target. moves=' + JSON.stringify(answer.moves)));
-            return;
+            var status = error501.withValues(expected, 'plane never reached target. moves=' + JSON.stringify(answer.moves));
         }
+        
+        callback(status);
 	}
 };

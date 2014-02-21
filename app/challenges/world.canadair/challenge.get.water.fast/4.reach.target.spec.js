@@ -33,7 +33,7 @@ describe('When the answer has the correct format,', function() {
 		});
 
 		it('sets expected', function() {
-			expect(status.expected).toContain('plane must reach water at {"x":0,"y":0}');
+			expect(status.expected).toContain('plane must end over water at {"x":0,"y":0}');
 		});
 
 		it('sets actual', function() {
@@ -73,11 +73,11 @@ describe('When the answer has the correct format,', function() {
 		});
 
 		it('sets expected', function() {
-			expect(status.expected).toContain('plane must first reach water at {"x":0,"y":0}');
+			expect(status.expected).toContain('plane must end over water at {"x":0,"y":0}');
 		});
 
 		it('sets actual', function() {
-			expect(status.got).toContain('plane reached another water point');
+			expect(status.got).toContain('plane reached another water point first');
 		});
     });
     
@@ -109,7 +109,7 @@ describe('When the answer has the correct format,', function() {
 		});
 
 		it('sets expected', function() {
-			expect(status.expected).toContain('plane must reach water at {"x":0,"y":0}');
+			expect(status.expected).toContain('plane must end over water at {"x":0,"y":0}');
 		});
 
 		it('sets actual', function() {
