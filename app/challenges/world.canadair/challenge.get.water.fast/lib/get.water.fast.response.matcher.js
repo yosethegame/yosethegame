@@ -98,14 +98,15 @@ module.exports = {
         var expected = 'Your plane must end over water at ' + JSON.stringify(target);
         
         moveUntilWaterOrEnd(plane, sentMap, answer.moves);
+        var status;
         if (whatIsBelowPlaneIn(sentMap, plane) == 'W') {
             if (equal(plane, target)) {
-                var status = success.withValues(expected, 'You did it!');
+                status = success.withValues(expected, 'You did it!');
             } else {
-                var status = error501.withValues(expected, 'plane reached another water point first. moves=' + JSON.stringify(answer.moves));
+                status = error501.withValues(expected, 'plane reached another water point first. moves=' + JSON.stringify(answer.moves));
             }
         } else {
-            var status = error501.withValues(expected, 'plane never reached target. moves=' + JSON.stringify(answer.moves));
+            status = error501.withValues(expected, 'plane never reached target. moves=' + JSON.stringify(answer.moves));
         }
         
         callback(status);
