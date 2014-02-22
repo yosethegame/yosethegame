@@ -95,7 +95,7 @@ module.exports = {
 
         var target = new Requester().candidateHavingMap(query.map).target;
         var plane = planePositionIn(sentMap); 
-        var expected = 'Your plane must end over water at ' + JSON.stringify(target);
+        var expected = 'Your plane must end over water at ' + JSON.stringify(target) + '. map=' + JSON.stringify(sentMap);
         
         moveUntilWaterOrEnd(plane, sentMap, answer.moves);
         var status;
