@@ -21,7 +21,7 @@ function ProductionDatabase() {
 		levels: [ 
             {
                 id: 25,
-                title: 'First Web page challenge',
+                title: 'First Web page',
                 file: 'app/challenges/challenge.hello.yose/lib/hello.yose.html',
                 requester: '../../../challenges/challenge.hello.yose/lib/hello.yose.requester.js',
                 checker: '../../../challenges/challenge.hello.yose/lib/hello.yose.response.matcher.js',
@@ -29,7 +29,7 @@ function ProductionDatabase() {
             },
 			{
 				id: 1,
-				title: 'First Web service challenge',
+				title: 'First Web service',
 				file: 'app/challenges/challenge.ping/lib/ping.html',
 				requester: '../../../challenges/challenge.ping/lib/ping.requester.js',
 				checker: '../../../challenges/challenge.ping/lib/ping.response.matcher.js',
@@ -37,7 +37,7 @@ function ProductionDatabase() {
 			},
 			{
 				id: 14,
-				title: 'Share challenge',
+				title: 'Share',
 				file: 'app/challenges/challenge.share//lib/share.html',
 				requester: '../../../challenges/challenge.share/lib/share.requester.js',
 				checker: '../../../challenges/challenge.share/lib/share.response.matcher.js',
@@ -51,7 +51,7 @@ function ProductionDatabase() {
 		levels: [ 
 			{
 				id: 22,
-				title: 'Contact information challenge',
+				title: 'Contact information',
 				file: 'app/challenges/challenge.contact/lib/contact.html',
 				requester: '../../../challenges/challenge.landing.page/lib/landing.requester.js',
 				checker: '../../../challenges/challenge.contact/lib/contact.response.matcher.js',
@@ -75,7 +75,7 @@ function ProductionDatabase() {
 			},
             {
                 id: 27,
-                title: 'Portfolio - Minesweeper challenge',
+                title: 'Portfolio - Minesweeper',
                 file: 'app/challenges/world.minesweeper/challenge.portfolio/lib/portfolio.html',
 				requester: '../../../challenges/challenge.landing.page/lib/landing.requester.js',
                 checker: '../../../challenges/world.minesweeper/challenge.portfolio/lib/portfolio.response.matcher.js',
@@ -89,7 +89,7 @@ function ProductionDatabase() {
 		levels: [
 			{
 				id: 2,
-				title: 'Power of two challenge',
+				title: 'Power of two',
 				file: 'app/challenges/world.prime.factors/challenge.power.of.two/lib/power.of.two.html',
 				requester: '../../../challenges/world.prime.factors/challenge.power.of.two/lib/power.of.two.requester.js',
 				checker: '../../../challenges/world.prime.factors/challenge.power.of.two/lib/power.of.two.response.matcher.js',
@@ -97,7 +97,7 @@ function ProductionDatabase() {
 			},
 			{
 				id: 3,
-				title: 'Guard challenge',
+				title: 'String guard',
 				file: 'app/challenges/world.prime.factors/challenge.guard.string/lib/guard.html',
 				requester: '../../../challenges/world.prime.factors/challenge.guard.string/lib/guard.requester.js',
 				checker: '../../../challenges/world.prime.factors/challenge.guard.string/lib/guard.response.matcher.js',
@@ -105,7 +105,7 @@ function ProductionDatabase() {
 			},
 			{
 				id: 4,
-				title: 'Decomposition challenge',
+				title: 'Decomposition',
 				file: 'app/challenges/world.prime.factors/challenge.decomposition/lib/decomposition.html',
 				requester: '../../../challenges/world.prime.factors/challenge.decomposition/lib/decomposition.requester.js',
 				checker: '../../../challenges/world.prime.factors/challenge.decomposition/lib/decomposition.response.matcher.js',
@@ -113,7 +113,7 @@ function ProductionDatabase() {
 			},
 			{
 				id: 7,
-				title: 'Big number guard challenge',
+				title: 'Big number guard',
 				file: 'app/challenges/world.prime.factors/challenge.guard.big.number/lib/big.number.html',
 				requester: '../../../challenges/world.prime.factors/challenge.guard.big.number/lib/big.number.requester.js',
 				checker: '../../../challenges/world.prime.factors/challenge.guard.big.number/lib/big.number.response.matcher.js',
@@ -129,7 +129,7 @@ function ProductionDatabase() {
 			},
 			{
 				id: 5,
-				title: 'Form challenge',
+				title: 'Form',
 				file: 'app/challenges/world.prime.factors/challenge.form/lib/form.html',
 				requester: '../../../challenges/world.prime.factors/challenge.form/lib/form.requester.js',
 				checker: '../../../challenges/world.prime.factors/challenge.form/lib/form.response.matcher.js',
@@ -137,7 +137,7 @@ function ProductionDatabase() {
 			},
 			{
 				id: 6,
-				title: 'Input challenge',
+				title: 'Input',
 				file: 'app/challenges/world.prime.factors/challenge.input/lib/input.html',
 				requester: '../../../challenges/world.prime.factors/challenge.form/lib/form.requester.js',
 				checker: '../../../challenges/world.prime.factors/challenge.input/lib/input.response.matcher.js',
@@ -191,7 +191,7 @@ function ProductionDatabase() {
 		levels: [
 			{
 				id: 15,
-				title: 'Minesweeper board challenge',
+				title: 'Minesweeper board',
 				file: 'app/challenges/world.minesweeper/challenge.board/lib/board.html',
 				requester: '../../../challenges/world.minesweeper/challenge.board/lib/board.requester.js',
 				checker: '../../../challenges/world.minesweeper/challenge.board/lib/board.response.matcher.js',
@@ -199,7 +199,7 @@ function ProductionDatabase() {
 			},
 			{
 				id: 17,
-				title: 'Data injection challenge',
+				title: 'Data injection',
 				file: 'app/challenges/world.minesweeper/challenge.injection/lib/injection.html',
 				requester: '../../../challenges/world.minesweeper/challenge.board/lib/board.requester.js',
 				checker: '../../../challenges/world.minesweeper/challenge.injection/lib/injection.response.matcher.js',
@@ -207,7 +207,7 @@ function ProductionDatabase() {
 			},
 			{
 				id: 18,
-				title: 'Safe cells challenge',
+				title: 'Safe cells',
 				file: 'app/challenges/world.minesweeper/challenge.safe/lib/safe.html',
 				requester: '../../../challenges/world.minesweeper/challenge.board/lib/board.requester.js',
 				checker: '../../../challenges/world.minesweeper/challenge.safe/lib/safe.response.matcher.js',
@@ -215,7 +215,7 @@ function ProductionDatabase() {
 			},
 			{
 				id: 19,
-				title: 'Zero mine around challenge',
+				title: 'Zero mine around',
 				file: 'app/challenges/world.minesweeper/challenge.zero/lib/zero.html',
 				requester: '../../../challenges/world.minesweeper/challenge.board/lib/board.requester.js',
 				checker: '../../../challenges/world.minesweeper/challenge.zero/lib/zero.response.matcher.js',
@@ -223,7 +223,7 @@ function ProductionDatabase() {
 			},
 			{
 				id: 20,
-				title: 'Open field challenge',
+				title: 'Open field',
 				file: 'app/challenges/world.minesweeper/challenge.open/lib/open.html',
 				requester: '../../../challenges/world.minesweeper/challenge.board/lib/board.requester.js',
 				checker: '../../../challenges/world.minesweeper/challenge.open/lib/open.response.matcher.js',
@@ -231,7 +231,7 @@ function ProductionDatabase() {
 			},
             {
                 id: 24,
-                title: 'Random grid challenge',
+                title: 'Random grid',
                 file: 'app/challenges/world.minesweeper/challenge.random/lib/random.html',
 				requester: '../../../challenges/world.minesweeper/challenge.board/lib/board.requester.js',
                 checker: '../../../challenges/world.minesweeper/challenge.random/lib/random.response.matcher.js',
@@ -239,7 +239,7 @@ function ProductionDatabase() {
             },
             {
                 id: 26,
-                title: 'Suspect mode challenge',
+                title: 'Suspect mode',
                 file: 'app/challenges/world.minesweeper/challenge.suspect/lib/suspect.html',
 				requester: '../../../challenges/world.minesweeper/challenge.board/lib/board.requester.js',
                 checker: '../../../challenges/world.minesweeper/challenge.suspect/lib/suspect.response.matcher.js',
@@ -253,7 +253,7 @@ function ProductionDatabase() {
 		levels: [
 			{
 				id: 28,
-				title: 'First fire challenge',
+				title: 'First fire',
 				file: 'app/challenges/world.canadair/challenge.first.fire/lib/first.fire.html',
 				requester: '../../../challenges/world.canadair/challenge.first.fire/lib/first.fire.requester.js',
 				checker: '../../../challenges/world.canadair/challenge.first.fire/lib/first.fire.response.matcher.js',
@@ -261,7 +261,7 @@ function ProductionDatabase() {
 			},		
 			{
 				id: 29,
-				title: 'Get water fast challenge',
+				title: 'Training',
 				file: 'app/challenges/world.canadair/challenge.get.water.fast/lib/get.water.fast.html',
 				requester: '../../../challenges/world.canadair/challenge.get.water.fast/lib/get.water.fast.requester.js',
 				checker: '../../../challenges/world.canadair/challenge.get.water.fast/lib/get.water.fast.response.matcher.js',
