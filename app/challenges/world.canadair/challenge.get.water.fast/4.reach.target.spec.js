@@ -1,4 +1,5 @@
 var matcher = require('./lib/get.water.fast.response.matcher');
+var json200 = require('../../common/lib/json200');
 
 describe('When the answer has the correct format,', function() {
     
@@ -22,7 +23,7 @@ describe('When the answer has the correct format,', function() {
                 ]
             });
 
-			matcher.validate(request, { headers: { 'content-type': 'application/json; charset=utf-8'}}, remoteAnswer, function(receivedStatus) {
+			matcher.validate(request, json200, remoteAnswer, function(receivedStatus) {
                 status = receivedStatus;
 				done();
 			});
@@ -62,7 +63,7 @@ describe('When the answer has the correct format,', function() {
                 ]
             });
 
-			matcher.validate(request, { headers: { 'content-type': 'application/json; charset=utf-8'}}, remoteAnswer, function(receivedStatus) {
+			matcher.validate(request, json200, remoteAnswer, function(receivedStatus) {
                 status = receivedStatus;
 				done();
 			});
@@ -98,7 +99,7 @@ describe('When the answer has the correct format,', function() {
                 ]
             });
 
-			matcher.validate(request, { headers: { 'content-type': 'application/json; charset=utf-8'}}, remoteAnswer, function(receivedStatus) {
+			matcher.validate(request, json200, remoteAnswer, function(receivedStatus) {
                 status = receivedStatus;
 				done();
 			});

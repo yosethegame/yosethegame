@@ -1,4 +1,5 @@
 var matcher = require('./lib/get.water.fast.response.matcher');
+var json200 = require('../../common/lib/json200');
 
 describe('When the answer contains the correct map,', function() {
     
@@ -17,7 +18,7 @@ describe('When the answer contains the correct map,', function() {
                 ]
             });
 
-			matcher.validate(request, { headers: { 'content-type': 'application/json; charset=utf-8'}}, remoteAnswer, function(receivedStatus) {
+			matcher.validate(request, json200, remoteAnswer, function(receivedStatus) {
                 status = receivedStatus;
                 done();
 			});
@@ -48,7 +49,7 @@ describe('When the answer contains the correct map,', function() {
                 moves: 'any'
             });
 
-			matcher.validate(request, { headers: { 'content-type': 'application/json; charset=utf-8'}}, remoteAnswer, function(receivedStatus) {
+			matcher.validate(request, json200, remoteAnswer, function(receivedStatus) {
                 status = receivedStatus;
 				done();
 			});
@@ -81,7 +82,7 @@ describe('When the answer contains the correct map,', function() {
                 ]
             });
 
-			matcher.validate(request, { headers: { 'content-type': 'application/json; charset=utf-8'}}, remoteAnswer, function(receivedStatus) {
+			matcher.validate(request, json200, remoteAnswer, function(receivedStatus) {
                 status = receivedStatus;
 				done();
 			});
@@ -112,7 +113,7 @@ describe('When the answer contains the correct map,', function() {
                 moves: 23
             });
 
-			matcher.validate(request, { headers: { 'content-type': 'application/json; charset=utf-8'}}, remoteAnswer, function(receivedStatus) {
+			matcher.validate(request, json200, remoteAnswer, function(receivedStatus) {
                 status = receivedStatus;
 				done();
 			});
@@ -149,7 +150,7 @@ describe('When the answer contains the correct map,', function() {
                 moves: moves
             });
 
-			matcher.validate(request, { headers: { 'content-type': 'application/json; charset=utf-8'}}, remoteAnswer, function(receivedStatus) {
+			matcher.validate(request, json200, remoteAnswer, function(receivedStatus) {
                 status = receivedStatus;
 				done();
 			});

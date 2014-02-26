@@ -44,6 +44,11 @@ module.exports = {
             return;
         }
 
+        if (remoteResponse.statusCode !== 200) {
+            callback(error501.withValues('A Json object', 'Error ' + remoteResponse.statusCode));
+            return;
+        }
+
         if (! this.hasExpectedContentType(remoteResponse)) {
             callback(error501.withValues('A content-type application/json in header', 'A different content-type'));
             return;
