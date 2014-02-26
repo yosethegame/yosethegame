@@ -88,13 +88,11 @@ var tryAllLevelsAndSaveResults = function(levelsToTry, params, player, database,
 };
 
 var tryWorld = function(incoming, response, database) {
-	output = [];
-	levelsToTry = [];
 	var params = url.parse(incoming.url, true);	
 	var world = database.worlds[params.query.world - 1];
 	var level = world.levels[params.query.level - 1];
 	database.find(params.query.login, function(player) {
-		levelsToTry = allLevelsToTry(player, world, level);
+		var levelsToTry = allLevelsToTry(player, world, level);
 		tryAllLevelsAndSaveResults(levelsToTry, params, player, database, function(output) {
             var jsonResponse = JSON.stringify( { score: player.score === undefined ? 0 : player.score, results: output } );
             response.writeHead(200, { 'Content-Type': 'application/json' } );
