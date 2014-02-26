@@ -1,4 +1,5 @@
 var matcher = require('./lib/first.fire.response.matcher');
+var json200 = require('../../common/lib/json200');
 
 describe('First fire response matcher,', function() {
 	var request;
@@ -17,7 +18,7 @@ describe('First fire response matcher,', function() {
                 ]
             });
 
-			matcher.validate(request, { headers: { 'content-type': 'application/json; charset=utf-8'}}, remoteAnswer, function(receivedStatus) {
+			matcher.validate(request, json200, remoteAnswer, function(receivedStatus) {
                 status = receivedStatus;
 				done();
 			});
@@ -42,7 +43,7 @@ describe('First fire response matcher,', function() {
             request = 'http://localhost:6000/fire/api?width=2&map=ABCD';
             remoteAnswer = JSON.stringify({});
 
-			matcher.validate(request, { headers: { 'content-type': 'application/json; charset=utf-8'}}, remoteAnswer, function(receivedStatus) {
+			matcher.validate(request, json200, remoteAnswer, function(receivedStatus) {
                 status = receivedStatus;
 				done();
 			});
@@ -67,7 +68,7 @@ describe('First fire response matcher,', function() {
             request = 'http://localhost:6000/fire/api?width=2&map=ABCD';
             remoteAnswer = JSON.stringify(null);
 
-			matcher.validate(request, { headers: { 'content-type': 'application/json; charset=utf-8'}}, remoteAnswer, function(receivedStatus) {
+			matcher.validate(request, json200, remoteAnswer, function(receivedStatus) {
                 status = receivedStatus;
 				done();
 			});
@@ -92,7 +93,7 @@ describe('First fire response matcher,', function() {
             request = 'http://localhost:6000/fire/api?width=2&map=ABCD';
             remoteAnswer = 'anything';
 
-			matcher.validate(request, { headers: { 'content-type': 'application/json; charset=utf-8'}}, remoteAnswer, function(receivedStatus) {
+			matcher.validate(request, json200, remoteAnswer, function(receivedStatus) {
                 status = receivedStatus;
 				done();
 			});
@@ -117,7 +118,7 @@ describe('First fire response matcher,', function() {
             request = 'http://localhost:6000/fire/api?width=2&map=ABCD';
             remoteAnswer = 'anything';
 
-			matcher.validate(request, { headers: { 'content-type': 'text/plain'}}, remoteAnswer, function(receivedStatus) {
+			matcher.validate(request, { statusCode: 200, headers: { 'content-type': 'text/plain'}}, remoteAnswer, function(receivedStatus) {
                 status = receivedStatus;
 				done();
 			});
@@ -160,4 +161,29 @@ describe('First fire response matcher,', function() {
 			expect(status.got).toContain('An empty response');
 		});
 	});
+	
+	describe('When the remote response has statusCode other than 200', function() {
+
+		beforeEach(function(done) {
+            request = 'http://localhost:6000/fire/api?width=2&map=ABCD';
+            remoteAnswer = 'anything';
+
+			matcher.validate(request, { statusCode: 404 }, remoteAnswer, function(receivedStatus) {
+                status = receivedStatus;
+				done();
+			});
+        });
+
+		it('sets code to 501', function() {
+			expect(status.code).toEqual(501);
+		});
+		
+		it('sets expected', function() {
+			expect(status.expected).toContain('A Json object');
+		});
+		
+		it('sets actual', function() {
+			expect(status.got).toContain('Error 404');
+		});
+	});	
 });
