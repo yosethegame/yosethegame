@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Decomposition</title>
+	<link href="/css/main.css" rel="stylesheet" type="text/css">
+	<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
+	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>		
+</head>
+<body>
+	
+	<div id="challenge-assignment">	
+		Image a time traveller shows up arriving directly from
+		the mythical ancient Rome and imagine he'd like to decompose
+		a number using your wonderful app! Yes those things can happen!
+		<br/>
+		Guess what? he uses roman numbers of course!
+	</div>
+	
+	<div id="challenge-details">
+		<p>For example, receiving</p>
+
+		<pre>http://your-server/primeFactors?number=CCC</pre>
+
+		<p>You should respond</p>
+
+		<pre>{
+    "number" : "CCC",
+    "decomposition" : [ "II", "II", "III", "V", "V" ]
+}
+		</pre>
+		
+		<p>
+			Your server will be called with a random number between 1 and 399.
+		</p>	
+	</div>
+	
+	<div id="challenge-tips">
+		You can find several examples of the Roman kata on 
+		the <a href="https://www.google.ca/search?q=roman+numerals+kata">Internet</a>.
+	</div>
+		
+</body>
+</html>

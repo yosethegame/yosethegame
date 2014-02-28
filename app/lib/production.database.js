@@ -183,6 +183,14 @@ function ProductionDatabase() {
 				checker: '../../../challenges/world.prime.factors/challenge.list.of.decomposition/lib/list.of.decomposition.response.matcher.js',
 				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 11); }
 			},
+			{
+				id: 30,
+				title: 'Roman decomposition',
+				file: 'app/challenges/world.prime.factors/challenge.roman.decomposition/lib/roman.decomposition.html',
+				requester: '../../../challenges/world.prime.factors/challenge.roman.decomposition/lib/roman.decomposition.requester.js',
+				checker: '../../../challenges/world.prime.factors/challenge.roman.decomposition/lib/roman.decomposition.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 13); }
+			},
 		]
 	},
 	{
