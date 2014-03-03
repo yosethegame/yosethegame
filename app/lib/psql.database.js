@@ -14,8 +14,8 @@ PostgreSql.prototype.createPlayer = function(player, callback) {
 			var count = result.rows[0].count;
 			if (parseInt(count) === 0) {
 				player.score = 0;
-				sql = "insert into players(login, json, score, creation_date) values('" + player.login + "', '" + JSON.stringify(player) + "', 0, now())";
-				client.query(sql, function(err, result) {
+				sql = "insert into players(login, json, score, creation_date) values($1, $2, 0, now())";
+				client.query(sql, [player.login, JSON.stringify(player)], function(err, result) {
 					client.end();
 					callback();
 				});
@@ -31,8 +31,8 @@ PostgreSql.prototype.createPlayer = function(player, callback) {
 PostgreSql.prototype.find = function(login, callback) {
 	client = new pg.Client(this.url);
 	client.connect(function(err) {
-		var sql = "select json from players where login = '" + login + "'";
-		client.query(sql, function(err, result) {
+		var sql = "select json from players where login = $1";
+		client.query(sql, [login], function(err, result) {
 			client.end();
 			if (result && result.rows[0]) {
 				callback(JSON.parse(result.rows[0].json));
@@ -46,8 +46,8 @@ PostgreSql.prototype.find = function(login, callback) {
 PostgreSql.prototype.savePlayer = function(player, callback) {
 	client = new pg.Client(this.url);
 	client.connect(function(err) {
-		var sql = "update players set score = " + player.score + ", json = '" + JSON.stringify(player) + "' where login = '" + player.login + "'";
-		client.query(sql, function(err, result) {
+		var sql = "update players set score = $1, json = $2 where login = $3";
+		client.query(sql, [player.score, JSON.stringify(player), player.login], function(err, result) {
 			client.end();
 			callback();
 		});
@@ -74,8 +74,8 @@ PostgreSql.prototype.allPlayers = function(callback) {
 PostgreSql.prototype.deletePlayer = function(player, callback) {
 	client = new pg.Client(this.url);
 	client.connect(function(err) {
-		var sql = "delete from players where login = '" + player.login + "'";
-		client.query(sql, function(err, result) {
+		var sql = "delete from players where login = $1";
+		client.query(sql, [player.login], function(err, result) {
 			client.end();
 			callback();
 		});
@@ -109,8 +109,8 @@ PostgreSql.prototype.getScoreCommunity = function(callback) {
 PostgreSql.prototype.findPlayersMatching = function(criteria, callback) {
 	client = new pg.Client(this.url);
 	client.connect(function(err) {
-		var sql = "select login, json from players where json like '%" + criteria + "%' order by score desc";
-		client.query(sql, function(err, result) {
+		var sql = "select login, json from players where json like $1 order by score desc";
+		client.query(sql, ['%' + criteria + '%'], function(err, result) {
 			client.end();
 			var players = [];
 			if (result !== undefined) {
