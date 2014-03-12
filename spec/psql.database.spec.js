@@ -40,10 +40,11 @@ describe('PostgreSql database', function() {
 	it('enjoys a env var', function() {
 		expect(url).toBeDefined();
 	});
-
+ 
 	it('can create a player', function(done) {
 		database.createPlayer(annessou, function() {
 			database.find('asm', function(player) {
+				expect(player).toBeDefined();
 				expect(player.name).toEqual('annessou');
 				done();
 			});
@@ -55,6 +56,7 @@ describe('PostgreSql database', function() {
 			annessou.name = 'new name';
 			database.createPlayer(annessou, function() {
 				database.find('asm', function(player) {
+					expect(player).toBeDefined();
 					expect(player.name).toEqual('annessou');
 					done();
 				});
@@ -86,6 +88,7 @@ describe('PostgreSql database', function() {
 			annessou.name = 'anne-sophie';
 			database.savePlayer(annessou, function() {
 				database.find('asm', function(player) {
+					expect(player).toBeDefined();
 					expect(player.name).toEqual('anne-sophie');
 					done();
 				});				
