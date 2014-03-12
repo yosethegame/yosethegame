@@ -9,8 +9,8 @@ function PostgreSql(url) {
 PostgreSql.prototype.createPlayer = function(player, callback) {
 	client = new pg.Client(this.url);
 	client.connect(function(err) {
-		var sql = "select count(1) from players where login = '" + player.login + "'";
-		client.query(sql, function(err, result) {
+		var sql = "select count(1) from players where login = $1";
+		client.query(sql, [player.login], function(err, result) {
 			var count = result.rows[0].count;
 			if (parseInt(count) === 0) {
 				player.score = 0;
