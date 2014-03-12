@@ -314,5 +314,21 @@ describe('PostgreSql database', function() {
     	});
 	});
 	
-	
+	describe('prevents sql injection', function() {
+    	it('when searching players', function(done) {
+  			var me = { login: 'me', one: 'blue' };
+            database.createPlayer(me, function() {
+			    database.findPlayersMatching('', function(players) {
+				    expect(players.length).toEqual(1);
+                    database.findPlayersMatching("' ; DELETE FROM PLAYERS; select login, json from players where json like '%", function(players) {
+                        database.findPlayersMatching('', function(players) {
+                            expect(players.length).toEqual(1);
+                            done();
+                        });
+                    });
+				});
+    		});		
+    	});
+	});
+
 });
