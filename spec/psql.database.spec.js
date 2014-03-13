@@ -40,10 +40,11 @@ describe('PostgreSql database', function() {
 	it('enjoys a env var', function() {
 		expect(url).toBeDefined();
 	});
-
+ 
 	it('can create a player', function(done) {
 		database.createPlayer(annessou, function() {
 			database.find('asm', function(player) {
+				expect(player).toBeDefined();
 				expect(player.name).toEqual('annessou');
 				done();
 			});
@@ -55,6 +56,7 @@ describe('PostgreSql database', function() {
 			annessou.name = 'new name';
 			database.createPlayer(annessou, function() {
 				database.find('asm', function(player) {
+					expect(player).toBeDefined();
 					expect(player.name).toEqual('annessou');
 					done();
 				});
@@ -86,6 +88,7 @@ describe('PostgreSql database', function() {
 			annessou.name = 'anne-sophie';
 			database.savePlayer(annessou, function() {
 				database.find('asm', function(player) {
+					expect(player).toBeDefined();
 					expect(player.name).toEqual('anne-sophie');
 					done();
 				});				
@@ -314,5 +317,21 @@ describe('PostgreSql database', function() {
     	});
 	});
 	
-	
+	describe('prevents sql injection', function() {
+    	it('when searching players', function(done) {
+  			var me = { login: 'me', one: 'blue' };
+            database.createPlayer(me, function() {
+			    database.findPlayersMatching('', function(players) {
+				    expect(players.length).toEqual(1);
+                    database.findPlayersMatching("' ; DELETE FROM PLAYERS; select login, json from players where json like '%", function(players) {
+                        database.findPlayersMatching('', function(players) {
+                            expect(players.length).toEqual(1);
+                            done();
+                        });
+                    });
+				});
+    		});		
+    	});
+	});
+
 });
