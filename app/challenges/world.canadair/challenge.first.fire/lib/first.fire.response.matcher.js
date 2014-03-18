@@ -86,7 +86,7 @@ module.exports = {
         
         var moveCountBeforeWater = moveCountBeforeBeingAboveWater(sentMap, answer.moves);
         if (moveCountBeforeWater === -1) {
-            callback(error501.withValues(expected, 'Your plane never took water moves = ' + JSON.stringify(answer.moves)));
+            callback(error501.withValues(expected, 'Your plane never took water. moves = ' + JSON.stringify(answer.moves)));
             return;
         }
 		
@@ -97,7 +97,7 @@ module.exports = {
         }
         
         if (moveCountBeforeFire < moveCountBeforeWater) {
-            callback(error501.withValues(expected, 'Your plane reached the fire without water moves = ' + JSON.stringify(answer.moves)));
+            callback(error501.withValues(expected, 'Your plane reached the fire without water. moves = ' + JSON.stringify(answer.moves)));
             return;
         }
 		
