@@ -11,14 +11,8 @@ module.exports = {
     validate: function(url, remoteResponse, content, callback) {
 
         if (! responseIsJson(  remoteResponse, content, callback )) { return; }
-        var answer;
-        try {
-            answer = JSON.parse(content);
-        }
-        catch (e) {
-            callback(error501.withValues('A Json object', '"' + content + '"'));
-            return;
-        }
+
+        var answer = JSON.parse(content);
         if (! answerHasMap( url, answer, callback ) ) { return; }
         if (! answerHasMoves( answer, callback ) ) { return; }
         

@@ -20,7 +20,15 @@ var responseIsJson = function(remoteResponse, content, callback) {
         callback(error501.withValues('A content-type application/json in header', 'A different content-type'));
         return false;
     }
-        
+    
+    try {
+        JSON.parse(content);
+    }
+    catch (e) {
+        callback(error501.withValues('A Json object', '"' + content + '"'));
+        return false;
+    }
+    
     return true;
 };
 
