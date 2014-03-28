@@ -10,7 +10,11 @@
 </head>
 <body style="background-color: #424242;">
 	
-	<div style="position:fixed;
+	<div id="menu"
+		 style="position:fixed;
+    			top: 0px;
+				left: 0px;
+				
 				width:100%;
 				padding-left:0px;
 				padding-right:5px;
@@ -49,54 +53,56 @@
 	</div>
 	
 	
-	<div style="position:relative;
-				">
-		<div style="position: absolute;
-		            top: 0;
-					left: 0;
-					padding-top:100px;
-					">
+	<div id="content" style="position:relative;">
+		<div style="position:absolute;">
 			<img src="/img/stadium.jpg" width="100%">
 		</div>
-		<div style="position: absolute;
-		            top: 0;
-					left: 0;
-					
-					background-color: rgba(66, 66, 66, 0.4);
-					border-width: 1px;
-					border-style: solid;
-					border-color: #000000;
-
-					margin: 180px 50px 50px 100px;
-					padding: 50px 20px 50px 50px;
-
-					">
-			<table>
-				<tr><td style="text-align:right;">
-					<a href="#what-is-yose">
-						<img src="/img/yosethegame.png" class="img-responsive">
-					</a>
-				</td></tr>
-				<tr><td>
-					<div style="color: white;
-							text-align:right;
-							font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-							padding-top: 100px;
-					">
-						Software development is like sport, you get better by practicing.<br/>Citius, altius, fortius. Have fun!!
+		<div style="position:absolute; top:100px;">
+			<table width="100%"><tr>
+				<td width="10%"></td>				
+				<td width="80%">
+					<div style="background-color: rgba(66, 66, 66, 0.4);
+								border-width: 1px;
+								border-style: solid;
+								border-color: #000000;
+						">
+						<table>
+							<tr><td>
+								<img src="/img/yosethegame.png" class="img-responsive">
+							</td></tr>
+							<tr><td>
+								<div style="color: white;
+										text-align:right;
+										font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+										padding-top: 100px;
+										padding-bottom: 50px;
+								">
+									Software development is like sport, you get better by practicing.<br/>Citius, altius, fortius. Have fun!!
+								</div>
+							</td></tr>
+						</table>
 					</div>
-				</td></tr>
-			</table>
+				</td>
+				<td width="10%"></td>
+			</tr></table>
 		</div>
 	</div>
-	
-	
-	<a name="what-is-yose"></a>
 
-	
-	
 	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
 	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>		
 	<script src="/features/feature.welcome/lib/login.js"></script>
+	
+	<script>
+		function moveContent() {
+			var topValue = $('#menu').outerHeight() + 'px'
+			$('#content').css({ top: topValue });
+		};
+		$( document ).ready(function() {
+			moveContent();
+		});
+		$( window ).resize(function() {
+			moveContent();
+		});
+	</script>
 </body>
 </html>
