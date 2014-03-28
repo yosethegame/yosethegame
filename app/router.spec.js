@@ -84,6 +84,13 @@ describe('Router', function() {
 			expect(router.endPointOf({ url: '/players/any/restart/world/42' })).toBe(require('./features/feature.restart.world/lib/restart.world.request.js'));
 		});
 
+		it('maps community request', function() {
+			expect(router.endPointOf({ url: '/community' })).toBe(require('./features/feature.community/lib/community.request.js'));
+		});
+
+		it('maps what-is-yose request', function() {
+			expect(router.endPointOf({ url: '/what-is-yose' })).toBe(require('./features/feature.what.is.yose/lib/what.is.yose.request.js'));
+		});
 	});
 	
 	describe('Compatibility with http module of node.js:', function() {

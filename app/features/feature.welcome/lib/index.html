@@ -10,123 +10,89 @@
 </head>
 <body style="background-color: #424242;">
 	
-	<div style="padding-left:50px;
+	<div style="position:fixed;
 				width:100%;
-				
-				padding-top:200px;
-				padding-bottom:317px;
-				
-				background-color:#424242;
-				
-				margin-bottom:0px;">
-		<a href="#what-is-yose">
-			<img src="/img/yosethegame.png" class="img-responsive">
-		</a>
-	</div>
+				padding-left:0px;
+				padding-right:5px;
+				padding-top:30px;
+				padding-bottom:5px;
+				min-height:90px;
+
+				background-color: #424242;
 	
-	<a name="what-is-yose"></a>
-	<div>
-		
-		<div class="row" style="margin:0px;">
-			
-			<div class="col-xs-12 col-md-9" style="padding-left:0px;padding-right:0px;">
-				<img src="/img/what.is.yose.1.png" class="img-responsive"/>
-				<img src="/img/what.is.yose.2.png" class="img-responsive"/>
-				<img src="/img/what.is.yose.3.png" class="img-responsive"/>
-			</div>
-
-			<div class="col-xs-12 col-md-3 pull-right row" style="background-color:#424242;
-									padding-top:0px;margin:0px;
-									">
+				z-index: 1000;
 				
-				<div class="box">
-					<label>Access your dashboard</label>
-
-					<div class="form-inline">
-						<div class="form-group">
-							<input type="text" class="form-control" id="login" placeholder="player"/>
-						</div>
-					</div>
-		
-					<a id="create-new-player-link" href="/create-new-player">New player?</a>
-				</div>
-			
-				<div class="box">
-
-					<label class=""><strong>Contribute</strong></label>
-					
-					<br/>
-
-					<div class="">
-						<a href="https://trello.com/b/mwhZQWc8/yosethegame" 
-				   			onmouseover="document.getElementById('contribute-info').innerHTML='<span>Vote the next feature</span>'"
-				   			onmouseout="document.getElementById('contribute-info').innerHTML='<span>Feel the force!</span> - Yoda'"
-						>
-							<span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
-						</a>
-						<a href="https://twitter.com/yosethegame" 
-				   			onmouseover="document.getElementById('contribute-info').innerHTML='<span>Tweet us your ideas</span>'"
-				   			onmouseout="document.getElementById('contribute-info').innerHTML='<span>Feel the force!</span> - Yoda'"
-				   			style="padding-left:20px"
-						>
-							<span class="glyphicon glyphicon-envelope"></span>
-						</a>
-						<a href="https://github.com/yosethegame/yosethegame" 
-				   			onmouseover="document.getElementById('contribute-info').innerHTML='<span>Create a new world</span>'"
-				   			onmouseout="document.getElementById('contribute-info').innerHTML='<span>Feel the force!</span> - Yoda'"
-				   			style="padding-left:20px"
-						>
-							<span class="glyphicon glyphicon-globe"></span>
-						</a>
-					</div>
-
-					<span id="contribute-info"><span class="">Feel the force!</span> - Yoda</span>			
-				</div>
+				" class="container">
 				
-				<div class="box">
-
-					<div>
-						<ul id="score-box-community">
-							<li>
-								<span class="score-box-title">Community Score</span>
-							</li>
-							<li><label class="score" id="score-community">000040</label></li>
-						</ul>
-					</div>
+		<div class="row">
 				
-					<div>
-						<span class="glyphicon glyphicon-user" id="player-count">&nbsp;4</span>&nbsp;&nbsp;
-						<a id="search-players-link" href="/players/search/criteria">Search players</a>			
-					</div>
-
-				</div>
-			
-				<div>
-					<table id="players" class="table table-condensed">
-						<tr class="hall-of-fame-header">
-							<td id="players-title">Top 10 Players</td>
-							<td id="score-title">Score</td>
-						</tr>
-						<tr class="player">
-							<td>
-								<a href="">
-									<img src="" class="avatar img-circle" width="40" height="40"/>
-								</a>
-							</td>
-							<td>
-								<span class="hall-of-fame-score-leading-zeros">0000</span>
-								<span class="hall-of-fame-score">1234567</span>
-							</td>
-						</tr>
-					</table>
-
-				</div>
-			
+			<div class="col-xs-12 col-md-1 text-center" style="margin-top:-4px; margin-bottom:5px;">
+				<a href="/"><img src="/img/square-logo.png" width="42" title="Home"></a>
 			</div>
 			
+			<div class="col-xs-12 col-md-1 text-center" style="background-color: #C7E4A9; padding:8px; min-width:100px;" >
+				<a id="create-new-player-link" href="/create-new-player">Create&nbsp;player</a>
+			</div>
 			
+			<div class="col-xs-12 col-md-2 text-center" style="padding:8px;">
+				<a id="what-is-yose-link" href="/what-is-yose">What&nbsp;is&nbsp;Yose?</a>
+			</div>
+			<div class="col-xs-12 col-md-2 text-center" style="padding:8px;">
+				<a id="community-link" href="/community" >Community</a>
+			</div>
+			<div class="col-xs-12 col-md-4 text-center" style="padding:5px;">
+				<span style="color:white;">Access your dashboard</span>				
+				<input type="text" id="login" placeholder="player"/>
+			</div>
+
 		</div>
 	</div>
+	
+	
+	<div style="position:relative;
+				">
+		<div style="position: absolute;
+		            top: 0;
+					left: 0;
+					padding-top:100px;
+					">
+			<img src="/img/stadium.jpg" width="100%">
+		</div>
+		<div style="position: absolute;
+		            top: 0;
+					left: 0;
+					
+					background-color: rgba(66, 66, 66, 0.4);
+					border-width: 1px;
+					border-style: solid;
+					border-color: #000000;
+
+					margin: 180px 50px 50px 100px;
+					padding: 50px 20px 50px 50px;
+
+					">
+			<table>
+				<tr><td style="text-align:right;">
+					<a href="#what-is-yose">
+						<img src="/img/yosethegame.png" class="img-responsive">
+					</a>
+				</td></tr>
+				<tr><td>
+					<div style="color: white;
+							text-align:right;
+							font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+							padding-top: 100px;
+					">
+						Software development is like sport, you get better by practicing.<br/>Citius, altius, fortius. Have fun!!
+					</div>
+				</td></tr>
+			</table>
+		</div>
+	</div>
+	
+	
+	<a name="what-is-yose"></a>
+
 	
 	
 	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>

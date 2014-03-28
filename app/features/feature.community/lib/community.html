@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>YoseTheGame - a TDD game</title>
+	<meta name="description" content="A free TDD game for software developers with both UI and algorithm challenges">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="/css/main.css" rel="stylesheet" type="text/css">
+</head>
+<body style="background-color: #424242;">
+	
+	<div class="box">
+
+		<div>
+			<ul id="score-box-community">
+				<li>
+					<span class="score-box-title">Community Score</span>
+				</li>
+				<li><label class="score" id="score-community">000040</label></li>
+			</ul>
+		</div>
+		
+		<div>
+			<span class="glyphicon glyphicon-user" id="player-count">&nbsp;4</span>&nbsp;&nbsp;
+			<a id="search-players-link" href="/players/search/criteria">Search players</a>			
+		</div>
+
+	</div>
+	
+	<div>
+		<table id="players" class="table table-condensed">
+			<tr class="hall-of-fame-header">
+				<td id="players-title">Top 10 Players</td>
+				<td id="score-title">Score</td>
+			</tr>
+			<tr class="player">
+				<td>
+					<a href="">
+						<img src="" class="avatar img-circle" width="40" height="40"/>
+					</a>
+				</td>
+				<td>
+					<span class="hall-of-fame-score-leading-zeros">0000</span>
+					<span class="hall-of-fame-score">1234567</span>
+				</td>
+			</tr>
+		</table>
+
+	</div>
+
+	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
+	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+</body>
+</html>
