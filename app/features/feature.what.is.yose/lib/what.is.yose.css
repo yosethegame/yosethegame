@@ -1,0 +1,21 @@
+.oval {
+    width: 150px;
+    height: 70px;
+    -moz-border-radius: 100px;
+    -webkit-border-radius: 100px;
+    border-radius: 100px;
+}
+
+.profile-ellipse {
+    width: 140px;
+    height:88px;
+    -webkit-border-radius: 95px / 60px;
+    -moz-border-radius:    95px / 60px; 
+    border-radius:         95px / 60px; 
+	text-align:center;
+	font-weight:normal;
+	font-size:120%;
+	background:white;
+
+	padding-top:2px;
+}

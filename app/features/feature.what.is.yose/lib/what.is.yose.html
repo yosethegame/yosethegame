@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<title>YoseTheGame - a TDD game</title>
+	<meta name="description" content="A free TDD game for software developers with both UI and algorithm challenges">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<link href="/css/main.css" rel="stylesheet" type="text/css">
+	<link href="/features/feature.what.is.yose/lib/what.is.yose.css" rel="stylesheet" type="text/css">
+</head>
+<body style="background-color: #424242;">
+	
+	placeholder for the menu
+	
+	<div id="content" style="position:relative;">
+		<div style="position:absolute;">
+			<img src="/img/stadium.jpg" width="100%">
+		</div>
+
+		<div class="container" style="position:absolute; top:50px; width:100%">
+			<div class="row">
+				
+				<div class="col-xs-12 col-md-1"></div>
+
+				<div class="col-xs-12 col-md-4">
+					placeholder for section what is yose?
+					placeholder for section what's in it for you?
+				</div>
+				
+				<div class="col-xs-12 col-md-6">
+					placeholder for section how to play?
+					placeholder for section profiles
+				</div>
+				
+				<div class="col-xs-12 col-md-1"></div>
+			</div>
+			
+			<div class="row">
+				<div class="col-xs-12 col-md-1"></div>
+
+				<div class="col-xs-12 col-md-4">
+					<div style="color:white; margin-bottom:20px;">
+						Need more? Tweet us <a style="color:white;" href="http://twitter.com/yosethegame">@YoseTheGame</a>
+					</div>
+				</div>
+				
+				<div class="col-xs-12 col-md-6">
+					<div style="background-color:white; padding:20px; text-align:right; font-size:180%; margin-bottom:20px;">						
+						<a href="/create-new-player">
+							<span class="glyphicon glyphicon-arrow-right"></span> Ready, set, go!
+						</a>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
+	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/features/feature.welcome/lib/login.js"></script>
+	<script>
+		function moveContent() {
+			var topValue = $('#menu').outerHeight() + 'px'
+			$('#content').css({ top: topValue });
+		};
+		$( document ).ready(function() {
+			moveContent();
+		});
+		$( window ).resize(function() {
+			moveContent();
+		});
+	</script>
+</body>
+</html>

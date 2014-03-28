@@ -52,4 +52,21 @@ describe("Dashboard access", function() {
 				done();
 			});
 	});
+
+	it("is possible from what.is.yose page", function(done) {
+		var browser = new Browser();
+		browser.visit("http://localhost:5000/what-is-yose").
+			then(function () {
+				browser.fill("#login", "ericminio");
+                return browser.evaluate("login()");
+			}).
+			then(function() {
+				expect(browser.location.toString()).toEqual("http://localhost:5000/players/ericminio");
+				done();
+			}).
+			fail(function(error) {
+				expect(error.toString()).toBeNull();
+				done();
+			});
+	});
 });
