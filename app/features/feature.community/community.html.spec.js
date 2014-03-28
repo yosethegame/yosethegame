@@ -33,14 +33,14 @@ describe("community.html", function() {
 		});
 		
 		describe('search player link', function() {
-		    
-		    it('exists', function() {
-		        expect(page('a#search-players-link').length).toEqual(1);
-		    });
 
-		    it('targets the search player page', function() {
-		        expect(page('a#search-players-link').attr('href')).toEqual('/players/search/criteria');
-		    });
+            it('exists', function() {
+                expect(page('a#search-players-link').length).toEqual(1);
+            });
+
+            it('targets the search player page', function() {
+                expect(page('a#search-players-link').attr('href')).toEqual('/players/search/criteria');
+            });
 		});
 		
 		describe('player list', function() {
