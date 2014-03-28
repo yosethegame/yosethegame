@@ -6,6 +6,8 @@ var renderScore	= require('../../common/lib/render.score');
 
 var index = function(request, response, database) {
 	var html = fs.readFileSync('./app/features/feature.community/lib/community.html').toString();
+	var menu = fs.readFileSync('./app/features/feature.welcome/lib/menu.html').toString();
+	html = html.replace('Placeholder for the menu', menu);
 
 	var page = cheerio.load(html);
 	database.allPlayers(function(players) {

@@ -3,7 +3,7 @@ var router 					= require('../app/lib/router');
 var Server 					= require('../app/lib/server');
 var DatabaseWithChallenges 	= require('../app/support/database.with.levels');
 
-describe("Home page", function() {
+describe("Community page", function() {
 
 	var server;
 	var browser;
@@ -39,7 +39,7 @@ describe("Home page", function() {
 	
 		it('has one line for each player', function(done) {
 			
-			browser.visit("http://localhost:5000").
+			browser.visit("http://localhost:5000/community").
 				then(function() {
 					expect(browser.queryAll("#players .player").length).toEqual(2);
 					done();
@@ -54,7 +54,7 @@ describe("Home page", function() {
 	
 	it('displays player count', function(done) {
 			
-		browser.visit("http://localhost:5000").
+		browser.visit("http://localhost:5000/community").
 			then(function() {
 				expect(browser.text("#player-count")).toEqual('2');
 				done();
@@ -67,7 +67,7 @@ describe("Home page", function() {
 		
 	it('displays total score', function(done) {
 			
-		browser.visit("http://localhost:5000").
+		browser.visit("http://localhost:5000/community").
 			then(function() {
 				expect(browser.text("#score-community")).toEqual('000030');
 				done();

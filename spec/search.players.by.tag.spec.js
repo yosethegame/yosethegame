@@ -38,7 +38,7 @@ describe("Search players by tags:", function() {
 	
 	it('can find players from st-jean in a list with a line of header', function(done) {
 		var browser = new Browser();
-		browser.visit('http://localhost:5000').
+		browser.visit('http://localhost:5000/community').
 		    then(function() {
 			    return browser.clickLink('a#search-players-link');
 		    }).
@@ -85,7 +85,7 @@ describe("Search players by tags:", function() {
 
     	it('can find players from criteria with a special character', function(done) {
     		var browser = new Browser();
-    		browser.visit('http://localhost:5000').
+    		browser.visit('http://localhost:5000/community').
     		    then(function() {
     			    return browser.clickLink('a#search-players-link');
     		    }).
