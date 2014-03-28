@@ -22,60 +22,103 @@
 			<div class="row">
 				<div class="col-xs-12 col-md-1"></div>
 
-				<div class="col-xs-12 col-md-6"
-				     style="background-color: rgba(230, 230, 230, 0.8);
-							border-width: 1px;
-							border-style: solid;
-							border-color: #000000;
-							padding-top: 20px;
-							margin-bottom: 20px;
-					" >
-					<table width="100%">
-						<tr>
-							<td>Community score</td>
-							<td style="font-size:130%" id="score-community">000040</td>
-							<td>Players</td>
-							<td style="font-size:130%; text-align:right;" id="player-count">&nbsp;4</td>
-						</tr>
-						<tr>
-							<td colspan="4" style="padding-top: 20px; text-align:right;">
-								<a id="search-players-link" href="/players/search/criteria">Search players</a>
-							</td>
-						</tr>
-					</table>
+				<div class="col-xs-12 col-md-6">
+					
+					<div style="background-color: rgba(230, 230, 230, 0.8);
+								border-width: 1px;
+								border-style: solid;
+								border-color: #000000;
+								padding-top: 20px;
+								padding-right: 10px;
+								padding-left: 10px;
+								margin-bottom: 20px;
+						" >
+						<table width="100%">
+							<tr>
+								<td>Community score</td>
+								<td style="font-size:130%" id="score-community">000040</td>
+								<td>Players</td>
+								<td style="font-size:130%; text-align:right;" id="player-count">&nbsp;4</td>
+							</tr>
+							<tr>
+								<td colspan="4" style="padding-top: 20px; text-align:right;">
+									<a id="search-players-link" href="/players/search/criteria">Search players</a>
+								</td>
+							</tr>
+						</table>
+					</div>
+
+					<div style="background-color: rgba(204, 204, 204, 0.8);
+								border-width: 1px;
+								border-style: solid;
+								border-color: #000000;
+								padding-top: 20px;
+								padding-right: 10px;
+								padding-left: 10px;
+								margin-bottom: 20px;
+						" >
+
+						<div class="box">
+
+							<label><strong>Contribute</strong></label>
+							<br>
+							<div>
+								<a href="https://trello.com/b/mwhZQWc8/yosethegame" 
+								   onmouseover="document.getElementById('contribute-info').innerHTML='<span>Vote the next feature</span>'" 
+								   onmouseout="document.getElementById('contribute-info').innerHTML='<span>Feel the force!</span> - Yoda'">
+									<span class="glyphicon glyphicon-sort-by-attributes-alt"></span>
+								</a>
+								<a href="https://twitter.com/yosethegame" 
+								   onmouseover="document.getElementById('contribute-info').innerHTML='<span>Tweet us your ideas</span>'" 
+								   onmouseout="document.getElementById('contribute-info').innerHTML='<span>Feel the force!</span> - Yoda'" style="padding-left:20px">
+									<span class="glyphicon glyphicon-envelope"></span>
+								</a>
+								<a href="https://github.com/yosethegame/yosethegame" 
+								   onmouseover="document.getElementById('contribute-info').innerHTML='<span>Create a new world</span>'" 
+								   onmouseout="document.getElementById('contribute-info').innerHTML='<span>Feel the force!</span> - Yoda'" style="padding-left:20px">
+									<span class="glyphicon glyphicon-globe"></span>
+								</a>
+							</div>
+							<span id="contribute-info"><span class="">Feel the force!</span> - Yoda</span>			
+						</div>						
+					</div>
+
 				</div>			
 
 				<div class="col-xs-12 col-md-1"></div>
 
-				<div class="col-xs-12 col-md-3"
-				     style="background-color: rgba(102, 102, 102, 0.8);
-							border-width: 1px;
-							border-style: solid;
-							border-color: #000000;
-							padding-top: 20px;
-					" >
-					<span style="color:white;">Top 10 players - Hall of fame</span>
+				<div class="col-xs-12 col-md-4">
+					<div
+					     style="background-color: rgba(102, 102, 102, 0.8);
+								border-width: 1px;
+								border-style: solid;
+								border-color: #000000;
+								padding-top: 20px;
+								padding-left: 10px;
+								padding-bottom: 20px;
+						" >
+						<span style="color:white;">Top 10 players - Hall of fame</span>
 
-					<table id="players" class="table-condensed" style="margin-top:30px;">
-						<tr class="hall-of-fame-header">
-							<td width="100%" id="players-title" style="text-align:left;">Player</td>
-							<td id="score-title" style="text-align:center;">Score</td>
-						</tr>
-						<tr class="player">
-							<td>
-								<a href="">
-									<img src="" class="avatar img-circle" width="40" height="40"/>
-								</a>
-							</td>
-							<td>
-								<div>
-									<span class="hall-of-fame-score-leading-zeros">0000</span>
-									<span class="hall-of-fame-score">1234567</span>
-								</div>
-							</td>
-						</tr>
-					</table>
-
+						<table id="players" class="table-condensed" style="margin-top:30px; margin-left: 20px; margin-right: 20px;">
+							<tr class="hall-of-fame-header">
+								<td width="100%" id="players-title" style="text-align:left;">Player</td>
+								<td id="score-title" style="text-align:center;">Score</td>
+							</tr>
+							<tr class="player">
+								<td>
+									<a href="">
+										<img src="" class="avatar img-circle" width="40" height="40"/>
+									</a>
+								</td>
+								<td>
+									<div>
+										<span class="hall-of-fame-score-leading-zeros">0000</span>
+										<span class="hall-of-fame-score">1234567</span>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>					
 				</div>
 			</div>				
 		</div>
@@ -83,6 +126,7 @@
 
 	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
 	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+	<script src="/features/feature.welcome/lib/login.js"></script>
 	<script>
 		function moveContent() {
 			var topValue = $('#menu').outerHeight() + 'px'
