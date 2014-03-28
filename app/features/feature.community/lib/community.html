@@ -10,46 +10,132 @@
 </head>
 <body style="background-color: #424242;">
 	
-	<div class="box">
+	<div id="menu"
+		 style="position:fixed;
+    			top: 0px;
+				left: 0px;
+				
+				width:100%;
+				padding-left:0px;
+				padding-right:5px;
+				padding-top:30px;
+				padding-bottom:5px;
+				min-height:90px;
 
-		<div>
-			<ul id="score-box-community">
-				<li>
-					<span class="score-box-title">Community Score</span>
-				</li>
-				<li><label class="score" id="score-community">000040</label></li>
-			</ul>
-		</div>
-		
-		<div>
-			<span class="glyphicon glyphicon-user" id="player-count">&nbsp;4</span>&nbsp;&nbsp;
-			<a id="search-players-link" href="/players/search/criteria">Search players</a>			
-		</div>
+				background-color: #424242;
+	
+				z-index: 1000;
+				
+				" class="container">
+				
+		<div class="row">
+				
+			<div class="col-xs-12 col-md-2 text-center" style="margin-top:-4px; margin-bottom:5px;">
+				<a href="/"><img src="/img/square-logo.png" width="42" title="Home"></a>
+			</div>
+			
+			<div class="col-xs-12 col-md-2 text-center">
+				<div style="background-color: #C7E4A9; padding:8px;">
+					<a id="create-new-player-link" href="/create-new-player">Create&nbsp;player</a>
+				</div>
+			</div>
+			
+			<div class="col-xs-12 col-md-1 text-center" style="padding:8px;">
+				<a id="what-is-yose-link" href="/what-is-yose">What&nbsp;is&nbsp;Yose?</a>
+			</div>
+			<div class="col-xs-12 col-md-1 text-center" style="padding:8px;">
+				<a id="community-link" href="/community" >Community</a>
+			</div>
+			<div class="col-xs-12 col-md-4 text-center" style="padding:5px;">
+				<span style="color:white;">Access your dashboard</span>				
+				<input type="text" id="login" placeholder="player"/>
+			</div>
 
+		</div>
 	</div>
 	
-	<div>
-		<table id="players" class="table table-condensed">
-			<tr class="hall-of-fame-header">
-				<td id="players-title">Top 10 Players</td>
-				<td id="score-title">Score</td>
-			</tr>
-			<tr class="player">
-				<td>
-					<a href="">
-						<img src="" class="avatar img-circle" width="40" height="40"/>
-					</a>
-				</td>
-				<td>
-					<span class="hall-of-fame-score-leading-zeros">0000</span>
-					<span class="hall-of-fame-score">1234567</span>
-				</td>
-			</tr>
-		</table>
+	<div id="content" style="position:relative;">
+		<div style="position:absolute;">
+			<img src="/img/stadium.jpg" width="100%">
+		</div>
 
+		<div style="position:absolute; top:50px;" class="container">
+			
+			<div class="row">
+				<div class="col-xs-12 col-md-1"></div>
+
+				<div class="col-xs-12 col-md-6"
+				     style="background-color: rgba(230, 230, 230, 0.8);
+							border-width: 1px;
+							border-style: solid;
+							border-color: #000000;
+							padding-top: 20px;
+							margin-bottom: 20px;
+					" >
+					<table width="100%">
+						<tr>
+							<td>Community score</td>
+							<td style="font-size:130%" id="score-community">000040</td>
+							<td>Players</td>
+							<td style="font-size:130%; text-align:right;" id="player-count">&nbsp;4</td>
+						</tr>
+						<tr>
+							<td colspan="4" style="padding-top: 20px; text-align:right;">
+								<a id="search-players-link" href="/players/search/criteria">Search players</a>
+							</td>
+						</tr>
+					</table>
+				</div>			
+
+				<div class="col-xs-12 col-md-1"></div>
+
+				<div class="col-xs-12 col-md-3"
+				     style="background-color: rgba(102, 102, 102, 0.8);
+							border-width: 1px;
+							border-style: solid;
+							border-color: #000000;
+							padding-top: 20px;
+					" >
+					<span style="color:white;">Top 10 players - Hall of fame</span>
+
+					<table id="players" class="table-condensed" style="margin-top:30px;">
+						<tr class="hall-of-fame-header">
+							<td width="100%" id="players-title" style="text-align:left;">Player</td>
+							<td id="score-title" style="text-align:center;">Score</td>
+						</tr>
+						<tr class="player">
+							<td>
+								<a href="">
+									<img src="" class="avatar img-circle" width="40" height="40"/>
+								</a>
+							</td>
+							<td>
+								<div>
+									<span class="hall-of-fame-score-leading-zeros">0000</span>
+									<span class="hall-of-fame-score">1234567</span>
+								</div>
+							</td>
+						</tr>
+					</table>
+
+				</div>
+			</div>				
+		</div>
 	</div>
 
 	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
 	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
+	<script>
+		function moveContent() {
+			var topValue = $('#menu').outerHeight() + 'px'
+			$('#content').css({ top: topValue });
+		};
+		$( document ).ready(function() {
+			moveContent();
+		});
+		$( window ).resize(function() {
+			moveContent();
+		});
+	</script>
 </body>
 </html>
