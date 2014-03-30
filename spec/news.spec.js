@@ -4,7 +4,7 @@ var Server 					= require('../app/lib/server');
 var DatabaseWithChallenges 	= require('../app/support/database.with.levels');
 var fs 						= require('fs');
 
-describe("Display latest news:", function() {
+describe("News display in Community page:", function() {
 
 	var server = new Server(router);
 	
@@ -19,11 +19,13 @@ describe("Display latest news:", function() {
 		database.news = [
 		    {
 		        image: 'me',
-		        text: 'it happened to me!'
+		        url: 'my-url',
+		        text: 'my-news'
 		    },
 		    {
 		        image: 'you',
-		        text: 'it happened to you!'
+		        url: 'your-url',
+		        text: 'your-news'
 		    },
 		]
 		server.useDatabase(database);
@@ -34,11 +36,49 @@ describe("Display latest news:", function() {
 		server.stop();
 	});
 	
-	it('displays the latest news', function(done) {
+	it('displays the known news', function(done) {
 		var browser = new Browser();
 		browser.visit('http://localhost:5000/community').
 			then(function() {
 				expect(browser.queryAll('.news').length).toEqual(2);
+				done();
+			}).
+			fail(function(error) {
+				expect(error.toString()).toBeNull();
+				done();
+			});
+	});	
+
+	it('displays the first news', function(done) {
+		var browser = new Browser();
+		browser.visit('http://localhost:5000/community').
+			then(function() {
+				expect(browser.queryAll('.news').length).toEqual(2);
+				done();
+			}).
+			then(function() {
+				expect(browser.query('#news-1 a').href).toContain('my-url');
+				expect(browser.query('#news-1 img').src).toContain('me');
+				expect(browser.text('#news-1')).toContain('my-news');
+				done();
+			}).
+			fail(function(error) {
+				expect(error.toString()).toBeNull();
+				done();
+			});
+	});	
+
+	it('displays the second news', function(done) {
+		var browser = new Browser();
+		browser.visit('http://localhost:5000/community').
+			then(function() {
+				expect(browser.queryAll('.news').length).toEqual(2);
+				done();
+			}).
+			then(function() {
+				expect(browser.query('#news-2 a').href).toContain('your-url');
+				expect(browser.query('#news-2 img').src).toContain('you');
+				expect(browser.text('#news-2')).toContain('your-news');
 				done();
 			}).
 			fail(function(error) {
