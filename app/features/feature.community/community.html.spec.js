@@ -81,6 +81,13 @@ describe("community.html", function() {
 			});
 			
 		});
+		
+		describe('News section', function() {
+		   
+		    it('has a placeholder for the list', function() {
+		        expect(page('#news-list').length).toEqual(1);
+		    });
+		});
 	});
 		
 });
