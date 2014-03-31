@@ -95,15 +95,7 @@
 								margin-bottom: 20px;
 						" >
 						Yose news
-						<table style="margin-top:10px; width: 100%;">
-							<tr class="news" id="news-1">
-								<td><a href="this-is-my-url"><img src="me"/></a></td>
-								<td>my-news</td>
-							</tr>
-							<tr class="news" id="news-2">
-								<td><a href="this-is-your-url"><img src="you"/></a></td>
-								<td>your-news</td>
-							</tr>
+						<table id="news-list" style="margin-top:10px; width: 100%;">
 						</table>
 					</div>
 
@@ -152,16 +144,18 @@
 	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
 	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
 	<script src="/features/feature.welcome/lib/login.js"></script>
+	<script src="/features/feature.community/lib/news.fetcher.js"></script>
 	<script>
 		function moveContent() {
 			var topValue = $('#menu').outerHeight() + 'px'
 			$('#content').css({ top: topValue });
 		};
-		$( document ).ready(function() {
-			moveContent();
-		});
 		$( window ).resize(function() {
 			moveContent();
+		});
+		$( document ).ready(function() {
+			moveContent();
+			new NewsFetcher().displayNews();
 		});
 	</script>
 </body>
