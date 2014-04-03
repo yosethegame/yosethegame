@@ -150,6 +150,7 @@
 	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
 	<script src="/features/feature.welcome/lib/login.js"></script>
 	<script src="/features/feature.community/lib/news.renderer.js"></script>
+	<script src="/features/feature.community/lib/news.fetcher.js"></script>
 	<script>
 		function moveContent() {
 			var topValue = $('#menu').outerHeight() + 'px'
@@ -160,20 +161,8 @@
 		});
 		$( document ).ready(function() {
 			moveContent();
-			new NewsRenderer().display([
-			    {
-			        date: '26 Feb',
-			        image: 'me',
-			        url: 'my-url',
-			        text: 'my-news'
-			    },
-			    {
-			        date: '1 Jan',
-			        image: 'you',
-			        url: 'your-url',
-			        text: 'your-news'
-			    },
-			]);
+			var news = new NewsFetcher().getNews();
+			new NewsRenderer().display(news);
 		});
 	</script>
 </body>
