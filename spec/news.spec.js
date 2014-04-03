@@ -18,11 +18,13 @@ describe("News display in Community page:", function() {
 		];
 		database.news = [
 		    {
+		        date: '26 Feb',
 		        image: 'me',
 		        url: 'my-url',
 		        text: 'my-news'
 		    },
 		    {
+		        date: '1 Jan',
 		        image: 'you',
 		        url: 'your-url',
 		        text: 'your-news'
@@ -53,10 +55,7 @@ describe("News display in Community page:", function() {
 		var browser = new Browser();
 		browser.visit('http://localhost:5000/community').
 			then(function() {
-				expect(browser.queryAll('.news').length).toEqual(2);
-				done();
-			}).
-			then(function() {
+				expect(browser.text('#news-1')).toContain('26 Feb');
 				expect(browser.query('#news-1 a').href).toContain('my-url');
 				expect(browser.query('#news-1 img').src).toContain('me');
 				expect(browser.text('#news-1')).toContain('my-news');
@@ -72,10 +71,7 @@ describe("News display in Community page:", function() {
 		var browser = new Browser();
 		browser.visit('http://localhost:5000/community').
 			then(function() {
-				expect(browser.queryAll('.news').length).toEqual(2);
-				done();
-			}).
-			then(function() {
+				expect(browser.text('#news-2')).toContain('1 Jan');
 				expect(browser.query('#news-2 a').href).toContain('your-url');
 				expect(browser.query('#news-2 img').src).toContain('you');
 				expect(browser.text('#news-2')).toContain('your-news');

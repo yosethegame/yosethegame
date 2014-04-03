@@ -83,10 +83,33 @@ describe("community.html", function() {
 		});
 		
 		describe('News section', function() {
-		   
-		    it('has a placeholder for the list', function() {
-		        expect(page('#news-list').length).toEqual(1);
-		    });
+
+            it('has a placeholder for the list', function() {
+                expect(page('#news-list').length).toEqual(1);
+            });
+
+            it('has a template for each news', function() {
+                expect(page('#news-list .news').length).toEqual(1);
+            });
+
+            describe('line template', function() {
+
+                it('has an image', function() {
+                    expect(page('#news-list .news img').length).toEqual(1);
+                });
+
+                it('uses an image to link somewhere else', function() {
+                    expect(page('#news-list .news a>img').length).toEqual(1);
+                });
+                
+                it('has a placeholder for the news-date', function() {
+                    expect(page('#news-list .news .news-date').length).toEqual(1);
+                });
+
+                it('has a placeholder for the news-content', function() {
+                    expect(page('#news-list .news .news-content').length).toEqual(1);
+                });
+            });
 		});
 	});
 		

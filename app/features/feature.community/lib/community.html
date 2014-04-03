@@ -84,7 +84,7 @@
 						</div>						
 					</div>
 					
-					<div style="background-color: rgba(153, 153, 153, 0.8);
+					<div style="background-color: rgba(153, 153, 153, 0.9);
 								border-width: 1px;
 								border-style: solid;
 								border-color: #000000;
@@ -94,8 +94,13 @@
 								padding-bottom: 20px;
 								margin-bottom: 20px;
 						" >
-						Yose news
+						<strong>Yose news</strong>
 						<table id="news-list" style="margin-top:10px; width: 100%;">
+							<tr id="news-x" class="news">
+								<td class="news-date"></td>
+								<td><a href=""><img src=""/></a></td>
+								<td class="news-content"></td>
+							</tr>
 						</table>
 					</div>
 
@@ -144,7 +149,7 @@
 	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
 	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>
 	<script src="/features/feature.welcome/lib/login.js"></script>
-	<script src="/features/feature.community/lib/news.fetcher.js"></script>
+	<script src="/features/feature.community/lib/news.renderer.js"></script>
 	<script>
 		function moveContent() {
 			var topValue = $('#menu').outerHeight() + 'px'
@@ -155,7 +160,20 @@
 		});
 		$( document ).ready(function() {
 			moveContent();
-			new NewsFetcher().displayNews();
+			new NewsRenderer().display([
+			    {
+			        date: '26 Feb',
+			        image: 'me',
+			        url: 'my-url',
+			        text: 'my-news'
+			    },
+			    {
+			        date: '1 Jan',
+			        image: 'you',
+			        url: 'your-url',
+			        text: 'your-news'
+			    },
+			]);
 		});
 	</script>
 </body>
