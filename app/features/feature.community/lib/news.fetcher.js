@@ -1,20 +1,21 @@
-function NewsFetcher() {}
+var $ = $ || require('jquery');
+
+var selfFetcher;
+
+function NewsFetcher() {
+    selfFetcher = this;
+}
+
+NewsFetcher.prototype.useRenderer = function(renderer) {
+    this.renderer = renderer;
+};
 
 NewsFetcher.prototype.getNews = function() {
-    return [
-	    {
-	        date: '26 Feb',
-	        image: 'me',
-	        url: 'my-url',
-	        text: 'my-news'
-	    },
-	    {
-	        date: '1 Jan',
-	        image: 'you',
-	        url: 'your-url',
-	        text: 'your-news'
-	    },
-	];
+    $.get('/news').success(this.received);    
+};
+
+NewsFetcher.prototype.received = function(news) {
+    selfFetcher.renderer.display(JSON.parse(news));
 };
 
 var module = module || {};

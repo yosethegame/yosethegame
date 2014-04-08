@@ -54,6 +54,10 @@ module.exports = {
         {
             pattern: /^\/what-is-yose$/,
             target: require('../features/feature.what.is.yose/lib/what.is.yose.request')
+        },
+        {
+            pattern: /^\/news$/,
+            target: require('../features/feature.news/lib/news.request')
         }
     ],
     

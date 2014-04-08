@@ -91,6 +91,10 @@ describe('Router', function() {
 		it('maps what-is-yose request', function() {
 			expect(router.endPointOf({ url: '/what-is-yose' })).toBe(require('./features/feature.what.is.yose/lib/what.is.yose.request.js'));
 		});
+
+		it('maps news request', function() {
+			expect(router.endPointOf({ url: '/news' })).toBe(require('./features/feature.news/lib/news.request.js'));
+		});
 	});
 	
 	describe('Compatibility with http module of node.js:', function() {

@@ -161,8 +161,10 @@
 		});
 		$( document ).ready(function() {
 			moveContent();
-			var news = new NewsFetcher().getNews();
-			new NewsRenderer().display(news);
+			var fetcher = new NewsFetcher();
+			var renderer = new NewsRenderer();
+			fetcher.useRenderer(renderer);
+			fetcher.getNews();
 		});
 	</script>
 </body>
