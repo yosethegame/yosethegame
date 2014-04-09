@@ -16,7 +16,7 @@ describe("News display in Community page:", function() {
 				tags: 'laval'
 			},
 		];
-		database.news = [
+		database.getNews = function(callback) { callback([
 		    {
 		        date: '26 Feb',
 		        image: 'me',
@@ -28,8 +28,9 @@ describe("News display in Community page:", function() {
 		        image: 'you',
 		        url: 'your-url',
 		        text: 'your-news'
-		    },
-		]
+		    }]) 
+		};
+		
 		server.useDatabase(database);
 		server.start();
 	});

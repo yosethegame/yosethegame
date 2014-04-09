@@ -333,5 +333,17 @@ describe('PostgreSql database', function() {
     		});		
     	});
 	});
+	
+	it('offers a way to add and retrieve the news', function(done) {
+	    var news = [ { first: 'one' }, { second: 'two' } ];
+		database.addNews( news[0], function() {
+    		database.addNews( news[1], function() {
+        		database.getNews(function(received) {
+        			expect(received).toEqual(news);
+        			done();
+        		});
+    		});
+		});
+	});
 
 });

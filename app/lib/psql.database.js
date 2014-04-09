@@ -123,4 +123,12 @@ PostgreSql.prototype.findPlayersMatching = function(criteria, callback) {
     });
 };
 
+PostgreSql.prototype.addNews = function(news, callback) {
+    callback();
+};
+
+PostgreSql.prototype.getNews = function(callback) {
+    callback();
+};
+
 module.exports = PostgreSql;

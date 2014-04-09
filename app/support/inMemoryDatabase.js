@@ -2,6 +2,7 @@ var array = require('../utils/lib/array.utils');
 
 function InMemoryDatabase() {
 	this.players = [];
+	this.news = [];
 }
 
 InMemoryDatabase.prototype.withPlayers = function(players) {
@@ -49,6 +50,15 @@ InMemoryDatabase.prototype.findPlayersMatching = function(criteria, callback) {
         }
     });
     callback(found);
+};
+
+InMemoryDatabase.prototype.addNews = function(news, callback) {
+    this.news.push(news);
+    callback();
+};
+
+InMemoryDatabase.prototype.getNews = function(callback) {
+    callback(this.news);
 };
 
 module.exports = InMemoryDatabase;
