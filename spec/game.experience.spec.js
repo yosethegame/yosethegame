@@ -21,6 +21,7 @@ describe("Game experience", function() {
 		database.players = [
 			{
 				login: 'annessou',
+				avatar: 'asm',
 				portfolio: [ { server: 'http://localhost:6000', achievements: [] } ]
 			},
 			{
@@ -63,6 +64,22 @@ describe("Game experience", function() {
 					expect(error.toString()).toBeNull();
 					done();
 				});
+		});
+		
+		it('appears in the news', function() {
+			var browser = new Browser();
+    		browser.visit('http://localhost:5000/community').
+    			then(function() {
+    				expect(browser.query('#news-1 a').href).toContain('http://localhost:6000');
+    				expect(browser.query('#news-1 img').src).toContain('asm');
+    				expect(browser.text('#news-1')).toContain('passed level ' + database.worlds[0].levels[0].title);
+    				done();
+    			}).
+    			fail(function(error) {
+    				expect(error.toString()).toBeNull();
+    				done();
+    			});
+		    
 		});
 	});
 	
