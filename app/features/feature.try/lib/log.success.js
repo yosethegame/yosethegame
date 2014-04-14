@@ -1,4 +1,5 @@
 var thePlayer = require('../../../lib/player.utils');
+var array = require('../../../utils/lib/array.utils');
 
 logSuccess = function(player, levelId, database) {
 	if (thePlayer.isANew(player)) {
@@ -10,7 +11,15 @@ logSuccess = function(player, levelId, database) {
 	if (player.score === undefined) player.score = 0;
 	player.score += 10;
 	
-	database.addNews({ url: player.portfolio[0].server, image: player.avatar, text: 'passed level "the first challenge"' }, function() {});
+	var title = '';
+	array.forEach(database.worlds, function(world) {
+	    array.forEach(world.levels, function(level) {
+	        if(level.id == levelId) {
+	            title = level.title;
+	        }
+	    });
+	});
+	database.addNews({ url: player.portfolio[0].server, image: player.avatar, text: 'passed level "' + title + '"' }, function() {});
 };
 
 var module = module || {};
