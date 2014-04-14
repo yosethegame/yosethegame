@@ -127,7 +127,7 @@ describe('Control Access', function() {
 		beforeEach(function() {
 			player.portfolio = [];
 			array.forEach(database.worlds[0].levels, function(level) {
-				logSuccess(player, level.id);
+				logSuccess(player, level.id, database);
 			});
 			playground({ url: '/players/ericminio/play/world/1/level/1' }, response, database);
 			page = cheerio.load(response.html);
@@ -228,7 +228,7 @@ describe('Control Access', function() {
 
 		beforeEach(function() {
 			player.portfolio = [];
-			logSuccess(player, database.worlds[0].levels[0].id);
+			logSuccess(player, database.worlds[0].levels[0].id, database);
 			playground({ url: '/players/ericminio/play/world/1/level/1' }, response, database);
 			page = cheerio.load(response.html);
 		});

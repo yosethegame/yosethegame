@@ -114,10 +114,10 @@ describe('InMemoryDatabase', function() {
 	
 	it('adds the current date to the given news', function(done) {
 		database.addNews( { any: 'value' }, function() {
-        	database.getNews(function(received) {
-        		expect(received[0].date.toString()).toEqual(new Date().toString());
-        		done();
-        	});
+            database.getNews(function(received) {
+                expect(received[0].date.toString()).toEqual(new Date().toString());
+                done();
+            });
 		});
 	});
 });

@@ -79,7 +79,7 @@ var tryAllLevelsAndSaveResults = function(levelsToTry, params, player, database,
 					}				
 				});
 			}
-			logSuccess(player, levelIdToSave);
+			logSuccess(player, levelIdToSave, database);
 		}
 		database.savePlayer(player, function() {
 			callback(output);
