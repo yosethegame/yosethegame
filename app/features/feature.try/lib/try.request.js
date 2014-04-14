@@ -8,6 +8,7 @@ var httperror       = require('./http.errors.utils');
 var thisPlayer      = require('../../../lib/player.utils');
 var logSuccess      = require('./log.success');
 var logServer       = require('./log.server');
+var news            = require('../../feature.news/lib/news.builder');
 
 var allLevelsToTry = function(player, world, level) {
 	var levelsToTry = thisPlayer.doneLevelsInWorld(player, world);
@@ -83,16 +84,7 @@ var tryAllLevelsAndSaveResults = function(levelsToTry, params, player, database,
 		}
 		database.savePlayer(player, function() {
             if (!fail) {
-                var title = '';
-                array.forEach(database.worlds, function(world) {
-                    array.forEach(world.levels, function(level) {
-                        if(level.id == levelIdToSave) {
-                            title = level.title;
-                        }
-                    });
-                });
-                var news = { text: 'passed level "' + title + '"', image: player.avatar, url: player.portfolio[0].server };
-                database.addNews(news, function() {
+                database.addNews(news.playerPassedLevel(levelIdToSave, player, database), function() {
                     callback(output);
                 });
             }
