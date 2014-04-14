@@ -68,8 +68,8 @@ var tryAllLevelsAndSaveResults = function(levelsToTry, params, player, database,
 				logServer(player, params.query.server);
             }
 		}
+		var levelIdToSave;
 		if (!fail) {
-			var levelIdToSave;
 			if (thisPlayer.isANew(player)) {
 				levelIdToSave = output[0].id;
 			} else {
@@ -82,7 +82,23 @@ var tryAllLevelsAndSaveResults = function(levelsToTry, params, player, database,
 			logSuccess(player, levelIdToSave, database);
 		}
 		database.savePlayer(player, function() {
-			callback(output);
+            if (!fail) {
+                var title = '';
+                array.forEach(database.worlds, function(world) {
+                    array.forEach(world.levels, function(level) {
+                        if(level.id == levelIdToSave) {
+                            title = level.title;
+                        }
+                    });
+                });
+                var news = { text: 'passed level "' + title + '"', image: player.avatar, url: player.portfolio[0].server };
+                database.addNews(news, function() {
+                    callback(output);
+                });
+            }
+            else {
+                callback(output);
+            }
 		});
     });
 };

@@ -45,32 +45,4 @@ describe('Log success,', function() {
 		});
 	});
 	
-	describe('News:', function() {
-
-        beforeEach(function() {
-            database.news = [];
-        });
-
-		it('passing a challenge creates a news', function(done) {
-			var player = {};
-			logSuccess(player, 1, database);
-
-            database.getNews(function(news) {
-                expect(news.length).toEqual(1);
-                done();
-            });
-		});
-		
-		it('passing a challenge creates a news with the title of the challenge', function(done) {
-			var player = {};
-			logSuccess(player, 2, database);
-
-            database.getNews(function(news) {
-                expect(news[0].text).toContain(database.worlds[0].levels[1].title);
-                done();
-            });
-		});
-		
-	});
-	
 });
