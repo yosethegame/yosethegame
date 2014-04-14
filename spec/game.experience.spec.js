@@ -66,9 +66,12 @@ describe("Game experience", function() {
 				});
 		});
 		
-		it('appears in the news', function() {
+		it('appears in the news', function(done) {
 			var browser = new Browser();
     		browser.visit('http://localhost:5000/community').
+			    then(function() {
+				    expect(browser.queryAll('#news-1').length).toEqual(1);
+			    }).
     			then(function() {
     				expect(browser.query('#news-1 a').href).toContain('http://localhost:6000');
     				expect(browser.query('#news-1 img').src).toContain('asm');
