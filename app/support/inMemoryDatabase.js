@@ -53,6 +53,7 @@ InMemoryDatabase.prototype.findPlayersMatching = function(criteria, callback) {
 };
 
 InMemoryDatabase.prototype.addNews = function(news, callback) {
+    news.date = new Date();
     this.news.push(news);
     callback();
 };

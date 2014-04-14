@@ -27,7 +27,21 @@ describe('PostgreSql database', function() {
 		
 	});
 	
-	afterEach(function(done) {
+	beforeEach(function(done) {
+		client = new pg.Client(url);
+		client.connect(function(err) {
+			client.query('drop table news', function(err, result) {
+				client.query('create table news(date timestamp with time zone, json varchar(5000))', function(err, result) {
+					client.end();
+					expect(err).toEqual(null);
+					done();
+				});			
+			});			
+		});
+		
+	});
+	
+    afterEach(function(done) {
 		database.deletePlayer(annessou, function() {
 			done();
 		})
@@ -333,17 +347,4 @@ describe('PostgreSql database', function() {
     		});		
     	});
 	});
-	
-	it('offers a way to add and retrieve the news', function(done) {
-	    var news = [ { first: 'one' }, { second: 'two' } ];
-		database.addNews( news[0], function() {
-    		database.addNews( news[1], function() {
-        		database.getNews(function(received) {
-        			expect(received).toEqual(news);
-        			done();
-        		});
-    		});
-		});
-	});
-
 });

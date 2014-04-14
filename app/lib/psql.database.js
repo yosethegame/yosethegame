@@ -124,11 +124,33 @@ PostgreSql.prototype.findPlayersMatching = function(criteria, callback) {
 };
 
 PostgreSql.prototype.addNews = function(news, callback) {
-    callback();
+	client = new pg.Client(this.url);
+	client.connect(function(err) {
+		sql = "insert into news(date, json) values(now(), $1)";
+		client.query(sql, [JSON.stringify(news)], function(err, result) {
+			client.end();
+			callback();
+		});
+	});
 };
 
 PostgreSql.prototype.getNews = function(callback) {
-    callback();
+    client = new pg.Client(this.url);
+	client.connect(function(err) {
+		var sql = "select date, json from news order by date desc limit 10";
+		client.query(sql, function(err, result) {
+			client.end();
+			var news = [];
+			if (result !== undefined) {
+				array.forEach(result.rows, function(row) {
+                    var line = JSON.parse(row.json);
+                    line.date = row.date;
+					news.push(line);
+				});
+			}
+			callback(news);
+		});
+	});
 };
 
 module.exports = PostgreSql;

@@ -101,15 +101,23 @@ describe('InMemoryDatabase', function() {
 	});
 	
 	it('offers a way to add and retrieve the news', function(done) {
-	    var news = [ { first: 'one' }, { second: 'two' } ];
+        var news = [ { first: 'one' }, { second: 'two' } ];
 		database.addNews( news[0], function() {
-    		database.addNews( news[1], function() {
-        		database.getNews(function(received) {
-        			expect(received).toEqual(news);
-        			done();
-        		});
-    		});
-		});
+            database.addNews( news[1], function() {
+                database.getNews(function(received) {
+                    expect(received).toEqual(news);
+                    done();
+                });
+            });
+        });
 	});	
 	
+	it('adds the current date to the given news', function(done) {
+		database.addNews( { any: 'value' }, function() {
+        	database.getNews(function(received) {
+        		expect(received[0].date.toString()).toEqual(new Date().toString());
+        		done();
+        	});
+		});
+	});
 });

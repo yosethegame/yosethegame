@@ -7,8 +7,8 @@ describe('News endpoint', function() {
     var response = { write: function(value) { received = value; }, end: function() {} };
 
 	beforeEach(function() {	
-	    news = { any: 'value' };
-	    var database = { getNews: function(callback) { callback(news) } };
+        news = { any: 'value' };
+        var database = { getNews: function(callback) { callback(news); } };
         newsendpoint({}, response, database);
 	});
 
