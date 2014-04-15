@@ -10,6 +10,7 @@ describe('Creating a player', function() {
 	beforeEach(function() {
 		database = new InMemoryDatabase();
 		database.players = [];
+		database.news = [];
 		server.useDatabase(database);
 		server.start();
 	});
@@ -35,6 +36,35 @@ describe('Creating a player', function() {
 			then(function() {
 				expect(browser.text("#world-1 .world-ellipse")).toContain(database.worlds[0].name);
 				done();
+			}).
+			fail(function(error) {
+				expect(error.toString()).toBeNull();
+				done();
+			});
+	});
+
+	it('appears in the news', function(done) {
+		var browser = new Browser();
+		browser.visit('http://localhost:5000/create-new-player').
+			then(function () {
+				return browser.fill('#login', 'eric')
+							  .fill('#avatar', 'this-avatar')
+							  .pressButton('#create');
+			}).
+			then(function() {
+        		browser.visit('http://localhost:5000/community').
+			        then(function() {
+				        expect(browser.queryAll('#news-1').length).toEqual(1);
+			        }).
+    			    then(function() {
+    				    expect(browser.query('#news-1 img').src).toContain('this-avatar');
+    				    expect(browser.text('#news-1')).toContain('entered the game');
+    				    done();
+    			    }).
+    			    fail(function(error) {
+    				    expect(error.toString()).toBeNull();
+    				    done();
+    			    });
 			}).
 			fail(function(error) {
 				expect(error.toString()).toBeNull();
