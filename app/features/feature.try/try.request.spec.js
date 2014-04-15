@@ -178,12 +178,12 @@ describe("Trying to pass challenges >", function() {
 			});			
 		});
 		it('logs a news', function(done) {
-		    request("http://localhost:5000/try?login=annessou&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
-		        database.getNews(function(news) {
-		            expect(news.length).toEqual(1);
-		            done();
-	            });
-	        });
+            request("http://localhost:5000/try?login=annessou&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
+                database.getNews(function(news) {
+                    expect(news.length).toEqual(1);
+                    done();
+                });
+            });
 		});
 	});
 	

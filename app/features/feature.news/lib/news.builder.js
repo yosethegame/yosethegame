@@ -2,7 +2,7 @@ var array = require('../../../utils/lib/array.utils');
 
 function news() {
     
-};
+}
 
 news.playerPassedLevel = function(id, player, database) {
     var title = '';
