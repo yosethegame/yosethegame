@@ -34,6 +34,7 @@ describe('When restarting world', function() {
          beforeEach(function() {		
              database.players = [{
                 login: 'bilou',
+                avatar: 'avatar-of-bilou',
                 score: 20,
                 portfolio: [ { server: 'any', achievements: [database.worlds[0].levels[0].id,
                                                              database.worlds[1].levels[0].id] } ]
@@ -49,5 +50,25 @@ describe('When restarting world', function() {
              });
          });
 
+         it('does log one news with restarted world info', function(done) {
+             database.getNews(function(news) {
+                 expect(news[0].text).toContain(database.worlds[1].name);
+                 done(); 
+             });
+         });
+
+         it('does log one news linking to the server of the player', function(done) {
+             database.getNews(function(news) {
+                 expect(news[0].url).toEqual('any');
+                 done(); 
+             });
+         });
+
+         it('does log one news displaying the avatar of the player', function(done) {
+             database.getNews(function(news) {
+                 expect(news[0].image).toEqual('avatar-of-bilou');
+                 done(); 
+             });
+         });
      });
 });

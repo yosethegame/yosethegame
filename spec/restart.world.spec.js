@@ -10,6 +10,7 @@ describe("When a player restarts world #2", function() {
 	
 	beforeEach(function(done) {
 		database = new DatabaseWithChallenges();
+		database.news = [];
 		database.players = [
 			{
 				login: 'bilou',

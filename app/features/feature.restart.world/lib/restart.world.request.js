@@ -1,5 +1,6 @@
 var array       = require('../../../utils/lib/array.utils');
 var thePlayer   = require('../../../lib/player.utils');
+var news        = require('../../feature.news/lib/news.builder');
 
 var urlPattern = /^\/players\/(.*)\/restart\/world\/(.*)/;
 
@@ -24,7 +25,9 @@ var removeAchievementsOfWorld = function(login, database, world, callback) {
                     }
                 });
                 database.savePlayer(player, function() {
-                    callback();
+                    database.addNews(news.playerRestartedWorld(world, player), function() {
+                        callback();
+                    });
                 });
             } else {
                 callback();
