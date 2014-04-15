@@ -1,8 +1,6 @@
 var array = require('../../../utils/lib/array.utils');
 
-function news() {
-    
-}
+function news() {}
 
 news.playerPassedLevel = function(id, player, database) {
     var title = '';
@@ -19,6 +17,10 @@ news.playerPassedLevel = function(id, player, database) {
 news.playerRestartedWorld = function(world, player) {
     var title = 'restarted world "' + world.name + '"';
     return { url: player.portfolio[0].server, image: player.avatar, text: title};
+};
+
+news.playerRestartedGame = function(player) {
+    return { url: "", image: player.avatar, text: 'restarted the game' };
 };
 
 module.exports = news;
