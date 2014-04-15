@@ -18,9 +18,11 @@ describe("Restart game:", function() {
 		.listen(6000);			
 
 		database = new DatabaseWithChallenges();
+		database.news = [];
 		database.players = [
 			{
 				login: 'bilou',
+				avatar: 'bilou-avatar',
 				portfolio: [ { server: 'http://localhost:6000', achievements: [1] } ]
 			}
 		];
@@ -50,6 +52,25 @@ describe("Restart game:", function() {
 					done();
 				});
 		});
+		
+		it('it appears in the news', function(done) {
+    		var browser = new Browser();
+    		browser.visit('http://localhost:5000/community').
+    		    then(function() {
+    			    expect(browser.queryAll('#news-1').length).toEqual(1);
+    		    }).
+    			then(function() {
+    				expect(browser.query('#news-1 a').href).toContain('http://localhost:6000');
+    				expect(browser.query('#news-1 img').src).toContain('bilou-avatar');
+    				expect(browser.text('#news-1')).toContain('restarted the game');
+    				done();
+    			}).
+    			fail(function(error) {
+    				expect(error.toString()).toBeNull();
+    				done();
+    			});
+
+    	});
 	});
 	
 });
