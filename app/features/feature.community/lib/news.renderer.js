@@ -2,12 +2,42 @@ var $ = $ || require('jquery');
 
 function NewsRenderer() {}
 
+NewsRenderer.prototype.getCurrentTime = function(date) {
+    return new Date().getTime();
+};
+
+NewsRenderer.prototype.formatDate = function(newsDate) {
+    var newsTime = Date.parse(newsDate);
+    var delta = this.getCurrentTime() - newsTime;
+    
+    if (delta < (60*1000)) {
+        return Math.floor(delta / (1000)) + ' s ago';
+    }
+
+    if (delta < (3600*1000)) {
+        return Math.floor(delta / (60 * 1000)) + ' min ago';
+    }
+
+    if (delta < (24*3600*1000)) {
+        return Math.floor(delta / (3600 * 1000)) + ' h ago';
+    }
+    
+    if (delta < (8*24*3600*1000)) {
+        return Math.floor(delta / (24*3600*1000)) + ' d ago';
+    }
+    
+    var date = new Date();
+    date.setTime(newsTime);
+    var dateAsString = date.toLocaleString('en-US').split(' ');
+    return dateAsString[1] + ' ' + dateAsString[2];
+};
+
 NewsRenderer.prototype.display = function(news) {
     var template = $('#news-list').html();
     $('#news-list').empty();
     for (var i=0; i<news.length; i++) {
         var item = news[i];
-        var line = template.replace('class="news-date"></', 'class="news-date">' + item.date + '</')
+        var line = template.replace('class="news-date"></', 'class="news-date">' + this.formatDate(item.date) + '</')
                            .replace('class="news-content"></', 'class="news-content">' + item.text + '</')
                            .replace('href=""', 'href="' + item.url + '"')
                            .replace('src=""', 'src="' + item.image + '"')

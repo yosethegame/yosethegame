@@ -56,7 +56,7 @@ describe("News display in Community page:", function() {
 		var browser = new Browser();
 		browser.visit('http://localhost:5000/community').
 			then(function() {
-				expect(browser.text('#news-1')).toContain('26 Feb');
+				expect(browser.text('#news-1')).toContain('Feb 26');
 				expect(browser.query('#news-1 a').href).toContain('my-url');
 				expect(browser.query('#news-1 img').src).toContain('me');
 				expect(browser.text('#news-1')).toContain('my-news');
@@ -72,7 +72,7 @@ describe("News display in Community page:", function() {
 		var browser = new Browser();
 		browser.visit('http://localhost:5000/community').
 			then(function() {
-				expect(browser.text('#news-2')).toContain('1 Jan');
+				expect(browser.text('#news-2')).toContain('Jan 01');
 				expect(browser.query('#news-2 a').href).toContain('your-url');
 				expect(browser.query('#news-2 img').src).toContain('you');
 				expect(browser.text('#news-2')).toContain('your-news');
