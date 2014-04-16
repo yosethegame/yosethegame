@@ -23,4 +23,8 @@ news.playerRestartedGame = function(player) {
     return { url: "", image: player.avatar, text: 'restarted the game' };
 };
 
+news.playerCreated = function(player) {
+    return { url: "", image: player.avatar, text: 'entered the game' };
+};
+
 module.exports = news;

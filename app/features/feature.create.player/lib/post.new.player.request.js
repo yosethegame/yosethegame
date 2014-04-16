@@ -1,4 +1,5 @@
 var qs = require('querystring');
+var news = require('../../feature.news/lib/news.builder');
 
 postNewPlayer = function(request, response, database) {
 
@@ -11,8 +12,10 @@ postNewPlayer = function(request, response, database) {
 		var form = qs.parse(body);	
 		var player = { login: form.login, avatar: form.avatar, score: 0 };	
 		database.createPlayer(player, function() {
-			response.writeHead(201);
-			response.end();
+		    database.addNews(news.playerCreated(player), function() {
+    			response.writeHead(201);
+    			response.end();
+		    });
 		});
     });
 
