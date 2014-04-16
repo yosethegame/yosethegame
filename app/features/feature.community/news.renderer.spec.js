@@ -5,8 +5,8 @@ describe('News Renderer', function() {
 
     beforeEach(function() {
         var template = '<li id="news-x">' +
-                            '<span class="news-date"></span>' +
-                            '<span class="news-content"></span>' +
+                            '<span class="any class before the specific news-date"></span>' +
+                            '<span class="any class before the specific news-content"></span>' +
                             '<a href=""><img src=""/></a>' +
                        '</li>';
         $('body').append('<ul id="news-list">' + template + '</ul>');
@@ -16,7 +16,7 @@ describe('News Renderer', function() {
         $('#news-list').remove();
     });
 
-    xit('displays as much line as there are news', function() {
+    it('displays as much line as there are news', function() {
         var renderer = new NewsRenderer();
         renderer.display([
                 { date: '26 Feb', image: 'me', url: 'my-url', text: 'my-news'},
@@ -25,7 +25,7 @@ describe('News Renderer', function() {
         expect($('ul#news-list li').length).toEqual(2);
     });
     
-    xdescribe('news line', function() {
+    describe('news line', function() {
         
         beforeEach(function() {
             var renderer = new NewsRenderer();

@@ -37,8 +37,8 @@ NewsRenderer.prototype.display = function(news) {
     $('#news-list').empty();
     for (var i=0; i<news.length; i++) {
         var item = news[i];
-        var line = template.replace('class="news-date"></', 'class="news-date">' + this.formatDate(item.date) + '</')
-                           .replace('class="news-content"></', 'class="news-content">' + item.text + '</')
+        var line = template.replace('news-date"></', 'news-date">' + this.formatDate(item.date) + '</')
+                           .replace('news-content"></', 'news-content">' + item.text + '</')
                            .replace('href=""', 'href="' + item.url + '"')
                            .replace('src=""', 'src="' + item.image + '"')
                            .replace('news-x', 'news-' + (i+1))
