@@ -1,7 +1,12 @@
+#news-list {
+    margin-top: 10px;
+    width: 90%;
+}
+
 .news-date {
-    
+    text-align: right;
 }
 
 .news-content {
-    
+    font-size: 100%;
 }

@@ -8,6 +8,7 @@
 	<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
 	<link href="/css/main.css" rel="stylesheet" type="text/css">
 	<link href="/features/feature.community/lib/news.css" rel="stylesheet" type="text/css">
+	<link href="/features/feature.community/lib/community.css" rel="stylesheet" type="text/css">
 	<link rel="shortcut icon" type="image/png" href="/img/favicon.png" />
 </head>
 <body style="background-color: #424242;">
@@ -35,15 +36,17 @@
 								padding-left: 10px;
 								margin-bottom: 20px;
 						" >
-						<table width="100%">
+						<strong>Community</strong>
+						<table id="community-data">
 							<tr>
-								<td>Community score</td>
+								<td class="community-data-padding"></td>
+								<td>Total score</td>
 								<td style="font-size:130%" id="score-community">000040</td>
 								<td>Players</td>
 								<td style="font-size:130%; text-align:right;" id="player-count">&nbsp;4</td>
 							</tr>
 							<tr>
-								<td colspan="4" style="padding-top: 20px; text-align:right;">
+								<td colspan="5" style="padding-top: 20px; text-align:right;">
 									<a id="search-players-link" href="/players/search/criteria">Search players</a>
 								</td>
 							</tr>
@@ -59,11 +62,13 @@
 								padding-left: 10px;
 								margin-bottom: 20px;
 						" >
-
+						<strong>Contribution</strong>
+						<br/><br/>
+						<table style="width:90%">
+							<tr>
+								<td class="community-data-padding"></td>
+								<td>
 						<div class="box">
-
-							<label><strong>Contribute</strong></label>
-							<br>
 							<div>
 								<a href="https://trello.com/b/mwhZQWc8/yosethegame" 
 								   onmouseover="document.getElementById('contribute-info').innerHTML='<span>Vote the next feature</span>'" 
@@ -82,7 +87,10 @@
 								</a>
 							</div>
 							<span id="contribute-info"><span class="">Feel the force!</span> - Yoda</span>			
-						</div>						
+						</div>	
+								</td>
+							</tr>
+						</table>
 					</div>
 					
 					<div style="background-color: rgba(153, 153, 153, 0.9);
@@ -96,11 +104,12 @@
 								margin-bottom: 20px;
 						" >
 						<strong>News</strong>
-						<table id="news-list" style="margin-top:10px; width: 100%;">
+						<table id="news-list">
 							<tr id="news-x" class="news">
-								<td><a href=""><img src="" class="img-circle" width="40" height="40"/></a></td>
+								<td class="community-data-padding"></td>
+								<td><a href=""><img src="" class="img-circle" width="30" height="30"/></a></td>
 								<td class="news-content"></td>
-								<td class="news-date"></td>
+								<td nowrap class="news-date"></td>
 							</tr>
 						</table>
 					</div>
@@ -116,7 +125,7 @@
 								border-style: solid;
 								border-color: #000000;
 								padding-top: 20px;
-								padding-left: 30px;
+								padding-left: 10px;
 								padding-bottom: 20px;
 						" >
 						<span style="color:white;">Top 10 players - Hall of fame</span>
@@ -124,10 +133,12 @@
 						<table id="players" class="table-condensed" 
 							   style="margin-top:30px; margin-left: -5px; margin-right: 20px; width: 100%;">
 							<tr class="hall-of-fame-header">
+								<td class="community-data-padding"></td>
 								<td id="players-title" style="text-align:left;">Player</td>
 								<td id="score-title" style="text-align:left;">Score</td>
 							</tr>
 							<tr class="player">
+								<td class="community-data-padding"></td>
 								<td>
 									<a href="">
 										<img src="" class="avatar img-circle" width="40" height="40"/>
