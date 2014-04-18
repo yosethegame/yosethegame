@@ -90,7 +90,15 @@ describe('News Renderer', function() {
                 return Date.parse('Tue Apr 15 2014 10:00:00 GMT-0400 (EDT)');
             };
                             
-            expect(renderer.formatDate('Tue Apr 12 2014 10:00:00 GMT-0400 (EDT)')).toEqual('3 d ago');
+            expect(renderer.formatDate('Tue Apr 12 2014 10:00:00 GMT-0400 (EDT)')).toEqual('3 days ago');
+        });
+
+        it('renders news of yesterday as yesterday', function() {                
+            renderer.getCurrentTime = function() { 
+                return Date.parse('Tue Apr 15 2014 10:00:00 GMT-0400 (EDT)');
+            };
+                            
+            expect(renderer.formatDate('Tue Apr 14 2014 9:00:00 GMT-0400 (EDT)')).toEqual('yesterday');
         });
 
         it('renders older news with the actual date', function() {                

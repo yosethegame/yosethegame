@@ -23,7 +23,12 @@ NewsRenderer.prototype.formatDate = function(newsDate) {
     }
     
     if (delta < (8*24*3600*1000)) {
-        return Math.floor(delta / (24*3600*1000)) + ' d ago';
+        var nb = Math.floor(delta / (24*3600*1000));
+        if (nb === 1) {
+            return 'yesterday';
+        } else {
+            return nb + ' days ago';
+        }
     }
     
     var date = new Date();
