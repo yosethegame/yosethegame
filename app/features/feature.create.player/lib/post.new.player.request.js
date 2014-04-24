@@ -11,11 +11,19 @@ postNewPlayer = function(request, response, database) {
     request.on('end', function () {
 		var form = qs.parse(body);	
 		var player = { login: form.login, avatar: form.avatar, score: 0 };	
-		database.createPlayer(player, function() {
-            database.addNews(news.playerCreated(player), function() {
-                response.writeHead(201);
+		database.find(form.login, function(found) {
+            if (found === undefined) {
+                database.createPlayer(player, function() {
+                    database.addNews(news.playerCreated(player), function() {
+                        response.writeHead(201);
+                        response.end();
+                    });
+                });
+            }
+            else {
+                response.writeHead(200);
                 response.end();
-            });
+            }
 		});
     });
 

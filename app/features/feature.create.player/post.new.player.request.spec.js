@@ -8,6 +8,7 @@ describe('Post player endpoint', function() {
 	
 	beforeEach(function() {
 		database = new InMemoryDatabase();
+		database.players = [];
 		server = require('http').createServer(function(request, response){
 			post(request, response, database);
 		}).listen(5000, 'localhost');
@@ -47,6 +48,14 @@ describe('Post player endpoint', function() {
 	it('returns 201', function(done) {
 		require('request').post('http://localhost:5000', {form: { login:'eric', avatar:'this-avatar' } }, function(error, response, body) {
 			expect(response.statusCode).toEqual(201);
+			done();
+		});
+	});
+	
+	it('returns 200 when the player already exists', function(done) {
+        database.players = [ { login: 'eric' } ];
+		require('request').post('http://localhost:5000', {form: { login:'eric', avatar:'this-avatar' } }, function(error, response, body) {
+			expect(response.statusCode).toEqual(200);
 			done();
 		});
 	});

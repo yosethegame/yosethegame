@@ -71,4 +71,34 @@ describe('Creating a player', function() {
 				done();
 			});
 	});
+	
+	it('does not create a second news when the player already exists', function(done) {
+		var browser = new Browser();
+		browser.visit('http://localhost:5000/create-new-player').
+			then(function () {
+				return browser.fill('#login', 'eric')
+							  .fill('#avatar', 'this-avatar')
+							  .pressButton('#create');
+			}).
+			then(function () {
+				return browser.fill('#login', 'eric')
+							  .fill('#avatar', 'this-avatar')
+							  .pressButton('#create');
+			}).
+			then(function() {
+        		browser.visit('http://localhost:5000/community').
+			        then(function() {
+				        expect(browser.queryAll('#news-2').length).toEqual(0);
+				        done();
+			        }).
+    			    fail(function(error) {
+    				    expect(error.toString()).toBeNull();
+    				    done();
+    			    });
+			}).
+			fail(function(error) {
+				expect(error.toString()).toBeNull();
+				done();
+			});
+	});
 });
