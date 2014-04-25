@@ -10,7 +10,6 @@ PostgreSql.prototype.createPlayer = function(player, callback) {
 	client = new pg.Client(this.url);
 	client.connect(function(err) {
 		var sql = "select count(1) from players where login = $1";
-		console.log('sql = ' + sql);
 		console.log('asked login = ' + player.login);
 		client.query(sql, [player.login], function(err, result) {
 			var count = result.rows[0].count;
