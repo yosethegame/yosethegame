@@ -113,6 +113,21 @@ describe("Trying to pass challenges >", function() {
 
 		});
 
+        describe('support retrying the first level', function() {
+
+            beforeEach(function() {
+                levels = tryAll.allLevelsToTry(bilou, database.worlds[0], database.worlds[0].levels[0]);
+            });
+
+            it('has just one level to try', function() {
+                expect(levels.length).toEqual(1);
+            });
+
+            it('is the first level', function() {
+                expect(levels[0]).toEqual(database.worlds[0].levels[0]);
+            });
+        });
+
 	});
 		
 	describe('When player passes the first challenge,', function() {
@@ -185,6 +200,14 @@ describe("Trying to pass challenges >", function() {
                 });
             });
 		});
+        it('does not increase the score again when trying again and passing', function(done) {
+            request("http://localhost:5000/try?login=annessou&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
+                request("http://localhost:5000/try?login=annessou&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
+                    expect(body).toContain('"score":10');
+                    done();
+                });
+            });
+        });
 	});
 	
 	describe('When player passes the second challenge', function() {
@@ -348,7 +371,7 @@ describe("Trying to pass challenges >", function() {
 			});			
 		});
 		it('returns the new score of the player', function(done) {
-			request("http://localhost:5000/try?login=clairette&world=1&level=1", function(error, response, body) {
+			request("http://localhost:5000/try?login=clairette&world=1&level=2", function(error, response, body) {
 				expect(body).toContain('"score":20');
 				done();
 			});			

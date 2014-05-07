@@ -12,7 +12,9 @@ var news            = require('../../feature.news/lib/news.builder');
 
 var allLevelsToTry = function(player, world, level) {
 	var levelsToTry = thisPlayer.doneLevelsInWorld(player, world);
-	levelsToTry.push(level);
+    if (levelsToTry.indexOf(level) == -1) {
+        levelsToTry.push(level);
+    }
 	return levelsToTry;
 };
 
@@ -77,10 +79,12 @@ var tryAllLevelsAndSaveResults = function(levelsToTry, params, player, database,
 				array.forEach(output, function(item) {
 					if (! thisPlayer.hasDoneThisLevel(player, item)) {
 						levelIdToSave = item.id;
-					}				
+					}
 				});
 			}
-			logSuccess(player, levelIdToSave, database);
+            if ( levelIdToSave !== undefined ) {
+                logSuccess(player, levelIdToSave, database);
+            }
 		}
 		database.savePlayer(player, function() {
             if (!fail) {
