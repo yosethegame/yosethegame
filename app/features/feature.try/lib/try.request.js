@@ -87,7 +87,7 @@ var tryAllLevelsAndSaveResults = function(levelsToTry, params, player, database,
             }
 		}
 		database.savePlayer(player, function() {
-            if (!fail) {
+            if (!fail && levelIdToSave !== undefined) {
                 database.addNews(news.playerPassedLevel(levelIdToSave, player, database), function() {
                     callback(output);
                 });
