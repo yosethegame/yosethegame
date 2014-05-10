@@ -11,7 +11,7 @@ Server.prototype.start = function() {
     var database = this.database;
     this.server = require('http').createServer(function(request, response) {
         router.endPointOf(request)(request, response, database);
-    }).listen(process.env.PORT || 5000);
+    }).listen(process.env.PORT || 5001);
 };
 
 Server.prototype.stop = function() {
