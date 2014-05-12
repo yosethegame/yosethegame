@@ -191,6 +191,14 @@ function ProductionDatabase() {
 				checker: '../../../challenges/world.prime.factors/challenge.roman.decomposition/lib/roman.decomposition.response.matcher.js',
 				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 13); }
 			},
+            {
+                id: 31,
+                title: 'Persistence',
+                file: 'app/challenges/world.prime.factors/challenge.persistence/lib/persistence.html',
+                requester: '../../../challenges/world.prime.factors/challenge.form/lib/form.requester.js',
+                checker: '../../../challenges/world.prime.factors/challenge.persistence/lib/persistence.matcher.js',
+                isOpenLevelFor: function(player) { return true; }
+            },
 		]
 	},
 	{
@@ -262,17 +270,17 @@ function ProductionDatabase() {
 			{
 				id: 28,
 				title: 'First fire',
-				file: 'app/challenges/world.canadair/challenge.first.fire/lib/first.fire.html',
-				requester: '../../../challenges/world.canadair/challenge.first.fire/lib/first.fire.requester.js',
-				checker: '../../../challenges/world.canadair/challenge.first.fire/lib/first.fire.response.matcher.js',
+				file: 'app/challenges/world.fire/challenge.first.fire/lib/first.fire.html',
+				requester: '../../../challenges/world.fire/challenge.first.fire/lib/first.fire.requester.js',
+				checker: '../../../challenges/world.fire/challenge.first.fire/lib/first.fire.response.matcher.js',
 				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 12); }
 			},		
 			{
 				id: 29,
 				title: 'Training',
-				file: 'app/challenges/world.canadair/challenge.get.water.fast/lib/get.water.fast.html',
-				requester: '../../../challenges/world.canadair/challenge.get.water.fast/lib/get.water.fast.requester.js',
-				checker: '../../../challenges/world.canadair/challenge.get.water.fast/lib/get.water.fast.response.matcher.js',
+				file: 'app/challenges/world.fire/challenge.get.water.fast/lib/get.water.fast.html',
+				requester: '../../../challenges/world.fire/challenge.get.water.fast/lib/get.water.fast.requester.js',
+				checker: '../../../challenges/world.fire/challenge.get.water.fast/lib/get.water.fast.response.matcher.js',
 				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 28); }
 			},		
 		]
