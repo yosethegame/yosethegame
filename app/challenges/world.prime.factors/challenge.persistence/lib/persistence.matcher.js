@@ -1,8 +1,11 @@
+var Chooser         = require('../../common/lib/integer.chooser');
 var primeFactorsOf  = require('../../common/lib/prime.factors');
-var givenContent = require('../../../common/lib/is.missing.element');
-var Browser = require('zombie');
+var givenContent    = require('../../../common/lib/is.missing.element');
+var Browser         = require('zombie');
 
 module.exports = {
+
+    numberChooser: new Chooser(),
 
     validate: function(url, remoteResponse, content, callback) {
         var self = this;
