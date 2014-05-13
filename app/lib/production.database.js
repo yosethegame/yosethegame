@@ -197,7 +197,7 @@ function ProductionDatabase() {
                 file: 'app/challenges/world.prime.factors/challenge.persistence/lib/persistence.html',
                 requester: '../../../challenges/world.prime.factors/challenge.form/lib/form.requester.js',
                 checker: '../../../challenges/world.prime.factors/challenge.persistence/lib/persistence.matcher.js',
-                isOpenLevelFor: function(player) { return true; }
+                isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 13); }
             },
 		]
 	},

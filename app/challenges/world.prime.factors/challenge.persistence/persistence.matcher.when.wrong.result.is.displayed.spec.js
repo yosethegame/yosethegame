@@ -45,7 +45,7 @@ describe('Persistence matcher,', function() {
 
         it('sets actual', function(done) {
             matcher.validate('http://localhost:6000', {}, correctContent, function(status) {
-                expect(status.got).toEqual("#last-decomposition containing 'anything'");
+                expect(status.got).toEqual("#last-decomposition with text 'anything'");
                 done();
             });
         });

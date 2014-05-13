@@ -30,11 +30,11 @@ module.exports = {
                     var browser = new Browser();
                     browser.visit(url).
                         then(function() {
-                            var lastDecomposition = browser.text('#last-decomposition');
+                            var text = browser.text('#last-decomposition');
                             callback({
-                                code: lastDecomposition == result ? 200 : 501,
+                                code: text.indexOf(result) != -1 ? 200 : 501,
                                 expected: expected,
-                                got: "#last-decomposition containing '" + lastDecomposition + "'"
+                                got: text.indexOf(result) != -1 ? expected : "#last-decomposition with text '" + text + "'"
                             });
                         }).
                         fail(function(error) {
@@ -43,7 +43,8 @@ module.exports = {
                                 expected: expected,
                                 got: error.toString()
                             });
-                        });	                }).
+                        });
+                }).
                 fail(function(error) {
                     callback({
                         code: 501,
