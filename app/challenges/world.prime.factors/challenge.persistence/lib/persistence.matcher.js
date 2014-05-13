@@ -1,13 +1,5 @@
 var primeFactorsOf  = require('../../common/lib/prime.factors');
-
-var givenContent = {
-
-    isMissingElement: function(selector, content) {
-        var page = require('cheerio').load(content);
-
-        return page(selector).length === 0;
-    }
-}
+var givenContent = require('../../../common/lib/is.missing.element');
 
 module.exports = {
 
