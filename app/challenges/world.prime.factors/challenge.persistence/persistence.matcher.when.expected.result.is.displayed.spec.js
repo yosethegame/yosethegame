@@ -10,6 +10,8 @@ describe('Persistence matcher,', function() {
         beforeEach(function() {
             matcher.numberChooser = { getNumber: function() { return 42; } };
             decomposition = '<html><body>' +
+                                    '<input id="number" />' +
+                                    '<button id="go" />' +
                                     '<label id="last-decomposition">42 = 2 x 3 x 7</label>' +
                                 '</body></html>';
             remote = require('http').createServer(function (request, response) {

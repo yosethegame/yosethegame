@@ -1,5 +1,6 @@
 var primeFactorsOf  = require('../../common/lib/prime.factors');
 var givenContent = require('../../../common/lib/is.missing.element');
+var Browser = require('zombie');
 
 module.exports = {
 
@@ -17,11 +18,36 @@ module.exports = {
             });
         }
         else {
-            callback({
-                code: 200,
-                expected: expected,
-                got: expected
-            });
+            var browser = new Browser();
+            browser.visit(url).
+                then(function () {
+                    return browser.fill('input#number', number).pressButton("button#go");
+                }).
+                then(function() {
+                    var browser = new Browser();
+                    browser.visit(url).
+                        then(function() {
+                            var lastDecomposition = browser.text('#last-decomposition');
+                            callback({
+                                code: lastDecomposition == result ? 200 : 501,
+                                expected: expected,
+                                got: "#last-decomposition containing '" + lastDecomposition + "'"
+                            });
+                        }).
+                        fail(function(error) {
+                            callback({
+                                code: 501,
+                                expected: expected,
+                                got: error.toString()
+                            });
+                        });	                }).
+                fail(function(error) {
+                    callback({
+                        code: 501,
+                        expected: expected,
+                        got: error.toString()
+                    });
+                });
         }
 
     }
