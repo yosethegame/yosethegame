@@ -191,6 +191,14 @@ function ProductionDatabase() {
 				checker: '../../../challenges/world.prime.factors/challenge.roman.decomposition/lib/roman.decomposition.response.matcher.js',
 				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 13); }
 			},
+            {
+                id: 31,
+                title: 'Persistence',
+                file: 'app/challenges/world.prime.factors/challenge.persistence/lib/persistence.html',
+                requester: '../../../challenges/world.prime.factors/challenge.form/lib/form.requester.js',
+                checker: '../../../challenges/world.prime.factors/challenge.persistence/lib/persistence.matcher.js',
+                isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 13); }
+            },
 		]
 	},
 	{
