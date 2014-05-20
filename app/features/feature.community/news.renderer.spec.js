@@ -109,14 +109,6 @@ describe('News Renderer', function() {
             expect(renderer.formatDate('Tue Apr 07 2014 10:00:00 GMT-0400 (EDT)')).toEqual('Apr 07');
         });
 
-        it('renders as int', function() {                
-            renderer.getCurrentTime = function() { 
-                return Date.parse('Tue Apr 15 2014 10:00:00 GMT-0400 (EDT)');
-            };
-                            
-            expect(renderer.formatDate('Tue Apr 15 2014 09:58:30 GMT-0400 (EDT)')).toEqual('1 min ago');
-        });
-
     });
 
 });

@@ -33,7 +33,7 @@ NewsRenderer.prototype.formatDate = function(newsDate) {
     
     var date = new Date();
     date.setTime(newsTime);
-    var dateAsString = date.toLocaleString('en-US').split(' ');
+    var dateAsString = date.toString().split(' ');
     return dateAsString[1] + ' ' + dateAsString[2];
 };
 
