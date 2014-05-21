@@ -72,7 +72,7 @@ describe("News display in Community page:", function() {
 		var browser = new Browser();
 		browser.visit('http://localhost:5000/community').
 			then(function() {
-				expect(browser.text('#news-2')).toContain('Jan 01');
+				expect(browser.text('#news-2')).toContain('Jan 1');
 				expect(browser.query('#news-2 a').href).toContain('your-url');
 				expect(browser.query('#news-2 img').src).toContain('you');
 				expect(browser.text('#news-2')).toContain('your-news');

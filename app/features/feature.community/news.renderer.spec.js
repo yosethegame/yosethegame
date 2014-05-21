@@ -106,7 +106,7 @@ describe('News Renderer', function() {
                 return Date.parse('Tue Apr 15 2014 10:00:00 GMT-0400 (EDT)');
             };
                             
-            expect(renderer.formatDate('Tue Apr 07 2014 10:00:00 GMT-0400 (EDT)')).toEqual('Apr 07');
+            expect(renderer.formatDate('Tue Apr 07 2014 10:00:00 GMT-0400 (EDT)')).toEqual('Apr 7');
         });
 
     });

@@ -1,5 +1,7 @@
 var $ = $ || require('jquery');
 
+var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
 function NewsRenderer() {}
 
 NewsRenderer.prototype.getCurrentTime = function(date) {
@@ -31,10 +33,8 @@ NewsRenderer.prototype.formatDate = function(newsDate) {
         }
     }
     
-    var date = new Date();
-    date.setTime(newsTime);
-    var dateAsString = date.toString().split(' ');
-    return dateAsString[1] + ' ' + dateAsString[2];
+    var date = new Date(newsTime);
+    return months[date.getMonth()] + ' ' + date.getDate();
 };
 
 NewsRenderer.prototype.display = function(news) {
