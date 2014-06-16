@@ -283,6 +283,14 @@ function ProductionDatabase() {
 				checker: '../../../challenges/world.fire/challenge.get.water.fast/lib/get.water.fast.response.matcher.js',
 				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 28); }
 			},		
+			{
+				id: 32,
+				title: 'Emergency',
+				file: 'app/challenges/world.fire/challenge.emergency/lib/emergency.html',
+				requester: '../../../challenges/world.fire/challenge.emergency/lib/emergency.requester.js',
+				checker: '../../../challenges/world.fire/challenge.emergency/lib/emergency.response.matcher.js',
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 29); }
+			},		
 		]
 	}
 	];	
