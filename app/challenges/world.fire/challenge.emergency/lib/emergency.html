@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>YOSE</title>
+	<link href="/css/main.css" rel="stylesheet" type="text/css">
+	<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
+	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>		
+</head>
+<body>
+	
+	<div id="challenge-assignment">
+		A new fire is calling and you must
+		extinguish it as soon as possible and therefore 
+		choose the point of water that minimizes the total length of the flight.
+	</div>
+	
+	<div id="challenge-details">
+		<p>For example, when you receive</p>
+		<pre>http://your-server/fire/geek?width=5&map=W...PF........W</pre>
+		
+		<p>You should respond the following Json</p>
+		<pre>{
+    map: [
+        "W...P",
+	"F....",
+	"....W"
+    ],
+    moves: [
+        { dx: -1, dy: 0 },
+        { dx: -1, dy: 0 },
+        { dx: -1, dy: 0 },
+        { dx: -1, dy: 0 },
+        { dx:  0, dy: 1 },
+    ]
+}</pre>
+
+		<p>
+			We will send a random map and check that 
+			your plane takes the shortest way to get water and extinguish the fire.
+		</p>		
+	</div>
+	
+	<div id="challenge-tips">		
+	</div>
+	
+</body>
+</html>
