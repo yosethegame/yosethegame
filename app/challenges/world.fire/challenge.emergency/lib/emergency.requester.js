@@ -5,10 +5,10 @@ function Requester(server) {
 	this.server = removeTrailingSlashOf(server);
 	
 	this.candidates = [
-        { map: "....PFWW", width: 4 },
-        { map: "PFWW....", width: 4 },
-        { map: "....WWFP", width: 4 },
-        { map: "WWFP....", width: 4 },
+        { map: "....PFWW", width: 4, expectedResponse : [ {dx:0, dy:-1}, {dx:+1, dy:0}, {dx:+1, dy:0}, {dx:0, dy:+1}, {dx:-1, dy:0} ] },
+        { map: "PFWW....", width: 4, expectedResponse : [ {dx:0, dy:+1}, {dx:+1, dy:0}, {dx:+1, dy:0}, {dx:0, dy:-1}, {dx:-1, dy:0} ] },
+        { map: "....WWFP", width: 4, expectedResponse : [ {dx:0, dy:-1}, {dx:-1, dy:0}, {dx:-1, dy:0}, {dx:0, dy:+1}, {dx:+1, dy:0} ] },
+        { map: "WWFP....", width: 4, expectedResponse : [ {dx:0, dy:+1}, {dx:-1, dy:0}, {dx:-1, dy:0}, {dx:0, dy:-1}, {dx:+1, dy:0} ] },
     ];
 }
 

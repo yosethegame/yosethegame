@@ -62,7 +62,8 @@ describe('Emergency challenge requester', function() {
 					var afterOneWaterRemoved = candidate.map;
 					var index = afterOneWaterRemoved.indexOf('W');
 					afterOneWaterRemoved = afterOneWaterRemoved.substr(0, index) + afterOneWaterRemoved.substr(index+1);
-					expect(afterOneWaterRemoved).toContain('W')
+
+					expect(afterOneWaterRemoved).toContain('W');
 				});
 			});
 
