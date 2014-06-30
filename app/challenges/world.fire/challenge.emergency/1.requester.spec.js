@@ -1,4 +1,5 @@
 var Requester = require('./lib/emergency.requester');
+var array = require('../../../utils/lib/array.utils');
 
 describe('Emergency challenge requester', function() {
 	
@@ -34,11 +35,65 @@ describe('Emergency challenge requester', function() {
         it('is not empty', function() {
             expect(requester.candidates.length).toBeGreaterThan(3);
         });
+		
+		describe('map', function() {
+			
+			it('exists for each candidate', function() {
+				array.forEach(requester.candidates, function(candidate) {
+					expect(candidate.map).toBeDefined();
+				});
+			});
 
-        it('is made of elements containing a map', function() {
+			it('has a plane', function() {
+				array.forEach(requester.candidates, function(candidate) {
+					expect(candidate.map).toContain('P');
+				});
+			});
+
+			it('has a fire', function() {
+				array.forEach(requester.candidates, function(candidate) {
+					expect(candidate.map).toContain('F');
+				});
+			});
+
+			it('has at least two points of water', function() {
+				array.forEach(requester.candidates, function(candidate) {
+					expect(candidate.map).toContain('W');
+					var afterOneWaterRemoved = candidate.map;
+					var index = afterOneWaterRemoved.indexOf('W');
+					afterOneWaterRemoved = afterOneWaterRemoved.substr(0, index) + afterOneWaterRemoved.substr(index+1);
+					expect(afterOneWaterRemoved).toContain('W')
+				});
+			});
+
+			it('is unique in the list of candidates', function() {
+				array.forEach(requester.candidates, function(candidate) {
+					var count = 0;
+					array.forEach(requester.candidates, function(item) {
+						if (item.map == candidate.map) {
+							count ++;
+						}
+					});
+					if (count > 1) {
+						throw "Map " + candidate.map + " found more than once";
+					}
+				});
+			});
+		});
+		
+        it('is made of elements containing the width of the map', function() {
             array.forEach(requester.candidates, function(candidate) {
-                expect(candidate.map).toBeDefined();
+                expect(candidate.width).toBeDefined();
             });
         });
+		
+		describe('expected result', function() {
+
+			it('exists for each candidate', function() {
+				array.forEach(requester.candidates, function(candidate) {
+					expect(candidate.expectedResponse).toBeDefined();
+				});
+			});			
+		});
     });
 });
