@@ -92,16 +92,16 @@ describe('Emergency challenge requester', function() {
 			
 			it('exist for each candidate', function() {
 
-	            array.forEach(requester.candidates, function(candidate) {
-	                expect(candidate.expectedMoveCount).toBeDefined();
-	            });
+				array.forEach(requester.candidates, function(candidate) {
+					expect(candidate.expectedMoveCount).toBeDefined();
+				});
 			});
 			
 			it('is greater than 1 to be realistic', function() {
 				
-	            array.forEach(requester.candidates, function(candidate) {
-	                expect(candidate.expectedMoveCount).toBeGreaterThan(1);
-	            });
+				array.forEach(requester.candidates, function(candidate) {
+					expect(candidate.expectedMoveCount).toBeGreaterThan(1);
+				});
 			});
 		});
     });
