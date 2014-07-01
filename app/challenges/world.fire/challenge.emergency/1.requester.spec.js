@@ -88,13 +88,21 @@ describe('Emergency challenge requester', function() {
             });
         });
 		
-		describe('expected result', function() {
+		describe('expectedMoveCount', function() {
+			
+			it('exist for each candidate', function() {
 
-			it('exists for each candidate', function() {
-				array.forEach(requester.candidates, function(candidate) {
-					expect(candidate.expectedResponse).toBeDefined();
-				});
-			});			
+	            array.forEach(requester.candidates, function(candidate) {
+	                expect(candidate.expectedMoveCount).toBeDefined();
+	            });
+			});
+			
+			it('is greater than 1 to be realistic', function() {
+				
+	            array.forEach(requester.candidates, function(candidate) {
+	                expect(candidate.expectedMoveCount).toBeGreaterThan(1);
+	            });
+			});
 		});
     });
 });
