@@ -24,6 +24,8 @@ var moveUntilWaterOrEnd = function(plane, map, moves) {
 };
 
 module.exports = {
+	
+	name: 'Get water fast response matcher',
 
 	validate: function(url, remoteResponse, content, callback) {
 
