@@ -14,23 +14,28 @@ var matcher = {
 		firstFireMatcher.validate(url, remoteResponse, content, function(status) {
 			
 			if (status.code != 200) {
-				callback(status);
+				return callback(status);
 			}
-			else {
+			
+			var sentMap = extractMap(url);
+			var expectedMoveCount = findCandidate(url, self.candidates).expectedMoveCount;		
+			var expectedMessage = expectedMoveCount + ' moves to minimize the flight to water and fire. map = ' + JSON.stringify(sentMap);
 
-				var sentMap = extractMap(url);
-				var expectedMoveCount = findCandidate(url, self.candidates).expectedMoveCount;		
-				var expectedMessage = expectedMoveCount + ' moves to minimize the flight to water and fire. map = ' + JSON.stringify(sentMap);
-
-		        callback({
-		            code: 200,
-		            expected: expectedMessage,
-		            got: 'You did it!'
+			var answer = JSON.parse(content);
+			if (expectedMoveCount != answer.moves.length) {
+				return callback({
+					code: 501,
+					expected: expectedMessage,
+					got: answer.moves.length + ' moves'
 				});
-				
 			}
+			
+			callback({
+				code: 200,
+				expected: expectedMessage,
+				got: 'You did it!'
+			});
 		});
-
 	}
 };
 

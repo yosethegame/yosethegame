@@ -7,14 +7,14 @@ module.exports = {
 		describe(matcher.name + ' > When the remote response is undefined', function() {
 
 			beforeEach(function(done) {
-	            var request = 'http://localhost:6000/fire/api?width=2&map=ABCD';
-	            var remoteAnswer = 'anything';
+				var request = 'http://localhost:6000/fire/api?width=2&map=ABCD';
+				var remoteAnswer = 'anything';
 
 				matcher.validate(request, undefined, remoteAnswer, function(receivedStatus) {
-	                status = receivedStatus;
+					status = receivedStatus;
 					done();
 				});
-	        });
+			});
 
 			it('sets code to 501', function() {
 				expect(status.code).toEqual(501);
@@ -35,14 +35,14 @@ module.exports = {
 		describe(matcher.name + ' > When the remote response has statusCode other than 200', function() {
 
 			beforeEach(function(done) {
-	            var request = 'http://localhost:6000/fire/api?width=2&map=ABCD';
-	            var remoteAnswer = 'anything';
+				var request = 'http://localhost:6000/fire/api?width=2&map=ABCD';
+				var remoteAnswer = 'anything';
 
 				matcher.validate(request, { statusCode: 404 }, remoteAnswer, function(receivedStatus) {
-	                status = receivedStatus;
+					status = receivedStatus;
 					done();
 				});
-	        });
+			});
 
 			it('sets code to 501', function() {
 				expect(status.code).toEqual(501);
