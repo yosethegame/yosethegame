@@ -41,13 +41,5 @@ describe('Emergency response matcher,', function() {
 			expect(status.got).toContain('You did it!');
 		});
 	});
-	
-	it('knows the candidates of the requester', function() {
-		var Requester = require('./lib/emergency.requester');
-		var requester = new Requester();
-		var matcherCandidates = require('./lib/emergency.response.matcher').candidates;
-
-		expect(matcherCandidates).toEqual(requester.candidates);
-	});
 
 });
