@@ -11,8 +11,8 @@ describe('Emergency response matcher,', function() {
 		var oldCandidates;
 
 		var sentMap = [ 'W.P...', '....WF'];
-		var moves = [ move.right, move.right, move.left, move.left, 
-					  move.left, move.left, move.down, move.left ];
+		var moves = [ move.left, move.left, move.right, move.right, 
+					  move.right, move.right, move.down, move.right ];
 
 		beforeEach(function(done) {
 			oldCandidates = matcher.candidates;
