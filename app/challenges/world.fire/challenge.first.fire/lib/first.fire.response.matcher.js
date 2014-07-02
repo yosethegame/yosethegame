@@ -7,6 +7,8 @@ var extractMap          = require('../../challenge.common/lib/extract.map');
 var answerHasMoves      = require('../../challenge.common/lib/check.that.answer.has.moves');
 
 module.exports = {
+	
+	name : 'First fire response matcher',
 
     validate: function(url, remoteResponse, content, callback) {
 
