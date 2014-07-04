@@ -289,7 +289,7 @@ function ProductionDatabase() {
 				file: 'app/challenges/world.fire/challenge.emergency/lib/emergency.html',
 				requester: '../../../challenges/world.fire/challenge.emergency/lib/emergency.requester.js',
 				checker: '../../../challenges/world.fire/challenge.emergency/lib/emergency.response.matcher.js',
-				isOpenLevelFor: function(player) { return true; }
+				isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 28); }
 			},		
 		]
 	}
