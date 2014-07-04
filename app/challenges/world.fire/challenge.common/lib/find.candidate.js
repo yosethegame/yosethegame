@@ -1,6 +1,7 @@
 var equal = require('deep-equal');
 var urlParser = require('url');
 var array = require('../../../../utils/lib/array.utils');
+var extractMap = require('./extract.map');
 
 var withMap = function(map) {
 	return function(item) {
@@ -9,8 +10,7 @@ var withMap = function(map) {
 };
 
 var findCandidate = function(url, candidates) {
-    var query = urlParser.parse(url, true).query;
-    var map = query.map;
+    var map = extractMap(url);
 	
 	return array.firstItemIn(candidates, withMap(map));
 };

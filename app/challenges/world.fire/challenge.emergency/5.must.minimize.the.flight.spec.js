@@ -16,7 +16,7 @@ describe('Emergency response matcher,', function() {
 
 		beforeEach(function(done) {
 			oldCandidates = matcher.candidates;
-			matcher.candidates = [ { map: sentMap.join(''), expectedMoveCount: expectedMoveCount } ];
+			matcher.candidates = [ { map: sentMap, expectedMoveCount: expectedMoveCount } ];
 			
             var request = 'http://localhost:6000/fire/api?width=' + sentMap[0].length + '&map=' + sentMap.join('');
 
