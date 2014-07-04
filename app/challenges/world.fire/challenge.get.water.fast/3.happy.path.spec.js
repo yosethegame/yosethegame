@@ -1,5 +1,7 @@
 var matcher = require('./lib/get.water.fast.response.matcher');
+
 var json200 = require('../../common/lib/json200');
+var move = require('../challenge.common/lib/move');
 
 describe('Get water fast response matcher,', function() {
     
@@ -15,11 +17,7 @@ describe('Get water fast response matcher,', function() {
                     ".....",
                     "W...."
                 ],
-                moves: [
-                    { dx:-1, dy:0 },
-                    { dx:-1, dy:0 },
-                    { dx:-1, dy:0 },
-                ]
+                moves: [ move.left, move.left, move.left ]
             });
 
 			matcher.validate(request, json200, remoteAnswer, function(receivedStatus) {

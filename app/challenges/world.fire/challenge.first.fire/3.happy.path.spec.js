@@ -1,7 +1,7 @@
 var matcher = require('./lib/first.fire.response.matcher');
-var json200 = require('../../common/lib/json200');
 
-var failWhenThePlane = require('../challenge.common/fail.when.the.plane');
+var json200 = require('../../common/lib/json200');
+var move = require('../challenge.common/lib/move');
 
 describe('First fire response matcher,', function() {
     
@@ -18,10 +18,7 @@ describe('First fire response matcher,', function() {
                     "PW",
                     ".F"
                 ],
-                moves: [
-                    { dx:1, dy:0 },
-                    { dx:0, dy:1 },
-                ]
+                moves: [ move.right, move.down ]
             });
 
 			matcher.validate(request, json200, remoteAnswer, function(receivedStatus) {
