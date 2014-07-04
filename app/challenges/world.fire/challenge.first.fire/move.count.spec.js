@@ -1,5 +1,7 @@
 var moveCountBeforeBeingAboveWater = require('./lib/move.count').moveCountBeforeBeingAboveWater;
 
+var move = require('../challenge.common/lib/move');
+
 describe('moveCountBeforeBeingAboveWater method', function() {
     
     it('returns -1 when the plane never flies over the water', function() {
@@ -8,10 +10,7 @@ describe('moveCountBeforeBeingAboveWater method', function() {
                 "PW",
                 ".F"
             ],
-            [
-                { dx:0, dy:1 },
-                { dx:1, dy:0 },
-            ])).toEqual(-1);
+            [ move.down, move.right,])).toEqual(-1);
     });
 
     it('returns 1 when the first move puts the plane over the water', function() {
@@ -20,9 +19,7 @@ describe('moveCountBeforeBeingAboveWater method', function() {
                 "PW",
                 ".F"
             ],
-            [
-                { dx:1, dy:0 },
-            ])).toEqual(1);
+            [ move.right])).toEqual(1);
     });
 
     it('returns 4 when the fourth move puts the plane over the water', function() {
@@ -31,11 +28,6 @@ describe('moveCountBeforeBeingAboveWater method', function() {
                 "P.W",
                 "..F"
             ],
-            [
-                { dx:0, dy:1 },
-                { dx:1, dy:0 },
-                { dx:0, dy:-1 },
-                { dx:1, dy:0 },
-            ])).toEqual(4);
+            [ move.down, move.right, move.up, move.right ])).toEqual(4);
     });
 });
