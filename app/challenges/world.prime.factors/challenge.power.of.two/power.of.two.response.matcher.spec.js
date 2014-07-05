@@ -175,7 +175,7 @@ describe('Power of two response matcher,', function() {
 		});
 
 		it('sets the actual value to undefined', function() {
-			expect(status.got).toEqual(undefined);
+			expect(status.got).toEqual('Error: 404');
 		});
 	});
 	

@@ -25,6 +25,7 @@ computeStatus = function(request, remoteResponse, content, matcher) {
         status = {
             code: 404,
             expected: expectedAnswer(request, matcher),
+			got: 'Error: 404'
         };
     }
 	else {
