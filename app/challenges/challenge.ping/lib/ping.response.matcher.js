@@ -3,6 +3,8 @@ var abstractMatcher = require('../../common/lib/abstract.response.matcher');
 
 module.exports = {
 
+	name: 'Ping response matcher',
+
 	expectedContent: function(url) {
 		return { alive: true };
 	},

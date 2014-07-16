@@ -171,7 +171,7 @@ describe('Power of two response matcher,', function() {
 		});
 
 		it('sets expected value to correct value and header', function() {
-			expect(status.expected).toEqual(correctAnswer);
+			expect(status.expected).toEqual('A running http server');
 		});
 
 		it('sets the actual value to undefined', function() {
