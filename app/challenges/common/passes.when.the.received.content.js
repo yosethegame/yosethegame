@@ -1,3 +1,5 @@
+var json200 = require('./lib/json200');
+
 module.exports = {
 
 	is: function(expected, matcher) {
@@ -7,7 +9,7 @@ module.exports = {
 			var status;
 
             beforeEach(function(done) {
-                matcher.validate({}, { headers: { 'content-type' : 'application/json' } }, JSON.stringify(expected), function(receivedStatus) {
+                matcher.validate({}, json200, JSON.stringify(expected), function(receivedStatus) {
                     status = receivedStatus;
                     done();
                 });
