@@ -2,6 +2,8 @@ var abstractMatcher = require('../../../common/lib/abstract.response.matcher');
 var primeFactorsOf = require('../../common/lib/prime.factors');
 
 module.exports = {
+	
+	name: 'Power of two response matcher',
 
 	expectedContent: function(url) {
 		var numberIndex = url.indexOf('number=');
