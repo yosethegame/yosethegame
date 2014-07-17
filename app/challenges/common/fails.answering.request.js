@@ -61,8 +61,11 @@ module.exports = function(request) {
 
 				var status;
 			
-				beforeEach(function() {
-					status = matcher.computeStatus('this-url/primeFactors?number=8', { statusCode: 200, headers: { 'content-type': 'application/json'}}, 'anything', matcher);
+				beforeEach(function(done) {
+					matcher.validate('this-url/primeFactors?number=8', { statusCode: 200, headers: { 'content-type': 'application/json'}}, 'anything', function(receivedStatus) {
+						status = receivedStatus;
+						done();
+					});
 				});
 
 				it('sets code to 501', function() {

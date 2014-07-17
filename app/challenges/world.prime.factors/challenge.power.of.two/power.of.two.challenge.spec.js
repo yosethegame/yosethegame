@@ -2,7 +2,7 @@ var matcher = require('./lib/power.of.two.response.matcher');
 var failsWhenTheRemoteServer = require('../../common/fails.when.the.remote.server');
 var failsAnswering = require('../../common/fails.answering.request');
 
-describe('Power of two challenge challenge,', function() {
+describe('Power of two challenge,', function() {
 	
 	it('expects a running remote server', function() {
 		failsWhenTheRemoteServer.doesNotAnswer(matcher);
