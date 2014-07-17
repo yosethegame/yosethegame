@@ -57,33 +57,6 @@ module.exports = function(request, expected) {
 			}); 
 		},
 		
-		whenTheResponseIsNotInJsonFormat: function(matcher) {
-			
-			describe(matcher.name + ' > When remote server returns not a json content,', function() {
-
-				var status;
-			
-				beforeEach(function(done) {
-					matcher.validate(request, json200, 'anything', function(receivedStatus) {
-						status = receivedStatus;
-						done();
-					});
-				});
-
-				it('sets code to 501', function() {
-					expect(status.code).toEqual(501);
-				});
-		
-				it('sets expected value to correct value and header', function() {
-					expect(status.expected['content-type']).toEqual('application/json');
-				});
-		
-				it('sets the actual value to the given value', function() {
-					expect(status.got.body).toEqual('anything');
-				});
-			});		
-		},
-		
 		whenTheAnswerIs: function(answer, matcher) {
 			
 			describe(matcher.name + ' > When remote server returns ' + JSON.stringify(answer) + ',', function() {
