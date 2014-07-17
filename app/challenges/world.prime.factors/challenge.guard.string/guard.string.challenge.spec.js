@@ -14,10 +14,12 @@ describe('Guard string challenge,', function() {
 		failsAnswering('***?number=batman').whenTheHeaderIsNotApplicationJson(matcher);		
 	});
 	
-	it('expect a specific json response', function() {
+	it('passes when the expected answer is received', function() {
 		passesAnswering('***?number=batman').whenTheAnswerIs({ number : 'batman', error : 'not a number' }, matcher);
 		passesAnswering('***?number=batman').whenTheAnswerIs({ error : 'not a number', number : 'batman' }, matcher);
+	});
 
+	it('fails when a different answer is received', function() {
 		failsAnswering('***?number=batman', { number : 'batman', error : 'not a number' }).whenTheAnswerIs({ value: 42 }, matcher);
 		failsAnswering('***?number=batman', { number : 'batman', error : 'not a number' }).whenTheAnswerIs('anything but json', matcher);
 		failsAnswering('***?number=batman', { number : 'batman', error : 'not a number' }).whenTheAnswerIs({ number: 'batman' }, matcher);

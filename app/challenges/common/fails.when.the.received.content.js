@@ -2,14 +2,14 @@ var json200 = require('./lib/json200');
 
 module.exports = {
 
-	isNot: function(expected, matcher) {
+	is: function(answer, matcher) {
 		
         describe(matcher.name + ' > When the received content is not correct,', function() {
 
 			var status;
 
             beforeEach(function(done) {
-                matcher.validate({}, json200, 'any', function(receivedStatus) {
+                matcher.validate({}, json200, answer, function(receivedStatus) {
                     status = receivedStatus;
                     done();
                 });
@@ -19,13 +19,9 @@ module.exports = {
                 expect(status.code).toEqual(501);
             });
         
-            it('sets expected', function() {
-                expect(status.expected.body).toEqual(expected);
-            });
-        
             it('sets actual', function() {
-                expect(status.got.body).toEqual('any');
+                expect(status.got.body).toEqual(answer);
             });
         }); 
-	}
+	},
 };
