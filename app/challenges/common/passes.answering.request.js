@@ -33,7 +33,7 @@ module.exports = function(request) {
 		
 		WhenTheAnswerIsWithExtraCarriageReturn: function(answer, matcher) {
 			
-			describe(matcher.name + ' > When remote server returns ' + JSON.stringify(answer) + ',', function() {
+			describe(matcher.name + ' > When remote server returns ' + JSON.stringify(answer) + ' and a CRLF,', function() {
 
 				var status;
 				
