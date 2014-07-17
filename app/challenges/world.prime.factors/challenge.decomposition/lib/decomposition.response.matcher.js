@@ -3,6 +3,8 @@ var primeFactorsOf = require('../../common/lib/prime.factors');
 
 module.exports = {
 
+	name: 'Decomposition response matcher',
+
 	expectedContent: function(url) {
 		var numberIndex = url.indexOf('number=');
 		var number = url.substring(numberIndex + 'number='.length);
