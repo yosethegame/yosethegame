@@ -14,4 +14,9 @@ describe('Power of two challenge,', function() {
 		failsAnswering('***?number=42').whenTheResponseIsNotInJsonFormat(matcher);
 	});
 	
+	it('expect a specific response', function() {
+		failsAnswering('***?number=42', { number: 42, decomposition: [2, 3, 7] })
+                       .whenTheAnswerIs({ number: 42, decomposition: [2, 3] }, matcher);
+	});
+	
 });
