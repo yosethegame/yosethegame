@@ -1,3 +1,5 @@
+var json200 = require('./lib/json200');
+
 module.exports = function(request, expected) {
 	
 	return {
@@ -62,7 +64,7 @@ module.exports = function(request, expected) {
 				var status;
 			
 				beforeEach(function(done) {
-					matcher.validate(request, { statusCode: 200, headers: { 'content-type': 'application/json'}}, 'anything', function(receivedStatus) {
+					matcher.validate(request, json200, 'anything', function(receivedStatus) {
 						status = receivedStatus;
 						done();
 					});
@@ -89,7 +91,7 @@ module.exports = function(request, expected) {
 				var status;
 				
 				beforeEach(function(done) {
-					matcher.validate(request, { statusCode: 200, headers: { 'content-type': 'application/json'}}, JSON.stringify( answer ), function(receivedStatus) {
+					matcher.validate(request, json200, JSON.stringify(answer), function(receivedStatus) {
 						status = receivedStatus;
 						done();
 					});
