@@ -79,25 +79,6 @@ describe('Power of two response matcher,', function() {
 		});
 	});
 	
-	describe('When remote server returns not a json content,', function() {
-
-		beforeEach(function() {
-			status = matcher.computeStatus('this-url/primeFactors?number=8', remoteResponse, 'anything', matcher);
-		});
-
-		it('sets code to 501', function() {
-			expect(status.code).toEqual(501);
-		});
-		
-		it('sets expected value to correct value and header', function() {
-			expect(status.expected).toEqual(correctAnswer);
-		});
-		
-		it('sets the actual value to the given value', function() {
-			expect(status.got).toEqual({ "content-type": 'application/json', body: 'anything' });
-		});
-	});	
-	
 	describe('When remote server returns a bad content,', function() {
 
 		beforeEach(function() {
