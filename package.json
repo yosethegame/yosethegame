@@ -22,7 +22,7 @@
     "jshint": "2.3.0",
     "request": "2.21.0",
     "zombie": "2.0.0-alpha19",
-    "coveralls": "^2.11.1",
+    "coveralls": "^2.11.1"
   },
   "engines": {
     "node": "0.10.28",
