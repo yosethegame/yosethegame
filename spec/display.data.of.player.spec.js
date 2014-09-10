@@ -11,7 +11,9 @@ describe('Data of player endpoint', function() {
 		database = new InMemoryDatabase();
 		database.players = [
             {
-                login: 'ericminio'
+                login: 'ericminio',
+                score: 120,
+                avater: 'sky.png'
             }
         ];
 		server.useDatabase(database);
@@ -29,4 +31,22 @@ describe('Data of player endpoint', function() {
 		});			
     });
 
+    it('returns json', function(done) {
+		request("http://localhost:5000/players/ericminio/data", function(error, response, body) {
+            expect(response.headers['content-type']).toEqual('application/json');
+			done();
+		});			
+    });
+    
+    it('returns the data of the player', function(done) {
+		request("http://localhost:5000/players/ericminio/data", function(error, response, body) {
+            expect(JSON.parse(body)).toEqual(
+                { 
+                    login: 'ericminio',
+                    score: 120,
+                    avatar: 'sky.png' 
+                });
+			done();
+		});			
+    });
 });
