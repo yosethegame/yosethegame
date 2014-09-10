@@ -95,6 +95,10 @@ describe('Router', function() {
 		it('maps news request', function() {
 			expect(router.endPointOf({ url: '/news' })).toBe(require('./features/feature.news/lib/news.request.js'));
 		});
+        
+        it('maps data of player request', function() {
+            expect(router.endPointOf({ url: '/players/any/data' })).toBe(require('./features/feature.data.of.player/lib/data.of.player.request.js'));
+        });
 	});
 	
 	describe('Compatibility with http module of node.js:', function() {
