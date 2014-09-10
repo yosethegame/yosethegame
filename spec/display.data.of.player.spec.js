@@ -13,7 +13,7 @@ describe('Data of player endpoint', function() {
             {
                 login: 'ericminio',
                 score: 120,
-                avater: 'sky.png'
+                avatar: 'sky.png'
             }
         ];
 		server.useDatabase(database);
@@ -46,6 +46,14 @@ describe('Data of player endpoint', function() {
                     score: 120,
                     avatar: 'sky.png' 
                 });
+			done();
+		});			
+    });
+    
+    it('returns not found when the player does not exists', function() {
+		request("http://localhost:5000/players/unknown/data", function(error, response, body) {
+            expect(response.statusCode).toEqual(404);
+            expect(body.length).toEqual(0);
 			done();
 		});			
     });
