@@ -9,7 +9,11 @@ describe('Data of player endpoint', function() {
 	
 	beforeEach(function() {
 		database = new InMemoryDatabase();
-		database.players = [];
+		database.players = [
+            {
+                login: 'ericminio'
+            }
+        ];
 		server.useDatabase(database);
 		server.start();
 	});
