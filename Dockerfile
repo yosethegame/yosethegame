@@ -5,7 +5,7 @@ FROM ubuntu:14.04
 MAINTAINER Eric Mignot <eric.mignot@gmail.com>
 
 RUN apt-get update
-RUN apt-get install nodejs npm
+RUN apt-get install -y nodejs npm
 
 COPY . /src
 
