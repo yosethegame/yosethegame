@@ -8,4 +8,9 @@ RUN apt-get update
 RUN apt-get install -y nodejs npm
 
 COPY . /src
+RUN cd /src; npm install
+
+EXPOSE 5000
+
+CMD ["nodejs", "/src/app/lib/web.js"]
 
