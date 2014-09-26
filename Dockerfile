@@ -12,5 +12,5 @@ RUN cd /src; npm install
 
 EXPOSE 5000
 
-RUN cd /src; nodejs app/lib/web.js
+CMD cd /src && nodejs app/lib/web.js
 
