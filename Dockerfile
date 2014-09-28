@@ -18,7 +18,7 @@ RUN cd /src; npm install
 
 # run
 RUN /etc/init.d/postgresql start
-RUN sudo -u postgres -i ; cd /src/scritps ; psql < create_user_and_database.sql ; psql < create_tables.sql ; exit
+#RUN sudo -u postgres -i ; cd /src/scritps ; psql < create_user_and_database.sql ; psql < create_tables.sql ; exit
 
 # EXPOSE 5000
 # ENV DATABASE_URL=postgres://root@localhost
