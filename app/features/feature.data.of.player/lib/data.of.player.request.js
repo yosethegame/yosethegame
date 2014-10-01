@@ -10,6 +10,7 @@ module.exports = function(request, response, database) {
             return;
         }
         
+        response.writeHead(200);
         var data = {
             login: player.login,
             score: player.score,
