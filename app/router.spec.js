@@ -99,6 +99,10 @@ describe('Router', function() {
         it('maps data of player request', function() {
             expect(router.endPointOf({ url: '/players/any/data' })).toBe(require('./features/feature.data.of.player/lib/data.of.player.request.js'));
         });
+
+        it('maps badge of player request', function() {
+            expect(router.endPointOf({ url: '/players/any/badge' })).toBe(require('./features/feature.badge.of.player/lib/badge.of.player.request.js'));
+        });
 	});
 	
 	describe('Compatibility with http module of node.js:', function() {
