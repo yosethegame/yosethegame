@@ -4,7 +4,7 @@ module.exports = {
 	
     routes: [
         {
-            pattern: /^\/players\/[A-z|\.|\-|@|0-9]+\/badge$/,
+            pattern: /^\/players\/[A-z|\.|\-|@|0-9]+\/badge\.svg$/,
             target: require('../features/feature.badge.of.player/lib/badge.of.player.request.js')
         },
         {

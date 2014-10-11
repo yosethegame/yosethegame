@@ -6,6 +6,7 @@ var InMemoryDatabase = require('../app/support/database.with.levels');
 describe('Data of player endpoint', function() {
    
 	var server = new Server(router);
+    var url = "http://localhost:5000/players/ericminio/badge.svg";
 	
 	beforeEach(function() {
 		database = new InMemoryDatabase();
@@ -25,22 +26,31 @@ describe('Data of player endpoint', function() {
 	});
     
     it('is online', function(done) {
-		request("http://localhost:5000/players/ericminio/badge", function(error, response, body) {
+		request(url, function(error, response, body) {
             expect(response.statusCode).toEqual(200);
 			done();
 		});			
     });
     
-    it('returns html', function(done) {
-		request("http://localhost:5000/players/ericminio/badge", function(error, response, body) {
-            expect(response.headers['content-type']).toEqual('text/html');
+    it('returns svg content type', function(done) {
+		request(url, function(error, response, body) {
+            expect(response.headers['content-type']).toContain('image/svg+xml');
 			done();
 		});			
     });
     
-    it('returns the badge of the player', function(done) {
-		request("http://localhost:5000/players/ericminio/badge", function(error, response, body) {
-            expect(body).toContain('120');
+    it('returns svg image', function(done) {
+		request(url, function(error, response, body) {
+            expect(body).toMatch(/^<svg/);
+            expect(body).toMatch(/svg>$/);
+			done();
+		});			
+    });
+    
+    it('returns the yose badge of the player', function(done) {
+		request(url, function(error, response, body) {
+            expect(body).toContain('>yose</text>');
+            expect(body).toContain('>120</text>');
 			done();
 		});			
     });

@@ -25,17 +25,19 @@ describe('Badge of player request', function() {
     
     describe('when the player is known', function() {
         
-        beforeEach(function() {
-            badge({url: '/players/bilou/badge'}, response, database);        
+        beforeEach(function(done) {
+            badge({url: '/players/bilou/badge.svg'}, response, database, function() {
+                done();
+            });        
         });
         
         it('returns 200', function() {
             expect(response.statusCode).toEqual(200);
         });
 
-        it('sets content-type to text/html', function() {
+        it('sets content-type to svg', function() {
             expect(response.headerKey).toEqual('Content-Type');
-            expect(response.headerValue).toEqual('text/html');
+            expect(response.headerValue).toEqual('image/svg+xml');
         });
         
         it('returns a badge containing the score', function() {
@@ -45,8 +47,10 @@ describe('Badge of player request', function() {
     
     describe('when the player is unknown', function() {
         
-        beforeEach(function() {
-            badge({url: '/players/unknown/badge'}, response, database);        
+        beforeEach(function(done) {
+            badge({url: '/players/unknown/badge.svg'}, response, database, function() {
+                done();
+            });
         });
         
         it('returns 404', function() {

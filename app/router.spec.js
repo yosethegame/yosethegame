@@ -101,7 +101,7 @@ describe('Router', function() {
         });
 
         it('maps badge of player request', function() {
-            expect(router.endPointOf({ url: '/players/any/badge' })).toBe(require('./features/feature.badge.of.player/lib/badge.of.player.request.js'));
+            expect(router.endPointOf({ url: '/players/any/badge.svg' })).toBe(require('./features/feature.badge.of.player/lib/badge.of.player.request.js'));
         });
 	});
 	

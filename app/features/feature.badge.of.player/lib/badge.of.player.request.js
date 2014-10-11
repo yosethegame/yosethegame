@@ -1,24 +1,28 @@
-var fs = require('fs');
+var request = require('request');
 
-module.exports = function(request, response, database) {
-    response.setHeader('Content-Type', 'text/html');
+module.exports = function(incoming, response, database, done) {
     
-    var login = /^\/players\/(.*)\/badge$/.exec(request.url)[1];
+    var login = /^\/players\/(.*)\/badge\.svg$/.exec(incoming.url)[1];
     
     database.find(login, function(player) {
         
         if (player === undefined) {
             response.writeHead(404);
-            response.end();
+            response.end();            
+
+            if (done !== undefined) { done(); }
             return;
         }
         
-        var template = fs.readFileSync('./app/features/feature.badge.of.player/lib/badge.html').toString();
-        var badge = template.replace('YoseScore', player.score);
-        
-        response.writeHead(200);
-        response.write(badge);
-        response.end();
+        var url = 'http://img.shields.io/badge/yose-'+ player.score +'-brightgreen.svg';
+
+        request(url, function(error, shieldsResponse, body) {     
+            response.setHeader('Content-Type', 'image/svg+xml');
+            response.writeHead(200);
+            response.write(body);
+            response.end();
+            
+            if (done !== undefined) { done(); }
+        });        
     });
-    
 };
