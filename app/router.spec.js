@@ -100,8 +100,12 @@ describe('Router', function() {
             expect(router.endPointOf({ url: '/players/any/data' })).toBe(require('./features/feature.data.of.player/lib/data.of.player.request.js'));
         });
 
-        it('maps badge of player request', function() {
-            expect(router.endPointOf({ url: '/players/any/badge.svg' })).toBe(require('./features/feature.badge.of.player/lib/badge.of.player.request.js'));
+        it('maps svg badge of player request', function() {
+            expect(router.endPointOf({ url: '/players/any/badge.svg' })).toBe(require('./features/feature.badge.of.player/lib/badge.svg.of.player.request.js'));
+        });
+
+        it('maps png badge of player request', function() {
+            expect(router.endPointOf({ url: '/players/any/badge.png' })).toBe(require('./features/feature.badge.of.player/lib/badge.png.of.player.request.js'));
         });
 	});
 	

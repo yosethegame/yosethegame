@@ -4,8 +4,12 @@ module.exports = {
 	
     routes: [
         {
+            pattern: /^\/players\/[A-z|\.|\-|@|0-9]+\/badge\.png$/,
+            target: require('../features/feature.badge.of.player/lib/badge.png.of.player.request.js')
+        },
+        {
             pattern: /^\/players\/[A-z|\.|\-|@|0-9]+\/badge\.svg$/,
-            target: require('../features/feature.badge.of.player/lib/badge.of.player.request.js')
+            target: require('../features/feature.badge.of.player/lib/badge.svg.of.player.request.js')
         },
         {
             pattern: /^\/players\/[A-z|\.|\-|@|0-9]+\/data$/,

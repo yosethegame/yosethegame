@@ -3,7 +3,7 @@ var router = require('../app/lib/router');
 var Server = require('../app/lib/server');
 var InMemoryDatabase = require('../app/support/database.with.levels');
 
-describe('Data of player endpoint', function() {
+describe('SVG Badge of player endpoint', function() {
    
 	var server = new Server(router);
     var url = "http://localhost:5000/players/ericminio/badge.svg";
