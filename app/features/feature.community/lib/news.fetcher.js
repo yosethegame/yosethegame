@@ -1,9 +1,8 @@
-var $ = $ || require('jquery');
-
 var selfFetcher;
 
-function NewsFetcher() {
+function NewsFetcher($) {
     selfFetcher = this;
+    this.page = $;
 }
 
 NewsFetcher.prototype.useRenderer = function(renderer) {
@@ -11,7 +10,7 @@ NewsFetcher.prototype.useRenderer = function(renderer) {
 };
 
 NewsFetcher.prototype.getNews = function() {
-    $.get('/news').success(this.received);    
+    this.page.get('/news').success(this.received);    
 };
 
 NewsFetcher.prototype.received = function(news) {
