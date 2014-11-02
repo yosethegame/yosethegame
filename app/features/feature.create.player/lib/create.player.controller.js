@@ -1,35 +1,34 @@
-var $ = $ || require('jquery');
-
-function CreatePlayerController() {
-    self = this;	
+function CreatePlayerController($) {
+    self = this;
+    this.page = $;
 }
 
 CreatePlayerController.prototype.isLoginCorrect = function() {
-    return (/^[A-z|\\.|\\-|@|0-9]+$/).test($('#login').val());
+    return (/^[A-z|\\.|\\-|@|0-9]+$/).test(this.page('#login').val());
 };
 
 CreatePlayerController.prototype.updateLoginFeedback = function() {
     if (this.isLoginCorrect()) {
-        $('#login-feedback').removeClass('alert-danger').addClass('alert-success');
-        $('#login-feedback label').text('Login correct');
+        this.page('#login-feedback').removeClass('alert-danger').addClass('alert-success');
+        this.page('#login-feedback label').text('Login correct');
     }
     else {
-        $('#login-feedback').removeClass('alert-success').addClass('alert-danger');
-        $('#login-feedback label').text('Login incorrect. Must match /^[A-z|\\.|\\-|@|0-9]+$/');
+        this.page('#login-feedback').removeClass('alert-success').addClass('alert-danger');
+        this.page('#login-feedback label').text('Login incorrect. Must match /^[A-z|\\.|\\-|@|0-9]+$/');
     }
 };
 
 CreatePlayerController.prototype.updatePreview = function() {
-    $('#avatar-preview').attr('src', $('#avatar').val());
-    $.get($('#avatar').val()).success(this.succesGettingAvatar).error(this.errorGettingAvatar);
+    this.page('#avatar-preview').attr('src', this.page('#avatar').val());
+    this.page.get($('#avatar').val()).success(this.succesGettingAvatar).error(this.errorGettingAvatar);
 };
 
 CreatePlayerController.prototype.player = function() {
-    var login = $('#login').val().replace(/\s/g, '');
-    var avatar = $('#avatar').val();
+    var login = this.page('#login').val().replace(/\s/g, '');
+    var avatar = this.page('#avatar').val();
 
     if (this.isLoginCorrect()) {
-        $.post('/create-player', { login: login, avatar: avatar }, this.success);
+        this.page.post('/create-player', { login: login, avatar: avatar }, this.success);
     }
 };
 
@@ -48,18 +47,18 @@ CreatePlayerController.prototype.errorGettingAvatar = function(jqXHR, textStatus
 };
 
 CreatePlayerController.prototype.displayError = function() {
-    $('#preview-feedback').removeClass('alert-success').addClass('alert-danger');
-    $('#preview-feedback label').text('Not an image');
+    self.page('#preview-feedback').removeClass('alert-success').addClass('alert-danger');
+    self.page('#preview-feedback label').text('Not an image');
 };
 
 CreatePlayerController.prototype.displaySuccess = function() {
-    $('#preview-feedback').removeClass('alert-danger').addClass('alert-success');
-    $('#preview-feedback label').text('Image found');
+    self.page('#preview-feedback').removeClass('alert-danger').addClass('alert-success');
+    self.page('#preview-feedback label').text('Image found');
 };
 
 CreatePlayerController.prototype.success = function(data) {
-	$('#feedback').removeClass('hidden').addClass('visible');
-	$('#player-dashboard').attr('href', '/players/' + $('#login').val());
+	self.page('#feedback').removeClass('hidden').addClass('visible');
+	self.page('#player-dashboard').attr('href', '/players/' + self.page('#login').val());
 };
 
 var module = module || {};

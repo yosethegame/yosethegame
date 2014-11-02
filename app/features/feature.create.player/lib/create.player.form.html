@@ -16,7 +16,7 @@
 		<div class="form-group">
 			<label>The login of the new player</label>
 			<input type="text" class="form-control" id="login" placeholder="choose a login"
-				   onkeyup="new CreatePlayerController().updateLoginFeedback();"/>
+				   onkeyup="new CreatePlayerController($).updateLoginFeedback();"/>
 			<div id="login-feedback" class="alert alert-danger">
 				<label>Login incorrect. Must match /^[A-z|\.|\-|@|0-9]+$/</label>
 			</div>
@@ -24,7 +24,7 @@
 		<div class="form-group">
 			<label>An url for the image of the new player</label>
 			<input type="text" class="form-control" id="avatar" value="/img/default-avatar.png" 
-					onkeyup="new CreatePlayerController().updatePreview();"	/>
+					onkeyup="new CreatePlayerController($).updatePreview();"	/>
 		</div>
 		<div class="form-group">
 			<label>Preview</label>
@@ -42,7 +42,7 @@
 			</div>
 		</div>
 
-		<button type="button" class="btn btn-primary" id="create" onclick="new CreatePlayerController().player()">Create this player</button>
+		<button type="button" class="btn btn-primary" id="create" onclick="new CreatePlayerController($).player()">Create this player</button>
 	</section>
 	
 	<br/>

@@ -3,7 +3,7 @@ var CreatePlayerController = require('./lib/create.player.controller');
 
 describe('Create player listener', function() {
 	
-	var create = new CreatePlayerController();
+	var create = new CreatePlayerController($);
 	
 	describe('Request sent', function() {
 		
