@@ -25,7 +25,7 @@ describe('Try button', function() {
 		playground({ url: '/players/ericminio/play/world/2/level/1' }, response, database);
 		page = cheerio.load(response.html);
 
-		expect(page('#try').attr('onclick')).toEqual('new TryListener().try(2, 1)');
+		expect(page('#try').attr('onclick')).toEqual('new TryListener($).try(2, 1)');
 	});
 	
 });

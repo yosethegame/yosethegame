@@ -3,7 +3,7 @@ var TryListener = require('./lib/try.listener');
 
 describe("TryListener: ", function() {
 
-	var listener = new TryListener();
+	var listener = new TryListener($);
 	
 	var buildResultsWithDummyScore = function(results) {
 		var resultsWithDummyScore = {

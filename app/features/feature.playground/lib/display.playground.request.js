@@ -74,7 +74,7 @@ playground = function(request, response, database) {
 			}
 		}
 
-		page('#try').attr('onclick', 'new TryListener().try(' + worldNumber + ', ' + levelNumber + ')');
+		page('#try').attr('onclick', 'new TryListener($).try(' + worldNumber + ', ' + levelNumber + ')');
 
 		page('#continue-link').attr('href', '/players/' + player.login);
 
