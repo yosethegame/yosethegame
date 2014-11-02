@@ -1,8 +1,8 @@
-var $ = $ || require('jquery');
-
 var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-function NewsRenderer() {}
+function NewsRenderer($) {
+    this.page = $;
+}
 
 NewsRenderer.prototype.getCurrentTime = function(date) {
     return new Date().getTime();
@@ -38,8 +38,8 @@ NewsRenderer.prototype.formatDate = function(newsDate) {
 };
 
 NewsRenderer.prototype.display = function(news) {
-    var template = $('#news-list').html();
-    $('#news-list').empty();
+    var template = this.page('#news-list').html();
+    this.page('#news-list').empty();
     for (var i=0; i<news.length; i++) {
         var item = news[i];
         var line = template.replace('news-date"></', 'news-date">' + this.formatDate(item.date) + '</')
@@ -48,7 +48,7 @@ NewsRenderer.prototype.display = function(news) {
                            .replace('src=""', 'src="' + item.image + '"')
                            .replace('news-x', 'news-' + (i+1))
                            ;
-        $('#news-list').append(line);
+        this.page('#news-list').append(line);
     }    
 };
 

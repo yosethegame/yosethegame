@@ -1,4 +1,4 @@
-var $ = $ || require('jquery');
+var $ = require('jquery');
 var NewsRenderer = require('./lib/news.renderer');
 
 describe('News Renderer', function() {
@@ -17,7 +17,7 @@ describe('News Renderer', function() {
     });
 
     it('displays as much line as there are news', function() {
-        var renderer = new NewsRenderer();
+        var renderer = new NewsRenderer($);
         renderer.display([
                 { date: '26 Feb', image: 'me', url: 'my-url', text: 'my-news'},
                 { date: '26 Feb', image: 'me', url: 'my-url', text: 'my-news'},
@@ -28,7 +28,7 @@ describe('News Renderer', function() {
     describe('news line', function() {
         
         beforeEach(function() {
-            var renderer = new NewsRenderer();
+            var renderer = new NewsRenderer($);
             renderer.display([
                     { date: '26 Feb', image: 'me', url: 'my-url', text: 'my-news'}
                 ]);
@@ -57,7 +57,7 @@ describe('News Renderer', function() {
         var renderer;
         
         beforeEach(function() {
-            renderer = new NewsRenderer();
+            renderer = new NewsRenderer($);
         });
         
         it('renders news of the day in hours', function() {                

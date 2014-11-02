@@ -174,7 +174,7 @@
 		$( document ).ready(function() {
 			moveContent();
 			var fetcher = new NewsFetcher();
-			var renderer = new NewsRenderer();
+			var renderer = new NewsRenderer($);
 			fetcher.useRenderer(renderer);
 			fetcher.getNews();
 		});
