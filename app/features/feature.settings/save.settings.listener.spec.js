@@ -3,7 +3,7 @@ var SaveSettings = require('./lib/save.settings.listener');
 
 describe('Save settings listener', function() {
 	
-	var listener = new SaveSettings();
+	var listener = new SaveSettings($);
 	
 	describe('Request sent', function() {
 		

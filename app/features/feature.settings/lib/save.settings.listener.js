@@ -1,14 +1,14 @@
-var $ = $ || require('jquery');
-
-function SaveSettings() {	
+function SaveSettings($) {	
+    this.page = $;
+    selfSettingSaver = this;
 }
 
 SaveSettings.prototype.go = function() {
-    $.post('/save-settings', { login: $('#login').text(), avatar: $('#avatar-url').val(), tags: $('#tags').val() }, this.success );
+    this.page.post('/save-settings', { login: this.page('#login').text(), avatar: this.page('#avatar-url').val(), tags: this.page('#tags').val() }, this.success );
 };
 
 SaveSettings.prototype.success = function() {
-    $('#feedback').removeClass('hidden').addClass('visible');
+    selfSettingSaver.page('#feedback').removeClass('hidden').addClass('visible');
 };
 
 

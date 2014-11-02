@@ -60,7 +60,7 @@ describe('Settings form', function() {
             });	
 
             it('calls local javascript', function() {
-                expect(page('button#save-settings-button').attr('onclick')).toEqual('new SaveSettings().go()');
+                expect(page('button#save-settings-button').attr('onclick')).toEqual('new SaveSettings($).go()');
             });
 
             it('calls an existing script', function() {
