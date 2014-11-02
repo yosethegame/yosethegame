@@ -1,10 +1,9 @@
-var $ = $ || require('jquery');
-
-function Restart() {	
+function Restart($) {
+    this.page = $;
 }
 
 Restart.prototype.game = function() {
-	$.get('/restart-game?login=' + $('#login').text()).success(this.reload);
+	this.page.get('/restart-game?login=' + this.page('#login').text()).success(this.reload);
 };
 
 Restart.prototype.reload = function() {
