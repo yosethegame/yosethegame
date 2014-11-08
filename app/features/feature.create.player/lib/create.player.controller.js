@@ -4,7 +4,7 @@ function CreatePlayerController($) {
 }
 
 CreatePlayerController.prototype.isLoginCorrect = function() {
-    return (/^[A-z|\\.|\\-|@|0-9]+$/).test(this.page('#login').val());
+    return (/^[A-z|\.|\-|@|0-9]+$/).test(this.page('#login').val());
 };
 
 CreatePlayerController.prototype.updateLoginFeedback = function() {

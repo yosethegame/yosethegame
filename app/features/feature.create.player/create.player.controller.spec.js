@@ -53,12 +53,30 @@ describe('Create player listener', function() {
         });
 
         it('is correct with numbers and letters', function() {
-            $('#login').val('eric.mignot.42@gmail.com');
+            $('#login').val('eric42');
+
+            expect(create.isLoginCorrect()).toEqual(true);
+        });
+        
+        it('is correct with dashes', function() {
+            $('#login').val('eric-mignot');
+
+            expect(create.isLoginCorrect()).toEqual(true);
+        });
+        
+        it('is correct with dots', function() {
+            $('#login').val('eric.mignot');
 
             expect(create.isLoginCorrect()).toEqual(true);
         });
 
-        it('is incorrect when not matching [A-z|\\.|\\-|@|0-9]+', function() {
+        it('is correct when it is an e-mail', function() {
+            $('#login').val('eric.mignot@gmail.com');
+
+            expect(create.isLoginCorrect()).toEqual(true);
+        });
+
+        it('is incorrect when not matching expected pattern', function() {
             $('#login').val('2&é""');
 
             expect(create.isLoginCorrect()).toEqual(false);
