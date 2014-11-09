@@ -38,7 +38,7 @@ module.exports = {
 		var emptyCellId = this.cellId(cellIndex);
 		var expectedCount = this.candidates[cellIndex].bombAround;
 		var expected = "#" + emptyCellId + " with class containing 'safe' and text = '" + expectedCount + "'";
-		var browser = new Browser();
+		var browser = Browser.create();
 		browser.visit(url).
 			then(function() {
 				browser.document.grid = self.data;
@@ -66,20 +66,22 @@ module.exports = {
 					throw "Error: #" + emptyCellId + " text = '" + text + "'"; 
 				}
 			}).
-			then(function() {
-				callback({
-					code: 200,
-					expected: expected,
-					got: expected
-				});
-			}).
-			fail(function(error) {
-				callback({
-					code: 501,
-					expected: expected,
-					got: error.toString()
-				});
-			});
+			done(
+                function() {
+				    callback({
+					    code: 200,
+                        expected: expected,
+                        got: expected
+                    });
+			    },
+                function(error) {
+                	callback({
+                	    code: 501,
+                		expected: expected,
+                		got: error.toString()
+                	});
+                }
+            );
 	}
 	
 };

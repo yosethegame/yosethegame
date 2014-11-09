@@ -1,4 +1,4 @@
-var $ = require('jquery');
+var $ = require('jquery')(require("jsdom").jsdom().parentWindow);
 
 describe('json parsing', function() {
    

@@ -6,7 +6,7 @@ var expectedAnswer = function(matcher, number) {
 
 var validate = function(url, matcher, callback) {
 	var number = matcher.numberChooser.getNumber();
-	var browser = new Browser();
+	var browser = Browser.create();
 	browser.visit(url).
 		then(function () {
 			return browser.fill('input#number', number).pressButton("button#go");
@@ -19,19 +19,26 @@ var validate = function(url, matcher, callback) {
 		then(function() {
 			var result = browser.text('#result');
 			var expectedResult = matcher.expectedResult(number);
-			callback({
-				code: result == expectedResult ? 200 : 501,
-				expected: expectedAnswer(matcher, number),
-				got: "#result containing '" + result + "'"
-			});
+            if (result !== expectedResult) {
+                throw "#result containing '" + result + "'";
+            }
 		}).
-		fail(function(error) {
-			callback({
-				code: 501,
-				expected: expectedAnswer(matcher, number),
-				got: error.toString()
-			});
-		});	
+		done(
+            function() {
+			    callback({
+				    code: 200,
+                    expected: expectedAnswer(matcher, number),
+                    got: "#result containing '" + browser.text('#result') + "'"
+                });
+            }, 
+            function(error) {
+			    callback({
+				    code: 501,
+                    expected: expectedAnswer(matcher, number),
+                    got: error.toString()
+                });
+		    }
+        );	
 };
 
 module.exports = validate;

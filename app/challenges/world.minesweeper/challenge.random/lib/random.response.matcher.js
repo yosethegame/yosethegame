@@ -8,7 +8,7 @@ module.exports = {
     
     validate: function(url, remoteResponse, content, callback) {
         var self = this;
-        var browser = new Browser();
+        var browser = Browser.create();
         
         browser.visit(url).
             then(function() {
@@ -18,19 +18,22 @@ module.exports = {
                     var second = browser.evaluate('document.grid');
                     if (equal(second, first)) {
                         throw 'The same document.grid';
-                    } else {
+                    }
+                }).
+                done(   
+                    function() {
                         callback({
                             code: 200,
                             expected: self.expected,
                             got: self.expected
                         });
+                    },
+                    function(error) {
+                        callback(error501.withValues(self.expected, error.toString()));
                     }
-                }).
-                fail(function(error) {
-                    callback(error501.withValues(self.expected, error.toString()));
-                });                
+                );                
             }).
-            fail(function(error) {
+            done(function() {}, function(error) {
 				callback(error501.withValues(self.expected, error.toString()));
             });        
     }

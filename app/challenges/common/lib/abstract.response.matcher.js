@@ -1,5 +1,4 @@
-var $		= require('jquery');
-var equal	= require('deep-equal');
+var equal = require('deep-equal');
 
 var expectedContentType = 'application/json';
 

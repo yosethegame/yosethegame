@@ -74,19 +74,23 @@ module.exports = {
 				self.listShouldHaveThreeItems(browser);
 				array.forEach([1, 2], self.itemShouldHaveExpectedResult(browser, numbers, self.expectedResult));
 				self.lastItemShouldHaveExpectedResult(browser, numbers[2].trim());
-				callback({
-					code: 200,
-					expected: self.expectedAnswer(numbers, self.expectedResult),
-					got: self.expectedAnswer(numbers, self.expectedResult)
-				});
 			}).
-			fail(function(error) {
-				callback({
-					code: 501,
-					expected: self.expectedAnswer(numbers, self.expectedResult),
-					got: error.toString()
-				});
-			});
+			done(
+                function() {
+    				callback({
+    					code: 200,
+    					expected: self.expectedAnswer(numbers, self.expectedResult),
+    					got: self.expectedAnswer(numbers, self.expectedResult)
+    				});
+                },
+                function(error) {
+                    callback({
+					    code: 501,
+                        expected: self.expectedAnswer(numbers, self.expectedResult),
+                        got: error.toString()
+                    });
+			    }
+            );
 	}
 	
 };

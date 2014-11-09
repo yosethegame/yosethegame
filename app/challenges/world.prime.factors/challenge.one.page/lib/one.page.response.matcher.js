@@ -17,7 +17,8 @@ module.exports = {
 	validate: function(url, remoteResponse, content, callback) {
 		var self = this;
 		var number = this.numberChooser.getNumber();
-		var browser = new Browser();
+        var expected = "browser.location '" + url +"' AND " + self.expectedAnswer(number);
+		var browser = Browser.create();
 		browser.visit(url).
 			then(function () {
 				return browser.fill('input#number', number)
@@ -32,19 +33,26 @@ module.exports = {
 				}
 				var result = browser.text('#result');
 				var expectedResult = self.expectedResult(number);
-				callback({
-					code: result === expectedResult ? 200 : 501,
-					expected: "browser.location '" + url +"' AND " + self.expectedAnswer(number),
-					got: "browser.location '" + url +"' AND #result containing '" + result + "'"
-				});
+                if (result !== expectedResult) {
+                    throw "browser.location '" + url +"' AND #result containing '" + result + "'";
+                }
 			}).
-			fail(function(error) {
-				callback({
-					code: 501,
-					expected: "browser.location '" + url +"' AND " + self.expectedAnswer(number),
-					got: error.toString()
-				});
-			});	
+			done(
+                function() {
+    				callback({
+    					code: 200,
+    					expected: expected,
+    					got: expected
+    				});
+                },
+                function(error) {
+                    callback({
+					    code: 501,
+                        expected: expected,
+                        got: error.toString()
+                    });
+                }
+            );	
 	}
 	
 };

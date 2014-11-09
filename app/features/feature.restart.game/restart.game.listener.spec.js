@@ -1,4 +1,4 @@
-var $ = require('jquery');
+var $ = require('jquery')(require("jsdom").jsdom().parentWindow);
 var Restart = require('./lib/restart.game.listener');
 
 describe("Restart game listener: ", function() {

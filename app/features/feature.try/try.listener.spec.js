@@ -1,4 +1,4 @@
-var $           = require('jquery');
+var $           = require('jquery')(require("jsdom").jsdom().parentWindow);
 var TryListener = require('./lib/try.listener');
 
 describe("TryListener: ", function() {
@@ -72,9 +72,9 @@ describe("TryListener: ", function() {
 		});
 		
 		it('stops when success', function() {
-			$('#avatar').addClass('rotate');
+			$('#avatar').addClass('rotate any');
 			listener.displayResults({"score":10,"results":[]});
-			expect($('#avatar').attr('class')).toNotContain('rotate');
+			expect($('#avatar').attr('class')).toEqual('any');
 		});
 		
 	});

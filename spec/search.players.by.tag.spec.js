@@ -47,9 +47,8 @@ describe("Search players by tags:", function() {
 		    }).
 			then(function() {
 				expect(browser.queryAll('#players tr').length).toEqual(1 + 2);
-				done();
 			}).
-			fail(function(error) {
+			done(done, function(error) {
 				expect(error.toString()).toBeNull();
 				done();
 			});
@@ -60,9 +59,8 @@ describe("Search players by tags:", function() {
 		browser.visit('http://localhost:5000/players/search/carl').
 			then(function() {
 				expect(browser.query('#criteria').value).toEqual('carl');
-				done();
 			}).
-			fail(function(error) {
+			done(done, function(error) {
 				expect(error.toString()).toBeNull();
 				done();
 			});
@@ -75,9 +73,8 @@ describe("Search players by tags:", function() {
     		browser.visit('http://localhost:5000/players/search/Espa%C3%B1a').
     			then(function() {
     				expect(browser.query('#criteria').value).toEqual('España');
-    				done();
     			}).
-    			fail(function(error) {
+    			done(done, function(error) {
     				expect(error.toString()).toBeNull();
     				done();
     			});
@@ -94,9 +91,8 @@ describe("Search players by tags:", function() {
     		    }).
     			then(function() {
     				expect(browser.queryAll('#players tr').length).toEqual(1 + 1);
-    				done();
     			}).
-    			fail(function(error) {
+    			done(done, function(error) {
     				expect(error.toString()).toBeNull();
     				done();
     			});

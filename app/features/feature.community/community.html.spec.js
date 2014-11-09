@@ -5,9 +5,10 @@ describe("community.html", function() {
 	var page;
 
 	beforeEach(function() {	
-		page = cheerio.load(require('fs').readFileSync('./app/features/feature.community/lib/community.html').toString());
+        var pageContent = require('fs').readFileSync('./app/features/feature.community/lib/community.html').toString();        
+		page = cheerio.load(pageContent);
 	});
-	
+    
 	describe("page's elements:", function() {
 		
 		describe('player count placeholder', function() {
@@ -17,7 +18,7 @@ describe("community.html", function() {
             });
 
             it('has a default count to be replaced', function() {
-                expect(page('#player-count').html()).toEqual('&nbsp;4');
+                expect(page('#player-count').html()).toEqual(' 4');
             });
 		});
 		

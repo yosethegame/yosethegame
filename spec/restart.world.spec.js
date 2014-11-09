@@ -26,10 +26,7 @@ describe("When a player restarts world #2", function() {
 			then(function () {
 				return browser.clickLink("#world-2 .restart-world-link");
 			}).
-			then(function() {
-				done();
-			}).
-			fail(function(error) {
+			done(done, function(error) {
 				expect(error.toString()).toBeNull();
 				done();
 			});
@@ -44,9 +41,8 @@ describe("When a player restarts world #2", function() {
 		browser.visit('http://localhost:5000/players/bilou').
 			then(function() {
 				expect(browser.text("#world-2 ul.level-list li:nth-child(1) a")).toContain(database.worlds[1].levels[0].title);
-				done();
 			}).
-			fail(function(error) {
+			done(done, function(error) {
 				expect(error.toString()).toBeNull();
 				done();
 			});
@@ -62,9 +58,8 @@ describe("When a player restarts world #2", function() {
 				expect(browser.query('#news-1 a').href).toContain('http://localhost:6000');
 				expect(browser.query('#news-1 img').src).toContain('bilou-avatar');
 				expect(browser.text('#news-1')).toContain('restarted world "' + database.worlds[1].name + '"');
-				done();
 			}).
-			fail(function(error) {
+			done(done, function(error) {
 				expect(error.toString()).toBeNull();
 				done();
 			});

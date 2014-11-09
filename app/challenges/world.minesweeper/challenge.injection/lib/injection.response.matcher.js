@@ -34,10 +34,10 @@ module.exports = {
 	},
 	
 	validate: function(url, remoteResponse, content, callback) {
-		var self = this;
+        var self = this;
 		var cellWithBombId = this.cellId(this.bombIndex());
 		var expected = "A load() method and #" + cellWithBombId + " class containing 'lost' after click";
-		var browser = new Browser();
+		var browser = Browser.create();
 		browser.visit(url).
 			then(function() {
 				if(browser.evaluate("typeof load") != 'function') {
@@ -63,20 +63,22 @@ module.exports = {
 					throw "Error: #" + cellWithBombId + " class = '" + classes + "'"; 
 				}
 			}).
-			then(function() {
-				callback({
-					code: 200,
-					expected: expected,
-					got: expected
-				});
-			}).
-			fail(function(error) {
-				callback({
-					code: 501,
-					expected: expected,
-					got: error.toString()
-				});
-			});
+			done(
+                function() {
+                    callback({
+                	    code: 200,
+                		expected: expected,
+                		got: expected
+                	});
+                },
+                function(error) {
+                    callback({
+					    code: 501,
+                        expected: expected,
+                        got: error.toString()
+				    });
+                }
+			);
 	}
 	
 };

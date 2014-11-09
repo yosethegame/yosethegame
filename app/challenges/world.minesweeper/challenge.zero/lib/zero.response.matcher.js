@@ -41,7 +41,7 @@ module.exports = {
 		var candidateIndex = this.candidateIndex();
 		var cellWithNoBombAroundId = this.cellId(candidateIndex);
 		var expected = 'empty text in #' + cellWithNoBombAroundId;
-		var browser = new Browser();		
+		var browser = Browser.create();		
 		browser.visit(url).
 			then(function() {
 				browser.document.grid = self.data;
@@ -55,20 +55,22 @@ module.exports = {
                     throw "Error: #" + cellWithNoBombAroundId + " text = '" + text + "'";
 				}
 			}).
-			then(function() {
-				callback({
-					code: 200,
-					expected: expected,
-					got: expected
-				});
-			}).
-			fail(function(error) {
-				callback({
-					code: 501,
-					expected: expected,
-					got: error.toString()
-				});
-			});
+			done(
+                function() {
+				    callback({
+                        code: 200,
+                        expected: expected,
+                        got: expected
+                    });
+                },
+                function(error) {
+                    callback({
+					    code: 501,
+                        expected: expected,
+                        got: error.toString()
+                    });
+                }
+            );
 	}
 	
 };

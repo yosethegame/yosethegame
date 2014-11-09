@@ -21,7 +21,7 @@ module.exports = {
             });
         }
         else {
-            var browser = new Browser();
+            var browser = Browser.create();
             browser.visit(url).
                 then(function () {
                     return browser.fill('input#number', number).pressButton("button#go");
@@ -37,7 +37,7 @@ module.exports = {
                                 got: text.indexOf(result) != -1 ? expected : "#last-decomposition with text '" + text + "'"
                             });
                         }).
-                        fail(function(error) {
+                        done(function(){}, function(error) {
                             callback({
                                 code: 501,
                                 expected: expected,
@@ -45,7 +45,7 @@ module.exports = {
                             });
                         });
                 }).
-                fail(function(error) {
+                done(function(){}, function(error) {
                     callback({
                         code: 501,
                         expected: expected,

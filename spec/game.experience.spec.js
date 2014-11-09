@@ -60,7 +60,7 @@ describe("Game experience", function() {
 					expect(browser.text("#result_1 .got")).toEqual('a correct actual value');
 					done();
 				}).
-				fail(function(error) {
+				done(done, function(error) {
 					expect(error.toString()).toBeNull();
 					done();
 				});
@@ -78,7 +78,7 @@ describe("Game experience", function() {
     				expect(browser.text('#news-1')).toContain('passed level "' + database.worlds[0].levels[0].title + '"');
     				done();
     			}).
-    			fail(function(error) {
+    			done(done, function(error) {
     				expect(error.toString()).toBeNull();
     				done();
     			});
@@ -112,7 +112,7 @@ describe("Game experience", function() {
 					expect(browser.text("#result_1 .got")).toEqual('an incorrect value');
 					done();
 				}).
-				fail(function(error) {
+				done(done, function(error) {
 					expect(error.toString()).toBeNull();
 					done();
 				});
@@ -144,7 +144,7 @@ describe("Game experience", function() {
 					expect(browser.text("#result_1 .got")).toEqual('a correct actual value');
 					done();
 				}).
-				fail(function(error) {
+				done(done, function(error) {
 					expect(error.toString()).toBeNull();
 					done();
 				});
@@ -160,7 +160,7 @@ describe("Game experience", function() {
 					expect(browser.text("#result_2 .challenge")).toEqual(database.worlds[0].levels[1].title);
 					done();
 				}).
-				fail(function(error) {
+				done(done, function(error) {
 					expect(error.toString()).toBeNull();
 					done();
 				});

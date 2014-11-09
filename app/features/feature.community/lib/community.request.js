@@ -13,7 +13,7 @@ var index = function(request, response, database) {
 	database.allPlayers(function(players) {
 		html = module.exports.hallOfFame.insertPlayerList(page, players, database);
 		database.playerCount(function(count) {
-            html = html.replace('id="player-count">&nbsp;4</', 'id="player-count">&nbsp;' + count + '</');
+            html = html.replace('id="player-count"> 4</', 'id="player-count"> ' + count + '</');
             database.getScoreCommunity(function(score) {
                 html = html.replace('id="score-community">000040</', 'id="score-community">' + renderScore(score) + '</');
                 response.write(html);

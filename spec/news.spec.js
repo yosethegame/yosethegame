@@ -46,7 +46,7 @@ describe("News display in Community page:", function() {
 				expect(browser.queryAll('.news').length).toEqual(2);
 				done();
 			}).
-			fail(function(error) {
+			done(done, function(error) {
 				expect(error.toString()).toBeNull();
 				done();
 			});
@@ -62,7 +62,7 @@ describe("News display in Community page:", function() {
 				expect(browser.text('#news-1')).toContain('my-news');
 				done();
 			}).
-			fail(function(error) {
+			done(done, function(error) {
 				expect(error.toString()).toBeNull();
 				done();
 			});
@@ -78,7 +78,7 @@ describe("News display in Community page:", function() {
 				expect(browser.text('#news-2')).toContain('your-news');
 				done();
 			}).
-			fail(function(error) {
+			done(done, function(error) {
 				expect(error.toString()).toBeNull();
 				done();
 			});

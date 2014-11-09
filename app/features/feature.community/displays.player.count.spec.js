@@ -12,6 +12,6 @@ describe('Community page > player count', function() {
 		page({}, response, database);		
 		var body = cheerio.load(response.html);
 		
-		expect(body('#player-count').html()).toEqual('&nbsp;2');
+		expect(body('#player-count').html()).toEqual(' 2');
     });
 });

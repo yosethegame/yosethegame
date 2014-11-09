@@ -39,7 +39,7 @@ module.exports = {
         var expected = 'A page containing a checkbox with id="suspect-mode" and #' + 
                         cellId + " with class containing 'suspect' and not containing 'lost'";
 
-        var browser = new Browser();
+        var browser = Browser.create();
 		browser.visit(url).
 			then(function() {
 				browser.document.grid = self.data;
@@ -65,20 +65,22 @@ module.exports = {
 					throw "Error: #" + cellId + " class = '" + classes + "'"; 
 				}
 			}).
-			then(function() {
-				callback({
-					code: 200,
-					expected: expected,
-					got: 'it works :)'
-				});
-			}).
-			fail(function(error) {
-				callback({
-					code: 501,
-					expected: expected,
-					got: error.toString()
-				});
-			});
+			done(
+                function() {
+				    callback({
+					    code: 200,
+					    expected: expected,
+                        got: 'it works :)'
+				    });
+                },                
+                function(error) {
+                    callback({
+                        code: 501,
+                        expected: expected,
+                        got: error.toString()
+				    });
+                }
+            );
 	}
 	
 };

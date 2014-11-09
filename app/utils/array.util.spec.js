@@ -1,4 +1,4 @@
-var $       = require('jquery');
+var $       = require('jquery')(require("jsdom").jsdom().parentWindow)  ;
 var array   = require('./lib/array.utils');
 var extract = require('./lib/array.utils');
 

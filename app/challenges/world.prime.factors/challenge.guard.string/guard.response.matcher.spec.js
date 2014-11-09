@@ -1,5 +1,4 @@
 var matcher = require('./lib/guard.response.matcher');
-var $ = require('jquery');
 
 describe('Guard response matcher,', function() {
 

@@ -1,5 +1,4 @@
 var pg      = require('pg');
-var $       = require('jquery');
 var array   = require('../utils/lib/array.utils');
 
 function PostgreSql(url) {

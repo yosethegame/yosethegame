@@ -20,7 +20,7 @@ module.exports = {
 	validate: function(url, remoteResponse, content, callback) {
 		var self = this;
 		var number = this.getInput();
-		var browser = new Browser();
+		var browser = Browser.create();
 		browser.visit(url).
 			then(function () {
 				return browser.fill('input#number', number)
@@ -40,7 +40,7 @@ module.exports = {
 					got: "#result containing '" + result + "'"
 				});
 			}).
-			fail(function(error) {
+			done(function(){}, function(error) {
 				callback({
 					code: 501,
 					expected: self.expectedAnswer(number),

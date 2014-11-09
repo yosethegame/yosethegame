@@ -44,7 +44,7 @@ describe("Community page", function() {
 					expect(browser.queryAll("#players .player").length).toEqual(2);
 					done();
 				}).
-				fail(function(error) {
+				done(done, function(error) {
 					expect(error.toString()).toBeNull();
 					done();
 				});
@@ -59,7 +59,7 @@ describe("Community page", function() {
 				expect(browser.text("#player-count")).toEqual('2');
 				done();
 			}).
-			fail(function(error) {
+			done(done, function(error) {
 				expect(error.toString()).toBeNull();
 				done();
 			});
@@ -72,7 +72,7 @@ describe("Community page", function() {
 				expect(browser.text("#score-community")).toEqual('000030');
 				done();
 			}).
-			fail(function(error) {
+			done(done, function(error) {
 				expect(error.toString()).toBeNull();
 				done();
 			});

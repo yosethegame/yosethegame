@@ -32,7 +32,7 @@ describe("Add tags:", function() {
 					browser.fill('#tags', 'laval quebec').pressButton('#save-settings-button');
 					done();
 				}).
-				fail(function(error) {
+				done(done, function(error) {
 					expect(error.toString()).toBeNull();
 					done();
 				});
@@ -45,7 +45,7 @@ describe("Add tags:", function() {
 					expect(browser.query('#tags').value).toEqual('laval quebec');
 					done();
 				}).
-				fail(function(error) {
+				done(done, function(error) {
 					expect(error.toString()).toBeNull();
 					done();
 				});

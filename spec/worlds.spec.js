@@ -41,9 +41,8 @@ describe("Dashboard,", function() {
 			browser.visit('http://localhost:5000/players/annessou').
 				then(function() {
 					expect(browser.query('#world-1 .world-detail').className).toContain('visible');
-					done();
 				}).
-				fail(function(error) {
+				done(done, function(error) {
 					expect(error.toString()).toBeNull();
 					done();
 				});

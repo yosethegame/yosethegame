@@ -1,7 +1,7 @@
 var DatabaseWithChallenges = require('../../support/database.with.levels');
 var badge = require('./lib/badge.png.of.player.request');
 
-describe('Svg Badge of player request', function() {
+describe('Png Badge of player request', function() {
 
     var response = {
         setHeader: function(key, value) { this.headerKey = key; this.headerValue = value; },

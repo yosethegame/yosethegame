@@ -1,4 +1,4 @@
-var $ = require('jquery');
+var $ = require('jquery')(require("jsdom").jsdom().parentWindow);
 var CreatePlayerController = require('./lib/create.player.controller');
 
 describe('Create player listener', function() {

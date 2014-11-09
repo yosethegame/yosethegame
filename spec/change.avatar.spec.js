@@ -27,29 +27,27 @@ describe("Change avatar:", function() {
 	describe("When player modify its avatar and comes back to his dashboard,", function() {
 		
 		beforeEach(function(done) {
-			var browser = new Browser();
+			var browser = Browser.create();
 			browser.visit('http://localhost:5000/players/annessou').
 				then(function() {
 					return browser.clickLink('#settings-link');
 				}).
 				then(function() {
 					browser.fill('#avatar-url', 'http://new-avatar').pressButton('#save-settings-button');
-					done();
 				}).
-				fail(function(error) {
+				done(done, function(error) {
 					expect(error.toString()).toBeNull();
 					done();
 				});
 		});
 		
 		it('sees his new avatar', function(done) {
-			var browser = new Browser();
+			var browser = Browser.create();
 			browser.visit('http://localhost:5000/players/annessou').
 				then(function() {
 					expect(browser.query("#avatar").src).toEqual('http://new-avatar/');
-					done();
 				}).
-				fail(function(error) {
+				done(done, function(error) {
 					expect(error.toString()).toBeNull();
 					done();
 				});
@@ -59,7 +57,7 @@ describe("Change avatar:", function() {
 	describe('avatar preview', function() {
 	   
 	   it('is updated when the user changes its value', function(done) {
-			var browser = new Browser();
+			var browser = Browser.create();
 			browser.visit('http://localhost:5000/players/annessou').
 				then(function() {
 					return browser.clickLink('#settings-link');
@@ -69,9 +67,8 @@ describe("Change avatar:", function() {
 				}).
 				then(function() {
 					expect(browser.query("#avatar-preview").src).toEqual('http://new-avatar/');
-					done();
 				}).
-				fail(function(error) {
+				done(done, function(error) {
 					expect(error.toString()).toBeNull();
 					done();
 				});

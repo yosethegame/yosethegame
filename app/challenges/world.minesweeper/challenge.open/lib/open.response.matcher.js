@@ -70,11 +70,10 @@ module.exports = {
 	},
 	
 	validate: function(url, remoteResponse, content, callback) {
-		var self = this;
 		var target = this.target();		
 		var expected = this.buildExpected(target);
 		
-		var browser = new Browser();		
+		var browser = Browser.create();		
 		browser.visit(url).
             then(function() {
                 browser.document.grid = target.grid;
@@ -97,20 +96,22 @@ module.exports = {
                     }
                 });
             }).
-			then(function() {
-				callback({
-					code: 200,
-					expected: expected,
-					got: 'it works :)'
-				});
-			}).
-			fail(function(error) {
-				callback({
-					code: 501,
-					expected: expected,
-					got: error.toString()
-				});
-			});
+			done(
+                function() {
+				    callback({
+					    code: 200,
+					    expected: expected,
+                        got: 'it works :)'
+				    });
+                },
+                function(error) {
+				    callback({
+					    code: 501,
+                        expected: expected,
+                        got: error.toString()
+				    });
+			    }
+            );
 	}
 	
 };

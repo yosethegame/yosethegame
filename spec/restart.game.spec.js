@@ -35,9 +35,7 @@ describe("Restart game:", function() {
 				then(function () {
 					return browser.clickLink("#restart-game-link");
 				}).
-				then(function() {
-				    done();
-				});
+				then(done);
 		});
 		
 		it('he sees the first challenge', function(done) {
@@ -47,7 +45,7 @@ describe("Restart game:", function() {
 					expect(browser.text("#world-1 ul.level-list li:nth-child(1) a")).toContain(database.worlds[0].levels[0].title);
 					done();
 				}).
-				fail(function(error) {
+				done(done, function(error) {
 					expect(error.toString()).toBeNull();
 					done();
 				});
@@ -63,9 +61,8 @@ describe("Restart game:", function() {
     				expect(browser.query('#news-1 a').href).toContain('/community');
     				expect(browser.query('#news-1 img').src).toContain('bilou-avatar');
     				expect(browser.text('#news-1')).toContain('restarted the game');
-    				done();
     			}).
-    			fail(function(error) {
+    			done(done, function(error) {
     				expect(error.toString()).toBeNull();
     				done();
     			});

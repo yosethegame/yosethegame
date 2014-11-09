@@ -1,4 +1,4 @@
-var $ = require('jquery');
+var $ = require('jquery')(require("jsdom").jsdom().parentWindow);
 var SaveSettings = require('./lib/save.settings.listener');
 
 describe('Save settings listener', function() {

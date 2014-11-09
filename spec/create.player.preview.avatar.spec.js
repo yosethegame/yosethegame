@@ -29,7 +29,7 @@ describe('Avatar preview', function() {
 				expect(browser.query('#avatar-preview').src).toEqual('http://this-url/');
 				done();
 			}).
-			fail(function(error) {
+			done(done, function(error) {
 				expect(error.toString()).toBeNull();
 				done();
 			});
@@ -49,7 +49,7 @@ describe('Avatar preview', function() {
 				expect(browser.text('#preview-feedback label')).toContain('Image found');
 				done();
 			}).
-			fail(function(error) {
+			done(done, function(error) {
 				expect(error.toString()).toBeNull();
 				done();
 			});
@@ -69,7 +69,7 @@ describe('Avatar preview', function() {
 				expect(browser.text('#preview-feedback label')).toContain('Not an image');
 				done();
 			}).
-			fail(function(error) {
+			done(done, function(error) {
 				expect(error.toString()).toBeNull();
 				done();
 			});

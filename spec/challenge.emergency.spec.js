@@ -90,7 +90,7 @@ describe("Challenge Emergency in WorldFire", function() {
 				expect(browser.text("#result_1 .got")).toEqual('You did it!');
 				done();
 			}).
-			fail(function(error) {
+			done(done, function(error) {
 				expect(error.toString()).toBeNull();
 				done();
 			});

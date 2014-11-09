@@ -37,7 +37,7 @@ describe('Creating a player', function() {
 				expect(browser.text("#world-1 .world-ellipse")).toContain(database.worlds[0].name);
 				done();
 			}).
-			fail(function(error) {
+			done(done, function(error) {
 				expect(error.toString()).toBeNull();
 				done();
 			});
@@ -61,12 +61,12 @@ describe('Creating a player', function() {
     				    expect(browser.text('#news-1')).toContain('entered the game');
     				    done();
     			    }).
-    			    fail(function(error) {
+    			    done(done, function(error) {
     				    expect(error.toString()).toBeNull();
     				    done();
     			    });
 			}).
-			fail(function(error) {
+			done(done, function(error) {
 				expect(error.toString()).toBeNull();
 				done();
 			});
@@ -91,12 +91,12 @@ describe('Creating a player', function() {
 				        expect(browser.queryAll('#news-2').length).toEqual(0);
 				        done();
 			        }).
-    			    fail(function(error) {
+    			    done(done, function(error) {
     				    expect(error.toString()).toBeNull();
     				    done();
     			    });
 			}).
-			fail(function(error) {
+			done(done, function(error) {
 				expect(error.toString()).toBeNull();
 				done();
 			});

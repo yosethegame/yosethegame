@@ -1,4 +1,3 @@
-var $ = require('jquery');
 var matcher = require('./lib/big.number.response.matcher');
 
 describe('Big number guard response matcher,', function() {

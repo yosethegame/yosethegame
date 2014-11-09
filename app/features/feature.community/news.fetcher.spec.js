@@ -1,4 +1,4 @@
-var $ = require('jquery');
+var $ = require('jquery')(require("jsdom").jsdom().parentWindow);;
 var NewsFetcher = require('./lib/news.fetcher');
 
 describe('News fetcher', function() {
