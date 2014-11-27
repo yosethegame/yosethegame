@@ -292,7 +292,22 @@ function ProductionDatabase() {
                 isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 28); }
             },      
         ]
+    },
+    {
+        name: 'Astroport',
+        isOpenFor: isWorldOpenFor,
+        levels: [      
+            {
+                id: 33,
+                title: "Astroport name",
+                file: 'app/challenges/world.astroport/challenge.name/lib/name.html',
+                requester: '../../../challenges/world.astroport/challenge.name/lib/name.requester.js',
+                checker: '../../../challenges/world.astroport/challenge.name/lib/name.response.matcher.js',
+                isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 25); }
+            },      
+        ]
     }
+    
     ];  
 }
 
