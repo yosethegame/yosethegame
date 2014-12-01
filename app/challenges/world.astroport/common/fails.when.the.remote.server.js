@@ -52,5 +52,13 @@ module.exports = {
                 expect(status.got).toEqual('Error: 404');
             });
         }); 
-	}
+	},
+    
+    doesNotAnswerWithHtml: function(matcher) {
+        this.doesNotAnswer(matcher);
+        this.answersWith404(matcher);
+        require('./fails.when.the.header').isUndefined(matcher);
+        require('./fails.when.the.header').isEmpty(matcher);
+        require('./fails.when.the.header').isNotTextHtml(matcher);
+    },
 };
