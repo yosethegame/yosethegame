@@ -305,6 +305,14 @@ function ProductionDatabase() {
                 checker: '../../../challenges/world.astroport/challenge.name/lib/name.response.matcher.js',
                 isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 25); }
             },      
+            {
+                id: 34,
+                title: "Gates",
+                file: 'app/challenges/world.astroport/challenge.gates/lib/gates.html',
+                requester: '../../../challenges/world.astroport/challenge.gates/lib/gates.requester.js',
+                checker: '../../../challenges/world.astroport/challenge.gates/lib/gates.response.matcher.js',
+                isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 33); }
+            },      
         ]
     }
     

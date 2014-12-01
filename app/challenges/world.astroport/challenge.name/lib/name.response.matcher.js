@@ -1,3 +1,4 @@
+var passes = require('../../common/lib/passes');
 var error501 = require('../../../common/lib/501');
 var code200 = require('../../../common/lib/200');
 var cheerio = require('cheerio');
@@ -5,21 +6,12 @@ var cheerio = require('cheerio');
 module.exports = {
 
     expected: 'A page containing an element #astroport-name',
+    
+    name: 'Astroport name challenge response matcher',
 	
     validate: function(url, remoteResponse, content, callback) {
 
-        if (remoteResponse.statusCode !== 200) {
-            callback(error501.withValues(this.expected, 'Error: 404'));
-            return;
-        }
-
-        if (remoteResponse.headers === undefined) {
-            callback(error501.withValues(this.expected, 'Error: missing content-type'));
-            return;
-        }
-        
-        if (remoteResponse.headers['content-type'] !== 'text/html') {
-            callback(error501.withValues(this.expected, 'Error: content-type ' + remoteResponse.headers['content-type']));
+        if (! passes.basicVerifications(remoteResponse, callback)) {
             return;
         }
 
