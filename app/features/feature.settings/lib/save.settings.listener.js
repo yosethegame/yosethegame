@@ -1,3 +1,5 @@
+var selfSettingSaver;
+
 function SaveSettings($) {	
     this.page = $;
     selfSettingSaver = this;

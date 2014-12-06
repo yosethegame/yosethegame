@@ -1,4 +1,5 @@
 var renderScore = renderScore || require('../../common/lib/render.score');
+var thisListener;
 
 function TryListener($) {
     this.page = $;

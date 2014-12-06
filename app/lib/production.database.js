@@ -313,6 +313,14 @@ function ProductionDatabase() {
                 checker: '../../../challenges/world.astroport/challenge.gates/lib/gates.response.matcher.js',
                 isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 33); }
             },      
+            {
+                id: 35,
+                title: "Docker",
+                file: 'app/challenges/world.astroport/challenge.docker/lib/docker.html',
+                requester: '../../../challenges/world.astroport/challenge.docker/lib/docker.requester.js',
+                checker: '../../../challenges/world.astroport/challenge.docker/lib/docker.response.matcher.js',
+                isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 34); }
+            },      
         ]
     }
     

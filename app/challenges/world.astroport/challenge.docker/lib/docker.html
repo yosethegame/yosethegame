@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>YOSE</title>
+	<link href="/css/main.css" rel="stylesheet" type="text/css">
+	<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
+	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>		
+</head>
+<body>
+	
+	<div id="challenge-assignment">
+		Update your server to let the user dock a ship at the first gate.
+	</div>
+	
+	<div id="challenge-details">
+        <p>
+            After the user enters a ship name in the #ship field and press the #dock button,
+            the ship's name should appear in the element #ship-1.
+        </p>
+		Your page should include the following elements
+		<dl style="padding-left:30px">
+			<dt>input#ship</dt><dd>An input field with id ship
+                that we will use to enter the name of the ship to be docked</dd>
+			<dt>button#dock</dt><dd>A button with id dock 
+                that we will use to trigger the docking of the ship</dd>
+		</dl>
+        <p>
+            <div>Something similar to the following</div>
+            <img id="docker-example" src="/img/challenges/docker-example.png"  
+                 style="border-radius:6px;"/>
+        </p>
+		<p>
+			Your server will be called with /astroport postfix
+		</p>	
+	</div>
+	
+	<div id="challenge-tips">
+        At this time, you don't need to implement persistance yet. We are just uncovering what we would like to implement by doing it.
+	</div>
+	
+</body>
+</html>

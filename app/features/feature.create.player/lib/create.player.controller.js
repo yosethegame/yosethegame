@@ -1,3 +1,5 @@
+var self;
+
 function CreatePlayerController($) {
     self = this;
     this.page = $;
