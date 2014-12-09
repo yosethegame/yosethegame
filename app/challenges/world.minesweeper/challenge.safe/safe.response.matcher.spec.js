@@ -42,6 +42,7 @@ describe('Safe cells in Minesweeper game', function() {
 							'<label id="cell-1x3" onclick="play(1, 3)"></label>' +
 							
 							'<script>function load() { }</script>' +
+							'<script>function play(line, column) { }</script>' +
                             '</body></html>';
 
 			remote = require('http').createServer(
