@@ -14,8 +14,7 @@ describe('Docker response matcher when the docker script is an external resource
                         '<label id="ship-1"><label>' +
                         '<input id="ship"/>' +
                         '<button id="dock" onclick="new Docker().dock(document);"></button>' +
-                        '<script src="docker.js">' +
-                        '</script>' +
+                        '<script src="docker.js"></script>' +
                   '</body></html>';
 
         var script = 'function Docker() {}' +                

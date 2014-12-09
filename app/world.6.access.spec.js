@@ -78,5 +78,30 @@ describe('World 6:', function() {
             expect(level.isOpenLevelFor(player)).toEqual(true);
         });
     });
+    
+    describe('fourth level', function() {
+    
+        var level = world.levels[3];
+        
+        it('exists', function() {
+            expect(level).not.toEqual(undefined);
+        });
+        
+        it('has id 36', function() {
+            expect(level.id).toEqual(36);
+        });
+
+        it('is locked when player has not achieved level 35', function() {
+            var player = { portfolio: [ { server: 'any', achievements: [] } ] };
+            
+            expect(level.isOpenLevelFor(player)).toEqual(false);
+        });
+        
+        it('is unlocked when player has achieved level 35', function() {
+            var player = { portfolio: [ { server: 'any', achievements: [35] } ] };
+            
+            expect(level.isOpenLevelFor(player)).toEqual(true);
+        });
+    });
 
 });

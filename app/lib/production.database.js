@@ -321,6 +321,14 @@ function ProductionDatabase() {
                 checker: '../../../challenges/world.astroport/challenge.docker/lib/docker.response.matcher.js',
                 isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 34); }
             },      
+            {
+                id: 36,
+                title: "Feedback",
+                file: 'app/challenges/world.astroport/challenge.feedback/lib/feedback.html',
+                requester: '../../../challenges/world.astroport/challenge.feedback/lib/feedback.requester.js',
+                checker: '../../../challenges/world.astroport/challenge.feedback/lib/feedback.response.matcher.js',
+                isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 35); }
+            },      
         ]
     }
     

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>YOSE</title>
+	<link href="/css/main.css" rel="stylesheet" type="text/css">
+	<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
+	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>		
+</head>
+<body>
+	
+	<div id="challenge-assignment">
+	    Well done! We will now add visual feedback for our user to better understand what is happening. 
+	</div>
+	
+	<div id="challenge-details">
+        <p>
+    		Our feedback strategy will combine two ways
+    		<dl style="padding-left:30px">
+    			<dt>feedback on gates</dt><dd>we will expect the gates to toggle their css class between free and occupied</dd>
+    			<dt>a #info section</dt><dd>we will expect an info element to toggle its css class between hidden and visible</dd>
+    		</dl>
+        </p>
+        <p>
+            So, starting from what we have so far
+            <ul>
+                <li>#gate-1 should start with css class containing <strong>free</strong></li>
+                <li>#gate-1 should have its css class contain <strong>occupied</strong> when a first ship is docked</li>
+                <li>#info should start with its css class containing <strong>hidden</strong></li>
+                <li>#info should have its css class not to contain <strong>hidden</strong> when a first ship is docked</li>
+                <li>#info should have its css class reset to <strong>hidden</strong> when one starts to type a new ship name in the input#ship element</li>
+                <li>No verification will be made on the content of your #info element, to let you choose the content that makes sense for you</li>
+            </ul>
+        </p>
+        <p>
+            <div>For those of you more visual-minded, here is an example of what it could look like after the docking of a ship</div>
+            <img id="feedback-example" src="/img/challenges/feedback-example.png"  
+                 style="border-radius:6px; display: block;"/>
+        </p>
+		<p>
+			Your server will be called with /astroport postfix
+		</p>	
+	</div>
+	
+	<div id="challenge-tips">
+	</div>
+	
+</body>
+</html>
