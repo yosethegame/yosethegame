@@ -55,7 +55,7 @@ describe('SVG Badge of player endpoint', function() {
 		});			
     });
     
-    it('returns not found when the player does not exists', function() {
+    it('returns not found when the player does not exists', function(done) {
 		request("http://localhost:5000/players/unknown/badge", function(error, response, body) {
             expect(response.statusCode).toEqual(404);
             expect(body.length).toEqual(0);
