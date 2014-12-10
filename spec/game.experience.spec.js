@@ -76,7 +76,6 @@ describe("Game experience", function() {
     				expect(browser.query('#news-1 a').href).toContain('http://localhost:6000');
     				expect(browser.query('#news-1 img').src).toContain('asm');
     				expect(browser.text('#news-1')).toContain('passed level "' + database.worlds[0].levels[0].title + '"');
-    				done();
     			}).
     			done(done, function(error) {
     				expect(error.toString()).toBeNull();

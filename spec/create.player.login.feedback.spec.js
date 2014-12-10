@@ -29,7 +29,6 @@ describe('Login feedback message', function() {
 			}).
 			then(function() {
 				expect(browser.text('#login-feedback label')).toContain('Login correct');
-				done();
 			}).
 			done(done, function(error) {
 				expect(error.toString()).toBeNull();
@@ -49,7 +48,6 @@ describe('Login feedback message', function() {
 			}).
 			then(function() {
 				expect(browser.text('#login-feedback label')).toContain('Login incorrect');
-				done();
 			}).
 			done(done, function(error) {
 				expect(error.toString()).toBeNull();

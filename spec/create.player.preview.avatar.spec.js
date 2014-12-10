@@ -27,7 +27,6 @@ describe('Avatar preview', function() {
 			}).
 			then(function() {
 				expect(browser.query('#avatar-preview').src).toEqual('http://this-url/');
-				done();
 			}).
 			done(done, function(error) {
 				expect(error.toString()).toBeNull();
@@ -47,7 +46,6 @@ describe('Avatar preview', function() {
 			}).
 			then(function() {
 				expect(browser.text('#preview-feedback label')).toContain('Image found');
-				done();
 			}).
 			done(done, function(error) {
 				expect(error.toString()).toBeNull();
@@ -67,7 +65,6 @@ describe('Avatar preview', function() {
 			}).
 			then(function() {
 				expect(browser.text('#preview-feedback label')).toContain('Not an image');
-				done();
 			}).
 			done(done, function(error) {
 				expect(error.toString()).toBeNull();

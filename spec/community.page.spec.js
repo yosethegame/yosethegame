@@ -42,7 +42,6 @@ describe("Community page", function() {
 			browser.visit("http://localhost:5000/community").
 				then(function() {
 					expect(browser.queryAll("#players .player").length).toEqual(2);
-					done();
 				}).
 				done(done, function(error) {
 					expect(error.toString()).toBeNull();
@@ -57,7 +56,6 @@ describe("Community page", function() {
 		browser.visit("http://localhost:5000/community").
 			then(function() {
 				expect(browser.text("#player-count")).toEqual('2');
-				done();
 			}).
 			done(done, function(error) {
 				expect(error.toString()).toBeNull();
@@ -70,7 +68,6 @@ describe("Community page", function() {
 		browser.visit("http://localhost:5000/community").
 			then(function() {
 				expect(browser.text("#score-community")).toEqual('000030');
-				done();
 			}).
 			done(done, function(error) {
 				expect(error.toString()).toBeNull();

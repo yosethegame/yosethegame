@@ -43,7 +43,6 @@ describe("Restart game:", function() {
 			browser.visit('http://localhost:5000/players/bilou').
 				then(function() {
 					expect(browser.text("#world-1 ul.level-list li:nth-child(1) a")).toContain(database.worlds[0].levels[0].title);
-					done();
 				}).
 				done(done, function(error) {
 					expect(error.toString()).toBeNull();

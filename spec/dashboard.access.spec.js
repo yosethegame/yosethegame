@@ -28,7 +28,6 @@ describe("Dashboard access", function() {
 			}).
 			then(function() {
 				expect(browser.location.toString()).toEqual("http://localhost:5000/players/ericminio");
-				done();
 			}).
 			done(done, function(error) {
 				expect(error.toString()).toBeNull();
@@ -45,7 +44,6 @@ describe("Dashboard access", function() {
 			}).
 			then(function() {
 				expect(browser.location.toString()).toEqual("http://localhost:5000/players/ericminio");
-				done();
 			}).
 			done(done, function(error) {
 				expect(error.toString()).toBeNull();
@@ -62,7 +60,6 @@ describe("Dashboard access", function() {
 			}).
 			then(function() {
 				expect(browser.location.toString()).toEqual("http://localhost:5000/players/ericminio");
-				done();
 			}).
 			done(done, function(error) {
 				expect(error.toString()).toBeNull();

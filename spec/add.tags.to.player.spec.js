@@ -43,7 +43,6 @@ describe("Add tags:", function() {
 			browser.visit('http://localhost:5000/players/annessou/settings').
 				then(function() {
 					expect(browser.query('#tags').value).toEqual('laval quebec');
-					done();
 				}).
 				done(done, function(error) {
 					expect(error.toString()).toBeNull();
