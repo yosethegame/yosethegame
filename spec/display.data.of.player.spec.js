@@ -6,9 +6,9 @@ var InMemoryDatabase = require('../app/support/database.with.levels');
 describe('Data of player endpoint', function() {
    
 	var server = new Server(router);
-	
+    
 	beforeEach(function() {
-		database = new InMemoryDatabase();
+		var database = new InMemoryDatabase();
 		database.players = [
             {
                 login: 'ericminio',
@@ -50,7 +50,7 @@ describe('Data of player endpoint', function() {
 		});			
     });
     
-    it('returns not found when the player does not exists', function() {
+    it('returns not found when the player does not exists', function(done) {
 		request("http://localhost:5000/players/unknown/data", function(error, response, body) {
             expect(response.statusCode).toEqual(404);
             expect(body.length).toEqual(0);
