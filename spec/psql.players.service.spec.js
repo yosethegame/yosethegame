@@ -42,9 +42,25 @@ describe('PostgreSql database', function() {
 	});
 	
     afterEach(function(done) {
-		database.deletePlayer(annessou, function() {
-			done();
-		})
+		client = new pg.Client(url);
+		client.connect(function(err) {
+			client.query('delete from players', function(err, result) {
+				client.end();
+				expect(err).toEqual(null);
+				done();
+			});			
+		});
+	});
+
+    afterEach(function(done) {
+		client = new pg.Client(url);
+		client.connect(function(err) {
+			client.query('delete from news', function(err, result) {
+				client.end();
+				expect(err).toEqual(null);
+				done();
+			});			
+		});
 	});
 
 	it('uses process.env.DATABASE_URL', function() {

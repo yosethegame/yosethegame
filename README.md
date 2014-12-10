@@ -4,3 +4,15 @@
 You've got Nutella on your nose :) 
 
 See it live: http://yosethegame.com
+
+### local install
+
+* install PostgreSql, Nodejs
+* create a database for yose and a postgresql user 
+* set env variable DATABASE_URL to something like postgres://yose@localhost
+* install dependencies: npm install
+* run spec that will create the tables: jasmine-node spec/psql.players.service.spec.js
+* run yose: node app/lib/web.js
+* access yose: http://localhost:5000
+
+The user ericminio is created at startup.
