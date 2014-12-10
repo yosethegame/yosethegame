@@ -20,12 +20,10 @@ describe('Creating a player', function() {
 	});
 	
 	it('makes the dashboard of this player available', function(done) {
-		var browser = new Browser();
+		var browser = Browser.create();
 		browser.visit('http://localhost:5000/create-new-player').
 			then(function () {
-				return browser.fill('#login', 'eric')
-							  .fill('#avatar', 'this-url')
-							  .pressButton('#create');
+				return browser.fill('#login', 'eric').pressButton('#create');
 			}).
 			then(function() {
 				expect(browser.text('#message')).toEqual('Done');
@@ -35,7 +33,6 @@ describe('Creating a player', function() {
 			}).
 			then(function() {
 				expect(browser.text("#world-1 .world-ellipse")).toContain(database.worlds[0].name);
-				done();
 			}).
 			done(done, function(error) {
 				expect(error.toString()).toBeNull();
@@ -44,28 +41,21 @@ describe('Creating a player', function() {
 	});
 
 	it('appears in the news', function(done) {
-		var browser = new Browser();
+		var browser = Browser.create();
 		browser.visit('http://localhost:5000/create-new-player').
 			then(function () {
-				return browser.fill('#login', 'eric')
-							  .fill('#avatar', 'this-avatar')
-							  .pressButton('#create');
+				return browser.fill('#login', 'eric').fill('#avatar', 'this-avatar').pressButton('#create');
 			}).
 			then(function() {
-        		browser.visit('http://localhost:5000/community').
-			        then(function() {
-				        expect(browser.queryAll('#news-1').length).toEqual(1);
-			        }).
-    			    then(function() {
-    				    expect(browser.query('#news-1 img').src).toContain('this-avatar');
-    				    expect(browser.text('#news-1')).toContain('entered the game');
-    				    done();
-    			    }).
-    			    done(done, function(error) {
-    				    expect(error.toString()).toBeNull();
-    				    done();
-    			    });
+        		return browser.visit('http://localhost:5000/community');
 			}).
+	        then(function() {
+		        expect(browser.query('#news-1')).not.toBeNull();
+	        }).
+		    then(function() {
+			    expect(browser.query('#news-1 img').src).toContain('this-avatar');
+			    expect(browser.text('#news-1')).toContain('entered the game');
+		    }).
 			done(done, function(error) {
 				expect(error.toString()).toBeNull();
 				done();
@@ -73,29 +63,20 @@ describe('Creating a player', function() {
 	});
 	
 	it('does not create a second news when the player already exists', function(done) {
-		var browser = new Browser();
+		var browser = Browser.create();
 		browser.visit('http://localhost:5000/create-new-player').
 			then(function () {
-				return browser.fill('#login', 'eric')
-							  .fill('#avatar', 'this-avatar')
-							  .pressButton('#create');
+				return browser.fill('#login', 'eric').pressButton('#create');
 			}).
 			then(function () {
-				return browser.fill('#login', 'eric')
-							  .fill('#avatar', 'this-avatar')
-							  .pressButton('#create');
+				return browser.fill('#login', 'eric').pressButton('#create');
 			}).
 			then(function() {
-        		browser.visit('http://localhost:5000/community').
-			        then(function() {
-				        expect(browser.queryAll('#news-2').length).toEqual(0);
-				        done();
-			        }).
-    			    done(done, function(error) {
-    				    expect(error.toString()).toBeNull();
-    				    done();
-    			    });
+        		return browser.visit('http://localhost:5000/community');
 			}).
+	        then(function() {
+		        expect(browser.query('#news-2')).toBeNull();
+	        }).
 			done(done, function(error) {
 				expect(error.toString()).toBeNull();
 				done();
