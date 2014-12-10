@@ -8,6 +8,7 @@ describe("Dashboard,", function() {
 
 	var server = new Server(router);
 	var remote;
+    var database;
 	
 	beforeEach(function() {
 		remote = require('http').createServer(
@@ -49,6 +50,6 @@ describe("Dashboard,", function() {
 		});
 	});
 	
-	});
+});
 		
 		

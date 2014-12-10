@@ -7,6 +7,7 @@ var fs 						= require('fs');
 describe("Search players by tags:", function() {
 
 	var server = new Server(router);
+    var database;
 	
 	beforeEach(function() {
 		database = new DatabaseWithChallenges();
