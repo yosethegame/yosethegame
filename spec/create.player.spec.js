@@ -44,7 +44,7 @@ describe('Creating a player', function() {
 		var browser = Browser.create();
 		browser.visit('http://localhost:5000/create-new-player').
 			then(function () {
-				return browser.fill('#login', 'eric').fill('#avatar', 'this-avatar').pressButton('#create');
+				return browser.fill('#login', 'eric').fill('#avatar', '/img/me.png').pressButton('#create');
 			}).
 			then(function() {
         		return browser.visit('http://localhost:5000/community');
@@ -53,7 +53,7 @@ describe('Creating a player', function() {
 		        expect(browser.query('#news-1')).not.toBeNull();
 	        }).
 		    then(function() {
-			    expect(browser.query('#news-1 img').src).toContain('this-avatar');
+			    expect(browser.query('#news-1 img').src).toContain('/img/me.png');
 			    expect(browser.text('#news-1')).toContain('entered the game');
 		    }).
 			done(done, function(error) {
