@@ -102,9 +102,7 @@ describe('Emergency challenge requester', function() {
 							count ++;
 						}
 					});
-					if (count > 1) {
-						throw "Map " + candidate.map + " found more than once";
-					}
+					expect(count).not.toBeGreaterThan(1);
 				});
 			});
 		});
@@ -144,7 +142,7 @@ describe('Emergency challenge requester', function() {
             var outOfRange = false;
             array.forEach([1, 2, 3, 4, 5], function(index) {
                 var candidateIndex = requester.candidateIndex();
-                if (candidateIndex >= requester.candidates.length) { outOfRange = true; }
+                outOfRange = outOfRange || (candidateIndex >= requester.candidates.length);
             });
 
             expect(outOfRange).toBe(false);

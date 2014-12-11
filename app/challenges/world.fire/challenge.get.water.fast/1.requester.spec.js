@@ -108,7 +108,7 @@ describe('Get water fast challenge requester', function() {
             var outOfRange = false;
             array.forEach([1, 2, 3, 4, 5], function(index) {
                 var candidateIndex = requester.candidateIndex();
-                if (candidateIndex >= requester.candidates.length) { outOfRange = true; }
+                outOfRange = outOfRange || (candidateIndex >= requester.candidates.length);
             });
 
             expect(outOfRange).toBe(false);
