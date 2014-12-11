@@ -10,7 +10,7 @@ describe('Form response matcher,', function() {
 
 	describe('When remote server responds the expected form and the expected content-type', function() {
 	
-		beforeEach(function() {
+		beforeEach(function(done) {
 			contentType = 'text/html';
 			content = '<html><body>' +
 							'<label id="title">title</label>' +
@@ -18,7 +18,10 @@ describe('Form response matcher,', function() {
 							'<input id="number">' +
 							'<button id="go">go</button>' +
                         '</body></html>';
-			status = matcher.computeStatus({ headers: {'content-type': contentType} }, content);
+			matcher.validate({}, { headers: {'content-type': contentType} }, content, function(receivedStatus) {
+			    status = receivedStatus;
+                done();
+			});
 		});
 		
 		it('sets code to 200', function() {
