@@ -69,5 +69,88 @@ describe('Resist strings response matcher', function() {
 		
 	});
 	
+	describe('When server does not include #result is the response,', function () {
+		
+		beforeEach(function() {
+			matcher.getInput = function() { return 'ZOUPO'; };
+			remote = require('http').createServer(
+				function (request, response) {
+					response.write(form);
+					response.end();
+				})
+			.listen(6000);			
+		});
+
+		afterEach(function() {
+			remote.close();
+		});
+
+		it('sets code to 501', function(done) {
+			matcher.validate('http://localhost:6000/primeFactors/ui', {}, {}, function(status) {
+				expect(status.code).toEqual(501);
+				done();
+			});
+		});
+		
+		it('sets expected', function(done) {
+			matcher.validate('http://localhost:6000/primeFactors/ui', {}, {}, function(status) {
+				expect(status.expected).toEqual("#result containing 'ZOUPO is not a number'");
+				done();
+			});
+		});
+		
+		it('sets actual', function(done) {
+			matcher.validate('http://localhost:6000/primeFactors/ui', {}, {}, function(status) {
+				expect(status.got).toEqual("Error: missing element #result");
+				done();
+			});
+		});
+		
+	});
 	
+	describe('When server does not respond the correct error message,', function () {
+		
+		beforeEach(function() {
+			matcher.getInput = function() { return 'TAMIS'; };
+			var content =   '<html><body>' + 
+                                '<label id="result">any</label>' +
+                            '</body></html>';
+			remote = require('http').createServer(
+				function (request, response) {
+					if (request.url == '/go') {
+						response.write(content);
+					} else {
+						response.write(form);
+					}
+					response.end();
+				})
+			.listen(6000);			
+		});
+
+		afterEach(function() {
+			remote.close();
+		});
+
+		it('sets code to 501', function(done) {
+			matcher.validate('http://localhost:6000/primeFactors/ui', {}, {}, function(status) {
+				expect(status.code).toEqual(501);
+				done();
+			});
+		});
+		
+		it('sets expected', function(done) {
+			matcher.validate('http://localhost:6000/primeFactors/ui', {}, {}, function(status) {
+				expect(status.expected).toEqual("#result containing 'TAMIS is not a number'");
+				done();
+			});
+		});
+		
+		it('sets actual', function(done) {
+			matcher.validate('http://localhost:6000/primeFactors/ui', {}, {}, function(status) {
+				expect(status.got).toEqual("#result containing 'any'");
+				done();
+			});
+		});
+		
+	});
 });

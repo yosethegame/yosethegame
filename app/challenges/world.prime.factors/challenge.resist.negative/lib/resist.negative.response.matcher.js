@@ -29,19 +29,26 @@ module.exports = {
 			then(function() {				
 				var result = browser.text('#result');
 				var expectedResult = self.expectedResult(number);
-				callback({
-					code: result == expectedResult ? 200 : 501,
-					expected: self.expectedAnswer(number),
-					got: "#result containing '" + result + "'"
-				});
+                if (result != expectedResult) {
+                    throw "#result containing '" + result + "'";
+                }
 			}).
-			done(function(){}, function(error) {
-				callback({
-					code: 501,
-					expected: self.expectedAnswer(number),
-					got: error.toString()
-				});
-			});	
+			done(
+                function() {
+    				callback({
+    					code: 200,
+    					expected: self.expectedAnswer(number),
+    					got: self.expectedAnswer(number)
+    				});
+                }, 
+                function(error) {
+				    callback({
+					    code: 501,
+                        expected: self.expectedAnswer(number),
+                        got: error.toString()
+                    });
+			    }
+            );	
 	}
 	
 };
