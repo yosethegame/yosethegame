@@ -5,15 +5,15 @@ describe('Big integer chooser:', function() {
 	var chooser = new Chooser();
 	
 	it('chooses randomly', function() {
-		var first = chooser.getNumber();
-		var second = chooser.getNumber();
 		var remainingAttempt = 5;
-		while (second == first && remainingAttempt > 0) {
-			second = chooser.getNumber();
+		var first = chooser.getNumber();
+        var different = false;
+		while (remainingAttempt > 0) {
 			remainingAttempt --;
+            different = different || (chooser.getNumber() !== first);
 		}
 		
-		expect(first).not.toEqual(second);
+		expect(different).toEqual(true);
 	});
 	
 	it('chooses numbers > 1e6', function() {

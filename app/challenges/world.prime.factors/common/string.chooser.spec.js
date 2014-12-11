@@ -8,16 +8,16 @@ describe('String chooser', function() {
 		expect(typeof(chooser.getString())).toEqual('string');
 	});
 	
-	it('chooses "randomly"', function() {
-		var first = chooser.getString();
-		var second = chooser.getString();
+	it('chooses randomly', function() {
 		var remainingAttempt = 5;
-		while (second == first && remainingAttempt > 0) {
-			second = chooser.getString();
+		var first = chooser.getString();
+		var different = false;
+		while (remainingAttempt > 0) {
 			remainingAttempt --;
+            different = different || (chooser.getString() !== first);
 		}
 		
-		expect(first).not.toEqual(second);
+		expect(different).toEqual(true);
 	});
 	
 });
