@@ -15,8 +15,8 @@ module.exports = {
 
 	validate: function(url, remoteResponse, content, callback) {
 		request(url, function (error, response, body) {
-			if (response === undefined) { return withError('Error: 404', callback); } 
-			if (response.statusCode !== 200) { return withError('Error: ' + response.statusCode, callback); } 
+			if (response === undefined) { return withError('Error1: 404', callback); } 
+			if (response.statusCode !== 200) { return withError('Error2: ' + response.statusCode, callback); } 
 
 			var page = cheerio.load(body);
 			if (page('a#repository-link').length === 0) { return withError('Error: missing element a#repository-link', callback); }
@@ -25,9 +25,9 @@ module.exports = {
 			if (repoUrl === undefined) { return withError('Error: missing element a#repository-link with href attribute', callback); }
 			if (repoUrl === '') { return withError('Error: missing element a#repository-link with href attribute', callback); }
 			request(repoUrl, function (repoError, repoResponse, repoBody) {
+				if (repoResponse === undefined) { return withError('Error: 404 (repository)', callback); } 
+				if (repoResponse.statusCode !== 200) { return withError('Error: ' + repoResponse.statusCode + ' (repository)',callback); } 
 				var pageRepo = cheerio.load(repoBody);
-				if (repoResponse === undefined) { return withError('Error: 404', callback); } 
-				if (repoResponse.statusCode !== 200) { return withError('Error: ' + repoResponse.statusCode,callback); } 
 				if (pageRepo('#readme').length === 0) { return withError('Error: missing element #readme', callback); }
 				if (pageRepo('#readme').html().indexOf('YoseTheGame') == -1) { return withError("missing reference to 'YoseTheGame' in element #readme", callback); }
 

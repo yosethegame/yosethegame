@@ -10,11 +10,14 @@ describe('Hello Yose response matcher,', function() {
 	
 	describe('When remote server responds the expected content', function() {
 	
-		beforeEach(function() {
+		beforeEach(function(done) {
 			content = '<html><body>' +
 							'Hello Yose' +
                         '</body></html>';
-			status = matcher.computeStatus({ }, content);
+			matcher.validate({}, {}, content, function(receivedStatus) {
+			    status = receivedStatus;
+                done();
+			});
 		});
 		
 		it('sets code to 200', function() {

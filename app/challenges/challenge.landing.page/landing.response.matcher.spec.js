@@ -14,13 +14,16 @@ describe('Landing page response matcher,', function() {
 	
 	describe('When remote server responds the expected elements and the expected content-type', function() {
 	
-		beforeEach(function() {
+		beforeEach(function(done) {
 			contentType = 'text/html';
 			content = '<html><body>' +
 							'<label id="welcome">title</label>' +
 							'<a id="ping-challenge-link" href="http://this-url/ping">The ping challenge</a>' +
                         '</body></html>';
-			status = matcher.computeStatus({ headers: {'content-type': contentType} }, content);
+			matcher.validate({}, { headers: {'content-type': contentType} }, content, function(receivedStatus) {
+			    status = receivedStatus;
+                done();
+			});
 		});
 		
 		it('sets code to 200', function() {

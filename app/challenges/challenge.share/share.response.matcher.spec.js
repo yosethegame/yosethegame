@@ -268,5 +268,139 @@ describe('Share response matcher,', function() {
 		});
 		
 	});
+    
+    describe('When repository does not answer,', function() {
+		
+		beforeEach(function() {
+			var content = '<html><body>' + 
+							'<a href="http://localhost:6001" id="repository-link">42</label>' +
+                            '</body></html>';
+			remote = require('http').createServer(
+				function (request, response) {
+					response.write(content);
+					response.end();
+				})
+			.listen(6000);			
+		});
+
+		afterEach(function() {
+			remote.close();
+		});
+
+		it('sets code to 501', function(done) {
+			matcher.validate('http://localhost:6000', {}, {}, function(status) {
+				expect(status.code).toEqual(501);
+				done();
+			});
+		});
+		
+		it('sets expected', function(done) {
+			matcher.validate('http://localhost:6000', {}, {}, function(status) {
+				expect(status.expected).toContain("a repository with a readme file");
+				done();
+			});
+		});
+		
+		it('sets actual', function(done) {
+			matcher.validate('http://localhost:6000/primeFactors/ui', {}, {}, function(status) {
+				expect(status.got).toContain('Error: 404 (repository)');
+				done();
+			});
+		});
+		
+	});	
+    
+    describe('When repository answers with 404,', function() {
+		
+        var repo;
+        
+		beforeEach(function() {
+			var content = '<html><body>' + 
+							'<a href="http://localhost:6001" id="repository-link">42</label>' +
+                            '</body></html>';
+			remote = require('http').createServer(
+				function (request, response) {
+					response.write(content);
+					response.end();
+				})
+			.listen(6000);			
+            
+			repo = require('http').createServer(
+				function (request, response) {
+					response.writeHead(404);
+					response.end();
+				})
+			.listen(6001);			
+		});
+
+		afterEach(function() {
+			remote.close();
+            repo.close();
+		});
+
+		it('sets code to 501', function(done) {
+			matcher.validate('http://localhost:6000', {}, {}, function(status) {
+				expect(status.code).toEqual(501);
+				done();
+			});
+		});
+		
+		it('sets expected', function(done) {
+			matcher.validate('http://localhost:6000', {}, {}, function(status) {
+				expect(status.expected).toContain("a repository with a readme file");
+				done();
+			});
+		});
+		
+		it('sets actual', function(done) {
+			matcher.validate('http://localhost:6000/primeFactors/ui', {}, {}, function(status) {
+				expect(status.got).toContain('Error: 404 (repository)');
+				done();
+			});
+		});
+		
+	});	
+    
+	describe('When readme file contains a reference to YoseTheGame,', function() {
+		
+		beforeEach(function() {
+			var content = '<html><body>' + 
+							'<a href="http://localhost:6000" id="repository-link">42</label>' +
+							'<label id="readme">Hello YoseTheGame</label>' +
+                        '</body></html>';
+			remote = require('http').createServer(
+				function (request, response) {
+					response.write(content);
+					response.end();
+				})
+			.listen(6000);			
+		});
+
+		afterEach(function() {
+			remote.close();
+		});
+
+		it('sets code to 200', function(done) {
+			matcher.validate('http://localhost:6000', {}, {}, function(status) {
+				expect(status.code).toEqual(200);
+				done();
+			});
+		});
+		
+		it('sets expected', function(done) {
+			matcher.validate('http://localhost:6000', {}, {}, function(status) {
+				expect(status.expected).toContain("a repository with a readme file containing 'YoseTheGame'");
+				done();
+			});
+		});
+		
+		it('sets actual', function(done) {
+			matcher.validate('http://localhost:6000/primeFactors/ui', {}, {}, function(status) {
+				expect(status.got).toContain("a repository with a readme file containing 'YoseTheGame'");
+				done();
+			});
+		});
+		
+	});
 	
 });
