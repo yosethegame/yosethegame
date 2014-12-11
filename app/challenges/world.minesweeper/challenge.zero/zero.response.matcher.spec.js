@@ -18,13 +18,12 @@ describe('Zero challenge in Minesweeper game:', function() {
 	
 	it('plays randomly on a candidate', function() {
 		var first = matcher.candidateIndex();
-		var same = true;
+		var different = false;
 		array.forEach([1, 2, 3, 4, 5], function(index) {
-            var second = matcher.candidateIndex();
-            if (second !== first) { same = false; }
+            different = different || (matcher.candidateIndex() !== first);
 		});
 		
-		expect(same).toBe(false);
+		expect(different).toBe(true);
 	});
 	
 	describe('fails when clicking on a cell with zero bomb around set text of cell to anything but empty', function() {

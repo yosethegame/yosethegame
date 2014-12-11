@@ -30,13 +30,12 @@ describe('Open challenge response matcher', function() {
       });
       
       it('is chosen randomly', function() {
-          var same = true;
+          var different = false;
           array.forEach([1, 2, 3, 4, 5], function(n) {
-              var next = matcher.target().grid;
-              if (next != grid) { same = false; }
+              different = different || (matcher.target().grid !== grid);
           });
           
-          expect(same).toBe(false);
+          expect(different).toBe(true);
       });
        
    });

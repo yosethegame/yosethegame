@@ -7,5 +7,4 @@ function Chooser() {
 	
 }
 
-var module = module || {};
 module.exports = Chooser;

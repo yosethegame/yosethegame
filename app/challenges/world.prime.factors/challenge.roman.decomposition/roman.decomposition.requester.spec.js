@@ -20,11 +20,10 @@ describe('Decomposition Requester', function() {
 	});
 	
 	it('chooses randomly a number', function() {
-        var different = false;
         var first = requester.chooseNumber();
+        var different = false;
         [1, 2, 3, 4, 5].forEach(function() {
-            var second = requester.chooseNumber();
-            if (second != first) { different = true; }
+            different = different || (requester.chooseNumber() !== first);
         });
 
         expect(different).toEqual(true);

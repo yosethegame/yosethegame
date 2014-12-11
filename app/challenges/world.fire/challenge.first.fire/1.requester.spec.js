@@ -67,13 +67,12 @@ describe('First fire challenge requester', function() {
 
         it('is random', function() {
             var first = requester.candidateIndex();
-            var same = true;
+            var different = false;
             array.forEach([1, 2, 3, 4, 5, 6, 7, 8, 9, 10], function(index) {
-                var second = requester.candidateIndex();
-                if (second !== first) { same = false; }
+                different = different || (requester.candidateIndex() !== first);
             });
 
-            expect(same).toBe(false);
+            expect(different).toEqual(true);
         });
 
         it('is made in the candidate list range', function() {

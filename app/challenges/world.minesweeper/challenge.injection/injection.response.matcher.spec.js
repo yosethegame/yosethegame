@@ -21,13 +21,12 @@ describe('Minesweeper data injection', function() {
 	
 	it('plays randomly on a bomb', function() {
 		var first = matcher.bombIndex();
-		var same = true;
+        var different = false;
 		array.forEach([1, 2, 3, 4, 5], function(index) {
-            var second = matcher.bombIndex();
-            if (second !== first) { same = false; }
+            different = different || (matcher.bombIndex() !== first);
 		});
 		
-		expect(same).toBe(false);
+		expect(different).toEqual(true);
 	});
 	
 	it('builds the cell id of the bomb to play', function() {

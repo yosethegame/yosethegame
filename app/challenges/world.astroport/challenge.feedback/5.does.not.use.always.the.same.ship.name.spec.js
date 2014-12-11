@@ -4,13 +4,11 @@ describe('Docker response matcher,', function() {
     
     it('does not use always the same ship name', function() {
         var first = matcher.willEnterShip();
-        var same = true;
+        var different = false;
         for (var i=0; i<5; i++) {
-            var current = matcher.willEnterShip();
-            if (first !== current) {
-                same = false;
-            }
+            different = different || (matcher.willEnterShip() !== first);
         }
-        expect(same).toEqual(false);
+
+        expect(different).toEqual(true);
     });
 });

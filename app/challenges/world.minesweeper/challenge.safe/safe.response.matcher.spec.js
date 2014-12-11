@@ -18,13 +18,12 @@ describe('Safe cells in Minesweeper game', function() {
 	
 	it('plays randomly on an empty cell', function() {
 		var first = matcher.cellIndex();
-		var same = true;
+		var different = false;
 		array.forEach([1, 2, 3, 4, 5], function(index) {
-            var second = matcher.cellIndex();
-            if (second !== first) { same = false; }
+            different = different || (matcher.cellIndex() !== first);
 		});
 		
-		expect(same).toBe(false);
+		expect(different).toEqual(true);
 	});
 	
 	it('builds the cell id of the cell to play', function() {
