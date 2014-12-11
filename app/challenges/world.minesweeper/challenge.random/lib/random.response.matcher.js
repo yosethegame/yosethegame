@@ -10,31 +10,32 @@ module.exports = {
         var self = this;
         var browser = Browser.create();
         
+        var first;
+        var second;
         browser.visit(url).
             then(function() {
-                var first = browser.evaluate('document.grid');
-                browser.visit(url).
-                then(function() {
-                    var second = browser.evaluate('document.grid');
-                    if (equal(second, first)) {
-                        throw 'The same document.grid';
-                    }
-                }).
-                done(   
-                    function() {
-                        callback({
-                            code: 200,
-                            expected: self.expected,
-                            got: self.expected
-                        });
-                    },
-                    function(error) {
-                        callback(error501.withValues(self.expected, error.toString()));
-                    }
-                );                
+                first = browser.evaluate('document.grid');
             }).
-            done(function() {}, function(error) {
-				callback(error501.withValues(self.expected, error.toString()));
-            });        
+            then(function() {
+                return browser.visit(url);
+            }).
+            then(function() {
+                second = browser.evaluate('document.grid');
+                if (equal(second, first)) {
+                    throw 'The same document.grid';
+                }
+            }).
+            done(   
+                function() {
+                    callback({
+                        code: 200,
+                        expected: self.expected,
+                        got: self.expected
+                    });
+                },
+                function(error) {
+                    callback(error501.withValues(self.expected, error.toString()));
+                }
+            );                
     }
 };

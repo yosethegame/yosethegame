@@ -14,12 +14,15 @@ describe('Minesweper portfolio challenge response matcher,', function() {
 	
 	describe('When remote server responds the expected element', function() {
 	
-		beforeEach(function() {
+		beforeEach(function(done) {
 			contentType = 'text/html';
 			content =   '<html><body>' +
                             '<a id="minesweeper-link" href="http://this-url/minesweeper">A minesweeper game</a>' +
                         '</body></html>';
-			status = matcher.computeStatus({}, content);
+			matcher.validate({}, {}, content, function(receivedStatus) {
+			    status = receivedStatus;
+                done();
+			});
 		});
 		
 		it('sets code to 200', function() {
