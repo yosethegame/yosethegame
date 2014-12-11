@@ -27,33 +27,32 @@ module.exports = {
                     return browser.fill('input#number', number).pressButton("button#go");
                 }).
                 then(function() {
-                    var browser = new Browser();
-                    browser.visit(url).
-                        then(function() {
-                            var text = browser.text('#last-decomposition');
-                            callback({
-                                code: text.indexOf(result) != -1 ? 200 : 501,
-                                expected: expected,
-                                got: text.indexOf(result) != -1 ? expected : "#last-decomposition with text '" + text + "'"
-                            });
-                        }).
-                        done(function(){}, function(error) {
-                            callback({
-                                code: 501,
-                                expected: expected,
-                                got: error.toString()
-                            });
-                        });
+                    browser = Browser.create();
+                    return browser.visit(url);
                 }).
-                done(function(){}, function(error) {
-                    callback({
-                        code: 501,
-                        expected: expected,
-                        got: error.toString()
-                    });
-                });
+                then(function() {
+                    var text = browser.text('#last-decomposition');
+                    if (text.indexOf(result) === -1) {
+                        throw "#last-decomposition with text '" + text + "'";
+                    }
+                }).
+                done(
+                    function() {
+                        callback({
+                            code: 200,
+                            expected: expected,
+                            got: expected
+                        });
+                    }, 
+                    function(error) {
+                        callback({
+                            code: 501,
+                            expected: expected,
+                            got: error.toString()
+                        });
+                    }
+                );
         }
-
     }
 
 };
