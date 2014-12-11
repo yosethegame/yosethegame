@@ -13,5 +13,4 @@ Requester.prototype.chooseNumber = function() {
     return Math.floor(Math.random()*399) + 1;
 };
 
-var module = module || {};
 module.exports = Requester;

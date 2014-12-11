@@ -30,5 +30,4 @@ Requester.prototype.url = function() {
 	return this.server + '/fire/geek?' + 'width=' + this.mapWidth() + '&map=' + this.map();
 };
 
-var module = module || {};
 module.exports = Requester;

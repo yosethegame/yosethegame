@@ -16,5 +16,4 @@ Requester.prototype.url = function() {
            ;
 };
 
-var module = module || {};
 module.exports = Requester;

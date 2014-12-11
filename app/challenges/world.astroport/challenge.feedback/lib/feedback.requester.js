@@ -8,5 +8,4 @@ Requester.prototype.url = function() {
 	return this.server + '/astroport';
 };
 
-var module = module || {};
 module.exports = Requester;

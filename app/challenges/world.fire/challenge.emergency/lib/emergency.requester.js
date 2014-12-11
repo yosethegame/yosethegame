@@ -45,5 +45,4 @@ Requester.prototype.map = function() {
 	return this.candidates[this.candidateIndex()].map;
 };
 
-var module = module || {};
 module.exports = Requester;

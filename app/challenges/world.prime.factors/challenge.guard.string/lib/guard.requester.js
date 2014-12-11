@@ -10,5 +10,4 @@ Requester.prototype.url = function() {
 	return this.server + '/primeFactors?number=' + this.stringChooser.getString();
 };
 
-var module = module || {};
 module.exports = Requester;
