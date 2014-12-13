@@ -25,7 +25,7 @@ describe('Name response matcher,', function() {
     });
     
     describe('passes when the response is', function() {
-        passesWhenTheResponse.is('<html><body><div id="gate-1"><div id="ship-1"/></div><div id="gate-2"><div id="ship-2"/></div><div id="gate-3"><div id="ship-3"/></div></body></html>', matcher)
+        passesWhenTheResponse.is('<html><body><div id="gate-1"><div id="ship-1"/></div><div id="gate-2"><div id="ship-2"/></div><div id="gate-3"><div id="ship-3"/></div></body></html>', matcher);
     });
 
 });

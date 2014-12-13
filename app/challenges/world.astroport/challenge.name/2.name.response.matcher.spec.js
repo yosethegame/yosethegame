@@ -17,7 +17,7 @@ describe('Name response matcher,', function() {
     });
     
     describe('passes when the response is', function() {
-        passesWhenTheResponse.is('<html><body id="astroport-name"></body></html>', matcher)
+        passesWhenTheResponse.is('<html><body id="astroport-name"></body></html>', matcher);
     });
     
 });

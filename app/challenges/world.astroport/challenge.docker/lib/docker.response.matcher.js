@@ -24,11 +24,11 @@ module.exports = {
         
         var document = cheerio.load(content);
         
-        if (document('input#ship').length == 0) {
+        if (document('input#ship').length === 0) {
             callback(error501.withValues(this.expected, 'Error: missing element input#ship'));
             return;
         }
-        if (document('button#dock').length == 0) {
+        if (document('button#dock').length === 0) {
             callback(error501.withValues(this.expected, 'Error: missing element button#dock'));
             return;
         }

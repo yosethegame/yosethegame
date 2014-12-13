@@ -24,7 +24,7 @@ describe('Feedback response matcher when gate-1 does not switch to occupied,', f
 
                         '<script src="docker.js"></script>' +
         
-                        '<label id="info" class="hidden"></label>'
+                        '<label id="info" class="hidden"></label>' +
                   '</body></html>';
 
           var script = 'function Docker() {}' +                

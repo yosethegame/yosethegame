@@ -16,14 +16,15 @@ module.exports = {
         }
         var document = cheerio.load(content);
         
-        for (var index=1; index<=3; index++) {            
-            if (document('#gate-' + index).length == 0) {
+        var index;
+        for (index=1; index<=3; index++) {            
+            if (document('#gate-' + index).length === 0) {
                 callback(error501.withValues(this.expected, 'Error: missing element #gate-' + index ));
                 return;
             }
         }
-        for (var index=1; index<=3; index++) {            
-            if (document('#gate-' + index + ' #ship-' + index).length == 0) {
+        for (index=1; index<=3; index++) {            
+            if (document('#gate-' + index + ' #ship-' + index).length === 0) {
                 callback(error501.withValues(this.expected, 'Error: missing element #ship-' + index + ' in element #gate-' + index ));
                 return;
             }
