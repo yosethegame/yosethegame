@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Play - Yose</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link href="/lib/bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link href="/css/main.css" rel="stylesheet" type="text/css">
+		<link rel="shortcut icon" type="image/png" href="/img/favicon.png" />
+	</head>
+<body>
+	
+	<label class="text-danger hidden" id="info">Unknown player</label>
+	
+	<div id="player" class="visible">
+		<label id="login" class="hidden">login-of-player</label>
+
+		<section id="sidebar">
+			content of section sidebar in feature.dashboard/banner.html will be included
+		</section>
+
+		<div id="playground-content">
+
+			<section id="next-challenge" class="visible">
+				<div id="next-challenge-header-section">
+					<span id="next-challenge-title">Next challenge title</span>
+				</div>		
+						
+				<div id="next-challenge-content">
+					<table>
+						<tr>
+							<td style="vertical-align: top">
+								<span class="glyphicon glyphicon-info-sign"
+								 	  style="color:#428bca; font-size:300%"
+									  >
+								</span>
+							</td>
+							<td><div id="next-challenge-assignment">assignment</div></td>
+						</tr>
+					</table>
+					<br/>
+					<div id="next-challenge-details">details</div>
+				</div>
+			</section>			
+		</div>		
+	</div>
+	
+	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>
+	<script src="/lib/bootstrap/js/bootstrap.min.js"></script>		
+
+	<script src="/features/common/lib/render.score.js"></script>	
+	<script src="/features/feature.restart.game/lib/restart.game.listener.js"></script>	
+</body>
+</html>

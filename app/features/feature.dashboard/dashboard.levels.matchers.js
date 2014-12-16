@@ -19,20 +19,21 @@ beforeEach(function() {
 		return levelClass.indexOf('level-open') !== -1 && this.actual.level.html() == expectedLink;
 	};
 	
-	var toBeDone = function() {
+	var toBeDoneBy = function(login) {
 		var levelClass = this.actual.level.attr('class');
+        var expectedLink = '<a href="/players/' + login + '/display/world/' + this.actual.worldNumber + '/level/' + this.actual.levelNumber + '">' + this.actual.levelTitle + '</a>';
 		this.message = function() {
 			return "Expected '" + levelClass + "' to contain 'level-done' and " +
                     "'" + this.actual.level.html() + "'" + 
-                    " to equal '" + this.actual.levelTitle + "'";
+                    " to equal '" + expectedLink;
 		};
-		return levelClass.indexOf('level-done') !== -1 && this.actual.level.html() == this.actual.levelTitle;
+		return levelClass.indexOf('level-done') !== -1 && this.actual.level.html() == expectedLink;
 	};
 
 	this.addMatchers({ 
 		toBeALockedLevel: toBeALockedLevel,
 		toBePlayableBy: toBePlayableBy, 
-		toBeDone: toBeDone });
+		toBeDoneBy: toBeDoneBy });
 });
 
 function DashboardLevelMatcherData(page, database) {

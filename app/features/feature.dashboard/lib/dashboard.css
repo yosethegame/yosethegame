@@ -53,6 +53,9 @@
     padding-right:5px;
 }
 
+.world-detail a:link, .world-detail a:hover, .world-detail a:visited {
+    color:#03a1fc;
+}
 
 .level-list-header {
     border-right-color:white;
@@ -70,18 +73,14 @@
 }
 
 .level {
-}
+} 
 
-.level-open {
-    color:#03a1fc;
-}
-
-.world-detail a:link, .world-detail a:hover, .world-detail a:visited {
-    color:#03a1fc;
-}
-
-.level-done {
+.level-done a:link, .level-done a:hover, .level-done a:visited {
     color: white;
+}
+
+.level-open a:link, .level-open a:hover, .level-open a:visited {
+    color: #03a1fc;
 }
 
 .level-locked {

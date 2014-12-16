@@ -40,6 +40,10 @@ module.exports = {
             target: require('../features/feature.playground/lib/display.playground.request')
         },
         {
+            pattern: /^\/players\/[A-z|\.|\-|@|0-9]+\/display\/world\/[0-9]+\/level\/[0-9]+$/,
+            target: require('../features/feature.display.level/lib/display.level.request')
+        },
+        {
             pattern: /^\/players\/[A-z|\.|\-|@|0-9]+\/settings$/,
             target: require('../features/feature.settings/lib/display.settings.request')
         },

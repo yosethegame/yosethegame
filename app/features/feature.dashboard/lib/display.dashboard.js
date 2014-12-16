@@ -55,7 +55,8 @@ dashboard = function(request, response, database) {
                 var levelDoneCount = 0;
                 array.forEach(world.levels, function(level, levelIndex) {
                     if (thePlayer.hasDoneThisLevel(player, level)) {
-                        levelList.append('<li class="level level-done">' + level.title + '</li>');
+                        var link = '<a href="/players/' + login + '/display/world/' + (worldIndex+1) + '/level/' + (levelIndex+1) + '">' + level.title + '</a>';
+                        levelList.append('<li class="level level-done">' + link + '</li>');
                         levelDoneCount ++;
                     }
                     else {

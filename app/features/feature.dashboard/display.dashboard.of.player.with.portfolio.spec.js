@@ -35,7 +35,7 @@ describe('The dashboard of a player with a portfolio:', function() {
 	});
 	
 	it('displays level 1.1 as done', function() {
-        expect(level.number(1, 1)).toBeDone();
+        expect(level.number(1, 1)).toBeDoneBy('ericminio');
 	});
 	
 	it('invites the player to play level 1.2', function() {

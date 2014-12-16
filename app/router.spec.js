@@ -64,6 +64,10 @@ describe('Router', function() {
 			expect(router.endPointOf({ url: '/players/any@name-with.dash.and.dot/play/world/42/level/18' })).toBe(require('./features/feature.playground/lib/display.playground.request.js'));
 		});
 		
+		it('maps display level request', function() {
+			expect(router.endPointOf({ url: '/players/any/display/world/42/level/18' })).toBe(require('./features/feature.display.level/lib/display.level.request.js'));
+		});
+
 		it('maps display settings request', function() {
 			expect(router.endPointOf({ url: '/players/any/settings' })).toBe(require('./features/feature.settings/lib/display.settings.request.js'));
 		});
