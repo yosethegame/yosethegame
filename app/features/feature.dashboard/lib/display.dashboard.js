@@ -55,14 +55,14 @@ dashboard = function(request, response, database) {
                 var levelDoneCount = 0;
                 array.forEach(world.levels, function(level, levelIndex) {
                     if (thePlayer.hasDoneThisLevel(player, level)) {
-                        var link = '<a href="/players/' + login + '/display/world/' + (worldIndex+1) + '/level/' + (levelIndex+1) + '">' + level.title + '</a>';
-                        levelList.append('<li class="level level-done">' + link + '</li>');
+                        var doneLink = '<a href="/players/' + login + '/display/world/' + (worldIndex+1) + '/level/' + (levelIndex+1) + '">' + level.title + '</a>';
+                        levelList.append('<li class="level level-done">' + doneLink + '</li>');
                         levelDoneCount ++;
                     }
                     else {
                         if (level.isOpenLevelFor(player)) {
-                            var link = '<a href="/players/' + login + '/play/world/' + (worldIndex+1) + '/level/' + (levelIndex+1) + '">' + level.title + '</a>';
-                            levelList.append('<li class="level level-open">' + link + '</li>');
+                            var openLink = '<a href="/players/' + login + '/play/world/' + (worldIndex+1) + '/level/' + (levelIndex+1) + '">' + level.title + '</a>';
+                            levelList.append('<li class="level level-open">' + openLink + '</li>');
                         }
                         else {
                             drawLockedLevel = true;
