@@ -18,13 +18,7 @@ var leadingZeros = function(score) {
 	return Array(7-digitCount).join('0');
 };
 
-try {
-	module = module || {};
-}
-catch(e) {
-	module = {};
-}
-
+var module = module || {};
 module.exports = renderScore;
 module.exports.withoutLeadingZeros = withoutLeadingZeros;
 module.exports.leadingZeros = leadingZeros;
