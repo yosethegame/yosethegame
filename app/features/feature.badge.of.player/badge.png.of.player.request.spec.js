@@ -6,7 +6,6 @@ describe('Png Badge of player request', function() {
     var response = {
         setHeader: function(key, value) { this.headerKey = key; this.headerValue = value; },
     	writeHead: function(statusCode) { this.statusCode = statusCode; },
-        write: function(content) { this.content = content; },
     	end: function(content, format) { this.content = content; this.format = format; },
         reset: function() { 
             this.headerKey = undefined; 
