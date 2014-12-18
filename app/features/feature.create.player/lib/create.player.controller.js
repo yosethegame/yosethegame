@@ -3,10 +3,11 @@ var self;
 function CreatePlayerController($) {
     self = this;
     this.page = $;
+    this.regex = /^[A-z|\.|\-|@|0-9]+$/;
 }
 
 CreatePlayerController.prototype.isLoginCorrect = function() {
-    return (/^[A-z|\.|\-|@|0-9]+$/).test(this.page('#login').val());
+    return (this.regex).test(this.page('#login').val());
 };
 
 CreatePlayerController.prototype.updateLoginFeedback = function() {
@@ -16,13 +17,13 @@ CreatePlayerController.prototype.updateLoginFeedback = function() {
     }
     else {
         this.page('#login-feedback').removeClass('alert-success').addClass('alert-danger');
-        this.page('#login-feedback label').text('Login incorrect. Must match /^[A-z|\\.|\\-|@|0-9]+$/');
+        this.page('#login-feedback label').text('Login incorrect. Must match ' + this.regex);
     }
 };
 
 CreatePlayerController.prototype.updatePreview = function() {
     this.page('#avatar-preview').attr('src', this.page('#avatar').val());
-    this.page.get($('#avatar').val()).success(this.succesGettingAvatar).error(this.errorGettingAvatar);
+    this.page.get(this.page('#avatar').val()).success(this.succesGettingAvatar).error(this.errorGettingAvatar);
 };
 
 CreatePlayerController.prototype.player = function() {

@@ -4,6 +4,8 @@ var restartworld    = require('./lib/restart.world.request');
 
 describe('Restart world', function() {
    
+    var database;
+   
 	beforeEach(function() {		
 		database = new Database();
 	});

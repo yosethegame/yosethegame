@@ -1,13 +1,14 @@
 var $ = require('jquery')(require("jsdom").jsdom().parentWindow);
 var CreatePlayerController = require('./lib/create.player.controller');
 
-describe('Create player listener', function() {
-	
-	var create = new CreatePlayerController($);
+describe('Create player listener:', function() {
 	
 	describe('Request sent', function() {
 		
+    	var create;
+	
 		beforeEach(function() {
+            create = new CreatePlayerController($);
 			$('body').append('<input id="login" />');
 			$('body').append('<input id="avatar" />');
 		});
@@ -38,7 +39,10 @@ describe('Create player listener', function() {
 	
 	describe('Login correctness', function() {
 	
+    	var create;
+	
 		beforeEach(function() {
+            create = new CreatePlayerController($);
 			$('body').append('<input id="login" />');
 		});
 
@@ -85,7 +89,10 @@ describe('Create player listener', function() {
 	
 	describe('Success', function() {
 		
+    	var create;
+	
 		beforeEach(function() {
+            create = new CreatePlayerController($);
 			$('body').append( '' +
 				'<input id="login" />' +
 				'<section id="feedback" class="hidden" >' +

@@ -13,7 +13,6 @@ describe('Control Access', function() {
 	
 	beforeEach(function() {	
 		database.worlds[0].isOpenFor = function(player) { return true; };
-		database.worlds[1].isOpenFor = function(player) { return true; };
 		player = {
 			login: 'ericminio'
 		};
@@ -81,7 +80,6 @@ describe('Control Access', function() {
 	describe('when the world number is unknown', function() {
 		
 		beforeEach(function() {
-			database.worlds[1].isOpenFor = function(player) { return false; };
 			playground({ url: '/players/ericminio/play/world/22/level/1' }, response, database);
 			page = cheerio.load(response.html);
 		});
@@ -103,7 +101,6 @@ describe('Control Access', function() {
 	describe('when the world number is corrupted', function() {
 		
 		beforeEach(function() {
-			database.worlds[1].isOpenFor = function(player) { return false; };
 			playground({ url: '/players/ericminio/play/world/any/level/1' }, response, database);
 			page = cheerio.load(response.html);
 		});

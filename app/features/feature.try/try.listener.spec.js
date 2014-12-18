@@ -31,6 +31,22 @@ describe("TryListener: ", function() {
 		$('#results').remove();
 		$('#scroll-anchor').remove();
 	});
+    
+    it('scrolls down to scroll anchor', function() {
+        var anchor = $('#scroll-anchor')[0];
+        anchor.scrollIntoView = function() {};
+        spyOn(anchor, 'scrollIntoView');
+		listener.displayResults(buildResultsWithDummyScore([
+			{
+				title: 'this-challenge',
+				code: 200,
+				expected: { question: 'any', answer: 42 },
+				got: { flag: true }
+			}
+		]));
+        
+        expect(anchor.scrollIntoView).toHaveBeenCalledWith(true);
+    });
 	
 	describe('Request sent:', function() {
 	

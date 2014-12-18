@@ -32,9 +32,6 @@ describe('Score rendering', function() {
         browser.visit('http://localhost:6000').
             then(function() {
                 expect(browser.text("#score")).toEqual('000042');
-            }).
-            done(done, function(error) {
-                expect(error.toString()).toEqual(null);
                 done();
             });
     });	

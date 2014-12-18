@@ -19,5 +19,17 @@ describe("Restart game listener: ", function() {
 
 		expect($.get).toHaveBeenCalledWith('/restart-game?login=eric');
 	});
+    
+    it('reloads window.location when success', function() {
+        window = { 
+            location : {
+                reload: function() {}
+            }
+        };
+        spyOn(window.location, 'reload');
+        restart.reload();
+        
+        expect(window.location.reload).toHaveBeenCalledWith(true);
+    });
 
 });

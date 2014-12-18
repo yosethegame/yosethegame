@@ -49,17 +49,23 @@ var rerun = function(request, response, database, done) {
 	var worldNumber = parseInt(/^\/players\/(.*)\/rerun\/world\/(.*)/.exec(request.url)[2]);
 	var world = database.worlds[worldNumber - 1];
 	if (world === undefined) {
-		return exitWithMessage('this world is unknown', page, response);
+        exitWithMessage('this world is unknown', page, response);
+        done();
+        return;
 	}
 
 	database.find(login, function(player) {
 
 		if (player === undefined) {
-			return exitWithMessage('this player is unknown', page, response);
+            exitWithMessage('this player is unknown', page, response);
+            done();
+            return;
 		}	
 		
 		if (!world.isOpenFor(player)) {
-			return exitWithMessage('this world is locked', page, response);
+            exitWithMessage('this world is locked', page, response);
+            done();
+            return;
 		}
 		
 		page('#login').empty().text(player.login);

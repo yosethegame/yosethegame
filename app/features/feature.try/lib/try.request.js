@@ -4,7 +4,6 @@ var withAttribute   = require('../../../utils/lib/array.matchers');
 var withValue       = require('../../../utils/lib/array.matchers');
 var extract         = require('../../../utils/lib/array.utils');
 var array           = require('../../../utils/lib/array.utils');
-var httperror       = require('./http.errors.utils');
 var thisPlayer      = require('../../../lib/player.utils');
 var logSuccess      = require('./log.success');
 var logServer       = require('./log.server');

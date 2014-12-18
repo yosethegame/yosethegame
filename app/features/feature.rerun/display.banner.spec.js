@@ -17,7 +17,6 @@ describe('The banner', function() {
 			portfolio: [ { server: 'this-server', achievements: [1, 2] } ]
 		};
 		database.worlds[0].isOpenFor = function(player) { return true; };
-		database.worlds[1].isOpenFor = function(player) { return true; };
 		database.players = [ player ];
 		rerun({ url: '/players/ericminio/rerun/world/1' }, response, database);
 		page = cheerio.load(response.html);

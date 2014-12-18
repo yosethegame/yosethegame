@@ -11,7 +11,6 @@ describe('Try button', function() {
 	var player;
 	
 	beforeEach(function() {	
-		database.worlds[0].isOpenFor = function(player) { return true; };
 		database.worlds[1].isOpenFor = function(player) { return true; };
 		database.worlds[1].levels[0].isOpenLevelFor = function(player) { return true; };
 		player = {

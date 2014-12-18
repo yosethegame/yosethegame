@@ -1,8 +1,10 @@
+var cheerio         = require('cheerio');
 var Database        = require('../../support/database.with.levels');
 var restartworld    = require('./lib/restart.world.request');
+var response        = require('../../support/fake.response');
 
-describe('Restart world link', function() {
-    
+describe('Restart world: when the player is unknown,', function() {
+   
     var response = {
         end: function() {},
         writeHead: function(code, headers) { 
@@ -12,13 +14,13 @@ describe('Restart world link', function() {
     };
 
     beforeEach(function() {		
-        database = new Database();
+	    var database = new Database();
         database.players = [{
            login: 'bilou',
            score: 10,
            portfolio: [ { server: 'any', achievements: [database.worlds[0].levels[0].id] } ]
 		}];
-		restartworld({ url: '/players/bilou/restart/world/1' }, response, database);
+		restartworld({ url: '/players/unknown/restart/world/2' }, response, database);
     });
 
     it('sets http code to redirect', function() {
@@ -26,7 +28,6 @@ describe('Restart world link', function() {
     });
     
     it('redirects to dashboard of player', function() {
-        expect(response.headers.location).toEqual('/players/bilou');
+        expect(response.headers.location).toEqual('/players/unknown');
     });
-    
 });
