@@ -6,5 +6,4 @@ EmptyRequest.prototype.url = function() {
 	return this.server;
 };
 
-var module = module || {};
 module.exports = EmptyRequest;
