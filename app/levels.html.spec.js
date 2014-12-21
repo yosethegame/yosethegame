@@ -53,7 +53,7 @@ describe('Level html Checkers', function() {
                     }
                 ]}
             ]
-        }
+        };
         try {        
             checkChallengeAssignmentSectionExistance(database);
         }
@@ -77,7 +77,7 @@ describe('Level html Checkers', function() {
                     }
                 ]}
             ]
-        }
+        };
         try {        
             checkChallengeDetailsSectionExistance(database);
         }
@@ -101,7 +101,7 @@ describe('Level html Checkers', function() {
                     }
                 ]}
             ]
-        }
+        };
         try {        
             checkChallengeTipsSectionExistance(database);
         }

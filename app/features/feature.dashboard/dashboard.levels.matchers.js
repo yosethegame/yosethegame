@@ -5,7 +5,7 @@ var buildMessage = function(login, actual, expectedClass, linksTo) {
  
     return 'Expected "' + levelClass + '" to contain "' + expectedClass + '" and ' +
             '"' + levelHtml + '" to equal "' + expectedLink + '"';
-}
+};
 
 var toBeALockedLevel = function() {
 	var levelClass = this.actual.level.attr('class');

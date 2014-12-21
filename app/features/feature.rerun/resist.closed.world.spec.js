@@ -14,7 +14,7 @@ describe('Rerun: when the world is closed,', function() {
             avatar: '/img/me.png',
 			portfolio: [ { server: 'this-server', achievements: [1] } ]
 		}];		
-        database.worlds[0].isOpenFor = function() { return false; }
+        database.worlds[0].isOpenFor = function() { return false; };
 		rerun({ url: '/players/ericminio/rerun/world/1/level/1' }, response, database, function() {
     		page = cheerio.load(response.html);
 		    done();

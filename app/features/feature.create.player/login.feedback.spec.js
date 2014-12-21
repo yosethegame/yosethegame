@@ -9,7 +9,7 @@ describe('Login feedback:', function() {
     
         beforeEach(function() {
             create = new CreatePlayerController($);
-            create.isLoginCorrect = function() { return true; }
+            create.isLoginCorrect = function() { return true; };
     		$('body').append('<section id="login-feedback" class="alert-danger"><label></label></section>');
             create.updateLoginFeedback();
         });
@@ -35,7 +35,7 @@ describe('Login feedback:', function() {
     
         beforeEach(function() {
             create = new CreatePlayerController($);
-            create.isLoginCorrect = function() { return false; }
+            create.isLoginCorrect = function() { return false; };
     		$('body').append('<section id="login-feedback" class="alert-success"><label></label></section>');
             create.updateLoginFeedback();
         });

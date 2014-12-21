@@ -14,7 +14,7 @@ describe('Score rendering', function() {
                             '</script>' +
                         '</body>' +
                    '</html>';
-        var script = require('fs').readFileSync('./app/features/common/lib/render.score.js').toString()
+       var script = require('fs').readFileSync('./app/features/common/lib/render.score.js').toString();
         
         server = require('http').createServer(function(request, response) {
             if (request.url == '/render.score.js') { response.write(script); } else { response.write(html); }
