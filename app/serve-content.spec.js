@@ -8,7 +8,11 @@ describe("Serve Content callback", function() {
 	var folder = 'test-data';
 	
 	beforeEach(function() {	
-		if (!fs.existsSync(folder)) fs.mkdirSync(folder);			
+        var files = fs.readdirSync(folder);
+        files.forEach(function(file, index) {
+            fs.unlinkSync(folder + '/' + file);
+        });
+
 		server = require('http').createServer(servecontent(folder)).listen(5000, 'localhost');		
 	});
 	afterEach(function() {
