@@ -1,6 +1,6 @@
 var self;
 
-function CreatePlayerController($) {
+CreatePlayerController = function($) {
     self = this;
     this.page = $;
     this.regex = /^[A-z|\.|\-|@|0-9]+$/;
@@ -63,6 +63,3 @@ CreatePlayerController.prototype.success = function(data) {
 	self.page('#feedback').removeClass('hidden').addClass('visible');
 	self.page('#player-dashboard').attr('href', '/players/' + self.page('#login').val());
 };
-
-var module = module || {};
-module.exports = CreatePlayerController;

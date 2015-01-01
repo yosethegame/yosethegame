@@ -1,6 +1,6 @@
 var months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-function NewsRenderer($) {
+NewsRenderer = function($) {
     this.page = $;
 }
 
@@ -51,6 +51,3 @@ NewsRenderer.prototype.display = function(news) {
         this.page('#news-list').append(line);
     }    
 };
-
-var module = module || {};
-module.exports = NewsRenderer;

@@ -1,6 +1,6 @@
 var selfFetcher;
 
-function NewsFetcher($) {
+NewsFetcher = function($) {
     selfFetcher = this;
     this.page = $;
 }
@@ -16,6 +16,3 @@ NewsFetcher.prototype.getNews = function() {
 NewsFetcher.prototype.received = function(news) {
     selfFetcher.renderer.display(JSON.parse(news));
 };
-
-var module = module || {};
-module.exports = NewsFetcher;

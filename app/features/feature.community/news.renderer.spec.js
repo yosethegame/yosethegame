@@ -1,5 +1,5 @@
 var $ = require('jquery')(require("jsdom").jsdom().parentWindow);
-var NewsRenderer = require('./lib/news.renderer');
+require('./lib/news.renderer');
 
 describe('News Renderer', function() {
 
