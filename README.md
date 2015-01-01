@@ -11,7 +11,7 @@ See it live: http://yosethegame.com
 * create a database for yose and a postgresql user 
 * set env variable DATABASE_URL to something like postgres://yose@localhost
 * install dependencies: npm install
-* run spec that will create the tables: jasmine-node spec/psql.players.service.spec.js
+* check your install: jasmine-node app
 * run yose: node app/lib/web.js
 * access yose: http://localhost:5000
 
