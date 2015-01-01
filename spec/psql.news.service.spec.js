@@ -1,5 +1,6 @@
 var PSql = require('../app/lib/psql.database');
 var pg = require('pg');
+var dropAndCreateTableNews = require('../app/utils/database.drop.and.create.table.news');
 
 describe('News service', function() {
 
@@ -8,17 +9,10 @@ describe('News service', function() {
 	var client;
 	
     beforeEach(function(done) {
-		client = new pg.Client(url);
-		client.connect(function(err) {
-			client.query('drop table news', function(err, result) {
-				client.query('create table news(date timestamp with time zone, json varchar(5000))', function(err, result) {
-					client.end();
-					expect(err).toEqual(null);
-					done();
-				});			
-			});			
-		});		
-	});
+        dropAndCreateTableNews(url, function() {
+            done();
+        });
+    });
 	
 	it('retrieves the news in the desc order', function(done) {
 	    var news = [ { text: 'yesterday' }, { text: 'today' } ];

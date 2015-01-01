@@ -1,67 +1,22 @@
 var PSql = require('../app/lib/psql.database');
 var pg = require('pg');
+var dropAndCreateTablePlayers = require('../app/utils/database.drop.and.create.table.players');
 
 describe('PostgreSql database', function() {
 
 	var url = process.env.DATABASE_URL;
 	var database = new PSql(url);
 	var client;
-	var annessou;
-	
-	beforeEach(function(done) {
-		annessou = { 
+	var annessou = { 
 			login: 'asm',
 			name: 'annessou'
 		};
-
-		client = new pg.Client(url);
-		client.connect(function(err) {
-			client.query('drop table players', function(err, result) {
-				client.query('create table players(login varchar(50), json varchar(5000), score integer, creation_date timestamp with time zone)', function(err, result) {
-					client.end();
-					expect(err).toEqual(null);
-					done();
-				});			
-			});			
-		});
-		
-	});
 	
-	beforeEach(function(done) {
-		client = new pg.Client(url);
-		client.connect(function(err) {
-			client.query('drop table news', function(err, result) {
-				client.query('create table news(date timestamp with time zone, json varchar(5000))', function(err, result) {
-					client.end();
-					expect(err).toEqual(null);
-					done();
-				});			
-			});			
-		});
-		
-	});
-	
-    afterEach(function(done) {
-		client = new pg.Client(url);
-		client.connect(function(err) {
-			client.query('delete from players', function(err, result) {
-				client.end();
-				expect(err).toEqual(null);
-				done();
-			});			
-		});
-	});
-
-    afterEach(function(done) {
-		client = new pg.Client(url);
-		client.connect(function(err) {
-			client.query('delete from news', function(err, result) {
-				client.end();
-				expect(err).toEqual(null);
-				done();
-			});			
-		});
-	});
+    beforeEach(function(done) {
+        dropAndCreateTablePlayers(url, function() {
+            done();
+        });
+    });
 
 	it('uses process.env.DATABASE_URL', function() {
 		expect(url).toEqual(process.env.DATABASE_URL);
@@ -196,17 +151,6 @@ describe('PostgreSql database', function() {
 						
 					});
 				});
-			});
-		});
-	});
-	
-	it('can delete a player', function(done) {
-		database.createPlayer(annessou, function() {
-			database.deletePlayer(annessou, function() {
-				database.find('asm', function(player) {
-					expect(player).toEqual(undefined);
-					done();
-				});								
 			});
 		});
 	});
