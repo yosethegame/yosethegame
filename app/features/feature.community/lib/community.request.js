@@ -2,7 +2,8 @@ var fs          = require('fs');
 var cheerio     = require('cheerio');
 var array       = require('../../../utils/lib/array.utils');
 var thePlayer   = require('../../../lib/player.utils');
-var renderScore	= require('../../common/lib/render.score');
+
+require('../../common/lib/render.score');
 
 var index = function(request, response, database) {
 	var html = fs.readFileSync('./app/features/feature.community/lib/community.html').toString();

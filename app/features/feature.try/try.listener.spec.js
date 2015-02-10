@@ -1,6 +1,8 @@
 var $           = require('jquery')(require("jsdom").jsdom().parentWindow);
 var TryListener = require('./lib/try.listener');
 
+require('../common/lib/render.score');
+
 describe("TryListener: ", function() {
 
 	var listener = new TryListener($);

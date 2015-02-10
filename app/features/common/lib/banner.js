@@ -1,4 +1,4 @@
-var renderScore = require('./render.score');
+require('./render.score');
 
 var fillBannerWithGreetings = function(page, player, greetings) {
     page("#avatar").attr('src', player.avatar);

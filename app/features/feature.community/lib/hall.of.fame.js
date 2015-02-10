@@ -2,7 +2,8 @@ var fs          = require('fs');
 var cheerio     = require('cheerio');
 var array       = require('../../../utils/lib/array.utils');
 var thePlayer   = require('../../../lib/player.utils');
-var renderScore	= require('../../common/lib/render.score');
+
+require('../../common/lib/render.score');
 
 var extractPlayerTemplateIn = function(page) {
 	return page.html('#players .player');
@@ -12,8 +13,8 @@ var buildLine = function(template, player, database) {
     var serverOfPlayer = thePlayer.hasServer(player) ? thePlayer.serverOf(player) : "";
 	var line = template.replace('<a href="">', '<a href="' + serverOfPlayer + '">')
                        .replace('<img src=""', '<img src="' + player.avatar + '"')
-                       .replace('1234567', renderScore.withoutLeadingZeros(player.score))
-                       .replace('0000', renderScore.leadingZeros(player.score))
+                       .replace('1234567', withoutLeadingZeros(player.score))
+                       .replace('0000', leadingZeros(player.score))
 				;
 	return line;
 };
