@@ -67,7 +67,7 @@ describe("TryListener: ", function() {
 			spyOn($, 'get').andCallThrough();
 			listener.try(2, 1);
 
-			expect($.get).toHaveBeenCalledWith('/try?login=eric&server=any&world=2&level=1');
+			expect($.get).toHaveBeenCalledWith('/try?login=eric&world=2&level=1&server=any');
 		});
 	});
 	

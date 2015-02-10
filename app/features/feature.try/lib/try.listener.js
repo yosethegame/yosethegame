@@ -8,7 +8,7 @@ function TryListener($) {
 TryListener.prototype.try = function(worldNumber, levelNumber) {
 	startAnimation();
 	hideResults();
-	thisListener.page.get('/try?login=' + thisListener.page('#login').text() + '&server=' + thisListener.page('#server').val() + '&world=' + worldNumber + '&level=' + levelNumber)
+	thisListener.page.get('/try?login=' + thisListener.page('#login').text() + '&world=' + worldNumber + '&level=' + levelNumber + '&server=' + thisListener.page('#server').val())
 		.success(this.displayResults);
 };
 
