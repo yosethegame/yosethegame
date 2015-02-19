@@ -126,6 +126,7 @@ describe('Level checkers', function() {
         }
         catch (error) {
             expect(error).toEqual('Requester ../../../../test-data/this-requester.js of level "this great level" should have an url() method');
+            fs.unlinkSync('test-data/this-requester.js');
         }
     });
     
@@ -169,6 +170,7 @@ describe('Level checkers', function() {
         }
         catch (error) {
             expect(error).toEqual('Checker ../../../../test-data/this-checker.js of level "this great level" should have an validate() method');
+            fs.unlinkSync('test-data/this-checker.js');
         }
     });
     

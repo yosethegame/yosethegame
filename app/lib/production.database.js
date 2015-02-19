@@ -81,6 +81,14 @@ function ProductionDatabase() {
                 checker: '../../../challenges/world.minesweeper/challenge.portfolio/lib/portfolio.response.matcher.js',
                 isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 26); }
             },      
+            {
+                id: 37,
+                title: 'Portfolio - Astroport',
+                file: 'app/challenges/world.astroport/challenge.portfolio/lib/portfolio.html',
+                requester: '../../../challenges/challenge.landing.page/lib/landing.requester.js',
+                checker: '../../../challenges/world.astroport/challenge.portfolio/lib/portfolio.response.matcher.js',
+                isOpenLevelFor: function(player) { return thisPlayer.hasDoneLevelWithId(player, 36); }
+            },      
         ]
     },
     {
