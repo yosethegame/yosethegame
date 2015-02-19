@@ -7,11 +7,11 @@ See it live: http://yosethegame.com
 
 ### local install
 
-* install PostgreSql, Nodejs
-* create a database for yose and a postgresql user 
-* set env variable DATABASE_URL to something like postgres://yose@localhost
+* install PostgreSql (9.3.x), Nodejs (0.10.x)
+* create a database
+* set env variable DATABASE_URL to something like postgres://{user}@localhost/{db}
 * install dependencies: npm install
-* check your install: jasmine-node app
+* check your install (run twice to create the tables during the first run): jasmine-node app
 * run yose: node app/lib/web.js
 * access yose: http://localhost:5000
 
