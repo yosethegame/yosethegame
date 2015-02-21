@@ -25,7 +25,7 @@ describe('News creation:', function() {
     it('sets date to now', function(done) {
         database.addNews({ title: 'any' }, function() {
             database.getNews(function(news) {
-                expect(new Date().getTime() - Date.parse(news[0].date)).toBeLessThan(1000);
+                expect(new Date().getTime() - Date.parse(news[0].date)).toBeLessThan(2000);
                 done();
             });
         });
