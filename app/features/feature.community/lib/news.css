@@ -5,6 +5,7 @@
 
 .news-date {
     text-align: right;
+    white-space: nowrap;
 }
 
 .news-content {
