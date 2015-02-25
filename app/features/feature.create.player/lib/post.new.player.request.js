@@ -15,13 +15,13 @@ postNewPlayer = function(request, response, database) {
             if (found === undefined) {
                 database.createPlayer(player, function() {
                     database.addNews(news.playerCreated(player), function() {
-                        response.writeHead(201);
+                        response.writeHead(301, { 'Location': '/players/' + player.login });
                         response.end();
                     });
                 });
             }
             else {
-                response.writeHead(200);
+                response.writeHead(301, { 'Location': '/players/' + form.login });
                 response.end();
             }
 		});

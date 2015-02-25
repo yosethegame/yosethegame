@@ -45,17 +45,27 @@ describe('Post player endpoint', function() {
 		});
 	});
 	
-	it('returns 201', function(done) {
+	it('returns 301, redirect to the dashboard', function(done) {
 		require('request').post('http://localhost:5000', {form: { login:'eric', avatar:'this-avatar' } }, function(error, response, body) {
-			expect(response.statusCode).toEqual(201);
+			expect(response.statusCode).toEqual(301);
+            expect(response.headers.location).toEqual('/players/eric');
 			done();
 		});
 	});
 	
-	it('returns 200 when the player already exists', function(done) {
+	it('returns 301 redirect even if the player already exists', function(done) {
         database.players = [ { login: 'eric' } ];
 		require('request').post('http://localhost:5000', {form: { login:'eric', avatar:'this-avatar' } }, function(error, response, body) {
-			expect(response.statusCode).toEqual(200);
+			expect(response.statusCode).toEqual(301);
+            expect(response.headers.location).toEqual('/players/eric');
+			done();
+		});
+	});
+    
+	it('does not create the player twice when the player already exists', function(done) {
+        database.players = [ { login: 'eric' } ];
+		require('request').post('http://localhost:5000', {form: { login:'eric', avatar:'this-avatar' } }, function(error, response, body) {
+			expect(database.players.length).toEqual(1);
 			done();
 		});
 	});

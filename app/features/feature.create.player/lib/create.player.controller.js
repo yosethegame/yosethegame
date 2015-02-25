@@ -27,11 +27,8 @@ CreatePlayerController.prototype.updatePreview = function() {
 };
 
 CreatePlayerController.prototype.player = function() {
-    var login = this.page('#login').val().replace(/\s/g, '');
-    var avatar = this.page('#avatar').val();
-
     if (this.isLoginCorrect()) {
-        this.page.post('/create-player', { login: login, avatar: avatar }, this.success);
+        this.page('#create-player-form').submit();
     }
 };
 
@@ -59,7 +56,3 @@ CreatePlayerController.prototype.displaySuccess = function() {
     self.page('#preview-feedback label').text('Image found');
 };
 
-CreatePlayerController.prototype.success = function(data) {
-	self.page('#feedback').removeClass('hidden').addClass('visible');
-	self.page('#player-dashboard').attr('href', '/players/' + self.page('#login').val());
-};

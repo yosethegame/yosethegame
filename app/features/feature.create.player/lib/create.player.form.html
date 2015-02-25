@@ -13,44 +13,41 @@
 	</legend>
 		
 	<section>
-		<div class="form-group">
-			<label>The login of the new player</label>
-			<input type="text" class="form-control" id="login" placeholder="choose a login"
-				   oninput="new CreatePlayerController($).updateLoginFeedback();"/>
-			<div id="login-feedback" class="alert alert-danger">
-				<label>Login incorrect. Must match /^[A-z|\.|\-|@|0-9]+$/</label>
-			</div>
-		</div>
-		<div class="form-group">
-			<label>An url for the image of the new player</label>
-			<input type="text" class="form-control" id="avatar" value="/img/default-avatar.png" 
-					oninput="new CreatePlayerController($).updatePreview();"	/>
-		</div>
-		<div class="form-group">
-			<label>Preview</label>
-			<br/>
-			<div class="form-inline row">
-				<div class="form-group col-xs-2">
-					<img src="/img/default-avatar.png" 
-						 width="60" height="60" id="avatar-preview" class="img-circle"/>
-				</div>
-				<div class="form-group col-xs-10">
-					<section id="preview-feedback" class="alert alert-success">
-						<label>Image found</label>
-					</section>
-				</div>
-			</div>
-		</div>
+        <form id="create-player-form" method="post" action="/create-player">
 
-		<button type="button" class="btn btn-primary" id="create" onclick="new CreatePlayerController($).player()">Create this player</button>
-	</section>
-	
-	<br/>
-	
-	<section id="feedback" class="alert alert-success hidden">
-		<span id="message">Done</span>
-		<br/>
-		You can now access <a id="player-dashboard" class="alert-link" href="">your dashboard</a>
+		    <div class="form-group">
+			    <label>The login of the new player</label>
+                <input type="text" class="form-control" id="login" name="login" placeholder="choose a login"
+				       oninput="new CreatePlayerController($).updateLoginFeedback();"/>
+                <div id="login-feedback" class="alert alert-danger">
+                    <label>Login incorrect. Must match /^[A-z|\.|\-|@|0-9]+$/</label>
+                </div>
+            </div>
+            <div class="form-group">
+			    <label>An url for the image of the new player</label>
+			    <input type="text" class="form-control" id="avatar" name="avatar" value="/img/default-avatar.png"
+				       oninput="new CreatePlayerController($).updatePreview();"	/>
+            </div>
+            <div class="form-group">
+			    <label>Preview</label>
+			    <br/>
+			    <div class="form-inline row">
+				    <div class="form-group col-xs-2">
+					    <img src="/img/default-avatar.png" 
+						     width="60" height="60" id="avatar-preview" class="img-circle"/>
+				    </div>
+				    <div class="form-group col-xs-10">
+					    <section id="preview-feedback" class="alert alert-success">
+						    <label>Image found</label>
+					    </section>
+				    </div>
+			    </div>
+		    </div>
+
+		    <button type="button" class="btn btn-primary" id="create" 
+                    onclick="new CreatePlayerController($).player()">Create this player</button>
+            
+        </form>
 	</section>
 	
 	<script src="/lib/jquery/jquery-1.9.0.min.js"></script>

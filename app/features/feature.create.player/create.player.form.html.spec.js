@@ -14,15 +14,19 @@ describe('Create player form', function() {
 			form({}, response, {});
 			page = cheerio.load(response.html);
 		});
+        
+        it('has a specific form to post the info of the new player', function() {
+            expect(page('form[method="post"][action="/create-player"]#create-player-form').length).toEqual(1);
+        });
 
 		it('has an input field for the login', function() {			
-			expect(page('input#login').length).toEqual(1);
+			expect(page('input[name="login"]#login').length).toEqual(1);
 		});		
 		
 		describe('avatar input field', function() {
 
             it('exists', function() {
-                expect(page('input#avatar').length).toEqual(1);
+                expect(page('input[name="avatar"]#avatar').length).toEqual(1);
             });
 
             it('proposes default value', function() {
@@ -45,41 +49,6 @@ describe('Create player form', function() {
 
         it('has create button to trigger the creation', function() {
 			expect(page('button#create').length).toEqual(1);
-		});	
-		
-		describe('feedback section', function() {
-			
-			it('exists', function() {
-				expect(page('#feedback').length).toEqual(1);
-			});
-
-			it('is hidden by default', function() {
-				expect(page('#feedback').attr('class')).toContain('hidden');
-			});
-
-			describe('message placeholder', function() {
-
-				it('exists', function() {
-					expect(page('#feedback #message').length).toEqual(1);
-				});
-
-			});
-			
-			describe('link to newly created player', function() {
-
-				it('exists', function() {
-					expect(page('#feedback a#player-dashboard').length).toEqual(1);
-				});
-
-				it('is empty', function() {
-					expect(page('#feedback a#player-dashboard').attr('href')).toEqual('');
-				});
-
-				it('invites to access to dashboard', function() {
-					expect(page('#feedback a#player-dashboard').text().length).toBeGreaterThan(0);
-				});
-
-			});
 		});
 		
 		describe('login feedback', function() {

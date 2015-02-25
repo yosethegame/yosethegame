@@ -23,10 +23,8 @@ describe('Creating a player', function() {
 		var browser = Browser.create();
 		browser.visit('http://localhost:5000/create-new-player').
 			then(function () {
-				return browser.fill('#login', 'eric').pressButton('#create');
-			}).
-			then(function() {
-				expect(browser.text('#message')).toEqual('Done');
+                browser.fill('#login', 'eric');
+				return browser.pressButton('#create');
 			}).
 			then(function() {
 				return browser.visit('http://localhost:5000/players/eric');
@@ -56,27 +54,6 @@ describe('Creating a player', function() {
 			    expect(browser.query('#news-1 img').src).toContain('/img/me.png');
 			    expect(browser.text('#news-1')).toContain('entered the game');
 		    }).
-			done(done, function(error) {
-				expect(error.toString()).toBeNull();
-				done();
-			});
-	});
-	
-	it('does not create a second news when the player already exists', function(done) {
-		var browser = Browser.create();
-		browser.visit('http://localhost:5000/create-new-player').
-			then(function () {
-				return browser.fill('#login', 'eric').pressButton('#create');
-			}).
-			then(function () {
-				return browser.fill('#login', 'eric').pressButton('#create');
-			}).
-			then(function() {
-        		return browser.visit('http://localhost:5000/community');
-			}).
-	        then(function() {
-		        expect(browser.query('#news-2')).toBeNull();
-	        }).
 			done(done, function(error) {
 				expect(error.toString()).toBeNull();
 				done();
