@@ -25,15 +25,6 @@ describe('Create player listener:', function() {
 
             expect(form.submit).not.toHaveBeenCalled();
         });
-
-        it('is submited when the login is correct', function() {
-			$('#login').val('eric');
-            var form = $('#create-player-form');
-            spyOn(form, 'submit');
-			create.player();
-
-            expect(form.submit).toHaveBeenCalled();
-        });
 	});
 	
 	describe('Login correctness', function() {
