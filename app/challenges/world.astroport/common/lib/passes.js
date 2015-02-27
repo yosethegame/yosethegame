@@ -20,7 +20,12 @@ module.exports = {
             return false;
         }
         
-        if (remoteResponse.headers['content-type'] !== 'text/html') {
+        if (remoteResponse.headers['content-type'] === undefined) {
+            callback(error501.withValues('content-type = text/html', 'Error: content-type = undefined'));
+            return false;
+        }
+        
+        if (remoteResponse.headers['content-type'].indexOf('text/html') ===-1 ) {
             callback(error501.withValues('content-type = text/html', 'Error: content-type = ' + remoteResponse.headers['content-type']));
             return false;
         }

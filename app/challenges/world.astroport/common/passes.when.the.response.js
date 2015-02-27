@@ -5,7 +5,7 @@ module.exports = {
         describe(actual, function() {
     
             beforeEach(function(done) {
-    			matcher.validate('', { statusCode: 200, headers: { 'content-type': 'text/html'} }, actual, function(receivedStatus) {
+    			matcher.validate('', { statusCode: 200, headers: { 'content-type': 'text/html; charset=utf-8'} }, actual, function(receivedStatus) {
     				status = receivedStatus;
     				done();
     			});
