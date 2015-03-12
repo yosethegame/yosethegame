@@ -8,22 +8,34 @@ describe('Create player listener:', function() {
     	var create;
 	
 		beforeEach(function() {
-            create = new CreatePlayerController($);
 			$('body').append('<input id="login" />');
 			$('body').append('<form id="create-player-form" />');
+            create = new CreatePlayerController($);
 		});
 
 		afterEach(function() {
 			$('#login').remove();
+			$('#create-player-form').remove();
 		});
+        
+        it('is kept for later use', function() {
+            expect(create.form).toEqual($('#create-player-form'));
+        });
 		
         it('is not submited when the login is not correct', function() {
 			$('#login').val('eric mignot');
-            var form = $('#create-player-form');
-            spyOn(form, 'submit');
+            spyOn(create.form, 'submit');
 			create.player();
 
-            expect(form.submit).not.toHaveBeenCalled();
+            expect(create.form.submit).not.toHaveBeenCalled();
+        });
+        
+        it('is submitted when the login is correct', function() {
+			$('#login').val('eric');
+            spyOn(create.form, 'submit');
+			create.player();
+
+            expect(create.form.submit).toHaveBeenCalled();
         });
 	});
 	
