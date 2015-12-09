@@ -39,7 +39,7 @@ module.exports = {
         var expected = 'A page containing a checkbox with id="suspect-mode" and #' + 
                         cellId + " with class containing 'suspect' and not containing 'lost'";
 
-        var browser = Browser.create();
+        var browser = new Browser();
 		browser.visit(url).
 			then(function() {
 				browser.document.grid = self.data;

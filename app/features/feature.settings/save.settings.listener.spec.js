@@ -1,12 +1,12 @@
-var $ = require('jquery')(require("jsdom").jsdom().parentWindow);
+var $ = require('jquery')(require("jsdom").jsdom().defaultView);
 var SaveSettings = require('./lib/save.settings.listener');
 
 describe('Save settings listener', function() {
-	
+
 	var listener = new SaveSettings($);
-	
+
 	describe('Request sent', function() {
-		
+
 		beforeEach(function() {
 			$('body').append('<label id="login" />');
 			$('body').append('<input id="avatar-url" />');
@@ -30,9 +30,9 @@ describe('Save settings listener', function() {
 		});
 
 	});
-	
+
 	describe('Success', function() {
-		
+
 		beforeEach(function() {
 			$('body').append( '<section id="feedback" class="hidden" />' );
 		});
@@ -40,13 +40,13 @@ describe('Save settings listener', function() {
 		afterEach(function() {
 			$('#feedback').remove();
 		});
-		
+
 		it('makes visible the feedback section', function() {
 			listener.success();
-			
+
 			expect($('#feedback').attr('class')).toContain('visible');
 		});
 
 	});
-		
+
 });

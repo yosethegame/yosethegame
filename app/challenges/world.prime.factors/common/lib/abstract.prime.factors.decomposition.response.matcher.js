@@ -6,7 +6,7 @@ var expectedAnswer = function(matcher, number) {
 
 var validate = function(url, matcher, callback) {
 	var number = matcher.numberChooser.getNumber();
-	var browser = Browser.create();
+	var browser = new Browser();
 	browser.visit(url).
 		then(function () {
 			return browser.fill('input#number', number).pressButton("button#go");

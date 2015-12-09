@@ -16,7 +16,7 @@ module.exports = {
 	validate: function(url, remoteResponse, content, callback) {
 		var self = this;
 		var number = this.numberChooser.getNumber();
-		var browser = Browser.create();
+		var browser = new Browser();
 		browser.visit(url).
 			then(function () {
                 return browser.fill('input#number', number).pressButton("button#go");

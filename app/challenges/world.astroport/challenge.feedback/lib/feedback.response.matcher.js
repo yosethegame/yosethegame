@@ -24,7 +24,7 @@ module.exports = {
         
         var self = this;
         var shipEntered = self.willEnterShip();
-        var browser = Browser.create();
+        var browser = new Browser();
         var useExpectedMessageIndex = 0;
 	    browser.visit(url)
             .then(function() {

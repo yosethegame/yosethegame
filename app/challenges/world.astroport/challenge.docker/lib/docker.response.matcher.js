@@ -35,7 +35,7 @@ module.exports = {
         
         var self = this;
         var shipEntered = self.willEnterShip();
-        var browser = Browser.create();
+        var browser = new Browser();
 	    browser.visit(url)
             .then(function() {
                 return browser.fill('input#ship', shipEntered).pressButton("button#dock");

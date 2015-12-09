@@ -5,7 +5,7 @@ var expectedContent = "A #title containing 'Minesweeper' AND a 8x8 cells grid";
 module.exports = {
 
 	validate: function(url, remoteResponse, content, callback) {
-		var browser = Browser.create();
+		var browser = new Browser();
 		browser.visit(url).
 			then(function() {
 				if(browser.query('#title') === null) {

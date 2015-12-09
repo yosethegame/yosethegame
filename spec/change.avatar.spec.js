@@ -27,7 +27,7 @@ describe("Change avatar:", function() {
 	describe("When player modify its avatar and comes back to his dashboard,", function() {
 		
 		beforeEach(function(done) {
-			var browser = Browser.create();
+			var browser = new Browser();
 			browser.visit('http://localhost:5000/players/annessou').
 				then(function() {
 					return browser.clickLink('#settings-link');
@@ -42,7 +42,7 @@ describe("Change avatar:", function() {
 		});
 		
 		it('sees his new avatar', function(done) {
-			var browser = Browser.create();
+			var browser = new Browser();
 			browser.visit('http://localhost:5000/players/annessou').
 				then(function() {
 					expect(browser.query("#avatar").src).toEqual('http://new-avatar/');
@@ -57,7 +57,7 @@ describe("Change avatar:", function() {
 	describe('avatar preview', function() {
 	   
 	   it('is updated when the user changes its value', function(done) {
-			var browser = Browser.create();
+			var browser = new Browser();
 			browser.visit('http://localhost:5000/players/annessou').
 				then(function() {
 					return browser.clickLink('#settings-link');

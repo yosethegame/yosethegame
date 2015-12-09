@@ -41,7 +41,7 @@ module.exports = {
 		var candidateIndex = this.candidateIndex();
 		var cellWithNoBombAroundId = this.cellId(candidateIndex);
 		var expected = 'empty text in #' + cellWithNoBombAroundId;
-		var browser = Browser.create();		
+		var browser = new Browser();		
 		browser.visit(url).
 			then(function() {
 				browser.document.grid = self.data;

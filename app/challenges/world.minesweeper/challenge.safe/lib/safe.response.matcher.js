@@ -38,7 +38,7 @@ module.exports = {
 		var emptyCellId = this.cellId(cellIndex);
 		var expectedCount = this.candidates[cellIndex].bombAround;
 		var expected = "#" + emptyCellId + " with class containing 'safe' and text = '" + expectedCount + "'";
-		var browser = Browser.create();
+		var browser = new Browser();
 		browser.visit(url).
 			then(function() {
 				browser.document.grid = self.data;

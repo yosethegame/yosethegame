@@ -20,7 +20,7 @@ describe('Creating a player', function() {
 	});
 	
 	it('makes the dashboard of this player available', function(done) {
-		var browser = Browser.create();
+		var browser = new Browser();
 		browser.visit('http://localhost:5000/create-new-player').
 			then(function () {
                 browser.fill('#login', 'eric');
@@ -39,7 +39,7 @@ describe('Creating a player', function() {
 	});
 
 	it('appears in the news', function(done) {
-		var browser = Browser.create();
+		var browser = new Browser();
 		browser.visit('http://localhost:5000/create-new-player').
 			then(function () {
 				return browser.fill('#login', 'eric').fill('#avatar', '/img/me.png').pressButton('#create');

@@ -37,7 +37,7 @@ module.exports = {
         var self = this;
 		var cellWithBombId = this.cellId(this.bombIndex());
 		var expected = "A load() method and #" + cellWithBombId + " class containing 'lost' after click";
-		var browser = Browser.create();
+		var browser = new Browser();
 		browser.visit(url).
 			then(function() {
 				if(browser.evaluate("typeof load") != 'function') {

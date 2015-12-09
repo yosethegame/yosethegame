@@ -21,13 +21,13 @@ module.exports = {
             });
         }
         else {
-            var browser = Browser.create();
+            var browser = new Browser();
             browser.visit(url).
                 then(function () {
                     return browser.fill('input#number', number).pressButton("button#go");
                 }).
                 then(function() {
-                    browser = Browser.create();
+                    browser = new Browser();
                     return browser.visit(url);
                 }).
                 then(function() {

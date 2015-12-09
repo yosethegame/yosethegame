@@ -73,7 +73,7 @@ module.exports = {
 		var target = this.target();		
 		var expected = this.buildExpected(target);
 		
-		var browser = Browser.create();		
+		var browser = new Browser();		
 		browser.visit(url).
             then(function() {
                 browser.document.grid = target.grid;

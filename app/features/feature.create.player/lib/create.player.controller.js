@@ -1,7 +1,7 @@
-var self;
+var controller;
 
 CreatePlayerController = function($) {
-    self = this;
+    controller = this;
     this.page = $;
     this.regex = /^[A-z|\.|\-|@|0-9]+$/;
     this.form = this.page('#create-player-form');
@@ -37,23 +37,22 @@ CreatePlayerController.prototype.succesGettingAvatar = function(data, textStatus
     var headers = jqXHR.getAllResponseHeaders();
     var type = headers.indexOf('Content-Type: image');
     if (type === -1) {
-        self.displayError();
+        controller.displayError();
     } else {
-        self.displaySuccess();
+        controller.displaySuccess();
     }
 };
 
 CreatePlayerController.prototype.errorGettingAvatar = function(jqXHR, textStatus, errorThrown) {
-    self.displayError();
+    controller.displayError();
 };
 
 CreatePlayerController.prototype.displayError = function() {
-    self.page('#preview-feedback').removeClass('alert-success').addClass('alert-danger');
-    self.page('#preview-feedback label').text('Not an image');
+    controller.page('#preview-feedback').removeClass('alert-success').addClass('alert-danger');
+    controller.page('#preview-feedback label').text('Not an image');
 };
 
 CreatePlayerController.prototype.displaySuccess = function() {
-    self.page('#preview-feedback').removeClass('alert-danger').addClass('alert-success');
-    self.page('#preview-feedback label').text('Image found');
+    controller.page('#preview-feedback').removeClass('alert-danger').addClass('alert-success');
+    controller.page('#preview-feedback label').text('Image found');
 };
-

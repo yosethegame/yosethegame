@@ -1,12 +1,12 @@
-var $ = require('jquery')(require("jsdom").jsdom().parentWindow);
+var $ = require('jquery')(require("jsdom").jsdom().defaultView);
 require('./lib/create.player.controller');
 
 describe('Create player listener:', function() {
-	
+
 	describe('Form', function() {
-		
+
     	var create;
-	
+
 		beforeEach(function() {
 			$('body').append('<input id="login" />');
 			$('body').append('<form id="create-player-form" />');
@@ -17,11 +17,11 @@ describe('Create player listener:', function() {
 			$('#login').remove();
 			$('#create-player-form').remove();
 		});
-        
+
         it('is kept for later use', function() {
             expect(create.form).toEqual($('#create-player-form'));
         });
-		
+
         it('is not submited when the login is not correct', function() {
 			$('#login').val('eric mignot');
             spyOn(create.form, 'submit');
@@ -29,7 +29,7 @@ describe('Create player listener:', function() {
 
             expect(create.form.submit).not.toHaveBeenCalled();
         });
-        
+
         it('is submitted when the login is correct', function() {
 			$('#login').val('eric');
             spyOn(create.form, 'submit');
@@ -38,11 +38,11 @@ describe('Create player listener:', function() {
             expect(create.form.submit).toHaveBeenCalled();
         });
 	});
-	
+
 	describe('Login correctness', function() {
-	
+
     	var create;
-	
+
 		beforeEach(function() {
             create = new CreatePlayerController($);
 			$('body').append('<input id="login" />');
@@ -69,13 +69,13 @@ describe('Create player listener:', function() {
 
             expect(create.isLoginCorrect()).toEqual(true);
         });
-        
+
         it('is correct with dashes', function() {
             $('#login').val('eric-mignot');
 
             expect(create.isLoginCorrect()).toEqual(true);
         });
-        
+
         it('is correct with dots', function() {
             $('#login').val('eric.mignot');
 
@@ -93,5 +93,5 @@ describe('Create player listener:', function() {
 
             expect(create.isLoginCorrect()).toEqual(false);
         });
-	});	
+	});
 });

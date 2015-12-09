@@ -18,7 +18,7 @@ module.exports = {
 		var self = this;
 		var number = this.numberChooser.getNumber();
         var expected = "browser.location '" + url +"' AND " + self.expectedAnswer(number);
-		var browser = Browser.create();
+		var browser = new Browser();
 		browser.visit(url).
 			then(function () {
 				return browser.fill('input#number', number)

@@ -8,7 +8,7 @@ module.exports = {
     
     validate: function(url, remoteResponse, content, callback) {
         var self = this;
-        var browser = Browser.create();
+        var browser = new Browser();
         
         var first;
         var second;

@@ -1,4 +1,4 @@
-var $           = require('jquery')(require("jsdom").jsdom().parentWindow);
+var $ = require('jquery')(require("jsdom").jsdom().defaultView);
 var TryListener = require('./lib/try.listener');
 
 require('../common/lib/render.score');
@@ -6,7 +6,7 @@ require('../common/lib/render.score');
 describe("TryListener: ", function() {
 
 	var listener = new TryListener($);
-	
+
 	var buildResultsWithDummyScore = function(results) {
 		var resultsWithDummyScore = {
 			score: 10,
@@ -14,7 +14,7 @@ describe("TryListener: ", function() {
 		};
 		return resultsWithDummyScore;
 	};
-	
+
 	beforeEach(function() {
 		$('body').append(
 			'<div id="results">' +
@@ -28,12 +28,12 @@ describe("TryListener: ", function() {
 		);
 		$('body').append('<section id="scroll-anchor"></section>');
 	});
-	
+
 	afterEach(function() {
 		$('#results').remove();
 		$('#scroll-anchor').remove();
 	});
-    
+
     it('scrolls down to scroll anchor', function() {
         var anchor = $('#scroll-anchor')[0];
         anchor.scrollIntoView = function() {};
@@ -46,22 +46,22 @@ describe("TryListener: ", function() {
 				got: { flag: true }
 			}
 		]));
-        
+
         expect(anchor.scrollIntoView).toHaveBeenCalledWith(true);
     });
-	
+
 	describe('Request sent:', function() {
-	
+
 		beforeEach(function() {
 			$('body').append('<label id="login">eric</label>');
-			$('body').append('<input id="server"/>');			
+			$('body').append('<input id="server"/>');
 		});
-		
+
 		afterEach(function() {
 			$('#login').remove();
 			$('#server').remove();
 		});
-		
+
 		it("sends a try request", function() {
 			$('#server').val('any');
 			spyOn($, 'get').andCallThrough();
@@ -70,7 +70,7 @@ describe("TryListener: ", function() {
 			expect($.get).toHaveBeenCalledWith('/try?login=eric&world=2&level=1&server=any');
 		});
 	});
-	
+
 	describe('Avatar animation', function() {
 
 		beforeEach(function() {
@@ -78,27 +78,27 @@ describe("TryListener: ", function() {
 			$('body').append('<input id="server"/>');
 			$('#server').val('any');
 		});
-		
+
 		afterEach(function() {
 			$('#server').remove();
-			$('#avatar').remove();			
+			$('#avatar').remove();
 		});
-		
+
 		it('starts when a try is triggered', function() {
 			listener.try();
 			expect($('#avatar').attr('class')).toContain('rotate');
 		});
-		
+
 		it('stops when success', function() {
 			$('#avatar').addClass('rotate any');
 			listener.displayResults({"score":10,"results":[]});
 			expect($('#avatar').attr('class')).toEqual('any');
 		});
-		
+
 	});
-	
+
 	describe('Results display', function() {
-		
+
 		describe('Show / hide results', function() {
 
 			it('hides the results when a try is triggered', function() {
@@ -125,7 +125,7 @@ describe("TryListener: ", function() {
 						expected: { question: 'any', answer: 42 },
 						got: { flag: true }
 					}
-				]));	
+				]));
 			});
 
 			it('displays the first result : the challenge name', function() {
@@ -142,11 +142,11 @@ describe("TryListener: ", function() {
 						expected: { question: 'any', answer: 42 },
 						got: { flag: true }
 					}
-				]));	
+				]));
 				expect($('#result_1 .status').text()).toEqual('fail');
 			});
 			describe('The expected:', function() {
-				
+
 				it('displays an object as string', function() {
 					expect($('#result_1 .expected').text()).toEqual(JSON.stringify({ question: 'any', answer: 42 }));
 				});
@@ -159,16 +159,16 @@ describe("TryListener: ", function() {
 							expected: 'any',
 							got: { flag: true }
 						}
-					]));	
+					]));
 					expect($('#result_1 .expected').text()).toEqual('any');
 				});
 			});
 			describe('The actual', function() {
-				
+
 				it('displays an object as string', function() {
 					expect($('#result_1 .got').text()).toEqual(JSON.stringify({ flag: true }));
 				});
-				
+
 				it('displays a string as is', function() {
 					listener.displayResults(buildResultsWithDummyScore([
 						{
@@ -177,7 +177,7 @@ describe("TryListener: ", function() {
 							expected: { question: 'any', answer: 42 },
 							got: 'any'
 						}
-					]));	
+					]));
 					expect($('#result_1 .got').text()).toEqual('any');
 				});
 			});
@@ -200,7 +200,7 @@ describe("TryListener: ", function() {
 						expected: { two: 2 },
 						got: { twotwo: 2 }
 					}
-				]));	
+				]));
 			});
 
 			describe('The challenges column', function() {
@@ -214,9 +214,9 @@ describe("TryListener: ", function() {
 				});
 
 			});
-			
+
 			describe('Multiple calls only keeps the results from the last call', function() {
-				
+
 				beforeEach(function() {
 					listener.displayResults(buildResultsWithDummyScore([
 						{
@@ -231,7 +231,7 @@ describe("TryListener: ", function() {
 							expected: { question: 'any', answer: 42 },
 							got: { flag: true }
 						}
-					]));	
+					]));
 					listener.displayResults(buildResultsWithDummyScore([
 						{
 							title: 'second',
@@ -239,7 +239,7 @@ describe("TryListener: ", function() {
 							expected: { question: 'any', answer: 42 },
 							got: { flag: true }
 						}
-					]));	
+					]));
 				});
 
 				it('displays the second result', function() {
@@ -267,19 +267,19 @@ describe("TryListener: ", function() {
 							expected: { question: 'any', answer: 42 },
 							got: { flag: true }
 						}
-					]));					
+					]));
 				});
-				
+
 				it('hightligth lines in errors', function() {
 					expect($('#result_1').attr('class')).toContain('danger');
 					expect($('#result_1').attr('class')).toNotContain('success');
 				});
-				
+
 				it('hightligth lines in success', function() {
 					expect($('#result_2').attr('class')).toContain('success');
 					expect($('#result_2').attr('class')).toNotContain('danger');
 				});
-				
+
 			});
 
 		});
@@ -338,7 +338,7 @@ describe("TryListener: ", function() {
 				expect($('#continue').attr('class')).toContain('hidden');
 				expect($('#continue').attr('class')).toNotContain('visible');
 			});
-			
+
 			it('hides back when a second try is failing', function() {
 				listener.displayResults(buildResultsWithDummyScore([
 					{
@@ -360,9 +360,9 @@ describe("TryListener: ", function() {
 				expect($('#continue').attr('class')).toNotContain('visible');
 			});
 		});
-		
+
 		describe('Try button:', function() {
-		
+
 			beforeEach(function() {
 				$('body').append('<button type="button" id="try">Try</button>');
 			});
@@ -370,7 +370,7 @@ describe("TryListener: ", function() {
 			afterEach(function() {
 				$('#try').remove();
 			});
-		
+
 			it('is disabled after success', function() {
 				listener.displayResults(buildResultsWithDummyScore([
 					{
@@ -382,7 +382,7 @@ describe("TryListener: ", function() {
 				]));
 				expect($('#try').prop('disabled')).toEqual(true);
 			});
-			
+
 			it('is enabled after failure', function() {
 				listener.displayResults(buildResultsWithDummyScore([
 					{
@@ -403,19 +403,19 @@ describe("TryListener: ", function() {
 				expect($('#try').prop('disabled')).toEqual(false);
 			});
 		});
-		
-	});	
-	
+
+	});
+
 	describe('Score update', function() {
-	
+
 		beforeEach(function() {
 			$('body').append('<span id="score">10</span>');
 		});
-		
+
 		afterEach(function() {
 			$('#score').remove();
 		});
-	
+
 		it('just happens', function() {
 			listener.displayResults(
 				{
@@ -429,9 +429,9 @@ describe("TryListener: ", function() {
 						}
 					]
 				});
-			
+
 			expect($('#score').text()).toEqual('000023');
 		});
-		
+
 	});
 });
