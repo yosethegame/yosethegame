@@ -3,7 +3,7 @@ function Restart($) {
 }
 
 Restart.prototype.game = function() {
-	this.page.get('/restart-game?login=' + this.page('#login').text()).success(this.reload);
+	this.page.get('/restart-game?login=' + this.page('#login').text()).done(this.reload);
 };
 
 Restart.prototype.reload = function() {

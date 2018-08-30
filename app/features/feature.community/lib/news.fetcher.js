@@ -10,7 +10,7 @@ NewsFetcher.prototype.useRenderer = function(renderer) {
 };
 
 NewsFetcher.prototype.getNews = function() {
-    this.page.get('/news').success(this.received);    
+    this.page.get('/news').done(this.received);    
 };
 
 NewsFetcher.prototype.received = function(news) {

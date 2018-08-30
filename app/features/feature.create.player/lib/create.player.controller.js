@@ -24,7 +24,7 @@ CreatePlayerController.prototype.updateLoginFeedback = function() {
 
 CreatePlayerController.prototype.updatePreview = function() {
     this.page('#avatar-preview').attr('src', this.page('#avatar').val());
-    this.page.get(this.page('#avatar').val()).success(this.succesGettingAvatar).error(this.errorGettingAvatar);
+    this.page.get(this.page('#avatar').val()).done(this.succesGettingAvatar).fail(this.errorGettingAvatar);
 };
 
 CreatePlayerController.prototype.player = function() {
