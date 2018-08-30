@@ -35,7 +35,7 @@
 		<h2 id="result-count"># matching players</h2>
 	</legend>
 	
-	<table id="players" class="table table-striped">
+	<table class="table table-striped">
 		<thead>
 			<tr class="lead">
 				<th>Player</td>
@@ -43,18 +43,20 @@
 				<th style="padding-right:20px;padding-left:10px">Score</td>
 			</tr>
 		</thead>
-		<tr class="player">
-			<td class="avatar-column">
-				<img src="" class="avatar img-circle" width="60" height="60"/>
-			</td>
-			<td class="server-column" style="vertical-align:middle;padding-left:30px">
-				<a href=""></a>
-			</td>
-			<td nowrap class="score-column" style="vertical-align:middle;">
-				<span class="search-score-leading-zeros">0000</span>
-				<span class="search-score">1234567</span>
-			</td>
-		</tr>
+		<tbody id="players">
+			<tr class="player">
+				<td class="avatar-column">
+					<img src="" class="avatar img-circle" width="60" height="60"/>
+				</td>
+				<td class="server-column" style="vertical-align:middle;padding-left:30px">
+					<a href=""></a>
+				</td>
+				<td nowrap class="score-column" style="vertical-align:middle;">
+					<span class="search-score-leading-zeros">0000</span>
+					<span class="search-score">1234567</span>
+				</td>
+			</tr>
+		</tbody>		
 	</table>
 	
 	</div>

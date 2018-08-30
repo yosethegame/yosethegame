@@ -14,7 +14,7 @@ describe('Search', function() {
 	beforeEach(function() {	
         database.findPlayersMatching = function(criteria, callback){
             callback([ 
-                { login: 'max',  avatar: 'max.png',  tags: 'laval' , score: 20 , portfolio: [ { server: 'server of asm' }]}, 
+                { login: 'max',  avatar: 'max.png',  tags: 'laval' , score: 20 , portfolio: [ { server: 'server of max' }]}, 
                 { login: 'ericminio', avatar: 'eric.png', tags: 'laval' , score: 10 },
             ]);
         };
@@ -27,7 +27,7 @@ describe('Search', function() {
 	});
     
 	it('displays two lines + the header', function() {
-        expect(page('#players tr').length).toEqual(2 + 1);
+        expect(page('#players .player').length).toEqual(2);
 	});
 	
 	describe('matching player line', function() {
@@ -35,7 +35,7 @@ describe('Search', function() {
         var line;
 
         beforeEach(function() {
-            line = page('#players tr:nth-child(2)');
+            line = page('#players .player:nth-child(1)');
         });
 
         describe('avatar column', function() {
@@ -43,7 +43,7 @@ describe('Search', function() {
             var column;
 
             beforeEach(function() {
-                column = line.find('td.avatar-column');
+                column = line.find('.avatar-column');
             });
 
             it('displays the avatar of the player as the link', function() {
@@ -53,17 +53,17 @@ describe('Search', function() {
         });
 
         it('displays the server of the player', function() {
-            expect(line.find('td.server-column').find('a').attr('href')).toEqual('server of asm');
+            expect(line.find('.server-column').find('a').attr('href')).toEqual('server of max');
         });
 
         it('displays the score of the player', function() {
-            expect(line.find('td.score-column').html()).toContain('20');
+            expect(line.find('.score-column').html()).toContain('20');
         });
 
 	});
 
 	it('does not display an undefined server', function() {
-        expect(page('#players tr:nth-child(3) td.server-column').html().trim()).toEqual('undefined');
+        expect(page('#players .player:nth-child(2) td.server-column').html().trim()).toEqual('undefined');
 	});
 
 });

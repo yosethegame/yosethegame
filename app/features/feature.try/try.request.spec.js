@@ -1,5 +1,6 @@
 var request                 = require('request');
-var $                       = require('jquery')(require("jsdom").jsdom().defaultView);
+const { JSDOM } 			= require("jsdom");
+var $ 						= require('jquery')(new JSDOM().window);
 var tryAll                  = require('./lib/try.request');
 var Server                  = require('../../lib/server');
 var DatabaseWithChallenges  = require('../../support/database.with.levels');

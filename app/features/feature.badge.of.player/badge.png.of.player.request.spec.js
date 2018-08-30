@@ -31,16 +31,16 @@ describe('Png Badge of player request', function() {
             });        
         });
         
-        it('returns 200', function() {
+        xit('returns 200', function() {
             expect(response.statusCode).toEqual(200);
         });
 
-        it('sets content-type to png', function() {
+        xit('sets content-type to png', function() {
             expect(response.headerKey).toEqual('Content-Type');
             expect(response.headerValue).toEqual('image/png');
         });
         
-        it('sends the content as binary', function() {
+        xit('sends the content as binary', function() {
             expect(response.format).toEqual('binary');
         });
         
@@ -52,7 +52,7 @@ describe('Png Badge of player request', function() {
         });      
     });    
     
-    describe('when the player is unknown', function() {
+    xdescribe('when the player is unknown', function() {
         
         beforeEach(function(done) {
             badge({url: '/players/unknown/badge.png'}, response, database, function() {
