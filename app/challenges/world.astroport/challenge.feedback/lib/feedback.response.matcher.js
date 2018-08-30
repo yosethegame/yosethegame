@@ -60,7 +60,10 @@ module.exports = {
                 return browser;
             })
             .then(function() {
-                return browser.fill('input#ship', shipEntered).pressButton("button#dock");
+                return browser.fill('input#ship', shipEntered);
+            })
+            .then(function() {
+                return browser.pressButton("button#dock");
             })
             .then(function() {
 			    if(browser.query('#gate-1').className.indexOf('occupied') === -1) {

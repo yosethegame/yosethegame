@@ -21,8 +21,10 @@ module.exports = {
 		var browser = new Browser();
 		browser.visit(url).
 			then(function () {
-				return browser.fill('input#number', number)
-                              .pressButton("button#go");
+				return browser.fill('input#number', number);
+			}).
+			then(function () {
+				return browser.pressButton("button#go");
 			}).
 			then(function() {
 				if(browser.location.toString() !== url) {

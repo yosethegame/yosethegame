@@ -38,7 +38,10 @@ module.exports = {
         var browser = new Browser();
 	    browser.visit(url)
             .then(function() {
-                return browser.fill('input#ship', shipEntered).pressButton("button#dock");
+                return browser.fill('input#ship', shipEntered);
+            })
+            .then(function() {
+                return browser.pressButton("button#dock");
             })
             .then(function() {
 			    if(browser.query('#ship-1') === null) {
