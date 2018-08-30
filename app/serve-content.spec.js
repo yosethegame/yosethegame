@@ -41,7 +41,7 @@ describe("Serve Content callback", function() {
 	
 	it("returns 404 when file does not exist", function(done) {
         fs.writeFileSync(folder + '/a-missing-file', 'anything');
-		fs.unlink(folder + '/a-missing-file');
+		fs.unlinkSync(folder + '/a-missing-file');
 		
 		request("http://localhost:5000/a-missing-file", function(error, response, body) {
 			expect(response.statusCode).toEqual(404);
@@ -90,6 +90,15 @@ describe("Serve Content callback", function() {
 
 		request("http://localhost:5000/a-file.png", function(error, response, body) {
 			expect(response.headers['content-type']).toEqual('image/png');
+			done();
+		});
+	});
+
+	it("serves a svg with image/svg+xml content-type", function(done) {
+        fs.writeFileSync(folder + '/a-file.svg', 'content');
+
+		request("http://localhost:5000/a-file.svg", function(error, response, body) {
+			expect(response.headers['content-type']).toEqual('image/svg+xml');
 			done();
 		});
 	});
