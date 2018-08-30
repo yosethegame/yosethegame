@@ -12,7 +12,7 @@ describe("Change avatar:", function() {
 		database = new DatabaseWithChallenges();
 		database.players = [
 			{
-				login: 'annessou',
+				login: 'max',
 				avatar: 'http://old-avatar'
 			}
 		];
@@ -28,12 +28,15 @@ describe("Change avatar:", function() {
 		
 		beforeEach(function(done) {
 			var browser = new Browser();
-			browser.visit('http://localhost:5000/players/annessou').
+			browser.visit('http://localhost:5000/players/max').
 				then(function() {
 					return browser.clickLink('#settings-link');
 				}).
 				then(function() {
-					browser.fill('#avatar-url', 'http://new-avatar').pressButton('#save-settings-button');
+					return browser.fill('#avatar-url', 'http://new-avatar');
+				}).
+				then(function() {
+					return browser.pressButton('#save-settings-button');
 				}).
 				done(done, function(error) {
 					expect(error.toString()).toBeNull();
@@ -43,7 +46,7 @@ describe("Change avatar:", function() {
 		
 		it('sees his new avatar', function(done) {
 			var browser = new Browser();
-			browser.visit('http://localhost:5000/players/annessou').
+			browser.visit('http://localhost:5000/players/max').
 				then(function() {
 					expect(browser.query("#avatar").src).toEqual('http://new-avatar/');
 				}).
@@ -58,7 +61,7 @@ describe("Change avatar:", function() {
 	   
 	   it('is updated when the user changes its value', function(done) {
 			var browser = new Browser();
-			browser.visit('http://localhost:5000/players/annessou').
+			browser.visit('http://localhost:5000/players/max').
 				then(function() {
 					return browser.clickLink('#settings-link');
 				}).

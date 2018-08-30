@@ -16,7 +16,7 @@ describe("Community page", function() {
 		database = new DatabaseWithChallenges();
 		database.players = [
 			{
-				login: 'annessou',
+				login: 'max',
 				score: 10,
 				avatar: 'https://si0.twimg.com/profile_images/850192180/Galice_AS_bigger.jpg'
 			},

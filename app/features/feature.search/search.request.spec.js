@@ -14,7 +14,7 @@ describe('Search', function() {
 	beforeEach(function() {	
         database.findPlayersMatching = function(criteria, callback){
             callback([ 
-                { login: 'annessou',  avatar: 'asm.png',  tags: 'laval' , score: 20 , portfolio: [ { server: 'server of asm' }]}, 
+                { login: 'max',  avatar: 'max.png',  tags: 'laval' , score: 20 , portfolio: [ { server: 'server of asm' }]}, 
                 { login: 'ericminio', avatar: 'eric.png', tags: 'laval' , score: 10 },
             ]);
         };
@@ -47,7 +47,7 @@ describe('Search', function() {
             });
 
             it('displays the avatar of the player as the link', function() {
-                expect(column.find('img').attr('src')).toEqual('asm.png'); 
+                expect(column.find('img').attr('src')).toEqual('max.png'); 
             });
 
         });

@@ -35,8 +35,8 @@ CreatePlayerController.prototype.player = function() {
 
 CreatePlayerController.prototype.succesGettingAvatar = function(data, textStatus, jqXHR) {
     var headers = jqXHR.getAllResponseHeaders();
-    var type = headers.indexOf('Content-Type: image');
-    if (type === -1) {
+    var notAnImage = (headers.indexOf('Content-Type: image')=== -1 && headers.indexOf('content-type: image')=== -1);
+    if (notAnImage) {
         controller.displayError();
     } else {
         controller.displaySuccess();

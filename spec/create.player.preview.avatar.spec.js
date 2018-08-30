@@ -22,8 +22,10 @@ describe('Avatar preview', function() {
 		var browser = new Browser();
 		browser.visit('http://localhost:5000/create-new-player').
 			then(function () {
-				return browser.fill('#login', 'eric')
-							  .fill('#avatar', 'http://this-url');
+				return browser.fill('#login', 'eric');
+			}).
+			then(function () {
+				return browser.fill('#avatar', 'http://this-url');
 			}).
 			then(function() {
 				expect(browser.query('#avatar-preview').src).toEqual('http://this-url/');
@@ -38,8 +40,10 @@ describe('Avatar preview', function() {
 		var browser = new Browser();
 		browser.visit('http://localhost:5000/create-new-player').
 			then(function () {
-				return browser.fill('#login', 'eric')
-							  .fill('#avatar', '/img/default-avatar.png');
+				return browser.fill('#login', 'eric');
+			}).
+			then(function () {
+				return browser.fill('#avatar', '/img/default-avatar.png');
 			}).
 			then(function() {
 				expect(browser.query('#preview-feedback').className).toContain('alert-success');
@@ -57,8 +61,10 @@ describe('Avatar preview', function() {
 		var browser = new Browser();
 		browser.visit('http://localhost:5000/create-new-player').
 			then(function () {
-				return browser.fill('#login', 'eric')
-							  .fill('#avatar', 'http://this-url');
+				return browser.fill('#login', 'eric');
+			}).
+			then(function () {
+				return browser.fill('#avatar', 'http://this-url');
 			}).
 			then(function() {
 				expect(browser.query('#preview-feedback').className).toContain('alert-danger');

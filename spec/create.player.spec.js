@@ -42,7 +42,13 @@ describe('Creating a player', function() {
 		var browser = new Browser();
 		browser.visit('http://localhost:5000/create-new-player').
 			then(function () {
-				return browser.fill('#login', 'eric').fill('#avatar', '/img/me.png').pressButton('#create');
+				return browser.fill('#login', 'eric');
+			}).
+			then(function () {
+				return browser.fill('#avatar', '/img/me.png');
+			}).
+			then(function () {
+				return browser.pressButton('#create');
 			}).
 			then(function() {
         		return browser.visit('http://localhost:5000/community');
