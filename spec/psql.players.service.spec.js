@@ -7,9 +7,9 @@ describe('PostgreSql database', function() {
 	var url = process.env.DATABASE_URL;
 	var database = new PSql(url);
 	var client;
-	var annessou = { 
-			login: 'asm',
-			name: 'annessou'
+	var max = { 
+			login: 'max',
+			name: 'max'
 		};
 	
     beforeEach(function(done) {
@@ -27,22 +27,22 @@ describe('PostgreSql database', function() {
 	});
  
 	it('can create a player', function(done) {
-		database.createPlayer(annessou, function() {
-			database.find('asm', function(player) {
+		database.createPlayer(max, function() {
+			database.find('max', function(player) {
 				expect(player).toBeDefined();
-				expect(player.name).toEqual('annessou');
+				expect(player.name).toEqual('max');
 				done();
 			});
 		});
 	});
 		
 	it('preserves an already existing player', function(done) {
-		database.createPlayer(annessou, function() {
-			annessou.name = 'new name';
-			database.createPlayer(annessou, function() {
-				database.find('asm', function(player) {
+		database.createPlayer(max, function() {
+			max.name = 'new name';
+			database.createPlayer(max, function() {
+				database.find('max', function(player) {
 					expect(player).toBeDefined();
-					expect(player.name).toEqual('annessou');
+					expect(player.name).toEqual('max');
 					done();
 				});
 			});
@@ -50,13 +50,13 @@ describe('PostgreSql database', function() {
 	});
 		
 	it('does not create extra players', function(done) {
-		database.createPlayer(annessou, function() {
-			annessou.name = 'new name';
-			database.createPlayer(annessou, function() {
+		database.createPlayer(max, function() {
+			max.name = 'new name';
+			database.createPlayer(max, function() {
 					
 				var client = new pg.Client(url);
 				client.connect(function(err) {
-					var sql = "select count(1) from players where login = 'asm'";
+					var sql = "select count(1) from players where login = 'max'";
 					client.query(sql, function(err, result) {
 						client.end();
 						expect(result.rows[0].count).toEqual('1');
@@ -69,12 +69,12 @@ describe('PostgreSql database', function() {
 	});
 		
 	it('can modify a field', function(done) {
-		database.createPlayer(annessou, function() {
-			annessou.name = 'anne-sophie';
-			database.savePlayer(annessou, function() {
-				database.find('asm', function(player) {
+		database.createPlayer(max, function() {
+			max.name = 'max';
+			database.savePlayer(max, function() {
+				database.find('max', function(player) {
 					expect(player).toBeDefined();
-					expect(player.name).toEqual('anne-sophie');
+					expect(player.name).toEqual('max');
 					done();
 				});				
 			});
@@ -82,10 +82,10 @@ describe('PostgreSql database', function() {
 	});	
 	
 	it('can add a new field', function(done) {
-		database.createPlayer(annessou, function() {
-			annessou.field = 'any';
-			database.savePlayer(annessou, function() {
-				database.find('asm', function(player) {
+		database.createPlayer(max, function() {
+			max.field = 'any';
+			database.savePlayer(max, function() {
+				database.find('max', function(player) {
 					expect(player.field).toEqual('any');
 					done();
 				});				
@@ -103,7 +103,7 @@ describe('PostgreSql database', function() {
 	describe('Retrieving all players', function() {
 		
 		it('is possible', function(done) {
-			database.createPlayer(annessou, function() {
+			database.createPlayer(max, function() {
 				database.allPlayers(function(players) {
 					expect(players.length).toEqual(1);
 					done();
@@ -112,8 +112,8 @@ describe('PostgreSql database', function() {
 		});
 
 		it('returns full players', function(done) {
-			annessou.field = 'any';
-			database.createPlayer(annessou, function() {
+			max.field = 'any';
+			database.createPlayer(max, function() {
 				database.allPlayers(function(players) {
 					expect(players[0].field).toEqual('any');
 					done();
@@ -129,20 +129,20 @@ describe('PostgreSql database', function() {
 		});
 		
 		it('returns players order by score', function(done) {
-			var clairette = { login: 'claire' };
+			var zoupo = { login: 'zoupo' };
 			var poseidon = { login: 'poseidon' };
-			var annessou = { login: 'annessou' };
-			database.createPlayer(clairette, function() {
+			var max = { login: 'max' };
+			database.createPlayer(zoupo, function() {
 				database.createPlayer(poseidon, function() {
-					database.createPlayer(annessou, function() {						
-						clairette.score = 18;
+					database.createPlayer(max, function() {						
+						zoupo.score = 18;
 						poseidon.score = 777;
-						annessou.score = 999;						
-						database.savePlayer(clairette, function() {
+						max.score = 999;						
+						database.savePlayer(zoupo, function() {
 							database.savePlayer(poseidon, function() {
-								database.savePlayer(annessou, function() {
+								database.savePlayer(max, function() {
 									database.allPlayers(function(players) {
-										expect(players[0].login).toEqual('annessou');
+										expect(players[0].login).toEqual('max');
 										done();
 									});
 								});
@@ -158,10 +158,10 @@ describe('PostgreSql database', function() {
 	describe('Score:', function() {
 	
 		it('sets score to 0 when creating a player', function(done) {		
-			database.createPlayer(annessou, function() {				
-				client = new pg.Client(this.url);
+			database.createPlayer(max, function() {				
+				client = new pg.Client(url);
 				client.connect(function(err) {
-					var sql = "select score from players where login = 'asm'";
+					var sql = "select score from players where login = 'max'";
 					client.query(sql, function(err, result) {
 						client.end();						
 						expect(err).toBe(null);
@@ -175,12 +175,12 @@ describe('PostgreSql database', function() {
 		});
 		
 		it('updates the score of the player when saving a player', function(done) {
-			database.createPlayer(annessou, function() {
-				annessou.score = 42;
-				database.savePlayer(annessou, function() {
-					client = new pg.Client(this.url);
+			database.createPlayer(max, function() {
+				max.score = 42;
+				database.savePlayer(max, function() {
+					client = new pg.Client(url);
 					client.connect(function(err) {
-						var sql = "select score from players where login = 'asm'";
+						var sql = "select score from players where login = 'max'";
 						client.query(sql, function(err, result) {
 							client.end();						
 							expect(err).toBe(null);
@@ -226,14 +226,15 @@ describe('PostgreSql database', function() {
 	});
 	
 	it('sets creation date to now when creating a player', function(done) {		
-		database.createPlayer({login: 'asm'}, function() {				
-			client = new pg.Client(this.url);
+		database.createPlayer(max, function() {				
+			client = new pg.Client(url);
 			client.connect(function(err) {
-				var sql = "select extract(microseconds from now() - creation_date) as diff from players where login = 'asm'";
+				var sql = "select extract(microseconds from now() - creation_date) as diff from players where login = 'max'";
 				client.query(sql, function(err, result) {
 					client.end();						
 					expect(err).toBe(null);
 					if (err == null) {
+						expect(result.rows.length).toEqual(1);
 						expect(result.rows[0].diff).toBeLessThan(1000000);
 					}
 					done();

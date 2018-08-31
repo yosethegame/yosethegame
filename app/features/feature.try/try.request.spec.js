@@ -1,5 +1,6 @@
 var request                 = require('request');
-var $                       = require('jquery')(require("jsdom").jsdom().defaultView);
+const { JSDOM } 			= require("jsdom");
+var $ 						= require('jquery')(new JSDOM().window);
 var tryAll                  = require('./lib/try.request');
 var Server                  = require('../../lib/server');
 var DatabaseWithChallenges  = require('../../support/database.with.levels');
@@ -10,25 +11,25 @@ describe("Trying to pass challenges >", function() {
 
 	var server;
 	var database;
-	var annessou;
-	var bilou;
-	var clairette;
+	var max;
+	var zoupo;
+	var tamis;
 	var ericminio;
 
 	beforeEach(function() {
-		annessou = {
-			login: 'annessou'
+		max = {
+			login: 'max'
 		};
-		bilou = {
-			login: 'bilou',
+		zoupo = {
+			login: 'zoupo',
 			score: 10,
 			portfolio: [ {
-				server: 'guiguilove',
+				server: 'zoupo-server',
 				achievements: [ 1 ]
 			} ]
 		};
-		clairette = {
-			login: 'clairette',
+		tamis = {
+			login: 'tamis',
 			score: 10,
 			portfolio: [ {
 				server: 'http://localhost:6000',
@@ -45,7 +46,7 @@ describe("Trying to pass challenges >", function() {
 		};
 
 		database = new DatabaseWithChallenges();
-		database.players = [ annessou, bilou, clairette, ericminio ];
+		database.players = [ max, zoupo, tamis, ericminio ];
 		server = require('http').createServer(function(incoming, response) {
 			tryAll(incoming, response, database);
 		}).listen(5000);
@@ -62,7 +63,7 @@ describe("Trying to pass challenges >", function() {
 		describe('When the player is a new player,', function() {
 
 			beforeEach(function() {
-				levels = tryAll.allLevelsToTry(annessou, database.worlds[0], database.worlds[0].levels[0]);
+				levels = tryAll.allLevelsToTry(max, database.worlds[0], database.worlds[0].levels[0]);
 			});
 
 			it('has just one level to try', function() {
@@ -77,7 +78,7 @@ describe("Trying to pass challenges >", function() {
 		describe('When the player has already done the first challenge,', function() {
 
 			beforeEach(function() {
-				levels = tryAll.allLevelsToTry(bilou, database.worlds[0], database.worlds[0].levels[1]);
+				levels = tryAll.allLevelsToTry(zoupo, database.worlds[0], database.worlds[0].levels[1]);
 			});
 
 			it('must try two challenges', function() {
@@ -116,7 +117,7 @@ describe("Trying to pass challenges >", function() {
         describe('support retrying the first level', function() {
 
             beforeEach(function() {
-                levels = tryAll.allLevelsToTry(bilou, database.worlds[0], database.worlds[0].levels[0]);
+                levels = tryAll.allLevelsToTry(zoupo, database.worlds[0], database.worlds[0].levels[0]);
             });
 
             it('has just one level to try', function() {
@@ -144,35 +145,35 @@ describe("Trying to pass challenges >", function() {
 			remote.close();
 		});
         it('returns json', function(done) {
-			request("http://localhost:5000/try?login=annessou&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
+			request("http://localhost:5000/try?login=max&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
                 expect(response.headers['content-type']).toEqual('application/json');
 				done();
 			});
         });
 		it('saves the server used by the player', function(done) {
-			request("http://localhost:5000/try?login=annessou&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
-				database.find('annessou', function(player) {
+			request("http://localhost:5000/try?login=max&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
+				database.find('max', function(player) {
 					expect(player.portfolio[0].server).toEqual('http://localhost:6000');
 					done();
 				});
 			});
 		});
 		it('makes the challenge to be in the portfolio of the player', function(done) {
-			request("http://localhost:5000/try?login=annessou&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
-				database.find('annessou', function(player) {
+			request("http://localhost:5000/try?login=max&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
+				database.find('max', function(player) {
                     expect(player.portfolio[0].achievements[0]).toEqual(database.worlds[0].levels[0].id);
 					done();
 				});
 			});
 		});
 		it('returns ok status', function(done) {
-			request("http://localhost:5000/try-all-up-to?login=annessou&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
+			request("http://localhost:5000/try-all-up-to?login=max&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
 				expect(response.statusCode).toEqual(200);
 				done();
 			});
 		});
 		it('returns detailed content for success', function(done) {
-			request("http://localhost:5000/try?login=annessou&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
+			request("http://localhost:5000/try?login=max&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
 				expect(body).toContain(JSON.stringify([
 						{
 							id: database.worlds[0].levels[0].id,
@@ -187,13 +188,13 @@ describe("Trying to pass challenges >", function() {
 			});
 		});
 		it('returns the new score of the player', function(done) {
-			request("http://localhost:5000/try?login=annessou&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
+			request("http://localhost:5000/try?login=max&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
 				expect(body).toContain('"score":10');
 				done();
 			});
 		});
 		it('logs a news', function(done) {
-            request("http://localhost:5000/try?login=annessou&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
+            request("http://localhost:5000/try?login=max&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
                 database.getNews(function(news) {
                     expect(news.length).toEqual(1);
                     done();
@@ -201,16 +202,16 @@ describe("Trying to pass challenges >", function() {
             });
 		});
         it('does not increase the score again when trying again and passing', function(done) {
-            request("http://localhost:5000/try?login=annessou&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
-                request("http://localhost:5000/try?login=annessou&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
+            request("http://localhost:5000/try?login=max&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
+                request("http://localhost:5000/try?login=max&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
                     expect(body).toContain('"score":10');
                     done();
                 });
             });
         });
         it('does not log a second news when trying again and passing', function(done) {
-            request("http://localhost:5000/try?login=annessou&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
-                request("http://localhost:5000/try?login=annessou&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
+            request("http://localhost:5000/try?login=max&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
+                request("http://localhost:5000/try?login=max&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
                     database.getNews(function(news) {
                         expect(news.length).toEqual(1);
                         done();
@@ -233,16 +234,16 @@ describe("Trying to pass challenges >", function() {
 			remote.close();
 		});
 		it('does not update the server of the player', function(done) {
-			request("http://localhost:5000/try?login=bilou&server=http://localhost:6000&world=1&level=2", function(error, response, body) {
-				database.find('bilou', function(player) {
-					expect(player.portfolio[0].server).toEqual('guiguilove');
+			request("http://localhost:5000/try?login=zoupo&server=http://localhost:6000&world=1&level=2", function(error, response, body) {
+				database.find('zoupo', function(player) {
+					expect(player.portfolio[0].server).toEqual('zoupo-server');
 					done();
 				});
 			});
 		});
 		it('makes the second challenge to be in the portfolio of the player', function(done) {
-			request("http://localhost:5000/try?login=clairette&world=1&level=2", function(error, response, body) {
-				database.find('clairette', function(player) {
+			request("http://localhost:5000/try?login=tamis&world=1&level=2", function(error, response, body) {
+				database.find('tamis', function(player) {
                     expect(player.portfolio[0].achievements[1]).toEqual(database.worlds[0].levels[1].id);
 					done();
 				});
@@ -257,13 +258,13 @@ describe("Trying to pass challenges >", function() {
 		});
 
 		it("returns normally", function(done) {
-			request("http://localhost:5000/try?login=annessou&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
+			request("http://localhost:5000/try?login=max&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
 				expect(response.statusCode).toEqual(200);
 				done();
 			});
 		});
 		it('returns detailed error for 404', function(done) {
-			request("http://localhost:5000/try?login=annessou&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
+			request("http://localhost:5000/try?login=max&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
 				expect(body).toContain(JSON.stringify([
 						{
 							id: database.worlds[0].levels[0].id,
@@ -278,7 +279,7 @@ describe("Trying to pass challenges >", function() {
 			});
 		});
 		it('support when no server is provided', function(done) {
-			request("http://localhost:5000/try-all-up-to?login=annessou&world=1&level=1", function(error, response, body) {
+			request("http://localhost:5000/try-all-up-to?login=max&world=1&level=1", function(error, response, body) {
 				expect(body).toContain(JSON.stringify([
 						{
 							id: database.worlds[0].levels[0].id,
@@ -293,7 +294,7 @@ describe("Trying to pass challenges >", function() {
 			});
 		});
 		it('returns the unchanged score of the player', function(done) {
-			request("http://localhost:5000/try?login=annessou&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
+			request("http://localhost:5000/try?login=max&server=http://localhost:6000&world=1&level=1", function(error, response, body) {
 				expect(body).toContain('"score":0');
 				done();
 			});
@@ -308,7 +309,7 @@ describe("Trying to pass challenges >", function() {
 					response.end();
 				})
 			.listen(6000);
-			database.find('bilou', function(player) {
+			database.find('zoupo', function(player) {
 				logServer(player, 'http://localhost:6000');
 				database.savePlayer(player, function() {
 					done();
@@ -320,7 +321,7 @@ describe("Trying to pass challenges >", function() {
 		});
 
 		it('uses the already known server of the player even if provided', function(done) {
-			request("http://localhost:5000/try?login=bilou&server=any&world=1&level=1", function(error, response, body) {
+			request("http://localhost:5000/try?login=zoupo&server=any&world=1&level=1", function(error, response, body) {
 				var content = $.parseJSON(body);
 				expect(content.results[0].code).toEqual(200);
 				done();
@@ -328,7 +329,7 @@ describe("Trying to pass challenges >", function() {
 		});
 
 		it('supports when no server is provided', function(done) {
-			request("http://localhost:5000/try?login=bilou&world=1&level=1", function(error, response, body) {
+			request("http://localhost:5000/try?login=zoupo&world=1&level=1", function(error, response, body) {
 				var content = $.parseJSON(body);
 				expect(content.results[0].code).toEqual(200);
 				done();
@@ -350,7 +351,7 @@ describe("Trying to pass challenges >", function() {
 		});
 
 		it('returns detailed content for success', function(done) {
-			request("http://localhost:5000/try?login=clairette&world=1&level=2", function(error, response, body) {
+			request("http://localhost:5000/try?login=tamis&world=1&level=2", function(error, response, body) {
 				expect(body).toContain(JSON.stringify([
 						{
 							id: database.worlds[0].levels[0].id,
@@ -372,8 +373,8 @@ describe("Trying to pass challenges >", function() {
 			});
 		});
 		it('only adds the second challenge in the portfolio and not two times the first', function(done) {
-			request("http://localhost:5000/try?login=clairette&world=1&level=2", function(error, response, body) {
-				database.find('clairette', function(player) {
+			request("http://localhost:5000/try?login=tamis&world=1&level=2", function(error, response, body) {
+				database.find('tamis', function(player) {
 					expect(player.portfolio[0].achievements.length).toEqual(2);
 					expect(player.portfolio[0].achievements[1]).toEqual(database.worlds[0].levels[1].id);
 					done();
@@ -381,7 +382,7 @@ describe("Trying to pass challenges >", function() {
 			});
 		});
 		it('returns the new score of the player', function(done) {
-			request("http://localhost:5000/try?login=clairette&world=1&level=2", function(error, response, body) {
+			request("http://localhost:5000/try?login=tamis&world=1&level=2", function(error, response, body) {
 				expect(body).toContain('"score":20');
 				done();
 			});
@@ -397,7 +398,7 @@ describe("Trying to pass challenges >", function() {
 					response.end();
 				})
 			.listen(6000);
-			database.find('bilou', function(player) {
+			database.find('zoupo', function(player) {
 				logServer(player, 'http://localhost:6000');
 				database.savePlayer(player, function() {
 					done();
@@ -409,7 +410,7 @@ describe("Trying to pass challenges >", function() {
 		});
 
 		it('considering a player with 1 challenge in his portfolio', function(done) {
-			database.find('bilou', function(player) {
+			database.find('zoupo', function(player) {
 				expect(player.portfolio[0].achievements.length).toEqual(1);
 				done();
 			});
@@ -418,8 +419,8 @@ describe("Trying to pass challenges >", function() {
 		describe('When there is no regression,', function() {
 
 			it('makes the next challenge to be in the portfolio of the player', function(done) {
-				request("http://localhost:5000/try?login=bilou&world=1&level=2", function(error, response, body) {
-					database.find('bilou', function(player) {
+				request("http://localhost:5000/try?login=zoupo&world=1&level=2", function(error, response, body) {
+					database.find('zoupo', function(player) {
 						expect(player.portfolio[0].achievements.length).toEqual(2);
 						done();
 					});
@@ -434,8 +435,8 @@ describe("Trying to pass challenges >", function() {
 			});
 
 			it('does not consider the next challenge as passing', function(done) {
-				request("http://localhost:5000/try?login=bilou&world=1&level=2", function(error, response, body) {
-					database.find('bilou', function(player) {
+				request("http://localhost:5000/try?login=zoupo&world=1&level=2", function(error, response, body) {
+					database.find('zoupo', function(player) {
 						expect(player.portfolio[0].achievements.length).toEqual(1);
 						done();
 					});

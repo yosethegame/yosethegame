@@ -13,7 +13,7 @@ describe('PNG Badge of player endpoint', function() {
 		database.players = [
             {
                 login: 'ericminio',
-                score: 120,
+                score: 168421,
                 avatar: 'sky.png'
             }
         ];
@@ -45,5 +45,15 @@ describe('PNG Badge of player endpoint', function() {
             expect(body.length).toEqual(0);
 			done();
 		});			
-    });
+	});
+	
+	it('builds the expected image', function(done) {
+		var fs = require('fs');
+		var expectedContent = fs.readFileSync('app/features/feature.badge.of.player/168421.png', 'binary');
+					
+		request({ url:url, encoding: 'binary' }, function(error, response, body) {
+            expect(body).toEqual(expectedContent);
+			done();
+		});		
+	}); 
 });

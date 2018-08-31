@@ -1,4 +1,5 @@
-var $ = require('jquery')(require("jsdom").jsdom().defaultView);
+const { JSDOM } = require("jsdom");
+var $ = require('jquery')(new JSDOM().window);
 var SaveSettings = require('./lib/save.settings.listener');
 
 describe('Save settings listener', function() {

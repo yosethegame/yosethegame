@@ -14,11 +14,11 @@ describe('Restart world link', function() {
     beforeEach(function() {		
         database = new Database();
         database.players = [{
-           login: 'bilou',
+           login: 'zoupo',
            score: 10,
            portfolio: [ { server: 'any', achievements: [database.worlds[0].levels[0].id] } ]
 		}];
-		restartworld({ url: '/players/bilou/restart/world/1' }, response, database);
+		restartworld({ url: '/players/zoupo/restart/world/1' }, response, database);
     });
 
     it('sets http code to redirect', function() {
@@ -26,7 +26,7 @@ describe('Restart world link', function() {
     });
     
     it('redirects to dashboard of player', function() {
-        expect(response.headers.location).toEqual('/players/bilou');
+        expect(response.headers.location).toEqual('/players/zoupo');
     });
     
 });

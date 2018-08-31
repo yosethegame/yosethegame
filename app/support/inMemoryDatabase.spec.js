@@ -14,11 +14,11 @@ describe('InMemoryDatabase', function() {
 	
 	it('offers a way to find a player by login', function(done) {
 		database.players = [
-			{ login: 'one', name: 'ricou' },
-			{ login: 'two', name: 'annessou' }
+			{ login: 'one', name: 'bob' },
+			{ login: 'two', name: 'max' }
 		];
 		database.find('two', function(player) {
-			expect(player.name).toEqual('annessou');
+			expect(player.name).toEqual('max');
 			done();
 		});
 	});
@@ -44,8 +44,8 @@ describe('InMemoryDatabase', function() {
 	
 	it('offers a way to retrieves all the players', function(done) {
 		database.players = [
-			{ login: 'one', name: 'ricou' },
-			{ login: 'two', name: 'annessou' }
+			{ login: 'one', name: 'bob' },
+			{ login: 'two', name: 'max' }
 		];
 		database.allPlayers(function(players) {
 			expect(players.length).toEqual(2);

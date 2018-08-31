@@ -1,9 +1,9 @@
 {
   "name": "yosethegame",
   "version": "1.0.0",
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/yosethegame/yosethegame.git"
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yosethegame/yosethegame.git"
   },
   "dependencies": {
     "cheerio": "latest",
@@ -20,11 +20,10 @@
     "jshint": "latest",
     "coveralls": "latest"
   },
-  "engines": {
-    "node": "4.2.3",
-    "npm": "2.14.7"
-  },
   "scripts": {
     "test": "./node_modules/.bin/istanbul cover ./node_modules/.bin/jasmine-node --report lcovonly -- app && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+  },
+  "engines": {
+    "node": "8.11.4"
   }
 }

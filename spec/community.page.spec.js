@@ -16,12 +16,12 @@ describe("Community page", function() {
 		database = new DatabaseWithChallenges();
 		database.players = [
 			{
-				login: 'annessou',
+				login: 'max',
 				score: 10,
 				avatar: 'https://si0.twimg.com/profile_images/850192180/Galice_AS_bigger.jpg'
 			},
 			{
-				login: 'bilou',
+				login: 'zoupo',
 				score: 20,
 				avatar: 'https://si0.twimg.com/profile_images/2646228289/8e597d3fd146485733ad4f132738898d_bigger.png',
 				portfolio: [ { title: 'challenge 1.1' } ]

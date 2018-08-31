@@ -20,12 +20,12 @@ describe("Game experience", function() {
 		database = new DatabaseWithChallenges();
 		database.players = [
 			{
-				login: 'annessou',
-				avatar: 'asm',
+				login: 'max',
+				avatar: 'max',
 				portfolio: [ { server: 'http://localhost:6000', achievements: [] } ]
 			},
 			{
-				login: 'bilou',
+				login: 'zoupo',
 				server: 'http://localhost:6000',
 				portfolio: [ { server: 'http://localhost:6000', achievements: [database.worlds[0].levels[0].id ] } ]
 			}
@@ -43,7 +43,7 @@ describe("Game experience", function() {
 		
 		it('displays the detail of the success', function(done) {
 			var browser = new Browser();
-			browser.visit('http://localhost:5000/players/annessou/play/world/1/level/1').
+			browser.visit('http://localhost:5000/players/max/play/world/1/level/1').
 				then(function () {
 					return browser.pressButton("#try");
 				}).
@@ -74,7 +74,7 @@ describe("Game experience", function() {
 			    }).
     			then(function() {
     				expect(browser.query('#news-1 a').href).toContain('http://localhost:6000');
-    				expect(browser.query('#news-1 img').src).toContain('asm');
+    				expect(browser.query('#news-1 img').src).toContain('max');
     				expect(browser.text('#news-1')).toContain('passed level "' + database.worlds[0].levels[0].title + '"');
     			}).
     			done(done, function(error) {
@@ -93,7 +93,7 @@ describe("Game experience", function() {
 
 		it('displays the detail of the error', function(done) {
 			var browser = new Browser();
-			browser.visit('http://localhost:5000/players/annessou/play/world/1/level/1').
+			browser.visit('http://localhost:5000/players/max/play/world/1/level/1').
 				then(function () {
 					return browser.pressButton("#try");
 				}).
@@ -126,7 +126,7 @@ describe("Game experience", function() {
 		
 		it('displays the detail of the success of the first challenge', function(done) {
 			var browser = new Browser();
-			browser.visit('http://localhost:5000/players/bilou/play/world/1/level/2').
+			browser.visit('http://localhost:5000/players/zoupo/play/world/1/level/2').
 				then(function () {
 					return browser.pressButton("#try");
 				}).
@@ -151,7 +151,7 @@ describe("Game experience", function() {
 
 		it('displays the detail of the success of the second challenge too', function(done) {
 			var browser = new Browser();
-			browser.visit('http://localhost:5000/players/bilou/play/world/1/level/2').
+			browser.visit('http://localhost:5000/players/zoupo/play/world/1/level/2').
 				then(function () {
 					return browser.pressButton("#try");
 				}).

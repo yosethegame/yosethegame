@@ -1,4 +1,5 @@
-var $ = require('jquery')(require("jsdom").jsdom().defaultView);
+const { JSDOM } = require("jsdom");
+var $ = require('jquery')(new JSDOM().window);
 var Restart = require('./lib/restart.game.listener');
 
 describe("Restart game listener: ", function() {

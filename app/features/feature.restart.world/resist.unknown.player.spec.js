@@ -16,7 +16,7 @@ describe('Restart world: when the player is unknown,', function() {
     beforeEach(function() {		
 	    var database = new Database();
         database.players = [{
-           login: 'bilou',
+           login: 'zoupo',
            score: 10,
            portfolio: [ { server: 'any', achievements: [database.worlds[0].levels[0].id] } ]
 		}];

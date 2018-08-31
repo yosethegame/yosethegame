@@ -29,7 +29,10 @@ describe("Add tags:", function() {
 			var browser = new Browser();
 			browser.visit('http://localhost:5000/players/joe/settings').
 				then(function() {
-					return browser.fill('#tags', 'laval quebec').pressButton('#save-settings-button');
+					return browser.fill('#tags', 'laval quebec');
+				}).
+				then(function() {
+					return browser.pressButton('#save-settings-button');
 				}).
 				done(done, function(error) {
 					expect(error.toString()).toBeNull();

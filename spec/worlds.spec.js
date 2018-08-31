@@ -32,14 +32,14 @@ describe("Dashboard,", function() {
 		beforeEach(function() {
 			database.players = [
 				{
-					login: 'annessou',
+					login: 'max',
 				},
 			];
 		});
 		
 		it('displays the first world as open', function(done) {
 			var browser = new Browser();
-			browser.visit('http://localhost:5000/players/annessou').
+			browser.visit('http://localhost:5000/players/max').
 				then(function() {
 					expect(browser.query('#world-1 .world-detail').className).toContain('visible');
 				}).

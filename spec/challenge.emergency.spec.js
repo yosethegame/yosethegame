@@ -57,8 +57,8 @@ describe("Challenge Emergency in WorldFire", function() {
 		
 		database.players = [
 			{
-				login: 'annessou',
-				avatar: 'asm',
+				login: 'max',
+				avatar: 'max',
 				portfolio: [ { server: 'http://localhost:6000', achievements: [] } ]
 			}
 		];
@@ -73,7 +73,7 @@ describe("Challenge Emergency in WorldFire", function() {
 	
 	it('can be passed', function(done) {
 		var browser = new Browser();
-		browser.visit('http://localhost:5000/players/annessou/play/world/1/level/1').
+		browser.visit('http://localhost:5000/players/max/play/world/1/level/1').
 			then(function () {
 				return browser.pressButton("#try");
 			}).

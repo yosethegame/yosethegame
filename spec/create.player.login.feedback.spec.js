@@ -40,8 +40,10 @@ describe('Login feedback message', function() {
 		var browser = new Browser();
 		browser.visit('http://localhost:5000/create-new-player').
 			then(function () {
-				return browser.fill('#login', 'eric')
-							  .fill('#login', '');
+				return browser.fill('#login', 'eric');
+			}).
+			then(function () {
+				return browser.fill('#login', '');
 			}).
 			then(function() {
 				expect(browser.query('#login-feedback').className).toContain('alert-danger');

@@ -24,7 +24,7 @@ CreatePlayerController.prototype.updateLoginFeedback = function() {
 
 CreatePlayerController.prototype.updatePreview = function() {
     this.page('#avatar-preview').attr('src', this.page('#avatar').val());
-    this.page.get(this.page('#avatar').val()).success(this.succesGettingAvatar).error(this.errorGettingAvatar);
+    this.page.get(this.page('#avatar').val()).done(this.succesGettingAvatar).fail(this.errorGettingAvatar);
 };
 
 CreatePlayerController.prototype.player = function() {
@@ -35,8 +35,8 @@ CreatePlayerController.prototype.player = function() {
 
 CreatePlayerController.prototype.succesGettingAvatar = function(data, textStatus, jqXHR) {
     var headers = jqXHR.getAllResponseHeaders();
-    var type = headers.indexOf('Content-Type: image');
-    if (type === -1) {
+    var notAnImage = (headers.indexOf('Content-Type: image')=== -1 && headers.indexOf('content-type: image')=== -1);
+    if (notAnImage) {
         controller.displayError();
     } else {
         controller.displaySuccess();

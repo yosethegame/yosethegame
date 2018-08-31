@@ -12,12 +12,12 @@ describe('When restarting world', function() {
        
         beforeEach(function() {		
             database.players = [{
-               login: 'bilou',
+               login: 'zoupo',
                score: 10,
                portfolio: [ { server: 'any', achievements: [database.worlds[0].levels[0].id] } ]
 			}];
 			database.news = [];
-			restartworld({ url: '/players/bilou/restart/world/1' }, { end: function() {}, writeHead: function() {} }, database);
+			restartworld({ url: '/players/zoupo/restart/world/1' }, { end: function() {}, writeHead: function() {} }, database);
         });
 
         it('does not log any news', function(done) {
@@ -33,14 +33,14 @@ describe('When restarting world', function() {
 
          beforeEach(function() {		
              database.players = [{
-                login: 'bilou',
-                avatar: 'avatar-of-bilou',
+                login: 'zoupo',
+                avatar: 'avatar-of-zoupo',
                 score: 20,
                 portfolio: [ { server: 'any', achievements: [database.worlds[0].levels[0].id,
                                                              database.worlds[1].levels[0].id] } ]
                 }];
                 database.news = [];
-                restartworld({ url: '/players/bilou/restart/world/2' }, { end: function() {}, writeHead: function() {} }, database);
+                restartworld({ url: '/players/zoupo/restart/world/2' }, { end: function() {}, writeHead: function() {} }, database);
          });
 
          it('does log one news', function(done) {
@@ -66,7 +66,7 @@ describe('When restarting world', function() {
 
          it('does log one news displaying the avatar of the player', function(done) {
              database.getNews(function(news) {
-                 expect(news[0].image).toEqual('avatar-of-bilou');
+                 expect(news[0].image).toEqual('avatar-of-zoupo');
                  done(); 
              });
          });

@@ -13,8 +13,8 @@ describe("When a player restarts world #2", function() {
 		database.news = [];
 		database.players = [
 			{
-				login: 'bilou',
-				avatar: 'bilou-avatar',
+				login: 'zoupo',
+				avatar: 'zoupo-avatar',
 				portfolio: [ { server: 'http://localhost:6000', achievements: [1, 2, 3] } ]
 			}
 		];
@@ -22,7 +22,7 @@ describe("When a player restarts world #2", function() {
 		server.start();
 
 		var browser = new Browser();
-		browser.visit('http://localhost:5000/players/bilou').
+		browser.visit('http://localhost:5000/players/zoupo').
 			then(function () {
 				return browser.clickLink("#world-2 .restart-world-link");
 			}).
@@ -38,7 +38,7 @@ describe("When a player restarts world #2", function() {
 
 	it('Then the first challenge of world #2 is displayed as an invitation', function(done) {
 		var browser = new Browser();
-		browser.visit('http://localhost:5000/players/bilou').
+		browser.visit('http://localhost:5000/players/zoupo').
 			then(function() {
 				expect(browser.text("#world-2 ul.level-list li:nth-child(1) a")).toContain(database.worlds[1].levels[0].title);
 			}).
@@ -56,7 +56,7 @@ describe("When a player restarts world #2", function() {
 		    }).
 			then(function() {
 				expect(browser.query('#news-1 a').href).toContain('http://localhost:6000');
-				expect(browser.query('#news-1 img').src).toContain('bilou-avatar');
+				expect(browser.query('#news-1 img').src).toContain('zoupo-avatar');
 				expect(browser.text('#news-1')).toContain('restarted world "' + database.worlds[1].name + '"');
 			}).
 			done(done, function(error) {

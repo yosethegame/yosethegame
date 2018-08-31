@@ -66,7 +66,10 @@ module.exports = {
 		var browser = new Browser();
 		browser.visit(url).
 			then(function () {
-				return browser.fill('input#number', input).pressButton("button#go");
+				return browser.fill('input#number', input);
+			}).
+			then(function () {
+				return browser.pressButton("button#go");
 			}).
 			then(function() {
 				self.listShouldExist(browser);

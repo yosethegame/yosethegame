@@ -14,8 +14,8 @@ describe("Restart game:", function() {
 		database.news = [];
 		database.players = [
 			{
-				login: 'bilou',
-				avatar: 'bilou-avatar',
+				login: 'zoupo',
+				avatar: 'zoupo-avatar',
 				portfolio: [ { server: 'http://localhost:6000', achievements: [1] } ]
 			}
 		];
@@ -31,7 +31,7 @@ describe("Restart game:", function() {
 		
 		beforeEach(function(done) {
 			var browser = new Browser();
-			browser.visit('http://localhost:5000/players/bilou').
+			browser.visit('http://localhost:5000/players/zoupo').
 				then(function () {
 					return browser.clickLink("#restart-game-link");
 				}).
@@ -40,7 +40,7 @@ describe("Restart game:", function() {
 		
 		it('he sees the first challenge', function(done) {
 			var browser = new Browser();
-			browser.visit('http://localhost:5000/players/bilou').
+			browser.visit('http://localhost:5000/players/zoupo').
 				then(function() {
 					expect(browser.text("#world-1 ul.level-list li:nth-child(1) a")).toContain(database.worlds[0].levels[0].title);
 				}).
@@ -58,7 +58,7 @@ describe("Restart game:", function() {
     		    }).
     			then(function() {
     				expect(browser.query('#news-1 a').href).toContain('/community');
-    				expect(browser.query('#news-1 img').src).toContain('bilou-avatar');
+    				expect(browser.query('#news-1 img').src).toContain('zoupo-avatar');
     				expect(browser.text('#news-1')).toContain('restarted the game');
     			}).
     			done(done, function(error) {

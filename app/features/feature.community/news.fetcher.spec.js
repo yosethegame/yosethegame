@@ -2,7 +2,7 @@ require('./lib/news.fetcher');
 
 describe('News fetcher', function() {
 
-    var $ = { get: function() { return { success:function() {} }; } };
+    var $ = { get: function() { return { done:function() {} }; } };
     var fetcher = new NewsFetcher($);
 
     it('calls news endpoint', function() {
@@ -16,7 +16,7 @@ describe('News fetcher', function() {
         var news = { any: 'value' };
         spyOn($, 'get').andCallFake(function() {
             return {
-                success: function(callback) {
+                done: function(callback) {
                     callback(news);
                 }
             };
