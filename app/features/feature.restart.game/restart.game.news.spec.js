@@ -10,11 +10,11 @@ describe('When restarting game:', function() {
 		database.news = [];
 		database.players = [
 			{
-				login: 'bilou',
+				login: 'zoupo',
 				portfolio: [ { server: 'any', achievements: [1] } ]
 			}
 		];
-		restartgame({ url: '/restart-game?login=bilou' }, { end: function() {} }, database);
+		restartgame({ url: '/restart-game?login=zoupo' }, { end: function() {} }, database);
 	});
 	
 	it('logs one news', function(done) {

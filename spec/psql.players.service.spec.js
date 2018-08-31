@@ -129,16 +129,16 @@ describe('PostgreSql database', function() {
 		});
 		
 		it('returns players order by score', function(done) {
-			var clairette = { login: 'claire' };
+			var zoupo = { login: 'zoupo' };
 			var poseidon = { login: 'poseidon' };
 			var max = { login: 'max' };
-			database.createPlayer(clairette, function() {
+			database.createPlayer(zoupo, function() {
 				database.createPlayer(poseidon, function() {
 					database.createPlayer(max, function() {						
-						clairette.score = 18;
+						zoupo.score = 18;
 						poseidon.score = 777;
 						max.score = 999;						
-						database.savePlayer(clairette, function() {
+						database.savePlayer(zoupo, function() {
 							database.savePlayer(poseidon, function() {
 								database.savePlayer(max, function() {
 									database.allPlayers(function(players) {

@@ -14,22 +14,22 @@ describe('Restart game:', function() {
 		beforeEach(function() {		
 			database.players = [
 				{
-					login: 'bilou',
+					login: 'zoupo',
 					portfolio: [ { server: 'any', achievements: [1] } ]
 				}
 			];
-			restartgame({ url: '/restart-game?login=bilou' }, { end: function() {} }, database);
+			restartgame({ url: '/restart-game?login=zoupo' }, { end: function() {} }, database);
 		});
 
 		it('empties the portfolio', function(done) {
-			database.find('bilou', function(player) {
+			database.find('zoupo', function(player) {
 				expect(player.portfolio.length).toEqual(0);
 				done();
 			});
 		});
 
 		it('sets score to 0', function(done) {
-			database.find('bilou', function(player) {
+			database.find('zoupo', function(player) {
 				expect(player.score).toEqual(0);
 				done();
 			});

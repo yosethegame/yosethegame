@@ -13,7 +13,7 @@ describe('Data of player request', function() {
     
     beforeEach(function() {
         database = new DatabaseWithChallenges();
-        database.players = [{ login: 'bilou', score: 168421, avatar: 'brenda.png' }];
+        database.players = [{ login: 'zoupo', score: 168421, avatar: 'brenda.png' }];
     });
     
     describe('when the player is unknown', function() {
@@ -35,7 +35,7 @@ describe('Data of player request', function() {
     describe('when the player is known', function() {
         
         beforeEach(function() {
-            data({url: '/players/bilou/data'}, response, database);        
+            data({url: '/players/zoupo/data'}, response, database);        
         });
         
         it('returns 200', function() {
@@ -48,7 +48,7 @@ describe('Data of player request', function() {
         });
 
         it('returns the login', function() {
-            expect(JSON.parse(response.content).login).toEqual('bilou');
+            expect(JSON.parse(response.content).login).toEqual('zoupo');
         });
 
         it('returns the score', function() {

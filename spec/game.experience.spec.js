@@ -25,7 +25,7 @@ describe("Game experience", function() {
 				portfolio: [ { server: 'http://localhost:6000', achievements: [] } ]
 			},
 			{
-				login: 'bilou',
+				login: 'zoupo',
 				server: 'http://localhost:6000',
 				portfolio: [ { server: 'http://localhost:6000', achievements: [database.worlds[0].levels[0].id ] } ]
 			}
@@ -126,7 +126,7 @@ describe("Game experience", function() {
 		
 		it('displays the detail of the success of the first challenge', function(done) {
 			var browser = new Browser();
-			browser.visit('http://localhost:5000/players/bilou/play/world/1/level/2').
+			browser.visit('http://localhost:5000/players/zoupo/play/world/1/level/2').
 				then(function () {
 					return browser.pressButton("#try");
 				}).
@@ -151,7 +151,7 @@ describe("Game experience", function() {
 
 		it('displays the detail of the success of the second challenge too', function(done) {
 			var browser = new Browser();
-			browser.visit('http://localhost:5000/players/bilou/play/world/1/level/2').
+			browser.visit('http://localhost:5000/players/zoupo/play/world/1/level/2').
 				then(function () {
 					return browser.pressButton("#try");
 				}).

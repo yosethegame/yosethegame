@@ -19,14 +19,14 @@ describe('Svg Badge of player request', function() {
     
     beforeEach(function() {
         database = new DatabaseWithChallenges();
-        database.players = [{ login: 'bilou', score: 168421, avatar: 'brenda.png' }];
+        database.players = [{ login: 'zoupo', score: 168421, avatar: 'brenda.png' }];
         response.reset();
     });
     
     describe('when the player is known', function() {
         
         beforeEach(function(done) {
-            badge({url: '/players/bilou/badge.svg'}, response, database, function() {
+            badge({url: '/players/zoupo/badge.svg'}, response, database, function() {
                 done();
             });        
         });
