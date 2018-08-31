@@ -50,7 +50,7 @@ describe("Search players by tags:", function() {
 			    return browser.pressButton('#search-button');
 		    }).
 			then(function() {
-				expect(browser.queryAll('#players tr').length).toEqual(1 + 2);
+				expect(browser.queryAll('#players .player').length).toEqual(2);
 			}).
 			done(done, function(error) {
 				expect(error.toString()).toBeNull();
@@ -97,7 +97,7 @@ describe("Search players by tags:", function() {
     			    return browser.pressButton('#search-button');
     		    }).
     			then(function() {
-    				expect(browser.queryAll('#players tr').length).toEqual(1 + 1);
+    				expect(browser.queryAll('#players .player').length).toEqual(1);
     			}).
     			done(done, function(error) {
     				expect(error.toString()).toBeNull();
