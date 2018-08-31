@@ -16,3 +16,11 @@ See it live: http://yosethegame.com
 * access yose: http://localhost:5000
 
 The user ericminio is created at startup.
+
+### with docker
+
+* docker build -t yoseserver .
+* docker run -p 5000:5000 -d yoseserver
+* docker ps -> pid
+* docker exec -it <pid> /bin/bash
+* node app/lib/web.js
