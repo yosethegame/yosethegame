@@ -22,3 +22,7 @@ The user ericminio is created at startup.
 * docker build -t yoseserver .
 * docker run -p 5000:5000 --name yoseserver -it --rm yoseserver
 * access yosethegame: http://localhost:5000
+
+### from Docker Hub
+* docker run -p 5000:5000 -it --rm ericminio/yoseserver
+* access yosethegame: http://localhost:5000
