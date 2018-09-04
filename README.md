@@ -5,7 +5,7 @@ You've got Nutella on your nose :)
 
 See it live: http://yosethegame.com
 
-### local install
+### run local install
 
 * install PostgreSql (9.3.x), Nodejs (0.10.x)
 * create a database
@@ -13,6 +13,16 @@ See it live: http://yosethegame.com
 * install dependencies: npm install
 * check your install (run twice to create the tables during the first run): jasmine-node app
 * run yose: node app/lib/web.js
-* access yose: http://localhost:5000
+* access yosethegame: http://localhost:5000
 
 The user ericminio is created at startup.
+
+### build and run from Dockerfile
+
+* docker build -t yoseserver -f docker/Dockerfile .
+* docker run -p 5000:5000 --name yoseserver -it --rm yoseserver
+* access yosethegame: http://localhost:5000
+
+### run from Docker Hub
+* docker run -p 5000:5000 -it --rm ericminio/yoseserver
+* access yosethegame: http://localhost:5000
