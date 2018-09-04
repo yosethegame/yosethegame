@@ -20,7 +20,6 @@ The user ericminio is created at startup.
 ### with docker
 
 * docker build -t yoseserver .
-* docker run -p 5000:5000 -d yoseserver
-* docker ps -> pid
-* docker exec -it <pid> /bin/bash
+* docker run -p 5000:5000 --name yoseserver -d yoseserver
+* docker exec -it yoseserver /bin/bash
 * node app/lib/web.js
