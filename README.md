@@ -13,13 +13,12 @@ See it live: http://yosethegame.com
 * install dependencies: npm install
 * check your install (run twice to create the tables during the first run): jasmine-node app
 * run yose: node app/lib/web.js
-* access yose: http://localhost:5000
+* access yosethegame: http://localhost:5000
 
 The user ericminio is created at startup.
 
-### with docker
+### from Dockerfile
 
 * docker build -t yoseserver .
-* docker run -p 5000:5000 --name yoseserver -d yoseserver
-* docker exec -it yoseserver /bin/bash
-* node app/lib/web.js
+* docker run -p 5000:5000 --name yoseserver -it --rm yoseserver
+* access yosethegame: http://localhost:5000

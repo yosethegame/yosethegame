@@ -11,6 +11,9 @@ RUN sudo apt-get install -y nodejs
 COPY database.init.sql /docker-entrypoint-initdb.d/database.init.sql
 COPY app /yose/app
 COPY node_modules /yose/node_modules
+COPY start.sh /yose/start.sh
 
 EXPOSE 5000
 WORKDIR /yose
+
+ENTRYPOINT ["/yose/start.sh"]
