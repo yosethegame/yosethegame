@@ -5,7 +5,7 @@ You've got Nutella on your nose :)
 
 See it live: http://yosethegame.com
 
-### local install
+### run local install
 
 * install PostgreSql (9.3.x), Nodejs (0.10.x)
 * create a database
@@ -17,12 +17,12 @@ See it live: http://yosethegame.com
 
 The user ericminio is created at startup.
 
-### from Dockerfile
+### build and run from Dockerfile
 
-* docker build -t yoseserver .
+* docker build -t yoseserver -f docker/Dockerfile .
 * docker run -p 5000:5000 --name yoseserver -it --rm yoseserver
 * access yosethegame: http://localhost:5000
 
-### from Docker Hub
+### run from Docker Hub
 * docker run -p 5000:5000 -it --rm ericminio/yoseserver
 * access yosethegame: http://localhost:5000

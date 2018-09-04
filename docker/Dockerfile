@@ -8,10 +8,10 @@ RUN apt-get update && apt-get install -y curl sudo
 RUN curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
 RUN sudo apt-get install -y nodejs
 
-COPY database.init.sql /docker-entrypoint-initdb.d/database.init.sql
+COPY docker/database.init.sql /docker-entrypoint-initdb.d/database.init.sql
 COPY app /yose/app
 COPY node_modules /yose/node_modules
-COPY start.sh /yose/start.sh
+COPY docker/start.sh /yose/start.sh
 
 EXPOSE 5000
 WORKDIR /yose
